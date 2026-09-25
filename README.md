@@ -17,7 +17,7 @@ qua checkpoint rồi nhận chứng chỉ PNG nộp lên Canvas.
 
 1. Tạo repo, chép toàn bộ thư mục `_Web/` vào gốc repo.
 2. Settings → Pages → Deploy from a branch → `main` / `(root)`.
-3. Link bài: `https://<tài-khoản>.github.io/<repo>/bai04/` — dán vào Canvas.
+3. Link bài: `https://vuongndlst.github.io/ml-level1/bai04/` — dán vào Canvas. Cập nhật: `python _Chung/dang_web.py "nội dung"`.
 
 ## Chạy thử trên máy
 
