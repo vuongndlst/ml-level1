@@ -13,3 +13,11 @@
 - Giấy phép: **Creative Commons Attribution 4.0 (CC BY 4.0)**.
 - Bản này giữ nguyên số liệu gốc; chỉ thêm dòng tên cột (bản gốc `zoo.data` không có tiêu đề).
 - Dùng trong: Thực hành nhóm 4.
+
+## water_potability.csv — Water Quality (Kaggle)
+
+- Nguồn: Kaggle, [Water Quality](https://www.kaggle.com/datasets/adityakadiwal/water-potability) — Aditya Kadiwal. 3 276 mẫu nước × 10 cột.
+- Giấy phép: **CC0: Public Domain**.
+- Bản này giữ nguyên nội dung gốc (lấy từ một bản sao công khai trên GitHub, đối chiếu trùng khớp với bản sao thứ hai).
+- Lưu ý dạy học: nguồn đo đạc không được mô tả rõ; tương quan của mọi cột với nhãn gần 0 — dùng để dạy đánh giá chất lượng dữ liệu.
+- Dùng trong: Thực hành nhóm 5.

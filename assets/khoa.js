@@ -89,5 +89,26 @@ window.KHOA = [
   "nhan": "Bài 16",
   "tieu_de": "SVM — máy vector hỗ trợ",
   "phan": "Phần B · Học có giám sát"
+ },
+ {
+  "ma": "bai17",
+  "bai": 17,
+  "nhan": "Bài 17",
+  "tieu_de": "Tổ hợp model và Random Forest",
+  "phan": "Phần B · Học có giám sát"
+ },
+ {
+  "ma": "bai18",
+  "bai": 18,
+  "nhan": "Bài 18",
+  "tieu_de": "Đánh giá cho công bằng",
+  "phan": "Phần C · Đánh giá và chọn model"
+ },
+ {
+  "ma": "bai19",
+  "bai": 19,
+  "nhan": "Bài 19",
+  "tieu_de": "Chọn model nào?",
+  "phan": "Phần C · Đánh giá và chọn model"
  }
 ];
