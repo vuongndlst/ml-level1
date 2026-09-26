@@ -6,3 +6,10 @@
 - Giấy phép: **Open Database License (ODbL) v1.0** cho cơ sở dữ liệu; nội dung © các tác giả gốc. <https://opendatacommons.org/licenses/odbl/1-0/>
 - Bản này giữ nguyên nội dung gốc, không sửa dòng nào (bản có đủ giây trong cột Timestamp, lấy từ một bản sao công khai trên GitHub và đối chiếu với hai bản sao khác).
 - Dùng trong: Thực hành nhóm 1 và 3, Machine Learning Level 1, Trường THCS và THPT Đinh Thiện Lý.
+
+## zoo.csv — Zoo (UCI Machine Learning Repository)
+
+- Nguồn: Forsyth, R. (1990). *Zoo* [Dataset]. UCI Machine Learning Repository. <https://doi.org/10.24432/C5R59V> — 101 con vật × 18 cột.
+- Giấy phép: **Creative Commons Attribution 4.0 (CC BY 4.0)**.
+- Bản này giữ nguyên số liệu gốc; chỉ thêm dòng tên cột (bản gốc `zoo.data` không có tiêu đề).
+- Dùng trong: Thực hành nhóm 4.

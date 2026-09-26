@@ -68,5 +68,26 @@ window.KHOA = [
   "nhan": "Bài 13",
   "tieu_de": "Hồi quy logistic",
   "phan": "Phần B · Học có giám sát"
+ },
+ {
+  "ma": "bai14",
+  "bai": 14,
+  "nhan": "Bài 14",
+  "tieu_de": "Cây quyết định",
+  "phan": "Phần B · Học có giám sát"
+ },
+ {
+  "ma": "bai15",
+  "bai": 15,
+  "nhan": "Bài 15",
+  "tieu_de": "Naïve Bayes",
+  "phan": "Phần B · Học có giám sát"
+ },
+ {
+  "ma": "bai16",
+  "bai": 16,
+  "nhan": "Bài 16",
+  "tieu_de": "SVM — máy vector hỗ trợ",
+  "phan": "Phần B · Học có giám sát"
  }
 ];
