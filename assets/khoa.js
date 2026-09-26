@@ -40,5 +40,19 @@ window.KHOA = [
   "nhan": "Bài 9",
   "tieu_de": "Tương quan và kể chuyện bằng dữ liệu",
   "phan": "Phần A · Nền tảng dữ liệu"
+ },
+ {
+  "ma": "bai10",
+  "bai": 10,
+  "nhan": "Bài 10",
+  "tieu_de": "Học có giám sát là gì",
+  "phan": "Phần B · Học có giám sát"
+ },
+ {
+  "ma": "bai11",
+  "bai": 11,
+  "nhan": "Bài 11",
+  "tieu_de": "K láng giềng gần nhất (KNN)",
+  "phan": "Phần B · Học có giám sát"
  }
 ];
