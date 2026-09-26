@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 23,
  "ma": "bai23",
  "nhan": "Bài 23",
- "tieu_de": "Đưa model thành ứng dụng",
- "phan": "Phần E · Trải nghiệm",
- "cau_hoi": "Làm sao để người không biết code cũng dùng được model của con?",
+ "tieu_de": "Đánh giá cho công bằng",
+ "phan": "Phần C · Đánh giá và chọn model",
+ "cau_hoi": "Một lần chia train / test có phải là may rủi?",
  "gioi_thieu": [
-  "Model của con đang nằm trong notebook — chỉ người biết Python mới dùng được. Bài này con biến model thành một <b>ứng dụng web nhỏ</b> có thanh trượt và nút bấm, bằng thư viện <b>Gradio</b> ngay trong Colab.",
-  "Model là hồi quy logistic 2 cột của Bài 13 trên bảng khối 10 (mô phỏng), đúng 91,7% trên tập kiểm tra. Trọng tâm không phải model, mà là: bọc model thành hàm, dựng giao diện, kiểm thử và chia sẻ có trách nhiệm.",
-  "Con dùng lại predict_proba (Bài 13) và ý tưởng “vùng có dữ liệu” (Bài 12)."
+  "Từ Bài 11, con luôn chia dữ liệu <b>một lần</b> (random_state = 42) rồi tin con số trên tập kiểm tra. Hôm nay con kiểm tra lại niềm tin đó — và học cách đo cho công bằng hơn: <b>kiểm định chéo</b>.",
+  "Năm chặng: một lần chia là may rủi, kiểm định chéo, so model công bằng, chọn tham số đúng cách, và scikit-learn. Bảng khối 10 là bảng mô phỏng.",
+  "Con dùng lại: chia dữ liệu (Bài 7), học vẹt và chọn K (Bài 12), các model đã học (Bài 11 – 17)."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai23",
  "muc_tieu": [
-  "Mô tả được đường đi từ người dùng tới model và ngược lại.",
-  "Bọc model trong một hàm nhận đầu vào, trả kết quả bằng lời.",
-  "Nêu được ba phần của gr.Interface: fn, inputs, outputs.",
-  "Kiểm thử app với đầu vào ngoài vùng dữ liệu và đầu vào vô lý.",
-  "Chia sẻ app có trách nhiệm: ghi nguồn dữ liệu, giới hạn, quyền riêng tư."
+  "Giải thích được vì sao một lần chia train / test có thể cho kết quả may rủi.",
+  "Mô tả được kiểm định chéo k phần.",
+  "Dùng kiểm định chéo để so các model công bằng hơn.",
+  "Chọn tham số (như K) bằng kiểm định chéo trên tập huấn luyện, giữ tập kiểm tra đến cuối.",
+  "Dùng cross_val_score và GridSearchCV trong scikit-learn."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,497 +36,530 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Từ notebook tới người dùng",
-   "ten_ngan": "Người dùng",
+   "ten": "Một lần chia là may rủi",
+   "ten_ngan": "May rủi",
    "phut": 4,
-   "muc_tieu": "mô tả được đường đi từ người dùng tới model và ngược lại.",
-   "khoi_dong": "Khi xem dự báo thời tiết, con có mở notebook Python không? Vậy model thời tiết tới tay con bằng cách nào?",
+   "muc_tieu": "giải thích được vì sao một lần chia train / test có thể cho kết quả may rủi.",
+   "khoi_dong": "Đổi random_state từ 42 sang số khác. Độ chính xác có đổi không?",
    "khoi": [
     {
-     "t": "anh",
-     "cap": "Đường đi của một lần dự đoán trong app",
-     "alt": "Đường đi của một lần dự đoán trong app",
-     "src": "img/so-do-ung-dung.png"
+     "t": "demo_truot",
+     "tieu_de": "mười lần chia khác nhau",
+     "huong_dan": "Kéo để đổi cách chia (random_state). Cùng model logistic, cùng dữ liệu — chỉ khác những bạn nào rơi vào tập kiểm tra.",
+     "dieu_kien": "random_state = <b>{x}</b>",
+     "moc": [
+      {
+       "x": 0,
+       "n": "lần chia số 0",
+       "p": 91.7
+      },
+      {
+       "x": 1,
+       "n": "lần chia số 1",
+       "p": 90.3
+      },
+      {
+       "x": 2,
+       "n": "lần chia số 2",
+       "p": 88.9
+      },
+      {
+       "x": 3,
+       "n": "lần chia số 3",
+       "p": 84.7
+      },
+      {
+       "x": 4,
+       "n": "lần chia số 4",
+       "p": 83.3
+      },
+      {
+       "x": 5,
+       "n": "lần chia số 5",
+       "p": 93.1
+      },
+      {
+       "x": 6,
+       "n": "lần chia số 6",
+       "p": 91.7
+      },
+      {
+       "x": 7,
+       "n": "lần chia số 7",
+       "p": 93.1
+      },
+      {
+       "x": 8,
+       "n": "lần chia số 8",
+       "p": 93.1
+      },
+      {
+       "x": 9,
+       "n": "lần chia số 9",
+       "p": 93.1
+      }
+     ],
+     "nhan_n": "Cách chia",
+     "nhan_p": "Độ chính xác trên tập kiểm tra",
+     "so_le_x": 0,
+     "bat_dau": 0
     },
     {
-     "t": "bang",
-     "cot": [
-      "Phần",
-      "Việc",
-      "Ai làm"
-     ],
-     "dong": [
-      [
-       "Ô nhập",
-       "Nhận số liệu từ người dùng",
-       "Gradio vẽ sẵn"
-      ],
-      [
-       "Hàm du_doan",
-       "Kiểm tra đầu vào, gọi model, viết câu trả lời",
-       "Con viết"
-      ],
-      [
-       "Model",
-       "Tính xác suất",
-       "Đã huấn luyện trước"
-      ],
-      [
-       "Ô kết quả",
-       "Hiện câu trả lời",
-       "Gradio vẽ sẵn"
-      ]
-     ]
+     "t": "anh",
+     "cap": "Cùng một model, mười con số từ 83,3% tới 93,1%",
+     "alt": "Cùng một model, mười con số từ 83,3% tới 93,1%",
+     "src": "img/muoi-lan-chia-khac-nhau.png"
+    },
+    {
+     "t": "p",
+     "html": "Tập kiểm tra chỉ 72 bạn: vài bạn “khó” rơi vào hay không đã đủ làm con số nhảy gần 9,8 điểm. Một lần đo giống như một bài kiểm tra 15 phút — có thể may, có thể xui."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ app huấn luyện lại model mỗi lần bấm nút — model đã học xong, app chỉ gọi dự đoán.",
-      "Đưa thẳng con số 0,818 cho người dùng mà không giải thích."
+      "Chọn random_state cho con số đẹp nhất để báo cáo.",
+      "So hai model trên hai cách chia khác nhau."
      ]
     },
     {
+     "t": "video",
+     "yt": "fSytzGwwBVw",
+     "ten": "StatQuest — Machine Learning Fundamentals: Cross Validation",
+     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc",
+     "bat_dau": null,
+     "ket_thuc": null
+    },
+    {
      "t": "tom_tat",
-     "html": "Người dùng → ô nhập → hàm → model → câu trả lời bằng lời."
+     "html": "Một lần chia chỉ là một mẫu thử; con số có thể lệch vài điểm do may rủi."
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Cross Validation in Machine Learning",
+       "url": "https://www.geeksforgeeks.org/machine-learning/cross-validation-machine-learning/",
+       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+      }
+     ]
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai23-q1",
-     "q": "Trong sơ đồ, phần nào do con tự viết?",
-     "giai": "Gradio vẽ giao diện; con viết hàm.",
-     "goi_y": "Xem cột “Ai làm” trong bảng.",
+     "q": "Trong mười lần chia, độ chính xác thấp nhất là bao nhiêu?",
+     "giai": "Lần chia random_state = 4.",
+     "goi_y": "Kéo thanh trượt, tìm cột đỏ.",
      "a": [
-      "Hàm du_doan kiểm tra đầu vào",
-      "Thanh trượt của ô nhập",
-      "Khung hiện kết quả chữ",
-      "Nút Submit màu cam"
+      "83,3%",
+      "93,1%",
+      "91,7%",
+      "50,0%"
      ],
-     "h": "1c3693615b9615"
+     "h": "4aa1379580d23"
     },
     {
      "k": "ds",
      "id": "bai23-q2",
-     "q": "Mỗi lần người dùng bấm Submit, app huấn luyện lại model từ đầu.",
-     "giai": "Model đã học xong; app chỉ gọi dự đoán.",
-     "goi_y": "Huấn luyện xảy ra trước hay sau khi dựng app?",
-     "h": "196c3c380a51aa"
+     "q": "Đổi random_state có thể làm độ chính xác trên tập kiểm tra thay đổi vài điểm.",
+     "giai": "Khác bạn nào rơi vào tập kiểm tra.",
+     "goi_y": "Nhìn lại mười cột.",
+     "h": "a502fb4120f9a"
     }
    ]
   },
   {
-   "ten": "Bọc model trong một hàm",
-   "ten_ngan": "Hàm",
+   "ten": "Kiểm định chéo",
+   "ten_ngan": "Kiểm định chéo",
    "phut": 5,
-   "muc_tieu": "bọc model trong một hàm nhận đầu vào, trả kết quả bằng lời.",
-   "khoi_dong": "Người dùng nhập 5 giờ và 100 phút. Con muốn app trả lời thế nào?",
+   "muc_tieu": "mô tả được kiểm định chéo k phần.",
+   "khoi_dong": "Làm sao cho mọi bạn đều được một lần “làm kiểm tra”?",
    "khoi": [
     {
-     "t": "p",
-     "html": "Hàm <code>du_doan(gio, phut)</code> làm ba việc: đặt hai số vào một bảng 1 dòng có đúng tên cột như lúc huấn luyện, gọi <code>model.predict_proba</code>, rồi viết câu trả lời."
+     "t": "dinh_nghia",
+     "ten": "Kiểm định chéo k phần (k-fold cross-validation)",
+     "html": "Chia dữ liệu thành k phần bằng nhau. Lần lượt mỗi phần làm tập kiểm tra, k − 1 phần còn lại huấn luyện. Được k điểm → lấy <b>trung bình</b> (và xem khoảng dao động).",
+     "ky_hieu": "Thường dùng k = 5 hoặc 10."
     },
     {
-     "t": "vi_du",
-     "tieu_de": "gọi hàm với vài đầu vào",
-     "de": "Model logistic 2 cột, bảng khối 10 (mô phỏng).",
-     "cot": [
-      "Giờ tự học",
-      "Phút mạng XH",
-      "Câu app trả về"
-     ],
-     "dong": [
-      [
-       "0,0",
-       "300",
-       "Khả năng Đạt: 4%"
-      ],
-      [
-       "2,0",
-       "200",
-       "Khả năng Đạt: 22%"
-      ],
-      [
-       "3,5",
-       "150",
-       "Khả năng Đạt: 53%"
-      ],
-      [
-       "5,0",
-       "100",
-       "Khả năng Đạt: 82%"
-      ],
-      [
-       "7,0",
-       "60",
-       "Khả năng Đạt: 96%"
-      ]
-     ],
-     "ket_luan": "Cùng một model, nhưng câu trả lời bằng lời dễ hiểu hơn con số 0,818.",
-     "nhan_manh": []
+     "t": "anh",
+     "cap": "Kiểm định chéo 5 phần: 5 vòng, 5 điểm",
+     "alt": "Kiểm định chéo 5 phần: 5 vòng, 5 điểm",
+     "src": "img/so-do-kiem-dinh-cheo-5-phan.png"
     },
-    {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Tên cột phải khớp",
-     "html": "Model học trên bảng có cột StudyHours, PhutMangXH. Hàm phải tạo bảng với <b>đúng</b> hai tên cột đó, đúng thứ tự — sai tên thì model báo lỗi hoặc cảnh báo."
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Trả về cả mảng [[0,18 0,82]] — người dùng không hiểu.",
-      "Tạo bảng với tên cột khác lúc huấn luyện."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "Hàm = bảng 1 dòng đúng tên cột → predict_proba → câu trả lời bằng lời."
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
-     "id": "bai23-q3",
-     "q": "Theo ví dụ, nhập 3,5 giờ và 150 phút thì app trả lời gì?",
-     "giai": "Gần ngưỡng 50%.",
-     "goi_y": "Tìm dòng 3,5 giờ trong bảng ví dụ.",
-     "a": [
-      "Khả năng Đạt: 53%",
-      "Khả năng Đạt: 82%",
-      "Khả năng Đạt: 22%",
-      "Khả năng Đạt: 100%"
-     ],
-     "h": "133b6db8c981a4"
-    },
-    {
-     "k": "sx",
-     "id": "bai23-q4",
-     "q": "Sắp xếp các việc trong hàm du_doan.",
-     "giai": "Nhận → bảng → dự đoán → trả lời.",
-     "goi_y": "Model cần bảng trước khi dự đoán.",
-     "a": [
-      "Nhận giờ và phút từ ô nhập",
-      "Đặt vào bảng 1 dòng đúng tên cột",
-      "Gọi model.predict_proba",
-      "Trả về câu “Khả năng Đạt: …%”"
-     ],
-     "h": "d485f9a4cfcab"
-    }
-   ]
-  },
-  {
-   "ten": "Dựng giao diện bằng Gradio",
-   "ten_ngan": "Gradio",
-   "phut": 5,
-   "muc_tieu": "nêu được ba phần của gr.Interface: fn, inputs, outputs.",
-   "khoi_dong": "Một ứng dụng dự đoán cần tối thiểu những phần nào trên màn hình?",
-   "khoi": [
     {
      "t": "demo_tung_buoc",
-     "tieu_de": "dựng app từng dòng",
-     "huong_dan": "Bấm “Bước tiếp” để thêm từng dòng code và xem mỗi dòng làm gì.",
-     "nhan_chon": "Mẫu",
+     "tieu_de": "năm vòng của model logistic",
+     "huong_dan": "Bấm “Bước tiếp” để chạy từng vòng. Cột cuối là trung bình tính tới vòng đó.",
+     "nhan_chon": "Model",
      "cot": [
-      "Dòng",
-      "Code",
-      "Tác dụng"
+      "Vòng",
+      "Việc",
+      "Điểm vòng này",
+      "Trung bình tới giờ"
      ],
      "mac_dinh": 0,
      "lua_chon": [
       {
-       "nhan": "App dự đoán Đạt",
+       "nhan": "Logistic",
        "dong": [
         [
          "1",
-         "<code>import gradio as gr</code>",
-         "Nạp thư viện Gradio"
+         "Phần 1 làm kiểm tra, 4 phần còn lại huấn luyện",
+         "89,6%",
+         "89,6%"
         ],
         [
          "2",
-         "<code>def du_doan(gio, phut): …</code>",
-         "Hàm nhận 2 số, trả về một câu"
+         "Phần 2 làm kiểm tra, 4 phần còn lại huấn luyện",
+         "91,7%",
+         "90,7%"
         ],
         [
          "3",
-         "<code>o_gio = gr.Slider(0, 7, label=\"Giờ tự học\")</code>",
-         "Ô nhập thứ nhất: thanh trượt 0 – 7 giờ (đúng vùng dữ liệu)"
+         "Phần 3 làm kiểm tra, 4 phần còn lại huấn luyện",
+         "97,9%",
+         "93,1%"
         ],
         [
          "4",
-         "<code>o_phut = gr.Slider(0, 450, label=\"Phút mạng XH\")</code>",
-         "Ô nhập thứ hai: 0 – 450 phút"
+         "Phần 4 làm kiểm tra, 4 phần còn lại huấn luyện",
+         "87,5%",
+         "91,7%"
         ],
         [
          "5",
-         "<code>app = gr.Interface(fn=du_doan, inputs=[o_gio, o_phut], outputs=\"text\")</code>",
-         "Ghép: 2 ô nhập → hàm → ô kết quả chữ"
-        ],
-        [
-         "6",
-         "<code>app.launch()</code>",
-         "Chạy app ngay dưới ô code trong Colab"
+         "Phần 5 làm kiểm tra, 4 phần còn lại huấn luyện",
+         "85,4%",
+         "90,4%"
         ]
        ]
       }
      ]
     },
     {
-     "t": "anh",
-     "cap": "Giao diện app sau khi chạy (hình minh hoạ vẽ lại)",
-     "alt": "Giao diện app sau khi chạy (hình minh hoạ vẽ lại)",
-     "src": "img/giao-dien-mau.png"
-    },
-    {
-     "t": "bang",
-     "cot": [
-      "Phần của gr.Interface",
-      "Trong app của bài"
-     ],
-     "dong": [
-      [
-       "fn",
-       "Hàm du_doan"
-      ],
-      [
-       "inputs",
-       "Hai thanh trượt: giờ (0 – 7), phút (0 – 450)"
-      ],
-      [
-       "outputs",
-       "Một ô chữ"
-      ]
-     ]
-    },
-    {
      "t": "hop",
-     "kieu": "ml",
-     "tieu_de": "Chạy trong Colab",
-     "html": "Colab chưa có sẵn Gradio: chạy <code>!pip install -q gradio</code> một lần. <code>app.launch()</code> hiện app ngay dưới ô code; tắt Colab thì app cũng tắt."
+     "kieu": "chu-y",
+     "tieu_de": "Kiểm định chéo đo gì?",
+     "html": "Nó đo <b>cách làm</b> (model + tham số) tốt tới đâu trên dữ liệu chưa thấy — trung bình qua nhiều lần, ít phụ thuộc may rủi của một lần chia."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Đặt thanh trượt 0 – 24 giờ trong khi dữ liệu chỉ có 0,5 – 7 giờ.",
-      "Truyền du_doan() (có ngoặc) vào fn — phải truyền tên hàm du_doan."
+      "Nghĩ kiểm định chéo cho ra một model mới — nó chỉ đo; muốn dùng thì fit lại trên dữ liệu huấn luyện.",
+      "Quên xem khoảng dao động giữa các phần."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "gr.Interface(fn=hàm, inputs=[ô nhập], outputs=ô kết quả) rồi launch()."
+     "html": "k phần, mỗi phần làm kiểm tra một lần → k điểm → lấy trung bình."
     }
    ],
    "checkpoint": [
     {
-     "k": "dd",
-     "id": "bai23-q5",
-     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-     "giai": "Ba phần: fn, inputs, outputs.",
-     "goi_y": "Xem bảng ba phần.",
-     "mau": "Trong gr.Interface, hàm dự đoán truyền vào {0}; các thanh trượt truyền vào {1}.",
-     "o": [
-      [
-       "fn",
-       "inputs",
-       "outputs",
-       "launch"
-      ],
-      [
-       "inputs",
-       "fn",
-       "outputs",
-       "label"
-      ]
+     "k": "mc",
+     "id": "bai23-q3",
+     "q": "Trong kiểm định chéo 5 phần, mỗi dòng dữ liệu được làm kiểm tra mấy lần?",
+     "giai": "Mỗi phần làm kiểm tra đúng một vòng.",
+     "goi_y": "Nhìn cột màu vàng trong sơ đồ.",
+     "a": [
+      "Đúng 1 lần",
+      "0 lần",
+      "5 lần",
+      "4 lần"
      ],
-     "h": "8e7e449407c0d"
+     "h": "7a17369443a12"
     },
     {
-     "k": "mc",
-     "id": "bai23-q6",
-     "q": "Theo phần Tự thử, dòng nào làm app hiện ra dưới ô code?",
-     "giai": "launch = khởi chạy.",
-     "goi_y": "Xem dòng cuối cùng.",
+     "k": "sx",
+     "id": "bai23-q4",
+     "q": "Sắp xếp các bước kiểm định chéo 5 phần.",
+     "giai": "Chia → luân phiên → lặp → trung bình.",
+     "goi_y": "Bắt đầu từ việc chia dữ liệu.",
      "a": [
-      "app.launch()",
-      "import gradio as gr",
-      "def du_doan(gio, phut)",
-      "gr.Slider(0, 7)"
+      "Chia dữ liệu thành 5 phần",
+      "Lấy một phần làm kiểm tra, 4 phần huấn luyện",
+      "Lặp lại cho đủ 5 phần",
+      "Lấy trung bình 5 điểm"
      ],
-     "h": "fab6f5968e79a"
+     "h": "74606bb60cf1b"
     }
    ]
   },
   {
-   "ten": "Kiểm thử trước khi chia sẻ",
-   "ten_ngan": "Kiểm thử",
-   "phut": 5,
-   "muc_tieu": "kiểm thử app với đầu vào ngoài vùng dữ liệu và đầu vào vô lý.",
-   "khoi_dong": "Nếu một bạn nhập 20 giờ tự học mỗi ngày, model sẽ nói gì? Có tin được không?",
+   "ten": "So model cho công bằng",
+   "ten_ngan": "So model",
+   "phut": 4,
+   "muc_tieu": "dùng kiểm định chéo để so các model công bằng hơn.",
+   "khoi_dong": "Bài 20: KNN đúng 95,8%, bốn model khác 91,7%. KNN có thật sự giỏi hơn?",
    "khoi": [
     {
      "t": "anh",
-     "cap": "Phút mạng XH giữ 150; kéo giờ tự học từ 0 tới 24",
-     "alt": "Phút mạng XH giữ 150; kéo giờ tự học từ 0 tới 24",
-     "src": "img/ngoai-vung-du-lieu.png"
+     "cap": "Sáu model, kiểm định chéo 5 phần trên cả 240 bạn",
+     "alt": "Sáu model, kiểm định chéo 5 phần trên cả 240 bạn",
+     "src": "img/sau-model-kiem-dinh-cheo.png"
     },
     {
-     "t": "bang",
+     "t": "vi_du",
+     "tieu_de": "trung bình 5 phần",
+     "de": null,
      "cot": [
-      "Đầu vào thử",
-      "Model trả về",
-      "Vấn đề"
+      "Model",
+      "Trung bình",
+      "Thấp nhất – cao nhất"
      ],
      "dong": [
       [
-       "12 giờ, 150 phút",
-       "99,9%",
-       "Ngoài vùng dữ liệu (tối đa 7 giờ)"
+       "KNN (K = 9)",
+       "91,3%",
+       "89,6 – 93,8"
       ],
       [
-       "20 giờ, 150 phút",
-       "100,0%",
-       "Vô lý: một ngày chỉ có 24 giờ"
+       "Logistic",
+       "90,4%",
+       "85,4 – 97,9"
       ],
       [
-       "−3 giờ, 100 phút",
-       "0,9%",
-       "Số âm — không thể có"
+       "Cây sâu 2",
+       "89,6%",
+       "85,4 – 95,8"
       ],
       [
-       "4 giờ, 1 000 phút",
-       "3,9%",
-       "1 000 phút > 16 giờ, ngoài vùng dữ liệu"
+       "Naïve Bayes",
+       "90,8%",
+       "87,5 – 95,8"
+      ],
+      [
+       "SVM",
+       "90,8%",
+       "87,5 – 97,9"
+      ],
+      [
+       "Rừng 100 cây",
+       "90,9%",
+       "89,6 – 93,8"
       ]
-     ]
-    },
-    {
-     "t": "p",
-     "html": "Model không biết mình “không biết”: ngoài vùng dữ liệu nó vẫn trả lời rất chắc chắn. Việc chặn đầu vào là của người làm app."
-    },
-    {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Hai cách chặn",
-     "html": "(1) Đặt giới hạn thanh trượt đúng vùng dữ liệu: 0,5 – 7 giờ, 15 – 450 phút. (2) Trong hàm, nếu đầu vào ngoài vùng thì trả lời “Ngoài phạm vi dữ liệu, không dự đoán được” thay vì một con số."
+     ],
+     "ket_luan": "Các model chỉ chênh 1,7 điểm trung bình, trong khi mỗi model tự dao động vài điểm giữa các phần — không model nào hơn hẳn.",
+     "nhan_manh": []
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Chỉ thử vài đầu vào “đẹp” rồi chia sẻ.",
-      "Tin con số 100% ở đầu vào 20 giờ."
+      "Kết luận model A giỏi hơn chỉ vì hơn 1 – 2 bạn trên một lần chia.",
+      "Chỉ nhìn trung bình mà bỏ qua khoảng dao động."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Kiểm thử cả đầu vào biên, vô lý, ngoài vùng dữ liệu; chặn bằng giới hạn và kiểm tra."
+     "html": "So model bằng kiểm định chéo: xem trung bình và khoảng dao động, không chỉ một con số."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai23-q5",
+     "q": "Theo kiểm định chéo, chênh lệch trung bình giữa model cao nhất và thấp nhất khoảng bao nhiêu điểm?",
+     "giai": "Nhỏ hơn cả độ dao động của một model.",
+     "goi_y": "Trừ trung bình cao nhất cho thấp nhất.",
+     "a": [
+      "1,7 điểm",
+      "4,1 điểm",
+      "15,0 điểm",
+      "0,0 điểm"
+     ],
+     "h": "156f626d0e86d1"
+    },
+    {
+     "k": "ds",
+     "id": "bai23-q6",
+     "q": "Theo kiểm định chéo, KNN hơn hẳn mọi model khác trên bảng khối 10.",
+     "giai": "Chênh chưa tới 2 điểm.",
+     "goi_y": "So cột trung bình của bảng.",
+     "h": "d6eb4310e926c"
+    }
+   ]
+  },
+  {
+   "ten": "Chọn tham số đúng cách",
+   "ten_ngan": "Dò tham số",
+   "phut": 5,
+   "muc_tieu": "chọn tham số bằng kiểm định chéo trên tập huấn luyện, giữ tập kiểm tra đến cuối.",
+   "khoi_dong": "Bài 12 chọn K = 9 vì cao nhất trên tập kiểm tra. Vì sao làm vậy là “gian lận nhẹ”?",
+   "khoi": [
+    {
+     "t": "p",
+     "html": "Nếu dùng tập kiểm tra để <b>chọn</b> K, tập kiểm tra đã góp phần huấn luyện — nó không còn là dữ liệu “chưa thấy”. Con số đo trên nó sẽ lạc quan hơn thực tế."
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "Dò tham số (tuning) đúng cách",
+     "html": "Chỉ dùng <b>tập huấn luyện</b>: thử từng giá trị tham số bằng kiểm định chéo, chọn giá trị tốt nhất. Sau cùng mới đo <b>một lần</b> trên tập kiểm tra.",
+     "ky_hieu": "Phần dữ liệu dùng để chọn tham số gọi là <b>tập kiểm định</b> (validation)."
+    },
+    {
+     "t": "anh",
+     "cap": "Kiểm định chéo chọn K = 3; tập kiểm tra (nếu dùng để chọn) sẽ chọn K = 9",
+     "alt": "Kiểm định chéo chọn K = 3; tập kiểm tra (nếu dùng để chọn) sẽ chọn K = 9",
+     "src": "img/chon-k-bang-kiem-dinh-cheo.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "hai cách chọn K",
+     "de": null,
+     "cot": [
+      "Cách chọn",
+      "K được chọn",
+      "Con số báo cáo"
+     ],
+     "dong": [
+      [
+       "Theo tập kiểm tra (Bài 12)",
+       "9",
+       "95,8% — lạc quan"
+      ],
+      [
+       "Kiểm định chéo trên tập huấn luyện",
+       "3",
+       "<b>91,7%</b> — trung thực"
+      ]
+     ],
+     "ket_luan": "Con số trung thực thấp hơn — nhưng đó mới là điều ta có thể hứa với dữ liệu mới.",
+     "nhan_manh": [
+      1
+     ]
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Thử hàng trăm cấu hình trên tập kiểm tra rồi báo cáo con số cao nhất.",
+      "Đưa MinMaxScaler ra ngoài kiểm định chéo — min, max của phần kiểm tra bị lọt vào."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "Chọn tham số bằng kiểm định chéo trên tập huấn luyện; tập kiểm tra chỉ dùng một lần ở cuối."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai23-q7",
-     "q": "Theo bảng kiểm thử, nhập −3 giờ thì model trả về bao nhiêu?",
-     "giai": "Model vẫn trả một con số, dù đầu vào vô lý.",
-     "goi_y": "Tìm dòng −3 giờ.",
+     "q": "Kiểm định chéo trên tập huấn luyện chọn K bằng bao nhiêu?",
+     "giai": "Điểm cao nhất của đường xanh.",
+     "goi_y": "Tìm đỉnh của đường liền màu xanh.",
      "a": [
-      "0,9%",
-      "Báo lỗi, không trả số",
-      "0%",
-      "3,9%"
+      "3",
+      "9",
+      "1",
+      "41"
      ],
-     "h": "e56ce4c318fc1"
+     "h": "1e7a572d5e7337"
     },
     {
-     "k": "ma",
+     "k": "dd",
      "id": "bai23-q8",
-     "q": "Hai cách nào giúp app không trả lời bừa? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "Chặn từ ô nhập và trong hàm.",
-     "goi_y": "Xem hộp “Hai cách chặn”.",
-     "a": [
-      "Giới hạn thanh trượt theo vùng dữ liệu",
-      "Kiểm tra đầu vào trong hàm",
-      "Làm tròn xác suất lên 100%",
-      "Ẩn ô kết quả khỏi màn hình"
+     "q": "Chọn từ đúng cho mỗi chỗ trống.",
+     "giai": "Giữ tập kiểm tra tới phút cuối.",
+     "goi_y": "Tập nào phải giữ “chưa thấy”?",
+     "mau": "Chọn tham số bằng tập {0}; đo kết quả cuối cùng một lần trên tập {1}.",
+     "o": [
+      [
+       "huấn luyện",
+       "kiểm tra",
+       "toàn bộ",
+       "ngẫu nhiên"
+      ],
+      [
+       "kiểm tra",
+       "huấn luyện",
+       "kiểm định",
+       "toàn bộ"
+      ]
      ],
-     "h": "131216bbc11012"
+     "h": "16c6fc635b2119"
     }
    ]
   },
   {
-   "ten": "Chia sẻ có trách nhiệm",
-   "ten_ngan": "Trách nhiệm",
+   "ten": "Kiểm định chéo trong scikit-learn",
+   "ten_ngan": "scikit-learn",
    "phut": 4,
-   "muc_tieu": "chia sẻ app có trách nhiệm: ghi nguồn dữ liệu, giới hạn, quyền riêng tư.",
-   "khoi_dong": "Con gửi link app cho cả lớp. Một bạn dùng kết quả để trêu bạn khác “sắp trượt”. Lỗi ở đâu?",
+   "muc_tieu": "dùng cross_val_score và GridSearchCV trong scikit-learn.",
+   "khoi_dong": "Viết tay 5 vòng thì dài. scikit-learn làm giúp thế nào?",
    "khoi": [
     {
      "t": "bang",
      "cot": [
       "Việc",
-      "Vì sao"
+      "Lệnh"
      ],
      "dong": [
       [
-       "Ghi rõ “dữ liệu mô phỏng, chỉ để học”",
-       "Người dùng biết không nên tin như thật"
+       "Gộp chuẩn hoá + model",
+       "<code>m = make_pipeline(MinMaxScaler(), KNeighborsClassifier(9))</code>"
       ],
       [
-       "Ghi độ chính xác và vùng dữ liệu",
-       "Người dùng biết khi nào model hay sai"
+       "Kiểm định chéo 5 phần",
+       "<code>cross_val_score(m, X, y, cv=5)</code>"
       ],
       [
-       "Không yêu cầu nhập họ tên, lớp",
-       "Không thu thập thông tin cá nhân không cần thiết"
+       "Dò tham số",
+       "<code>GridSearchCV(m, {\"kneighborsclassifier__n_neighbors\": [1, 3, 5, …]}, cv=5)</code>"
       ],
       [
-       "Cẩn thận với launch(share=True)",
-       "Link công khai: ai có link đều dùng được (hết hạn sau 72 giờ)"
-      ],
-      [
-       "Không dùng để xếp loại hay trêu chọc",
-       "Model đoán xu hướng, không phán xét một người"
+       "Kết quả",
+       "<code>.best_params_</code> · <code>.best_score_</code> · <code>.score(X_test, y_test)</code>"
       ]
      ]
     },
     {
      "t": "hop",
      "kieu": "ml",
-     "tieu_de": "Sau bài này",
-     "html": "Buổi dự án cuối khoá, nhóm con có thể thêm một app Gradio nhỏ vào poster để thầy cô và các bạn thử model của nhóm."
+     "tieu_de": "Vì sao dùng make_pipeline?",
+     "html": "Để MinMaxScaler được fit lại <b>bên trong</b> mỗi vòng — chỉ trên phần huấn luyện của vòng đó. Nếu scale cả bảng trước rồi mới kiểm định chéo, thông tin phần kiểm tra đã lọt vào."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Chia sẻ link công khai mà không ghi nguồn dữ liệu và giới hạn.",
-      "Thêm ô nhập họ tên “cho đẹp”."
+      "Gọi GridSearchCV trên cả X, y rồi báo best_score_ như kết quả cuối.",
+      "Quên rằng best_score_ là điểm kiểm định chéo, không phải điểm tập kiểm tra."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "App tốt = dự đoán đúng vùng + nói rõ giới hạn + tôn trọng người dùng."
+     "html": "cross_val_score để đo; GridSearchCV để chọn tham số; make_pipeline để không rò rỉ."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai23-q9",
-     "q": "Vì sao không nên thêm ô nhập họ tên vào app?",
-     "giai": "Chỉ thu thập điều cần thiết.",
-     "goi_y": "Model có dùng họ tên để tính không?",
+     "q": "Hàm nào chạy kiểm định chéo và trả về điểm từng phần?",
+     "giai": "Trả về mảng k điểm.",
+     "goi_y": "Tên có chữ cross (chéo).",
      "a": [
-      "Không cần cho dự đoán, lại lộ thông tin",
-      "Gradio không có ô nhập chữ",
-      "Họ tên làm model chạy chậm hơn",
-      "Model sẽ học thuộc tên từng bạn"
+      "cross_val_score",
+      "train_test_split",
+      "accuracy_score",
+      "MinMaxScaler"
      ],
-     "h": "65e22bd7f3ec0"
+     "h": "1497c7060f9d5a"
     },
     {
-     "k": "ds",
+     "k": "ma",
      "id": "bai23-q10",
-     "q": "Link tạo bằng launch(share=True) chỉ mình con mở được.",
-     "giai": "Ai có link đều mở được, tới khi link hết hạn.",
-     "goi_y": "Xem dòng share=True trong bảng.",
-     "h": "1e284668446c0a"
+     "q": "Hai lý do nào để đặt MinMaxScaler trong pipeline? <b>(Chọn 2 đáp án đúng.)</b>",
+     "giai": "Fit trên phần huấn luyện của từng vòng.",
+     "goi_y": "Đọc hộp “Vì sao dùng make_pipeline?”.",
+     "a": [
+      "Scaler chỉ học từ phần huấn luyện mỗi vòng",
+      "Tránh rò rỉ thông tin phần kiểm tra",
+      "Để model chạy nhanh gấp đôi",
+      "Để không cần tập kiểm tra"
+     ],
+     "h": "1c677eb4cfe10d"
     }
    ]
   }
@@ -545,318 +578,318 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai23-q11",
-    "q": "Nhìn hình. Ô màu vàng trong sơ đồ là gì?",
-    "giai": "Ô giữa.",
+    "q": "Nhìn hình. Lần chia nào cho độ chính xác thấp nhất?",
+    "giai": "Cột đỏ: 83,3%.",
     "img": {
-     "src": "img/so-do-ung-dung.png"
+     "src": "img/muoi-lan-chia-khac-nhau.png"
     },
     "a": [
-     "Hàm du_doan kiểm tra đầu vào",
-     "Model logistic đã học",
-     "Người dùng là học sinh",
-     "Kết quả trả về bằng lời"
+     "random_state = 4",
+     "random_state = 0",
+     "random_state = 5",
+     "random_state = 9"
     ],
-    "h": "a43e2e5b92481"
+    "h": "1fa54d5eb242af"
    },
    {
     "k": "mc",
     "id": "bai23-q12",
-    "q": "Nhìn hình. App mẫu có mấy thanh trượt?",
-    "giai": "Giờ và phút.",
+    "q": "Nhìn hình. Ở vòng 3, phần nào làm tập kiểm tra?",
+    "giai": "Ô vàng ở vòng 3.",
     "img": {
-     "src": "img/giao-dien-mau.png"
+     "src": "img/so-do-kiem-dinh-cheo-5-phan.png"
     },
     "a": [
-     "2",
-     "1",
-     "3",
-     "4"
+     "Phần thứ ba",
+     "Phần thứ nhất",
+     "Cả năm phần",
+     "Không phần nào"
     ],
-    "h": "1ad3eb30f62864"
+    "h": "80990eab83c61"
    },
    {
     "k": "mc",
     "id": "bai23-q13",
-    "q": "Nhìn hình. Vùng tô xanh nhạt là gì?",
-    "giai": "0,5 – 7 giờ.",
+    "q": "Nhìn hình. Model nào có khoảng dao động giữa các phần RỘNG nhất?",
+    "giai": "Thanh xanh nhạt dài nhất.",
     "img": {
-     "src": "img/ngoai-vung-du-lieu.png"
+     "src": "img/sau-model-kiem-dinh-cheo.png"
     },
     "a": [
-     "Vùng giờ tự học có trong dữ liệu",
-     "Vùng model đoán sai hết",
-     "Vùng xác suất trên 50%",
-     "Vùng bị cấm nhập số"
+     "Logistic",
+     "KNN (K = 9)",
+     "Rừng 100 cây",
+     "Naïve Bayes"
     ],
-    "h": "a21437479efa9"
+    "h": "f67aeff600be2"
    },
    {
     "k": "mc",
     "id": "bai23-q14",
-    "q": "Nhìn hình. Ở 20 giờ mỗi ngày, model trả về khoảng bao nhiêu?",
-    "giai": "Rất tự tin dù vô lý.",
+    "q": "Nhìn hình. Đường nét đứt xám cao hơn đường xanh ở hầu hết K. Vì sao?",
+    "giai": "Chọn trên tập nào thì tập đó cho số lạc quan.",
     "img": {
-     "src": "img/ngoai-vung-du-lieu.png"
+     "src": "img/chon-k-bang-kiem-dinh-cheo.png"
     },
     "a": [
-     "Gần 100%",
-     "Khoảng 50%",
-     "Khoảng 10%",
-     "Không trả về gì"
+     "Nó đo trên đúng tập dùng để chọn",
+     "Tập kiểm tra dễ hơn hẳn",
+     "Đường xanh bị vẽ sai",
+     "Kiểm định chéo luôn thấp"
     ],
-    "h": "35b172c4458fc"
+    "h": "1921fbbe3eef66"
    },
    {
     "k": "mc",
     "id": "bai23-q15",
-    "q": "Thư viện nào dùng để dựng app trong bài?",
-    "giai": "gr.Interface.",
+    "q": "Một bạn thi thử 5 lần được 6, 9, 7, 8, 5 điểm. Cách ước lượng sức học nào hợp lý nhất?",
+    "giai": "Giống kiểm định chéo.",
     "a": [
-     "Gradio",
-     "Pandas",
-     "Matplotlib",
-     "Seaborn"
+     "Lấy trung bình 5 lần: 7 điểm",
+     "Lấy lần cao nhất: 9 điểm",
+     "Lấy lần đầu tiên: 6 điểm",
+     "Lấy lần thấp nhất: 5 điểm"
     ],
-    "h": "1ba33cfd62dbe1"
+    "h": "15f0fd07c447"
    },
    {
     "k": "mc",
     "id": "bai23-q16",
-    "q": "Hàm nào của model cho xác suất Đạt?",
-    "giai": "Bài 13.",
+    "q": "Nhóm thử 200 cấu hình model, mỗi lần đo trên tập kiểm tra, rồi báo con số cao nhất. Vấn đề là gì?",
+    "giai": "Tập kiểm tra đã bị dùng để chọn.",
     "a": [
-     "predict_proba",
-     "fit",
-     "score",
-     "train_test_split"
+     "Con số đó lạc quan, không trung thực",
+     "Con số đó quá thấp so với thật",
+     "Không có vấn đề gì cả",
+     "Model sẽ chạy quá chậm"
     ],
-    "h": "f5a09475af784"
+    "h": "1d1d63c3d5f"
    },
    {
     "k": "mc",
     "id": "bai23-q17",
-    "q": "App dự đoán giá xe cũ, dữ liệu có xe 1 – 10 năm tuổi. Thanh trượt “số năm” nên đặt thế nào?",
-    "giai": "Theo vùng dữ liệu.",
+    "q": "Kiểm định chéo 10 phần trên 200 dòng. Mỗi vòng tập kiểm tra có bao nhiêu dòng?",
+    "giai": "200 : 10.",
     "a": [
-     "Từ 1 tới 10 năm",
-     "Từ 0 tới 100 năm",
-     "Từ −10 tới 10 năm",
-     "Không giới hạn"
+     "20 dòng",
+     "10 dòng",
+     "180 dòng",
+     "200 dòng"
     ],
-    "h": "15f50cd413e92f"
+    "h": "edc7012a06689"
    },
    {
     "k": "mc",
     "id": "bai23-q18",
-    "q": "App cần chạy lại dòng nào mỗi khi mở Colab mới?",
-    "giai": "Colab mới chưa có Gradio.",
+    "q": "best_score_ của GridSearchCV là điểm gì?",
+    "giai": "Chưa phải điểm tập kiểm tra.",
     "a": [
-     "Cài và nạp Gradio",
-     "Xoá dữ liệu khối 10",
-     "Tắt máy tính",
-     "Đổi tên cột"
+     "Trung bình kiểm định chéo của cấu hình tốt",
+     "Điểm trên tập kiểm tra cuối cùng",
+     "Điểm trên toàn bộ dữ liệu huấn luyện",
+     "Điểm cao nhất trong một phần"
     ],
-    "h": "d9294f6668e3c"
+    "h": "350d2e1c7b988"
    },
    {
     "k": "mc",
     "id": "bai23-q19",
-    "q": "Người dùng thấy “Khả năng Đạt: 82%”. Câu nào nên thêm ngay dưới?",
-    "giai": "Nói rõ giới hạn.",
+    "q": "Vì sao con số “trung thực” (K = 3) thấp hơn con số Bài 12 (K = 9)?",
+    "giai": "Chọn trên tập kiểm tra → lạc quan.",
     "a": [
-     "Dữ liệu mô phỏng, chỉ để học",
-     "Chắc chắn con sẽ Đạt",
-     "Hãy chia sẻ cho cả lớp",
-     "Model luôn đúng 100%"
+     "Bài 12 đã nhìn tập kiểm tra khi chọn K",
+     "K = 3 là giá trị K tệ nhất",
+     "Kiểm định chéo làm model kém đi",
+     "Bài 12 dùng dữ liệu khác hẳn"
     ],
-    "h": "1c0c9c53c0e5e9"
+    "h": "390b41da4a9c4"
    },
    {
     "k": "ma",
     "id": "bai23-q20",
-    "q": "Hai thứ nào là phần của gr.Interface? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "fn, inputs, outputs.",
+    "q": "Những phát biểu nào đúng về kiểm định chéo? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "k vòng, k điểm.",
     "a": [
-     "fn",
-     "outputs",
-     "fit",
-     "predict"
+     "Mỗi dòng được làm kiểm tra đúng một lần",
+     "Cho trung bình và độ dao động",
+     "Chỉ dùng một lần chia",
+     "Thay hoàn toàn tập huấn luyện"
     ],
-    "h": "125a568ca780a6"
+    "h": "15cf3bc9b953e6"
    },
    {
     "k": "ma",
     "id": "bai23-q21",
-    "q": "Hai đầu vào nào cần chặn khi kiểm thử? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Vô lý hoặc ngoài vùng.",
+    "q": "Hai việc nào là dò tham số đúng cách? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Giữ tập kiểm tra tới cuối.",
     "a": [
-     "−3 giờ tự học",
-     "20 giờ tự học mỗi ngày",
-     "4 giờ tự học",
-     "150 phút mạng XH"
+     "Kiểm định chéo trên tập huấn luyện",
+     "Đo tập kiểm tra một lần ở cuối",
+     "Chọn tham số theo tập kiểm tra",
+     "Đổi random_state tới khi đẹp"
     ],
-    "h": "518533bf4492c"
+    "h": "1f0caa70859e72"
    },
    {
     "k": "ma",
     "id": "bai23-q22",
-    "q": "Hai việc nào là chia sẻ có trách nhiệm? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Trung thực, tôn trọng.",
+    "q": "Vì sao một lần chia có thể may rủi? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Mẫu thử nhỏ.",
     "a": [
-     "Ghi rõ dữ liệu mô phỏng",
-     "Nêu độ chính xác",
-     "Bắt nhập họ tên",
-     "Nói model luôn đúng"
+     "Tập kiểm tra nhỏ",
+     "Vài dòng khó rơi vào hay không",
+     "Máy tính cộng sai",
+     "Model đổi thuật toán mỗi lần"
     ],
-    "h": "1e07fbd7fa1698"
+    "h": "10e3110e451ef1"
    },
    {
     "k": "ma",
     "id": "bai23-q23",
-    "q": "Hai việc nào hàm du_doan phải làm? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Hàm.",
+    "q": "Hai lệnh nào dùng trong bài? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Đo và dò.",
     "a": [
-     "Đặt đầu vào vào bảng đúng tên cột",
-     "Trả câu trả lời dễ hiểu",
-     "Huấn luyện lại model",
-     "Vẽ thanh trượt"
+     "cross_val_score",
+     "GridSearchCV",
+     "export_text",
+     "predict_proba_cv"
     ],
-    "h": "13a83f65567ee1"
+    "h": "87b754f8db9fc"
    },
    {
     "k": "sx",
     "id": "bai23-q24",
-    "q": "Sắp xếp các bước làm app.",
-    "giai": "Model → hàm → giao diện → chạy.",
+    "q": "Sắp xếp quy trình chọn K đúng cách.",
+    "giai": "Chia → CV → chọn → fit → đo.",
     "a": [
-     "Huấn luyện model",
-     "Viết hàm du_doan",
-     "Tạo ô nhập và ô kết quả",
-     "Ghép bằng gr.Interface",
-     "launch() rồi kiểm thử"
+     "Chia tập huấn luyện và tập kiểm tra",
+     "Kiểm định chéo từng K trên tập huấn luyện",
+     "Chọn K có điểm trung bình cao nhất",
+     "Fit lại với K đó trên tập huấn luyện",
+     "Đo một lần trên tập kiểm tra"
     ],
-    "h": "5a098eef4af6f"
+    "h": "187b18e13d75be"
    },
    {
     "k": "sx",
     "id": "bai23-q25",
-    "q": "Sắp xếp đường đi của một lần dự đoán.",
-    "giai": "Người dùng → hàm → kết quả.",
+    "q": "Sắp xếp các bước kiểm định chéo 5 phần.",
+    "giai": "Chia → luân phiên → trung bình.",
     "a": [
-     "Người dùng kéo thanh trượt",
-     "Bấm Submit",
-     "Hàm gọi model",
-     "Ô kết quả hiện câu trả lời"
+     "Chia thành 5 phần",
+     "Vòng 1: phần 1 làm kiểm tra",
+     "Lặp tới vòng 5",
+     "Tính trung bình 5 điểm"
     ],
-    "h": "1f554b09ce1f34"
+    "h": "3ac5eb1c41b5"
    },
    {
     "k": "dd",
     "id": "bai23-q26",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Ba phần.",
-    "mau": "Hàm dự đoán truyền vào {0}; ô kết quả chữ truyền vào {1}.",
+    "giai": "k-fold.",
+    "mau": "Kiểm định chéo {0} phần: mỗi phần làm kiểm tra {1} lần.",
     "o": [
      [
-      "fn",
-      "inputs",
-      "launch",
-      "label"
+      "k",
+      "2",
+      "0",
+      "100"
      ],
      [
-      "outputs",
-      "inputs",
-      "fn",
-      "label"
+      "đúng một",
+      "hai",
+      "không",
+      "k"
      ]
     ],
-    "h": "1df49fa08e39b3"
+    "h": "afe0eb8f99aa4"
    },
    {
     "k": "dd",
     "id": "bai23-q27",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Vùng dữ liệu.",
-    "mau": "Dữ liệu có giờ tự học từ {0} tới {1} giờ.",
+    "giai": "Cùng model, khác cách chia.",
+    "mau": "Mười lần chia cho kết quả từ {0} tới {1}.",
     "o": [
      [
-      "0,5",
-      "0",
-      "2,0",
-      "1,5"
+      "83,3%",
+      "93,1%",
+      "50,0%",
+      "100%"
      ],
      [
-      "7",
-      "24",
-      "12",
-      "10"
+      "93,1%",
+      "83,3%",
+      "100%",
+      "75,0%"
      ]
     ],
-    "h": "d7d4075be56c3"
+    "h": "530a9ee8f0c10"
    },
    {
     "k": "dd",
     "id": "bai23-q28",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Kiểm thử.",
-    "mau": "Ngoài vùng dữ liệu, model vẫn trả lời rất {0}; người làm app phải {1} đầu vào.",
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "Bài 23 sửa Bài 12.",
+    "mau": "Kiểm định chéo chọn K = {0}; con số trung thực trên tập kiểm tra là {1}.",
     "o": [
      [
-      "chắc chắn",
-      "dè dặt",
-      "chậm",
-      "ngắn"
+      "3",
+      "9",
+      "1",
+      "41"
      ],
      [
-      "chặn",
-      "phóng to",
-      "xoá hết",
-      "làm tròn"
+      "91,7%",
+      "95,8%",
+      "100%",
+      "83,3%"
      ]
     ],
-    "h": "19b481fb1aa282"
+    "h": "1e8e8748b2a085"
    },
    {
     "k": "dd",
     "id": "bai23-q29",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Chia sẻ.",
-    "mau": "Link share=True là link {0}, hết hạn sau {1}.",
+    "giai": "Validation / test.",
+    "mau": "Dữ liệu dùng để chọn tham số gọi là tập {0}; dữ liệu đo một lần cuối là tập {1}.",
     "o": [
      [
-      "công khai",
-      "riêng tư",
-      "nội bộ",
-      "có mật khẩu"
+      "kiểm định",
+      "kiểm tra",
+      "huấn luyện",
+      "ngẫu nhiên"
      ],
      [
-      "72 giờ",
-      "1 giờ",
-      "1 năm",
-      "không bao giờ"
+      "kiểm tra",
+      "kiểm định",
+      "huấn luyện",
+      "toàn bộ"
      ]
     ],
-    "h": "1ee4ae771ae097"
+    "h": "1fd79432bba49f"
    },
    {
     "k": "ds",
     "id": "bai23-q30",
-    "q": "Model biết khi nào đầu vào nằm ngoài vùng dữ liệu của nó.",
-    "giai": "Nó vẫn trả lời chắc chắn.",
+    "q": "Báo cáo con số cao nhất trong nhiều lần chia là trung thực.",
+    "giai": "Đó là chọn may.",
     "h": "1a88bcb40f407"
    },
    {
     "k": "ds",
     "id": "bai23-q31",
-    "q": "Tên cột trong hàm dự đoán phải khớp tên cột lúc huấn luyện.",
-    "giai": "Khớp đúng.",
+    "q": "Kiểm định chéo cho biết cả độ dao động của kết quả.",
+    "giai": "Xem thấp nhất – cao nhất.",
     "h": "7597c8c76b289"
    },
    {
     "k": "ds",
     "id": "bai23-q32",
-    "q": "App Gradio chạy trong Colab sẽ tắt khi tắt Colab.",
-    "giai": "App sống cùng phiên Colab.",
+    "q": "Đặt MinMaxScaler trong pipeline giúp tránh rò rỉ dữ liệu khi kiểm định chéo.",
+    "giai": "Fit trên phần huấn luyện mỗi vòng.",
     "h": "306fc4a85c26c"
    }
   ]

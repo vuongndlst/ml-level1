@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 21,
  "ma": "bai21",
  "nhan": "Bài 21",
- "tieu_de": "Học tăng cường: học qua thử và sai",
- "phan": "Phần E · Trải nghiệm",
- "cau_hoi": "Không ai chỉ đường, máy có tự học cách thoát mê cung không?",
+ "tieu_de": "Tổ hợp model và Random Forest",
+ "phan": "Phần B · Học có giám sát",
+ "cau_hoi": "Nhiều model “bình thường” hợp lại có thành một model giỏi không?",
  "gioi_thieu": [
-  "Học có giám sát cần đáp án, gom nhóm cần dữ liệu. Nhánh thứ ba — <b>học tăng cường</b> — không cần cả hai: máy tự <b>hành động</b>, nhận <b>điểm thưởng</b> hoặc bị trừ điểm, và dần rút ra cách làm tốt nhất.",
-  "Bài này là bài trải nghiệm: con chạy và quan sát một máy học thoát mê cung 5 × 5 bằng Q-learning. Mọi con số trên trang được tính lại từ chính mê cung đó.",
-  "Con dùng lại ý tưởng “đánh giá bằng con số” và “lặp tới khi ổn định” của các bài trước."
+  "Mỗi model con đã học đều có lúc sai. Nếu ta cho <b>nhiều model</b> cùng bỏ phiếu thì sao? Đó là ý tưởng của <b>tổ hợp model</b> (ensemble), và Random Forest — rừng gồm nhiều cây quyết định — là ví dụ nổi tiếng nhất.",
+  "Năm chặng: trí tuệ đám đông, rừng ngẫu nhiên, rừng trên bảng của lớp, khi rừng không thắng, và rừng trong scikit-learn. Bảng khối 10 là bảng mô phỏng; bài dùng 4 cột.",
+  "Con dùng lại: cây quyết định và học vẹt (Bài 17), bỏ phiếu (Bài 12), tương quan (Bài 9)."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai21",
  "muc_tieu": [
-  "Nêu được các thành phần của học tăng cường: tác tử, môi trường, hành động, phần thưởng.",
-  "Mô tả được một tập học: thử, nhận thưởng, cập nhật điểm.",
-  "Đọc được bảng Q và đường đi máy chọn.",
-  "Giải thích được khám phá và khai thác.",
-  "Nhận ra hậu quả của phần thưởng đặt sai."
+  "Giải thích được vì sao trung bình / bỏ phiếu của nhiều dự đoán thường tốt hơn phần lớn từng dự đoán.",
+  "Mô tả được Random Forest: nhiều cây, mỗi cây học một tập con ngẫu nhiên, rồi bỏ phiếu.",
+  "Đọc được kết quả rừng so với từng cây, và thấy rừng ổn định hơn.",
+  "Nhận ra rừng không phải lúc nào cũng thắng cây tốt nhất.",
+  "Dùng RandomForestClassifier và đọc mức quan trọng của từng cột."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,573 +36,691 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Nhánh thứ ba của ML",
-   "ten_ngan": "Ba nhánh",
+   "ten": "Trí tuệ đám đông",
+   "ten_ngan": "Đám đông",
    "phut": 4,
-   "muc_tieu": "nêu được các thành phần của học tăng cường.",
-   "khoi_dong": "Con học đi xe đạp thế nào? Có ai đưa con bảng đáp án không?",
+   "muc_tieu": "giải thích được vì sao trung bình của nhiều dự đoán thường tốt hơn phần lớn từng dự đoán.",
+   "khoi_dong": "Ba mươi bạn đoán số kẹo trong lọ. Nên tin bạn giỏi nhất, hay tin trung bình cả lớp?",
    "khoi": [
     {
      "t": "anh",
-     "cap": "Mê cung của bài: đi từ Xuất phát tới Đích, tránh Hố",
-     "alt": "Mê cung của bài: đi từ Xuất phát tới Đích, tránh Hố",
-     "src": "img/me-cung.png"
+     "cap": "30 bạn đoán số kẹo (số liệu minh hoạ)",
+     "alt": "30 bạn đoán số kẹo (số liệu minh hoạ)",
+     "src": "img/keo-trong-lo-minh-hoa.png"
     },
     {
-     "t": "bang",
+     "t": "vi_du",
+     "tieu_de": "đọc hình",
+     "de": null,
      "cot": [
       "",
-      "Có giám sát",
-      "Không giám sát",
-      "Tăng cường"
+      "Giá trị"
      ],
      "dong": [
       [
-       "Máy nhận gì",
-       "Dữ liệu + đáp án",
-       "Dữ liệu, không đáp án",
-       "Điểm thưởng sau mỗi hành động"
+       "Số kẹo thật",
+       "250"
       ],
       [
-       "Máy học gì",
-       "Đoán nhãn / con số",
-       "Tìm nhóm",
-       "Cách hành động tốt nhất"
+       "Các bạn đoán",
+       "từ 131 tới 535"
       ],
       [
-       "Ví dụ",
-       "Đạt / Chưa đạt",
-       "Playlist",
-       "Thoát mê cung, chơi cờ, robot đi lại"
+       "Trung bình cả lớp",
+       "<b>266</b>"
+      ],
+      [
+       "Số bạn đoán xa hơn trung bình",
+       "<b>25 / 30</b>"
       ]
+     ],
+     "ket_luan": "Sai lệch của từng bạn lệch theo nhiều hướng khác nhau nên phần lớn triệt tiêu nhau khi lấy trung bình.",
+     "nhan_manh": [
+      3
      ]
     },
     {
-     "t": "bang",
-     "cot": [
-      "Thành phần",
-      "Trong mê cung"
-     ],
-     "dong": [
+     "t": "dinh_nghia",
+     "ten": "Tổ hợp model (ensemble)",
+     "html": "Kết hợp nhiều model: phân loại thì <b>bỏ phiếu</b>, hồi quy thì <b>lấy trung bình</b>. Hiệu quả nhất khi các model <b>sai theo những cách khác nhau</b>.",
+     "ky_hieu": null
+    },
+    {
+     "t": "anh",
+     "cap": "Nhiều model học rồi kết hợp dự đoán",
+     "alt": "Nhiều model học rồi kết hợp dự đoán",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251216112827581506/ensemble_learning.webp",
+     "du_phong": "img/minh-hoa-hoc-to-hop-nhieu-model.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — A comprehensive guide to ensemble learning",
+      "url": "https://www.geeksforgeeks.org/machine-learning/a-comprehensive-guide-to-ensemble-learning/"
+     },
+     "chu_giai": [
       [
-       "Tác tử (agent)",
-       "Người máy đi trong mê cung"
+       "Training data",
+       "Dữ liệu huấn luyện"
       ],
       [
-       "Môi trường",
-       "Mê cung 5 × 5 với tường, hố, đích"
+       "Base learners",
+       "Các model con"
       ],
       [
-       "Trạng thái",
-       "Ô đang đứng"
+       "Individual predictions",
+       "Dự đoán riêng"
       ],
       [
-       "Hành động",
-       "Lên, xuống, trái, phải"
-      ],
-      [
-       "Phần thưởng",
-       "Mỗi bước −1 · rơi hố −10 · tới đích +10"
+       "Ensemble prediction",
+       "Dự đoán của cả nhóm"
       ]
      ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ học tăng cường cần bảng dữ liệu có đáp án.",
-      "Nghĩ phần thưởng chỉ có ở cuối — ở đây mỗi bước đều có điểm (−1)."
+      "Nghĩ trung bình luôn tốt hơn mọi cá nhân — chỉ tốt hơn phần lớn.",
+      "Ghép nhiều model giống hệt nhau — chúng sai cùng chỗ nên không giúp gì."
      ]
     },
     {
+     "t": "video",
+     "yt": "J4Wdy0Wc_xQ",
+     "ten": "StatQuest — Random Forests Part 1",
+     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc",
+     "bat_dau": null,
+     "ket_thuc": null
+    },
+    {
      "t": "tom_tat",
-     "html": "Học tăng cường: hành động → nhận điểm thưởng → điều chỉnh cách hành động."
+     "html": "Nhiều dự đoán sai theo nhiều hướng → gộp lại thường sát hơn phần lớn từng dự đoán."
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "A Comprehensive Guide to Ensemble Learning",
+       "url": "https://www.geeksforgeeks.org/machine-learning/a-comprehensive-guide-to-ensemble-learning/",
+       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+      }
+     ]
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai21-q1",
-     "q": "Trong mê cung của bài, “hành động” là gì?",
-     "giai": "Trạng thái là ô, phần thưởng là điểm.",
-     "goi_y": "Người máy có thể làm gì ở mỗi ô?",
+     "q": "Trong hình đoán kẹo, bao nhiêu bạn đoán xa số thật hơn trung bình cả lớp?",
+     "giai": "Trung bình 266, số thật 250.",
+     "goi_y": "Đọc dòng cuối của bảng ví dụ.",
      "a": [
-      "Đi lên, xuống, trái hoặc phải",
-      "Ô người máy đang đứng",
-      "Điểm +10 khi tới đích",
-      "Bức tường màu xám đậm"
+      "25 / 30",
+      "0 / 30",
+      "15 / 30",
+      "30 / 30"
      ],
-     "h": "719829f7466f"
+     "h": "19dc97d2931f50"
     },
     {
      "k": "ds",
      "id": "bai21-q2",
-     "q": "Học tăng cường cần một bảng dữ liệu có sẵn đáp án.",
-     "giai": "Máy tự tạo trải nghiệm bằng cách hành động.",
-     "goi_y": "Máy lấy thông tin từ đâu để học?",
+     "q": "Tổ hợp nhiều model giống hệt nhau giúp tăng độ chính xác rất nhiều.",
+     "giai": "Chúng sai cùng chỗ — bỏ phiếu không sửa được.",
+     "goi_y": "Mười bạn chép cùng một bài thì trung bình có khác bài gốc không?",
      "h": "eb899003fa2b5"
     }
    ]
   },
   {
-   "ten": "Một tập học: thử và nhận điểm",
-   "ten_ngan": "Thử và sai",
+   "ten": "Rừng ngẫu nhiên",
+   "ten_ngan": "Random Forest",
    "phut": 5,
-   "muc_tieu": "mô tả được một tập học: thử, nhận thưởng, cập nhật điểm.",
-   "khoi_dong": "Lần đầu vào mê cung, người máy chưa biết gì. Nó sẽ đi thế nào?",
+   "muc_tieu": "mô tả được Random Forest: nhiều cây, mỗi cây học một tập con ngẫu nhiên, rồi bỏ phiếu.",
+   "khoi_dong": "Nếu 100 cây học cùng một dữ liệu thì cây nào cũng giống hệt nhau. Làm sao cho chúng khác nhau?",
    "khoi": [
     {
-     "t": "p",
-     "html": "Một <b>tập</b> (episode) là một lần đi từ ô Xuất phát tới khi tới đích, rơi hố, hoặc hết 100 bước. Máy ghi nhớ điểm của từng cặp (ô, hướng) trong một bảng gọi là <b>bảng Q</b>."
+     "t": "dinh_nghia",
+     "ten": "Random Forest",
+     "html": "Tạo nhiều cây quyết định; mỗi cây học trên <b>một tập con dữ liệu rút ngẫu nhiên</b> (có lặp lại) và mỗi lần chia chỉ được xét <b>vài cột ngẫu nhiên</b>. Dự đoán: các cây <b>bỏ phiếu</b>.",
+     "ky_hieu": "Rút ngẫu nhiên rồi bỏ phiếu gọi là <b>bagging</b>."
+    },
+    {
+     "t": "anh",
+     "cap": "Mỗi cây một tập con ngẫu nhiên, rồi bỏ phiếu",
+     "alt": "Mỗi cây một tập con ngẫu nhiên, rồi bỏ phiếu",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250521100554969405/XG-Boost.webp",
+     "du_phong": "img/minh-hoa-nhieu-cay-tren-cac-tap-con-ngau-nhien.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Xgboost",
+      "url": "https://www.geeksforgeeks.org/machine-learning/xgboost/"
+     },
+     "chu_giai": [
+      [
+       "Instance",
+       "Mẫu cần dự đoán"
+      ],
+      [
+       "Random Subset",
+       "Tập con ngẫu nhiên"
+      ],
+      [
+       "Tree 1 … Tree n",
+       "Cây 1 … cây n"
+      ],
+      [
+       "Final Result",
+       "Kết quả cuối (đa số)"
+      ]
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Một cây và cả rừng",
+     "alt": "Một cây và cả rừng",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251216121929207068/random_forest.webp",
+     "du_phong": "img/minh-hoa-mot-cay-so-voi-ca-rung.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Random forest algorithm in machine learning",
+      "url": "https://www.geeksforgeeks.org/machine-learning/random-forest-algorithm-in-machine-learning/"
+     },
+     "chu_giai": [
+      [
+       "Single Decision Tree",
+       "Một cây quyết định"
+      ],
+      [
+       "Random Forest",
+       "Rừng ngẫu nhiên — nhiều cây"
+      ],
+      [
+       "Prediction from a single decision path",
+       "Mỗi cây một đường dự đoán"
+      ]
+     ]
     },
     {
      "t": "demo_tung_buoc",
-     "tieu_de": "tập học đầu tiên",
-     "huong_dan": "Bấm “Bước tiếp” để xem người máy đi từng bước trong tập đầu tiên. Ô ghi (hàng, cột).",
-     "nhan_chon": "Tập",
+     "tieu_de": "11 cây bỏ phiếu cho một bạn mới",
+     "huong_dan": "Bạn mới: học 3,3 giờ, mạng 180 phút, ngủ 7 giờ, nộp trễ 1 lần. Bấm “Bước tiếp” để xem từng cây bỏ phiếu.",
+     "nhan_chon": "Bạn mới",
      "cot": [
-      "Bước",
-      "Người máy làm gì",
-      "Điểm"
+      "#",
+      "Cây",
+      "Phiếu",
+      "Kiểm phiếu"
      ],
      "mac_dinh": 0,
      "lua_chon": [
       {
-       "nhan": "Tập 1 (bảng Q ban đầu toàn số 0)",
+       "nhan": "11 cây đầu của rừng",
        "dong": [
         [
-         "0",
-         "Đứng ở ô Xuất phát (1, 1); bảng Q toàn số 0",
-         "Tổng điểm 0"
-        ],
-        [
          "1",
-         "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): xuống → (2, 1)",
-         "thưởng −1 · Q[(1, 1), xuống]: 0,0 → −0,5 · tổng −1"
+         "Cây 1",
+         "Đạt",
+         "1 Đạt – 0 Chưa đạt"
         ],
         [
          "2",
-         "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): phải → (2, 1) (đâm tường, đứng yên)",
-         "thưởng −1 · Q[(2, 1), phải]: 0,0 → −0,5 · tổng −2"
+         "Cây 2",
+         "Chưa đạt",
+         "1 Đạt – 1 Chưa đạt"
         ],
         [
          "3",
-         "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): xuống → (3, 1)",
-         "thưởng −1 · Q[(2, 1), xuống]: 0,0 → −0,5 · tổng −3"
+         "Cây 3",
+         "Chưa đạt",
+         "1 Đạt – 2 Chưa đạt"
         ],
         [
          "4",
-         "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): trái → (3, 1) (đâm tường, đứng yên)",
-         "thưởng −1 · Q[(3, 1), trái]: 0,0 → −0,5 · tổng −4"
+         "Cây 4",
+         "Đạt",
+         "2 Đạt – 2 Chưa đạt"
         ],
         [
          "5",
-         "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): phải → (3, 2)",
-         "thưởng −1 · Q[(3, 1), phải]: 0,0 → −0,5 · tổng −5"
+         "Cây 5",
+         "Chưa đạt",
+         "2 Đạt – 3 Chưa đạt"
         ],
         [
          "6",
-         "Thử ngẫu nhiên: lên → (3, 2) (đâm tường, đứng yên)",
-         "thưởng −1 · Q[(3, 2), lên]: 0,0 → −0,5 · tổng −6"
+         "Cây 6",
+         "Đạt",
+         "3 Đạt – 3 Chưa đạt"
         ],
         [
          "7",
-         "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): phải → (3, 3)",
-         "thưởng −1 · Q[(3, 2), phải]: 0,0 → −0,5 · tổng −7"
+         "Cây 7",
+         "Đạt",
+         "4 Đạt – 3 Chưa đạt"
         ],
         [
-         "…",
-         "Đi tiếp 39 bước nữa, cuối cùng rơi xuống hố",
-         "Tập 1 kết thúc: tổng −55 điểm"
+         "8",
+         "Cây 8",
+         "Đạt",
+         "5 Đạt – 3 Chưa đạt"
+        ],
+        [
+         "9",
+         "Cây 9",
+         "Đạt",
+         "6 Đạt – 3 Chưa đạt"
+        ],
+        [
+         "10",
+         "Cây 10",
+         "Đạt",
+         "7 Đạt – 3 Chưa đạt"
+        ],
+        [
+         "11",
+         "Cây 11",
+         "Đạt",
+         "8 Đạt – 3 Chưa đạt"
+        ],
+        [
+         "—",
+         "Cả rừng (11 cây)",
+         "<b>Đạt</b>",
+         "đa số thắng"
         ]
        ]
       }
      ]
     },
     {
-     "t": "anh",
-     "cap": "Trung bình 20 lần học: số bước mỗi tập giảm dần về 8",
-     "alt": "Trung bình 20 lần học: số bước mỗi tập giảm dần về 8",
-     "src": "img/so-buoc-moi-tap.png"
-    },
-    {
-     "t": "p",
-     "html": "5 tập đầu, người máy cần trung bình 52,4 bước; 50 tập cuối chỉ còn 8,8 bước — gần bằng đường ngắn nhất 8 bước."
-    },
-    {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ tập đầu tiên máy đã đi đúng — nó gần như đi mò.",
-      "Nghĩ máy nhớ đường đi — nó nhớ <b>điểm</b> của từng (ô, hướng)."
+      "Nghĩ “ngẫu nhiên” là rừng đoán bừa — mỗi cây vẫn học thật, chỉ trên dữ liệu khác nhau.",
+      "Nhầm Random Forest với một cây rất sâu."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Mỗi tập: thử → nhận điểm → cập nhật bảng Q. Qua nhiều tập, đường đi ngắn dần."
+     "html": "Random Forest = nhiều cây, mỗi cây một tập con ngẫu nhiên + vài cột ngẫu nhiên → bỏ phiếu."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai21-q3",
-     "q": "Theo phần Tự thử, ở bước 1 của tập đầu, điểm thưởng người máy nhận là bao nhiêu?",
-     "giai": "Mỗi bước bình thường bị trừ 1.",
-     "goi_y": "Xem cột Điểm ở dòng bước 1.",
+     "q": "Theo phần Tự thử, 11 cây bỏ phiếu cho bạn mới thế nào?",
+     "giai": "Rừng đoán theo đa số.",
+     "goi_y": "Bấm tới dòng cuối cùng rồi đọc cột kiểm phiếu.",
      "a": [
-      "−1",
-      "+10",
-      "0",
-      "−10"
+      "8 Đạt – 3 Chưa đạt",
+      "11 Đạt – 0 Chưa đạt",
+      "3 Đạt – 8 Chưa đạt",
+      "6 Đạt – 5 Chưa đạt"
      ],
-     "h": "58a228d0b600c"
+     "h": "1808e78a64022a"
     },
     {
-     "k": "sx",
+     "k": "ma",
      "id": "bai21-q4",
-     "q": "Sắp xếp những gì xảy ra trong một bước học.",
-     "giai": "Chọn → nhận → cập nhật → tiếp.",
-     "goi_y": "Hành động phải có trước điểm thưởng.",
+     "q": "Hai điều nào làm các cây trong rừng khác nhau? <b>(Chọn 2 đáp án đúng.)</b>",
+     "giai": "Hai nguồn ngẫu nhiên.",
+     "goi_y": "Đọc lại định nghĩa Random Forest.",
      "a": [
-      "Người máy chọn một hướng",
-      "Môi trường cho ô mới và điểm thưởng",
-      "Máy cập nhật điểm của (ô, hướng) vừa đi",
-      "Người máy đứng ở ô mới, chọn tiếp"
+      "Mỗi cây học một tập con ngẫu nhiên",
+      "Mỗi lần chia chỉ xét vài cột ngẫu nhiên",
+      "Mỗi cây dùng một nhãn khác nhau",
+      "Mỗi cây có độ sâu bằng 0"
      ],
-     "h": "1206004d017384"
+     "h": "1b7ec42df057ba"
     }
    ]
   },
   {
-   "ten": "Bảng Q và cách cập nhật",
-   "ten_ngan": "Bảng Q",
+   "ten": "Rừng trên bảng của lớp",
+   "ten_ngan": "Bảng lớp",
    "phut": 5,
-   "muc_tieu": "đọc được bảng Q và đường đi máy chọn.",
-   "khoi_dong": "Nếu mỗi ô có 4 hướng, bảng Q của mê cung 5 × 5 có bao nhiêu ô số?",
+   "muc_tieu": "đọc được kết quả rừng so với từng cây, và thấy rừng ổn định hơn.",
+   "khoi_dong": "Rừng 100 cây. Cây giỏi nhất và cây dở nhất khác nhau bao nhiêu?",
    "khoi": [
     {
-     "t": "dinh_nghia",
-     "ten": "Điểm Q",
-     "html": "Q[ô, hướng] ước lượng <b>tổng điểm sẽ nhận được</b> nếu đứng ở ô đó, đi hướng đó, rồi sau đó đi khôn ngoan. Điểm cao hơn = hướng tốt hơn.",
-     "ky_hieu": null
-    },
-    {
-     "t": "cong_thuc",
-     "html": "Q mới = Q cũ + 0,5 × (thưởng + 0,9 × Q tốt nhất ở ô mới − Q cũ)"
+     "t": "anh",
+     "cap": "100 cây lẻ và cả rừng trên 72 bạn kiểm tra",
+     "alt": "100 cây lẻ và cả rừng trên 72 bạn kiểm tra",
+     "src": "img/tram-cay-le-va-ca-rung.png"
     },
     {
      "t": "vi_du",
-     "tieu_de": "cập nhật một lần",
-     "de": "Q cũ = −0,5; đi một bước được thưởng −1; ở ô mới, hướng tốt nhất có Q = 2,0.",
+     "tieu_de": "đọc hình",
+     "de": null,
      "cot": [
-      "Bước",
-      "Tính",
-      "Kết quả"
+      "",
+      "Độ chính xác"
      ],
      "dong": [
       [
-       "1",
-       "Mục tiêu = −1 + 0,9 × 2,0",
-       "0,8"
+       "Cây lẻ dở nhất · giỏi nhất",
+       "66,7% · 95,8%"
       ],
       [
-       "2",
-       "Chênh lệch = 0,8 − (−0,5)",
-       "1,3"
+       "Trung bình một cây",
+       "86,8%"
       ],
       [
-       "3",
-       "Q mới = −0,5 + 0,5 × 1,3",
-       "0,15"
+       "Cả rừng",
+       "<b>93,1%</b>"
       ]
      ],
-     "ket_luan": "Ô mới có triển vọng (Q = 2,0) kéo điểm của bước đi này lên, dù bước đi bị trừ 1.",
-     "nhan_manh": []
+     "ket_luan": "Rừng hơn 90 / 100 cây của chính nó, không hơn cây giỏi nhất — nhưng ta không biết trước cây nào sẽ giỏi nhất.",
+     "nhan_manh": [
+      2
+     ]
+    },
+    {
+     "t": "demo_truot",
+     "tieu_de": "thử số cây trong rừng",
+     "huong_dan": "Kéo để đổi số cây. Mỗi số cây được huấn luyện 20 lần với cách rút ngẫu nhiên khác nhau. So khoảng dao động và độ chính xác trung bình.",
+     "dieu_kien": "Rừng có <b>{x}</b> cây",
+     "moc": [
+      {
+       "x": 1,
+       "n": "77,8 – 97,2",
+       "p": 86.8
+      },
+      {
+       "x": 3,
+       "n": "80,6 – 94,4",
+       "p": 89.0
+      },
+      {
+       "x": 5,
+       "n": "86,1 – 95,8",
+       "p": 91.2
+      },
+      {
+       "x": 11,
+       "n": "88,9 – 97,2",
+       "p": 92.6
+      },
+      {
+       "x": 25,
+       "n": "88,9 – 95,8",
+       "p": 93.1
+      },
+      {
+       "x": 51,
+       "n": "91,7 – 97,2",
+       "p": 93.8
+      },
+      {
+       "x": 101,
+       "n": "91,7 – 95,8",
+       "p": 93.8
+      }
+     ],
+     "nhan_n": "Dao động qua 20 lần (%)",
+     "nhan_p": "Trung bình",
+     "so_le_x": 0,
+     "bat_dau": 3
     },
     {
      "t": "anh",
-     "cap": "Sau 300 tập: điểm của 4 hướng ở ô Xuất phát",
-     "alt": "Sau 300 tập: điểm của 4 hướng ở ô Xuất phát",
-     "src": "img/bang-q-o-xuat-phat.png"
-    },
-    {
-     "t": "anh",
-     "cap": "Mỗi ô: mũi tên chỉ hướng có điểm Q cao nhất",
-     "alt": "Mỗi ô: mũi tên chỉ hướng có điểm Q cao nhất",
-     "src": "img/duong-di-sau-khi-hoc.png"
-    },
-    {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Ô ít khi đi qua",
-     "html": "Ở góc dưới bên trái, người máy hiếm khi ghé nên mũi tên có thể chỉ vào tường. Bảng Q chỉ đáng tin ở những ô đã được thử nhiều."
+     "cap": "Càng nhiều cây, kết quả càng ổn định",
+     "alt": "Càng nhiều cây, kết quả càng ổn định",
+     "src": "img/rung-theo-so-cay.png"
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ 0,5 và 0,9 là xác suất — đây là tốc độ học và mức coi trọng tương lai.",
-      "Tin mọi mũi tên trên hình, kể cả ở ô hiếm khi đi qua."
+      "Nghĩ rừng luôn giỏi hơn mọi cây của nó.",
+      "Nghĩ càng nhiều cây độ chính xác càng tăng mãi — nó chững lại, chỉ ổn định hơn."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Bảng Q: điểm của mỗi (ô, hướng). Đi theo điểm cao nhất → đường đi của máy."
+     "html": "Rừng không giỏi nhất ở mọi lần, nhưng ổn định: ít phụ thuộc may rủi của một cây."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai21-q5",
-     "q": "Theo hình bảng Q ở ô Xuất phát, người máy sẽ đi hướng nào?",
-     "giai": "Hướng có cột cao nhất (-0,43).",
-     "goi_y": "Tìm cột cao nhất.",
+     "q": "Rừng 100 cây đúng bao nhiêu trên tập kiểm tra?",
+     "giai": "Trung bình một cây chỉ 86,8%.",
+     "goi_y": "Đường đậm trên biểu đồ.",
      "a": [
-      "Phải",
-      "Lên",
-      "Xuống",
-      "Trái"
+      "93,1%",
+      "86,8%",
+      "95,8%",
+      "66,7%"
      ],
-     "h": "1930ac3d2274a1"
+     "h": "1cbe49d87f5d3"
     },
     {
      "k": "dd",
      "id": "bai21-q6",
-     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-     "giai": "25 × 4 = 100.",
-     "goi_y": "Nhân số ô với số hướng; đếm đoạn thẳng trên hình đường đi.",
-     "mau": "Mê cung 5 × 5, mỗi ô 4 hướng: bảng Q có {0} ô số. Đường đi sau khi học dài {1} bước.",
+     "q": "Chọn số đúng cho mỗi chỗ trống.",
+     "giai": "Nhiều cây → ổn định hơn.",
+     "goi_y": "Kéo thanh trượt tới 1 cây rồi tới 101 cây.",
+     "mau": "Rừng 1 cây dao động khoảng {0} điểm; rừng 101 cây dao động khoảng {1} điểm.",
      "o": [
       [
-       "100",
-       "25",
-       "20",
-       "9"
+       "19,4",
+       "4,1",
+       "0,0",
+       "50,0"
       ],
       [
-       "8",
-       "5",
-       "12",
-       "25"
+       "4,1",
+       "19,4",
+       "0,0",
+       "50,0"
       ]
      ],
-     "h": "1dcf9ad6f631be"
+     "h": "a5eac17e8973e"
     }
    ]
   },
   {
-   "ten": "Học bao nhiêu, thử bao nhiêu?",
-   "ten_ngan": "Khám phá",
-   "phut": 5,
-   "muc_tieu": "giải thích được khám phá và khai thác.",
-   "khoi_dong": "Quán ăn quen luôn ngon. Có nên thỉnh thoảng thử quán mới không?",
+   "ten": "Khi rừng không thắng",
+   "ten_ngan": "Không luôn thắng",
+   "phut": 3,
+   "muc_tieu": "nhận ra rừng không phải lúc nào cũng thắng cây tốt nhất.",
+   "khoi_dong": "Chỉ dùng 2 cột (giờ học, phút mạng) thì rừng còn thắng không?",
    "khoi": [
     {
-     "t": "demo_truot",
-     "tieu_de": "số tập học",
-     "huong_dan": "Kéo để đổi số tập. Mỗi số tập được học lại 20 lần với cách thử ngẫu nhiên khác nhau; thanh cho biết bao nhiêu lần người máy học được đường tới đích.",
-     "dieu_kien": "Học <b>{x}</b> tập",
-     "moc": [
-      {
-       "x": 1,
-       "n": "0 / 20 lần học tới đích, 0 lần đi đường ngắn nhất 8 bước",
-       "p": 0.0
-      },
-      {
-       "x": 5,
-       "n": "0 / 20 lần học tới đích, 0 lần đi đường ngắn nhất 8 bước",
-       "p": 0.0
-      },
-      {
-       "x": 10,
-       "n": "2 / 20 lần học tới đích, 2 lần đi đường ngắn nhất 8 bước",
-       "p": 10.0
-      },
-      {
-       "x": 20,
-       "n": "20 / 20 lần học tới đích, 20 lần đi đường ngắn nhất 8 bước",
-       "p": 100.0
-      },
-      {
-       "x": 50,
-       "n": "20 / 20 lần học tới đích, 20 lần đi đường ngắn nhất 8 bước",
-       "p": 100.0
-      },
-      {
-       "x": 100,
-       "n": "20 / 20 lần học tới đích, 20 lần đi đường ngắn nhất 8 bước",
-       "p": 100.0
-      },
-      {
-       "x": 300,
-       "n": "20 / 20 lần học tới đích, 20 lần đi đường ngắn nhất 8 bước",
-       "p": 100.0
-      }
-     ],
-     "nhan_n": "Kết quả 20 lần học",
-     "nhan_p": "Tỉ lệ tới đích",
-     "so_le_x": 0,
-     "bat_dau": 0
+     "t": "anh",
+     "cap": "Cây không giới hạn, cây sâu 2 và rừng — với 2 cột và 4 cột",
+     "alt": "Cây không giới hạn, cây sâu 2 và rừng — với 2 cột và 4 cột",
+     "src": "img/hai-cot-va-bon-cot.png"
     },
     {
-     "t": "bang",
+     "t": "vi_du",
+     "tieu_de": "so hai bảng cột",
+     "de": null,
      "cot": [
-      "",
-      "Khai thác",
-      "Khám phá"
+      "Model",
+      "2 cột",
+      "4 cột"
      ],
      "dong": [
       [
-       "Làm gì",
-       "Đi hướng có điểm Q cao nhất",
-       "Thử một hướng ngẫu nhiên"
+       "Cây không giới hạn",
+       "87,5%",
+       "87,5%"
       ],
       [
-       "Lợi",
-       "Dùng điều đã học",
-       "Có thể tìm ra đường tốt hơn"
+       "Cây sâu 2",
+       "91,7%",
+       "91,7%"
       ],
       [
-       "Hại",
-       "Có thể kẹt ở đường “tạm được”",
-       "Mắc lỗi, mất điểm khi đang học"
+       "Rừng 100 cây",
+       "90,3%",
+       "<b>93,1%</b>"
       ]
+     ],
+     "ket_luan": "Với 2 cột, rừng (90,3%) thua cây sâu 2 (91,7%). Có thêm cột, các cây khác nhau hơn và rừng mới phát huy.",
+     "nhan_manh": [
+      2
      ]
     },
     {
-     "t": "anh",
-     "cap": "Tỉ lệ bước thử ngẫu nhiên và điểm trung bình khi học (300 tập, 20 lần)",
-     "alt": "Tỉ lệ bước thử ngẫu nhiên và điểm trung bình khi học (300 tập, 20 lần)",
-     "src": "img/kham-pha-va-khai-thac.png"
-    },
-    {
-     "t": "p",
-     "html": "Mê cung nhỏ nên mọi mức đều tìm ra đường. Nhưng thử ngẫu nhiên 50% số bước thì điểm trung bình mỗi tập khi học chỉ còn -12,2, so với -1,0 khi thử 10%."
-    },
-    {
      "t": "hop",
-     "kieu": "ml",
-     "tieu_de": "Vì sao 0% vẫn học được ở đây?",
-     "html": "Bảng Q bắt đầu bằng 0, còn mỗi bước đi bị trừ điểm — nên hướng chưa thử luôn trông “hấp dẫn” hơn hướng đã thử. Ở bài toán lớn, không khám phá thì dễ kẹt ở cách làm tạm được."
+     "kieu": "chu-y",
+     "tieu_de": "Nói cho đúng",
+     "html": "Rừng <b>thường</b> tốt và <b>ổn định hơn</b> một cây. Nó không phải phép màu: dữ liệu ít cột hoặc một câu hỏi đã đủ tốt thì một cây nông có thể ngang hoặc hơn."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ học càng ít tập càng tốt — dưới 20 tập người máy thường chưa tới được đích.",
-      "Nghĩ khám phá càng nhiều càng tốt."
+      "Nói “rừng luôn thắng cây”.",
+      "Chỉ so trên một lần chia dữ liệu rồi kết luận chắc chắn."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Cân bằng: khai thác điều đã biết, khám phá một phần để tìm cách tốt hơn."
+     "html": "Rừng mạnh khi các cây đủ khác nhau; không phải lúc nào cũng thắng cây tốt nhất."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai21-q7",
-     "q": "Theo phần Tự thử, học 20 tập thì bao nhiêu lần trên 20 người máy tới được đích?",
-     "giai": "Từ 20 tập trở lên, lần học nào cũng tới đích.",
-     "goi_y": "Kéo thanh tới 20 tập.",
+     "q": "Với 2 cột, model nào đúng nhất trong bảng?",
+     "giai": "91,7% so với rừng 90,3%.",
+     "goi_y": "So cột “2 cột”.",
      "a": [
-      "20 / 20",
-      "2 / 20",
-      "0 / 20",
-      "10 / 20"
+      "Cây sâu 2",
+      "Rừng 100 cây",
+      "Cây không giới hạn",
+      "Ba model bằng nhau"
      ],
-     "h": "12e84effa51532"
+     "h": "53c8468daa91"
     },
     {
-     "k": "ma",
+     "k": "ds",
      "id": "bai21-q8",
-     "q": "Hai câu nào đúng về khám phá? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "Khám phá = thử ngẫu nhiên.",
-     "goi_y": "Xem bảng Khai thác – Khám phá.",
-     "a": [
-      "Có thể tìm ra đường tốt hơn",
-      "Làm mất điểm khi đang học",
-      "Luôn chọn điểm Q cao nhất",
-      "Không bao giờ mắc lỗi"
-     ],
-     "h": "17057c17572b4a"
+     "q": "Random Forest luôn chính xác hơn mọi cây quyết định.",
+     "giai": "Với 2 cột, cây sâu 2 hơn rừng.",
+     "goi_y": "Nhìn lại bảng hai cột.",
+     "h": "5e3e3b7972dac"
     }
    ]
   },
   {
-   "ten": "Phần thưởng quyết định tất cả",
-   "ten_ngan": "Phần thưởng",
-   "phut": 4,
-   "muc_tieu": "nhận ra hậu quả của phần thưởng đặt sai.",
-   "khoi_dong": "Nếu thầy cô chấm điểm theo số trang viết, không theo nội dung, học sinh sẽ làm gì?",
+   "ten": "Rừng trong scikit-learn",
+   "ten_ngan": "scikit-learn",
+   "phut": 5,
+   "muc_tieu": "dùng RandomForestClassifier và đọc mức quan trọng của từng cột.",
+   "khoi_dong": "Rừng có 100 cây — ta còn đọc được “vì sao” như một cây không?",
    "khoi": [
-    {
-     "t": "anh",
-     "cap": "Cùng mê cung, cùng thuật toán — chỉ đổi điểm của hố",
-     "alt": "Cùng mê cung, cùng thuật toán — chỉ đổi điểm của hố",
-     "src": "img/phan-thuong-dat-sai.png"
-    },
-    {
-     "t": "p",
-     "html": "Hố −10: 20 / 20 lần học tới đích. Lỡ đặt hố +5: 20 / 20 lần người máy lao thẳng vào hố — với phần thưởng đó, vào hố thật sự “lời” hơn đi tới đích."
-    },
     {
      "t": "bang",
      "cot": [
-      "Ngoài đời",
-      "Học tăng cường làm gì"
+      "Việc",
+      "Lệnh"
      ],
      "dong": [
       [
-       "Trò chơi",
-       "AlphaGo tự chơi hàng triệu ván cờ vây"
+       "Huấn luyện",
+       "<code>rung = RandomForestClassifier(n_estimators=100, random_state=42)</code><br><code>rung.fit(X_train, y_train)</code>"
       ],
       [
-       "Robot",
-       "Học giữ thăng bằng, cầm nắm đồ vật"
+       "Mức quan trọng",
+       "<code>rung.feature_importances_</code>"
       ],
       [
-       "Chatbot",
-       "Học trả lời theo điểm người dùng chấm"
+       "Dự đoán, đánh giá",
+       "<code>rung.predict(X_test)</code> · <code>accuracy_score</code>"
+      ]
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Mức quan trọng trong rừng và tương quan với điểm (Bài 9)",
+     "alt": "Mức quan trọng trong rừng và tương quan với điểm (Bài 9)",
+     "src": "img/muc-quan-trong-cua-cot.png"
+    },
+    {
+     "t": "p",
+     "html": "Không đọc được 100 cây, nhưng rừng cho biết mỗi cột giúp giảm độ lẫn lộn bao nhiêu — <b>mức quan trọng</b>. Thứ tự ở đây trùng thứ tự tương quan của Bài 9: giờ học > phút mạng > giờ ngủ > nộp trễ."
+    },
+    {
+     "t": "anh",
+     "cap": "Boosting: model sau học sửa lỗi của model trước (chỉ cần biết tên)",
+     "alt": "Boosting: model sau học sửa lỗi của model trước (chỉ cần biết tên)",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251216112827912821/boosting.webp",
+     "du_phong": "img/minh-hoa-cach-boosting-hoat-dong.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — A comprehensive guide to ensemble learning",
+      "url": "https://www.geeksforgeeks.org/machine-learning/a-comprehensive-guide-to-ensemble-learning/"
+     },
+     "chu_giai": [
+      [
+       "Base Models",
+       "Các model con"
+      ],
+      [
+       "Prediction",
+       "Dự đoán"
+      ],
+      [
+       "The training is modified based on the predictions",
+       "Lần học sau dựa trên chỗ sai của lần trước"
       ]
      ]
     },
     {
      "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Đặt phần thưởng là việc của con người",
-     "html": "Máy chỉ tối ưu con số được giao. Phần thưởng lệch khỏi ý muốn thật thì máy sẽ “khôn” theo hướng sai — người thiết kế phải kiểm tra hành vi, không chỉ nhìn điểm."
+     "kieu": "ml",
+     "tieu_de": "Ba cách tổ hợp — chỉ cần biết tên",
+     "html": "<b>Bagging</b> (Random Forest): học song song, bỏ phiếu. <b>Boosting</b> (AdaBoost, Gradient Boosting, XGBoost): học nối tiếp, sửa lỗi nhau. <b>Stacking</b>: một model học cách gộp các model khác."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Đổ lỗi cho thuật toán khi máy làm điều lạ — thường là do phần thưởng.",
-      "Nghĩ điểm cao nghĩa là máy làm đúng ý mình."
+      "Nghĩ mức quan trọng là tương quan — nó đo cột giúp cây chia tốt tới đâu.",
+      "Quên random_state nên mỗi lần chạy ra số hơi khác."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Máy tối ưu đúng phần thưởng — không phải đúng ý người đặt."
+     "html": "RandomForestClassifier(n_estimators=...) → fit → feature_importances_ → predict."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai21-q9",
-     "q": "Khi lỡ đặt hố +5 điểm, người máy làm gì?",
-     "giai": "Vào hố lời hơn với phần thưởng đó.",
-     "goi_y": "Xem hình bên phải.",
+     "q": "Cột nào quan trọng nhất trong rừng của lớp?",
+     "giai": "Mức quan trọng 0,68.",
+     "goi_y": "Thanh dài nhất bên trái.",
      "a": [
-      "Lao vào hố trong cả 20 lần học",
-      "Vẫn tới đích như cũ trong 20 lần",
-      "Đứng yên ở ô Xuất phát mãi mãi",
-      "Đi vòng quanh mê cung không dừng"
+      "Giờ tự học",
+      "Phút mạng xã hội",
+      "Giờ ngủ",
+      "Số lần nộp trễ"
      ],
-     "h": "aaa48124649ad"
+     "h": "3c8b84d58eb9e"
     },
     {
-     "k": "ds",
+     "k": "dd",
      "id": "bai21-q10",
-     "q": "Người máy lao vào hố vì thuật toán Q-learning bị lỗi.",
-     "giai": "Thuật toán đúng; phần thưởng đặt sai.",
-     "goi_y": "Hai hình chỉ khác nhau ở điều gì?",
-     "h": "121da24ed63cc6"
+     "q": "Chọn từ đúng cho mỗi chỗ trống.",
+     "giai": "Song song / nối tiếp.",
+     "goi_y": "Cách nào học song song, cách nào sửa lỗi nối tiếp?",
+     "mau": "Random Forest thuộc kiểu {0}; AdaBoost thuộc kiểu {1}.",
+     "o": [
+      [
+       "bagging",
+       "boosting",
+       "stacking",
+       "kernel"
+      ],
+      [
+       "boosting",
+       "bagging",
+       "stacking",
+       "làm mịn"
+      ]
+     ],
+     "h": "1940f194e1495"
     }
    ]
   }
@@ -621,318 +739,327 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai21-q11",
-    "q": "Nhìn hình. Ô nào cho +10 điểm?",
-    "giai": "Đích +10.",
+    "q": "Nhìn hình. Đường nét đứt xanh trong hình đoán kẹo biểu diễn gì?",
+    "giai": "Trung bình 266.",
     "img": {
-     "src": "img/me-cung.png"
+     "src": "img/keo-trong-lo-minh-hoa.png"
     },
     "a": [
-     "Ô Đích ở góc dưới phải",
-     "Ô Hố ở giữa mê cung",
-     "Ô Xuất phát ở góc trên",
-     "Ô màu xám đậm bất kỳ"
+     "Trung bình cả lớp",
+     "Số kẹo thật",
+     "Bạn đoán giỏi nhất",
+     "Bạn đoán lớn nhất"
     ],
-    "h": "1e11b5067f5141"
+    "h": "74a100d91c924"
    },
    {
     "k": "mc",
     "id": "bai21-q12",
-    "q": "Nhìn hình. Khoảng bao nhiêu tập thì số bước gần chạm đường 8 bước?",
-    "giai": "Đường cong giảm nhanh rồi đi ngang.",
+    "q": "Nhìn hình. Cây lẻ dở nhất đúng khoảng bao nhiêu?",
+    "giai": "Cột ngoài cùng bên trái.",
     "img": {
-     "src": "img/so-buoc-moi-tap.png"
+     "src": "img/tram-cay-le-va-ca-rung.png"
     },
     "a": [
-     "Khoảng 20 – 40 tập",
-     "Ngay tập đầu tiên",
-     "Sau đúng 100 tập",
-     "Không bao giờ chạm"
+     "66,7%",
+     "95,8%",
+     "93,1%",
+     "86,8%"
     ],
-    "h": "13be72ed03d5dc"
+    "h": "3c254fb3a76c3"
    },
    {
     "k": "mc",
     "id": "bai21-q13",
-    "q": "Nhìn hình. Từ ô Xuất phát, đường đi rẽ xuống ở cột thứ mấy?",
-    "giai": "Đi phải 3 ô rồi xuống.",
+    "q": "Nhìn hình. Khi tăng số cây, vùng tô nhạt thay đổi thế nào?",
+    "giai": "Kết quả ổn định hơn.",
     "img": {
-     "src": "img/duong-di-sau-khi-hoc.png"
+     "src": "img/rung-theo-so-cay.png"
     },
     "a": [
-     "Cột 4",
-     "Cột 1",
-     "Cột 2",
-     "Cột 5"
+     "Hẹp dần lại",
+     "Rộng dần ra",
+     "Không thay đổi",
+     "Biến mất ngay từ 3 cây"
     ],
-    "h": "1587413be48f96"
+    "h": "13d6e179a55485"
    },
    {
     "k": "mc",
     "id": "bai21-q14",
-    "q": "Nhìn hình. Mức thử ngẫu nhiên nào cho điểm trung bình thấp nhất?",
-    "giai": "Thử nhiều, mắc lỗi nhiều.",
+    "q": "Nhìn hình. Với 4 cột, model nào cao nhất?",
+    "giai": "93,1%.",
     "img": {
-     "src": "img/kham-pha-va-khai-thac.png"
+     "src": "img/hai-cot-va-bon-cot.png"
     },
     "a": [
-     "50%",
-     "0%",
-     "10%",
-     "30%"
+     "Rừng 100 cây",
+     "Cây sâu 2",
+     "Cây không giới hạn",
+     "Ba model bằng nhau"
     ],
-    "h": "198b17a3a6fb3f"
+    "h": "702868270b4c0"
    },
    {
     "k": "mc",
     "id": "bai21-q15",
-    "q": "Trong học tăng cường, “tác tử” là gì?",
-    "giai": "Tác tử = agent.",
+    "q": "Nhìn hình. Mỗi cây trong rừng nhận dữ liệu gì?",
+    "giai": "Bagging.",
+    "img": {
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250521100554969405/XG-Boost.webp",
+     "du_phong": "img/minh-hoa-nhieu-cay-tren-cac-tap-con-ngau-nhien.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Xgboost",
+      "url": "https://www.geeksforgeeks.org/machine-learning/xgboost/"
+     }
+    },
     "a": [
-     "Người máy ra quyết định hành động",
-     "Mê cung chứa tường và hố",
-     "Điểm thưởng sau mỗi bước",
-     "Bảng dữ liệu có đáp án"
+     "Một tập con rút ngẫu nhiên",
+     "Toàn bộ dữ liệu như nhau",
+     "Chỉ các điểm bị đoán sai",
+     "Chỉ một dòng dữ liệu"
     ],
-    "h": "15a171c2614113"
+    "h": "13da0c8e51db37"
    },
    {
     "k": "mc",
     "id": "bai21-q16",
-    "q": "Điểm Q[ô, hướng] ước lượng điều gì?",
-    "giai": "Điểm tương lai.",
+    "q": "Một đội bóng hỏi ý kiến 11 huấn luyện viên có cách nhìn khác nhau rồi theo đa số. Đó là ý tưởng của gì?",
+    "giai": "Ensemble / bagging.",
     "a": [
-     "Tổng điểm sẽ nhận nếu đi hướng đó",
-     "Số lần người máy đã đi qua ô đó",
-     "Khoảng cách từ ô đó tới ô Đích",
-     "Xác suất rơi xuống hố từ ô đó"
+     "Tổ hợp model bỏ phiếu",
+     "Cây quyết định một tầng",
+     "Hồi quy tuyến tính",
+     "Đưa về cùng thang đo"
     ],
-    "h": "1a46cd49221d1a"
+    "h": "8898fc3dc5a3e"
    },
    {
     "k": "mc",
     "id": "bai21-q17",
-    "q": "Vì sao mỗi bước đi bị trừ 1 điểm?",
-    "giai": "Càng nhiều bước càng mất điểm.",
+    "q": "Rừng dự đoán giá nhà (con số) gộp các cây thế nào?",
+    "giai": "Hồi quy → trung bình.",
     "a": [
-     "Để máy ưu tiên đường ngắn",
-     "Để máy đi chậm lại",
-     "Để máy đâm vào tường",
-     "Để bảng Q luôn bằng 0"
+     "Lấy trung bình dự đoán các cây",
+     "Chọn cây sâu nhất",
+     "Bỏ phiếu theo đa số",
+     "Lấy dự đoán lớn nhất"
     ],
-    "h": "7c48a28fb1894"
+    "h": "133dda6ce8a068"
    },
    {
     "k": "mc",
     "id": "bai21-q18",
-    "q": "Robot hút bụi được thưởng theo số lần bật máy hút, không theo độ sạch. Rủi ro là gì?",
-    "giai": "Phần thưởng lệch ý muốn.",
+    "q": "Vì sao mỗi cây trong rừng chỉ xét vài cột ngẫu nhiên khi chia?",
+    "giai": "Cây khác nhau → sai khác nhau → bỏ phiếu hiệu quả.",
     "a": [
-     "Robot bật tắt liên tục mà nhà vẫn bẩn",
-     "Robot hút sạch hơn bình thường",
-     "Robot không bao giờ bật máy hút",
-     "Robot tự sửa lại phần thưởng"
+     "Để các cây khác nhau hơn",
+     "Để cây chạy chậm hơn",
+     "Để bỏ hết cột yếu",
+     "Để cây sâu vô hạn"
     ],
-    "h": "9cd6896c9fe5d"
+    "h": "1ee1fd1d58ce45"
    },
    {
     "k": "mc",
     "id": "bai21-q19",
-    "q": "Q cũ = 0; bước đi được −1; Q tốt nhất ở ô mới = 0. Q mới bằng bao nhiêu?",
-    "giai": "0 + 0,5 × (−1 + 0 − 0).",
+    "q": "AdaBoost và Gradient Boosting thuộc cách tổ hợp nào?",
+    "giai": "Học nối tiếp, sửa lỗi.",
     "a": [
-     "−0,5",
-     "−1",
-     "0",
-     "+0,5"
+     "Boosting",
+     "Bagging",
+     "Stacking",
+     "Kernel"
     ],
-    "h": "c5c5d662b5e40"
+    "h": "1c228cef06f4a3"
    },
    {
     "k": "ma",
     "id": "bai21-q20",
-    "q": "Hai thứ nào là thành phần của học tăng cường? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Tác tử, môi trường, hành động, phần thưởng.",
+    "q": "Những phát biểu nào đúng về Random Forest? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Nhiều cây + bỏ phiếu.",
     "a": [
-     "Hành động",
-     "Phần thưởng",
-     "Cột nhãn",
-     "Tâm nhóm"
+     "Gồm nhiều cây quyết định",
+     "Các cây bỏ phiếu",
+     "Chỉ có đúng một cây",
+     "Không cần dữ liệu huấn luyện"
     ],
-    "h": "1f924764e5a48b"
+    "h": "169c438d5ee42f"
    },
    {
     "k": "ma",
     "id": "bai21-q21",
-    "q": "Hai việc nào là khai thác? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Khai thác = dùng cái đã biết.",
+    "q": "Hai điều nào đúng về rừng trên bảng lớp (4 cột)? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Ổn định, thường tốt.",
     "a": [
-     "Đi hướng có điểm Q cao nhất",
-     "Dùng điều đã học",
-     "Thử một hướng ngẫu nhiên",
-     "Đi thử vào ô chưa tới"
+     "Thắng phần lớn cây của nó",
+     "Ổn định hơn một cây",
+     "Thắng mọi cây của nó",
+     "Kém hơn model lười"
     ],
-    "h": "13f343f8035cdb"
+    "h": "61c189b0c0cea"
    },
    {
     "k": "ma",
     "id": "bai21-q22",
-    "q": "Hai ví dụ nào dùng học tăng cường? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Học qua hành động.",
+    "q": "Tổ hợp model hiệu quả nhất khi nào? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Đa dạng + đủ tốt.",
     "a": [
-     "Máy tự chơi cờ vây",
-     "Robot học giữ thăng bằng",
-     "Chia khách hàng thành nhóm",
-     "Đoán giá nhà từ diện tích"
+     "Các model sai theo cách khác nhau",
+     "Mỗi model tự nó khá tốt",
+     "Các model giống hệt nhau",
+     "Chỉ có một model"
     ],
-    "h": "8d998feab1c20"
+    "h": "192d05fffbd2ed"
    },
    {
     "k": "ma",
     "id": "bai21-q23",
-    "q": "Hai điều nào đúng về bảng Q? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Bảng Q.",
+    "q": "Lệnh nào dùng với rừng trong scikit-learn? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Rừng + mức quan trọng.",
     "a": [
-     "Mỗi (ô, hướng) có một điểm",
-     "Được cập nhật sau mỗi bước",
-     "Được nhập tay từ trước",
-     "Chỉ có một số duy nhất"
+     "RandomForestClassifier",
+     "feature_importances_",
+     "KNeighborsClassifier",
+     "predict_proba_ngau_nhien"
     ],
-    "h": "e12f66615db3a"
+    "h": "168f10ae335258"
    },
    {
     "k": "sx",
     "id": "bai21-q24",
-    "q": "Sắp xếp một bước học Q-learning.",
-    "giai": "Một bước.",
+    "q": "Sắp xếp các bước Random Forest đoán một mẫu mới.",
+    "giai": "Rút → học → đoán → bỏ phiếu.",
     "a": [
-     "Chọn hướng (khai thác hoặc khám phá)",
-     "Nhận ô mới và điểm thưởng",
-     "Tính mục tiêu = thưởng + 0,9 × Q tốt nhất ô mới",
-     "Cập nhật Q của (ô, hướng) cũ"
+     "Rút nhiều tập con ngẫu nhiên",
+     "Mỗi tập con huấn luyện một cây",
+     "Mỗi cây dự đoán mẫu mới",
+     "Bỏ phiếu lấy đa số"
     ],
-    "h": "11397e2dcbda69"
+    "h": "8882cf46a39e6"
    },
    {
     "k": "sx",
     "id": "bai21-q25",
-    "q": "Sắp xếp các giai đoạn người máy học mê cung.",
-    "giai": "Qua nhiều tập.",
+    "q": "Sắp xếp các bước dùng rừng trong scikit-learn.",
+    "giai": "Chia → tạo → fit → đo → đọc.",
     "a": [
-     "Đi mò, rất nhiều bước",
-     "Bảng Q dần có điểm",
-     "Số bước giảm dần",
-     "Đi đúng đường ngắn nhất"
+     "Chia tập huấn luyện và kiểm tra",
+     "Tạo RandomForestClassifier",
+     "Fit trên tập huấn luyện",
+     "Đo trên tập kiểm tra",
+     "Đọc feature_importances_"
     ],
-    "h": "96c71e8ac3437"
+    "h": "5c2a95c9a5e0"
    },
    {
     "k": "dd",
     "id": "bai21-q26",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Ba nhánh.",
-    "mau": "Học có giám sát cần {0}; học tăng cường cần {1}.",
+    "giai": "Nhãn → phiếu; số → trung bình.",
+    "mau": "Phân loại: rừng {0}; hồi quy: rừng {1}.",
     "o": [
      [
-      "đáp án",
-      "phần thưởng",
-      "tâm nhóm",
-      "khuỷu tay"
+      "bỏ phiếu",
+      "lấy trung bình",
+      "chọn cây đầu",
+      "nhân xác suất"
      ],
      [
-      "phần thưởng",
-      "đáp án",
-      "tâm nhóm",
-      "cột nhãn"
+      "lấy trung bình",
+      "bỏ phiếu",
+      "chọn cây sâu nhất",
+      "đếm lá"
      ]
     ],
-    "h": "5bec73f4e7b4e"
+    "h": "8d1eeff43a6a8"
    },
    {
     "k": "dd",
     "id": "bai21-q27",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Hai lựa chọn.",
-    "mau": "Đi theo điểm Q cao nhất là {0}; thử hướng ngẫu nhiên là {1}.",
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "Đọc biểu đồ 100 cây.",
+    "mau": "Rừng đúng {0}; trung bình một cây đúng {1}.",
     "o": [
      [
-      "khai thác",
-      "khám phá",
-      "gom nhóm",
-      "phân loại"
+      "93,1%",
+      "86,8%",
+      "66,7%",
+      "100%"
      ],
      [
-      "khám phá",
-      "khai thác",
-      "hồi quy",
-      "phân loại"
+      "86,8%",
+      "93,1%",
+      "95,8%",
+      "50,0%"
      ]
     ],
-    "h": "182a99931e7f82"
+    "h": "4221d31fef0a1"
    },
    {
     "k": "dd",
     "id": "bai21-q28",
-    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Phần thưởng của bài.",
-    "mau": "Tới đích được {0} điểm; rơi hố bị {1} điểm.",
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "n_estimators, feature_importances_.",
+    "mau": "Tham số {0} là số cây; thuộc tính {1} cho mức quan trọng.",
     "o": [
      [
-      "+10",
-      "−1",
-      "+5",
-      "0"
+      "n_estimators",
+      "max_depth",
+      "n_neighbors",
+      "alpha"
      ],
      [
-      "−10",
-      "−1",
-      "+10",
-      "0"
+      "feature_importances_",
+      "coef_",
+      "support_",
+      "classes_"
      ]
     ],
-    "h": "1356b393e11060"
+    "h": "16a119d06ceb8f"
    },
    {
     "k": "dd",
     "id": "bai21-q29",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Câu chốt.",
-    "mau": "Máy tối ưu đúng {0}, không phải đúng {1} người đặt.",
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "Rừng không luôn thắng.",
+    "mau": "Với 2 cột, rừng đúng {0}, thua cây sâu 2 ({1}).",
     "o": [
      [
-      "phần thưởng",
-      "mê cung",
-      "bảng dữ liệu",
-      "khoảng cách"
+      "90,3%",
+      "91,7%",
+      "93,1%",
+      "100%"
      ],
      [
-      "ý muốn",
-      "mê cung",
-      "bảng Q",
-      "thuật toán"
+      "91,7%",
+      "90,3%",
+      "87,5%",
+      "50,0%"
      ]
     ],
-    "h": "f155660ada43"
+    "h": "110fc8469483a4"
    },
    {
     "k": "ds",
     "id": "bai21-q30",
-    "q": "Trong tập học đầu tiên, người máy gần như đi mò.",
-    "giai": "Bảng Q toàn số 0.",
+    "q": "Mức quan trọng trong rừng của lớp xếp cùng thứ tự với tương quan ở Bài 9.",
+    "giai": "Giờ học > phút mạng > giờ ngủ > nộp trễ.",
     "h": "69b3f3ad83c10"
    },
    {
     "k": "ds",
     "id": "bai21-q31",
-    "q": "Khám phá càng nhiều, điểm khi đang học càng cao.",
-    "giai": "Thử nhiều, mắc lỗi nhiều.",
+    "q": "Tăng số cây từ 100 lên 1 000 chắc chắn làm độ chính xác tăng mạnh.",
+    "giai": "Nó chững lại; chỉ ổn định hơn.",
     "h": "627bcc0154d91"
    },
    {
     "k": "ds",
     "id": "bai21-q32",
-    "q": "Đổi phần thưởng có thể làm máy học hành vi hoàn toàn khác.",
-    "giai": "Hố +5.",
-    "h": "88d49a0a976f8"
+    "q": "Mỗi cây trong Random Forest học trên đúng cùng một dữ liệu.",
+    "giai": "Mỗi cây một tập con ngẫu nhiên.",
+    "h": "1884f913bd3e1d"
    }
   ]
  },

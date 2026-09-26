@@ -456,7 +456,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "ml",
      "tieu_de": "Nhắc lại Bài 5",
-     "html": "Nếu model đo khoảng cách (như KNN, Bài 11), nhớ đưa các feature đã chọn về cùng thang đo trước khi huấn luyện."
+     "html": "Nếu model đo khoảng cách (như KNN, Bài 12), nhớ đưa các feature đã chọn về cùng thang đo trước khi huấn luyện."
     },
     {
      "t": "loi_hay_gap",
@@ -582,7 +582,7 @@ window.BAI = {
       ],
       [
        "Validation / Dev Set",
-       "Tập kiểm định — dùng để chỉnh model (Bài 18)"
+       "Tập kiểm định — dùng để chỉnh model (Bài 23)"
       ],
       [
        "Test Set",

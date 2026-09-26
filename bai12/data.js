@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 12,
  "ma": "bai12",
  "nhan": "Bài 12",
- "tieu_de": "Hồi quy tuyến tính",
+ "tieu_de": "K láng giềng gần nhất (KNN)",
  "phan": "Phần B · Học có giám sát",
- "cau_hoi": "Chiếc điện thoại cũ này nên rao bao nhiêu tiền?",
+ "cau_hoi": "Máy quyết định “bạn này giống ai” bằng cách nào?",
  "gioi_thieu": [
-  "Từ Bài 10 tới giờ, các model của con đều đoán một <b>nhãn</b> (Đạt / Chưa đạt). Hôm nay con dự đoán một <b>con số</b>: giá của một chiếc điện thoại cũ. Đó là bài toán <b>hồi quy</b>.",
-  "Năm chặng: hồi quy là gì, tự kẻ đường tốt nhất, đọc hai số a và b, đo model hồi quy tốt tới đâu, và dùng nhiều cột trong scikit-learn. Bảng 120 tin rao là bảng <b>mô phỏng</b>.",
-  "Con dùng lại: biểu đồ phân tán và tương quan (Bài 9), gradient descent (Bài 5), chia dữ liệu và mốc model lười (Bài 7, 10)."
+  "Ở Bài 5 con đã cho 5 bạn gần A nhất “bỏ phiếu” đoán kết quả của A. Đó chính là ý tưởng của <b>KNN — K láng giềng gần nhất</b>, thuật toán học có giám sát đầu tiên con xây trọn vẹn.",
+  "Năm chặng: ba bước của KNN, tự đoán một bạn mới bằng tay, vì sao phải đưa về cùng thang đo, chọn K, và dùng KNN trong scikit-learn. Bảng khối 10 là bảng mô phỏng.",
+  "Con dùng lại khoảng cách Euclid, đưa về 0 – 1 (Bài 5), chia dữ liệu (Bài 7) và quy trình 5 bước, mốc model lười (Bài 11)."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai12",
  "muc_tieu": [
-  "Phân biệt được bài toán hồi quy với bài toán phân loại.",
-  "Giải thích được “đường tốt nhất” là đường có tổng bình phương sai số nhỏ nhất.",
-  "Đọc được ý nghĩa của hệ số góc a và hệ số chặn b trong bối cảnh.",
-  "Đánh giá model hồi quy bằng MAE và R², so với model lười.",
-  "Huấn luyện hồi quy nhiều cột bằng scikit-learn và nhận ra cột vô dụng."
+  "Mô tả được ba bước của thuật toán KNN.",
+  "Tự dự đoán được nhãn cho một điểm mới bằng KNN.",
+  "Giải thích được vì sao KNN cần đưa các cột về cùng thang đo.",
+  "Giải thích được ảnh hưởng của K: K nhỏ dễ học vẹt, K lớn dễ chưa khớp.",
+  "Huấn luyện và đánh giá KNN bằng scikit-learn, so với mốc."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,142 +36,600 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Dự đoán một con số",
-   "ten_ngan": "Hồi quy là gì",
+   "ten": "Ba bước của KNN",
+   "ten_ngan": "Ba bước",
    "phut": 4,
-   "muc_tieu": "phân biệt được bài toán hồi quy với bài toán phân loại.",
-   "khoi_dong": "Đoán “Đạt hay Chưa đạt” và đoán “giá bao nhiêu triệu” — hai câu hỏi khác nhau ở chỗ nào?",
+   "muc_tieu": "mô tả được ba bước của thuật toán KNN.",
+   "khoi_dong": "Một bạn mới chuyển tới lớp. Muốn đoán bạn ấy học thế nào, con sẽ hỏi ai?",
    "khoi": [
     {
      "t": "dinh_nghia",
-     "ten": "Hồi quy (regression)",
-     "html": "Bài toán học có giám sát mà cột cần dự đoán là <b>một con số liên tục</b>: giá tiền, nhiệt độ, chiều cao, số điểm. Phân loại thì dự đoán <b>một nhãn</b> trong vài nhãn cho trước.",
-     "ky_hieu": "Hồi quy tuyến tính: dự đoán bằng một đường thẳng <code>y = a·x + b</code>."
+     "ten": "K láng giềng gần nhất (KNN — K-Nearest Neighbours)",
+     "html": "Để dự đoán nhãn cho một điểm mới: (1) đo khoảng cách từ điểm mới tới <b>mọi điểm đã biết nhãn</b>; (2) lấy <b>K điểm gần nhất</b>; (3) cho K điểm đó <b>bỏ phiếu</b> — nhãn nhiều phiếu nhất là dự đoán.",
+     "ky_hieu": "K là tham số do người dùng chọn. KNN không tìm quy tắc nào khi huấn luyện — nó chỉ <b>nhớ</b> dữ liệu rồi hỏi láng giềng khi cần dự đoán."
     },
     {
      "t": "anh",
-     "cap": "Học có giám sát chia hai nhánh",
-     "alt": "Học có giám sát chia hai nhánh",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250902175259468148/difff.webp",
-     "du_phong": "img/minh-hoa-hai-nhanh-phan-loai-va-hoi-quy.png",
+     "cap": "Bước 0: một điểm mới (ô vàng) cần xếp vào nhóm A hay B",
+     "alt": "Bước 0: một điểm mới (ô vàng) cần xếp vào nhóm A hay B",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250512150739534897/Initial-Data.webp",
+     "du_phong": "img/minh-hoa-diem-moi-can-phan-loai.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Supervised machine learning",
-      "url": "https://www.geeksforgeeks.org/machine-learning/supervised-machine-learning/"
+      "ten": "GeeksforGeeks — K nearest neighbours",
+      "url": "https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/"
      },
      "chu_giai": [
       [
-       "Supervised Learning",
-       "Học có giám sát"
+       "Initial Data",
+       "Dữ liệu ban đầu"
       ],
       [
-       "Classification (defined Labels)",
-       "Phân loại — nhãn cho trước"
+       "New example to classify",
+       "Điểm mới cần phân loại"
       ],
       [
-       "Regression (no Labels defined)",
-       "Hồi quy — dự đoán con số"
+       "Class A, Class B",
+       "Nhóm A (ngôi sao), nhóm B (tam giác)"
       ]
      ]
     },
     {
      "t": "anh",
-     "cap": "120 chiếc điện thoại cũ đang rao bán (mô phỏng): máy càng cũ, giá càng thấp",
-     "alt": "120 chiếc điện thoại cũ đang rao bán (mô phỏng): máy càng cũ, giá càng thấp",
-     "src": "img/gia-theo-tuoi-may.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "bảng dữ liệu",
-     "de": null,
-     "cot": [
-      "Cột",
-      "Ý nghĩa",
-      "Vai trò"
-     ],
-     "dong": [
-      [
-       "TuoiMay",
-       "Số tháng đã dùng",
-       "feature"
-      ],
-      [
-       "DungLuong",
-       "Bộ nhớ (GB)",
-       "feature"
-      ],
-      [
-       "PinConLai",
-       "Pin còn lại (%)",
-       "feature"
-      ],
-      [
-       "SoLanRoi",
-       "Số lần làm rơi máy",
-       "feature"
-      ],
-      [
-       "Gia",
-       "Giá rao bán (triệu đồng)",
-       "<b>cột cần dự đoán</b>"
-      ]
-     ],
-     "ket_luan": "Tương quan giữa tuổi máy và giá: r = -0,91 — xu hướng giảm rất rõ.",
-     "nhan_manh": []
-    },
-    {
-     "t": "anh",
-     "cap": "Bốn ứng dụng của hồi quy tuyến tính",
-     "alt": "Bốn ứng dụng của hồi quy tuyến tính",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251212171555881822/real_world_use_cases_of_linear_regression.webp",
-     "du_phong": "img/minh-hoa-bon-ung-dung-thuc-te-cua-hoi-quy.png",
+     "cap": "Bước 1: đo khoảng cách tới các điểm đã biết",
+     "alt": "Bước 1: đo khoảng cách tới các điểm đã biết",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250512150738992167/Calculate-Data.webp",
+     "du_phong": "img/minh-hoa-do-khoang-cach-tu-diem-moi-den-moi-diem.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Ml linear regression",
-      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
+      "ten": "GeeksforGeeks — K nearest neighbours",
+      "url": "https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/"
      },
      "chu_giai": [
       [
-       "Stock Market Prediction",
-       "Dự đoán giá cổ phiếu"
+       "Calculate Data",
+       "Tính khoảng cách"
       ],
       [
-       "Real Estate Price Prediction",
-       "Dự đoán giá nhà đất"
+       "X-Axis, Y-Axis",
+       "Trục hoành, trục tung"
+      ]
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Bước 2 – 3: lấy K = 3 điểm gần nhất rồi bỏ phiếu",
+     "alt": "Bước 2 – 3: lấy K = 3 điểm gần nhất rồi bỏ phiếu",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250512162457630554/Finding_Neighbor_Voting_for_Labels.webp",
+     "du_phong": "img/minh-hoa-ba-hang-xom-gan-nhat-bo-phieu.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — K nearest neighbours",
+      "url": "https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/"
+     },
+     "chu_giai": [
+      [
+       "Finding Neighbors & Voting for Labels",
+       "Tìm láng giềng và bỏ phiếu"
       ],
       [
-       "Medical Risk Prediction",
-       "Dự đoán nguy cơ bệnh"
-      ],
-      [
-       "Sales Forecasting",
-       "Dự báo doanh số"
+       "K = 3",
+       "Lấy 3 láng giềng gần nhất"
       ]
      ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ cột cần dự đoán là số thì luôn là hồi quy — mã số học sinh là số nhưng không phải đại lượng.",
-      "Nhầm “hồi quy” với “quay lại” — ở đây hồi quy chỉ việc dự đoán một con số."
+      "Nghĩ KNN “học” ra một công thức — nó chỉ nhớ dữ liệu và đo khoảng cách lúc dự đoán.",
+      "Lấy K điểm xa nhất thay vì gần nhất."
      ]
     },
     {
      "t": "video",
-     "yt": "7ArmBVF2dCs",
-     "ten": "StatQuest — Linear Regression, Clearly Explained!!!",
+     "yt": "HVXime0nQeI",
+     "ten": "StatQuest — K-nearest neighbors, Clearly Explained",
      "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc",
      "bat_dau": null,
      "ket_thuc": null
     },
     {
      "t": "tom_tat",
-     "html": "Hồi quy dự đoán một con số; phân loại dự đoán một nhãn."
+     "html": "KNN: đo khoảng cách → lấy K gần nhất → bỏ phiếu đa số."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Linear Regression in Machine Learning",
-       "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/",
+       "ten": "K-Nearest Neighbor (KNN) Algorithm",
+       "url": "https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/",
+       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+      }
+     ]
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "sx",
+     "id": "bai12-q1",
+     "q": "Sắp xếp ba bước dự đoán nhãn cho một điểm mới bằng KNN.",
+     "giai": "Đo → chọn → bỏ phiếu.",
+     "goi_y": "Muốn biết điểm nào gần nhất thì phải làm gì trước?",
+     "a": [
+      "Đo khoảng cách tới mọi điểm đã biết nhãn",
+      "Chọn K điểm gần nhất",
+      "Cho K điểm đó bỏ phiếu, lấy nhãn nhiều phiếu nhất"
+     ],
+     "h": "18a761d0814f95"
+    },
+    {
+     "k": "mc",
+     "id": "bai12-q2",
+     "q": "K = 5 láng giềng gần nhất có 3 bạn Chưa đạt, 2 bạn Đạt. KNN đoán bạn mới thế nào?",
+     "giai": "Đa số là Chưa đạt (3 > 2).",
+     "goi_y": "Nhãn nào nhiều phiếu hơn?",
+     "a": [
+      "Chưa đạt",
+      "Đạt",
+      "Không đoán được",
+      "Nửa Đạt, nửa Chưa đạt"
+     ],
+     "h": "e686029a2157d"
+    }
+   ]
+  },
+  {
+   "ten": "Tự dự đoán một bạn mới",
+   "ten_ngan": "Tính tay",
+   "phut": 5,
+   "muc_tieu": "tự dự đoán được nhãn của một điểm mới bằng KNN và thấy kết quả có thể đổi theo K.",
+   "khoi_dong": "Bạn mới tự học 3,4 giờ, dùng mạng 150 phút mỗi ngày. Bạn ấy Đạt hay Chưa đạt?",
+   "khoi": [
+    {
+     "t": "p",
+     "html": "Máy đã đưa hai cột về 0 – 1 (dùng min, max của tập huấn luyện: giờ 0,5 – 7,0, phút 15 – 450), rồi đo khoảng cách từ bạn mới tới 168 bạn trong tập huấn luyện. Dưới đây là 9 bạn gần nhất."
+    },
+    {
+     "t": "demo_tung_buoc",
+     "tieu_de": "9 láng giềng gần nhất của bạn mới",
+     "huong_dan": "Bấm “Bước tiếp” để thêm từng láng giềng, từ gần tới xa. Theo dõi cột cuối: kiểm phiếu sau K láng giềng.",
+     "nhan_chon": "Láng giềng",
+     "cot": [
+      "Hạng",
+      "Mã",
+      "Giờ học",
+      "Phút mạng",
+      "Khoảng cách (0 – 1)",
+      "Kết quả",
+      "Kiểm phiếu"
+     ],
+     "mac_dinh": 0,
+     "lua_chon": [
+      {
+       "nhan": "9 láng giềng",
+       "dong": [
+        [
+         "—",
+         "Bạn mới",
+         "3,4",
+         "150",
+         "—",
+         "?",
+         "—"
+        ],
+        [
+         "1",
+         "HS186",
+         "3,5",
+         "147",
+         "0,017",
+         "Đạt",
+         "1 Đạt – 0 Chưa đạt"
+        ],
+        [
+         "2",
+         "HS057",
+         "3,2",
+         "144",
+         "0,034",
+         "Chưa đạt",
+         "1 Đạt – 1 Chưa đạt"
+        ],
+        [
+         "3",
+         "HS084",
+         "3,3",
+         "135",
+         "0,038",
+         "Chưa đạt",
+         "1 Đạt – 2 Chưa đạt"
+        ],
+        [
+         "4",
+         "HS214",
+         "3,3",
+         "133",
+         "0,042",
+         "Đạt",
+         "2 Đạt – 2 Chưa đạt"
+        ],
+        [
+         "5",
+         "HS199",
+         "3,6",
+         "164",
+         "0,045",
+         "Đạt",
+         "3 Đạt – 2 Chưa đạt"
+        ],
+        [
+         "6",
+         "HS011",
+         "3,1",
+         "136",
+         "0,056",
+         "Chưa đạt",
+         "3 Đạt – 3 Chưa đạt"
+        ],
+        [
+         "7",
+         "HS046",
+         "3,7",
+         "128",
+         "0,068",
+         "Đạt",
+         "4 Đạt – 3 Chưa đạt"
+        ],
+        [
+         "8",
+         "HS239",
+         "3,2",
+         "123",
+         "0,069",
+         "Đạt",
+         "5 Đạt – 3 Chưa đạt"
+        ],
+        [
+         "9",
+         "HS045",
+         "3,3",
+         "185",
+         "0,082",
+         "Đạt",
+         "6 Đạt – 3 Chưa đạt"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "kết quả theo từng K",
+     "de": null,
+     "cot": [
+      "K",
+      "Phiếu Đạt",
+      "Phiếu Chưa đạt",
+      "KNN đoán"
+     ],
+     "dong": [
+      [
+       "1",
+       "1",
+       "0",
+       "<b>Đạt</b>"
+      ],
+      [
+       "3",
+       "1",
+       "2",
+       "<b>Chưa đạt</b>"
+      ],
+      [
+       "5",
+       "3",
+       "2",
+       "<b>Đạt</b>"
+      ],
+      [
+       "9",
+       "6",
+       "3",
+       "<b>Đạt</b>"
+      ]
+     ],
+     "ket_luan": "Cùng một bạn mới, K khác nhau cho câu trả lời khác nhau — vì bạn ấy nằm ở vùng giáp ranh. Chặng 4 sẽ chọn K bằng dữ liệu.",
+     "nhan_manh": []
+    },
+    {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Vì sao K thường là số lẻ?",
+     "html": "Với hai nhãn, K lẻ không bao giờ hoà phiếu (ví dụ K = 4 có thể 2 – 2)."
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Quên đưa điểm mới về 0 – 1 bằng cùng min, max với tập huấn luyện.",
+      "Đếm cả chính điểm mới vào danh sách láng giềng."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "Dự đoán bằng KNN: đưa về 0 – 1, đo, sắp xếp, lấy K đầu danh sách, kiểm phiếu."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai12-q3",
+     "q": "Trong phần Tự thử, với K = 3 KNN đoán bạn mới thế nào?",
+     "giai": "Ba láng giềng đầu: 1 Đạt, 2 Chưa đạt.",
+     "goi_y": "Bấm tới láng giềng thứ 3 rồi đọc cột kiểm phiếu.",
+     "a": [
+      "Chưa đạt",
+      "Đạt",
+      "Hoà phiếu",
+      "Không đoán được"
+     ],
+     "h": "189a4ce18f6442"
+    },
+    {
+     "k": "ds",
+     "id": "bai12-q4",
+     "q": "Với hai nhãn, chọn K là số chẵn có thể bị hoà phiếu.",
+     "giai": "K = 4 có thể ra 2 – 2.",
+     "goi_y": "Thử K = 2: hai láng giềng khác nhãn thì sao?",
+     "h": "fbfa2d1dae6cd"
+    }
+   ]
+  },
+  {
+   "ten": "KNN cần cùng thang đo",
+   "ten_ngan": "Thang đo",
+   "phut": 4,
+   "muc_tieu": "giải thích được vì sao KNN phải đưa các cột về cùng thang đo, bằng số liệu.",
+   "khoi_dong": "Bài 5: đo thô thì cột phút mạng lấn át cột giờ học. Điều đó ảnh hưởng tới KNN thế nào?",
+   "khoi": [
+    {
+     "t": "anh",
+     "cap": "Vẽ hai cột trên cùng một thang đo: cả cột giờ học chỉ còn là một dải hẹp",
+     "alt": "Vẽ hai cột trên cùng một thang đo: cả cột giờ học chỉ còn là một dải hẹp",
+     "src": "img/thang-do-goc-nuot-mat-cot-gio-hoc.png"
+    },
+    {
+     "t": "anh",
+     "cap": "Cùng KNN, cùng K = 5: chưa đưa về cùng thang đo 72,2% — đã đưa 94,4%",
+     "alt": "Cùng KNN, cùng K = 5: chưa đưa về cùng thang đo 72,2% — đã đưa 94,4%",
+     "src": "img/duong-bien-knn-chua-scale-va-da-scale.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "KNN K = 5 trên tập kiểm tra",
+     "de": null,
+     "cot": [
+      "Cách làm",
+      "Độ chính xác"
+     ],
+     "dong": [
+      [
+       "Chưa đưa về cùng thang đo",
+       "72,2%"
+      ],
+      [
+       "Đưa về 0 – 1 (MinMaxScaler)",
+       "<b>94,4%</b>"
+      ],
+      [
+       "Mốc model lười",
+       "54,2%"
+      ]
+     ],
+     "ket_luan": "Chênh 22,2 điểm chỉ vì thang đo — không đổi thuật toán, không đổi dữ liệu.",
+     "nhan_manh": [
+      1
+     ]
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "Đưa về 0 – 1 đúng cách",
+     "html": "Tính min, max <b>trên tập huấn luyện</b>, rồi dùng đúng min, max đó để đổi cả tập huấn luyện, tập kiểm tra và mọi điểm mới.",
+     "ky_hieu": "<code>sc = MinMaxScaler().fit(X_train)</code> · <code>X_train_s = sc.transform(X_train)</code> · <code>X_test_s = sc.transform(X_test)</code>"
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Tính min, max trên cả bảng (gồm tập kiểm tra) — tập kiểm tra không còn “chưa thấy”.",
+      "Đổi tập huấn luyện mà quên đổi tập kiểm tra."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "KNN đo khoảng cách nên cột số to lấn át cột số nhỏ. Luôn đưa về cùng thang đo, với min, max lấy từ tập huấn luyện."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai12-q5",
+     "q": "Với KNN K = 5, đưa về cùng thang đo làm độ chính xác trên tập kiểm tra thay đổi thế nào?",
+     "giai": "Hết bị cột phút lấn át, KNN chọn đúng láng giềng hơn.",
+     "goi_y": "Xem bảng ví dụ ở trên.",
+     "a": [
+      "Tăng từ 72,2% lên 94,4%",
+      "Giảm từ 94,4% xuống 72,2%",
+      "Giữ nguyên 72,2%",
+      "Tăng lên 100,0%"
+     ],
+     "h": "c47dabd684c41"
+    },
+    {
+     "k": "dd",
+     "id": "bai12-q6",
+     "q": "Chọn từ đúng cho mỗi chỗ trống.",
+     "giai": "Min, max lấy từ tập huấn luyện; dùng để đổi mọi dữ liệu.",
+     "goi_y": "Phần dữ liệu để chấm ở cuối có được nhìn thấy lúc chuẩn bị không?",
+     "mau": "MinMaxScaler phải .fit() trên tập {0}, rồi .transform() cả tập huấn luyện và tập {1}.",
+     "o": [
+      [
+       "huấn luyện",
+       "kiểm tra",
+       "toàn bộ bảng",
+       "nhãn"
+      ],
+      [
+       "kiểm tra",
+       "nhãn",
+       "feature",
+       "trùng lặp"
+      ]
+     ],
+     "h": "17124470389f8d"
+    }
+   ]
+  },
+  {
+   "ten": "Chọn K",
+   "ten_ngan": "Chọn K",
+   "phut": 5,
+   "muc_tieu": "giải thích được ảnh hưởng của K và chọn K bằng dữ liệu.",
+   "khoi_dong": "K = 1 hay K = 41 — láng giềng ít hay nhiều thì tốt hơn?",
+   "khoi": [
+    {
+     "t": "demo_truot",
+     "tieu_de": "thử các giá trị K",
+     "huong_dan": "Kéo thanh trượt để đổi K. So độ chính xác trên tập huấn luyện và tập kiểm tra.",
+     "dieu_kien": "KNN với K = <b>{x}</b> láng giềng (đã đưa về cùng thang đo)",
+     "moc": [
+      {
+       "x": 1,
+       "n": "100,0%",
+       "p": 86.1
+      },
+      {
+       "x": 3,
+       "n": "94,0%",
+       "p": 91.7
+      },
+      {
+       "x": 5,
+       "n": "91,7%",
+       "p": 94.4
+      },
+      {
+       "x": 9,
+       "n": "92,3%",
+       "p": 95.8
+      },
+      {
+       "x": 15,
+       "n": "91,1%",
+       "p": 93.1
+      },
+      {
+       "x": 25,
+       "n": "88,7%",
+       "p": 91.7
+      },
+      {
+       "x": 41,
+       "n": "89,9%",
+       "p": 93.1
+      }
+     ],
+     "nhan_n": "Đúng trên tập huấn luyện",
+     "nhan_p": "Đúng trên tập kiểm tra",
+     "so_le_x": 0,
+     "bat_dau": 3
+    },
+    {
+     "t": "anh",
+     "cap": "Độ chính xác theo K trên train và test",
+     "alt": "Độ chính xác theo K trên train và test",
+     "src": "img/do-chinh-xac-theo-tung-gia-tri-k.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "đọc hình chọn K",
+     "de": null,
+     "cot": [
+      "K",
+      "Train",
+      "Test",
+      "Nhận xét"
+     ],
+     "dong": [
+      [
+       "1",
+       "100,0%",
+       "86,1%",
+       "Học vẹt — mỗi điểm tự bầu cho chính nó"
+      ],
+      [
+       "9",
+       "92,3%",
+       "<b>95,8%</b>",
+       "Tốt nhất trên test"
+      ],
+      [
+       "41",
+       "89,9%",
+       "93,1%",
+       "Ranh giới mượt quá, bắt đầu chưa khớp"
+      ]
+     ],
+     "ket_luan": null,
+     "nhan_manh": [
+      1
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Ranh giới quyết định với K = 1, 5, 9, 25 — K nhỏ thì lởm chởm, K lớn thì mượt",
+     "alt": "Ranh giới quyết định với K = 1, 5, 9, 25 — K nhỏ thì lởm chởm, K lớn thì mượt",
+     "src": "img/duong-bien-voi-bon-gia-tri-k.png"
+    },
+    {
+     "t": "anh",
+     "cap": "Một bộ dữ liệu khác: ranh giới của KNN khi k = 1, 3, 5, 10",
+     "alt": "Một bộ dữ liệu khác: ranh giới của KNN khi k = 1, 3, 5, 10",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20240910125132/casestudy1.webp",
+     "du_phong": "img/minh-hoa-duong-bien-thay-doi-theo-gia-tri-k.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Understanding decision boundaries in k nearest neighbors knn",
+      "url": "https://www.geeksforgeeks.org/machine-learning/understanding-decision-boundaries-in-k-nearest-neighbors-knn/"
+     },
+     "chu_giai": [
+      [
+       "KNN Decision Boundaries (k=1)",
+       "Ranh giới quyết định của KNN với k = 1"
+      ],
+      [
+       "Feature 1, Feature 2",
+       "Feature thứ nhất, thứ hai"
+      ]
+     ]
+    },
+    {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Chọn K bằng tập nào?",
+     "html": "Bài này dùng tập kiểm tra để minh hoạ cho dễ thấy. Làm đúng quy trình thì chọn K bằng một phần tách riêng từ tập huấn luyện (tập kiểm định) — Bài 23 sẽ học cách làm này."
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Chọn K = 1 vì đúng 100% trên tập huấn luyện.",
+      "Nghĩ K càng lớn càng tốt."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "K nhỏ: dễ học vẹt. K lớn: dễ chưa khớp. Thử nhiều K, chọn K tốt trên dữ liệu chưa thấy."
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Understanding Decision Boundaries in KNN",
+       "url": "https://www.geeksforgeeks.org/machine-learning/understanding-decision-boundaries-in-k-nearest-neighbors-knn/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -180,866 +638,50 @@ window.BAI = {
    "checkpoint": [
     {
      "k": "mc",
-     "id": "bai12-q1",
-     "q": "Bài toán nào là hồi quy?",
-     "giai": "Nhiệt độ là một con số liên tục.",
-     "goi_y": "Câu trả lời nào là một con số có thể lẻ tới phần thập phân?",
-     "a": [
-      "Dự đoán nhiệt độ ngày mai (°C)",
-      "Dự đoán thư có phải thư rác",
-      "Dự đoán ảnh là chó hay mèo",
-      "Dự đoán học sinh Đạt hay Chưa đạt"
-     ],
-     "h": "1d5944f98d1ee0"
-    },
-    {
-     "k": "ds",
-     "id": "bai12-q2",
-     "q": "Dự đoán giá một chiếc điện thoại cũ là bài toán phân loại.",
-     "giai": "Giá là con số liên tục → hồi quy.",
-     "goi_y": "Giá có phải là một trong vài nhãn cho trước không?",
-     "h": "1ddec0de11fdfa"
-    }
-   ]
-  },
-  {
-   "ten": "Tự kẻ đường tốt nhất",
-   "ten_ngan": "Đường tốt nhất",
-   "phut": 5,
-   "muc_tieu": "giải thích được đường tốt nhất là đường có tổng bình phương sai số nhỏ nhất.",
-   "khoi_dong": "Ba bạn kẻ ba đường khác nhau qua cùng một đám điểm. Đường nào tốt nhất — và đo bằng gì?",
-   "khoi": [
-    {
-     "t": "anh",
-     "cap": "Sai số của một điểm = giá thật − giá đường đoán, đo theo chiều dọc",
-     "alt": "Sai số của một điểm = giá thật − giá đường đoán, đo theo chiều dọc",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260112155359063476/observed_value.webp",
-     "du_phong": "img/minh-hoa-gia-tri-quan-sat-va-gia-tri-du-doan.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Ml linear regression",
-      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
-     },
-     "chu_giai": [
-      [
-       "Observed value",
-       "Giá trị thật"
-      ],
-      [
-       "Predicted value",
-       "Giá trị đoán"
-      ],
-      [
-       "Random error",
-       "Sai số"
-      ],
-      [
-       "Intercept",
-       "Hệ số chặn b"
-      ],
-      [
-       "Slope",
-       "Hệ số góc a"
-      ]
-     ]
-    },
-    {
-     "t": "dinh_nghia",
-     "ten": "Tổng bình phương sai số",
-     "html": "Với mỗi điểm: lấy sai số (thật − đoán), bình phương lên, rồi cộng tất cả lại. <b>Đường tốt nhất là đường có tổng này nhỏ nhất.</b>",
-     "ky_hieu": "Bình phương để sai số âm và dương không triệt tiêu nhau, và phạt nặng sai số lớn."
-    },
-    {
-     "t": "demo_ke_duong",
-     "id": "kd2",
-     "tieu_de": "kẻ đường qua 90 máy của tập huấn luyện",
-     "huong_dan": "Kéo a (độ dốc) và b (điểm cắt trục tung). Mỗi vạch đỏ là sai số của một máy. Cố làm tổng bình phương sai số nhỏ nhất, rồi bấm nút để so với đường của máy.",
-     "diem": [
-      [
-       21,
-       6.2
-      ],
-      [
-       33,
-       2.0
-      ],
-      [
-       37,
-       7.6
-      ],
-      [
-       22,
-       7.4
-      ],
-      [
-       13,
-       8.2
-      ],
-      [
-       4,
-       10.9
-      ],
-      [
-       2,
-       10.7
-      ],
-      [
-       22,
-       5.3
-      ],
-      [
-       47,
-       3.2
-      ],
-      [
-       4,
-       12.2
-      ],
-      [
-       23,
-       8.0
-      ],
-      [
-       4,
-       11.0
-      ],
-      [
-       11,
-       10.2
-      ],
-      [
-       33,
-       4.3
-      ],
-      [
-       10,
-       9.6
-      ],
-      [
-       2,
-       14.3
-      ],
-      [
-       5,
-       16.5
-      ],
-      [
-       30,
-       3.1
-      ],
-      [
-       25,
-       4.7
-      ],
-      [
-       11,
-       8.3
-      ],
-      [
-       40,
-       2.4
-      ],
-      [
-       27,
-       6.9
-      ],
-      [
-       4,
-       11.8
-      ],
-      [
-       23,
-       7.1
-      ],
-      [
-       6,
-       14.9
-      ],
-      [
-       4,
-       9.9
-      ],
-      [
-       6,
-       11.7
-      ],
-      [
-       35,
-       3.1
-      ],
-      [
-       14,
-       13.0
-      ],
-      [
-       30,
-       4.1
-      ],
-      [
-       44,
-       1.5
-      ],
-      [
-       28,
-       11.5
-      ],
-      [
-       40,
-       2.6
-      ],
-      [
-       13,
-       13.3
-      ],
-      [
-       10,
-       11.6
-      ],
-      [
-       3,
-       10.8
-      ],
-      [
-       33,
-       1.5
-      ],
-      [
-       48,
-       1.5
-      ],
-      [
-       46,
-       1.5
-      ],
-      [
-       48,
-       1.5
-      ],
-      [
-       34,
-       3.1
-      ],
-      [
-       35,
-       3.3
-      ],
-      [
-       19,
-       5.0
-      ],
-      [
-       33,
-       3.4
-      ],
-      [
-       23,
-       6.2
-      ],
-      [
-       12,
-       9.1
-      ],
-      [
-       38,
-       1.5
-      ],
-      [
-       27,
-       6.3
-      ],
-      [
-       12,
-       10.9
-      ],
-      [
-       4,
-       11.8
-      ],
-      [
-       18,
-       7.8
-      ],
-      [
-       34,
-       4.3
-      ],
-      [
-       35,
-       4.2
-      ],
-      [
-       13,
-       9.7
-      ],
-      [
-       34,
-       1.9
-      ],
-      [
-       36,
-       2.8
-      ],
-      [
-       41,
-       3.5
-      ],
-      [
-       47,
-       1.5
-      ],
-      [
-       19,
-       8.1
-      ],
-      [
-       42,
-       1.5
-      ],
-      [
-       35,
-       1.8
-      ],
-      [
-       29,
-       2.9
-      ],
-      [
-       7,
-       15.7
-      ],
-      [
-       16,
-       8.0
-      ],
-      [
-       20,
-       4.3
-      ],
-      [
-       20,
-       6.1
-      ],
-      [
-       39,
-       3.5
-      ],
-      [
-       43,
-       2.9
-      ],
-      [
-       47,
-       1.5
-      ],
-      [
-       22,
-       7.2
-      ],
-      [
-       36,
-       3.1
-      ],
-      [
-       8,
-       11.6
-      ],
-      [
-       36,
-       2.0
-      ],
-      [
-       1,
-       13.7
-      ],
-      [
-       24,
-       5.4
-      ],
-      [
-       38,
-       1.9
-      ],
-      [
-       28,
-       3.0
-      ],
-      [
-       41,
-       3.1
-      ],
-      [
-       33,
-       5.3
-      ],
-      [
-       30,
-       3.9
-      ],
-      [
-       6,
-       12.7
-      ],
-      [
-       29,
-       6.7
-      ],
-      [
-       38,
-       2.5
-      ],
-      [
-       1,
-       14.4
-      ],
-      [
-       39,
-       1.5
-      ],
-      [
-       47,
-       1.5
-      ],
-      [
-       27,
-       4.3
-      ],
-      [
-       17,
-       5.0
-      ],
-      [
-       12,
-       8.8
-      ],
-      [
-       7,
-       11.6
-      ]
-     ],
-     "mien": {
-      "x": [
-       0,
-       50
-      ],
-      "y": [
-       0,
-       18
-      ]
-     },
-     "a": {
-      "min": -0.6,
-      "max": 0.1,
-      "buoc": 0.01,
-      "dau": -0.1,
-      "so_le": 2
-     },
-     "b": {
-      "min": 0,
-      "max": 20,
-      "buoc": 0.1,
-      "dau": 9,
-      "so_le": 1
-     },
-     "tot": {
-      "a": -0.2688,
-      "b": 13.0795,
-      "sse": 290.4
-     },
-     "nhan_x": "Tuổi máy (tháng)",
-     "nhan_y": "Giá (triệu)",
-     "vach_x": [
-      0,
-      12,
-      24,
-      36,
-      48
-     ],
-     "vach_y": [
-      0,
-      5,
-      10,
-      15
-     ],
-     "nhan_a": null,
-     "nhan_b": null,
-     "nhan_tot": null
-    },
-    {
-     "t": "anh",
-     "cap": "Ba đường, ba tổng bình phương sai số: 800 · 705 · 290",
-     "alt": "Ba đường, ba tổng bình phương sai số: 800 · 705 · 290",
-     "src": "img/ba-duong-ke-tay-khac-nhau.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "so ba đường",
-     "de": null,
-     "cot": [
-      "Đường",
-      "a",
-      "b",
-      "Tổng bình phương sai số"
-     ],
-     "dong": [
-      [
-       "Đường 1",
-       "-0,10",
-       "9,00",
-       "800"
-      ],
-      [
-       "Đường 2",
-       "-0,42",
-       "16,50",
-       "705"
-      ],
-      [
-       "Đường 3",
-       "-0,27",
-       "13,08",
-       "290"
-      ]
-     ],
-     "ket_luan": "Đường 3 có tổng nhỏ nhất — đó là đường máy tìm ra.",
-     "nhan_manh": [
-      2
-     ]
-    },
-    {
-     "t": "hop",
-     "kieu": "ml",
-     "tieu_de": "Máy tìm a, b thế nào?",
-     "html": "Giống gradient descent ở Bài 5: bắt đầu từ một cặp a, b bất kỳ, mỗi bước dịch một chút về phía tổng bình phương sai số giảm, cho tới đáy. (Riêng hồi quy tuyến tính còn có công thức tính thẳng ra đáy.)"
-    },
-    {
-     "t": "anh",
-     "cap": "Đi xuống dốc tới chỗ sai số nhỏ nhất",
-     "alt": "Đi xuống dốc tới chỗ sai số nhỏ nhất",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260529101329191488/derivative_of_cost.webp",
-     "du_phong": "img/minh-hoa-duong-cong-sai-so-va-cac-buoc-di-xuong.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Ml linear regression",
-      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
-     },
-     "chu_giai": [
-      [
-       "Cost J(θ)",
-       "Sai số"
-      ],
-      [
-       "Weight(θ)",
-       "Tham số (a hoặc b)"
-      ],
-      [
-       "Initial Weight",
-       "Điểm xuất phát"
-      ],
-      [
-       "Steps",
-       "Các bước"
-      ],
-      [
-       "Minimum Cost",
-       "Sai số nhỏ nhất"
-      ],
-      [
-       "Derivative of Cost",
-       "Độ dốc"
-      ]
-     ]
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Nghĩ đường tốt là đường chạm qua nhiều điểm nhất.",
-      "Đo sai số theo đường vuông góc thay vì theo chiều dọc."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "Đường tốt nhất = tổng bình phương sai số nhỏ nhất."
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
-     "id": "bai12-q3",
-     "q": "Theo phần Tự thử, đường của máy có tổng bình phương sai số bằng bao nhiêu?",
-     "giai": "Không đường thẳng nào có tổng nhỏ hơn trên 90 máy này.",
-     "goi_y": "Bấm nút hiện đường của máy rồi đọc ô bên phải.",
-     "a": [
-      "290",
-      "800",
-      "705",
-      "0"
-     ],
-     "h": "37b1161fbe8af"
-    },
-    {
-     "k": "mc",
-     "id": "bai12-q4",
-     "q": "Vì sao phải bình phương sai số trước khi cộng?",
-     "giai": "Cộng thẳng thì +3 và −3 thành 0 — trông như không sai.",
-     "goi_y": "Một máy đoán thừa 3 triệu, một máy đoán thiếu 3 triệu. Cộng thẳng được bao nhiêu?",
-     "a": [
-      "Để sai số âm, dương không triệt tiêu",
-      "Để con số nhỏ lại cho dễ tính",
-      "Vì máy tính chỉ cộng được số dương",
-      "Để đường thẳng dốc hơn"
-     ],
-     "h": "73ded66f04ea6"
-    }
-   ]
-  },
-  {
-   "ten": "Đọc a và b",
-   "ten_ngan": "a và b",
-   "phut": 4,
-   "muc_tieu": "đọc được ý nghĩa của hệ số góc a, hệ số chặn b và biết giới hạn của đường thẳng.",
-   "khoi_dong": "Máy trả về a = -0,27, b = 13,08. Hai con số này nói gì về điện thoại cũ?",
-   "khoi": [
-    {
-     "t": "anh",
-     "cap": "Giá = -0,27 × TuoiMay + 13,08",
-     "alt": "Giá = -0,27 × TuoiMay + 13,08",
-     "src": "img/duong-tot-nhat-va-hai-so-a-b.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "đọc thành lời",
-     "de": null,
-     "cot": [
-      "Số",
-      "Ý nghĩa"
-     ],
-     "dong": [
-      [
-       "a = -0,27",
-       "Mỗi tháng tuổi máy, giá giảm khoảng 269 nghìn đồng"
-      ],
-      [
-       "b = 13,08",
-       "Giá đường thẳng đoán cho máy 0 tháng tuổi"
-      ],
-      [
-       "Máy 24 tháng",
-       "-0,27 × 24 + 13,08 ≈ <b>6,63 triệu</b>"
-      ]
-     ],
-     "ket_luan": null,
-     "nhan_manh": [
-      2
-     ]
-    },
-    {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Đường thẳng chỉ đáng tin trong vùng dữ liệu đã học",
-     "html": "Dữ liệu có máy từ 1 tới 48 tháng. Máy 80 tháng: đường đoán -8,42 triệu — giá âm, vô lý. Ra ngoài vùng đã học, model không biết gì."
-    },
-    {
-     "t": "anh",
-     "cap": "Không phải dữ liệu nào cũng đi theo đường thẳng",
-     "alt": "Không phải dữ liệu nào cũng đi theo đường thẳng",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251212171555560592/linear.webp",
-     "du_phong": "img/minh-hoa-du-lieu-tuyen-tinh-va-phi-tuyen.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Ml linear regression",
-      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
-     },
-     "chu_giai": [
-      [
-       "Linear",
-       "Tuyến tính — theo đường thẳng"
-      ],
-      [
-       "Non-Linear",
-       "Phi tuyến — không theo đường thẳng"
-      ]
-     ]
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Đọc a âm thành “model sai” — a âm chỉ là giá giảm khi tuổi tăng.",
-      "Dùng đường thẳng dự đoán xa ngoài vùng dữ liệu."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "a: mỗi đơn vị x tăng thì y đổi bao nhiêu. b: y khi x = 0. Chỉ tin đường trong vùng dữ liệu đã học."
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
-     "id": "bai12-q5",
-     "q": "Với a = -0,27, máy già thêm 10 tháng thì giá đoán thay đổi thế nào?",
-     "giai": "10 × -0,27 = -2,69.",
-     "goi_y": "a là mức thay đổi cho MỖI tháng. 10 tháng thì nhân lên.",
-     "a": [
-      "Giảm khoảng 2,69 triệu",
-      "Tăng khoảng 2,69 triệu",
-      "Giảm khoảng 0,27 triệu",
-      "Không đổi"
-     ],
-     "h": "137b682f3daec3"
-    },
-    {
-     "k": "ds",
-     "id": "bai12-q6",
-     "q": "Đường thẳng của bài dự đoán tốt cho cả máy đã dùng 80 tháng.",
-     "giai": "Ngoài vùng 1 – 48 tháng; đường còn cho giá âm.",
-     "goi_y": "Máy cũ nhất trong dữ liệu bao nhiêu tháng?",
-     "h": "62f29d17a180d"
-    }
-   ]
-  },
-  {
-   "ten": "Model hồi quy tốt tới đâu?",
-   "ten_ngan": "MAE và R²",
-   "phut": 4,
-   "muc_tieu": "đánh giá model hồi quy bằng MAE và R², so với model lười.",
-   "khoi_dong": "Model hồi quy không “đúng” hay “sai” như phân loại. Vậy đo nó bằng gì?",
-   "khoi": [
-    {
-     "t": "dinh_nghia",
-     "ten": "MAE — sai trung bình",
-     "html": "Trung bình của |thật − đoán| trên tập kiểm tra. Cùng đơn vị với cột cần dự đoán (ở đây: triệu đồng). <b>Càng nhỏ càng tốt.</b>",
-     "ky_hieu": null
-    },
-    {
-     "t": "dinh_nghia",
-     "ten": "R² — hơn model lười bao nhiêu",
-     "html": "Model lười luôn đoán giá trung bình → R² = 0. Đoán đúng tuyệt đối → R² = 1. <b>Càng gần 1 càng tốt.</b>",
-     "ky_hieu": "R² âm: còn tệ hơn đoán trung bình."
-    },
-    {
-     "t": "anh",
-     "cap": "Ba model trên cùng 30 máy của tập kiểm tra",
-     "alt": "Ba model trên cùng 30 máy của tập kiểm tra",
-     "src": "img/moc-luoi-va-hai-model.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "ba model",
-     "de": null,
-     "cot": [
-      "Model",
-      "MAE (triệu)",
-      "R²"
-     ],
-     "dong": [
-      [
-       "Lười — đoán giá trung bình",
-       "3,99",
-       "≈ 0"
-      ],
-      [
-       "1 cột — tuổi máy",
-       "1,34",
-       "0,84"
-      ],
-      [
-       "3 cột — tuổi, dung lượng, pin",
-       "<b>0,75</b>",
-       "<b>0,95</b>"
-      ]
-     ],
-     "ket_luan": "Thêm hai cột có ích, sai trung bình giảm từ 1,34 xuống 0,75 triệu.",
-     "nhan_manh": [
-      2
-     ]
-    },
-    {
-     "t": "anh",
-     "cap": "Giá thật và giá model 3 cột đoán — điểm càng sát đường chéo càng tốt",
-     "alt": "Giá thật và giá model 3 cột đoán — điểm càng sát đường chéo càng tốt",
-     "src": "img/gia-that-va-gia-du-doan.png"
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Đo model hồi quy bằng độ chính xác (%) như phân loại.",
-      "Báo R² trên tập huấn luyện thay vì tập kiểm tra."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "MAE: sai trung bình, cùng đơn vị. R²: 0 là ngang model lười, 1 là hoàn hảo. Luôn đo trên tập kiểm tra."
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
      "id": "bai12-q7",
-     "q": "Model đoán giá có MAE = 0,75 triệu. Nghĩa là gì?",
-     "giai": "MAE là sai trung bình, cùng đơn vị với giá.",
-     "goi_y": "Chữ M trong MAE là Mean — trung bình.",
+     "q": "Vì sao KNN với K = 1 luôn đúng 100% trên tập huấn luyện?",
+     "giai": "Mỗi điểm tự “bầu” cho nhãn của chính nó — học vẹt.",
+     "goi_y": "Khi dự đoán một điểm của tập huấn luyện, láng giềng gần nhất là ai?",
      "a": [
-      "Trung bình mỗi máy đoán lệch 0,75 triệu",
-      "Đoán đúng 0,75% số máy",
-      "Máy nào cũng lệch đúng 0,75 triệu",
-      "Tổng lệch của cả tập là 0,75 triệu"
+      "Điểm gần nhất của mỗi điểm là chính nó",
+      "K = 1 là giá trị K tốt nhất",
+      "Tập huấn luyện không có lỗi nào",
+      "Máy đoán ngẫu nhiên mà trúng"
      ],
-     "h": "18bfd78c1ddbbb"
+     "h": "5a9493f573f10"
     },
     {
      "k": "dd",
      "id": "bai12-q8",
      "q": "Chọn từ đúng cho mỗi chỗ trống.",
-     "giai": "R² so model với model lười.",
-     "goi_y": "R² đo model hơn việc luôn đoán trung bình bao nhiêu.",
-     "mau": "Model lười có R² bằng {0}; model càng tốt thì R² càng gần {1}.",
+     "giai": "K nhỏ bám từng điểm; K lớn làm mờ ranh giới.",
+     "goi_y": "Nhìn ranh giới K = 1 (lởm chởm) và K = 25 (rất mượt).",
+     "mau": "K quá nhỏ dễ {0}; K quá lớn dễ {1}.",
      "o": [
       [
-       "0",
-       "1",
-       "100",
-       "−1"
+       "học vẹt",
+       "chưa khớp",
+       "rò rỉ",
+       "lệch nhãn"
       ],
       [
-       "1",
-       "0",
-       "−1",
-       "50"
+       "chưa khớp",
+       "học vẹt",
+       "rò rỉ",
+       "lệch nhãn"
       ]
      ],
-     "h": "1628c7881d6e69"
+     "h": "3acf2b2eff73d"
     }
    ]
   },
   {
-   "ten": "Nhiều cột và scikit-learn",
-   "ten_ngan": "Nhiều cột",
-   "phut": 5,
-   "muc_tieu": "huấn luyện hồi quy nhiều cột bằng scikit-learn và nhận ra cột vô dụng.",
-   "khoi_dong": "Thêm cột thì model có luôn tốt hơn không?",
+   "ten": "KNN trong scikit-learn và đánh giá",
+   "ten_ngan": "scikit-learn",
+   "phut": 4,
+   "muc_tieu": "huấn luyện, dự đoán và đánh giá KNN bằng scikit-learn, so với mốc.",
+   "khoi_dong": "Con đã làm bằng tay. Máy làm cho 72 bạn chỉ với vài dòng lệnh thế nào?",
    "khoi": [
-    {
-     "t": "anh",
-     "cap": "Hồi quy một cột và hồi quy nhiều cột",
-     "alt": "Hồi quy một cột và hồi quy nhiều cột",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251212171556082327/types_of_linear_regression.webp",
-     "du_phong": "img/minh-hoa-hai-dang-hoi-quy-tuyen-tinh.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Ml linear regression",
-      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
-     },
-     "chu_giai": [
-      [
-       "Types of Linear Regression",
-       "Hai dạng hồi quy tuyến tính"
-      ],
-      [
-       "Simple Linear Regression",
-       "Hồi quy một cột"
-      ],
-      [
-       "Multiple Linear Regression",
-       "Hồi quy nhiều cột"
-      ]
-     ]
-    },
     {
      "t": "bang",
      "cot": [
@@ -1049,104 +691,137 @@ window.BAI = {
      "dong": [
       [
        "Chia dữ liệu",
-       "<code>train_test_split(X, y, test_size=0.25, random_state=42)</code>"
+       "<code>train_test_split(X, y, test_size=0.3, stratify=y)</code>"
       ],
       [
-       "Huấn luyện",
-       "<code>model = LinearRegression().fit(X_train, y_train)</code>"
+       "Đưa về 0 – 1",
+       "<code>sc = MinMaxScaler().fit(X_train)</code>"
       ],
       [
-       "Đọc a, b",
-       "<code>model.coef_</code> · <code>model.intercept_</code>"
+       "Huấn luyện (nhớ dữ liệu)",
+       "<code>knn = KNeighborsClassifier(n_neighbors=9)</code><br><code>knn.fit(sc.transform(X_train), y_train)</code>"
       ],
       [
        "Dự đoán",
-       "<code>du_doan = model.predict(X_test)</code>"
+       "<code>du_doan = knn.predict(sc.transform(X_test))</code>"
       ],
       [
        "Đánh giá",
-       "<code>mean_absolute_error</code> · <code>r2_score</code>"
+       "<code>accuracy_score(y_test, du_doan)</code>"
       ]
      ]
     },
     {
-     "t": "anh",
-     "cap": "Thêm cột SoLanRoi (gần như không liên quan tới giá)",
-     "alt": "Thêm cột SoLanRoi (gần như không liên quan tới giá)",
-     "src": "img/them-cot-vo-dung-r2-van-tang.png"
-    },
-    {
      "t": "vi_du",
-     "tieu_de": "cái bẫy của cột vô dụng",
+     "tieu_de": "so KNN với các model trước",
      "de": null,
      "cot": [
       "Model",
-      "R² tập huấn luyện",
-      "R² tập kiểm tra"
+      "Độ chính xác trên tập kiểm tra"
      ],
      "dong": [
       [
-       "3 cột",
-       "0,9569",
-       "0,9505"
+       "Model lười (Bài 7, 11)",
+       "54,2%"
       ],
       [
-       "3 cột + SoLanRoi",
-       "<b>0,9590 ↑</b>",
-       "<b>0,9482 ↓</b>"
+       "Model ngưỡng giờ học (Bài 11)",
+       "91,7%"
+      ],
+      [
+       "KNN K = 9, đã đưa về cùng thang đo",
+       "<b>95,8%</b>"
       ]
      ],
-     "ket_luan": "Trên dữ liệu đã học R² luôn tăng khi thêm cột — kể cả cột vô dụng. Chỉ tập kiểm tra mới lộ ra (r của SoLanRoi với giá: -0,05).",
+     "ket_luan": "KNN nhìn được hai cột cùng lúc nên vượt model ngưỡng một cột.",
      "nhan_manh": [
-      1
+      2
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Ranh giới quyết định: vùng mà mọi điểm mới rơi vào sẽ được đoán cùng một nhãn",
+     "alt": "Ranh giới quyết định: vùng mà mọi điểm mới rơi vào sẽ được đoán cùng một nhãn",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251113175949623882/420046938.webp",
+     "du_phong": "img/minh-hoa-duong-bien-quyet-dinh-cua-knn.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Understanding decision boundaries in k nearest neighbors knn",
+      "url": "https://www.geeksforgeeks.org/machine-learning/understanding-decision-boundaries-in-k-nearest-neighbors-knn/"
+     },
+     "chu_giai": [
+      [
+       "Decision Boundary (KNN)",
+       "Ranh giới quyết định của KNN"
+      ]
+     ]
+    },
+    {
+     "t": "bang",
+     "cot": [
+      "Ưu điểm",
+      "Hạn chế"
+     ],
+     "dong": [
+      [
+       "Dễ hiểu, dễ giải thích bằng “láng giềng”",
+       "Dự đoán chậm khi dữ liệu rất lớn"
+      ],
+      [
+       "Không cần tìm công thức",
+       "Bắt buộc đưa về cùng thang đo"
+      ],
+      [
+       "Dùng được cho nhiều nhãn",
+       "Cột thừa, cột nhiễu làm sai khoảng cách"
+      ]
      ]
     },
     {
      "t": "hop",
      "kieu": "ml",
-     "tieu_de": "Không cần đưa về cùng thang đo?",
-     "html": "Hồi quy tuyến tính không đo khoảng cách như KNN, nên kết quả dự đoán không đổi khi đổi thang đo. (Hệ số a của từng cột thì đổi theo đơn vị.)"
+     "tieu_de": "Buổi sau: bài 13 (thực hành)",
+     "html": "Nhóm dùng KNN chẩn đoán khối u lành hay ác trên một bộ dữ liệu y khoa thật — quy trình y hệt hôm nay."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Thêm cột thấy R² train tăng liền kết luận cột đó có ích.",
-      "Quên rằng hồi quy tuyến tính chỉ vẽ được đường thẳng (hoặc mặt phẳng)."
+      "Quên transform tập kiểm tra trước khi predict.",
+      "Không so với mốc model lười nên không biết KNN có thật sự học được gì."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "LinearRegression().fit → coef_, intercept_ → predict → MAE, R² trên tập kiểm tra. Cột vô dụng lộ ra ở tập kiểm tra."
+     "html": "scikit-learn: chia → MinMaxScaler → KNeighborsClassifier.fit → predict → accuracy_score; luôn so với mốc."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai12-q9",
-     "q": "Lệnh nào cho biết hệ số chặn b của model?",
-     "giai": "coef_ là các hệ số góc a; intercept_ là b.",
-     "goi_y": "Intercept nghĩa là điểm cắt trục.",
+     "q": "Lệnh nào tạo một model KNN với 7 láng giềng trong scikit-learn?",
+     "giai": "n_neighbors là K.",
+     "goi_y": "Tên lớp có chữ Neighbors.",
      "a": [
-      "model.intercept_",
-      "model.coef_",
-      "model.predict",
-      "model.score_b"
+      "KNeighborsClassifier(n_neighbors=7)",
+      "MinMaxScaler(n_neighbors=7)",
+      "train_test_split(n_neighbors=7)",
+      "accuracy_score(n_neighbors=7)"
      ],
-     "h": "1dd189b061a43e"
+     "h": "8257f18a8878c"
     },
     {
      "k": "ma",
      "id": "bai12-q10",
-     "q": "Thêm SoLanRoi vào model 3 cột. Hai điều nào xảy ra? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "Đây là cái bẫy: dữ liệu đã học luôn khen cột mới.",
-     "goi_y": "Xem bảng “cái bẫy của cột vô dụng”.",
+     "q": "Những hạn chế nào đúng với KNN? <b>(Chọn 2 đáp án đúng.)</b>",
+     "giai": "KNN dễ giải thích; dùng tốt cho phân loại.",
+     "goi_y": "Xem bảng ưu điểm, hạn chế.",
      "a": [
-      "R² trên tập huấn luyện tăng",
-      "R² trên tập kiểm tra giảm",
-      "R² trên tập kiểm tra tăng mạnh",
-      "MAE trên tập kiểm tra về 0"
+      "Cần đưa các cột về cùng thang đo",
+      "Dự đoán chậm khi dữ liệu rất lớn",
+      "Chỉ dùng được cho hồi quy",
+      "Không giải thích được bằng lời"
      ],
-     "h": "ceb0bfbffca67"
+     "h": "17ac7d3cc4ffb5"
     }
    ]
   }
@@ -1165,326 +840,331 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai12-q11",
-    "q": "Nhìn hình. Nhánh bên phải của sơ đồ dự đoán loại kết quả nào?",
-    "giai": "Regression = hồi quy: dự đoán con số.",
+    "q": "Nhìn hình. Vòng tròn nét đứt quanh ô vàng cho biết điều gì?",
+    "giai": "Vòng tròn khoanh 3 điểm gần ô vàng nhất — những điểm được bỏ phiếu.",
     "img": {
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250902175259468148/difff.webp",
-     "du_phong": "img/minh-hoa-hai-nhanh-phan-loai-va-hoi-quy.png",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250512162457630554/Finding_Neighbor_Voting_for_Labels.webp",
+     "du_phong": "img/minh-hoa-ba-hang-xom-gan-nhat-bo-phieu.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Supervised machine learning",
-      "url": "https://www.geeksforgeeks.org/machine-learning/supervised-machine-learning/"
+      "ten": "GeeksforGeeks — K nearest neighbours",
+      "url": "https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/"
      }
     },
     "a": [
-     "Một con số liên tục",
-     "Một nhãn cho trước",
-     "Một nhóm tự chia",
-     "Một hình ảnh"
+     "Vùng chứa K = 3 láng giềng gần nhất",
+     "Ranh giới giữa nhóm A và nhóm B",
+     "Vùng chứa mọi điểm của nhóm B",
+     "Khoảng cách xa nhất của dữ liệu"
     ],
-    "h": "fa6bb1c8624bd"
+    "h": "1077a236cbf76c"
    },
    {
     "k": "mc",
     "id": "bai12-q12",
-    "q": "Nhìn hình. Vạch đỏ nối mỗi điểm với đường thẳng là gì?",
-    "giai": "Sai số đo theo chiều dọc: thật − đoán.",
+    "q": "Nhìn hình. K nào cho độ chính xác cao nhất trên tập kiểm tra?",
+    "giai": "Đỉnh đường test ở K = 9.",
     "img": {
-     "src": "img/sai-so-doc-tu-diem-toi-duong.png"
+     "src": "img/do-chinh-xac-theo-tung-gia-tri-k.png"
     },
     "a": [
-     "Sai số của từng chiếc máy",
-     "Khoảng cách tới điểm gần nhất",
-     "Độ dốc của đường thẳng",
-     "Giá trung bình của các máy"
+     "K = 9",
+     "K = 1",
+     "K = 41",
+     "K = 3"
     ],
-    "h": "1553bff2ff2f50"
+    "h": "10af960bb7d791"
    },
    {
     "k": "mc",
     "id": "bai12-q13",
-    "q": "Nhìn hình. Đường nào có tổng bình phương sai số nhỏ nhất?",
-    "giai": "Đường 3: 290.",
+    "q": "Nhìn hình. Vì sao hình bên trái kém hơn hình bên phải?",
+    "giai": "Cùng K = 5, chỉ khác thang đo.",
     "img": {
-     "src": "img/ba-duong-ke-tay-khac-nhau.png"
+     "src": "img/duong-bien-knn-chua-scale-va-da-scale.png"
     },
     "a": [
-     "Đường 3",
-     "Đường 1",
-     "Đường 2",
-     "Ba đường bằng nhau"
+     "Cột phút mạng lấn át cột giờ học",
+     "Dùng K khác nhau ở hai hình",
+     "Hình trái có ít dữ liệu hơn",
+     "Hình trái dùng thuật toán khác"
     ],
-    "h": "1fa7393926261f"
+    "h": "1a02b549ecf3d1"
    },
    {
     "k": "mc",
     "id": "bai12-q14",
-    "q": "Nhìn hình. Model nào có R² gần 0?",
-    "giai": "R² = 0 nghĩa là ngang model lười.",
+    "q": "Nhìn hình. Ranh giới với K = 1 có đặc điểm gì?",
+    "giai": "K = 1 bám từng điểm — dấu hiệu học vẹt.",
     "img": {
-     "src": "img/moc-luoi-va-hai-model.png"
+     "src": "img/duong-bien-voi-bon-gia-tri-k.png"
     },
     "a": [
-     "Model lười đoán trung bình",
-     "Model chỉ dùng 1 cột",
-     "Model dùng đủ 3 cột",
-     "Không có model nào"
+     "Lởm chởm, bám sát từng điểm",
+     "Mượt, gần như thẳng",
+     "Không có ranh giới",
+     "Giống hệt K = 25"
     ],
-    "h": "16cd543470d971"
+    "h": "d4ec36445b0f3"
    },
    {
     "k": "mc",
     "id": "bai12-q15",
-    "q": "Nhìn hình. Điểm nằm xa đường chéo nét đứt nhất cho biết gì?",
-    "giai": "Lệch 2,53 triệu.",
-    "img": {
-     "src": "img/gia-that-va-gia-du-doan.png"
-    },
+    "q": "KNN nhớ dữ liệu và chỉ tính khi cần dự đoán. Điều này gây khó khăn gì?",
+    "giai": "Mỗi lần dự đoán phải đo tới mọi điểm.",
     "a": [
-     "Máy model đoán lệch nhiều nhất",
-     "Máy đắt nhất trong dữ liệu",
-     "Máy mới nhất trong dữ liệu",
-     "Máy model đoán đúng tuyệt đối"
+     "Dự đoán chậm khi dữ liệu rất lớn",
+     "Huấn luyện mất rất nhiều giờ",
+     "Không dự đoán được điểm mới",
+     "Không dùng được cho phân loại"
     ],
-    "h": "13c94d297e1a1c"
+    "h": "ec0ca6fe1bb13"
    },
    {
     "k": "mc",
     "id": "bai12-q16",
-    "q": "Tiền điện = 3 × số kWh + 50 (nghìn đồng). Hệ số góc 3 nghĩa là gì?",
-    "giai": "a là mức tăng của y khi x tăng 1.",
+    "q": "Bảng có cột Chiều cao (cm) và cột Chiều dài bàn chân (cm). Có cần đưa về cùng thang đo trước KNN không?",
+    "giai": "Cùng đơn vị nhưng khoảng biến thiên khác nhau vẫn lấn át.",
     "a": [
-     "Mỗi kWh dùng thêm, trả thêm 3 nghìn",
-     "Tháng nào cũng trả 3 nghìn",
-     "Dùng 3 kWh thì miễn phí",
-     "Tiền điện tăng gấp 3 mỗi tháng"
+     "Có — khoảng biến thiên hai cột khác nhau",
+     "Không — hai cột cùng đơn vị cm",
+     "Không — KNN tự đổi thang đo",
+     "Có — vì cột cm luôn phải bỏ"
     ],
-    "h": "1b110ce187bb87"
+    "h": "1e1c71161deddc"
    },
    {
     "k": "mc",
     "id": "bai12-q17",
-    "q": "Model dự đoán chiều cao trẻ em theo tuổi học từ trẻ 2 – 12 tuổi. Đoán chiều cao người 40 tuổi thì sao?",
-    "giai": "Đường thẳng cứ tăng mãi, người lớn thì ngừng cao.",
+    "q": "KNN với K = 7 đúng 88% trên test, mốc model lười 90%. Nhận xét nào đúng?",
+    "giai": "Không vượt mốc thì model chưa có ích.",
     "a": [
-     "Không đáng tin — ngoài vùng đã học",
-     "Rất chính xác vì đã học kỹ",
-     "Chính xác hơn trẻ 5 tuổi",
-     "Luôn ra đúng 170 cm"
+     "KNN còn kém hơn đoán một nhãn",
+     "KNN rất tốt vì gần 90%",
+     "KNN đang học vẹt",
+     "Cần tăng K lên 1000"
     ],
-    "h": "15b772b28841e"
+    "h": "3bc7608ea523c"
    },
    {
     "k": "mc",
     "id": "bai12-q18",
-    "q": "Model A có MAE 2 triệu, model B có MAE 0,8 triệu trên cùng tập kiểm tra. Nhận xét nào đúng?",
-    "giai": "MAE càng nhỏ càng tốt.",
+    "q": "K = 4 láng giềng có 2 Đạt, 2 Chưa đạt. Chuyện gì xảy ra?",
+    "giai": "Vì vậy với hai nhãn thường chọn K lẻ.",
     "a": [
-     "Model B đoán sát hơn model A",
-     "Model A đoán sát hơn model B",
-     "Hai model tốt như nhau",
-     "Không so sánh được hai model"
+     "Hoà phiếu, khó quyết định",
+     "Chắc chắn đoán Đạt",
+     "Chắc chắn đoán Chưa đạt",
+     "KNN báo lỗi không chạy"
     ],
-    "h": "184570ead64862"
+    "h": "179c64fea9cd6c"
    },
    {
     "k": "mc",
     "id": "bai12-q19",
-    "q": "Model hồi quy có R² = −0,2 trên tập kiểm tra. Điều đó cho thấy gì?",
-    "giai": "R² âm: thua model lười.",
+    "q": "Thêm một cột ngẫu nhiên vô nghĩa vào KNN. Điều gì dễ xảy ra?",
+    "giai": "KNN dùng mọi cột để đo khoảng cách.",
     "a": [
-     "Còn tệ hơn luôn đoán trung bình",
-     "Tốt hơn model lười một chút",
-     "Đoán đúng 20% số dòng",
-     "Model hoàn hảo trên tập kiểm tra"
+     "Khoảng cách bị nhiễu, đoán kém hơn",
+     "Đoán chính xác hơn hẳn trước",
+     "Không ảnh hưởng gì tới kết quả",
+     "KNN tự động bỏ qua cột đó"
     ],
-    "h": "60a53951dd82"
+    "h": "1ce758bd2f9a79"
    },
    {
     "k": "ma",
     "id": "bai12-q20",
-    "q": "Những bài toán nào là hồi quy? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Hồi quy: kết quả là con số liên tục.",
+    "q": "Những bước nào có trong thuật toán KNN? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Đo → chọn K → bỏ phiếu.",
     "a": [
-     "Dự đoán giá vé máy bay",
-     "Dự đoán lượng mưa ngày mai (mm)",
-     "Dự đoán email là thư rác",
-     "Dự đoán loài hoa từ ảnh"
+     "Đo khoảng cách tới các điểm đã biết",
+     "Bỏ phiếu theo đa số",
+     "Tính hệ số tương quan",
+     "Xoá các điểm xa nhất"
     ],
-    "h": "43052c22652d1"
+    "h": "d71ccd223257"
    },
    {
     "k": "ma",
     "id": "bai12-q21",
-    "q": "Những phát biểu nào đúng về đường tốt nhất? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Tốt nhất theo tổng bình phương sai số.",
+    "q": "Những phát biểu nào đúng về K trong KNN? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "K là tham số chọn bằng dữ liệu.",
     "a": [
-     "Có tổng bình phương sai số nhỏ nhất",
-     "Sai số đo theo chiều dọc",
-     "Phải đi qua nhiều điểm nhất",
-     "Luôn đi qua gốc toạ độ"
+     "K là số láng giềng được hỏi",
+     "K do người dùng chọn",
+     "K luôn phải bằng 1",
+     "K càng lớn càng chính xác"
     ],
-    "h": "171d8291db68e2"
+    "h": "1964f07423fa75"
    },
    {
     "k": "ma",
     "id": "bai12-q22",
-    "q": "Những chỉ số nào dùng để đánh giá model hồi quy? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Hồi quy đo độ lệch, không đo đúng/sai.",
+    "q": "Những việc nào đúng khi đưa về 0 – 1 cho KNN? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Fit trên train, transform mọi dữ liệu.",
     "a": [
-     "MAE",
-     "R²",
-     "Độ chính xác (%)",
-     "Số láng giềng K"
+     "Lấy min, max từ tập huấn luyện",
+     "Đổi cả tập kiểm tra bằng min, max đó",
+     "Lấy min, max từ cả bảng",
+     "Chỉ đổi tập huấn luyện"
     ],
-    "h": "f8a68773cf0c"
+    "h": "59e03a53a0394"
    },
    {
     "k": "ma",
     "id": "bai12-q23",
-    "q": "Thêm cột SoLanRoi vô dụng vào model. Hai điều nào đúng? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Dữ liệu đã học luôn khen cột mới.",
+    "q": "KNN với K = 1 có những đặc điểm nào? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "K = 1 bám từng điểm.",
     "a": [
-     "R² tập huấn luyện vẫn tăng",
-     "Tập kiểm tra mới lộ ra cột vô dụng",
-     "R² tập kiểm tra tăng mạnh",
-     "Model tự bỏ cột vô dụng"
+     "Đúng 100% trên tập huấn luyện",
+     "Dễ học vẹt",
+     "Luôn tốt nhất trên tập kiểm tra",
+     "Ranh giới rất mượt"
     ],
-    "h": "1e1d0f711d9c28"
+    "h": "13d77b19c17408"
    },
    {
     "k": "sx",
     "id": "bai12-q24",
-    "q": "Sắp xếp các bước tìm đường tốt nhất bằng tay.",
-    "giai": "Chọn → tính sai số → bình phương, cộng → chỉnh.",
+    "q": "Sắp xếp các bước dùng KNN trong scikit-learn.",
+    "giai": "Chia → scaler → fit → predict → chấm.",
     "a": [
-     "Chọn một cặp a, b",
-     "Tính sai số từng điểm",
-     "Bình phương rồi cộng lại",
-     "Đổi a, b để tổng nhỏ hơn"
+     "Chia tập huấn luyện và kiểm tra",
+     "Fit MinMaxScaler trên tập huấn luyện",
+     "Fit KNeighborsClassifier",
+     "Predict tập kiểm tra",
+     "Tính accuracy_score"
     ],
-    "h": "1811ab3d49d898"
+    "h": "b8ea48addfdad"
    },
    {
     "k": "sx",
     "id": "bai12-q25",
-    "q": "Sắp xếp các bước dùng LinearRegression trong scikit-learn.",
-    "giai": "Chia → fit → predict → chấm.",
+    "q": "Sắp xếp các bước chọn K.",
+    "giai": "Thử → học → đo → giữ.",
     "a": [
-     "Chia tập huấn luyện và kiểm tra",
-     "Fit LinearRegression trên tập huấn luyện",
-     "Predict tập kiểm tra",
-     "Tính MAE và R²"
+     "Chọn danh sách K để thử",
+     "Huấn luyện KNN với từng K",
+     "Đo độ chính xác trên dữ liệu chưa thấy",
+     "Giữ K cho kết quả tốt nhất"
     ],
-    "h": "1958a3a9fae0c3"
+    "h": "1008684fd5932a"
    },
    {
     "k": "dd",
     "id": "bai12-q26",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "a: độ dốc; b: điểm cắt trục tung.",
-    "mau": "Trong y = a·x + b, số đứng trước x là {0}; số cộng thêm ở cuối là {1}.",
+    "giai": "K láng giềng, bỏ phiếu.",
+    "mau": "KNN dự đoán bằng cách hỏi {0} láng giềng gần nhất rồi {1}.",
     "o": [
      [
-      "hệ số góc",
-      "hệ số chặn",
-      "sai số",
-      "feature"
+      "K",
+      "tất cả",
+      "một nửa",
+      "hai"
      ],
      [
-      "hệ số chặn",
-      "hệ số góc",
-      "sai số",
-      "nhãn"
+      "bỏ phiếu đa số",
+      "lấy trung bình cộng",
+      "chọn ngẫu nhiên",
+      "xoá láng giềng"
      ]
     ],
-    "h": "9e611759c0469"
+    "h": "1e8ccef307a5c"
    },
    {
     "k": "dd",
     "id": "bai12-q27",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "a = -0,27; -0,27 × 24 + 13,08.",
-    "mau": "Mỗi tháng tuổi máy, giá giảm khoảng {0} nghìn; máy 24 tháng đoán khoảng {1} triệu.",
+    "giai": "Chênh 22,2 điểm.",
+    "mau": "KNN K = 5 chưa đưa về cùng thang đo đúng {0}; đã đưa đúng {1}.",
     "o": [
      [
-      "269",
-      "1308",
-      "27",
-      "1 000"
+      "72,2%",
+      "94,4%",
+      "54,2%",
+      "95,8%"
      ],
      [
-      "6,63",
-      "13,08",
-      "-8,42",
-      "6,50"
+      "94,4%",
+      "72,2%",
+      "54,2%",
+      "100,0%"
      ]
     ],
-    "h": "7d6d709066524"
+    "h": "da2a7a3f28dc2"
    },
    {
     "k": "dd",
     "id": "bai12-q28",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "MAE là sai số; R² tối đa bằng 1.",
-    "mau": "MAE càng {0} càng tốt; R² càng {1} càng tốt.",
+    "giai": "n_neighbors = K; MinMaxScaler đưa về 0 – 1.",
+    "mau": "Tham số n_neighbors là {0}; lớp dùng để đưa về 0 – 1 là {1}.",
     "o": [
      [
-      "nhỏ",
-      "lớn",
-      "âm",
-      "gần 100"
+      "K",
+      "nhãn",
+      "ngưỡng",
+      "độ dốc"
      ],
      [
-      "gần 1",
-      "gần 0",
-      "âm",
-      "nhỏ"
+      "MinMaxScaler",
+      "KNeighborsClassifier",
+      "train_test_split",
+      "accuracy_score"
      ]
     ],
-    "h": "16570b31a359d9"
+    "h": "117968f1de2553"
    },
    {
     "k": "dd",
     "id": "bai12-q29",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "coef_ = a; intercept_ = b.",
-    "mau": "Lệnh {0} trả về các hệ số góc; lệnh {1} trả về hệ số chặn.",
+    "giai": "K lẻ không hoà phiếu với hai nhãn.",
+    "mau": "Với hai nhãn nên chọn K {0} để tránh {1}.",
     "o": [
      [
-      "coef_",
-      "intercept_",
-      "predict",
-      "fit"
+      "lẻ",
+      "chẵn",
+      "bằng 0",
+      "âm"
      ],
      [
-      "intercept_",
-      "coef_",
-      "predict",
-      "score"
+      "hoà phiếu",
+      "học vẹt",
+      "rò rỉ",
+      "thiếu dữ liệu"
      ]
     ],
-    "h": "679ee0c0538da"
+    "h": "436afe94c0356"
    },
    {
     "k": "ds",
     "id": "bai12-q30",
-    "q": "Hồi quy tuyến tính cần đưa các cột về cùng thang đo như KNN thì dự đoán mới đúng.",
-    "giai": "Dự đoán không đổi khi đổi thang đo; chỉ hệ số a đổi theo đơn vị.",
+    "q": "KNN tìm ra một công thức trong lúc huấn luyện.",
+    "giai": "KNN chỉ nhớ dữ liệu; tính khoảng cách khi dự đoán.",
     "h": "16cc98db644e34"
    },
    {
     "k": "ds",
     "id": "bai12-q31",
-    "q": "R² bằng 0 nghĩa là model chỉ ngang với luôn đoán giá trung bình.",
-    "giai": "Đó chính là định nghĩa qua model lười.",
+    "q": "Đưa về cùng thang đo có thể thay đổi láng giềng gần nhất của một điểm.",
+    "giai": "Bài 5 và chặng 3: láng giềng đổi khi hết bị cột lớn lấn át.",
     "h": "17c0837d483ba1"
    },
    {
     "k": "ds",
     "id": "bai12-q32",
-    "q": "Dữ liệu điện thoại cũ trong bài là dữ liệu mô phỏng.",
-    "giai": "Sinh bằng máy tính cho bài học (seed 9).",
-    "h": "1ed84ebb79db30"
+    "q": "K càng lớn thì KNN càng chính xác trên dữ liệu mới.",
+    "giai": "K quá lớn làm ranh giới quá mượt — chưa khớp.",
+    "h": "c9c5cd7eb99a3"
+   },
+   {
+    "k": "ds",
+    "id": "bai12-q33",
+    "q": "KNN có thể dùng cho bài toán có nhiều hơn hai nhãn.",
+    "giai": "Bỏ phiếu chọn nhãn nhiều phiếu nhất.",
+    "h": "1bd1f249c200c0"
    }
   ]
  },

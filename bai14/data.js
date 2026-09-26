@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 14,
  "ma": "bai14",
  "nhan": "Bài 14",
- "tieu_de": "Cây quyết định",
+ "tieu_de": "Hồi quy tuyến tính",
  "phan": "Phần B · Học có giám sát",
- "cau_hoi": "Model có nói cho ta biết vì sao nó quyết định như vậy không?",
+ "cau_hoi": "Chiếc điện thoại cũ này nên rao bao nhiêu tiền?",
  "gioi_thieu": [
-  "KNN, hồi quy tuyến tính, hồi quy logistic đều khó trả lời câu hỏi <b>“vì sao?”</b>. Hôm nay con gặp model đọc được luật ra thành câu tiếng Việt: <b>cây quyết định</b>.",
-  "Năm chặng: cây quyết định là gì, chọn câu hỏi tốt nhất, đọc cây của lớp mình, độ sâu và học vẹt, và dùng cây trong scikit-learn. Bảng khối 10 là bảng mô phỏng.",
-  "Con dùng lại: quy trình 5 bước và mốc model lười (Bài 10), học vẹt (Bài 10, 11), ma trận nhầm lẫn (Bài 13)."
+  "Từ Bài 11 tới giờ, các model của con đều đoán một <b>nhãn</b> (Đạt / Chưa đạt). Hôm nay con dự đoán một <b>con số</b>: giá của một chiếc điện thoại cũ. Đó là bài toán <b>hồi quy</b>.",
+  "Năm chặng: hồi quy là gì, tự kẻ đường tốt nhất, đọc hai số a và b, đo model hồi quy tốt tới đâu, và dùng nhiều cột trong scikit-learn. Bảng 120 tin rao là bảng <b>mô phỏng</b>.",
+  "Con dùng lại: biểu đồ phân tán và tương quan (Bài 9), gradient descent (Bài 5), chia dữ liệu và mốc model lười (Bài 7, 11)."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai14",
  "muc_tieu": [
-  "Mô tả được cấu trúc cây quyết định: nút gốc, nút, nhánh, lá.",
-  "Giải thích được cây chọn câu hỏi làm các nhóm gọn nhất.",
-  "Đọc được luật NẾU… THÌ… từ một cây và tự đi theo cây để dự đoán.",
-  "Giải thích được cây quá sâu thì học vẹt.",
-  "Huấn luyện cây bằng scikit-learn với độ sâu giới hạn."
+  "Phân biệt được bài toán hồi quy với bài toán phân loại.",
+  "Giải thích được “đường tốt nhất” là đường có tổng bình phương sai số nhỏ nhất.",
+  "Đọc được ý nghĩa của hệ số góc a và hệ số chặn b trong bối cảnh.",
+  "Đánh giá model hồi quy bằng MAE và R², so với model lười.",
+  "Huấn luyện hồi quy nhiều cột bằng scikit-learn và nhận ra cột vô dụng."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,130 +36,142 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Cây quyết định là gì?",
-   "ten_ngan": "Cây là gì",
+   "ten": "Dự đoán một con số",
+   "ten_ngan": "Hồi quy là gì",
    "phut": 4,
-   "muc_tieu": "mô tả được cấu trúc cây quyết định: nút gốc, nút, nhánh, lá.",
-   "khoi_dong": "Trò 20 câu hỏi: đoán một con vật chỉ bằng câu hỏi Có / Không. Con hỏi câu nào trước?",
+   "muc_tieu": "phân biệt được bài toán hồi quy với bài toán phân loại.",
+   "khoi_dong": "Đoán “Đạt hay Chưa đạt” và đoán “giá bao nhiêu triệu” — hai câu hỏi khác nhau ở chỗ nào?",
    "khoi": [
     {
      "t": "dinh_nghia",
-     "ten": "Cây quyết định (decision tree)",
-     "html": "Model hỏi một chuỗi câu hỏi Có / Không về các cột, mỗi câu trả lời dẫn sang một nhánh, tới <b>lá</b> thì ra dự đoán.",
-     "ky_hieu": "Nút gốc: câu hỏi đầu tiên · nút: câu hỏi giữa chừng · lá: kết luận."
+     "ten": "Hồi quy (regression)",
+     "html": "Bài toán học có giám sát mà cột cần dự đoán là <b>một con số liên tục</b>: giá tiền, nhiệt độ, chiều cao, số điểm. Phân loại thì dự đoán <b>một nhãn</b> trong vài nhãn cho trước.",
+     "ky_hieu": "Hồi quy tuyến tính: dự đoán bằng một đường thẳng <code>y = a·x + b</code>."
     },
     {
      "t": "anh",
-     "cap": "Cấu trúc một cây",
-     "alt": "Cấu trúc một cây",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251216110915386263/decision_tree.webp",
-     "du_phong": "img/minh-hoa-cau-truc-mot-cay-quyet-dinh.png",
+     "cap": "Học có giám sát chia hai nhánh",
+     "alt": "Học có giám sát chia hai nhánh",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250902175259468148/difff.webp",
+     "du_phong": "img/minh-hoa-hai-nhanh-phan-loai-va-hoi-quy.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Decision tree introduction example",
-      "url": "https://www.geeksforgeeks.org/machine-learning/decision-tree-introduction-example/"
+      "ten": "GeeksforGeeks — Supervised machine learning",
+      "url": "https://www.geeksforgeeks.org/machine-learning/supervised-machine-learning/"
      },
      "chu_giai": [
       [
-       "Root Node",
-       "Nút gốc"
+       "Supervised Learning",
+       "Học có giám sát"
       ],
       [
-       "Decision Node",
-       "Nút quyết định (câu hỏi)"
+       "Classification (defined Labels)",
+       "Phân loại — nhãn cho trước"
       ],
       [
-       "Leaf Node",
-       "Lá (kết luận)"
+       "Regression (no Labels defined)",
+       "Hồi quy — dự đoán con số"
       ]
      ]
     },
     {
      "t": "anh",
-     "cap": "Một cây đoán khách có mua hàng",
-     "alt": "Một cây đoán khách có mua hàng",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250408153824016146/predicting_whether_a_customer_will_buy_a_product.webp",
-     "du_phong": "img/minh-hoa-cay-quyet-dinh-du-doan-khach-co-mua-hang.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Decision tree introduction example",
-      "url": "https://www.geeksforgeeks.org/machine-learning/decision-tree-introduction-example/"
-     },
-     "chu_giai": [
+     "cap": "120 chiếc điện thoại cũ đang rao bán (mô phỏng): máy càng cũ, giá càng thấp",
+     "alt": "120 chiếc điện thoại cũ đang rao bán (mô phỏng): máy càng cũ, giá càng thấp",
+     "src": "img/gia-theo-tuoi-may.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "bảng dữ liệu",
+     "de": null,
+     "cot": [
+      "Cột",
+      "Ý nghĩa",
+      "Vai trò"
+     ],
+     "dong": [
       [
-       "Income > 50,000?",
-       "Thu nhập trên 50 000?"
+       "TuoiMay",
+       "Số tháng đã dùng",
+       "feature"
       ],
       [
-       "Age > 30?",
-       "Trên 30 tuổi?"
+       "DungLuong",
+       "Bộ nhớ (GB)",
+       "feature"
       ],
       [
-       "Previous Purchase > 0",
-       "Đã từng mua?"
+       "PinConLai",
+       "Pin còn lại (%)",
+       "feature"
       ],
       [
-       "Purchase / No Purchase",
-       "Mua / Không mua"
+       "SoLanRoi",
+       "Số lần làm rơi máy",
+       "feature"
       ],
       [
-       "Internal Node",
-       "Nút giữa"
+       "Gia",
+       "Giá rao bán (triệu đồng)",
+       "<b>cột cần dự đoán</b>"
       ]
-     ]
+     ],
+     "ket_luan": "Tương quan giữa tuổi máy và giá: r = -0,91 — xu hướng giảm rất rõ.",
+     "nhan_manh": []
     },
     {
      "t": "anh",
-     "cap": "Cây quyết định dùng ở đâu",
-     "alt": "Cây quyết định dùng ở đâu",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251216110915568549/applications_of_decision_trees.webp",
-     "du_phong": "img/minh-hoa-bon-linh-vuc-dung-cay-quyet-dinh.png",
+     "cap": "Bốn ứng dụng của hồi quy tuyến tính",
+     "alt": "Bốn ứng dụng của hồi quy tuyến tính",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251212171555881822/real_world_use_cases_of_linear_regression.webp",
+     "du_phong": "img/minh-hoa-bon-ung-dung-thuc-te-cua-hoi-quy.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Decision tree introduction example",
-      "url": "https://www.geeksforgeeks.org/machine-learning/decision-tree-introduction-example/"
+      "ten": "GeeksforGeeks — Ml linear regression",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
      },
      "chu_giai": [
       [
-       "Finance",
-       "Tài chính — duyệt khoản vay"
+       "Stock Market Prediction",
+       "Dự đoán giá cổ phiếu"
       ],
       [
-       "Medicine",
-       "Y tế — chẩn đoán"
+       "Real Estate Price Prediction",
+       "Dự đoán giá nhà đất"
       ],
       [
-       "Machine Learning",
-       "Nền tảng của Random Forest (Bài 17)"
+       "Medical Risk Prediction",
+       "Dự đoán nguy cơ bệnh"
       ],
       [
-       "Education",
-       "Giáo dục — dự đoán điểm"
+       "Sales Forecasting",
+       "Dự báo doanh số"
       ]
      ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ cây vẽ ngược là sai — cây quyết định luôn vẽ gốc ở trên, lá ở dưới.",
-      "Nhầm lá với nút: lá không hỏi gì nữa, chỉ đưa kết luận."
+      "Nghĩ cột cần dự đoán là số thì luôn là hồi quy — mã số học sinh là số nhưng không phải đại lượng.",
+      "Nhầm “hồi quy” với “quay lại” — ở đây hồi quy chỉ việc dự đoán một con số."
      ]
     },
     {
      "t": "video",
-     "yt": "_L39rN6gz7Y",
-     "ten": "StatQuest — Decision and Classification Trees, Clearly Explained",
+     "yt": "7ArmBVF2dCs",
+     "ten": "StatQuest — Linear Regression, Clearly Explained!!!",
      "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc",
      "bat_dau": null,
      "ket_thuc": null
     },
     {
      "t": "tom_tat",
-     "html": "Cây quyết định: chuỗi câu hỏi Có / Không, gốc ở trên, lá cho kết luận."
+     "html": "Hồi quy dự đoán một con số; phân loại dự đoán một nhãn."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Decision Tree in Machine Learning",
-       "url": "https://www.geeksforgeeks.org/machine-learning/decision-tree-introduction-example/",
+       "ten": "Linear Regression in Machine Learning",
+       "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -169,618 +181,973 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai14-q1",
-     "q": "Trong cây quyết định, phần nào đưa ra kết luận cuối cùng?",
-     "giai": "Lá không hỏi nữa, chỉ kết luận.",
-     "goi_y": "Phần nào nằm cuối cùng, không có nhánh con?",
+     "q": "Bài toán nào là hồi quy?",
+     "giai": "Nhiệt độ là một con số liên tục.",
+     "goi_y": "Câu trả lời nào là một con số có thể lẻ tới phần thập phân?",
      "a": [
-      "Lá",
-      "Nút gốc",
-      "Nhánh",
-      "Nút quyết định"
+      "Dự đoán nhiệt độ ngày mai (°C)",
+      "Dự đoán thư có phải thư rác",
+      "Dự đoán ảnh là chó hay mèo",
+      "Dự đoán học sinh Đạt hay Chưa đạt"
      ],
-     "h": "3b657d2e3fa9"
+     "h": "1f80ba0f1dfec1"
     },
     {
-     "k": "sx",
+     "k": "ds",
      "id": "bai14-q2",
-     "q": "Sắp xếp đường đi của một mẫu qua cây.",
-     "giai": "Gốc → nhánh → nút → lá.",
-     "goi_y": "Mẫu mới bắt đầu từ đâu của cây?",
-     "a": [
-      "Trả lời câu hỏi ở nút gốc",
-      "Đi theo nhánh ứng với câu trả lời",
-      "Trả lời câu hỏi ở nút tiếp theo",
-      "Tới lá và nhận kết luận"
-     ],
-     "h": "10d11df8747105"
+     "q": "Dự đoán giá một chiếc điện thoại cũ là bài toán phân loại.",
+     "giai": "Giá là con số liên tục → hồi quy.",
+     "goi_y": "Giá có phải là một trong vài nhãn cho trước không?",
+     "h": "d84a31d65bfd7"
     }
    ]
   },
   {
-   "ten": "Chọn câu hỏi tốt nhất",
-   "ten_ngan": "Câu hỏi tốt",
+   "ten": "Tự kẻ đường tốt nhất",
+   "ten_ngan": "Đường tốt nhất",
    "phut": 5,
-   "muc_tieu": "giải thích được cây chọn câu hỏi làm các nhóm gọn nhất.",
-   "khoi_dong": "Học trên 1,5 giờ? Học trên 3,45 giờ? Mạng trên 250 phút? Câu nào chia lớp gọn nhất?",
+   "muc_tieu": "giải thích được đường tốt nhất là đường có tổng bình phương sai số nhỏ nhất.",
+   "khoi_dong": "Ba bạn kẻ ba đường khác nhau qua cùng một đám điểm. Đường nào tốt nhất — và đo bằng gì?",
    "khoi": [
     {
      "t": "anh",
-     "cap": "Ba câu hỏi, ba mức lẫn lộn còn lại",
-     "alt": "Ba câu hỏi, ba mức lẫn lộn còn lại",
-     "src": "img/cau-hoi-nao-chia-gon-nhat.png"
+     "cap": "Sai số của một điểm = giá thật − giá đường đoán, đo theo chiều dọc",
+     "alt": "Sai số của một điểm = giá thật − giá đường đoán, đo theo chiều dọc",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260112155359063476/observed_value.webp",
+     "du_phong": "img/minh-hoa-gia-tri-quan-sat-va-gia-tri-du-doan.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Ml linear regression",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
+     },
+     "chu_giai": [
+      [
+       "Observed value",
+       "Giá trị thật"
+      ],
+      [
+       "Predicted value",
+       "Giá trị đoán"
+      ],
+      [
+       "Random error",
+       "Sai số"
+      ],
+      [
+       "Intercept",
+       "Hệ số chặn b"
+      ],
+      [
+       "Slope",
+       "Hệ số góc a"
+      ]
+     ]
     },
     {
      "t": "dinh_nghia",
-     "ten": "Độ lẫn lộn (chỉ số Gini)",
-     "html": "Đo một nhóm còn trộn hai nhãn tới đâu: <b>0</b> = cả nhóm cùng một nhãn (thuần); <b>0,5</b> = nửa này nửa kia (lẫn nhất, với hai nhãn).",
-     "ky_hieu": "Cây thử mọi câu hỏi có thể và chọn câu làm độ lẫn lộn còn lại <b>nhỏ nhất</b>."
+     "ten": "Tổng bình phương sai số",
+     "html": "Với mỗi điểm: lấy sai số (thật − đoán), bình phương lên, rồi cộng tất cả lại. <b>Đường tốt nhất là đường có tổng này nhỏ nhất.</b>",
+     "ky_hieu": "Bình phương để sai số âm và dương không triệt tiêu nhau, và phạt nặng sai số lớn."
+    },
+    {
+     "t": "demo_ke_duong",
+     "id": "kd2",
+     "tieu_de": "kẻ đường qua 90 máy của tập huấn luyện",
+     "huong_dan": "Kéo a (độ dốc) và b (điểm cắt trục tung). Mỗi vạch đỏ là sai số của một máy. Cố làm tổng bình phương sai số nhỏ nhất, rồi bấm nút để so với đường của máy.",
+     "diem": [
+      [
+       21,
+       6.2
+      ],
+      [
+       33,
+       2.0
+      ],
+      [
+       37,
+       7.6
+      ],
+      [
+       22,
+       7.4
+      ],
+      [
+       13,
+       8.2
+      ],
+      [
+       4,
+       10.9
+      ],
+      [
+       2,
+       10.7
+      ],
+      [
+       22,
+       5.3
+      ],
+      [
+       47,
+       3.2
+      ],
+      [
+       4,
+       12.2
+      ],
+      [
+       23,
+       8.0
+      ],
+      [
+       4,
+       11.0
+      ],
+      [
+       11,
+       10.2
+      ],
+      [
+       33,
+       4.3
+      ],
+      [
+       10,
+       9.6
+      ],
+      [
+       2,
+       14.3
+      ],
+      [
+       5,
+       16.5
+      ],
+      [
+       30,
+       3.1
+      ],
+      [
+       25,
+       4.7
+      ],
+      [
+       11,
+       8.3
+      ],
+      [
+       40,
+       2.4
+      ],
+      [
+       27,
+       6.9
+      ],
+      [
+       4,
+       11.8
+      ],
+      [
+       23,
+       7.1
+      ],
+      [
+       6,
+       14.9
+      ],
+      [
+       4,
+       9.9
+      ],
+      [
+       6,
+       11.7
+      ],
+      [
+       35,
+       3.1
+      ],
+      [
+       14,
+       13.0
+      ],
+      [
+       30,
+       4.1
+      ],
+      [
+       44,
+       1.5
+      ],
+      [
+       28,
+       11.5
+      ],
+      [
+       40,
+       2.6
+      ],
+      [
+       13,
+       13.3
+      ],
+      [
+       10,
+       11.6
+      ],
+      [
+       3,
+       10.8
+      ],
+      [
+       33,
+       1.5
+      ],
+      [
+       48,
+       1.5
+      ],
+      [
+       46,
+       1.5
+      ],
+      [
+       48,
+       1.5
+      ],
+      [
+       34,
+       3.1
+      ],
+      [
+       35,
+       3.3
+      ],
+      [
+       19,
+       5.0
+      ],
+      [
+       33,
+       3.4
+      ],
+      [
+       23,
+       6.2
+      ],
+      [
+       12,
+       9.1
+      ],
+      [
+       38,
+       1.5
+      ],
+      [
+       27,
+       6.3
+      ],
+      [
+       12,
+       10.9
+      ],
+      [
+       4,
+       11.8
+      ],
+      [
+       18,
+       7.8
+      ],
+      [
+       34,
+       4.3
+      ],
+      [
+       35,
+       4.2
+      ],
+      [
+       13,
+       9.7
+      ],
+      [
+       34,
+       1.9
+      ],
+      [
+       36,
+       2.8
+      ],
+      [
+       41,
+       3.5
+      ],
+      [
+       47,
+       1.5
+      ],
+      [
+       19,
+       8.1
+      ],
+      [
+       42,
+       1.5
+      ],
+      [
+       35,
+       1.8
+      ],
+      [
+       29,
+       2.9
+      ],
+      [
+       7,
+       15.7
+      ],
+      [
+       16,
+       8.0
+      ],
+      [
+       20,
+       4.3
+      ],
+      [
+       20,
+       6.1
+      ],
+      [
+       39,
+       3.5
+      ],
+      [
+       43,
+       2.9
+      ],
+      [
+       47,
+       1.5
+      ],
+      [
+       22,
+       7.2
+      ],
+      [
+       36,
+       3.1
+      ],
+      [
+       8,
+       11.6
+      ],
+      [
+       36,
+       2.0
+      ],
+      [
+       1,
+       13.7
+      ],
+      [
+       24,
+       5.4
+      ],
+      [
+       38,
+       1.9
+      ],
+      [
+       28,
+       3.0
+      ],
+      [
+       41,
+       3.1
+      ],
+      [
+       33,
+       5.3
+      ],
+      [
+       30,
+       3.9
+      ],
+      [
+       6,
+       12.7
+      ],
+      [
+       29,
+       6.7
+      ],
+      [
+       38,
+       2.5
+      ],
+      [
+       1,
+       14.4
+      ],
+      [
+       39,
+       1.5
+      ],
+      [
+       47,
+       1.5
+      ],
+      [
+       27,
+       4.3
+      ],
+      [
+       17,
+       5.0
+      ],
+      [
+       12,
+       8.8
+      ],
+      [
+       7,
+       11.6
+      ]
+     ],
+     "mien": {
+      "x": [
+       0,
+       50
+      ],
+      "y": [
+       0,
+       18
+      ]
+     },
+     "a": {
+      "min": -0.6,
+      "max": 0.1,
+      "buoc": 0.01,
+      "dau": -0.1,
+      "so_le": 2
+     },
+     "b": {
+      "min": 0,
+      "max": 20,
+      "buoc": 0.1,
+      "dau": 9,
+      "so_le": 1
+     },
+     "tot": {
+      "a": -0.2688,
+      "b": 13.0795,
+      "sse": 290.4
+     },
+     "nhan_x": "Tuổi máy (tháng)",
+     "nhan_y": "Giá (triệu)",
+     "vach_x": [
+      0,
+      12,
+      24,
+      36,
+      48
+     ],
+     "vach_y": [
+      0,
+      5,
+      10,
+      15
+     ],
+     "nhan_a": null,
+     "nhan_b": null,
+     "nhan_tot": null,
+     "nhan": null
+    },
+    {
+     "t": "anh",
+     "cap": "Ba đường, ba tổng bình phương sai số: 800 · 705 · 290",
+     "alt": "Ba đường, ba tổng bình phương sai số: 800 · 705 · 290",
+     "src": "img/ba-duong-ke-tay-khac-nhau.png"
     },
     {
      "t": "vi_du",
-     "tieu_de": "ba câu hỏi trên tập huấn luyện",
+     "tieu_de": "so ba đường",
      "de": null,
      "cot": [
-      "Câu hỏi",
-      "Độ lẫn lộn còn lại"
+      "Đường",
+      "a",
+      "b",
+      "Tổng bình phương sai số"
      ],
      "dong": [
       [
-       "Học trên 1,5 giờ?",
-       "0,392"
+       "Đường 1",
+       "-0,10",
+       "9,00",
+       "800"
       ],
       [
-       "Học trên 3,45 giờ?",
-       "<b>0,161</b>"
+       "Đường 2",
+       "-0,42",
+       "16,50",
+       "705"
       ],
       [
-       "Dùng mạng trên 250 phút?",
-       "0,462"
+       "Đường 3",
+       "-0,27",
+       "13,08",
+       "290"
       ]
      ],
-     "ket_luan": "Trước khi chia: 0,497. Câu “học trên 3,45 giờ” giảm mạnh nhất nên thành câu hỏi đầu tiên.",
+     "ket_luan": "Đường 3 có tổng nhỏ nhất — đó là đường máy tìm ra.",
      "nhan_manh": [
-      1
-     ]
-    },
-    {
-     "t": "anh",
-     "cap": "Chia theo cột Y: hai nhánh đều thuần — câu hỏi hoàn hảo",
-     "alt": "Chia theo cột Y: hai nhánh đều thuần — câu hỏi hoàn hảo",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250804112900346223/444.webp",
-     "du_phong": "img/minh-hoa-chia-theo-cot-y-cho-hai-nhanh-thuan.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Decision tree introduction example",
-      "url": "https://www.geeksforgeeks.org/machine-learning/decision-tree-introduction-example/"
-     },
-     "chu_giai": [
-      [
-       "Split an attribute Y",
-       "Chia theo cột Y"
-      ],
-      [
-       "GAIN = 1",
-       "Lợi thông tin tối đa"
-      ],
-      [
-       "E child = 0",
-       "Nhánh con thuần, không còn lẫn"
-      ]
-     ]
-    },
-    {
-     "t": "anh",
-     "cap": "Chia theo cột Z: hai nhánh vẫn lẫn — câu hỏi vô ích",
-     "alt": "Chia theo cột Z: hai nhánh vẫn lẫn — câu hỏi vô ích",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250804113010619739/555.webp",
-     "du_phong": "img/minh-hoa-chia-theo-cot-z-khong-loi-gi.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Decision tree introduction example",
-      "url": "https://www.geeksforgeeks.org/machine-learning/decision-tree-introduction-example/"
-     },
-     "chu_giai": [
-      [
-       "Split on feature Z",
-       "Chia theo cột Z"
-      ],
-      [
-       "GAIN = 0",
-       "Không lợi gì"
-      ]
+      2
      ]
     },
     {
      "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Không cần nhớ công thức",
-     "html": "GfG dùng entropy và “lợi thông tin” (information gain) — cùng ý với Gini: đo độ lẫn lộn, chọn câu làm nó giảm nhiều nhất."
+     "kieu": "ml",
+     "tieu_de": "Máy tìm a, b thế nào?",
+     "html": "Giống gradient descent ở Bài 5: bắt đầu từ một cặp a, b bất kỳ, mỗi bước dịch một chút về phía tổng bình phương sai số giảm, cho tới đáy. (Riêng hồi quy tuyến tính còn có công thức tính thẳng ra đáy.)"
+    },
+    {
+     "t": "anh",
+     "cap": "Đi xuống dốc tới chỗ sai số nhỏ nhất",
+     "alt": "Đi xuống dốc tới chỗ sai số nhỏ nhất",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260529101329191488/derivative_of_cost.webp",
+     "du_phong": "img/minh-hoa-duong-cong-sai-so-va-cac-buoc-di-xuong.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Ml linear regression",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
+     },
+     "chu_giai": [
+      [
+       "Cost J(θ)",
+       "Sai số"
+      ],
+      [
+       "Weight(θ)",
+       "Tham số (a hoặc b)"
+      ],
+      [
+       "Initial Weight",
+       "Điểm xuất phát"
+      ],
+      [
+       "Steps",
+       "Các bước"
+      ],
+      [
+       "Minimum Cost",
+       "Sai số nhỏ nhất"
+      ],
+      [
+       "Derivative of Cost",
+       "Độ dốc"
+      ]
+     ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ cây chọn câu hỏi ngẫu nhiên.",
-      "Nghĩ Gini càng lớn càng tốt — ngược lại, càng nhỏ càng gọn."
+      "Nghĩ đường tốt là đường chạm qua nhiều điểm nhất.",
+      "Đo sai số theo đường vuông góc thay vì theo chiều dọc."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Mỗi nút, cây chọn câu hỏi làm độ lẫn lộn còn lại nhỏ nhất."
+     "html": "Đường tốt nhất = tổng bình phương sai số nhỏ nhất."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai14-q3",
-     "q": "Theo bảng, câu hỏi nào được cây chọn làm câu hỏi đầu tiên?",
-     "giai": "Độ lẫn lộn còn lại nhỏ nhất: 0,161.",
-     "goi_y": "Tìm dòng có độ lẫn lộn còn lại nhỏ nhất.",
+     "q": "Theo phần Tự thử, đường của máy có tổng bình phương sai số bằng bao nhiêu?",
+     "giai": "Không đường thẳng nào có tổng nhỏ hơn trên 90 máy này.",
+     "goi_y": "Bấm nút hiện đường của máy rồi đọc ô bên phải.",
      "a": [
-      "Học trên 3,45 giờ?",
-      "Học trên 1,5 giờ?",
-      "Dùng mạng trên 250 phút?",
-      "Ngủ trên 7 giờ?"
+      "290",
+      "800",
+      "705",
+      "0"
      ],
-     "h": "1214d5e7be6c6b"
+     "h": "1cfcf1176d5589"
     },
     {
-     "k": "dd",
+     "k": "mc",
      "id": "bai14-q4",
-     "q": "Chọn số đúng cho mỗi chỗ trống.",
-     "giai": "Gini đo độ lẫn lộn.",
-     "goi_y": "Nhóm toàn Đạt thì còn lẫn lộn không?",
-     "mau": "Với hai nhãn, nhóm thuần có Gini = {0}; nhóm nửa này nửa kia có Gini = {1}.",
-     "o": [
-      [
-       "0",
-       "0,5",
-       "1",
-       "100"
-      ],
-      [
-       "0,5",
-       "0",
-       "1",
-       "2"
-      ]
+     "q": "Vì sao phải bình phương sai số trước khi cộng?",
+     "giai": "Cộng thẳng thì +3 và −3 thành 0 — trông như không sai.",
+     "goi_y": "Một máy đoán thừa 3 triệu, một máy đoán thiếu 3 triệu. Cộng thẳng được bao nhiêu?",
+     "a": [
+      "Để sai số âm, dương không triệt tiêu",
+      "Để con số nhỏ lại cho dễ tính",
+      "Vì máy tính chỉ cộng được số dương",
+      "Để đường thẳng dốc hơn"
      ],
-     "h": "48fc95db18cf2"
+     "h": "ddeebc8f66dff"
     }
    ]
   },
   {
-   "ten": "Đọc cây của lớp mình",
-   "ten_ngan": "Đọc cây",
-   "phut": 5,
-   "muc_tieu": "đọc được luật NẾU… THÌ… từ một cây và tự đi theo cây để dự đoán.",
-   "khoi_dong": "Cây chỉ hỏi hai tầng. Nó nói gì về cách học và dùng mạng?",
+   "ten": "Đọc a và b",
+   "ten_ngan": "a và b",
+   "phut": 4,
+   "muc_tieu": "đọc được ý nghĩa của hệ số góc a, hệ số chặn b và biết giới hạn của đường thẳng.",
+   "khoi_dong": "Máy trả về a = -0,27, b = 13,08. Hai con số này nói gì về điện thoại cũ?",
    "khoi": [
     {
      "t": "anh",
-     "cap": "Cây sâu 1: chỉ một câu hỏi, đúng 91,7% trên tập kiểm tra",
-     "alt": "Cây sâu 1: chỉ một câu hỏi, đúng 91,7% trên tập kiểm tra",
-     "src": "img/cay-sau-1-chia-doi-lop.png"
+     "cap": "Giá = -0,27 × TuoiMay + 13,08",
+     "alt": "Giá = -0,27 × TuoiMay + 13,08",
+     "src": "img/duong-tot-nhat-va-hai-so-a-b.png"
     },
     {
-     "t": "anh",
-     "cap": "Cây sâu 2 của lớp: mỗi ô ghi câu hỏi, số bạn và nhãn",
-     "alt": "Cây sâu 2 của lớp: mỗi ô ghi câu hỏi, số bạn và nhãn",
-     "src": "img/cay-sau-2-cua-lop.png"
-    },
-    {
-     "t": "anh",
-     "cap": "Ba luật đọc được từ cây sâu 2",
-     "alt": "Ba luật đọc được từ cây sâu 2",
-     "src": "img/luat-doc-thanh-cau-tieng-viet.png"
-    },
-    {
-     "t": "demo_tung_buoc",
-     "tieu_de": "đi theo cây với ba bạn mới",
-     "huong_dan": "Chọn một bạn, bấm “Bước tiếp” để đi từng câu hỏi của cây sâu 2.",
-     "nhan_chon": "Bạn mới",
+     "t": "vi_du",
+     "tieu_de": "đọc thành lời",
+     "de": null,
      "cot": [
-      "Bước",
-      "Câu hỏi",
-      "Trả lời",
-      "Kết luận"
+      "Số",
+      "Ý nghĩa"
      ],
-     "mac_dinh": 0,
-     "lua_chon": [
-      {
-       "nhan": "Bạn Hà (2,8 giờ, 90 phút)",
-       "dong": [
-        [
-         "1",
-         "Giờ tự học ≤ 3,45?",
-         "2,8 → Có — rẽ trái",
-         "—"
-        ],
-        [
-         "2",
-         "Giờ tự học ≤ 2,35?",
-         "2,8 → Không — rẽ phải",
-         "—"
-        ],
-        [
-         "3",
-         "Tới lá",
-         "",
-         "<b>CHƯA ĐẠT</b>"
-        ]
-       ]
-      },
-      {
-       "nhan": "Bạn Minh (4,5 giờ, 120 phút)",
-       "dong": [
-        [
-         "1",
-         "Giờ tự học ≤ 3,45?",
-         "4,5 → Không — rẽ phải",
-         "—"
-        ],
-        [
-         "2",
-         "Phút mạng ≤ 317,5?",
-         "120 → Có — rẽ trái",
-         "—"
-        ],
-        [
-         "3",
-         "Tới lá",
-         "",
-         "<b>ĐẠT</b>"
-        ]
-       ]
-      },
-      {
-       "nhan": "Bạn Khoa (5,2 giờ, 380 phút)",
-       "dong": [
-        [
-         "1",
-         "Giờ tự học ≤ 3,45?",
-         "5,2 → Không — rẽ phải",
-         "—"
-        ],
-        [
-         "2",
-         "Phút mạng ≤ 317,5?",
-         "380 → Không — rẽ phải",
-         "—"
-        ],
-        [
-         "3",
-         "Tới lá",
-         "",
-         "<b>CHƯA ĐẠT</b>"
-        ]
-       ]
-      }
+     "dong": [
+      [
+       "a = -0,27",
+       "Mỗi tháng tuổi máy, giá giảm khoảng 269 nghìn đồng"
+      ],
+      [
+       "b = 13,08",
+       "Giá đường thẳng đoán cho máy 0 tháng tuổi"
+      ],
+      [
+       "Máy 24 tháng",
+       "-0,27 × 24 + 13,08 ≈ <b>6,63 triệu</b>"
+      ]
+     ],
+     "ket_luan": null,
+     "nhan_manh": [
+      2
      ]
     },
     {
      "t": "hop",
-     "kieu": "ml",
-     "tieu_de": "Luật thứ ba",
-     "html": "NẾU học > 3,45 giờ VÀ mạng > 317,5 phút THÌ Chưa đạt — học nhiều mà lướt mạng quá nhiều vẫn có nguy cơ. KNN hay logistic không nói ra được câu như vậy."
+     "kieu": "chu-y",
+     "tieu_de": "Đường thẳng chỉ đáng tin trong vùng dữ liệu đã học",
+     "html": "Dữ liệu có máy từ 1 tới 48 tháng. Máy 80 tháng: đường đoán -8,42 triệu — giá âm, vô lý. Ra ngoài vùng đã học, model không biết gì."
+    },
+    {
+     "t": "anh",
+     "cap": "Không phải dữ liệu nào cũng đi theo đường thẳng",
+     "alt": "Không phải dữ liệu nào cũng đi theo đường thẳng",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251212171555560592/linear.webp",
+     "du_phong": "img/minh-hoa-du-lieu-tuyen-tinh-va-phi-tuyen.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Ml linear regression",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
+     },
+     "chu_giai": [
+      [
+       "Linear",
+       "Tuyến tính — theo đường thẳng"
+      ],
+      [
+       "Non-Linear",
+       "Phi tuyến — không theo đường thẳng"
+      ]
+     ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Đọc ngược nhánh: nhánh trái là câu trả lời “Có” (≤), nhánh phải là “Không”.",
-      "Nghĩ luật của cây là nguyên nhân — nó chỉ tóm tắt dữ liệu (mô phỏng)."
+      "Đọc a âm thành “model sai” — a âm chỉ là giá giảm khi tuổi tăng.",
+      "Dùng đường thẳng dự đoán xa ngoài vùng dữ liệu."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Mỗi đường từ gốc tới lá là một luật NẾU… THÌ… đọc được bằng lời."
+     "html": "a: mỗi đơn vị x tăng thì y đổi bao nhiêu. b: y khi x = 0. Chỉ tin đường trong vùng dữ liệu đã học."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai14-q5",
-     "q": "Theo phần Tự thử, cây đoán Bạn Khoa thế nào?",
-     "giai": "Học nhiều nhưng mạng 380 phút > 317,5.",
-     "goi_y": "Chọn bạn đó và bấm tới lá.",
+     "q": "Với a = -0,27, máy già thêm 10 tháng thì giá đoán thay đổi thế nào?",
+     "giai": "10 × -0,27 = -2,69.",
+     "goi_y": "a là mức thay đổi cho MỖI tháng. 10 tháng thì nhân lên.",
      "a": [
-      "Chưa đạt",
-      "Đạt",
-      "Không đoán được",
-      "Cần hỏi thêm giờ ngủ"
+      "Giảm khoảng 2,69 triệu",
+      "Tăng khoảng 2,69 triệu",
+      "Giảm khoảng 0,27 triệu",
+      "Không đổi"
      ],
-     "h": "19a52ead3538f5"
+     "h": "4ad03a2e786bf"
     },
     {
      "k": "ds",
      "id": "bai14-q6",
-     "q": "Cây sâu 2 của lớp đoán mọi bạn học không quá 3,45 giờ là Chưa đạt.",
-     "giai": "Cả hai lá bên trái đều Chưa đạt.",
-     "goi_y": "Nhìn nhánh trái của nút gốc.",
-     "h": "c125d94dce10f"
+     "q": "Đường thẳng của bài dự đoán tốt cho cả máy đã dùng 80 tháng.",
+     "giai": "Ngoài vùng 1 – 48 tháng; đường còn cho giá âm.",
+     "goi_y": "Máy cũ nhất trong dữ liệu bao nhiêu tháng?",
+     "h": "9034870016bed"
     }
    ]
   },
   {
-   "ten": "Độ sâu và học vẹt",
-   "ten_ngan": "Độ sâu",
+   "ten": "Model hồi quy tốt tới đâu?",
+   "ten_ngan": "MAE và R²",
    "phut": 4,
-   "muc_tieu": "giải thích được cây quá sâu thì học vẹt.",
-   "khoi_dong": "Cây được hỏi bao nhiêu câu cũng được. Hỏi thật nhiều có tốt hơn không?",
+   "muc_tieu": "đánh giá model hồi quy bằng MAE và R², so với model lười.",
+   "khoi_dong": "Model hồi quy không “đúng” hay “sai” như phân loại. Vậy đo nó bằng gì?",
    "khoi": [
     {
-     "t": "demo_truot",
-     "tieu_de": "thử các độ sâu",
-     "huong_dan": "Kéo thanh trượt để đổi độ sâu tối đa của cây. So độ chính xác trên dữ liệu đã học và trên tập kiểm tra.",
-     "dieu_kien": "Cây sâu tối đa <b>{x}</b> tầng",
-     "moc": [
-      {
-       "x": 1,
-       "n": "91,1% · 2 lá",
-       "p": 91.7
-      },
-      {
-       "x": 2,
-       "n": "92,3% · 4 lá",
-       "p": 91.7
-      },
-      {
-       "x": 3,
-       "n": "92,9% · 7 lá",
-       "p": 91.7
-      },
-      {
-       "x": 4,
-       "n": "94,6% · 10 lá",
-       "p": 91.7
-      },
-      {
-       "x": 5,
-       "n": "96,4% · 12 lá",
-       "p": 87.5
-      },
-      {
-       "x": 6,
-       "n": "97,6% · 14 lá",
-       "p": 88.9
-      },
-      {
-       "x": 8,
-       "n": "100,0% · 18 lá",
-       "p": 87.5
-      }
-     ],
-     "nhan_n": "Trên tập huấn luyện · số lá",
-     "nhan_p": "Trên tập kiểm tra",
-     "so_le_x": 0,
-     "bat_dau": 1
+     "t": "dinh_nghia",
+     "ten": "MAE — sai trung bình",
+     "html": "Trung bình của |thật − đoán| trên tập kiểm tra. Cùng đơn vị với cột cần dự đoán (ở đây: triệu đồng). <b>Càng nhỏ càng tốt.</b>",
+     "ky_hieu": null
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "R² — hơn model lười bao nhiêu",
+     "html": "Model lười luôn đoán giá trung bình → R² = 0. Đoán đúng tuyệt đối → R² = 1. <b>Càng gần 1 càng tốt.</b>",
+     "ky_hieu": "R² âm: còn tệ hơn đoán trung bình."
     },
     {
      "t": "anh",
-     "cap": "Train leo lên 100%, test đứng rồi tụt",
-     "alt": "Train leo lên 100%, test đứng rồi tụt",
-     "src": "img/do-chinh-xac-theo-do-sau.png"
-    },
-    {
-     "t": "anh",
-     "cap": "Cây càng sâu, vùng quyết định càng vụn",
-     "alt": "Cây càng sâu, vùng quyết định càng vụn",
-     "src": "img/duong-bien-cay-theo-do-sau.png"
-    },
-    {
-     "t": "anh",
-     "cap": "Cây không giới hạn: 18 lá — đọc không nổi",
-     "alt": "Cây không giới hạn: 18 lá — đọc không nổi",
-     "src": "img/cay-khong-gioi-han-qua-ram.png"
+     "cap": "Ba model trên cùng 30 máy của tập kiểm tra",
+     "alt": "Ba model trên cùng 30 máy của tập kiểm tra",
+     "src": "img/moc-luoi-va-hai-model.png"
     },
     {
      "t": "vi_du",
-     "tieu_de": "ba độ sâu",
+     "tieu_de": "ba model",
      "de": null,
      "cot": [
-      "Độ sâu",
-      "Số lá",
-      "Train",
-      "Test"
+      "Model",
+      "MAE (triệu)",
+      "R²"
      ],
      "dong": [
       [
-       "1",
-       "2",
-       "91,1%",
-       "91,7%"
+       "Lười — đoán giá trung bình",
+       "3,99",
+       "≈ 0"
       ],
       [
-       "4",
-       "10",
-       "94,6%",
-       "91,7%"
+       "1 cột — tuổi máy",
+       "1,34",
+       "0,84"
       ],
       [
-       "8",
-       "18",
-       "100,0%",
-       "87,5%"
+       "3 cột — tuổi, dung lượng, pin",
+       "<b>0,75</b>",
+       "<b>0,95</b>"
       ]
      ],
-     "ket_luan": "Không giới hạn: đúng 100,0% trên dữ liệu đã học nhưng chỉ 87,5% trên tập kiểm tra — học vẹt.",
+     "ket_luan": "Thêm hai cột có ích, sai trung bình giảm từ 1,34 xuống 0,75 triệu.",
      "nhan_manh": [
       2
      ]
     },
     {
+     "t": "anh",
+     "cap": "Giá thật và giá model 3 cột đoán — điểm càng sát đường chéo càng tốt",
+     "alt": "Giá thật và giá model 3 cột đoán — điểm càng sát đường chéo càng tốt",
+     "src": "img/gia-that-va-gia-du-doan.png"
+    },
+    {
      "t": "loi_hay_gap",
      "muc": [
-      "Chọn cây sâu nhất vì đúng 100% trên tập huấn luyện.",
-      "Nghĩ cây nông (1 – 2 tầng) là quá đơn giản — ở đây nó tốt ngang cây sâu 4."
+      "Đo model hồi quy bằng độ chính xác (%) như phân loại.",
+      "Báo R² trên tập huấn luyện thay vì tập kiểm tra."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Giới hạn độ sâu (max_depth) để cây vừa đọc được vừa không học vẹt."
+     "html": "MAE: sai trung bình, cùng đơn vị. R²: 0 là ngang model lười, 1 là hoàn hảo. Luôn đo trên tập kiểm tra."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai14-q7",
-     "q": "Cây không giới hạn độ sâu có bao nhiêu lá?",
-     "giai": "Mỗi lá gần như chỉ để nhớ vài bạn.",
-     "goi_y": "Kéo thanh trượt tới độ sâu lớn nhất.",
+     "q": "Model đoán giá có MAE = 0,75 triệu. Nghĩa là gì?",
+     "giai": "MAE là sai trung bình, cùng đơn vị với giá.",
+     "goi_y": "Chữ M trong MAE là Mean — trung bình.",
      "a": [
-      "18",
-      "4",
-      "10",
-      "100"
+      "Trung bình mỗi máy đoán lệch 0,75 triệu",
+      "Đoán đúng 0,75% số máy",
+      "Máy nào cũng lệch đúng 0,75 triệu",
+      "Tổng lệch của cả tập là 0,75 triệu"
      ],
-     "h": "79f3a51b4f2b0"
+     "h": "17085be3096f84"
     },
     {
-     "k": "ma",
+     "k": "dd",
      "id": "bai14-q8",
-     "q": "Khi cây sâu thêm từ 4 lên 8 tầng, hai điều nào xảy ra? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "Dấu hiệu học vẹt.",
-     "goi_y": "So hai ô kết quả khi kéo từ 4 lên 8.",
-     "a": [
-      "Đúng hơn trên tập huấn luyện",
-      "Kém đi trên tập kiểm tra",
-      "Đúng hơn trên tập kiểm tra",
-      "Ít lá hơn"
+     "q": "Chọn từ đúng cho mỗi chỗ trống.",
+     "giai": "R² so model với model lười.",
+     "goi_y": "R² đo model hơn việc luôn đoán trung bình bao nhiêu.",
+     "mau": "Model lười có R² bằng {0}; model càng tốt thì R² càng gần {1}.",
+     "o": [
+      [
+       "0",
+       "1",
+       "100",
+       "−1"
+      ],
+      [
+       "1",
+       "0",
+       "−1",
+       "50"
+      ]
      ],
-     "h": "c829de2f85ffc"
+     "h": "f75e5883baa2f"
     }
    ]
   },
   {
-   "ten": "Cây trong scikit-learn",
-   "ten_ngan": "scikit-learn",
-   "phut": 4,
-   "muc_tieu": "huấn luyện cây bằng scikit-learn với độ sâu giới hạn.",
-   "khoi_dong": "Vẽ và đọc cây bằng máy mất mấy dòng lệnh?",
+   "ten": "Nhiều cột và scikit-learn",
+   "ten_ngan": "Nhiều cột",
+   "phut": 5,
+   "muc_tieu": "huấn luyện hồi quy nhiều cột bằng scikit-learn và nhận ra cột vô dụng.",
+   "khoi_dong": "Thêm cột thì model có luôn tốt hơn không?",
    "khoi": [
+    {
+     "t": "anh",
+     "cap": "Hồi quy một cột và hồi quy nhiều cột",
+     "alt": "Hồi quy một cột và hồi quy nhiều cột",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251212171556082327/types_of_linear_regression.webp",
+     "du_phong": "img/minh-hoa-hai-dang-hoi-quy-tuyen-tinh.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Ml linear regression",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
+     },
+     "chu_giai": [
+      [
+       "Types of Linear Regression",
+       "Hai dạng hồi quy tuyến tính"
+      ],
+      [
+       "Simple Linear Regression",
+       "Hồi quy một cột"
+      ],
+      [
+       "Multiple Linear Regression",
+       "Hồi quy nhiều cột"
+      ]
+     ]
+    },
     {
      "t": "bang",
      "cot": [
-      "Bước",
+      "Bước (quy trình 5 bước)",
       "Lệnh"
      ],
      "dong": [
       [
+       "Chia dữ liệu",
+       "<code>train_test_split(X, y, test_size=0.25, random_state=42)</code>"
+      ],
+      [
        "Huấn luyện",
-       "<code>cay = DecisionTreeClassifier(max_depth=2, random_state=42)</code><br><code>cay.fit(X_train, y_train)</code>"
+       "<code>model = LinearRegression().fit(X_train, y_train)</code>"
       ],
       [
-       "Vẽ cây",
-       "<code>plot_tree(cay, feature_names=..., filled=True)</code>"
+       "Đọc a, b",
+       "<code>model.coef_</code> · <code>model.intercept_</code>"
       ],
       [
-       "In luật",
-       "<code>print(export_text(cay, feature_names=...))</code>"
+       "Dự đoán",
+       "<code>du_doan = model.predict(X_test)</code>"
       ],
       [
-       "Dự đoán, đánh giá",
-       "<code>cay.predict(X_test)</code> · <code>accuracy_score</code>"
+       "Đánh giá",
+       "<code>mean_absolute_error</code> · <code>r2_score</code>"
       ]
      ]
     },
     {
      "t": "anh",
-     "cap": "Lớp DecisionTreeClassifier trong scikit-learn",
-     "alt": "Lớp DecisionTreeClassifier trong scikit-learn",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250509140530196329/Decision-Tree-Classifier.png",
-     "du_phong": "img/minh-hoa-doi-tuong-decisiontreeclassifier.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Building and implementing decision tree classifiers with scikit learn a comprehensive guide",
-      "url": "https://www.geeksforgeeks.org/machine-learning/building-and-implementing-decision-tree-classifiers-with-scikit-learn-a-comprehensive-guide/"
-     },
-     "chu_giai": [
-      [
-       "DecisionTreeClassifier(random_state=1)",
-       "Tạo cây phân loại, cố định cách chọn ngẫu nhiên để chạy lại ra như cũ"
-      ]
-     ]
-    },
-    {
-     "t": "bang",
-     "cot": [
-      "Ưu điểm",
-      "Hạn chế"
-     ],
-     "dong": [
-      [
-       "Đọc được luật bằng lời",
-       "Sâu quá thì học vẹt"
-      ],
-      [
-       "Không cần đưa về cùng thang đo",
-       "Đổi vài dòng dữ liệu, cây có thể đổi hẳn"
-      ],
-      [
-       "Dùng được cả cột chữ đã mã hoá",
-       "Ranh giới luôn là bậc thang vuông góc"
-      ]
-     ]
+     "cap": "Thêm cột SoLanRoi (gần như không liên quan tới giá)",
+     "alt": "Thêm cột SoLanRoi (gần như không liên quan tới giá)",
+     "src": "img/them-cot-vo-dung-r2-van-tang.png"
     },
     {
      "t": "vi_du",
-     "tieu_de": "so với các model trước (tập kiểm tra)",
+     "tieu_de": "cái bẫy của cột vô dụng",
      "de": null,
      "cot": [
       "Model",
-      "Độ chính xác"
+      "R² tập huấn luyện",
+      "R² tập kiểm tra"
      ],
      "dong": [
       [
-       "Model lười",
-       "54,2%"
+       "3 cột",
+       "0,9569",
+       "0,9505"
       ],
       [
-       "Cây sâu 2",
-       "91,7%"
-      ],
-      [
-       "Logistic 2 cột (Bài 13)",
-       "91,7%"
-      ],
-      [
-       "KNN K = 9 (Bài 11)",
-       "95,8%"
+       "3 cột + SoLanRoi",
+       "<b>0,9590 ↑</b>",
+       "<b>0,9482 ↓</b>"
       ]
      ],
-     "ket_luan": "Cây không đúng nhất — nhưng là model duy nhất nói ra được luật.",
-     "nhan_manh": []
+     "ket_luan": "Trên dữ liệu đã học R² luôn tăng khi thêm cột — kể cả cột vô dụng. Chỉ tập kiểm tra mới lộ ra (r của SoLanRoi với giá: -0,05).",
+     "nhan_manh": [
+      1
+     ]
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Không cần đưa về cùng thang đo?",
+     "html": "Hồi quy tuyến tính không đo khoảng cách như KNN, nên kết quả dự đoán không đổi khi đổi thang đo. (Hệ số a của từng cột thì đổi theo đơn vị.)"
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Đưa cột về 0 – 1 trước khi dùng cây — không cần, cây chỉ so ≤ với một ngưỡng.",
-      "Quên đặt max_depth nên cây mọc tới khi học thuộc."
+      "Thêm cột thấy R² train tăng liền kết luận cột đó có ích.",
+      "Quên rằng hồi quy tuyến tính chỉ vẽ được đường thẳng (hoặc mặt phẳng)."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "DecisionTreeClassifier(max_depth=...) → fit → plot_tree / export_text → predict."
+     "html": "LinearRegression().fit → coef_, intercept_ → predict → MAE, R² trên tập kiểm tra. Cột vô dụng lộ ra ở tập kiểm tra."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai14-q9",
-     "q": "Tham số nào giới hạn số tầng câu hỏi của cây?",
-     "giai": "max_depth = độ sâu tối đa.",
-     "goi_y": "depth nghĩa là độ sâu.",
+     "q": "Lệnh nào cho biết hệ số chặn b của model?",
+     "giai": "coef_ là các hệ số góc a; intercept_ là b.",
+     "goi_y": "Intercept nghĩa là điểm cắt trục.",
      "a": [
-      "max_depth",
-      "n_neighbors",
-      "test_size",
-      "random_state"
+      "model.intercept_",
+      "model.coef_",
+      "model.predict",
+      "model.score_b"
      ],
-     "h": "1bbb3d2a6b1ca7"
+     "h": "a7bacd88b34df"
     },
     {
-     "k": "ds",
+     "k": "ma",
      "id": "bai14-q10",
-     "q": "Cây quyết định bắt buộc phải đưa các cột về cùng thang đo.",
-     "giai": "Cây chỉ so một cột với một ngưỡng mỗi lần.",
-     "goi_y": "Câu hỏi của cây có cộng hai cột với nhau không?",
-     "h": "5c72ea081d8e8"
+     "q": "Thêm SoLanRoi vào model 3 cột. Hai điều nào xảy ra? <b>(Chọn 2 đáp án đúng.)</b>",
+     "giai": "Đây là cái bẫy: dữ liệu đã học luôn khen cột mới.",
+     "goi_y": "Xem bảng “cái bẫy của cột vô dụng”.",
+     "a": [
+      "R² trên tập huấn luyện tăng",
+      "R² trên tập kiểm tra giảm",
+      "R² trên tập kiểm tra tăng mạnh",
+      "MAE trên tập kiểm tra về 0"
+     ],
+     "h": "1da225bcf5c60a"
     }
    ]
   }
@@ -799,332 +1166,326 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai14-q11",
-    "q": "Nhìn hình. Trong cây đoán khách mua hàng, câu hỏi ở nút gốc là gì?",
-    "giai": "Nút gốc ở trên cùng.",
+    "q": "Nhìn hình. Nhánh bên phải của sơ đồ dự đoán loại kết quả nào?",
+    "giai": "Regression = hồi quy: dự đoán con số.",
     "img": {
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250408153824016146/predicting_whether_a_customer_will_buy_a_product.webp",
-     "du_phong": "img/minh-hoa-cay-quyet-dinh-du-doan-khach-co-mua-hang.png",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250902175259468148/difff.webp",
+     "du_phong": "img/minh-hoa-hai-nhanh-phan-loai-va-hoi-quy.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Decision tree introduction example",
-      "url": "https://www.geeksforgeeks.org/machine-learning/decision-tree-introduction-example/"
+      "ten": "GeeksforGeeks — Supervised machine learning",
+      "url": "https://www.geeksforgeeks.org/machine-learning/supervised-machine-learning/"
      }
     },
     "a": [
-     "Thu nhập trên 50 000?",
-     "Trên 30 tuổi?",
-     "Đã từng mua hàng?",
-     "Có mua hàng không?"
+     "Một con số liên tục",
+     "Một nhãn cho trước",
+     "Một nhóm tự chia",
+     "Một hình ảnh"
     ],
-    "h": "1cf08966d248b5"
+    "h": "1c1e4a3debd9d0"
    },
    {
     "k": "mc",
     "id": "bai14-q12",
-    "q": "Nhìn hình. Câu hỏi nào để lại độ lẫn lộn nhiều nhất?",
-    "giai": "Độ lẫn lộn 0,462.",
+    "q": "Nhìn hình. Vạch đỏ nối mỗi điểm với đường thẳng là gì?",
+    "giai": "Sai số đo theo chiều dọc: thật − đoán.",
     "img": {
-     "src": "img/cau-hoi-nao-chia-gon-nhat.png"
+     "src": "img/sai-so-doc-tu-diem-toi-duong.png"
     },
     "a": [
-     "Dùng mạng trên 250 phút?",
-     "Học trên 3,45 giờ?",
-     "Học trên 1,5 giờ?",
-     "Ba câu như nhau"
+     "Sai số của từng chiếc máy",
+     "Khoảng cách tới điểm gần nhất",
+     "Độ dốc của đường thẳng",
+     "Giá trung bình của các máy"
     ],
-    "h": "38139242ed465"
+    "h": "41897f5e7f2c7"
    },
    {
     "k": "mc",
     "id": "bai14-q13",
-    "q": "Nhìn hình. Ở độ sâu nào đường test bắt đầu tụt?",
-    "giai": "Test 91,7% ở sâu 4, 87,5% ở sâu 5.",
+    "q": "Nhìn hình. Đường nào có tổng bình phương sai số nhỏ nhất?",
+    "giai": "Đường 3: 290.",
     "img": {
-     "src": "img/do-chinh-xac-theo-do-sau.png"
+     "src": "img/ba-duong-ke-tay-khac-nhau.png"
     },
     "a": [
-     "Từ độ sâu 5",
-     "Từ độ sâu 1",
-     "Từ độ sâu 2",
-     "Không bao giờ tụt"
+     "Đường 3",
+     "Đường 1",
+     "Đường 2",
+     "Ba đường bằng nhau"
     ],
-    "h": "1a653d8815023b"
+    "h": "df6b22563a9cc"
    },
    {
     "k": "mc",
     "id": "bai14-q14",
-    "q": "Nhìn hình. Luật nào dẫn tới kết luận ĐẠT?",
-    "giai": "Chỉ một đường dẫn tới ĐẠT.",
+    "q": "Nhìn hình. Model nào có R² gần 0?",
+    "giai": "R² = 0 nghĩa là ngang model lười.",
     "img": {
-     "src": "img/luat-doc-thanh-cau-tieng-viet.png"
+     "src": "img/moc-luoi-va-hai-model.png"
     },
     "a": [
-     "Học > 3,45 giờ và mạng ≤ 317,5 phút",
-     "Học ≤ 3,45 giờ",
-     "Học > 3,45 giờ và mạng > 317,5 phút",
-     "Mạng ≤ 317,5 phút"
+     "Model lười đoán trung bình",
+     "Model chỉ dùng 1 cột",
+     "Model dùng đủ 3 cột",
+     "Không có model nào"
     ],
-    "h": "159358654a011b"
+    "h": "11b4c163926433"
    },
    {
     "k": "mc",
     "id": "bai14-q15",
-    "q": "Nhìn hình. Vì sao cột Y là câu hỏi tốt?",
-    "giai": "Nhánh thuần → không còn lẫn lộn.",
+    "q": "Nhìn hình. Điểm nằm xa đường chéo nét đứt nhất cho biết gì?",
+    "giai": "Lệch 2,53 triệu.",
     "img": {
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250804112900346223/444.webp",
-     "du_phong": "img/minh-hoa-chia-theo-cot-y-cho-hai-nhanh-thuan.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Decision tree introduction example",
-      "url": "https://www.geeksforgeeks.org/machine-learning/decision-tree-introduction-example/"
-     }
+     "src": "img/gia-that-va-gia-du-doan.png"
     },
     "a": [
-     "Hai nhánh đều chỉ còn một nhãn",
-     "Cột Y có nhiều giá trị nhất",
-     "Cột Y nằm ở bên trái hình",
-     "Hai nhánh có số mẫu lệch"
+     "Máy model đoán lệch nhiều nhất",
+     "Máy đắt nhất trong dữ liệu",
+     "Máy mới nhất trong dữ liệu",
+     "Máy model đoán đúng tuyệt đối"
     ],
-    "h": "162e0d2eb4c015"
+    "h": "11113df40caae5"
    },
    {
     "k": "mc",
     "id": "bai14-q16",
-    "q": "Cây đoán cho vay dùng câu hỏi “thu nhập ≤ 10 triệu?”. Nhánh bên trái thường ứng với câu trả lời nào?",
-    "giai": "scikit-learn vẽ nhánh “≤ đúng” sang trái.",
+    "q": "Tiền điện = 3 × số kWh + 50 (nghìn đồng). Hệ số góc 3 nghĩa là gì?",
+    "giai": "a là mức tăng của y khi x tăng 1.",
     "a": [
-     "Có (≤ 10 triệu)",
-     "Không (> 10 triệu)",
-     "Không xác định",
-     "Cả hai câu trả lời"
+     "Mỗi kWh dùng thêm, trả thêm 3 nghìn",
+     "Tháng nào cũng trả 3 nghìn",
+     "Dùng 3 kWh thì miễn phí",
+     "Tiền điện tăng gấp 3 mỗi tháng"
     ],
-    "h": "17ffe84731b638"
+    "h": "6b22bc622980c"
    },
    {
     "k": "mc",
     "id": "bai14-q17",
-    "q": "Một cây có 60 lá cho bộ dữ liệu 70 dòng. Rủi ro lớn nhất là gì?",
-    "giai": "Gần mỗi dòng một lá → học vẹt.",
+    "q": "Model dự đoán chiều cao trẻ em theo tuổi học từ trẻ 2 – 12 tuổi. Đoán chiều cao người 40 tuổi thì sao?",
+    "giai": "Đường thẳng cứ tăng mãi, người lớn thì ngừng cao.",
     "a": [
-     "Cây gần như học thuộc từng dòng",
-     "Cây quá đơn giản, chưa khớp",
-     "Cây không dự đoán được",
-     "Cây cần đưa về 0 – 1"
+     "Không đáng tin — ngoài vùng đã học",
+     "Rất chính xác vì đã học kỹ",
+     "Chính xác hơn trẻ 5 tuổi",
+     "Luôn ra đúng 170 cm"
     ],
-    "h": "163eb7b8c25322"
+    "h": "768136009b51f"
    },
    {
     "k": "mc",
     "id": "bai14-q18",
-    "q": "Vì sao cây quyết định không cần MinMaxScaler?",
-    "giai": "Không đo khoảng cách giữa các cột.",
+    "q": "Model A có MAE 2 triệu, model B có MAE 0,8 triệu trên cùng tập kiểm tra. Nhận xét nào đúng?",
+    "giai": "MAE càng nhỏ càng tốt.",
     "a": [
-     "Mỗi câu hỏi chỉ so một cột với ngưỡng",
-     "Vì cây tự đổi mọi cột về 0 – 1",
-     "Vì cây chỉ dùng cột chữ",
-     "Vì cây không cần dữ liệu huấn luyện"
+     "Model B đoán sát hơn model A",
+     "Model A đoán sát hơn model B",
+     "Hai model tốt như nhau",
+     "Không so sánh được hai model"
     ],
-    "h": "1f5ac90f7dda74"
+    "h": "7f2e2b9800c27"
    },
    {
     "k": "mc",
     "id": "bai14-q19",
-    "q": "Cây sâu 2 của lớp đúng bao nhiêu trên tập kiểm tra?",
-    "giai": "Bằng logistic hai cột.",
+    "q": "Model hồi quy có R² = −0,2 trên tập kiểm tra. Điều đó cho thấy gì?",
+    "giai": "R² âm: thua model lười.",
     "a": [
-     "91,7%",
-     "54,2%",
-     "87,5%",
-     "100%"
+     "Còn tệ hơn luôn đoán trung bình",
+     "Tốt hơn model lười một chút",
+     "Đoán đúng 20% số dòng",
+     "Model hoàn hảo trên tập kiểm tra"
     ],
-    "h": "71d4d6b01eb7f"
+    "h": "1756e0dcea7acf"
    },
    {
     "k": "ma",
     "id": "bai14-q20",
-    "q": "Những phần nào có trong một cây quyết định? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Gốc, nút, nhánh, lá.",
+    "q": "Những bài toán nào là hồi quy? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Hồi quy: kết quả là con số liên tục.",
     "a": [
-     "Nút gốc",
-     "Lá",
-     "Tâm cụm",
-     "Hệ số chặn"
+     "Dự đoán giá vé máy bay",
+     "Dự đoán lượng mưa ngày mai (mm)",
+     "Dự đoán email là thư rác",
+     "Dự đoán loài hoa từ ảnh"
     ],
-    "h": "18c78a0f9f879a"
+    "h": "ca208618b3f0b"
    },
    {
     "k": "ma",
     "id": "bai14-q21",
-    "q": "Dấu hiệu nào cho thấy cây đang học vẹt? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Sâu, nhiều lá, train hoàn hảo.",
+    "q": "Những phát biểu nào đúng về đường tốt nhất? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Tốt nhất theo tổng bình phương sai số.",
     "a": [
-     "Đúng 100% trên tập huấn luyện",
-     "Có rất nhiều lá",
-     "Test cao hơn train",
-     "Chỉ có một câu hỏi"
+     "Có tổng bình phương sai số nhỏ nhất",
+     "Sai số đo theo chiều dọc",
+     "Phải đi qua nhiều điểm nhất",
+     "Luôn đi qua gốc toạ độ"
     ],
-    "h": "191b81a918da3b"
+    "h": "1a6d864d413c47"
    },
    {
     "k": "ma",
     "id": "bai14-q22",
-    "q": "Những ưu điểm nào đúng với cây quyết định? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Dễ giải thích, dễ dùng.",
+    "q": "Những chỉ số nào dùng để đánh giá model hồi quy? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Hồi quy đo độ lệch, không đo đúng/sai.",
     "a": [
-     "Đọc được luật bằng lời",
-     "Không cần cùng thang đo",
-     "Không bao giờ học vẹt",
-     "Luôn đúng nhất trong mọi model"
+     "MAE",
+     "R²",
+     "Độ chính xác (%)",
+     "Số láng giềng K"
     ],
-    "h": "1e7ecbfd817ac4"
+    "h": "1abf7421ca2d9e"
    },
    {
     "k": "ma",
     "id": "bai14-q23",
-    "q": "Cây chọn câu hỏi ở mỗi nút theo tiêu chí nào? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Gini / entropy.",
+    "q": "Thêm cột SoLanRoi vô dụng vào model. Hai điều nào đúng? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Dữ liệu đã học luôn khen cột mới.",
     "a": [
-     "Làm độ lẫn lộn còn lại nhỏ nhất",
-     "Tách hai nhãn gọn nhất",
-     "Chọn cột có tên ngắn nhất",
-     "Chọn ngẫu nhiên một cột"
+     "R² tập huấn luyện vẫn tăng",
+     "Tập kiểm tra mới lộ ra cột vô dụng",
+     "R² tập kiểm tra tăng mạnh",
+     "Model tự bỏ cột vô dụng"
     ],
-    "h": "16f5675a1f40ed"
+    "h": "1fa5a52abdf2c6"
    },
    {
     "k": "sx",
     "id": "bai14-q24",
-    "q": "Sắp xếp các bước dùng cây trong scikit-learn.",
-    "giai": "Chia → tạo → fit → đọc → đo.",
+    "q": "Sắp xếp các bước tìm đường tốt nhất bằng tay.",
+    "giai": "Chọn → tính sai số → bình phương, cộng → chỉnh.",
     "a": [
-     "Chia tập huấn luyện và kiểm tra",
-     "Tạo DecisionTreeClassifier với max_depth",
-     "Fit trên tập huấn luyện",
-     "Vẽ cây, đọc luật",
-     "Đo trên tập kiểm tra"
+     "Chọn một cặp a, b",
+     "Tính sai số từng điểm",
+     "Bình phương rồi cộng lại",
+     "Đổi a, b để tổng nhỏ hơn"
     ],
-    "h": "106aa41844c935"
+    "h": "1243251c2950c3"
    },
    {
     "k": "sx",
     "id": "bai14-q25",
-    "q": "Sắp xếp các bước cây chọn câu hỏi ở một nút.",
-    "giai": "Thử hết → đo → chọn → chia.",
+    "q": "Sắp xếp các bước dùng LinearRegression trong scikit-learn.",
+    "giai": "Chia → fit → predict → chấm.",
     "a": [
-     "Liệt kê các câu hỏi có thể",
-     "Tính độ lẫn lộn sau mỗi câu",
-     "Chọn câu có độ lẫn lộn nhỏ nhất",
-     "Chia nhóm theo câu đó"
+     "Chia tập huấn luyện và kiểm tra",
+     "Fit LinearRegression trên tập huấn luyện",
+     "Predict tập kiểm tra",
+     "Tính MAE và R²"
     ],
-    "h": "10d44b1a06ab97"
+    "h": "1461bb6a5c1b49"
    },
    {
     "k": "dd",
     "id": "bai14-q26",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Gốc trên, lá dưới.",
-    "mau": "Câu hỏi đầu tiên nằm ở {0}; kết luận nằm ở {1}.",
+    "giai": "a: độ dốc; b: điểm cắt trục tung.",
+    "mau": "Trong y = a·x + b, số đứng trước x là {0}; số cộng thêm ở cuối là {1}.",
     "o": [
      [
-      "nút gốc",
-      "lá",
-      "nhánh",
-      "tâm cụm"
+      "hệ số góc",
+      "hệ số chặn",
+      "sai số",
+      "feature"
      ],
      [
-      "lá",
-      "nút gốc",
-      "nhánh",
-      "ngưỡng"
+      "hệ số chặn",
+      "hệ số góc",
+      "sai số",
+      "nhãn"
      ]
     ],
-    "h": "806a8c450c155"
+    "h": "12fa20d365c5fa"
    },
    {
     "k": "dd",
     "id": "bai14-q27",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Học vẹt: nhiều lá, test thấp.",
-    "mau": "Cây không giới hạn có {0} lá và đúng {1} trên tập kiểm tra.",
+    "giai": "a = -0,27; -0,27 × 24 + 13,08.",
+    "mau": "Mỗi tháng tuổi máy, giá giảm khoảng {0} nghìn; máy 24 tháng đoán khoảng {1} triệu.",
     "o": [
      [
-      "18",
-      "4",
-      "2",
-      "100"
+      "269",
+      "1308",
+      "27",
+      "1 000"
      ],
      [
-      "87,5%",
-      "100,0%",
-      "91,7%",
-      "54,2%"
+      "6,63",
+      "13,08",
+      "-8,42",
+      "6,50"
      ]
     ],
-    "h": "fcce884936323"
+    "h": "18660dbb9f0f86"
    },
    {
     "k": "dd",
     "id": "bai14-q28",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "plot = vẽ; text = chữ.",
-    "mau": "Lệnh {0} vẽ cây; lệnh {1} in luật ra chữ.",
+    "giai": "MAE là sai số; R² tối đa bằng 1.",
+    "mau": "MAE càng {0} càng tốt; R² càng {1} càng tốt.",
     "o": [
      [
-      "plot_tree",
-      "export_text",
-      "fit",
-      "predict"
+      "nhỏ",
+      "lớn",
+      "âm",
+      "gần 100"
      ],
      [
-      "export_text",
-      "plot_tree",
-      "fit",
-      "score"
+      "gần 1",
+      "gần 0",
+      "âm",
+      "nhỏ"
      ]
     ],
-    "h": "1425d2c9930c04"
+    "h": "596efde3f4243"
    },
    {
     "k": "dd",
     "id": "bai14-q29",
-    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Đọc từ cây sâu 2.",
-    "mau": "Câu hỏi đầu tiên của cây là học ≤ {0} giờ; câu hỏi tầng hai bên phải là mạng ≤ {1} phút.",
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "coef_ = a; intercept_ = b.",
+    "mau": "Lệnh {0} trả về các hệ số góc; lệnh {1} trả về hệ số chặn.",
     "o": [
      [
-      "3,45",
-      "1,50",
-      "5,00",
-      "2,35"
+      "coef_",
+      "intercept_",
+      "predict",
+      "fit"
      ],
      [
-      "317,5",
-      "250,0",
-      "150,0",
-      "450,0"
+      "intercept_",
+      "coef_",
+      "predict",
+      "score"
      ]
     ],
-    "h": "12bbd48742d715"
+    "h": "16d3618a62d4ab"
    },
    {
     "k": "ds",
     "id": "bai14-q30",
-    "q": "Cây quyết định chỉ dùng được cho bài toán phân loại.",
-    "giai": "Còn có cây hồi quy — dự đoán con số theo bậc thang.",
+    "q": "Hồi quy tuyến tính cần đưa các cột về cùng thang đo như KNN thì dự đoán mới đúng.",
+    "giai": "Dự đoán không đổi khi đổi thang đo; chỉ hệ số a đổi theo đơn vị.",
     "h": "5a4506c36698c"
    },
    {
     "k": "ds",
     "id": "bai14-q31",
-    "q": "Mỗi đường từ gốc tới lá là một luật NẾU… THÌ….",
-    "giai": "Đọc được bằng lời.",
+    "q": "R² bằng 0 nghĩa là model chỉ ngang với luôn đoán giá trung bình.",
+    "giai": "Đó chính là định nghĩa qua model lười.",
     "h": "736b61949eb92"
    },
    {
     "k": "ds",
     "id": "bai14-q32",
-    "q": "Cây càng sâu thì càng đúng trên dữ liệu mới.",
-    "giai": "Sâu quá thì học vẹt.",
-    "h": "2d00c794e2467"
+    "q": "Dữ liệu điện thoại cũ trong bài là dữ liệu mô phỏng.",
+    "giai": "Sinh bằng máy tính cho bài học (seed 9).",
+    "h": "1b041a347aed61"
    }
   ]
  },

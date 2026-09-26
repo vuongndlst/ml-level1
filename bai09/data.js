@@ -8,7 +8,7 @@ window.BAI = {
  "gioi_thieu": [
   "Ở Bài 8, con đọc từng cột một. Bài này đọc <b>hai cột cùng lúc</b>: giờ học và điểm, phút mạng và điểm đi cùng nhau thế nào — và kể lại điều mình thấy thành một câu chuyện có số liệu.",
   "Năm chặng: biểu đồ phân tán, hệ số tương quan, bản đồ nhiệt, những cái bẫy khi đọc tương quan, và cách kể chuyện bằng dữ liệu. Bảng khối 10 là bảng mô phỏng.",
-  "Bài này khép lại Phần A. Buổi sau là <b>thực hành nhóm 1</b>: nhóm tự khám phá một bộ dữ liệu mới và kể câu chuyện của nó."
+  "Bài này khép lại Phần A. Buổi sau là <b>bài 10 (thực hành)</b>: nhóm tự khám phá một bộ dữ liệu mới và kể câu chuyện của nó."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai09",

@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 11,
  "ma": "bai11",
  "nhan": "Bài 11",
- "tieu_de": "K láng giềng gần nhất (KNN)",
+ "tieu_de": "Học có giám sát là gì",
  "phan": "Phần B · Học có giám sát",
- "cau_hoi": "Máy quyết định “bạn này giống ai” bằng cách nào?",
+ "cau_hoi": "Máy “học” từ dữ liệu nghĩa là gì — và làm sao biết nó học thật hay chỉ thuộc lòng?",
  "gioi_thieu": [
-  "Ở Bài 5 con đã cho 5 bạn gần A nhất “bỏ phiếu” đoán kết quả của A. Đó chính là ý tưởng của <b>KNN — K láng giềng gần nhất</b>, thuật toán học có giám sát đầu tiên con xây trọn vẹn.",
-  "Năm chặng: ba bước của KNN, tự đoán một bạn mới bằng tay, vì sao phải đưa về cùng thang đo, chọn K, và dùng KNN trong scikit-learn. Bảng khối 10 là bảng mô phỏng.",
-  "Con dùng lại khoảng cách Euclid, đưa về 0 – 1 (Bài 5), chia dữ liệu (Bài 7) và quy trình 5 bước, mốc model lười (Bài 10)."
+  "Phần A đã giúp con đọc và chuẩn bị dữ liệu. Từ bài này, máy bắt đầu <b>học</b>: nhìn những ví dụ đã biết đáp án rồi đoán đáp án cho ví dụ mới.",
+  "Bài này chưa dạy thuật toán nào. Năm chặng dựng cái <b>khung chung</b> mà mọi bài sau đều dùng: dữ liệu có nhãn, phân loại hay hồi quy, quy trình 5 bước, model là một quy tắc có tham số, và phân biệt model học thật với model học vẹt. Bảng khối 10 là bảng mô phỏng.",
+  "Con dùng lại feature, nhãn, tập huấn luyện, tập kiểm tra và model lười từ Bài 7."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai11",
  "muc_tieu": [
-  "Mô tả được ba bước của thuật toán KNN.",
-  "Tự dự đoán được nhãn cho một điểm mới bằng KNN.",
-  "Giải thích được vì sao KNN cần đưa các cột về cùng thang đo.",
-  "Giải thích được ảnh hưởng của K: K nhỏ dễ học vẹt, K lớn dễ chưa khớp.",
-  "Huấn luyện và đánh giá KNN bằng scikit-learn, so với mốc."
+  "Giải thích được học có giám sát: học từ dữ liệu có nhãn để dự đoán nhãn cho dữ liệu mới.",
+  "Phân biệt được bài toán phân loại và bài toán hồi quy.",
+  "Sắp xếp đúng quy trình 5 bước của một bài toán học có giám sát.",
+  "Hiểu model là một quy tắc có tham số, huấn luyện là tìm tham số tốt nhất.",
+  "Nhận ra model học vẹt: đúng trên dữ liệu đã học, sai trên dữ liệu mới."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,110 +36,84 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Ba bước của KNN",
-   "ten_ngan": "Ba bước",
+   "ten": "Học có giám sát — học từ ví dụ có đáp án",
+   "ten_ngan": "Học có giám sát",
    "phut": 4,
-   "muc_tieu": "mô tả được ba bước của thuật toán KNN.",
-   "khoi_dong": "Một bạn mới chuyển tới lớp. Muốn đoán bạn ấy học thế nào, con sẽ hỏi ai?",
+   "muc_tieu": "giải thích được học có giám sát bằng lời của mình.",
+   "khoi_dong": "Nhìn 12 bạn đã biết kết quả trên hình. Con đoán được ba bạn mới A, B, C không? Con vừa dùng quy tắc gì?",
    "khoi": [
     {
+     "t": "anh",
+     "cap": "12 bạn đã biết Đạt / Chưa đạt và ba bạn mới A, B, C (bạn mới là ví dụ tự đặt)",
+     "alt": "12 bạn đã biết Đạt / Chưa đạt và ba bạn mới A, B, C (bạn mới là ví dụ tự đặt)",
+     "src": "img/muoi-hai-ban-da-biet-va-ba-ban-moi.png"
+    },
+    {
+     "t": "p",
+     "html": "Khi đoán A, B, C, con đã làm đúng việc của một model: nhìn các ví dụ có đáp án, rút ra một quy tắc (học nhiều, dùng mạng ít thì thường Đạt), rồi áp dụng cho ví dụ mới."
+    },
+    {
      "t": "dinh_nghia",
-     "ten": "K láng giềng gần nhất (KNN — K-Nearest Neighbours)",
-     "html": "Để dự đoán nhãn cho một điểm mới: (1) đo khoảng cách từ điểm mới tới <b>mọi điểm đã biết nhãn</b>; (2) lấy <b>K điểm gần nhất</b>; (3) cho K điểm đó <b>bỏ phiếu</b> — nhãn nhiều phiếu nhất là dự đoán.",
-     "ky_hieu": "K là tham số do người dùng chọn. KNN không tìm quy tắc nào khi huấn luyện — nó chỉ <b>nhớ</b> dữ liệu rồi hỏi láng giềng khi cần dự đoán."
+     "ten": "Học có giám sát (supervised learning)",
+     "html": "Máy học từ <b>dữ liệu có nhãn</b> — mỗi ví dụ đã kèm đáp án đúng — để tìm ra quy tắc nối feature với nhãn, rồi dùng quy tắc đó <b>dự đoán nhãn cho dữ liệu mới</b>. Chữ “giám sát” nghĩa là có đáp án đi kèm để kiểm tra máy học đúng hay sai.",
+     "ky_hieu": "Dữ liệu có nhãn → huấn luyện → model → dự đoán cho dữ liệu mới"
     },
     {
      "t": "anh",
-     "cap": "Bước 0: một điểm mới (ô vàng) cần xếp vào nhóm A hay B",
-     "alt": "Bước 0: một điểm mới (ô vàng) cần xếp vào nhóm A hay B",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250512150739534897/Initial-Data.webp",
-     "du_phong": "img/minh-hoa-diem-moi-can-phan-loai.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — K nearest neighbours",
-      "url": "https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/"
-     },
-     "chu_giai": [
-      [
-       "Initial Data",
-       "Dữ liệu ban đầu"
-      ],
-      [
-       "New example to classify",
-       "Điểm mới cần phân loại"
-      ],
-      [
-       "Class A, Class B",
-       "Nhóm A (ngôi sao), nhóm B (tam giác)"
-      ]
-     ]
+     "cap": "Bảng khối 10 là dữ liệu có nhãn: cột Result là đáp án",
+     "alt": "Bảng khối 10 là dữ liệu có nhãn: cột Result là đáp án",
+     "src": "img/bang-du-lieu-co-nhan.png"
     },
     {
      "t": "anh",
-     "cap": "Bước 1: đo khoảng cách tới các điểm đã biết",
-     "alt": "Bước 1: đo khoảng cách tới các điểm đã biết",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250512150738992167/Calculate-Data.webp",
-     "du_phong": "img/minh-hoa-do-khoang-cach-tu-diem-moi-den-moi-diem.png",
+     "cap": "Học có giám sát: học từ ảnh đã gắn nhãn, rồi phân loại ảnh mới",
+     "alt": "Học có giám sát: học từ ảnh đã gắn nhãn, rồi phân loại ảnh mới",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20241022160725494723/supervised-machine-learning.webp",
+     "du_phong": "img/minh-hoa-hoc-co-giam-sat-tong-quan.png",
      "nguon": {
-      "ten": "GeeksforGeeks — K nearest neighbours",
-      "url": "https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/"
+      "ten": "GeeksforGeeks — Supervised machine learning",
+      "url": "https://www.geeksforgeeks.org/machine-learning/supervised-machine-learning/"
      },
      "chu_giai": [
       [
-       "Calculate Data",
-       "Tính khoảng cách"
+       "Supervised Machine Learning",
+       "Học máy có giám sát"
       ],
       [
-       "X-Axis, Y-Axis",
-       "Trục hoành, trục tung"
-      ]
-     ]
-    },
-    {
-     "t": "anh",
-     "cap": "Bước 2 – 3: lấy K = 3 điểm gần nhất rồi bỏ phiếu",
-     "alt": "Bước 2 – 3: lấy K = 3 điểm gần nhất rồi bỏ phiếu",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250512162457630554/Finding_Neighbor_Voting_for_Labels.webp",
-     "du_phong": "img/minh-hoa-ba-hang-xom-gan-nhat-bo-phieu.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — K nearest neighbours",
-      "url": "https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/"
-     },
-     "chu_giai": [
-      [
-       "Finding Neighbors & Voting for Labels",
-       "Tìm láng giềng và bỏ phiếu"
+       "Labeled Data, Labels",
+       "Dữ liệu có nhãn, các nhãn (voi, lạc đà, bò)"
       ],
       [
-       "K = 3",
-       "Lấy 3 láng giềng gần nhất"
+       "Algorithm, Processing",
+       "Thuật toán học, xử lý"
+      ],
+      [
+       "Output",
+       "Kết quả dự đoán"
+      ],
+      [
+       "Model is trained using labeled data…",
+       "Model được huấn luyện bằng dữ liệu có nhãn để dự đoán và phân loại"
       ]
      ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ KNN “học” ra một công thức — nó chỉ nhớ dữ liệu và đo khoảng cách lúc dự đoán.",
-      "Lấy K điểm xa nhất thay vì gần nhất."
+      "Nghĩ “học” là máy tự hiểu như người — thật ra máy tìm một quy tắc khớp với các ví dụ.",
+      "Quên rằng không có nhãn thì không có học có giám sát."
      ]
     },
     {
-     "t": "video",
-     "yt": "HVXime0nQeI",
-     "ten": "StatQuest — K-nearest neighbors, Clearly Explained",
-     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc",
-     "bat_dau": null,
-     "ket_thuc": null
-    },
-    {
      "t": "tom_tat",
-     "html": "KNN: đo khoảng cách → lấy K gần nhất → bỏ phiếu đa số."
+     "html": "Học có giám sát: học từ ví dụ có đáp án để đoán đáp án cho ví dụ mới."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "K-Nearest Neighbor (KNN) Algorithm",
-       "url": "https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/",
+       "ten": "Supervised Machine Learning",
+       "url": "https://www.geeksforgeeks.org/machine-learning/supervised-machine-learning/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -147,681 +121,644 @@ window.BAI = {
    ],
    "checkpoint": [
     {
-     "k": "sx",
+     "k": "mc",
      "id": "bai11-q1",
-     "q": "Sắp xếp ba bước dự đoán nhãn cho một điểm mới bằng KNN.",
-     "giai": "Đo → chọn → bỏ phiếu.",
-     "goi_y": "Muốn biết điểm nào gần nhất thì phải làm gì trước?",
+     "q": "Bài toán nào dưới đây là học có giám sát?",
+     "giai": "Có dữ liệu đã gắn nhãn (rác / không rác) để học rồi đoán cho email mới.",
+     "goi_y": "Học có giám sát cần ví dụ đã có đáp án.",
      "a": [
-      "Đo khoảng cách tới mọi điểm đã biết nhãn",
-      "Chọn K điểm gần nhất",
-      "Cho K điểm đó bỏ phiếu, lấy nhãn nhiều phiếu nhất"
+      "Đoán email rác từ email đã gắn nhãn",
+      "Chia khách hàng thành nhóm không có nhãn",
+      "Tìm các từ hay đi cùng nhau trong sách",
+      "Nén ảnh cho nhỏ dung lượng hơn"
      ],
-     "h": "112239366e14bd"
+     "h": "86401ea0697aa"
     },
     {
-     "k": "mc",
+     "k": "ds",
      "id": "bai11-q2",
-     "q": "K = 5 láng giềng gần nhất có 3 bạn Chưa đạt, 2 bạn Đạt. KNN đoán bạn mới thế nào?",
-     "giai": "Đa số là Chưa đạt (3 > 2).",
-     "goi_y": "Nhãn nào nhiều phiếu hơn?",
-     "a": [
-      "Chưa đạt",
-      "Đạt",
-      "Không đoán được",
-      "Nửa Đạt, nửa Chưa đạt"
-     ],
-     "h": "1fc608c56b84d6"
+     "q": "Trong học có giám sát, mỗi dòng dữ liệu dùng để học đều kèm đáp án đúng.",
+     "giai": "Đó là dữ liệu có nhãn.",
+     "goi_y": "“Giám sát” nghĩa là có gì đi kèm?",
+     "h": "160c0b8e43b156"
     }
    ]
   },
   {
-   "ten": "Tự dự đoán một bạn mới",
-   "ten_ngan": "Tính tay",
-   "phut": 5,
-   "muc_tieu": "tự dự đoán được nhãn của một điểm mới bằng KNN và thấy kết quả có thể đổi theo K.",
-   "khoi_dong": "Bạn mới tự học 3,4 giờ, dùng mạng 150 phút mỗi ngày. Bạn ấy Đạt hay Chưa đạt?",
+   "ten": "Phân loại và hồi quy",
+   "ten_ngan": "Phân loại, hồi quy",
+   "phut": 4,
+   "muc_tieu": "phân biệt được bài toán phân loại và bài toán hồi quy.",
+   "khoi_dong": "Đoán một bạn Đạt hay Chưa đạt, và đoán một bạn được bao nhiêu điểm — hai câu hỏi này khác nhau ở đâu?",
    "khoi": [
     {
-     "t": "p",
-     "html": "Máy đã đưa hai cột về 0 – 1 (dùng min, max của tập huấn luyện: giờ 0,5 – 7,0, phút 15 – 450), rồi đo khoảng cách từ bạn mới tới 168 bạn trong tập huấn luyện. Dưới đây là 9 bạn gần nhất."
+     "t": "dinh_nghia",
+     "ten": "Phân loại (classification)",
+     "html": "Nhãn là một <b>nhóm</b> trong số ít nhóm cho trước. Ví dụ: Đạt / Chưa đạt; chó / mèo; email rác / không rác.",
+     "ky_hieu": null
     },
     {
-     "t": "demo_tung_buoc",
-     "tieu_de": "9 láng giềng gần nhất của bạn mới",
-     "huong_dan": "Bấm “Bước tiếp” để thêm từng láng giềng, từ gần tới xa. Theo dõi cột cuối: kiểm phiếu sau K láng giềng.",
-     "nhan_chon": "Láng giềng",
-     "cot": [
-      "Hạng",
-      "Mã",
-      "Giờ học",
-      "Phút mạng",
-      "Khoảng cách (0 – 1)",
-      "Kết quả",
-      "Kiểm phiếu"
-     ],
-     "mac_dinh": 0,
-     "lua_chon": [
-      {
-       "nhan": "9 láng giềng",
-       "dong": [
-        [
-         "—",
-         "Bạn mới",
-         "3,4",
-         "150",
-         "—",
-         "?",
-         "—"
-        ],
-        [
-         "1",
-         "HS186",
-         "3,5",
-         "147",
-         "0,017",
-         "Đạt",
-         "1 Đạt – 0 Chưa đạt"
-        ],
-        [
-         "2",
-         "HS057",
-         "3,2",
-         "144",
-         "0,034",
-         "Chưa đạt",
-         "1 Đạt – 1 Chưa đạt"
-        ],
-        [
-         "3",
-         "HS084",
-         "3,3",
-         "135",
-         "0,038",
-         "Chưa đạt",
-         "1 Đạt – 2 Chưa đạt"
-        ],
-        [
-         "4",
-         "HS214",
-         "3,3",
-         "133",
-         "0,042",
-         "Đạt",
-         "2 Đạt – 2 Chưa đạt"
-        ],
-        [
-         "5",
-         "HS199",
-         "3,6",
-         "164",
-         "0,045",
-         "Đạt",
-         "3 Đạt – 2 Chưa đạt"
-        ],
-        [
-         "6",
-         "HS011",
-         "3,1",
-         "136",
-         "0,056",
-         "Chưa đạt",
-         "3 Đạt – 3 Chưa đạt"
-        ],
-        [
-         "7",
-         "HS046",
-         "3,7",
-         "128",
-         "0,068",
-         "Đạt",
-         "4 Đạt – 3 Chưa đạt"
-        ],
-        [
-         "8",
-         "HS239",
-         "3,2",
-         "123",
-         "0,069",
-         "Đạt",
-         "5 Đạt – 3 Chưa đạt"
-        ],
-        [
-         "9",
-         "HS045",
-         "3,3",
-         "185",
-         "0,082",
-         "Đạt",
-         "6 Đạt – 3 Chưa đạt"
-        ]
-       ]
-      }
+     "t": "dinh_nghia",
+     "ten": "Hồi quy (regression)",
+     "html": "Nhãn là một <b>con số</b> có thể nhận rất nhiều giá trị. Ví dụ: điểm học kỳ, giá nhà, nhiệt độ ngày mai.",
+     "ky_hieu": null
+    },
+    {
+     "t": "anh",
+     "cap": "Hai nhánh của học có giám sát",
+     "alt": "Hai nhánh của học có giám sát",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250902175259468148/difff.webp",
+     "du_phong": "img/minh-hoa-hai-nhanh-phan-loai-va-hoi-quy.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Supervised machine learning",
+      "url": "https://www.geeksforgeeks.org/machine-learning/supervised-machine-learning/"
+     },
+     "chu_giai": [
+      [
+       "Supervised Learning",
+       "Học có giám sát"
+      ],
+      [
+       "Classification (defined Labels)",
+       "Phân loại — nhãn là các nhóm cho trước"
+      ],
+      [
+       "Regression (no Labels defined)",
+       "Hồi quy — nhãn là số, không phải nhóm cho trước (GfG gọi là “không có nhãn định sẵn”; vẫn là học có giám sát)"
+      ]
      ]
     },
     {
      "t": "vi_du",
-     "tieu_de": "kết quả theo từng K",
+     "tieu_de": "phân loại hay hồi quy?",
      "de": null,
      "cot": [
-      "K",
-      "Phiếu Đạt",
-      "Phiếu Chưa đạt",
-      "KNN đoán"
+      "Bài toán",
+      "Nhãn",
+      "Loại"
      ],
      "dong": [
       [
-       "1",
-       "1",
-       "0",
-       "<b>Đạt</b>"
+       "Đoán Đạt / Chưa đạt",
+       "Pass / Fail",
+       "<b>Phân loại</b>"
       ],
       [
-       "3",
-       "1",
-       "2",
-       "<b>Chưa đạt</b>"
+       "Đoán điểm học kỳ",
+       "Số từ 0 đến 10",
+       "<b>Hồi quy</b>"
       ],
       [
-       "5",
-       "3",
-       "2",
-       "<b>Đạt</b>"
+       "Đoán loại hoa từ ảnh",
+       "Hồng / cúc / lan",
+       "Phân loại"
       ],
       [
-       "9",
-       "6",
-       "3",
-       "<b>Đạt</b>"
+       "Đoán số khách tới quán ngày mai",
+       "Số nguyên",
+       "Hồi quy"
       ]
      ],
-     "ket_luan": "Cùng một bạn mới, K khác nhau cho câu trả lời khác nhau — vì bạn ấy nằm ở vùng giáp ranh. Chặng 4 sẽ chọn K bằng dữ liệu.",
+     "ket_luan": null,
      "nhan_manh": []
     },
     {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Vì sao K thường là số lẻ?",
-     "html": "Với hai nhãn, K lẻ không bao giờ hoà phiếu (ví dụ K = 4 có thể 2 – 2)."
+     "t": "anh",
+     "cap": "Bảng A: nhãn Purchased là 0/1 — phân loại. Bảng B: nhãn Wind Speed là số — hồi quy",
+     "alt": "Bảng A: nhãn Purchased là 0/1 — phân loại. Bảng B: nhãn Wind Speed là số — hồi quy",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250902165132990858/supervised-data.webp",
+     "du_phong": "img/minh-hoa-bang-du-lieu-phan-loai-va-hoi-quy.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Supervised machine learning",
+      "url": "https://www.geeksforgeeks.org/machine-learning/supervised-machine-learning/"
+     },
+     "chu_giai": [
+      [
+       "Figure A: Classification",
+       "Bảng A: phân loại — cột khoanh đỏ là nhãn"
+      ],
+      [
+       "Purchased",
+       "Đã mua hàng (1) hay không (0)"
+      ],
+      [
+       "Figure B: Regression",
+       "Bảng B: hồi quy"
+      ],
+      [
+       "Wind Speed",
+       "Tốc độ gió"
+      ],
+      [
+       "Temperature, Pressure, Relative Humidity",
+       "Nhiệt độ, áp suất, độ ẩm"
+      ]
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Ba kiểu bài toán phân loại",
+     "alt": "Ba kiểu bài toán phân loại",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260312160830294415/Types-of-classification.webp",
+     "du_phong": "img/minh-hoa-ba-kieu-bai-toan-phan-loai.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Getting started with classification",
+      "url": "https://www.geeksforgeeks.org/machine-learning/getting-started-with-classification/"
+     },
+     "chu_giai": [
+      [
+       "Binary Classification",
+       "Phân loại hai nhóm"
+      ],
+      [
+       "Multi-Class Classification",
+       "Phân loại nhiều nhóm — mỗi mẫu một nhóm"
+      ],
+      [
+       "Multi-Label Classification",
+       "Phân loại nhiều nhãn — một mẫu có thể nhiều nhãn"
+      ],
+      [
+       "Category, Label",
+       "Nhóm, nhãn"
+      ]
+     ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Quên đưa điểm mới về 0 – 1 bằng cùng min, max với tập huấn luyện.",
-      "Đếm cả chính điểm mới vào danh sách láng giềng."
+      "Nghĩ nhãn là số thì luôn là hồi quy — nhãn 0/1 chỉ là tên hai nhóm, vẫn là phân loại.",
+      "Nghĩ hồi quy không có nhãn — nhãn của hồi quy là một con số."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Dự đoán bằng KNN: đưa về 0 – 1, đo, sắp xếp, lấy K đầu danh sách, kiểm phiếu."
+     "html": "Nhãn là nhóm → phân loại. Nhãn là con số liên tục → hồi quy."
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Getting started with Classification",
+       "url": "https://www.geeksforgeeks.org/machine-learning/getting-started-with-classification/",
+       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+      }
+     ]
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai11-q3",
-     "q": "Trong phần Tự thử, với K = 3 KNN đoán bạn mới thế nào?",
-     "giai": "Ba láng giềng đầu: 1 Đạt, 2 Chưa đạt.",
-     "goi_y": "Bấm tới láng giềng thứ 3 rồi đọc cột kiểm phiếu.",
+     "q": "Đoán giá một chiếc điện thoại cũ (triệu đồng). Đây là bài toán gì?",
+     "giai": "Nhãn là một con số — hồi quy.",
+     "goi_y": "Nhãn là một nhóm hay một con số?",
      "a": [
-      "Chưa đạt",
-      "Đạt",
-      "Hoà phiếu",
-      "Không đoán được"
+      "Hồi quy",
+      "Phân loại hai nhóm",
+      "Phân loại nhiều nhóm",
+      "Không phải học có giám sát"
      ],
-     "h": "9430d67bbc6b1"
+     "h": "976814b428dd3"
     },
-    {
-     "k": "ds",
-     "id": "bai11-q4",
-     "q": "Với hai nhãn, chọn K là số chẵn có thể bị hoà phiếu.",
-     "giai": "K = 4 có thể ra 2 – 2.",
-     "goi_y": "Thử K = 2: hai láng giềng khác nhãn thì sao?",
-     "h": "1397dcd39d632c"
-    }
-   ]
-  },
-  {
-   "ten": "KNN cần cùng thang đo",
-   "ten_ngan": "Thang đo",
-   "phut": 4,
-   "muc_tieu": "giải thích được vì sao KNN phải đưa các cột về cùng thang đo, bằng số liệu.",
-   "khoi_dong": "Bài 5: đo thô thì cột phút mạng lấn át cột giờ học. Điều đó ảnh hưởng tới KNN thế nào?",
-   "khoi": [
-    {
-     "t": "anh",
-     "cap": "Vẽ hai cột trên cùng một thang đo: cả cột giờ học chỉ còn là một dải hẹp",
-     "alt": "Vẽ hai cột trên cùng một thang đo: cả cột giờ học chỉ còn là một dải hẹp",
-     "src": "img/thang-do-goc-nuot-mat-cot-gio-hoc.png"
-    },
-    {
-     "t": "anh",
-     "cap": "Cùng KNN, cùng K = 5: chưa đưa về cùng thang đo 72,2% — đã đưa 94,4%",
-     "alt": "Cùng KNN, cùng K = 5: chưa đưa về cùng thang đo 72,2% — đã đưa 94,4%",
-     "src": "img/duong-bien-knn-chua-scale-va-da-scale.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "KNN K = 5 trên tập kiểm tra",
-     "de": null,
-     "cot": [
-      "Cách làm",
-      "Độ chính xác"
-     ],
-     "dong": [
-      [
-       "Chưa đưa về cùng thang đo",
-       "72,2%"
-      ],
-      [
-       "Đưa về 0 – 1 (MinMaxScaler)",
-       "<b>94,4%</b>"
-      ],
-      [
-       "Mốc model lười",
-       "54,2%"
-      ]
-     ],
-     "ket_luan": "Chênh 22,2 điểm chỉ vì thang đo — không đổi thuật toán, không đổi dữ liệu.",
-     "nhan_manh": [
-      1
-     ]
-    },
-    {
-     "t": "dinh_nghia",
-     "ten": "Đưa về 0 – 1 đúng cách",
-     "html": "Tính min, max <b>trên tập huấn luyện</b>, rồi dùng đúng min, max đó để đổi cả tập huấn luyện, tập kiểm tra và mọi điểm mới.",
-     "ky_hieu": "<code>sc = MinMaxScaler().fit(X_train)</code> · <code>X_train_s = sc.transform(X_train)</code> · <code>X_test_s = sc.transform(X_test)</code>"
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Tính min, max trên cả bảng (gồm tập kiểm tra) — tập kiểm tra không còn “chưa thấy”.",
-      "Đổi tập huấn luyện mà quên đổi tập kiểm tra."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "KNN đo khoảng cách nên cột số to lấn át cột số nhỏ. Luôn đưa về cùng thang đo, với min, max lấy từ tập huấn luyện."
-    }
-   ],
-   "checkpoint": [
     {
      "k": "mc",
-     "id": "bai11-q5",
-     "q": "Với KNN K = 5, đưa về cùng thang đo làm độ chính xác trên tập kiểm tra thay đổi thế nào?",
-     "giai": "Hết bị cột phút lấn át, KNN chọn đúng láng giềng hơn.",
-     "goi_y": "Xem bảng ví dụ ở trên.",
+     "id": "bai11-q4",
+     "q": "Nhãn của bảng là 0 hoặc 1 (không mua / có mua). Đây là bài toán gì?",
+     "giai": "0 và 1 chỉ là tên của hai nhóm.",
+     "goi_y": "Nhãn 0/1 có phải là số đo được lớn nhỏ không?",
      "a": [
-      "Tăng từ 72,2% lên 94,4%",
-      "Giảm từ 94,4% xuống 72,2%",
-      "Giữ nguyên 72,2%",
-      "Tăng lên 100,0%"
+      "Phân loại hai nhóm",
+      "Hồi quy",
+      "Phân loại nhiều nhóm",
+      "Phân loại nhiều nhãn"
      ],
-     "h": "17777d02556e39"
+     "h": "8adea6f9b8ad7"
     },
     {
      "k": "dd",
-     "id": "bai11-q6",
+     "id": "bai11-q5",
      "q": "Chọn từ đúng cho mỗi chỗ trống.",
-     "giai": "Min, max lấy từ tập huấn luyện; dùng để đổi mọi dữ liệu.",
-     "goi_y": "Phần dữ liệu để chấm ở cuối có được nhìn thấy lúc chuẩn bị không?",
-     "mau": "MinMaxScaler phải .fit() trên tập {0}, rồi .transform() cả tập huấn luyện và tập {1}.",
+     "giai": "Loại → nhóm → phân loại. Cân nặng → số → hồi quy.",
+     "goi_y": "Loại trái cây là nhóm hay số? Cân nặng thì sao?",
+     "mau": "Đoán loại trái cây từ ảnh là {0}; đoán cân nặng trái cây là {1}.",
      "o": [
       [
-       "huấn luyện",
-       "kiểm tra",
-       "toàn bộ bảng",
-       "nhãn"
+       "phân loại",
+       "hồi quy",
+       "làm sạch",
+       "trực quan hoá"
       ],
       [
-       "kiểm tra",
-       "nhãn",
-       "feature",
-       "trùng lặp"
+       "hồi quy",
+       "phân loại",
+       "làm sạch",
+       "trực quan hoá"
       ]
      ],
-     "h": "b0a7cbaa96fb1"
+     "h": "12e56c47095a77"
     }
    ]
   },
   {
-   "ten": "Chọn K",
-   "ten_ngan": "Chọn K",
-   "phut": 5,
-   "muc_tieu": "giải thích được ảnh hưởng của K và chọn K bằng dữ liệu.",
-   "khoi_dong": "K = 1 hay K = 41 — láng giềng ít hay nhiều thì tốt hơn?",
+   "ten": "Quy trình 5 bước",
+   "ten_ngan": "Quy trình",
+   "phut": 4,
+   "muc_tieu": "sắp xếp đúng 5 bước của một bài toán học có giám sát.",
+   "khoi_dong": "Mọi model trong các bài sau — KNN, hồi quy, cây quyết định… — có điểm gì chung trong cách làm?",
    "khoi": [
     {
-     "t": "demo_truot",
-     "tieu_de": "thử các giá trị K",
-     "huong_dan": "Kéo thanh trượt để đổi K. So độ chính xác trên tập huấn luyện và tập kiểm tra.",
-     "dieu_kien": "KNN với K = <b>{x}</b> láng giềng (đã đưa về cùng thang đo)",
-     "moc": [
-      {
-       "x": 1,
-       "n": "100,0%",
-       "p": 86.1
-      },
-      {
-       "x": 3,
-       "n": "94,0%",
-       "p": 91.7
-      },
-      {
-       "x": 5,
-       "n": "91,7%",
-       "p": 94.4
-      },
-      {
-       "x": 9,
-       "n": "92,3%",
-       "p": 95.8
-      },
-      {
-       "x": 15,
-       "n": "91,1%",
-       "p": 93.1
-      },
-      {
-       "x": 25,
-       "n": "88,7%",
-       "p": 91.7
-      },
-      {
-       "x": 41,
-       "n": "89,9%",
-       "p": 93.1
-      }
-     ],
-     "nhan_n": "Đúng trên tập huấn luyện",
-     "nhan_p": "Đúng trên tập kiểm tra",
-     "so_le_x": 0,
-     "bat_dau": 3
-    },
-    {
      "t": "anh",
-     "cap": "Độ chính xác theo K trên train và test",
-     "alt": "Độ chính xác theo K trên train và test",
-     "src": "img/do-chinh-xac-theo-tung-gia-tri-k.png"
+     "cap": "Năm bước của mọi bài toán học có giám sát",
+     "alt": "Năm bước của mọi bài toán học có giám sát",
+     "src": "img/quy-trinh-nam-buoc.png"
     },
     {
      "t": "vi_du",
-     "tieu_de": "đọc hình chọn K",
+     "tieu_de": "năm bước với bảng khối 10",
      "de": null,
      "cot": [
-      "K",
-      "Train",
-      "Test",
-      "Nhận xét"
+      "Bước",
+      "Việc",
+      "Với bảng khối 10"
      ],
      "dong": [
       [
        "1",
-       "100,0%",
-       "86,1%",
-       "Học vẹt — mỗi điểm tự bầu cho chính nó"
+       "Dữ liệu có nhãn",
+       "240 bạn, nhãn Result (129 Đạt, 111 Chưa đạt)"
       ],
       [
-       "9",
-       "92,3%",
-       "<b>95,8%</b>",
-       "Tốt nhất trên test"
+       "2",
+       "Chia huấn luyện / kiểm tra",
+       "168 / 72 bạn, có stratify"
       ],
       [
-       "41",
-       "89,9%",
-       "93,1%",
-       "Ranh giới mượt quá, bắt đầu chưa khớp"
+       "3",
+       "Huấn luyện",
+       "Máy tìm quy tắc trên 168 bạn"
+      ],
+      [
+       "4",
+       "Dự đoán",
+       "Đưa 72 bạn đã giấu vào model"
+      ],
+      [
+       "5",
+       "Đánh giá",
+       "So dự đoán với đáp án thật, so với mốc model lười 54,2%"
       ]
      ],
      "ket_luan": null,
-     "nhan_manh": [
-      1
-     ]
-    },
-    {
-     "t": "anh",
-     "cap": "Ranh giới quyết định với K = 1, 5, 9, 25 — K nhỏ thì lởm chởm, K lớn thì mượt",
-     "alt": "Ranh giới quyết định với K = 1, 5, 9, 25 — K nhỏ thì lởm chởm, K lớn thì mượt",
-     "src": "img/duong-bien-voi-bon-gia-tri-k.png"
-    },
-    {
-     "t": "anh",
-     "cap": "Một bộ dữ liệu khác: ranh giới của KNN khi k = 1, 3, 5, 10",
-     "alt": "Một bộ dữ liệu khác: ranh giới của KNN khi k = 1, 3, 5, 10",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20240910125132/casestudy1.webp",
-     "du_phong": "img/minh-hoa-duong-bien-thay-doi-theo-gia-tri-k.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Understanding decision boundaries in k nearest neighbors knn",
-      "url": "https://www.geeksforgeeks.org/machine-learning/understanding-decision-boundaries-in-k-nearest-neighbors-knn/"
-     },
-     "chu_giai": [
-      [
-       "KNN Decision Boundaries (k=1)",
-       "Ranh giới quyết định của KNN với k = 1"
-      ],
-      [
-       "Feature 1, Feature 2",
-       "Feature thứ nhất, thứ hai"
-      ]
-     ]
-    },
-    {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Chọn K bằng tập nào?",
-     "html": "Bài này dùng tập kiểm tra để minh hoạ cho dễ thấy. Làm đúng quy trình thì chọn K bằng một phần tách riêng từ tập huấn luyện (tập kiểm định) — Bài 18 sẽ học cách làm này."
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Chọn K = 1 vì đúng 100% trên tập huấn luyện.",
-      "Nghĩ K càng lớn càng tốt."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "K nhỏ: dễ học vẹt. K lớn: dễ chưa khớp. Thử nhiều K, chọn K tốt trên dữ liệu chưa thấy."
-    },
-    {
-     "t": "doc_them",
-     "link": [
-      {
-       "ten": "Understanding Decision Boundaries in KNN",
-       "url": "https://www.geeksforgeeks.org/machine-learning/understanding-decision-boundaries-in-k-nearest-neighbors-knn/",
-       "ghi_chu": "GeeksforGeeks, tiếng Anh"
-      }
-     ]
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
-     "id": "bai11-q7",
-     "q": "Vì sao KNN với K = 1 luôn đúng 100% trên tập huấn luyện?",
-     "giai": "Mỗi điểm tự “bầu” cho nhãn của chính nó — học vẹt.",
-     "goi_y": "Khi dự đoán một điểm của tập huấn luyện, láng giềng gần nhất là ai?",
-     "a": [
-      "Điểm gần nhất của mỗi điểm là chính nó",
-      "K = 1 là giá trị K tốt nhất",
-      "Tập huấn luyện không có lỗi nào",
-      "Máy đoán ngẫu nhiên mà trúng"
-     ],
-     "h": "2b69b76d87df0"
-    },
-    {
-     "k": "dd",
-     "id": "bai11-q8",
-     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-     "giai": "K nhỏ bám từng điểm; K lớn làm mờ ranh giới.",
-     "goi_y": "Nhìn ranh giới K = 1 (lởm chởm) và K = 25 (rất mượt).",
-     "mau": "K quá nhỏ dễ {0}; K quá lớn dễ {1}.",
-     "o": [
-      [
-       "học vẹt",
-       "chưa khớp",
-       "rò rỉ",
-       "lệch nhãn"
-      ],
-      [
-       "chưa khớp",
-       "học vẹt",
-       "rò rỉ",
-       "lệch nhãn"
-      ]
-     ],
-     "h": "9805c952ab953"
-    }
-   ]
-  },
-  {
-   "ten": "KNN trong scikit-learn và đánh giá",
-   "ten_ngan": "scikit-learn",
-   "phut": 4,
-   "muc_tieu": "huấn luyện, dự đoán và đánh giá KNN bằng scikit-learn, so với mốc.",
-   "khoi_dong": "Con đã làm bằng tay. Máy làm cho 72 bạn chỉ với vài dòng lệnh thế nào?",
-   "khoi": [
-    {
-     "t": "bang",
-     "cot": [
-      "Bước (quy trình 5 bước)",
-      "Lệnh"
-     ],
-     "dong": [
-      [
-       "Chia dữ liệu",
-       "<code>train_test_split(X, y, test_size=0.3, stratify=y)</code>"
-      ],
-      [
-       "Đưa về 0 – 1",
-       "<code>sc = MinMaxScaler().fit(X_train)</code>"
-      ],
-      [
-       "Huấn luyện (nhớ dữ liệu)",
-       "<code>knn = KNeighborsClassifier(n_neighbors=9)</code><br><code>knn.fit(sc.transform(X_train), y_train)</code>"
-      ],
-      [
-       "Dự đoán",
-       "<code>du_doan = knn.predict(sc.transform(X_test))</code>"
-      ],
-      [
-       "Đánh giá",
-       "<code>accuracy_score(y_test, du_doan)</code>"
-      ]
-     ]
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "so KNN với các model trước",
-     "de": null,
-     "cot": [
-      "Model",
-      "Độ chính xác trên tập kiểm tra"
-     ],
-     "dong": [
-      [
-       "Model lười (Bài 7, 10)",
-       "54,2%"
-      ],
-      [
-       "Model ngưỡng giờ học (Bài 10)",
-       "91,7%"
-      ],
-      [
-       "KNN K = 9, đã đưa về cùng thang đo",
-       "<b>95,8%</b>"
-      ]
-     ],
-     "ket_luan": "KNN nhìn được hai cột cùng lúc nên vượt model ngưỡng một cột.",
      "nhan_manh": [
       2
      ]
     },
     {
      "t": "anh",
-     "cap": "Ranh giới quyết định: vùng mà mọi điểm mới rơi vào sẽ được đoán cùng một nhãn",
-     "alt": "Ranh giới quyết định: vùng mà mọi điểm mới rơi vào sẽ được đoán cùng một nhãn",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251113175949623882/420046938.webp",
-     "du_phong": "img/minh-hoa-duong-bien-quyet-dinh-cua-knn.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Understanding decision boundaries in k nearest neighbors knn",
-      "url": "https://www.geeksforgeeks.org/machine-learning/understanding-decision-boundaries-in-k-nearest-neighbors-knn/"
-     },
-     "chu_giai": [
-      [
-       "Decision Boundary (KNN)",
-       "Ranh giới quyết định của KNN"
-      ]
+     "cap": "Chia 240 bạn: 168 để học, 72 giấu đi để chấm",
+     "alt": "Chia 240 bạn: 168 để học, 72 giấu đi để chấm",
+     "src": "img/chia-train-test.png"
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Mốc so sánh",
+     "html": "Trước khi khen model, luôn so với <b>model lười</b> (đoán mọi bạn cùng một nhãn — Bài 7). Với bảng này model lười đúng 54,2% trên tập kiểm tra: model nào không vượt mốc này là chưa học được gì."
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Đánh giá model trên chính tập huấn luyện.",
+      "Khen model 70% mà không so với mốc model lười."
      ]
     },
     {
-     "t": "bang",
+     "t": "tom_tat",
+     "html": "Dữ liệu có nhãn → chia → huấn luyện → dự đoán → đánh giá (so với mốc)."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "sx",
+     "id": "bai11-q6",
+     "q": "Sắp xếp năm bước của bài toán học có giám sát.",
+     "giai": "Dữ liệu → chia → huấn luyện → dự đoán → đánh giá.",
+     "goi_y": "Model phải học trước rồi mới dự đoán; chấm điểm là việc cuối.",
+     "a": [
+      "Chuẩn bị dữ liệu có nhãn",
+      "Chia tập huấn luyện và tập kiểm tra",
+      "Huấn luyện model trên tập huấn luyện",
+      "Dự đoán cho tập kiểm tra",
+      "Đánh giá, so với mốc model lười"
+     ],
+     "h": "1516ecf1d4c0eb"
+    },
+    {
+     "k": "mc",
+     "id": "bai11-q7",
+     "q": "Với bảng khối 10, model lười đúng 54,2% trên tập kiểm tra. Một model mới đúng 55%. Nhận xét nào đúng?",
+     "giai": "55% gần bằng mốc lười 54,2% — model hầu như không hơn việc đoán một nhãn.",
+     "goi_y": "So 55% với mốc model lười.",
+     "a": [
+      "Gần như chưa học được gì",
+      "Model rất tốt vì trên 50%",
+      "Model tệ hơn hẳn đoán bừa",
+      "Model đã học xong hoàn toàn"
+     ],
+     "h": "48f81ac28ad29"
+    }
+   ]
+  },
+  {
+   "ten": "Model là một quy tắc, huấn luyện là tìm tham số tốt nhất",
+   "ten_ngan": "Huấn luyện",
+   "phut": 5,
+   "muc_tieu": "hiểu model là một quy tắc có tham số và huấn luyện là tìm tham số tốt nhất.",
+   "khoi_dong": "Quy tắc “học từ 3,5 giờ trở lên thì Đạt” có một con số. Nếu đổi con số đó, quy tắc đúng hơn hay sai hơn?",
+   "khoi": [
+    {
+     "t": "dinh_nghia",
+     "ten": "Model và tham số",
+     "html": "<b>Model</b> là một quy tắc biến feature thành dự đoán. Quy tắc có những con số điều chỉnh được gọi là <b>tham số</b>. <b>Huấn luyện</b> là tìm giá trị tham số làm model đoán đúng nhất trên tập huấn luyện.",
+     "ky_hieu": "Model ngưỡng: học từ t giờ trở lên → Đạt · tham số: ngưỡng t"
+    },
+    {
+     "t": "anh",
+     "cap": "Model ngưỡng t = 3,5 giờ trên cả 240 bạn: vòng vàng là các bạn model đoán sai",
+     "alt": "Model ngưỡng t = 3,5 giờ trên cả 240 bạn: vòng vàng là các bạn model đoán sai",
+     "src": "img/nguong-tren-truc-gio-hoc.png"
+    },
+    {
+     "t": "demo_truot",
+     "tieu_de": "thử các ngưỡng",
+     "huong_dan": "Kéo thanh trượt để đổi ngưỡng t. Theo dõi độ chính xác trên tập huấn luyện và tập kiểm tra. Ngưỡng nào tốt nhất?",
+     "dieu_kien": "Model: học từ <b>{x}</b> giờ trở lên thì đoán Đạt",
+     "moc": [
+      {
+       "x": 0.5,
+       "n": "53,6%",
+       "p": 54.2
+      },
+      {
+       "x": 1.0,
+       "n": "60,7%",
+       "p": 61.1
+      },
+      {
+       "x": 1.5,
+       "n": "67,9%",
+       "p": 70.8
+      },
+      {
+       "x": 2.0,
+       "n": "76,8%",
+       "p": 79.2
+      },
+      {
+       "x": 2.5,
+       "n": "84,5%",
+       "p": 88.9
+      },
+      {
+       "x": 3.0,
+       "n": "88,7%",
+       "p": 90.3
+      },
+      {
+       "x": 3.5,
+       "n": "91,1%",
+       "p": 91.7
+      },
+      {
+       "x": 4.0,
+       "n": "86,3%",
+       "p": 88.9
+      },
+      {
+       "x": 4.5,
+       "n": "80,4%",
+       "p": 79.2
+      },
+      {
+       "x": 5.0,
+       "n": "80,4%",
+       "p": 70.8
+      },
+      {
+       "x": 5.5,
+       "n": "72,0%",
+       "p": 69.4
+      },
+      {
+       "x": 6.0,
+       "n": "65,5%",
+       "p": 63.9
+      }
+     ],
+     "nhan_n": "Đúng trên tập huấn luyện",
+     "nhan_p": "Đúng trên tập kiểm tra",
+     "so_le_x": 1,
+     "bat_dau": 6
+    },
+    {
+     "t": "anh",
+     "cap": "Huấn luyện = thử các ngưỡng, giữ ngưỡng đúng nhất trên tập huấn luyện",
+     "alt": "Huấn luyện = thử các ngưỡng, giữ ngưỡng đúng nhất trên tập huấn luyện",
+     "src": "img/do-chinh-xac-theo-tung-nguong.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "kết quả huấn luyện",
+     "de": null,
      "cot": [
-      "Ưu điểm",
-      "Hạn chế"
+      "",
+      "Tập huấn luyện",
+      "Tập kiểm tra"
      ],
      "dong": [
       [
-       "Dễ hiểu, dễ giải thích bằng “láng giềng”",
-       "Dự đoán chậm khi dữ liệu rất lớn"
+       "Model lười",
+       "53,6%",
+       "54,2%"
       ],
       [
-       "Không cần tìm công thức",
-       "Bắt buộc đưa về cùng thang đo"
-      ],
-      [
-       "Dùng được cho nhiều nhãn",
-       "Cột thừa, cột nhiễu làm sai khoảng cách"
+       "Model ngưỡng t = 3,5",
+       "91,1%",
+       "<b>91,7%</b>"
       ]
+     ],
+     "ket_luan": "Ngưỡng được chọn chỉ bằng tập huấn luyện; tập kiểm tra xác nhận model học được quy luật thật — vượt xa mốc lười.",
+     "nhan_manh": [
+      1
      ]
     },
     {
      "t": "hop",
      "kieu": "ml",
-     "tieu_de": "Buổi sau: thực hành nhóm 2",
-     "html": "Nhóm dùng KNN chẩn đoán khối u lành hay ác trên một bộ dữ liệu y khoa thật — quy trình y hệt hôm nay."
+     "tieu_de": "Nối với bài sau",
+     "html": "Mỗi thuật toán ở Phần B là một kiểu quy tắc khác nhau với tham số khác nhau: KNN (Bài 12) dùng số láng giềng K, hồi quy tuyến tính dùng hệ số a, b (Bài 5 đã gặp)."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Quên transform tập kiểm tra trước khi predict.",
-      "Không so với mốc model lười nên không biết KNN có thật sự học được gì."
+      "Chọn ngưỡng bằng cách nhìn tập kiểm tra — như vậy tập kiểm tra không còn “giấu”.",
+      "Nghĩ tham số do máy tự đặt ngẫu nhiên — máy tìm nó từ dữ liệu."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "scikit-learn: chia → MinMaxScaler → KNeighborsClassifier.fit → predict → accuracy_score; luôn so với mốc."
+     "html": "Model = quy tắc có tham số. Huấn luyện = tìm tham số tốt nhất trên tập huấn luyện; tập kiểm tra để xác nhận."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
-     "id": "bai11-q9",
-     "q": "Lệnh nào tạo một model KNN với 7 láng giềng trong scikit-learn?",
-     "giai": "n_neighbors là K.",
-     "goi_y": "Tên lớp có chữ Neighbors.",
+     "id": "bai11-q8",
+     "q": "Trong model “học từ t giờ trở lên thì Đạt”, t được gọi là gì?",
+     "giai": "t là con số điều chỉnh được của quy tắc — tham số.",
+     "goi_y": "Con số nào máy phải tìm khi huấn luyện?",
      "a": [
-      "KNeighborsClassifier(n_neighbors=7)",
-      "MinMaxScaler(n_neighbors=7)",
-      "train_test_split(n_neighbors=7)",
-      "accuracy_score(n_neighbors=7)"
+      "Tham số của model",
+      "Nhãn của dữ liệu",
+      "Tập kiểm tra",
+      "Feature mới tạo"
      ],
-     "h": "18f07f575950e6"
+     "h": "1f68b62d701a40"
     },
     {
-     "k": "ma",
-     "id": "bai11-q10",
-     "q": "Những hạn chế nào đúng với KNN? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "KNN dễ giải thích; dùng tốt cho phân loại.",
-     "goi_y": "Xem bảng ưu điểm, hạn chế.",
-     "a": [
-      "Cần đưa các cột về cùng thang đo",
-      "Dự đoán chậm khi dữ liệu rất lớn",
-      "Chỉ dùng được cho hồi quy",
-      "Không giải thích được bằng lời"
+     "k": "ds",
+     "id": "bai11-q9",
+     "q": "Khi huấn luyện, nên chọn ngưỡng cho kết quả cao nhất trên tập kiểm tra.",
+     "giai": "Chọn tham số bằng tập huấn luyện; tập kiểm tra chỉ để xác nhận ở cuối.",
+     "goi_y": "Tập kiểm tra có được dùng trong lúc huấn luyện không?",
+     "h": "1f564c4da2af5"
+    }
+   ]
+  },
+  {
+   "ten": "Học thật hay học vẹt",
+   "ten_ngan": "Học vẹt",
+   "phut": 5,
+   "muc_tieu": "nhận ra model học vẹt và phân biệt chưa khớp, vừa khớp, học vẹt.",
+   "khoi_dong": "Một model thuộc lòng từng dòng của tập huấn luyện, đúng 100%. Nó có đoán tốt cho bạn mới không?",
+   "khoi": [
+    {
+     "t": "dinh_nghia",
+     "ten": "Học vẹt (overfitting — quá khớp)",
+     "html": "Model khớp quá sát tập huấn luyện, nhớ cả những ngoại lệ, nên <b>đúng rất cao trên dữ liệu đã học nhưng kém trên dữ liệu mới</b>.",
+     "ky_hieu": "Dấu hiệu: độ chính xác trên tập huấn luyện cao hơn hẳn trên tập kiểm tra."
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "Chưa khớp (underfitting)",
+     "html": "Model quá đơn giản, bỏ sót quy luật — <b>kém cả trên tập huấn luyện lẫn tập kiểm tra</b>. Model tốt là <b>vừa khớp</b>: bắt đúng xu hướng chung, chấp nhận vài ngoại lệ.",
+     "ky_hieu": null
+    },
+    {
+     "t": "anh",
+     "cap": "Ba model trên dữ liệu đã học và dữ liệu chưa thấy",
+     "alt": "Ba model trên dữ liệu đã học và dữ liệu chưa thấy",
+     "src": "img/ba-model-tren-train-va-test.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "ba model trên bảng khối 10",
+     "de": null,
+     "cot": [
+      "Model",
+      "Đã học (train)",
+      "Chưa thấy (test)",
+      "Nhận xét"
      ],
-     "h": "97c6aa27877f7"
+     "dong": [
+      [
+       "Lười — đoán hết Đạt",
+       "53,6%",
+       "54,2%",
+       "Mốc so sánh"
+      ],
+      [
+       "Ngưỡng 3,5 giờ",
+       "91,1%",
+       "91,7%",
+       "<b>Vừa khớp</b>"
+      ],
+      [
+       "Học vẹt — nhớ từng dòng",
+       "100,0%",
+       "54,2%",
+       "Học vẹt"
+      ]
+     ],
+     "ket_luan": "Model học vẹt nhớ 168 dòng đã học; gặp bạn mới không có trong sổ nó chỉ biết đoán Đạt — rơi đúng về mốc lười.",
+     "nhan_manh": [
+      1
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Ba kiểu model: chưa khớp, vừa khớp, học vẹt",
+     "alt": "Ba kiểu model: chưa khớp, vừa khớp, học vẹt",
+     "src": "img/chua-khop-vua-khop-hoc-vet.png"
+    },
+    {
+     "t": "video",
+     "yt": "EuBBz3bI-aA",
+     "ten": "StatQuest — Machine Learning Fundamentals: Bias and Variance",
+     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc — nói về chưa khớp và học vẹt",
+     "bat_dau": null,
+     "ket_thuc": null
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Khen model đúng 100% trên tập huấn luyện.",
+      "Nghĩ model phức tạp hơn luôn tốt hơn."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "Model giỏi không phải model nhớ nhiều, mà là model đoán đúng thứ nó chưa từng thấy."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai11-q10",
+     "q": "Model A: train 99%, test 60%. Model B: train 85%, test 83%. Nên chọn model nào?",
+     "giai": "A học vẹt: chênh 39 điểm. B vừa khớp: train và test gần nhau.",
+     "goi_y": "Cột nào cho biết model làm tốt với dữ liệu mới?",
+     "a": [
+      "Model B, vì đúng với dữ liệu mới",
+      "Model A, vì train cao hơn",
+      "Model A, vì học kỹ hơn",
+      "Hai model tốt như nhau"
+     ],
+     "h": "1fc7fd7b59bbec"
+    },
+    {
+     "k": "dd",
+     "id": "bai11-q11",
+     "q": "Chọn từ đúng cho mỗi chỗ trống.",
+     "giai": "Chưa khớp: quá đơn giản. Học vẹt: nhớ tập huấn luyện.",
+     "goi_y": "Model quá đơn giản kém ở đâu? Model thuộc lòng kém ở đâu?",
+     "mau": "Kém cả trên train lẫn test là {0}; tốt trên train nhưng kém trên test là {1}.",
+     "o": [
+      [
+       "chưa khớp",
+       "học vẹt",
+       "vừa khớp",
+       "rò rỉ"
+      ],
+      [
+       "học vẹt",
+       "chưa khớp",
+       "vừa khớp",
+       "lệch nhãn"
+      ]
+     ],
+     "h": "19bf28a438a04f"
     }
    ]
   }
@@ -839,332 +776,326 @@ window.BAI = {
   "ngan_hang": [
    {
     "k": "mc",
-    "id": "bai11-q11",
-    "q": "Nhìn hình. Vòng tròn nét đứt quanh ô vàng cho biết điều gì?",
-    "giai": "Vòng tròn khoanh 3 điểm gần ô vàng nhất — những điểm được bỏ phiếu.",
-    "img": {
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250512162457630554/Finding_Neighbor_Voting_for_Labels.webp",
-     "du_phong": "img/minh-hoa-ba-hang-xom-gan-nhat-bo-phieu.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — K nearest neighbours",
-      "url": "https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/"
-     }
-    },
-    "a": [
-     "Vùng chứa K = 3 láng giềng gần nhất",
-     "Ranh giới giữa nhóm A và nhóm B",
-     "Vùng chứa mọi điểm của nhóm B",
-     "Khoảng cách xa nhất của dữ liệu"
-    ],
-    "h": "db01e682fb594"
-   },
-   {
-    "k": "mc",
     "id": "bai11-q12",
-    "q": "Nhìn hình. K nào cho độ chính xác cao nhất trên tập kiểm tra?",
-    "giai": "Đỉnh đường test ở K = 9.",
+    "q": "Nhìn hình. Theo quy luật của 12 bạn đã biết, bạn A nhiều khả năng thế nào?",
+    "giai": "A học nhiều, dùng mạng ít — nằm giữa các bạn Đạt.",
     "img": {
-     "src": "img/do-chinh-xac-theo-tung-gia-tri-k.png"
+     "src": "img/muoi-hai-ban-da-biet-va-ba-ban-moi.png"
     },
     "a": [
-     "K = 9",
-     "K = 1",
-     "K = 41",
-     "K = 3"
+     "Đạt",
+     "Chưa đạt",
+     "Không đoán được gì",
+     "Giống hệt bạn B"
     ],
-    "h": "1b14d611019194"
+    "h": "109e7b69a2ae1a"
    },
    {
     "k": "mc",
     "id": "bai11-q13",
-    "q": "Nhìn hình. Vì sao hình bên trái kém hơn hình bên phải?",
-    "giai": "Cùng K = 5, chỉ khác thang đo.",
+    "q": "Nhìn hình. Ngưỡng nào đúng nhất trên tập huấn luyện?",
+    "giai": "Đỉnh đường tập huấn luyện ở 3,5 giờ.",
     "img": {
-     "src": "img/duong-bien-knn-chua-scale-va-da-scale.png"
+     "src": "img/do-chinh-xac-theo-tung-nguong.png"
     },
     "a": [
-     "Cột phút mạng lấn át cột giờ học",
-     "Dùng K khác nhau ở hai hình",
-     "Hình trái có ít dữ liệu hơn",
-     "Hình trái dùng thuật toán khác"
+     "3,5 giờ",
+     "1,0 giờ",
+     "5,0 giờ",
+     "2,0 giờ"
     ],
-    "h": "18e9e6449c4205"
+    "h": "164fd3b1d3e8b2"
    },
    {
     "k": "mc",
     "id": "bai11-q14",
-    "q": "Nhìn hình. Ranh giới với K = 1 có đặc điểm gì?",
-    "giai": "K = 1 bám từng điểm — dấu hiệu học vẹt.",
+    "q": "Nhìn hình. Model học vẹt đúng bao nhiêu trên dữ liệu chưa thấy?",
+    "giai": "Nhớ từng dòng nhưng gặp dòng mới thì chỉ đoán Đạt.",
     "img": {
-     "src": "img/duong-bien-voi-bon-gia-tri-k.png"
+     "src": "img/ba-model-tren-train-va-test.png"
     },
     "a": [
-     "Lởm chởm, bám sát từng điểm",
-     "Mượt, gần như thẳng",
-     "Không có ranh giới",
-     "Giống hệt K = 25"
+     "54,2%",
+     "100,0%",
+     "91,7%",
+     "91,1%"
     ],
-    "h": "15aa4cd0c0829e"
+    "h": "1403359c7b18b8"
    },
    {
     "k": "mc",
     "id": "bai11-q15",
-    "q": "KNN nhớ dữ liệu và chỉ tính khi cần dự đoán. Điều này gây khó khăn gì?",
-    "giai": "Mỗi lần dự đoán phải đo tới mọi điểm.",
+    "q": "Nhìn hình. Cột nào của bảng là nhãn?",
+    "giai": "Cột khoanh vàng — đáp án đã biết sẵn.",
+    "img": {
+     "src": "img/bang-du-lieu-co-nhan.png"
+    },
     "a": [
-     "Dự đoán chậm khi dữ liệu rất lớn",
-     "Huấn luyện mất rất nhiều giờ",
-     "Không dự đoán được điểm mới",
-     "Không dùng được cho phân loại"
+     "Result",
+     "StudyHours",
+     "HoTen",
+     "Score"
     ],
-    "h": "189dbad7c23335"
+    "h": "14e98269c2f949"
    },
    {
     "k": "mc",
     "id": "bai11-q16",
-    "q": "Bảng có cột Chiều cao (cm) và cột Chiều dài bàn chân (cm). Có cần đưa về cùng thang đo trước KNN không?",
-    "giai": "Cùng đơn vị nhưng khoảng biến thiên khác nhau vẫn lấn át.",
+    "q": "Đoán số lượt xem một video sau một tuần là bài toán gì?",
+    "giai": "Nhãn là con số — hồi quy.",
     "a": [
-     "Có — khoảng biến thiên hai cột khác nhau",
-     "Không — hai cột cùng đơn vị cm",
-     "Không — KNN tự đổi thang đo",
-     "Có — vì cột cm luôn phải bỏ"
+     "Hồi quy",
+     "Phân loại hai nhóm",
+     "Phân loại nhiều nhóm",
+     "Không có nhãn"
     ],
-    "h": "1c4eb7f1ecebb5"
+    "h": "52bd82bf865fc"
    },
    {
     "k": "mc",
     "id": "bai11-q17",
-    "q": "KNN với K = 7 đúng 88% trên test, mốc model lười 90%. Nhận xét nào đúng?",
-    "giai": "Không vượt mốc thì model chưa có ích.",
+    "q": "Đoán một bức ảnh là chó, mèo hay thỏ là bài toán gì?",
+    "giai": "Ba nhóm, mỗi ảnh thuộc một nhóm.",
     "a": [
-     "KNN còn kém hơn đoán một nhãn",
-     "KNN rất tốt vì gần 90%",
-     "KNN đang học vẹt",
-     "Cần tăng K lên 1000"
+     "Phân loại nhiều nhóm",
+     "Phân loại hai nhóm",
+     "Hồi quy",
+     "Phân loại nhiều nhãn"
     ],
-    "h": "15c6c8f0b19636"
+    "h": "79960a35413e9"
    },
    {
     "k": "mc",
     "id": "bai11-q18",
-    "q": "K = 4 láng giềng có 2 Đạt, 2 Chưa đạt. Chuyện gì xảy ra?",
-    "giai": "Vì vậy với hai nhãn thường chọn K lẻ.",
+    "q": "Model đúng 97% trên train và 58% trên test. Đây là hiện tượng gì?",
+    "giai": "Chênh lệch lớn giữa train và test.",
     "a": [
-     "Hoà phiếu, khó quyết định",
-     "Chắc chắn đoán Đạt",
-     "Chắc chắn đoán Chưa đạt",
-     "KNN báo lỗi không chạy"
+     "Học vẹt",
+     "Chưa khớp",
+     "Vừa khớp",
+     "Rò rỉ dữ liệu"
     ],
-    "h": "193930ea36f0d6"
+    "h": "ad22dead16ff"
    },
    {
     "k": "mc",
     "id": "bai11-q19",
-    "q": "Thêm một cột ngẫu nhiên vô nghĩa vào KNN. Điều gì dễ xảy ra?",
-    "giai": "KNN dùng mọi cột để đo khoảng cách.",
+    "q": "Model đúng 55% trên train và 54% trên test, mốc lười là 54%. Đây là gì?",
+    "giai": "Không hơn mốc lười — quá đơn giản.",
     "a": [
-     "Khoảng cách bị nhiễu, đoán kém hơn",
-     "Đoán chính xác hơn hẳn trước",
-     "Không ảnh hưởng gì tới kết quả",
-     "KNN tự động bỏ qua cột đó"
+     "Chưa khớp",
+     "Học vẹt",
+     "Vừa khớp",
+     "Model rất tốt"
     ],
-    "h": "5f9225e19a2f"
+    "h": "1fd7330eff54f6"
    },
    {
-    "k": "ma",
+    "k": "mc",
     "id": "bai11-q20",
-    "q": "Những bước nào có trong thuật toán KNN? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Đo → chọn K → bỏ phiếu.",
+    "q": "Vì sao phải so model với mốc model lười?",
+    "giai": "Không vượt mốc lười là chưa học được quy luật nào.",
     "a": [
-     "Đo khoảng cách tới các điểm đã biết",
-     "Bỏ phiếu theo đa số",
-     "Tính hệ số tương quan",
-     "Xoá các điểm xa nhất"
+     "Để biết model có học được gì không",
+     "Để model chạy nhanh hơn nhiều lần",
+     "Để tăng số dòng của dữ liệu",
+     "Để chọn ra cột nhãn phù hợp"
     ],
-    "h": "10cf0a2ae979b2"
+    "h": "f2e00adeb988b"
    },
    {
     "k": "ma",
     "id": "bai11-q21",
-    "q": "Những phát biểu nào đúng về K trong KNN? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "K là tham số chọn bằng dữ liệu.",
+    "q": "Những bài toán nào là phân loại? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Hai bài đầu có nhãn là nhóm.",
     "a": [
-     "K là số láng giềng được hỏi",
-     "K do người dùng chọn",
-     "K luôn phải bằng 1",
-     "K càng lớn càng chính xác"
+     "Email rác hay không rác",
+     "Khối u lành hay ác",
+     "Giá nhà bao nhiêu tỉ đồng",
+     "Nhiệt độ ngày mai bao nhiêu độ"
     ],
-    "h": "1f12cc47167eef"
+    "h": "1e7f4facf82a27"
    },
    {
     "k": "ma",
     "id": "bai11-q22",
-    "q": "Những việc nào đúng khi đưa về 0 – 1 cho KNN? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Fit trên train, transform mọi dữ liệu.",
+    "q": "Những dấu hiệu nào cho thấy model học vẹt? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Học vẹt: khớp quá sát train.",
     "a": [
-     "Lấy min, max từ tập huấn luyện",
-     "Đổi cả tập kiểm tra bằng min, max đó",
-     "Lấy min, max từ cả bảng",
-     "Chỉ đổi tập huấn luyện"
+     "Train rất cao, test thấp hơn hẳn",
+     "Nhớ cả các ngoại lệ trong train",
+     "Train và test gần bằng nhau",
+     "Train và test đều thấp"
     ],
-    "h": "19c067e0daea1b"
+    "h": "1244397dfa02a5"
    },
    {
     "k": "ma",
     "id": "bai11-q23",
-    "q": "KNN với K = 1 có những đặc điểm nào? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "K = 1 bám từng điểm.",
+    "q": "Những việc nào thuộc bước huấn luyện? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Chấm là bước 5; chia là bước 2.",
     "a": [
-     "Đúng 100% trên tập huấn luyện",
-     "Dễ học vẹt",
-     "Luôn tốt nhất trên tập kiểm tra",
-     "Ranh giới rất mượt"
+     "Thử nhiều giá trị tham số",
+     "Giữ tham số đúng nhất trên train",
+     "Chấm model trên tập kiểm tra",
+     "Chia dữ liệu thành hai phần"
     ],
-    "h": "15c029d7d20e14"
+    "h": "c949fcda9931b"
    },
    {
-    "k": "sx",
+    "k": "ma",
     "id": "bai11-q24",
-    "q": "Sắp xếp các bước dùng KNN trong scikit-learn.",
-    "giai": "Chia → scaler → fit → predict → chấm.",
+    "q": "Những phát biểu nào đúng về học có giám sát? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Gồm cả phân loại và hồi quy; luôn cần kiểm tra.",
     "a": [
-     "Chia tập huấn luyện và kiểm tra",
-     "Fit MinMaxScaler trên tập huấn luyện",
-     "Fit KNeighborsClassifier",
-     "Predict tập kiểm tra",
-     "Tính accuracy_score"
+     "Cần dữ liệu có nhãn",
+     "Dự đoán nhãn cho dữ liệu mới",
+     "Không cần tập kiểm tra",
+     "Chỉ dùng cho bài toán hồi quy"
     ],
-    "h": "7c41d9e4824b0"
+    "h": "2bc4fcce37980"
    },
    {
     "k": "sx",
     "id": "bai11-q25",
-    "q": "Sắp xếp các bước chọn K.",
-    "giai": "Thử → học → đo → giữ.",
+    "q": "Sắp xếp các bước huấn luyện model ngưỡng.",
+    "giai": "Thử → tính → giữ → chấm.",
     "a": [
-     "Chọn danh sách K để thử",
-     "Huấn luyện KNN với từng K",
-     "Đo độ chính xác trên dữ liệu chưa thấy",
-     "Giữ K cho kết quả tốt nhất"
+     "Chọn danh sách ngưỡng để thử",
+     "Tính độ chính xác của từng ngưỡng trên train",
+     "Giữ ngưỡng có độ chính xác cao nhất",
+     "Chấm ngưỡng đó trên tập kiểm tra"
     ],
-    "h": "1aeb671f469ffc"
+    "h": "37deceb88e973"
    },
    {
-    "k": "dd",
+    "k": "sx",
     "id": "bai11-q26",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "K láng giềng, bỏ phiếu.",
-    "mau": "KNN dự đoán bằng cách hỏi {0} láng giềng gần nhất rồi {1}.",
-    "o": [
-     [
-      "K",
-      "tất cả",
-      "một nửa",
-      "hai"
-     ],
-     [
-      "bỏ phiếu đa số",
-      "lấy trung bình cộng",
-      "chọn ngẫu nhiên",
-      "xoá láng giềng"
-     ]
+    "q": "Sắp xếp các bước kiểm tra xem model có học vẹt không.",
+    "giai": "Học → đo train → đo test → so.",
+    "a": [
+     "Huấn luyện model trên tập huấn luyện",
+     "Tính độ chính xác trên tập huấn luyện",
+     "Tính độ chính xác trên tập kiểm tra",
+     "So hai con số với nhau"
     ],
-    "h": "1222a6e9914b02"
+    "h": "9693a7a3d99e5"
    },
    {
     "k": "dd",
     "id": "bai11-q27",
-    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Chênh 22,2 điểm.",
-    "mau": "KNN K = 5 chưa đưa về cùng thang đo đúng {0}; đã đưa đúng {1}.",
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "Dữ liệu có nhãn; phân loại và hồi quy.",
+    "mau": "Học có giám sát học từ dữ liệu {0}; hai loại bài toán là phân loại và {1}.",
     "o": [
      [
-      "72,2%",
-      "94,4%",
-      "54,2%",
-      "95,8%"
+      "có nhãn",
+      "không nhãn",
+      "bị trùng",
+      "bị trống"
      ],
      [
-      "94,4%",
-      "72,2%",
-      "54,2%",
-      "100,0%"
+      "hồi quy",
+      "làm sạch",
+      "tương quan",
+      "trực quan hoá"
      ]
     ],
-    "h": "1cf59a7733740f"
+    "h": "156ffc20eeb904"
    },
    {
     "k": "dd",
     "id": "bai11-q28",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "n_neighbors = K; MinMaxScaler đưa về 0 – 1.",
-    "mau": "Tham số n_neighbors là {0}; lớp dùng để đưa về 0 – 1 là {1}.",
+    "giai": "Tham số; huấn luyện.",
+    "mau": "Con số điều chỉnh được của model gọi là {0}; tìm nó trên tập huấn luyện gọi là {1}.",
     "o": [
      [
-      "K",
+      "tham số",
       "nhãn",
-      "ngưỡng",
-      "độ dốc"
+      "feature",
+      "mốc"
      ],
      [
-      "MinMaxScaler",
-      "KNeighborsClassifier",
-      "train_test_split",
-      "accuracy_score"
+      "huấn luyện",
+      "đánh giá",
+      "chia dữ liệu",
+      "làm sạch"
      ]
     ],
-    "h": "14fc4048ce35e2"
+    "h": "10d57e203f7e16"
    },
    {
     "k": "dd",
     "id": "bai11-q29",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "K lẻ không hoà phiếu với hai nhãn.",
-    "mau": "Với hai nhãn nên chọn K {0} để tránh {1}.",
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "Số trong bảng ba model.",
+    "mau": "Model ngưỡng 3,5 giờ đúng {0} trên tập kiểm tra; model lười đúng {1}.",
     "o": [
      [
-      "lẻ",
-      "chẵn",
-      "bằng 0",
-      "âm"
+      "91,7%",
+      "100,0%",
+      "54,2%",
+      "91,1%"
      ],
      [
-      "hoà phiếu",
-      "học vẹt",
-      "rò rỉ",
-      "thiếu dữ liệu"
+      "54,2%",
+      "91,7%",
+      "100,0%",
+      "50,0%"
      ]
     ],
-    "h": "11aafaf2b98781"
+    "h": "1e7cc24c160929"
    },
    {
-    "k": "ds",
+    "k": "dd",
     "id": "bai11-q30",
-    "q": "KNN tìm ra một công thức trong lúc huấn luyện.",
-    "giai": "KNN chỉ nhớ dữ liệu; tính khoảng cách khi dự đoán.",
-    "h": "1e4ce5e829ec15"
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "Đoán đúng thứ chưa từng thấy.",
+    "mau": "Model tốt là model {0}: đúng với dữ liệu {1}.",
+    "o": [
+     [
+      "vừa khớp",
+      "học vẹt",
+      "chưa khớp",
+      "lười"
+     ],
+     [
+      "chưa từng thấy",
+      "đã học thuộc",
+      "bị trùng",
+      "bị xoá"
+     ]
+    ],
+    "h": "17828fe7dc0610"
    },
    {
     "k": "ds",
     "id": "bai11-q31",
-    "q": "Đưa về cùng thang đo có thể thay đổi láng giềng gần nhất của một điểm.",
-    "giai": "Bài 5 và chặng 3: láng giềng đổi khi hết bị cột lớn lấn át.",
-    "h": "c3c46a4ce574"
+    "q": "Model đúng 100% trên tập huấn luyện chắc chắn là model tốt.",
+    "giai": "Có thể là học vẹt — phải xem tập kiểm tra.",
+    "h": "53c6c1f4a0594"
    },
    {
     "k": "ds",
     "id": "bai11-q32",
-    "q": "K càng lớn thì KNN càng chính xác trên dữ liệu mới.",
-    "giai": "K quá lớn làm ranh giới quá mượt — chưa khớp.",
+    "q": "Nhãn 0/1 thì bài toán là hồi quy.",
+    "giai": "0/1 là tên hai nhóm — phân loại.",
     "h": "19d3baec28a87c"
    },
    {
     "k": "ds",
     "id": "bai11-q33",
-    "q": "KNN có thể dùng cho bài toán có nhiều hơn hai nhãn.",
-    "giai": "Bỏ phiếu chọn nhãn nhiều phiếu nhất.",
+    "q": "Một model không vượt mốc model lười là chưa học được quy luật nào đáng kể.",
+    "giai": "Mốc lười là mức đoán không cần học.",
     "h": "1d8342c1328476"
+   },
+   {
+    "k": "ds",
+    "id": "bai11-q34",
+    "q": "Cả phân loại và hồi quy đều là học có giám sát.",
+    "giai": "Cả hai học từ dữ liệu có nhãn.",
+    "h": "4c54cca525500"
    }
   ]
  },

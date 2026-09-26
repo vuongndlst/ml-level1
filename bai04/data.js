@@ -1039,11 +1039,11 @@ window.BAI = {
       ],
       [
        "Xác suất",
-       "Bài 13 — hồi quy logistic trả về xác suất"
+       "Bài 15 — hồi quy logistic trả về xác suất"
       ],
       [
        "Xác suất có điều kiện",
-       "Bài 15 — Naïve Bayes"
+       "Bài 19 — Naïve Bayes"
       ]
      ]
     },

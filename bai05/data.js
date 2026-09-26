@@ -584,7 +584,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "ml",
      "tieu_de": "Nối với Machine Learning: K láng giềng gần nhất (KNN)",
-     "html": "Gặp một học sinh mới, thuật toán KNN đo khoảng cách tới mọi học sinh cũ, lấy K bạn gần nhất rồi cho các bạn đó “bỏ phiếu” đoán kết quả. Đo sai thang đo thì chọn nhầm láng giềng. Bài 11 con sẽ tự xây model này."
+     "html": "Gặp một học sinh mới, thuật toán KNN đo khoảng cách tới mọi học sinh cũ, lấy K bạn gần nhất rồi cho các bạn đó “bỏ phiếu” đoán kết quả. Đo sai thang đo thì chọn nhầm láng giềng. Bài 12 con sẽ tự xây model này."
     },
     {
      "t": "anh",
@@ -1269,11 +1269,11 @@ window.BAI = {
      "dong": [
       [
        "Vector, khoảng cách Euclid",
-       "Bài 11 — K láng giềng gần nhất (KNN)"
+       "Bài 12 — K láng giềng gần nhất (KNN)"
       ],
       [
        "Đưa về cùng thang đo",
-       "Bài 7 — chuẩn bị feature; Bài 11 — KNN"
+       "Bài 7 — chuẩn bị feature; Bài 12 — KNN"
       ],
       [
        "MSE, đường dự đoán ŷ = a·x + b",

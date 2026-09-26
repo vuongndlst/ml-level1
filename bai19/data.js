@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 19,
  "ma": "bai19",
  "nhan": "Bài 19",
- "tieu_de": "Chọn model nào?",
- "phan": "Phần C · Đánh giá và chọn model",
- "cau_hoi": "Có model nào tốt nhất cho mọi bài toán không?",
+ "tieu_de": "Naïve Bayes",
+ "phan": "Phần B · Học có giám sát",
+ "cau_hoi": "Đếm, rồi nhân xác suất — máy đoán được gì?",
  "gioi_thieu": [
-  "Con đã xây sáu model phân loại và một model hồi quy. Bài này không có thuật toán mới: con <b>xếp lại</b> chúng thành một bản đồ và học cách <b>chọn</b> model theo mục đích.",
-  "Năm chặng: bản đồ các model, tiêu chí ngoài độ chính xác, so sánh thực nghiệm, chọn theo tình huống, và quy trình làm một dự án trọn vẹn. Bảng khối 10 là bảng mô phỏng.",
-  "Con dùng lại toàn bộ Bài 10 – 18, đặc biệt kiểm định chéo (Bài 18)."
+  "Ở Bài 4 con đã tính xác suất có điều kiện: biết thêm một điều thì xác suất đổi. Hôm nay con dùng đúng ý đó để xây một model: <b>Naïve Bayes</b> — đếm trong dữ liệu, rồi nhân các xác suất lại.",
+  "Năm chặng: ý tưởng đếm và nhân, bảng tần suất của lớp, tự nhân cho một bạn, ô bằng 0, và Naïve Bayes trong scikit-learn. Bảng khối 10 là bảng mô phỏng.",
+  "Con dùng lại: xác suất có điều kiện (Bài 4), chia dữ liệu và mốc (Bài 11)."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai19",
  "muc_tieu": [
-  "Xếp các model đã học theo cách chúng “nghĩ”.",
-  "Nêu được các tiêu chí chọn model ngoài độ chính xác.",
-  "Đọc được bảng so sánh các model bằng kiểm định chéo.",
-  "Chọn và bảo vệ được một model cho một tình huống cụ thể.",
-  "Trình bày lại quy trình trọn vẹn của một dự án học có giám sát."
+  "Giải thích được ý tưởng của Naïve Bayes: đếm tần suất rồi nhân xác suất.",
+  "Lập và đọc được bảng tần suất của từng cột theo nhãn.",
+  "Tự nhân xác suất để dự đoán nhãn cho một điểm mới.",
+  "Giải thích được vì sao một ô bằng 0 là vấn đề và cách khắc phục.",
+  "Dùng GaussianNB trong scikit-learn và so với mốc."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,565 +36,620 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Bản đồ các model",
-   "ten_ngan": "Bản đồ",
+   "ten": "Đếm rồi nhân",
+   "ten_ngan": "Ý tưởng",
    "phut": 4,
-   "muc_tieu": "xếp các model đã học theo cách chúng “nghĩ”.",
-   "khoi_dong": "Kể tên các model con đã học từ Bài 11. Chúng giống nhau ở điểm nào?",
+   "muc_tieu": "giải thích được ý tưởng của Naïve Bayes: đếm tần suất rồi nhân xác suất.",
+   "khoi_dong": "Hôm qua trời nắng, gió nhẹ. Có nên đi đá bóng không? Con sẽ tra lại những ngày trước đó thế nào?",
    "khoi": [
     {
-     "t": "anh",
-     "cap": "Bốn cách “nghĩ” của các model đã học",
-     "alt": "Bốn cách “nghĩ” của các model đã học",
-     "src": "img/ban-do-cac-model-da-hoc.png"
+     "t": "dinh_nghia",
+     "ten": "Naïve Bayes",
+     "html": "Với mỗi nhãn, nhân: <b>tỉ lệ nhãn đó</b> × tỉ lệ giá trị cột 1 trong nhãn đó × tỉ lệ giá trị cột 2 trong nhãn đó × … Nhãn nào có tích lớn hơn là dự đoán.",
+     "ky_hieu": "“Naïve” (ngây thơ): máy nhân các cột như thể chúng không liên quan gì tới nhau — một giả định đơn giản hoá, thường sai một chút nhưng vẫn dùng tốt."
     },
     {
-     "t": "bang",
-     "cot": [
-      "Cách nghĩ",
-      "Model",
-      "Ghi nhớ"
-     ],
-     "dong": [
+     "t": "anh",
+     "cap": "Ví dụ GfG: đếm số ngày đi chơi theo thời tiết",
+     "alt": "Ví dụ GfG: đếm số ngày đi chơi theo thời tiết",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260227115947481605/outlook.webp",
+     "du_phong": "img/minh-hoa-bang-tan-suat-cot-outlook.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Naive bayes classifiers",
+      "url": "https://www.geeksforgeeks.org/machine-learning/naive-bayes-classifiers/"
+     },
+     "chu_giai": [
       [
-       "Đo khoảng cách",
-       "KNN, SVM",
-       "Cần đưa về cùng thang đo"
+       "Outlook",
+       "Bầu trời"
       ],
       [
-       "Vẽ đường / xác suất",
-       "Hồi quy tuyến tính, logistic",
-       "Đọc được hệ số a, b"
+       "Sunny / Overcast / Rainy",
+       "Nắng / Âm u / Mưa"
       ],
       [
-       "Hỏi câu Có / Không",
-       "Cây quyết định, Random Forest",
-       "Cây đọc được luật"
+       "Yes / No",
+       "Có / Không đi chơi"
       ],
       [
-       "Đếm rồi nhân",
-       "Naïve Bayes",
-       "Rất nhanh, cần ít dữ liệu"
+       "P(yes)",
+       "Tỉ lệ trong nhóm Có"
+      ]
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Tỉ lệ của từng cột cho một ngày cụ thể",
+     "alt": "Tỉ lệ của từng cột cho một ngày cụ thể",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251216105654598399/feature.webp",
+     "du_phong": "img/minh-hoa-bang-xac-suat-cua-tung-dac-trung.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Naive bayes classifiers",
+      "url": "https://www.geeksforgeeks.org/machine-learning/naive-bayes-classifiers/"
+     },
+     "chu_giai": [
+      [
+       "Feature / Value",
+       "Cột / Giá trị"
+      ],
+      [
+       "P(Value | Yes)",
+       "Tỉ lệ giá trị đó trong nhóm Có"
+      ],
+      [
+       "Temperature, Humidity, Wind",
+       "Nhiệt độ, độ ẩm, gió"
       ]
      ]
     },
     {
      "t": "hop",
      "kieu": "ml",
-     "tieu_de": "Điều không đổi",
-     "html": "Model nào cũng đi qua cùng quy trình 5 bước của Bài 10: dữ liệu → chia → huấn luyện → dự đoán → đánh giá. Thuật toán khác nhau, quy trình như nhau."
+     "tieu_de": "Nối Bài 4",
+     "html": "P(học Nhiều | Đạt) chính là xác suất có điều kiện: trong các bạn Đạt, bao nhiêu phần trăm học nhiều?"
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ hồi quy tuyến tính dùng cho bài Đạt / Chưa đạt — nó dự đoán con số.",
-      "Nghĩ Random Forest là một cách nghĩ riêng — nó là nhiều cây quyết định."
+      "Lấy tỉ lệ trong cả lớp thay vì tỉ lệ trong từng nhóm nhãn.",
+      "Cộng các xác suất thay vì nhân."
      ]
     },
     {
+     "t": "video",
+     "yt": "O2L2Uv9pdDA",
+     "ten": "StatQuest — Naive Bayes, Clearly Explained!!!",
+     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc",
+     "bat_dau": null,
+     "ket_thuc": null
+    },
+    {
      "t": "tom_tat",
-     "html": "Bốn cách nghĩ: khoảng cách · đường / xác suất · câu hỏi Có / Không · đếm rồi nhân."
+     "html": "Naïve Bayes: với mỗi nhãn, nhân tỉ lệ nhãn với tỉ lệ từng cột trong nhãn đó; nhãn có tích lớn nhất thắng."
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Naive Bayes Classifiers",
+       "url": "https://www.geeksforgeeks.org/machine-learning/naive-bayes-classifiers/",
+       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+      }
+     ]
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai19-q1",
-     "q": "Model nào thuộc nhóm “đo khoảng cách”?",
-     "giai": "KNN hỏi các láng giềng gần nhất.",
-     "goi_y": "Model nào cần đưa về cùng thang đo?",
+     "q": "Naïve Bayes làm phép toán gì với các xác suất của từng cột?",
+     "giai": "Tích của tỉ lệ nhãn và tỉ lệ từng cột.",
+     "goi_y": "Tên thuật toán nhắc tới Bayes — quy tắc của xác suất có điều kiện.",
      "a": [
-      "KNN",
-      "Naïve Bayes",
-      "Cây quyết định",
-      "Hồi quy logistic"
+      "Nhân lại với nhau",
+      "Cộng lại với nhau",
+      "Lấy số lớn nhất",
+      "Lấy trung bình"
      ],
-     "h": "1bfdf3ece54aa7"
+     "h": "1481fafe1e898f"
     },
     {
      "k": "ds",
      "id": "bai19-q2",
-     "q": "Mọi model đã học đều dùng chung quy trình 5 bước.",
-     "giai": "Chỉ đổi dòng gọi thuật toán.",
-     "goi_y": "Nhớ lại Bài 10.",
+     "q": "Chữ “naïve” nghĩa là máy coi các cột như không liên quan tới nhau.",
+     "giai": "Giả định đơn giản hoá để chỉ cần nhân.",
+     "goi_y": "Naïve nghĩa là ngây thơ, đơn giản quá mức.",
      "h": "23950233ae8b"
     }
    ]
   },
   {
-   "ten": "Không chỉ độ chính xác",
-   "ten_ngan": "Tiêu chí",
+   "ten": "Bảng tần suất của lớp",
+   "ten_ngan": "Bảng tần suất",
    "phut": 4,
-   "muc_tieu": "nêu được các tiêu chí chọn model ngoài độ chính xác.",
-   "khoi_dong": "Hai model cùng đúng 90%. Con còn muốn biết gì trước khi chọn?",
+   "muc_tieu": "lập và đọc được bảng tần suất của từng cột theo nhãn.",
+   "khoi_dong": "Chia giờ học thành Ít / Vừa / Nhiều. Trong 90 bạn Đạt, bao nhiêu bạn học Nhiều?",
    "khoi": [
     {
-     "t": "bang",
+     "t": "anh",
+     "cap": "Bảng tần suất trên 168 bạn của tập huấn luyện",
+     "alt": "Bảng tần suất trên 168 bạn của tập huấn luyện",
+     "src": "img/bang-tan-suat-dem-tay.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "đọc một ô",
+     "de": null,
      "cot": [
-      "Tiêu chí",
-      "Câu hỏi cần đặt",
-      "Model mạnh ở tiêu chí này"
+      "Ô",
+      "Nghĩa là",
+      "Tỉ lệ"
      ],
      "dong": [
       [
-       "Giải thích được",
-       "Có phải nói lý do bằng lời?",
-       "Cây quyết định nông"
+       "Học Nhiều · Đạt",
+       "69 trong 90 bạn Đạt học > 4 giờ",
+       "0,767"
       ],
       [
-       "Cho xác suất",
-       "Cần chỉnh ngưỡng cảnh báo?",
-       "Logistic"
+       "Học Nhiều · Chưa đạt",
+       "4 trong 78 bạn Chưa đạt",
+       "0,051"
       ],
       [
-       "Tốc độ",
-       "Dữ liệu rất lớn, cần trả lời ngay?",
-       "Naïve Bayes, logistic"
-      ],
-      [
-       "Kiểu sai",
-       "Bỏ sót hay báo nhầm nguy hiểm hơn?",
-       "Đo bằng bảng nhầm lẫn"
-      ],
-      [
-       "Ổn định",
-       "Kết quả có nhảy khi dữ liệu đổi?",
-       "Random Forest"
+       "Mạng Ít · Đạt",
+       "71 trong 90 bạn Đạt",
+       "0,789"
       ]
-     ]
-    },
-    {
-     "t": "dinh_nghia",
-     "ten": "Không có model tốt nhất",
-     "html": "Chỉ có model <b>phù hợp</b> với bài toán, với dữ liệu, và với người phải đọc kết quả.",
-     "ky_hieu": null
+     ],
+     "ket_luan": "Tỉ lệ luôn tính <b>trong nhóm nhãn</b>: chia cho 90 (Đạt) hoặc 78 (Chưa đạt).",
+     "nhan_manh": []
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Chỉ nhìn độ chính xác rồi chọn.",
-      "Chọn model phức tạp nhất vì nghe “xịn” hơn."
+      "Chia cho 168 (cả lớp) thay vì cho số bạn trong nhóm nhãn.",
+      "Quên rằng tỉ lệ trong mỗi cột của một nhãn cộng lại bằng 1."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Chọn model: độ chính xác + giải thích + xác suất + tốc độ + kiểu sai + ổn định."
+     "html": "Mỗi ô: số bạn có giá trị đó trong nhãn ÷ tổng số bạn của nhãn."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai19-q3",
-     "q": "Ngân hàng phải nói cho khách lý do từ chối vay. Tiêu chí nào quan trọng nhất?",
-     "giai": "Khách có quyền biết lý do.",
-     "goi_y": "Khách hỏi “vì sao?” thì model cần gì?",
+     "q": "Trong bảng, tỉ lệ học Nhiều ở nhóm Đạt bằng bao nhiêu?",
+     "giai": "69 : 90.",
+     "goi_y": "Tìm cột Giờ tự học, dòng Nhiều, cột Đạt.",
      "a": [
-      "Giải thích được bằng lời",
-      "Huấn luyện nhanh nhất",
-      "Chạy được trên điện thoại",
-      "Có nhiều tham số nhất"
+      "0,767",
+      "0,051",
+      "0,789",
+      "0,536"
      ],
-     "h": "175ac7e24b0543"
-    },
-    {
-     "k": "ma",
-     "id": "bai19-q4",
-     "q": "Hai tiêu chí nào KHÔNG phải độ chính xác? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "Tiêu chí khác.",
-     "goi_y": "Xem bảng tiêu chí.",
-     "a": [
-      "Tốc độ dự đoán",
-      "Giải thích được",
-      "Tỉ lệ đoán đúng",
-      "Số bạn đoán đúng"
-     ],
-     "h": "1040d1ca4c5ae5"
-    }
-   ]
-  },
-  {
-   "ten": "So sánh bằng thực nghiệm",
-   "ten_ngan": "Thực nghiệm",
-   "phut": 5,
-   "muc_tieu": "đọc được bảng so sánh các model bằng kiểm định chéo.",
-   "khoi_dong": "Sáu model trên cùng bảng khối 10, đo bằng kiểm định chéo. Ai thắng?",
-   "khoi": [
-    {
-     "t": "anh",
-     "cap": "Kiểm định chéo 5 phần: độ chính xác và số bạn bị bỏ sót",
-     "alt": "Kiểm định chéo 5 phần: độ chính xác và số bạn bị bỏ sót",
-     "src": "img/sau-model-dung-va-bo-sot.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "bảng lớp",
-     "de": null,
-     "cot": [
-      "Model",
-      "Đúng",
-      "Bỏ sót",
-      "Báo nhầm"
-     ],
-     "dong": [
-      [
-       "KNN (K = 3)",
-       "90,8%",
-       "11",
-       "11"
-      ],
-      [
-       "Logistic",
-       "90,4%",
-       "12",
-       "11"
-      ],
-      [
-       "Cây sâu 2",
-       "89,6%",
-       "9",
-       "16"
-      ],
-      [
-       "Naïve Bayes",
-       "90,8%",
-       "10",
-       "12"
-      ],
-      [
-       "SVM",
-       "90,8%",
-       "13",
-       "9"
-      ],
-      [
-       "Rừng 100 cây",
-       "90,8%",
-       "11",
-       "11"
-      ]
-     ],
-     "ket_luan": "Độ chính xác chỉ chênh 1,2 điểm; bỏ sót từ 9 tới 13 bạn. Trên bảng này, các model gần như ngang nhau.",
-     "nhan_manh": []
-    },
-    {
-     "t": "anh",
-     "cap": "Trên dữ liệu mô phỏng 20 000 dòng: tốc độ chênh hàng trăm lần",
-     "alt": "Trên dữ liệu mô phỏng 20 000 dòng: tốc độ chênh hàng trăm lần",
-     "src": "img/toc-do-huan-luyen-va-du-doan.png"
-    },
-    {
-     "t": "p",
-     "html": "Tốc độ thì khác xa: Naïve Bayes huấn luyện nhanh nhất, Rừng 100 cây chậm nhất; KNN (K = 3) dự đoán chậm nhất vì phải đo tới mọi điểm cũ."
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Kết luận model tốt nhất từ chênh lệch nhỏ hơn độ dao động.",
-      "Đo thời gian trên dữ liệu 240 dòng rồi suy cho dữ liệu lớn."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "Khi độ chính xác ngang nhau, các tiêu chí khác quyết định."
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
-     "id": "bai19-q5",
-     "q": "Theo bảng, model nào bỏ sót ít bạn Chưa đạt nhất?",
-     "giai": "9 bạn.",
-     "goi_y": "Tìm số nhỏ nhất ở cột Bỏ sót.",
-     "a": [
-      "Cây sâu 2",
-      "SVM",
-      "Logistic",
-      "Rừng 100 cây"
-     ],
-     "h": "676fe54ff52c1"
+     "h": "a3993b8c2669d"
     },
     {
      "k": "dd",
-     "id": "bai19-q6",
-     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-     "giai": "Chênh chưa tới 2 điểm.",
-     "goi_y": "Đọc cột “Đúng”.",
-     "mau": "Độ chính xác các model từ {0} tới {1}.",
+     "id": "bai19-q4",
+     "q": "Chọn số đúng cho mỗi chỗ trống.",
+     "giai": "Chia cho tổng số bạn của nhãn đó.",
+     "goi_y": "Mỗi nhóm nhãn có bao nhiêu bạn?",
+     "mau": "Tỉ lệ trong nhóm Đạt chia cho {0}; trong nhóm Chưa đạt chia cho {1}.",
      "o": [
       [
-       "89,6%",
-       "90,8%",
-       "50,0%",
-       "100%"
+       "90",
+       "78",
+       "168",
+       "100"
       ],
       [
-       "90,8%",
-       "89,6%",
-       "100%",
-       "75,0%"
+       "78",
+       "90",
+       "168",
+       "72"
       ]
      ],
-     "h": "ceb038aa843a"
+     "h": "e6dbb9de47757"
     }
    ]
   },
   {
-   "ten": "Chọn theo tình huống",
-   "ten_ngan": "Tình huống",
+   "ten": "Tự nhân cho một bạn",
+   "ten_ngan": "Nhân tay",
    "phut": 5,
-   "muc_tieu": "chọn và bảo vệ được một model cho một tình huống cụ thể.",
-   "khoi_dong": "Cùng dữ liệu, bốn người dùng khác nhau có chọn cùng một model không?",
+   "muc_tieu": "tự nhân xác suất để dự đoán nhãn cho một điểm mới.",
+   "khoi_dong": "Một bạn học Nhiều, dùng mạng Ít. Nhân thế nào để biết bạn ấy Đạt hay Chưa đạt?",
    "khoi": [
     {
      "t": "demo_tung_buoc",
-     "tieu_de": "chọn model cho bốn tình huống",
-     "huong_dan": "Chọn một tình huống, bấm “Bước tiếp” để đi qua từng câu hỏi.",
-     "nhan_chon": "Tình huống",
+     "tieu_de": "nhân từng bước cho ba bạn mới",
+     "huong_dan": "Chọn một bạn, bấm “Bước tiếp” để nhân từng thừa số cho cả hai nhãn.",
+     "nhan_chon": "Bạn mới",
      "cot": [
-      "#",
-      "Câu hỏi",
-      "Trả lời"
+      "Bước",
+      "Việc",
+      "Đạt",
+      "Chưa đạt"
      ],
      "mac_dinh": 0,
      "lua_chon": [
       {
-       "nhan": "Bệnh viện cần giải thích cho bệnh nhân",
+       "nhan": "Học nhiều · mạng ít",
        "dong": [
         [
          "1",
-         "Có phải giải thích lý do bằng lời không?",
-         "Có — bác sĩ phải nói được vì sao"
+         "Tỉ lệ Đạt / Chưa đạt ban đầu",
+         "0,536",
+         "0,464"
         ],
         [
          "2",
-         "Model nào đọc được luật NẾU… THÌ…?",
-         "Cây quyết định (nông)"
+         "× tỉ lệ học “Nhiều” trong nhóm",
+         "0,767",
+         "0,051"
         ],
         [
          "3",
-         "Cần giảm bỏ sót người bệnh?",
-         "Đo bảng nhầm lẫn; cây sâu 2 bỏ sót ít nhất ở bảng lớp"
+         "× tỉ lệ mạng “Ít” trong nhóm",
+         "0,789",
+         "0,372"
         ],
         [
-         "→",
-         "Gợi ý",
-         "<b>Cây quyết định nông</b>, kiểm tra bằng kiểm định chéo"
+         "4",
+         "= Tích",
+         "0,3242",
+         "0,0088"
+        ],
+        [
+         "5",
+         "Kết luận",
+         "<b>ĐẠT</b>",
+         "—"
         ]
        ]
       },
       {
-       "nhan": "Lọc hàng triệu tin nhắn mỗi giây",
+       "nhan": "Học vừa · mạng vừa",
        "dong": [
         [
          "1",
-         "Có phải giải thích từng tin không?",
-         "Không bắt buộc"
+         "Tỉ lệ Đạt / Chưa đạt ban đầu",
+         "0,536",
+         "0,464"
         ],
         [
          "2",
-         "Tốc độ quan trọng tới đâu?",
-         "Rất quan trọng — huấn luyện và dự đoán phải nhanh"
+         "× tỉ lệ học “Vừa” trong nhóm",
+         "0,233",
+         "0,372"
         ],
         [
          "3",
-         "Dữ liệu dạng đếm từ?",
-         "Có — hợp với đếm rồi nhân"
+         "× tỉ lệ mạng “Vừa” trong nhóm",
+         "0,189",
+         "0,538"
         ],
         [
-         "→",
-         "Gợi ý",
-         "<b>Naïve Bayes</b>; tránh KNN (dự đoán chậm khi dữ liệu lớn)"
+         "4",
+         "= Tích",
+         "0,0236",
+         "0,0929"
+        ],
+        [
+         "5",
+         "Kết luận",
+         "—",
+         "<b>CHƯA ĐẠT</b>"
         ]
        ]
       },
       {
-       "nhan": "Thầy chủ nhiệm muốn chỉnh mức cảnh báo",
+       "nhan": "Học vừa · mạng ít",
        "dong": [
         [
          "1",
-         "Cần xác suất, không chỉ nhãn?",
-         "Có — để chọn ngưỡng cảnh báo"
+         "Tỉ lệ Đạt / Chưa đạt ban đầu",
+         "0,536",
+         "0,464"
         ],
         [
          "2",
-         "Cần đọc cột nào kéo lên, kéo xuống?",
-         "Có — hệ số dương / âm"
+         "× tỉ lệ học “Vừa” trong nhóm",
+         "0,233",
+         "0,372"
         ],
         [
          "3",
-         "Dữ liệu vừa phải, ranh giới gần thẳng?",
-         "Có"
+         "× tỉ lệ mạng “Ít” trong nhóm",
+         "0,789",
+         "0,372"
         ],
         [
-         "→",
-         "Gợi ý",
-         "<b>Hồi quy logistic</b>, chỉnh ngưỡng như Bài 13"
-        ]
-       ]
-      },
-      {
-       "nhan": "Cần đúng nhất, không cần giải thích",
-       "dong": [
-        [
-         "1",
-         "Có phải giải thích bằng lời không?",
-         "Không"
+         "4",
+         "= Tích",
+         "0,0987",
+         "0,0641"
         ],
         [
-         "2",
-         "Dữ liệu có nhiều cột hữu ích?",
-         "Có"
-        ],
-        [
-         "3",
-         "Chấp nhận huấn luyện chậm hơn?",
-         "Có"
-        ],
-        [
-         "→",
-         "Gợi ý",
-         "<b>Random Forest</b> (thử thêm KNN, SVM); so bằng kiểm định chéo"
+         "5",
+         "Kết luận",
+         "<b>ĐẠT</b>",
+         "—"
         ]
        ]
       }
      ]
     },
     {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Bảo vệ lựa chọn bằng 3 câu",
-     "html": "(1) Tiêu chí quan trọng nhất của tình huống là gì. (2) Model nào mạnh ở tiêu chí đó. (3) Số liệu kiểm định chéo cho thấy model đó không kém hơn đáng kể."
+     "t": "anh",
+     "cap": "Học Nhiều, mạng Ít: Đạt gấp 37 lần",
+     "alt": "Học Nhiều, mạng Ít: Đạt gấp 37 lần",
+     "src": "img/nhan-xac-suat-mot-ban-cu-the.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "đổi tích ra phần trăm",
+     "de": null,
+     "cot": [
+      "",
+      "Giá trị"
+     ],
+     "dong": [
+      [
+       "Tích Đạt",
+       "0,3240"
+      ],
+      [
+       "Tích Chưa đạt",
+       "0,0089"
+      ],
+      [
+       "% Đạt = Đạt ÷ (Đạt + Chưa đạt)",
+       "<b>97,3%</b>"
+      ]
+     ],
+     "ket_luan": "Hai tích rất nhỏ, nhưng chỉ cần so với nhau.",
+     "nhan_manh": [
+      2
+     ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Chọn cùng một model cho mọi tình huống.",
-      "Bảo vệ lựa chọn chỉ bằng “vì nó hay”."
+      "Nghĩ tích 0,3240 là “32% Đạt” — phải chia cho tổng hai tích.",
+      "Quên nhân tỉ lệ nhãn ban đầu (bước 1)."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Mục đích quyết định tiêu chí; tiêu chí quyết định model; số liệu để bảo vệ."
+     "html": "Nhân cho từng nhãn, so hai tích; đổi ra % bằng cách chia cho tổng."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai19-q5",
+     "q": "Theo phần Tự thử, bạn học Vừa và mạng Vừa được đoán thế nào?",
+     "giai": "Tích Đạt 0,0236, tích Chưa đạt 0,0929.",
+     "goi_y": "Chọn bạn đó, bấm tới dòng Kết luận.",
+     "a": [
+      "Chưa đạt",
+      "Đạt",
+      "Hoà",
+      "Không đoán được"
+     ],
+     "h": "141f449be183be"
+    },
+    {
+     "k": "sx",
+     "id": "bai19-q6",
+     "q": "Sắp xếp các bước Naïve Bayes đoán một bạn mới.",
+     "giai": "Tỉ lệ nhãn → nhân → so → chọn.",
+     "goi_y": "Bắt đầu từ việc lớp có bao nhiêu phần trăm Đạt.",
+     "a": [
+      "Lấy tỉ lệ mỗi nhãn ban đầu",
+      "Nhân với tỉ lệ từng cột trong nhãn",
+      "So tích của các nhãn",
+      "Chọn nhãn có tích lớn nhất"
+     ],
+     "h": "17fe93f984ca69"
+    }
+   ]
+  },
+  {
+   "ten": "Một ô bằng 0",
+   "ten_ngan": "Ô bằng 0",
+   "phut": 4,
+   "muc_tieu": "giải thích được vì sao một ô bằng 0 là vấn đề và cách khắc phục.",
+   "khoi_dong": "Trong 90 bạn Đạt, không bạn nào học Ít. Chuyện gì xảy ra khi nhân?",
+   "khoi": [
+    {
+     "t": "anh",
+     "cap": "Một thừa số bằng 0 → cả tích bằng 0",
+     "alt": "Một thừa số bằng 0 → cả tích bằng 0",
+     "src": "img/o-bang-0-nuot-mat-bang-chung.png"
+    },
+    {
+     "t": "p",
+     "html": "Nhân với 0 thì kết quả luôn là 0 — mọi thông tin khác (mạng Ít nghiêng về Đạt) bị “nuốt” mất. Máy sẽ không bao giờ đoán Đạt cho bạn học Ít, chỉ vì tập huấn luyện chưa gặp trường hợp đó."
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "Làm mịn (Laplace)",
+     "html": "Cộng thêm 1 vào mọi ô khi đếm, để không ô nào bằng 0. Ô 0 thành một số rất nhỏ — vẫn nói “hiếm”, nhưng không xoá hết bằng chứng khác.",
+     "ky_hieu": "scikit-learn làm sẵn qua tham số <code>alpha</code> (mặc định 1)."
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Nghĩ ô 0 là lỗi nhập liệu — đó là trường hợp chưa gặp trong tập huấn luyện.",
+      "Nghĩ chưa gặp nghĩa là không thể xảy ra."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "Ô bằng 0 xoá sạch tích; làm mịn bằng cách cộng thêm 1 vào mọi ô."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai19-q7",
-     "q": "Theo phần Tự thử, tình huống lọc hàng triệu tin nhắn gợi ý model nào?",
-     "giai": "Nhanh, hợp dữ liệu đếm từ.",
-     "goi_y": "Chọn tình huống thứ hai, bấm tới dòng Gợi ý.",
+     "q": "Vì sao một ô tỉ lệ bằng 0 gây rắc rối cho Naïve Bayes?",
+     "giai": "Nhân với 0 → 0, bất kể các cột khác.",
+     "goi_y": "Nhân một số bất kỳ với 0 được bao nhiêu?",
      "a": [
-      "Naïve Bayes",
-      "KNN",
-      "Random Forest",
-      "Cây sâu 10"
+      "Cả tích thành 0",
+      "Máy báo lỗi chia cho 0",
+      "Tích lớn vô hạn",
+      "Bảng không vẽ được"
      ],
-     "h": "10b563d4f7ffdc"
+     "h": "1d9c4aa742bc05"
     },
     {
-     "k": "sx",
+     "k": "ds",
      "id": "bai19-q8",
-     "q": "Sắp xếp các bước bảo vệ lựa chọn model.",
-     "giai": "Tiêu chí → model → đo → trình bày.",
-     "goi_y": "Bắt đầu từ nhu cầu của người dùng.",
-     "a": [
-      "Xác định tiêu chí quan trọng nhất",
-      "Tìm model mạnh ở tiêu chí đó",
-      "So bằng kiểm định chéo",
-      "Trình bày lý do kèm số liệu"
-     ],
-     "h": "1688c5831fe123"
+     "q": "Làm mịn Laplace cộng thêm 1 vào mọi ô khi đếm.",
+     "giai": "Để không còn ô nào bằng 0.",
+     "goi_y": "Làm mịn là làm gì với các ô đếm?",
+     "h": "1057ba7ade813f"
     }
    ]
   },
   {
-   "ten": "Một dự án trọn vẹn",
-   "ten_ngan": "Dự án",
-   "phut": 4,
-   "muc_tieu": "trình bày lại quy trình trọn vẹn của một dự án học có giám sát.",
-   "khoi_dong": "Nếu phải làm một dự án từ đầu, con làm những bước nào?",
+   "ten": "Naïve Bayes trong scikit-learn",
+   "ten_ngan": "scikit-learn",
+   "phut": 5,
+   "muc_tieu": "dùng GaussianNB trong scikit-learn và so với mốc.",
+   "khoi_dong": "Chia giờ học thành 3 mức thì mất thông tin. Có cách nào dùng thẳng số giờ?",
    "khoi": [
+    {
+     "t": "anh",
+     "cap": "GaussianNB: thay bảng đếm bằng đường cong hình chuông cho mỗi nhãn",
+     "alt": "GaussianNB: thay bảng đếm bằng đường cong hình chuông cho mỗi nhãn",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250514094215279104/Gaussian-Naive-Bayes.webp",
+     "du_phong": "img/minh-hoa-naive-bayes-voi-phan-bo-chuan.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Gaussian naive bayes",
+      "url": "https://www.geeksforgeeks.org/machine-learning/gaussian-naive-bayes/"
+     },
+     "chu_giai": [
+      [
+       "Gaussian Naive Bayes",
+       "Naïve Bayes với phân bố chuẩn"
+      ],
+      [
+       "p(x|A), p(x|B)",
+       "Mật độ của x trong nhóm A, nhóm B"
+      ],
+      [
+       "Class A / Class B",
+       "Nhóm A / nhóm B"
+      ]
+     ]
+    },
     {
      "t": "bang",
      "cot": [
-      "Bước",
       "Việc",
-      "Học ở"
+      "Lệnh"
      ],
      "dong": [
       [
-       "1 · Câu hỏi",
-       "Phân loại hay hồi quy? Ai dùng kết quả?",
-       "Bài 10, 12"
+       "Huấn luyện",
+       "<code>nb = GaussianNB().fit(X_train, y_train)</code>"
       ],
       [
-       "2 · Dữ liệu",
-       "Khám phá, làm sạch, EDA",
-       "Bài 6 – 9"
+       "Dự đoán",
+       "<code>nb.predict(X_test)</code> · <code>nb.predict_proba(X_test)</code>"
       ],
       [
-       "3 · Chuẩn bị",
-       "Chia train / test; thang đo trong pipeline",
-       "Bài 7, 11, 18"
-      ],
-      [
-       "4 · Chọn model",
-       "So vài model bằng kiểm định chéo; dò tham số",
-       "Bài 11 – 18"
-      ],
-      [
-       "5 · Đánh giá",
-       "Một lần trên tập kiểm tra; mốc; bảng nhầm lẫn",
-       "Bài 10, 13"
-      ],
-      [
-       "6 · Báo cáo",
-       "Số liệu, hạn chế, không nói “gây ra”",
-       "Thực hành nhóm"
+       "Đánh giá",
+       "<code>accuracy_score(y_test, du_doan)</code>"
       ]
+     ]
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "kết quả trên tập kiểm tra",
+     "de": null,
+     "cot": [
+      "Model",
+      "Độ chính xác"
+     ],
+     "dong": [
+      [
+       "Model lười",
+       "54,2%"
+      ],
+      [
+       "Naïve Bayes đếm 3 mức",
+       "88,9%"
+      ],
+      [
+       "GaussianNB (số giờ, số phút thật)",
+       "<b>91,7%</b>"
+      ],
+      [
+       "Logistic (Bài 15) · cây sâu 2 (Bài 17)",
+       "91,7%"
+      ]
+     ],
+     "ket_luan": "Dùng số thật tốt hơn chia mức; ngang logistic và cây.",
+     "nhan_manh": [
+      2
      ]
     },
     {
      "t": "hop",
      "kieu": "ml",
-     "tieu_de": "Sắp tới",
-     "html": "Bài 20 bước sang một nhánh mới: dữ liệu <b>không có nhãn</b> — máy tự chia nhóm (K-Means)."
+     "tieu_de": "Naïve Bayes ở đâu ngoài đời?",
+     "html": "Bộ lọc thư rác đời đầu: đếm mỗi từ xuất hiện trong thư rác và thư thường bao nhiêu lần, rồi nhân. Nhanh, cần ít dữ liệu, dễ cập nhật khi có thư mới."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nhảy thẳng tới chọn model, bỏ qua làm sạch và EDA.",
-      "Báo cáo con số mà không nói hạn chế của dữ liệu."
+      "Đưa về 0 – 1 trước GaussianNB — không cần, mỗi cột có đường cong riêng.",
+      "Nghĩ Naïve Bayes luôn kém vì “ngây thơ”."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Câu hỏi → dữ liệu → chuẩn bị → chọn model → đánh giá → báo cáo trung thực."
+     "html": "GaussianNB().fit → predict / predict_proba; nhanh, ít tham số, dùng tốt với nhiều cột."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai19-q9",
-     "q": "Bước nào nên làm trước khi so các model?",
-     "giai": "Dữ liệu trước, model sau.",
-     "goi_y": "Nhìn thứ tự các bước trong bảng.",
+     "q": "Lớp scikit-learn nào dùng Naïve Bayes với cột số liên tục?",
+     "giai": "Gaussian = phân bố chuẩn (hình chuông).",
+     "goi_y": "Tên lớp có chữ NB.",
      "a": [
-      "Làm sạch và khám phá dữ liệu",
-      "Báo cáo kết quả cuối",
-      "Đo trên tập kiểm tra",
-      "Chọn ngưỡng cảnh báo"
+      "GaussianNB",
+      "LinearRegression",
+      "KNeighborsClassifier",
+      "MinMaxScaler"
      ],
-     "h": "1826367adb3610"
+     "h": "144040fc059a00"
     },
     {
-     "k": "ds",
+     "k": "ma",
      "id": "bai19-q10",
-     "q": "Tập kiểm tra nên được dùng nhiều lần trong lúc chọn model.",
-     "giai": "Chỉ một lần ở cuối.",
-     "goi_y": "Nhớ lại Bài 18.",
-     "h": "126237d1a09f75"
+     "q": "GaussianNB so với cách đếm 3 mức: hai điều nào đúng? <b>(Chọn 2 đáp án đúng.)</b>",
+     "giai": "Không mất thông tin khi chia mức.",
+     "goi_y": "So hai dòng giữa của bảng kết quả.",
+     "a": [
+      "Dùng thẳng số giờ, số phút",
+      "Đúng hơn trên tập kiểm tra của bài",
+      "Bắt buộc chia mức trước",
+      "Cần đưa về 0 – 1 trước"
+     ],
+     "h": "1e8c964ef766ef"
     }
    ]
   }
@@ -613,315 +668,330 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai19-q11",
-    "q": "Nhìn hình. Nhóm “Hỏi câu Có / Không” gồm model nào?",
-    "giai": "Cả rừng cũng hỏi câu Có / Không.",
+    "q": "Nhìn hình. Trong nhóm Chưa đạt, tỉ lệ học Ít bằng bao nhiêu?",
+    "giai": "45 : 78.",
     "img": {
-     "src": "img/ban-do-cac-model-da-hoc.png"
+     "src": "img/bang-tan-suat-dem-tay.png"
     },
     "a": [
-     "Cây quyết định, Random Forest",
-     "KNN và SVM",
-     "Hồi quy tuyến tính, logistic",
-     "Naïve Bayes và KNN"
+     "0,577",
+     "0,000",
+     "0,372",
+     "0,538"
     ],
-    "h": "12712718628794"
+    "h": "ba2a6421acf1e"
    },
    {
     "k": "mc",
     "id": "bai19-q12",
-    "q": "Nhìn hình. Model nào bỏ sót nhiều bạn Chưa đạt nhất?",
-    "giai": "13 bạn.",
+    "q": "Nhìn hình. Tích của nhãn Đạt bằng bao nhiêu?",
+    "giai": "Tích ba thừa số.",
     "img": {
-     "src": "img/sau-model-dung-va-bo-sot.png"
+     "src": "img/nhan-xac-suat-mot-ban-cu-the.png"
     },
     "a": [
-     "SVM",
-     "Cây sâu 2",
-     "Naïve Bayes",
-     "Logistic"
+     "0,3240",
+     "0,0089",
+     "0,536",
+     "1,0000"
     ],
-    "h": "1de5b628d6d513"
+    "h": "1e7acec504823f"
    },
    {
     "k": "mc",
     "id": "bai19-q13",
-    "q": "Nhìn hình. Model nào dự đoán chậm nhất trên dữ liệu lớn?",
-    "giai": "Phải đo tới mọi điểm cũ.",
+    "q": "Nhìn hình. Vì sao tích Đạt bằng 0?",
+    "giai": "P(học Ít | Đạt) = 0.",
     "img": {
-     "src": "img/toc-do-huan-luyen-va-du-doan.png"
+     "src": "img/o-bang-0-nuot-mat-bang-chung.png"
     },
     "a": [
-     "KNN (K = 3)",
-     "Naïve Bayes",
-     "Cây sâu 2",
-     "Logistic"
+     "Không bạn Đạt nào học Ít",
+     "Không bạn nào dùng mạng Ít",
+     "Tỉ lệ Đạt ban đầu bằng 0",
+     "Máy tính bị lỗi làm tròn"
     ],
-    "h": "450b894b1a0fe"
+    "h": "13d04f69f8bd23"
    },
    {
     "k": "mc",
     "id": "bai19-q14",
-    "q": "Một app cần đoán giá thuê nhà theo diện tích. Model nào đúng loại bài toán?",
-    "giai": "Giá là con số.",
+    "q": "Nhìn hình. Trong bảng Outlook, có bao nhiêu ngày Overcast đi chơi (Yes)?",
+    "giai": "Dòng Overcast, cột Yes.",
+    "img": {
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260227115947481605/outlook.webp",
+     "du_phong": "img/minh-hoa-bang-tan-suat-cot-outlook.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Naive bayes classifiers",
+      "url": "https://www.geeksforgeeks.org/machine-learning/naive-bayes-classifiers/"
+     }
+    },
     "a": [
-     "Hồi quy tuyến tính",
-     "Hồi quy logistic",
-     "Naïve Bayes",
-     "Cây phân loại"
+     "4",
+     "0",
+     "2",
+     "3"
     ],
-    "h": "9ee402482f9c6"
+    "h": "60c0230baf0ae"
    },
    {
     "k": "mc",
     "id": "bai19-q15",
-    "q": "Hai model: A đúng 91% và giải thích được; B đúng 91,5% nhưng không giải thích được. Phòng tuyển sinh cần nói lý do. Chọn?",
-    "giai": "Giải thích quan trọng hơn 0,5 điểm.",
+    "q": "Nhìn hình. Đường cong màu đỏ và xanh biểu diễn điều gì?",
+    "giai": "Mỗi nhóm một đường chuông.",
+    "img": {
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250514094215279104/Gaussian-Naive-Bayes.webp",
+     "du_phong": "img/minh-hoa-naive-bayes-voi-phan-bo-chuan.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Gaussian naive bayes",
+      "url": "https://www.geeksforgeeks.org/machine-learning/gaussian-naive-bayes/"
+     }
+    },
     "a": [
-     "Model A",
-     "Model B",
-     "Không chọn model nào",
-     "Chọn ngẫu nhiên"
+     "Phân bố giá trị x trong từng nhóm",
+     "Ranh giới giữa hai nhóm",
+     "Đường hồi quy của x",
+     "Số lần x xuất hiện trong cả bảng"
     ],
-    "h": "1bd149e8075960"
+    "h": "5f7f82d63487"
    },
    {
     "k": "mc",
     "id": "bai19-q16",
-    "q": "Dữ liệu có 10 triệu dòng, cần trả lời trong tích tắc. Model nào nên tránh?",
-    "giai": "KNN đo tới mọi điểm.",
+    "q": "Trong 50 email lừa đảo, 30 email có chữ “khẩn cấp”. Tỉ lệ “khẩn cấp” trong nhóm lừa đảo là bao nhiêu?",
+    "giai": "30 : 50.",
     "a": [
-     "KNN",
-     "Naïve Bayes",
-     "Logistic",
-     "Cây nông"
+     "0,6",
+     "0,3",
+     "0,5",
+     "30"
     ],
-    "h": "3d0709eae4bcf"
+    "h": "158db47aa93207"
    },
    {
     "k": "mc",
     "id": "bai19-q17",
-    "q": "Bệnh hiếm: bỏ sót nguy hiểm hơn báo nhầm. Nên so model bằng gì ngoài độ chính xác?",
-    "giai": "Đọc bảng nhầm lẫn.",
+    "q": "Naïve Bayes cho tích Có = 0,02, tích Không = 0,06. Dự đoán là gì?",
+    "giai": "Tích lớn hơn thắng.",
     "a": [
-     "Số ca bị bỏ sót",
-     "Thời gian huấn luyện",
-     "Số cột dữ liệu",
-     "Tên thuật toán"
+     "Không",
+     "Có",
+     "Hoà",
+     "Không đoán được"
     ],
-    "h": "833f8a1d7c2"
+    "h": "1ceb2e78cf014d"
    },
    {
     "k": "mc",
     "id": "bai19-q18",
-    "q": "Sáu model trên bảng khối 10 chênh chưa tới 2 điểm. Kết luận khách quan nhất?",
-    "giai": "Chênh nhỏ hơn dao động.",
+    "q": "Bộ lọc thư rác chưa từng thấy từ “voucher” trong thư thường. Không làm mịn thì sao?",
+    "giai": "Tỉ lệ 0 trong nhóm thường → tích nhóm thường bằng 0.",
     "a": [
-     "Chưa model nào hơn hẳn",
-     "KNN là tốt nhất mọi lúc",
-     "Cây quyết định vô dụng",
-     "Cần bỏ bảng khối 10"
+     "Mọi thư có “voucher” bị coi là rác",
+     "Thư đó chắc chắn là thư thường",
+     "Bộ lọc tự học thêm từ mới",
+     "Không ảnh hưởng gì tới kết quả"
     ],
-    "h": "1d777493d0a01"
+    "h": "3b31f9822d9b4"
    },
    {
     "k": "mc",
     "id": "bai19-q19",
-    "q": "Model nào vừa cho xác suất vừa đọc được hệ số dương / âm của từng cột?",
-    "giai": "Bài 13.",
+    "q": "Vì sao Naïve Bayes được gọi là “ngây thơ”?",
+    "giai": "Giả định đơn giản để chỉ cần nhân.",
     "a": [
-     "Hồi quy logistic",
-     "KNN",
-     "Random Forest",
-     "SVM kernel rbf"
+     "Coi các cột như không liên quan nhau",
+     "Chỉ dùng được cho trẻ em",
+     "Luôn đoán nhãn nhiều nhất",
+     "Không cần dữ liệu huấn luyện"
     ],
-    "h": "667b324b6b718"
+    "h": "162d734a6dcf46"
    },
    {
     "k": "ma",
     "id": "bai19-q20",
-    "q": "Những tiêu chí nào dùng để chọn model? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Ngoài độ chính xác.",
+    "q": "Những bước nào có trong Naïve Bayes? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Đếm rồi nhân.",
     "a": [
-     "Giải thích được",
-     "Tốc độ",
-     "Tên model dài",
-     "Màu biểu đồ"
+     "Đếm tần suất theo nhãn",
+     "Nhân các tỉ lệ",
+     "Tìm K láng giềng gần nhất",
+     "Kẻ đường có lề rộng nhất"
     ],
-    "h": "1428593ccb4295"
+    "h": "c798e6d89a106"
    },
    {
     "k": "ma",
     "id": "bai19-q21",
-    "q": "Hai model nào cần đưa về cùng thang đo? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Đo khoảng cách.",
+    "q": "Hai điểm mạnh nào của Naïve Bayes? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Đơn giản, nhanh.",
     "a": [
-     "KNN",
-     "SVM",
-     "Cây quyết định",
-     "Naïve Bayes"
+     "Huấn luyện rất nhanh",
+     "Cần ít dữ liệu",
+     "Luôn chính xác nhất",
+     "Không bao giờ gặp ô bằng 0"
     ],
-    "h": "d13bd703e8650"
+    "h": "d45f80fa47a42"
    },
    {
     "k": "ma",
     "id": "bai19-q22",
-    "q": "Hai model nào đọc được lý do bằng lời tốt nhất? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Luật / hệ số.",
+    "q": "Tỉ lệ P(học Nhiều | Đạt) được tính thế nào? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Trong nhóm nhãn Đạt.",
     "a": [
-     "Cây quyết định nông",
-     "Hồi quy logistic",
-     "Random Forest 500 cây",
-     "SVM kernel rbf"
+     "Đếm bạn Đạt học Nhiều",
+     "Chia cho tổng số bạn Đạt",
+     "Chia cho cả lớp",
+     "Chia cho số bạn học Nhiều"
     ],
-    "h": "6314ff4b4f438"
+    "h": "3104e71dd57d"
    },
    {
     "k": "ma",
     "id": "bai19-q23",
-    "q": "Hai bước nào nằm trong một dự án trọn vẹn? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Quy trình trung thực.",
+    "q": "Cách nào tránh được tích bằng 0? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Làm mịn Laplace.",
     "a": [
-     "Làm sạch dữ liệu",
-     "Nêu hạn chế",
-     "Chọn random_state đẹp nhất",
-     "Bỏ qua mốc model lười"
+     "Cộng thêm 1 vào mọi ô",
+     "Dùng tham số alpha",
+     "Xoá cột có ô bằng 0",
+     "Nhân thêm với 0"
     ],
-    "h": "1e5c1b07a71e5e"
+    "h": "de065b659c3a0"
    },
    {
     "k": "sx",
     "id": "bai19-q24",
-    "q": "Sắp xếp các bước một dự án học có giám sát.",
-    "giai": "Câu hỏi → dữ liệu → chia → so → đo.",
+    "q": "Sắp xếp các bước lập bảng tần suất.",
+    "giai": "Chia mức → đếm → chia → ghi.",
     "a": [
-     "Đặt câu hỏi",
-     "Khám phá và làm sạch dữ liệu",
-     "Chia train / test",
-     "So model bằng kiểm định chéo",
-     "Đo một lần trên tập kiểm tra"
+     "Chia giá trị cột thành các mức",
+     "Đếm số bạn mỗi mức trong từng nhãn",
+     "Chia cho tổng số bạn của nhãn",
+     "Ghi tỉ lệ vào bảng"
     ],
-    "h": "9c2d8596ff03c"
+    "h": "1bb5fb0abd6098"
    },
    {
     "k": "sx",
     "id": "bai19-q25",
-    "q": "Sắp xếp các bước bảo vệ lựa chọn model.",
-    "giai": "Nhu cầu → tiêu chí → model → số liệu.",
+    "q": "Sắp xếp các bước dùng GaussianNB.",
+    "giai": "Chia → fit → predict → so mốc.",
     "a": [
-     "Nêu nhu cầu người dùng",
-     "Chọn tiêu chí quan trọng",
-     "Chọn model mạnh ở tiêu chí đó",
-     "Đưa số liệu kiểm định chéo"
+     "Chia tập huấn luyện và kiểm tra",
+     "Fit GaussianNB",
+     "Predict tập kiểm tra",
+     "So với mốc model lười"
     ],
-    "h": "11bb0af146617f"
+    "h": "1dac3b84f356f1"
    },
    {
     "k": "dd",
     "id": "bai19-q26",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Bản đồ.",
-    "mau": "KNN thuộc nhóm {0}; Naïve Bayes thuộc nhóm {1}.",
+    "giai": "Nhân rồi chọn lớn nhất.",
+    "mau": "Naïve Bayes {0} các tỉ lệ; nhãn có tích {1} là dự đoán.",
     "o": [
      [
-      "đo khoảng cách",
-      "đếm rồi nhân",
-      "hỏi Có / Không",
-      "vẽ đường"
+      "nhân",
+      "cộng",
+      "trừ",
+      "chia"
      ],
      [
-      "đếm rồi nhân",
-      "đo khoảng cách",
-      "hỏi Có / Không",
-      "vẽ đường"
+      "lớn nhất",
+      "nhỏ nhất",
+      "bằng 0",
+      "bằng 1"
      ]
     ],
-    "h": "1dc5c580c58977"
+    "h": "1d40740b097b91"
    },
    {
     "k": "dd",
     "id": "bai19-q27",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Theo tiêu chí.",
-    "mau": "Cần xác suất để chỉnh ngưỡng: chọn {0}; cần luật đọc được: chọn {1}.",
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "Đọc từ hình nhân tay.",
+    "mau": "Học Nhiều, mạng Ít: Đạt gấp {0} lần, tức khoảng {1} Đạt.",
     "o": [
      [
-      "logistic",
-      "KNN",
-      "SVM",
-      "rừng"
+      "37",
+      "2",
+      "10",
+      "100"
      ],
      [
-      "cây nông",
-      "KNN",
-      "SVM",
-      "rừng 500 cây"
+      "97,3%",
+      "50,0%",
+      "32,4%",
+      "100%"
      ]
     ],
-    "h": "10fb142e91597c"
+    "h": "ec0281dda44bb"
    },
    {
     "k": "dd",
     "id": "bai19-q28",
-    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Đọc biểu đồ.",
-    "mau": "Bỏ sót ít nhất: {0}; nhiều nhất: {1}.",
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "Laplace.",
+    "mau": "Một ô bằng 0 làm tích bằng {0}; cách khắc phục gọi là {1}.",
     "o": [
      [
-      "Cây sâu 2",
-      "Logistic",
-      "SVM",
-      "KNN (K = 3)"
+      "0",
+      "1",
+      "vô cùng",
+      "0,5"
      ],
      [
-      "SVM",
-      "Cây sâu 2",
-      "Naïve Bayes",
-      "Logistic"
+      "làm mịn",
+      "đưa về 0 – 1",
+      "cắt tỉa",
+      "bỏ phiếu"
      ]
     ],
-    "h": "1dff1506221761"
+    "h": "1566023825830d"
    },
    {
     "k": "dd",
     "id": "bai19-q29",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Câu chốt.",
-    "mau": "Không có model {0}; chỉ có model {1}.",
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "So với mốc.",
+    "mau": "GaussianNB đúng {0} trên tập kiểm tra; mốc model lười là {1}.",
     "o": [
      [
-      "tốt nhất",
-      "chậm nhất",
-      "đắt nhất",
-      "mới nhất"
+      "91,7%",
+      "54,2%",
+      "100%",
+      "50,0%"
      ],
      [
-      "phù hợp",
-      "phức tạp",
-      "nổi tiếng",
-      "mới nhất"
+      "54,2%",
+      "91,7%",
+      "100%",
+      "90,0%"
      ]
     ],
-    "h": "9493a7942de1d"
+    "h": "3e4252c7c088c"
    },
    {
     "k": "ds",
     "id": "bai19-q30",
-    "q": "Model có độ chính xác cao nhất luôn là lựa chọn đúng.",
-    "giai": "Còn nhiều tiêu chí khác.",
+    "q": "Naïve Bayes cần đưa các cột về cùng thang đo.",
+    "giai": "Mỗi cột được xét riêng trong từng nhãn.",
     "h": "1c614803e683cf"
    },
    {
     "k": "ds",
     "id": "bai19-q31",
-    "q": "Random Forest thường huấn luyện chậm hơn Naïve Bayes.",
-    "giai": "Nhiều cây.",
+    "q": "Tỉ lệ trong bảng tần suất của một nhãn tính trên số bạn của nhãn đó.",
+    "giai": "Xác suất có điều kiện.",
     "h": "2032fea08cf35"
    },
    {
     "k": "ds",
     "id": "bai19-q32",
-    "q": "Hồi quy tuyến tính dùng để phân loại Đạt / Chưa đạt.",
-    "giai": "Nó dự đoán con số.",
+    "q": "Tích 0,3240 nghĩa là bạn đó có 32,4% khả năng Đạt.",
+    "giai": "Phải chia cho tổng hai tích: 97,3%.",
     "h": "b032996557374"
    }
   ]
