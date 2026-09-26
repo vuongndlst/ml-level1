@@ -54,5 +54,19 @@ window.KHOA = [
   "nhan": "Bài 11",
   "tieu_de": "K láng giềng gần nhất (KNN)",
   "phan": "Phần B · Học có giám sát"
+ },
+ {
+  "ma": "bai12",
+  "bai": 12,
+  "nhan": "Bài 12",
+  "tieu_de": "Hồi quy tuyến tính",
+  "phan": "Phần B · Học có giám sát"
+ },
+ {
+  "ma": "bai13",
+  "bai": 13,
+  "nhan": "Bài 13",
+  "tieu_de": "Hồi quy logistic",
+  "phan": "Phần B · Học có giám sát"
  }
 ];

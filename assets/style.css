@@ -268,3 +268,7 @@ table.chu-giai td.en { font-style: italic; color: var(--chu-phu); white-space: n
 /* demo phan tan (Bai 9) */
 .demo svg.phan-tan { width: 100%; max-width: 420px; height: auto; display: block; margin: 8px auto;
   background: #fff; border: 1px solid var(--vien); border-radius: 8px; }
+
+.demo .hang-truot { display: grid; grid-template-columns: 120px 1fr 64px; gap: 10px; align-items: center; margin: 6px 0; }
+.demo .hang-truot b { font-size: 18px; color: var(--xanh); text-align: right; }
+@media (max-width: 520px) { .demo .hang-truot { grid-template-columns: 1fr 56px; } .demo .hang-truot span { grid-column: 1 / -1; } }

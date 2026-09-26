@@ -236,6 +236,7 @@
       case "demo_tung_buoc": return demoTungBuoc(k);
       case "demo_truc": return demoTruc(k);
       case "demo_phan_tan": return demoPhanTan(k);
+      case "demo_ke_duong": return demoKeDuong(k);
     }
     return el("p", { text: "[khối chưa hỗ trợ: " + k.t + "]" });
   }
@@ -391,6 +392,77 @@
     }
     r.addEventListener("input", ve);
     o.appendChild(r); o.appendChild(svg); o.appendChild(kq); ve();
+    return o;
+  }
+  // Tự kẻ đường thẳng y = a·x + b qua đám điểm: kéo a, b; hiện sai số dọc và tổng bình phương sai số.
+  function demoKeDuong(k) {
+    var NS = "http://www.w3.org/2000/svg";
+    var o = el("div", { class: "demo" }, [el("div", { class: "tieu-de-hop", text: "Tự thử: " + k.tieu_de })]);
+    o.appendChild(el("p", { html: k.huong_dan }));
+    function thanh(t, c) {
+      var i = el("input", { type: "range", min: c.min, max: c.max, step: c.buoc, value: c.dau, "aria-label": t });
+      var nh = el("b");
+      o.appendChild(el("div", { class: "hang-truot" }, [el("span", { html: t }), i, nh]));
+      return { i: i, nh: nh, d: c.so_le === undefined ? 2 : c.so_le };
+    }
+    var A = thanh(k.nhan_a || "Hệ số góc a", k.a), B = thanh(k.nhan_b || "Hệ số chặn b", k.b);
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 340 240"); svg.setAttribute("class", "phan-tan");
+    var kq = el("div", { class: "ket-qua" }), bS = el("b"), bT = el("b");
+    kq.appendChild(el("div", {}, [el("span", { text: "Tổng bình phương sai số của con" }), bS]));
+    kq.appendChild(el("div", {}, [el("span", { text: k.nhan_tot || "Đường tốt nhất của máy" }), bT]));
+    var hienMay = false;
+    var nut = el("button", { class: "nut phu", type: "button", text: "Hiện / ẩn đường của máy", onclick: function () { hienMay = !hienMay; ve(); } });
+    var X0 = k.mien.x[0], X1 = k.mien.x[1], Y0 = k.mien.y[0], Y1 = k.mien.y[1];
+    function px(x) { return 36 + (x - X0) / (X1 - X0) * 294; }
+    function py(y) { return 210 - (y - Y0) / (Y1 - Y0) * 200; }
+    function net(x1, y1, x2, y2, mau, w, dash) {
+      var l = document.createElementNS(NS, "line");
+      l.setAttribute("x1", x1); l.setAttribute("y1", y1); l.setAttribute("x2", x2); l.setAttribute("y2", y2);
+      l.setAttribute("stroke", mau); l.setAttribute("stroke-width", w); if (dash) l.setAttribute("stroke-dasharray", dash);
+      svg.appendChild(l);
+    }
+    function chu(x, y, t, anchor) {
+      var e = document.createElementNS(NS, "text");
+      e.setAttribute("x", x); e.setAttribute("y", y); e.setAttribute("font-size", "10"); e.setAttribute("fill", "#55636E");
+      e.setAttribute("text-anchor", anchor || "middle"); e.textContent = t; svg.appendChild(e);
+    }
+    function duong(a, b, mau, w, dash) {
+      // cắt đoạn thẳng trong khung [X0, X1] × [Y0, Y1]
+      var xa = X0, xb = X1;
+      if (a !== 0) {
+        var xy0 = (Y0 - b) / a, xy1 = (Y1 - b) / a;
+        xa = Math.max(xa, Math.min(xy0, xy1)); xb = Math.min(xb, Math.max(xy0, xy1));
+      } else if (b < Y0 || b > Y1) return;
+      if (xa >= xb) return;
+      net(px(xa), py(a * xa + b), px(xb), py(a * xb + b), mau, w, dash);
+    }
+    function sv(x, d) { return so(x, d).replace("-", "−"); }
+    function ve() {
+      var a = +A.i.value, b = +B.i.value;
+      A.nh.textContent = sv(a, A.d); B.nh.textContent = sv(b, B.d);
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      net(36, 10, 36, 210, "#55636E", 1); net(36, 210, 330, 210, "#55636E", 1);
+      chu(183, 236, k.nhan_x); chu(4, 12, k.nhan_y, "start");
+      (k.vach_x || []).forEach(function (v) { chu(px(v), 222, so(v, 0)); });
+      (k.vach_y || []).forEach(function (v) { chu(32, py(v) + 3, so(v, 0), "end"); });
+      var sse = 0;
+      k.diem.forEach(function (d) {
+        var yh = a * d[0] + b; sse += (d[1] - yh) * (d[1] - yh);
+        net(px(d[0]), py(d[1]), px(d[0]), py(Math.max(Y0, Math.min(Y1, yh))), "#C0392B", 0.8);
+      });
+      k.diem.forEach(function (d) {
+        var c = document.createElementNS(NS, "circle");
+        c.setAttribute("cx", px(d[0])); c.setAttribute("cy", py(d[1])); c.setAttribute("r", 3.2);
+        c.setAttribute("fill", "#1E7B45"); c.setAttribute("fill-opacity", "0.8"); svg.appendChild(c);
+      });
+      if (hienMay) duong(k.tot.a, k.tot.b, "#C8A02C", 2.2, "5 3");
+      duong(a, b, "#146B3A", 2.4);
+      bS.textContent = so(sse, 0);
+      bT.textContent = hienMay ? "a = " + sv(k.tot.a, 2) + " · b = " + sv(k.tot.b, 2) + " · " + so(k.tot.sse, 0) : "bấm nút để xem";
+    }
+    A.i.addEventListener("input", ve); B.i.addEventListener("input", ve);
+    o.appendChild(svg); o.appendChild(kq); o.appendChild(el("div", { class: "hang-nut" }, [nut])); ve();
     return o;
   }
   // Chạy một thuật toán lặp từng bước: chọn một phương án, bấm "Bước tiếp" để hiện thêm một dòng.
