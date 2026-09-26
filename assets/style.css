@@ -258,3 +258,13 @@ table.chu-giai td.en { font-style: italic; color: var(--chu-phu); white-space: n
 .demo .chon-pa button { font: inherit; font-size: 15px; padding: 6px 14px; border-radius: 999px; cursor: pointer;
   border: 1.5px solid var(--xanh-chinh); background: #fff; color: var(--xanh); }
 .demo .chon-pa button.dang-chon { background: var(--xanh-chinh); color: #fff; }
+/* demo truc dung (Bai 8) */
+.demo .cot-demo { display: flex; align-items: flex-end; gap: 18px; height: 230px; margin: 12px 0 40px; padding: 0 8px;
+  border-left: 2px solid var(--chu-phu); border-bottom: 2px solid var(--chu-phu); }
+.demo .o-cot { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+.demo .o-cot .cot { width: 70%; background: var(--xanh-chinh); border-radius: 4px 4px 0 0; transition: height .15s; }
+.demo .o-cot b { color: var(--xanh); font-size: 15px; margin-bottom: 4px; }
+.demo .o-cot span { margin-top: 6px; font-weight: 600; font-size: 14px; position: relative; top: 26px; }
+/* demo phan tan (Bai 9) */
+.demo svg.phan-tan { width: 100%; max-width: 420px; height: auto; display: block; margin: 8px auto;
+  background: #fff; border: 1px solid var(--vien); border-radius: 8px; }

@@ -234,6 +234,8 @@
       case "demo_truot": return demoTruot(k);
       case "demo_khoang_cach": return demoKhoangCach(k);
       case "demo_tung_buoc": return demoTungBuoc(k);
+      case "demo_truc": return demoTruc(k);
+      case "demo_phan_tan": return demoPhanTan(k);
     }
     return el("p", { text: "[khối chưa hỗ trợ: " + k.t + "]" });
   }
@@ -334,6 +336,61 @@
       bKc.textContent = "√" + f(tong, 2 * d) + " ≈ " + so(Math.sqrt(tong), d + 1);
     }
     tinh();
+    return o;
+  }
+  // Biểu đồ cột có thanh trượt đổi điểm bắt đầu của trục đứng — thấy trục bị cắt làm chênh lệch trông lớn thế nào.
+  function demoTruc(k) {
+    var o = el("div", { class: "demo" }, [el("div", { class: "tieu-de-hop", text: "Tự thử: " + k.tieu_de })]);
+    o.appendChild(el("p", { html: k.huong_dan }));
+    var vmax = Math.max.apply(null, k.gia_tri), vmin = Math.min.apply(null, k.gia_tri);
+    var tren = k.tran || Math.ceil(vmax * 1.05 * 10) / 10;
+    var r = el("input", { type: "range", min: 0, max: Math.floor(vmin * 100) - 1, step: 1, value: 0, "aria-label": "điểm bắt đầu của trục đứng" });
+    var nhan = el("div", { class: "thong-bao" });
+    var khung = el("div", { class: "cot-demo" });
+    var cot = k.nhan.map(function (t, i) {
+      var h = el("div", { class: "cot" }), so_ = el("b", { text: so(k.gia_tri[i], k.so_le || 2) });
+      khung.appendChild(el("div", { class: "o-cot" }, [so_, h, el("span", { text: t })]));
+      return h;
+    });
+    var kq = el("div", { class: "ket-qua" }), bTi = el("b");
+    kq.appendChild(el("div", {}, [el("span", { text: "Cột cao nhất trông gấp cột thấp nhất" }), bTi]));
+    function ve() {
+      var y0 = +r.value / 100;
+      nhan.innerHTML = "Trục đứng bắt đầu từ <b>" + so(y0, 2) + "</b>";
+      k.gia_tri.forEach(function (x, i) { cot[i].style.height = Math.max(2, (x - y0) / (tren - y0) * 180) + "px"; });
+      bTi.textContent = so((vmax - y0) / (vmin - y0), 1) + " lần";
+    }
+    r.addEventListener("input", ve);
+    o.appendChild(nhan); o.appendChild(r); o.appendChild(khung); o.appendChild(kq); ve();
+    return o;
+  }
+  // Biểu đồ phân tán đổi theo thanh trượt: mỗi nấc là một bộ điểm có hệ số tương quan r khác nhau.
+  function demoPhanTan(k) {
+    var NS = "http://www.w3.org/2000/svg";
+    var o = el("div", { class: "demo" }, [el("div", { class: "tieu-de-hop", text: "Tự thử: " + k.tieu_de })]);
+    o.appendChild(el("p", { html: k.huong_dan }));
+    var r = el("input", { type: "range", min: 0, max: k.bo.length - 1, step: 1, value: k.bat_dau || 0, "aria-label": "hệ số tương quan" });
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 320 220"); svg.setAttribute("class", "phan-tan");
+    var kq = el("div", { class: "ket-qua" }), bR = el("b"), bY = el("b");
+    kq.appendChild(el("div", {}, [el("span", { text: "Hệ số tương quan r" }), bR]));
+    kq.appendChild(el("div", {}, [el("span", { text: "Cách đọc" }), bY]));
+    function ve() {
+      var b = k.bo[+r.value];
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var tr = document.createElementNS(NS, "path");
+      tr.setAttribute("d", "M20 10 V200 H310"); tr.setAttribute("stroke", "#55636E"); tr.setAttribute("fill", "none");
+      svg.appendChild(tr);
+      b.x.forEach(function (x, i) {
+        var c = document.createElementNS(NS, "circle");
+        c.setAttribute("cx", 20 + x * 285); c.setAttribute("cy", 200 - b.y[i] * 185); c.setAttribute("r", 4);
+        c.setAttribute("fill", "#1E7B45"); c.setAttribute("fill-opacity", "0.75");
+        svg.appendChild(c);
+      });
+      bR.textContent = b.r; bY.textContent = b.doc;
+    }
+    r.addEventListener("input", ve);
+    o.appendChild(r); o.appendChild(svg); o.appendChild(kq); ve();
     return o;
   }
   // Chạy một thuật toán lặp từng bước: chọn một phương án, bấm "Bước tiếp" để hiện thêm một dòng.
