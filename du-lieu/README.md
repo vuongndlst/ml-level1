@@ -34,4 +34,12 @@
 - Nguồn: Liang, X., Zou, T., Guo, B., Li, S., Zhang, H., Zhang, S., Huang, H. & Chen, S. X. (2015). *Beijing PM2.5* [Dataset]. UCI Machine Learning Repository. <https://archive.ics.uci.edu/dataset/381/beijing+pm2+5+data> (DOI 10.24432/C5JS49) — số đo theo giờ tại Đại sứ quán Mỹ ở Bắc Kinh, 2010 – 2014.
 - Giấy phép: **Creative Commons Attribution 4.0 (CC BY 4.0)**.
 - Bản này là **bản gộp theo ngày** (1 826 ngày × 6 cột): `pm25` trung bình các giờ có số đo (để trống nếu cả ngày không có số đo — 37 ngày), `diem_suong`, `nhiet_do`, `ap_suat` trung bình ngày, `gio_max` tốc độ gió cộng dồn lớn nhất trong ngày. Bản theo giờ lấy từ bản sao jbrownlee/Datasets (`pollution.csv`), đối chiếu trùng khớp với phần tải được từ UCI.
-- Dùng trong: Bài 22.
+- Dùng trong: Bài 22; đề 1 và dự án mẫu của Dự án cuối khoá.
+
+## forestfires.csv — Forest Fires (UCI)
+
+- Nguồn: Cortez, P. & Morais, A. (2007). *Forest Fires* [Dataset]. UCI Machine Learning Repository. <https://archive.ics.uci.edu/dataset/162/forest+fires> — 517 vụ cháy ở công viên Montesinho (Bồ Đào Nha) × 13 cột.
+- Giấy phép: **Creative Commons Attribution 4.0 (CC BY 4.0)**.
+- Bản này giữ nguyên file gốc `forestfires.csv` tải từ UCI.
+- Lưu ý dạy học: đa số vụ có diện tích cháy rất nhỏ hoặc 0; model phân loại “có lan rộng” chỉ nhỉnh hơn mốc — đề khó, dùng để dạy kết luận trung thực.
+- Dùng trong: Dự án cuối khoá (đề 3).
