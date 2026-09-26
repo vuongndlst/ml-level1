@@ -117,5 +117,26 @@ window.KHOA = [
   "nhan": "Bài 20",
   "tieu_de": "K-Means: máy tự chia nhóm",
   "phan": "Phần D · Học không giám sát"
+ },
+ {
+  "ma": "bai21",
+  "bai": 21,
+  "nhan": "Bài 21",
+  "tieu_de": "Học tăng cường: học qua thử và sai",
+  "phan": "Phần E · Trải nghiệm"
+ },
+ {
+  "ma": "bai22",
+  "bai": 22,
+  "nhan": "Bài 22",
+  "tieu_de": "Dự báo theo thời gian: bụi mịn PM2.5",
+  "phan": "Phần E · Trải nghiệm"
+ },
+ {
+  "ma": "bai23",
+  "bai": 23,
+  "nhan": "Bài 23",
+  "tieu_de": "Đưa model thành ứng dụng",
+  "phan": "Phần E · Trải nghiệm"
  }
 ];

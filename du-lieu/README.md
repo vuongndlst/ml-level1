@@ -1,4 +1,4 @@
-# Dữ liệu dùng trong các buổi thực hành
+# Dữ liệu dùng trong khoá học (thực hành nhóm và bài học)
 
 ## smmh.csv — Social Media and Mental Health
 
@@ -28,3 +28,10 @@
 - Giấy phép: repo TidyTuesday phát hành theo **CC0 1.0 Universal**. Tên bài hát, ca sĩ thuộc về chủ sở hữu tương ứng; chỉ số âm thanh do Spotify ước lượng.
 - Bản này là **mẫu rút gọn**: từ 32 833 dòng gốc, rút 180 bài mỗi thể loại (seed 7) và giữ mọi dòng của các bài đó → 1 235 dòng × 11 cột (bỏ bớt cột ID, album, key, mode, loudness, instrumentalness, liveness; thêm cột `nam` từ ngày phát hành; làm tròn 3 chữ số). Các dòng trùng (một bài nằm trong nhiều playlist) được giữ nguyên để học sinh làm sạch.
 - Dùng trong: Thực hành nhóm 6.
+
+## bui_min_ngay.csv — Beijing PM2.5 (UCI), gộp theo ngày
+
+- Nguồn: Liang, X., Zou, T., Guo, B., Li, S., Zhang, H., Zhang, S., Huang, H. & Chen, S. X. (2015). *Beijing PM2.5* [Dataset]. UCI Machine Learning Repository. <https://archive.ics.uci.edu/dataset/381/beijing+pm2+5+data> (DOI 10.24432/C5JS49) — số đo theo giờ tại Đại sứ quán Mỹ ở Bắc Kinh, 2010 – 2014.
+- Giấy phép: **Creative Commons Attribution 4.0 (CC BY 4.0)**.
+- Bản này là **bản gộp theo ngày** (1 826 ngày × 6 cột): `pm25` trung bình các giờ có số đo (để trống nếu cả ngày không có số đo — 37 ngày), `diem_suong`, `nhiet_do`, `ap_suat` trung bình ngày, `gio_max` tốc độ gió cộng dồn lớn nhất trong ngày. Bản theo giờ lấy từ bản sao jbrownlee/Datasets (`pollution.csv`), đối chiếu trùng khớp với phần tải được từ UCI.
+- Dùng trong: Bài 22.
