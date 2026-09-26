@@ -21,3 +21,10 @@
 - Bản này giữ nguyên nội dung gốc (lấy từ một bản sao công khai trên GitHub, đối chiếu trùng khớp với bản sao thứ hai).
 - Lưu ý dạy học: nguồn đo đạc không được mô tả rõ; tương quan của mọi cột với nhãn gần 0 — dùng để dạy đánh giá chất lượng dữ liệu.
 - Dùng trong: Thực hành nhóm 5.
+
+## spotify_mau.csv — Spotify Songs (TidyTuesday)
+
+- Nguồn: R for Data Science Online Learning Community, TidyTuesday 2020-01-21 — [Spotify Songs](https://github.com/rfordatascience/tidytuesday/tree/main/data/2020/2020-01-21). Dữ liệu do Kaylin Pavlik thu thập từ Spotify Web API qua gói [spotifyr](https://www.rcharlie.com/spotifyr/) (Charlie Thompson, Josiah Parry, Donal Phipps, Tom Wolff).
+- Giấy phép: repo TidyTuesday phát hành theo **CC0 1.0 Universal**. Tên bài hát, ca sĩ thuộc về chủ sở hữu tương ứng; chỉ số âm thanh do Spotify ước lượng.
+- Bản này là **mẫu rút gọn**: từ 32 833 dòng gốc, rút 180 bài mỗi thể loại (seed 7) và giữ mọi dòng của các bài đó → 1 235 dòng × 11 cột (bỏ bớt cột ID, album, key, mode, loudness, instrumentalness, liveness; thêm cột `nam` từ ngày phát hành; làm tròn 3 chữ số). Các dòng trùng (một bài nằm trong nhiều playlist) được giữ nguyên để học sinh làm sạch.
+- Dùng trong: Thực hành nhóm 6.

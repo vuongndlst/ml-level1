@@ -110,5 +110,12 @@ window.KHOA = [
   "nhan": "Bài 19",
   "tieu_de": "Chọn model nào?",
   "phan": "Phần C · Đánh giá và chọn model"
+ },
+ {
+  "ma": "bai20",
+  "bai": 20,
+  "nhan": "Bài 20",
+  "tieu_de": "K-Means: máy tự chia nhóm",
+  "phan": "Phần D · Học không giám sát"
  }
 ];
