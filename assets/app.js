@@ -350,7 +350,8 @@
     var nutTiep = el("button", { class: "nut", type: "button", text: "Bước tiếp ▶", onclick: function () {
       if (hien < k.lua_chon[chon].dong.length) { hien++; ve(); } } });
     var nutLai = el("button", { class: "nut phu", type: "button", text: "Làm lại", onclick: function () { hien = 1; ve(); } });
-    o.appendChild(hangChon); o.appendChild(bang); o.appendChild(el("div", { class: "hang-nut" }, [nutTiep, nutLai, tb2]));
+    if (k.lua_chon.length > 1) o.appendChild(hangChon);
+    o.appendChild(bang); o.appendChild(el("div", { class: "hang-nut" }, [nutTiep, nutLai, tb2]));
     function ve() {
       nutPa.forEach(function (b, i) { b.className = i === chon ? "dang-chon" : ""; b.setAttribute("aria-pressed", i === chon ? "true" : "false"); });
       var pa = k.lua_chon[chon];
