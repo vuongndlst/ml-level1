@@ -232,6 +232,8 @@
         }))]);
       case "demo_tb_tv": return demoTbTv(k);
       case "demo_truot": return demoTruot(k);
+      case "demo_khoang_cach": return demoKhoangCach(k);
+      case "demo_tung_buoc": return demoTungBuoc(k);
     }
     return el("p", { text: "[khối chưa hỗ trợ: " + k.t + "]" });
   }
@@ -286,6 +288,78 @@
     }
     r.addEventListener("input", ve);
     o.appendChild(nhan); o.appendChild(r); o.appendChild(kq); ve();
+    return o;
+  }
+  // Khoảng cách Euclid giữa hai điểm, hiện từng bước; tuỳ chọn đưa từng cột về 0 – 1 trước khi đo.
+  function demoKhoangCach(k) {
+    var o = el("div", { class: "demo" }, [el("div", { class: "tieu-de-hop", text: "Tự thử: " + k.tieu_de })]);
+    o.appendChild(el("p", { html: k.huong_dan }));
+    var ten = Object.keys(k.diem), P = {};
+    ten.forEach(function (t) { P[t] = k.diem[t].slice(); });
+    var tbN = el("table", { class: "bang nhap-diem" });
+    tbN.appendChild(el("tr", {}, [el("th", { text: "Điểm" })].concat(k.cot.map(function (c) { return el("th", { html: c }); }))));
+    ten.forEach(function (t) {
+      tbN.appendChild(el("tr", {}, [el("td", { html: "<b>" + t + "</b>" })].concat(k.cot.map(function (_, j) {
+        var ip = el("input", { type: "number", step: "any", value: P[t][j], "aria-label": t + " — " + k.cot[j] });
+        ip.addEventListener("input", function () { var x = parseFloat(ip.value); if (!isNaN(x)) { P[t][j] = x; tinh(); } });
+        return el("td", {}, [ip]);
+      }))));
+    });
+    o.appendChild(el("div", { class: "bang-wrap" }, [tbN]));
+    var hop = null;
+    if (k.mien) {
+      hop = el("input", { type: "checkbox", id: "cb-" + Math.random().toString(36).slice(2) });
+      hop.addEventListener("change", tinh);
+      o.appendChild(el("label", { class: "chon-thang-do", for: hop.id }, [hop,
+        el("span", { html: " " + (k.nhan_thang_do || "Đưa từng cột về 0 – 1 trước khi đo") })]));
+    }
+    var buoc = el("div", { class: "bang-wrap" }), kq = el("div", { class: "ket-qua" }), bKc = el("b");
+    kq.appendChild(el("div", {}, [el("span", { text: "Khoảng cách " + ten[0] + " → " + ten[1] }), bKc]));
+    o.appendChild(buoc); o.appendChild(kq);
+    // Sau khi đổi về 0 – 1, làm tròn 3 chữ số rồi mới trừ — khớp với cách học sinh tính tay.
+    function doi(v, j) {
+      return hop && hop.checked ? Math.round((v - k.mien[j][0]) / (k.mien[j][1] - k.mien[j][0]) * 1000) / 1000 : v;
+    }
+    function f(x, d) { var r = Math.round(x * 1e6) / 1e6; return (r === Math.round(r) ? so(r, 0) : so(r, d)).replace("-", "−"); }
+    function tinh() {
+      var d = hop && hop.checked ? 3 : 1, tong = 0;
+      var cot = ["Cột", ten[0], ten[1], "Hiệu " + ten[0] + " − " + ten[1], "Bình phương hiệu"], dong = [];
+      k.cot.forEach(function (c, j) {
+        var a = doi(P[ten[0]][j], j), b = doi(P[ten[1]][j], j), h = a - b;
+        tong += h * h;
+        dong.push([c, f(a, d), f(b, d), f(h, d), f(h * h, 2 * d)]);
+      });
+      dong.push(["Tổng các bình phương", "", "", "", "<b>" + f(tong, 2 * d) + "</b>"]);
+      buoc.innerHTML = ""; buoc.appendChild(veBang(cot, dong, [dong.length - 1]));
+      bKc.textContent = "√" + f(tong, 2 * d) + " ≈ " + so(Math.sqrt(tong), d + 1);
+    }
+    tinh();
+    return o;
+  }
+  // Chạy một thuật toán lặp từng bước: chọn một phương án, bấm "Bước tiếp" để hiện thêm một dòng.
+  function demoTungBuoc(k) {
+    var o = el("div", { class: "demo" }, [el("div", { class: "tieu-de-hop", text: "Tự thử: " + k.tieu_de })]);
+    o.appendChild(el("p", { html: k.huong_dan }));
+    var chon = k.mac_dinh || 0, hien = 1;
+    var hangChon = el("div", { class: "hang-nut chon-pa" }, [el("span", { html: k.nhan_chon + ":" })]);
+    var nutPa = k.lua_chon.map(function (pa, i) {
+      var b = el("button", { type: "button", text: pa.nhan, onclick: function () { chon = i; hien = 1; ve(); } });
+      hangChon.appendChild(b); return b;
+    });
+    var bang = el("div", {}), tb2 = el("span", { class: "thong-bao" });
+    var nutTiep = el("button", { class: "nut", type: "button", text: "Bước tiếp ▶", onclick: function () {
+      if (hien < k.lua_chon[chon].dong.length) { hien++; ve(); } } });
+    var nutLai = el("button", { class: "nut phu", type: "button", text: "Làm lại", onclick: function () { hien = 1; ve(); } });
+    o.appendChild(hangChon); o.appendChild(bang); o.appendChild(el("div", { class: "hang-nut" }, [nutTiep, nutLai, tb2]));
+    function ve() {
+      nutPa.forEach(function (b, i) { b.className = i === chon ? "dang-chon" : ""; b.setAttribute("aria-pressed", i === chon ? "true" : "false"); });
+      var pa = k.lua_chon[chon];
+      bang.innerHTML = "";
+      bang.appendChild(veBang(k.cot, pa.dong.slice(0, hien), [hien - 1]));
+      nutTiep.disabled = hien >= pa.dong.length;
+      tb2.textContent = hien >= pa.dong.length ? "Đã chạy hết " + (pa.dong.length - 1) + " bước." : "";
+    }
+    ve();
     return o;
   }
 

@@ -248,3 +248,13 @@ table.chu-giai td.en { font-style: italic; color: var(--chu-phu); white-space: n
 .sx li.dang-keo { position: relative; z-index: 5; box-shadow: 0 6px 18px rgba(0,0,0,.15); background: #fff; }
 .sx li.cho-tha { outline: 2px dashed var(--xanh-tuoi); }
 .dau a img { display: block; }
+
+/* demo khoảng cách + demo từng bước (Bài 5) */
+.demo table.nhap-diem input { width: 96px; font: inherit; font-size: 15px; padding: 4px 6px;
+  border: 1.5px solid var(--vang); background: var(--vang-nhat); border-radius: 6px; }
+.demo .chon-thang-do { display: flex; align-items: center; gap: 6px; margin: 10px 0; font-weight: 600; cursor: pointer; }
+.demo .chon-thang-do input { width: 20px; height: 20px; accent-color: var(--xanh-chinh); }
+.demo .chon-pa { margin: 6px 0 10px; }
+.demo .chon-pa button { font: inherit; font-size: 15px; padding: 6px 14px; border-radius: 999px; cursor: pointer;
+  border: 1.5px solid var(--xanh-chinh); background: #fff; color: var(--xanh); }
+.demo .chon-pa button.dang-chon { background: var(--xanh-chinh); color: #fff; }
