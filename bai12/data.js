@@ -112,9 +112,14 @@ window.BAI = {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Supervised Machine Learning",
-       "url": "https://www.geeksforgeeks.org/machine-learning/supervised-machine-learning/",
-       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+       "ten": "Google — Introduction to Machine Learning: Supervised learning",
+       "url": "https://developers.google.com/machine-learning/intro-to-ml/supervised",
+       "ghi_chu": "tiếng Anh"
+      },
+      {
+       "ten": "Elements of AI — chương 4: Machine learning",
+       "url": "https://www.elementsofai.com/",
+       "ghi_chu": "khoá miễn phí, tiếng Anh"
       }
      ]
     }
@@ -298,6 +303,11 @@ window.BAI = {
     {
      "t": "doc_them",
      "link": [
+      {
+       "ten": "scikit-learn — Supervised learning (danh sách model phân loại và hồi quy)",
+       "url": "https://scikit-learn.org/stable/supervised_learning.html",
+       "ghi_chu": "tài liệu chính thức"
+      },
       {
        "ten": "Getting started with Classification",
        "url": "https://www.geeksforgeeks.org/machine-learning/getting-started-with-classification/",
@@ -701,6 +711,83 @@ window.BAI = {
      "cap": "Ba kiểu model: chưa khớp, vừa khớp, học vẹt",
      "alt": "Ba kiểu model: chưa khớp, vừa khớp, học vẹt",
      "src": "img/chua-khop-vua-khop-hoc-vet.png"
+    },
+    {
+     "t": "tra_bang",
+     "tieu_de": "model càng phức tạp, càng tốt?",
+     "huong_dan": "Model ở đây là một <b>cây quyết định</b> (Bài 18) học từ giờ tự học và phút mạng. Kéo thanh trượt để cho cây hỏi thêm nhiều tầng câu hỏi. Theo dõi hai đường: <b>đã học (train)</b> và <b>chưa thấy (test)</b>. Từ độ sâu nào cây bắt đầu học vẹt?",
+     "nhan_truot": "Độ sâu tối đa của cây",
+     "khoa": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "∞"
+     ],
+     "so": [
+      91.1,
+      92.3,
+      92.9,
+      94.6,
+      96.4,
+      97.6,
+      98.2,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+     ],
+     "so2": [
+      91.7,
+      91.7,
+      91.7,
+      91.7,
+      87.5,
+      88.9,
+      88.9,
+      87.5,
+      87.5,
+      87.5,
+      87.5
+     ],
+     "ten_chenh": "train − test:",
+     "ten_so": "Đã học (train)",
+     "ten_so2": "Chưa thấy (test)",
+     "don_vi": "%",
+     "kieu": "duong",
+     "ymin": 80,
+     "ymax": 100,
+     "truc_x": "Độ sâu tối đa (max_depth)",
+     "truc_y": "Đoán đúng (%)",
+     "ghi": [
+      "Độ sâu 1: train 91,1%, test 91,7%.",
+      "Độ sâu 2: train 92,3%, test 91,7%.",
+      "Độ sâu 3: train 92,9%, test 91,7%.",
+      "Độ sâu 4: train 94,6%, test 91,7%.",
+      "Độ sâu 5: train 96,4%, test 87,5%.",
+      "Độ sâu 6: train 97,6%, test 88,9%.",
+      "Độ sâu 7: train 98,2%, test 88,9%.",
+      "Độ sâu 8: train 100,0%, test 87,5%. Train chạm 100%% nhưng test tụt — học vẹt.",
+      "Độ sâu 9: train 100,0%, test 87,5%. Train chạm 100%% nhưng test tụt — học vẹt.",
+      "Độ sâu 10: train 100,0%, test 87,5%. Train chạm 100%% nhưng test tụt — học vẹt.",
+      "Không giới hạn: train 100,0%, test 87,5%. Cây vẫn đoán bạn mới bằng các câu hỏi đã học nên không tệ như model nhớ từng dòng ở bảng trên (54,2%) — nhưng vẫn kém cây nông độ sâu 1 – 4."
+     ]
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Google Machine Learning Crash Course — Overfitting",
+       "url": "https://developers.google.com/machine-learning/crash-course/overfitting/overfitting",
+       "ghi_chu": "tiếng Anh"
+      }
+     ]
     },
     {
      "t": "video",
