@@ -17,6 +17,7 @@
  *  knn             kéo điểm mới trên tập huấn luyện, chọn K, bật/tắt đưa về 0 – 1 -> K láng giềng bỏ phiếu
  *  mat_phang       hồi quy 2 cột: điểm 3D + mặt phẳng model tìm được (Plotly), bật/tắt mặt phẳng
  *  nguong_nham_lan kéo ngưỡng xác suất -> chấm từng bạn (viền đỏ = sai) + ma trận nhầm lẫn (tính sẵn)
+ *  chia_nhanh      chọn cột, kéo ngưỡng -> hai nhánh (số Đạt / Chưa đạt) + Gini còn lại (tính sẵn)
  *  keo_diem        kéo các chấm trên trục số -> số trung bình, trung vị, độ lệch chuẩn (chia n, như SGK) đổi ngay
  */
 (function () {
@@ -738,10 +739,50 @@
     return o;
   }
 
+  // ---------------------------------------------------------------- chia_nhanh (chọn cột, kéo ngưỡng -> hai nhánh + Gini)
+  function chiaNhanh(k) {
+    var o = khung(k, "chia-nhanh"), ten = Object.keys(k.bang);
+    var sc = el("select", { "aria-label": "cột" }, ten.map(function (c) { return el("option", { value: c, text: c }); }));
+    var r = el("input", { type: "range", min: 0, max: 1, step: 1, value: 0, "aria-label": "ngưỡng" });
+    var nhan = el("div", { class: "thong-bao" }), cv = canvas(640, 165);
+    var hang = el("div", { class: "tt-the-hang" }, [the("Gini trước khi chia", "g0"), the("Gini còn lại sau khi chia", "g1"), the("Giảm được", "gd")]);
+    o.appendChild(el("div", { class: "tt-hang" }, [el("label", {}, ["Hỏi theo cột ", sc])])); o.appendChild(nhan); o.appendChild(r);
+    o.appendChild(cv.c); o.appendChild(hang);
+    var tot = el("p", { class: "tt-ghi" }); o.appendChild(tot);
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    function doiCot() { var d = k.bang[sc.value]; r.max = d.length - 1; r.value = Math.floor(d.length / 2); ve(); }
+    function ve() {
+      var d = k.bang[sc.value], m = d[+r.value], g = cv.g;
+      nhan.innerHTML = "Câu hỏi: <b>" + sc.value + " ≤ " + so(m.t, k.so_le[sc.value] || 0) + "</b> ?";
+      g.clearRect(0, 0, cv.w, cv.h);
+      [["Có (≤)", m.trai, 20], ["Không (>)", m.phai, 340]].forEach(function (nh) {
+        var x0 = nh[2], w = 280, tong = nh[1][0] + nh[1][1], gi = tong ? 1 - Math.pow(nh[1][0] / tong, 2) - Math.pow(nh[1][1] / tong, 2) : 0;
+        g.fillStyle = MAU.chu; g.font = "600 14px " + FONT; g.textAlign = "left";
+        g.fillText(nh[0] + " — " + tong + " bạn", x0, 22);
+        var h = 150, y0 = 36, wA = tong ? w * nh[1][0] / tong : 0;
+        g.fillStyle = MAU.chinh; g.fillRect(x0, y0, wA, 46); g.fillStyle = MAU.vang; g.fillRect(x0 + wA, y0, w - wA, 46);
+        if (!tong) { g.fillStyle = MAU.vien; g.fillRect(x0, y0, w, 46); }
+        g.font = "13px " + FONT; g.fillStyle = MAU.chu;
+        g.fillText(k.ten[0] + ": " + nh[1][0] + "   " + k.ten[1] + ": " + nh[1][1], x0, y0 + 70);
+        g.fillText("Gini nhánh: " + so(gi, 3), x0, y0 + 92);
+        g.fillStyle = gi < 0.2 ? MAU.teal : gi < 0.4 ? MAU.phu : "#DC2626";
+        g.fillText(gi < 0.2 ? "khá thuần" : gi < 0.4 ? "còn lẫn" : "lẫn nhiều", x0, y0 + 114);
+      });
+      hang.querySelector('[data-id="g0"]').textContent = so(k.gini_goc, 3);
+      hang.querySelector('[data-id="g1"]').textContent = so(m.gini, 3);
+      hang.querySelector('[data-id="gd"]').textContent = so(k.gini_goc - m.gini, 3);
+      var tb = null; ten.forEach(function (c) { k.bang[c].forEach(function (x) { if (!tb || x.gini < tb.gini) tb = { c: c, t: x.t, gini: x.gini }; }); });
+      tot.innerHTML = m.gini <= tb.gini + 1e-9 ? "<b>Đây chính là câu hỏi máy chọn đầu tiên</b> — Gini còn lại nhỏ nhất trong mọi câu hỏi đã thử."
+        : "Còn câu hỏi làm Gini nhỏ hơn nữa — thử tiếp cột khác hoặc ngưỡng khác.";
+    }
+    sc.addEventListener("change", doiCot); r.addEventListener("input", ve); doiCot();
+    return o;
+  }
+
   window.ML1_TT = {
     init: function (hamEl) { el = hamEl; },
     tra_bang: traBang, du_doan_tu: duDoanTu, phan_tan_3d: phanTan3d, loc_bang: locBang,
     histogram: histogram, chay_tung_dong: chayTungDong, keo_diem: keoDiem,
-    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d, knn: knn, mat_phang: matPhang, nguong_nham_lan: nguongNhamLan
+    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d, knn: knn, mat_phang: matPhang, nguong_nham_lan: nguongNhamLan, chia_nhanh: chiaNhanh
   };
 })();

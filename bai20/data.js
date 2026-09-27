@@ -80,6 +80,49 @@ window.BAI = {
      ]
     },
     {
+     "t": "tra_bang",
+     "tieu_de": "càng nhiều bạn góp, trung bình càng gần",
+     "huong_dan": "Kéo để đổi số bạn góp vào con số trung bình. Con số lớn là <b>trung bình sai lệch</b> so với 250 kẹo thật (thử 200 cách chọn bạn khác nhau).",
+     "nhan_truot": "Số bạn góp vào trung bình",
+     "khoa": [
+      "1",
+      "2",
+      "3",
+      "5",
+      "8",
+      "12",
+      "20",
+      "30"
+     ],
+     "so": [
+      76.5,
+      54.2,
+      42.5,
+      32.3,
+      27.9,
+      22.7,
+      17.1,
+      16.5
+     ],
+     "nhan_so": "Sai lệch trung bình",
+     "don_vi": " kẹo",
+     "so_le": 1,
+     "kieu": "cot",
+     "ymin": 0,
+     "truc_x": "Số bạn",
+     "truc_y": "Sai lệch (kẹo)",
+     "ghi": [
+      "Một bạn đoán một mình: lệch trung bình 76,5 kẹo.",
+      "2 bạn: lệch 54,2 kẹo.",
+      "3 bạn: lệch 42,5 kẹo.",
+      "5 bạn: lệch 32,3 kẹo.",
+      "8 bạn: lệch 27,9 kẹo.",
+      "12 bạn: lệch 22,7 kẹo.",
+      "20 bạn: lệch 17,1 kẹo.",
+      "30 bạn: lệch 16,5 kẹo."
+     ]
+    },
+    {
      "t": "dinh_nghia",
      "ten": "Tổ hợp model (ensemble)",
      "html": "Kết hợp nhiều model: phân loại thì <b>bỏ phiếu</b>, hồi quy thì <b>lấy trung bình</b>. Hiệu quả nhất khi các model <b>sai theo những cách khác nhau</b>.",
@@ -136,6 +179,16 @@ window.BAI = {
     {
      "t": "doc_them",
      "link": [
+      {
+       "ten": "scikit-learn — Ensembles: random forests",
+       "url": "https://scikit-learn.org/stable/modules/ensemble.html#forest",
+       "ghi_chu": "tài liệu chính thức"
+      },
+      {
+       "ten": "Google — Decision Forests: Random forests",
+       "url": "https://developers.google.com/machine-learning/decision-forests/random-forests",
+       "ghi_chu": "tiếng Anh"
+      },
       {
        "ten": "A Comprehensive Guide to Ensemble Learning",
        "url": "https://www.geeksforgeeks.org/machine-learning/a-comprehensive-guide-to-ensemble-learning/",
