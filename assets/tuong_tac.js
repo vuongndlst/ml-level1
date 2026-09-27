@@ -15,6 +15,8 @@
  *  bieu_do_hop     chọn cột số × cách chia nhóm -> các hộp (tứ phân vị tính sẵn bằng pandas) + bảng số
  *  phan_tan_2d     chọn cột trục ngang, trục đứng -> biểu đồ phân tán + hệ số r (tính sẵn bằng pandas)
  *  knn             kéo điểm mới trên tập huấn luyện, chọn K, bật/tắt đưa về 0 – 1 -> K láng giềng bỏ phiếu
+ *  mat_phang       hồi quy 2 cột: điểm 3D + mặt phẳng model tìm được (Plotly), bật/tắt mặt phẳng
+ *  nguong_nham_lan kéo ngưỡng xác suất -> chấm từng bạn (viền đỏ = sai) + ma trận nhầm lẫn (tính sẵn)
  *  keo_diem        kéo các chấm trên trục số -> số trung bình, trung vị, độ lệch chuẩn (chia n, như SGK) đổi ngay
  */
 (function () {
@@ -676,10 +678,70 @@
     return o;
   }
 
+  // ---------------------------------------------------------------- mat_phang (hồi quy 2 cột: điểm 3D + mặt phẳng)
+  function matPhang(k) {
+    var o = khung(k, "mat-phang"), vung = el("div", { class: "tt-3d" }), cb = el("input", { type: "checkbox" });
+    cb.checked = true;
+    o.appendChild(el("label", { class: "tt-cong-tac-dong" }, [cb, el("span", { html: "Hiện mặt phẳng " + k.cong_thuc })]));
+    o.appendChild(vung);
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    taiPlotly().then(function () {
+      var xs = [Math.min.apply(null, k.x), Math.max.apply(null, k.x)], ys = [Math.min.apply(null, k.y), Math.max.apply(null, k.y)];
+      var z = ys.map(function (yy) { return xs.map(function (xx) { return k.a1 * xx + k.a2 * yy + k.b; }); });
+      Plotly.newPlot(vung, [
+        { type: "scatter3d", mode: "markers", x: k.x, y: k.y, z: k.z, marker: { size: 3.5, color: MAU.chinh, opacity: 0.85 }, name: "máy" },
+        { type: "surface", x: xs, y: ys, z: z, opacity: 0.45, showscale: false, colorscale: [[0, "#F59E0B"], [1, "#F59E0B"]], name: "mặt phẳng" }],
+        { margin: { l: 0, r: 0, t: 0, b: 0 }, showlegend: false, font: { family: FONT },
+          scene: { xaxis: { title: k.nhan_x }, yaxis: { title: k.nhan_y }, zaxis: { title: k.nhan_z }, camera: { eye: { x: 1.7, y: -1.4, z: 0.8 } } } },
+        { displaylogo: false, responsive: true });
+      cb.addEventListener("change", function () { Plotly.restyle(vung, { visible: cb.checked }, [1]); });
+    }).catch(function () { vung.innerHTML = '<p class="tt-ghi">Không tải được thư viện vẽ 3D — kiểm tra kết nối mạng.</p>'; });
+    return o;
+  }
+
+  // ---------------------------------------------------------------- nguong_nham_lan (kéo ngưỡng -> chấm + ma trận nhầm lẫn)
+  function nguongNhamLan(k) {
+    var o = khung(k, "nguong-nham-lan"), M = k.moc, n = M.length;
+    var r = el("input", { type: "range", min: 0, max: n - 1, step: 1, value: k.bat_dau || 0, "aria-label": "ngưỡng" });
+    var nhan = el("div", { class: "thong-bao" }), cv = canvas(640, 190);
+    var mt = el("table", { class: "bang tt-ma-tran" }), hang = el("div", { class: "tt-the-hang" }, [the("Độ chính xác", "acc"), the("Bỏ sót", "bs"), the("Báo nhầm", "bn")]);
+    o.appendChild(nhan); o.appendChild(r); o.appendChild(cv.c); o.appendChild(el("div", { class: "tt-hai-cot" }, [mt, hang]));
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    function ve() {
+      var m = M[+r.value], g = cv.g, L = 96, R = 16, T = 12, B = 34, W = cv.w - L - R, H = cv.h - T - B;
+      nhan.innerHTML = "Ngưỡng xác suất " + k.ten_duong + " = <b>" + so(m.t, 2) + "</b> — từ ngưỡng trở lên thì đoán " + k.ten_duong;
+      g.clearRect(0, 0, cv.w, cv.h);
+      var X = function (p) { return L + p * W; };
+      g.strokeStyle = MAU.vien; g.fillStyle = MAU.phu; g.font = "12px " + FONT; g.textAlign = "center";
+      [0, 0.25, 0.5, 0.75, 1].forEach(function (p) { g.beginPath(); g.moveTo(X(p), T); g.lineTo(X(p), T + H); g.stroke(); g.fillText(so(p, 2), X(p), T + H + 16); });
+      g.fillText("Xác suất " + k.ten_duong + " model đưa ra", L + W / 2, cv.h - 2);
+      var hangY = {}; hangY[k.nhan_am] = T + H * 0.3; hangY[k.nhan_duong] = T + H * 0.75;
+      g.textAlign = "right"; g.fillStyle = MAU.chu;
+      g.fillText("Thật " + k.ten_am, L - 8, hangY[k.nhan_am] + 4); g.fillText("Thật " + k.ten_duong, L - 8, hangY[k.nhan_duong] + 4);
+      k.xac_suat.forEach(function (p, i) {
+        var that = k.nhan[i], doan = p >= m.t ? k.nhan_duong : k.nhan_am, sai = that !== doan;
+        var jit = ((i * 37) % 11 - 5) * 3.2;
+        g.beginPath(); g.arc(X(p), hangY[that] + jit, sai ? 5.5 : 4, 0, 7);
+        g.fillStyle = that === k.nhan_duong ? MAU.chinh : MAU.vang; g.globalAlpha = sai ? 1 : 0.55; g.fill(); g.globalAlpha = 1;
+        if (sai) { g.strokeStyle = "#DC2626"; g.lineWidth = 2; g.stroke(); }
+      });
+      g.strokeStyle = "#DC2626"; g.lineWidth = 2.5; g.setLineDash([6, 4]); g.beginPath(); g.moveTo(X(m.t), T); g.lineTo(X(m.t), T + H); g.stroke(); g.setLineDash([]);
+      var dungAm = k.tong_am - m.bo_sot, dungDuong = k.tong_duong - m.bao_nham;
+      mt.innerHTML = "<tr><th></th><th>Đoán " + k.ten_am + "</th><th>Đoán " + k.ten_duong + "</th></tr>" +
+        "<tr><th>Thật " + k.ten_am + "</th><td class='dung'>" + dungAm + " đúng</td><td class='sai'>" + m.bo_sot + " bỏ sót</td></tr>" +
+        "<tr><th>Thật " + k.ten_duong + "</th><td class='sai'>" + m.bao_nham + " báo nhầm</td><td class='dung'>" + dungDuong + " đúng</td></tr>";
+      hang.querySelector('[data-id="acc"]').textContent = so(m.acc, 1) + "%";
+      hang.querySelector('[data-id="bs"]').textContent = m.bo_sot + " bạn";
+      hang.querySelector('[data-id="bn"]').textContent = m.bao_nham + " bạn";
+    }
+    r.addEventListener("input", ve); ve();
+    return o;
+  }
+
   window.ML1_TT = {
     init: function (hamEl) { el = hamEl; },
     tra_bang: traBang, du_doan_tu: duDoanTu, phan_tan_3d: phanTan3d, loc_bang: locBang,
     histogram: histogram, chay_tung_dong: chayTungDong, keo_diem: keoDiem,
-    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d, knn: knn
+    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d, knn: knn, mat_phang: matPhang, nguong_nham_lan: nguongNhamLan
   };
 })();

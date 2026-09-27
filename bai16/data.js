@@ -122,6 +122,16 @@ window.BAI = {
      "t": "doc_them",
      "link": [
       {
+       "ten": "Google Machine Learning Crash Course — Logistic regression",
+       "url": "https://developers.google.com/machine-learning/crash-course/logistic-regression",
+       "ghi_chu": "tiếng Anh"
+      },
+      {
+       "ten": "Google Machine Learning Crash Course — Thresholds and the confusion matrix",
+       "url": "https://developers.google.com/machine-learning/crash-course/classification/thresholding",
+       "ghi_chu": "tiếng Anh"
+      },
+      {
        "ten": "Understanding Logistic Regression",
        "url": "https://www.geeksforgeeks.org/machine-learning/understanding-logistic-regression/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
@@ -582,101 +592,269 @@ window.BAI = {
      "html": "Quy tắc: xác suất Đạt ≥ ngưỡng → đoán Đạt; nhỏ hơn → đoán Chưa đạt. Nâng ngưỡng lên thì model khó đoán Đạt hơn — nhiều bạn bị gắn cờ Chưa đạt hơn."
     },
     {
-     "t": "demo_truot",
-     "tieu_de": "kéo ngưỡng trên 72 bạn tập kiểm tra",
-     "huong_dan": "Kéo thanh trượt để đổi ngưỡng. Theo dõi số bạn bị bỏ sót, bị báo nhầm và độ chính xác.",
-     "dieu_kien": "Ngưỡng xác suất Đạt = <b>{x}</b>",
+     "t": "nguong_nham_lan",
+     "tieu_de": "kéo ngưỡng, xem ai bị đoán sai",
+     "huong_dan": "Mỗi chấm là một bạn trong 72 bạn tập kiểm tra, đặt theo xác suất Đạt model đưa ra. Chấm viền đỏ là bạn bị đoán sai. Kéo ngưỡng: ô <b>bỏ sót</b> và ô <b>báo nhầm</b> đổi chỗ cho nhau thế nào? Tìm ngưỡng không bỏ sót bạn nào.",
      "moc": [
       {
-       "x": 0.1,
-       "n": "29 bỏ sót · 0 báo nhầm",
-       "p": 59.7
+       "t": 0.1,
+       "acc": 59.7,
+       "bo_sot": 29,
+       "bao_nham": 0
       },
       {
-       "x": 0.15,
-       "n": "22 bỏ sót · 0 báo nhầm",
-       "p": 69.4
+       "t": 0.15,
+       "acc": 69.4,
+       "bo_sot": 22,
+       "bao_nham": 0
       },
       {
-       "x": 0.2,
-       "n": "16 bỏ sót · 0 báo nhầm",
-       "p": 77.8
+       "t": 0.2,
+       "acc": 77.8,
+       "bo_sot": 16,
+       "bao_nham": 0
       },
       {
-       "x": 0.25,
-       "n": "12 bỏ sót · 0 báo nhầm",
-       "p": 83.3
+       "t": 0.25,
+       "acc": 83.3,
+       "bo_sot": 12,
+       "bao_nham": 0
       },
       {
-       "x": 0.3,
-       "n": "7 bỏ sót · 0 báo nhầm",
-       "p": 90.3
+       "t": 0.3,
+       "acc": 90.3,
+       "bo_sot": 7,
+       "bao_nham": 0
       },
       {
-       "x": 0.35,
-       "n": "7 bỏ sót · 0 báo nhầm",
-       "p": 90.3
+       "t": 0.35,
+       "acc": 90.3,
+       "bo_sot": 7,
+       "bao_nham": 0
       },
       {
-       "x": 0.4,
-       "n": "5 bỏ sót · 1 báo nhầm",
-       "p": 91.7
+       "t": 0.4,
+       "acc": 91.7,
+       "bo_sot": 5,
+       "bao_nham": 1
       },
       {
-       "x": 0.45,
-       "n": "3 bỏ sót · 2 báo nhầm",
-       "p": 93.1
+       "t": 0.45,
+       "acc": 93.1,
+       "bo_sot": 3,
+       "bao_nham": 2
       },
       {
-       "x": 0.5,
-       "n": "3 bỏ sót · 3 báo nhầm",
-       "p": 91.7
+       "t": 0.5,
+       "acc": 91.7,
+       "bo_sot": 3,
+       "bao_nham": 3
       },
       {
-       "x": 0.55,
-       "n": "1 bỏ sót · 5 báo nhầm",
-       "p": 91.7
+       "t": 0.55,
+       "acc": 91.7,
+       "bo_sot": 1,
+       "bao_nham": 5
       },
       {
-       "x": 0.6,
-       "n": "0 bỏ sót · 9 báo nhầm",
-       "p": 87.5
+       "t": 0.6,
+       "acc": 87.5,
+       "bo_sot": 0,
+       "bao_nham": 9
       },
       {
-       "x": 0.65,
-       "n": "0 bỏ sót · 13 báo nhầm",
-       "p": 81.9
+       "t": 0.65,
+       "acc": 81.9,
+       "bo_sot": 0,
+       "bao_nham": 13
       },
       {
-       "x": 0.7,
-       "n": "0 bỏ sót · 14 báo nhầm",
-       "p": 80.6
+       "t": 0.7,
+       "acc": 80.6,
+       "bo_sot": 0,
+       "bao_nham": 14
       },
       {
-       "x": 0.75,
-       "n": "0 bỏ sót · 17 báo nhầm",
-       "p": 76.4
+       "t": 0.75,
+       "acc": 76.4,
+       "bo_sot": 0,
+       "bao_nham": 17
       },
       {
-       "x": 0.8,
-       "n": "0 bỏ sót · 20 báo nhầm",
-       "p": 72.2
+       "t": 0.8,
+       "acc": 72.2,
+       "bo_sot": 0,
+       "bao_nham": 20
       },
       {
-       "x": 0.85,
-       "n": "0 bỏ sót · 22 báo nhầm",
-       "p": 69.4
+       "t": 0.85,
+       "acc": 69.4,
+       "bo_sot": 0,
+       "bao_nham": 22
       },
       {
-       "x": 0.9,
-       "n": "0 bỏ sót · 26 báo nhầm",
-       "p": 63.9
+       "t": 0.9,
+       "acc": 63.9,
+       "bo_sot": 0,
+       "bao_nham": 26
       }
      ],
-     "nhan_n": "Trên 72 bạn",
-     "nhan_p": "Độ chính xác",
-     "so_le_x": 2,
-     "bat_dau": 8
+     "bat_dau": 8,
+     "xac_suat": [
+      0.8058,
+      0.8736,
+      0.9477,
+      0.9161,
+      0.3575,
+      0.5313,
+      0.3942,
+      0.4912,
+      0.5453,
+      0.0918,
+      0.1976,
+      0.2108,
+      0.1331,
+      0.9327,
+      0.8064,
+      0.2508,
+      0.0947,
+      0.2833,
+      0.7839,
+      0.6188,
+      0.1379,
+      0.1983,
+      0.1605,
+      0.9636,
+      0.2429,
+      0.7212,
+      0.0815,
+      0.8752,
+      0.7602,
+      0.6885,
+      0.7022,
+      0.5843,
+      0.9372,
+      0.9573,
+      0.4426,
+      0.1195,
+      0.2919,
+      0.4246,
+      0.6116,
+      0.7672,
+      0.883,
+      0.9243,
+      0.2445,
+      0.1678,
+      0.9073,
+      0.7465,
+      0.1794,
+      0.1808,
+      0.1285,
+      0.114,
+      0.892,
+      0.5322,
+      0.4348,
+      0.1124,
+      0.5506,
+      0.5984,
+      0.2607,
+      0.2874,
+      0.9509,
+      0.9181,
+      0.5173,
+      0.1191,
+      0.6022,
+      0.5813,
+      0.6211,
+      0.9335,
+      0.3746,
+      0.5888,
+      0.09,
+      0.9006,
+      0.9209,
+      0.213
+     ],
+     "nhan": [
+      "Pass",
+      "Pass",
+      "Pass",
+      "Pass",
+      "Pass",
+      "Fail",
+      "Fail",
+      "Pass",
+      "Pass",
+      "Fail",
+      "Fail",
+      "Fail",
+      "Fail",
+      "Pass",
+      "Pass",
+      "Fail",
+      "Fail",
+      "Fail",
+      "Pass",
+      "Pass",
+      "Fail",
+      "Fail",
+      "Fail",
+      "Pass",
+      "Fail",
+      "Pass",
+      "Fail",
+      "Pass",
+      "Pass",
+      "Pass",
+      "Pass",
+      "Pass",
+      "Pass",
+      "Pass",
+      "Fail",
+      "Fail",
+      "Fail",
+      "Pass",
+      "Pass",
+      "Pass",
+      "Pass",
+      "Pass",
+      "Fail",
+      "Fail",
+      "Pass",
+      "Pass",
+      "Fail",
+      "Fail",
+      "Fail",
+      "Fail",
+      "Pass",
+      "Pass",
+      "Fail",
+      "Fail",
+      "Pass",
+      "Fail",
+      "Fail",
+      "Fail",
+      "Pass",
+      "Pass",
+      "Fail",
+      "Fail",
+      "Pass",
+      "Pass",
+      "Pass",
+      "Pass",
+      "Fail",
+      "Pass",
+      "Fail",
+      "Pass",
+      "Pass",
+      "Fail"
+     ],
+     "nhan_duong": "Pass",
+     "nhan_am": "Fail",
+     "ten_duong": "Đạt",
+     "ten_am": "Chưa đạt",
+     "tong_am": 33,
+     "tong_duong": 39,
+     "ghi": "Xác suất do LogisticRegression (hai cột, đã đưa về 0 – 1) tính trên tập kiểm tra; các con số trong ma trận đếm sẵn cho từng ngưỡng."
     },
     {
      "t": "anh",

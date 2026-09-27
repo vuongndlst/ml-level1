@@ -319,3 +319,6 @@ code, pre, .tt-dong, .tt-ma, .tt-man-hinh { font-variant-ligatures: none; font-f
 .tt .tt-o.test { opacity: 1; border-color: #0F172A; }
 .tt .tt-chu-giai { font-size: 13.5px; color: var(--chu-phu); } .tt .tt-chu-giai .tt-o { width: 16px; height: 16px; }
 .tt .tt-chip.dang-chon { background: var(--xanh-tuoi); color: #fff; border-color: var(--xanh-tuoi); }
+.tt table.tt-ma-tran td { text-align: center; font-weight: 600; font-size: 16px; }
+.tt table.tt-ma-tran td.dung { background: #DBEAFE; color: #1E3A8A; }
+.tt table.tt-ma-tran td.sai { background: #FEE2E2; color: #B91C1C; }
