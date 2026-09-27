@@ -131,6 +131,11 @@ window.BAI = {
      "t": "doc_them",
      "link": [
       {
+       "ten": "scikit-learn — Naive Bayes (CategoricalNB, GaussianNB)",
+       "url": "https://scikit-learn.org/stable/modules/naive_bayes.html",
+       "ghi_chu": "tài liệu chính thức"
+      },
+      {
        "ten": "Naive Bayes Classifiers",
        "url": "https://www.geeksforgeeks.org/machine-learning/naive-bayes-classifiers/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
@@ -383,6 +388,59 @@ window.BAI = {
        ]
       }
      ]
+    },
+    {
+     "t": "nhan_bayes",
+     "tieu_de": "tự nhân cho một bạn bất kỳ",
+     "huong_dan": "Chọn mức giờ tự học và phút mạng của một bạn. Trang lấy đúng các ô đếm ở bảng tần suất phía trên rồi nhân. <b>Thử:</b> chọn học <b>Ít</b> — chuyện gì xảy ra với tích của Đạt? Rồi bật làm mịn.",
+     "muc": [
+      "Ít",
+      "Vừa",
+      "Nhiều"
+     ],
+     "bang": {
+      "Giờ tự học": {
+       "Ít": [
+        0,
+        45
+       ],
+       "Vừa": [
+        21,
+        29
+       ],
+       "Nhiều": [
+        69,
+        4
+       ]
+      },
+      "Phút mạng": {
+       "Ít": [
+        71,
+        29
+       ],
+       "Vừa": [
+        17,
+        42
+       ],
+       "Nhiều": [
+        2,
+        7
+       ]
+      }
+     },
+     "n": [
+      90,
+      78
+     ],
+     "ten_lop": [
+      "Đạt",
+      "Chưa đạt"
+     ],
+     "mac_dinh": {
+      "Giờ tự học": "Nhiều",
+      "Phút mạng": "Ít"
+     },
+     "ghi": "Đếm trên 168 bạn tập huấn luyện (mô phỏng). Làm mịn cộng 1 vào mỗi ô và cộng số mức vào mẫu — scikit-learn gọi là alpha=1."
     },
     {
      "t": "anh",

@@ -18,6 +18,7 @@
  *  mat_phang       hồi quy 2 cột: điểm 3D + mặt phẳng model tìm được (Plotly), bật/tắt mặt phẳng
  *  nguong_nham_lan kéo ngưỡng xác suất -> chấm từng bạn (viền đỏ = sai) + ma trận nhầm lẫn (tính sẵn)
  *  chia_nhanh      chọn cột, kéo ngưỡng -> hai nhánh (số Đạt / Chưa đạt) + Gini còn lại (tính sẵn)
+ *  nhan_bayes      chọn mức từng cột -> phép nhân Naive Bayes cho từng nhãn, bật/tắt làm mịn +1
  *  keo_diem        kéo các chấm trên trục số -> số trung bình, trung vị, độ lệch chuẩn (chia n, như SGK) đổi ngay
  */
 (function () {
@@ -690,8 +691,9 @@
       var xs = [Math.min.apply(null, k.x), Math.max.apply(null, k.x)], ys = [Math.min.apply(null, k.y), Math.max.apply(null, k.y)];
       var z = ys.map(function (yy) { return xs.map(function (xx) { return k.a1 * xx + k.a2 * yy + k.b; }); });
       Plotly.newPlot(vung, [
-        { type: "scatter3d", mode: "markers", x: k.x, y: k.y, z: k.z, marker: { size: 3.5, color: MAU.chinh, opacity: 0.85 }, name: "máy" },
-        { type: "surface", x: xs, y: ys, z: z, opacity: 0.45, showscale: false, colorscale: [[0, "#F59E0B"], [1, "#F59E0B"]], name: "mặt phẳng" }],
+        { type: "scatter3d", mode: "markers", x: k.x, y: k.y, z: k.z, name: "điểm",
+          marker: { size: 3.5, opacity: 0.85, color: k.nhan ? k.nhan.map(function (v) { return (k.thu_tu || []).indexOf(v) > 0 ? MAU.vang : MAU.chinh; }) : MAU.chinh } },
+        { type: "surface", x: xs, y: ys, z: z, opacity: 0.3, showscale: false, colorscale: [[0, "#F59E0B"], [1, "#F59E0B"]], name: "mặt phẳng" }],
         { margin: { l: 0, r: 0, t: 0, b: 0 }, showlegend: false, font: { family: FONT },
           scene: { xaxis: { title: k.nhan_x }, yaxis: { title: k.nhan_y }, zaxis: { title: k.nhan_z }, camera: { eye: { x: 1.7, y: -1.4, z: 0.8 } } } },
         { displaylogo: false, responsive: true });
@@ -779,10 +781,54 @@
     return o;
   }
 
+  // ---------------------------------------------------------------- nhan_bayes (chọn mức từng cột -> phép nhân Naive Bayes)
+  function nhanBayes(k) {
+    var o = khung(k, "nhan-bayes"), cot = Object.keys(k.bang), chon = {};
+    var hangChon = el("div", { class: "tt-hang" });
+    cot.forEach(function (c) {
+      var s = el("select", { "aria-label": c }, k.muc.map(function (m) { return el("option", { value: m, text: m }); }));
+      s.value = k.mac_dinh[c]; chon[c] = s; s.addEventListener("change", ve);
+      hangChon.appendChild(el("label", {}, [c + " ", s]));
+    });
+    var cb = el("input", { type: "checkbox" });
+    hangChon.appendChild(el("label", { class: "tt-cong-tac-dong" }, [cb, el("span", { text: "Làm mịn: cộng 1 vào mỗi ô đếm" })]));
+    cb.addEventListener("change", ve);
+    var bang = el("table", { class: "bang" }), cv = canvas(640, 120), kl = el("div", { class: "thong-bao" });
+    o.appendChild(hangChon); o.appendChild(bang); o.appendChild(cv.c); o.appendChild(kl);
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    function phan(a, b) { return a + "/" + b; }
+    function ve() {
+      var lam = cb.checked ? 1 : 0, M = k.muc.length, tich = [], dong = [];
+      [0, 1].forEach(function (j) {
+        var n = k.n[j], p = n / (k.n[0] + k.n[1]), txt = [phan(n, k.n[0] + k.n[1])];
+        cot.forEach(function (c) {
+          var dem = k.bang[c][chon[c].value][j] + lam, mau = n + lam * M;
+          p *= dem / mau; txt.push(phan(dem, mau));
+        });
+        tich.push(p); dong.push("<tr><td><b>" + k.ten_lop[j] + "</b></td><td>" + txt.join(" × ") + "</td><td><b>" + so(p, 4) + "</b></td></tr>");
+      });
+      bang.innerHTML = "<tr><th>Nhãn</th><th>P(nhãn) × P(" + cot.join(" | nhãn) × P(") + " | nhãn)</th><th>Tích</th></tr>" + dong.join("");
+      var g = cv.g, tong = tich[0] + tich[1]; g.clearRect(0, 0, cv.w, cv.h);
+      [0, 1].forEach(function (j) {
+        var y = 16 + j * 50, w = tong ? 430 * tich[j] / tong : 0;
+        g.fillStyle = j ? MAU.vang : MAU.chinh; g.fillRect(130, y, w, 34);
+        g.fillStyle = MAU.chu; g.font = "600 14px " + FONT; g.textAlign = "right"; g.fillText(k.ten_lop[j], 120, y + 22);
+        g.textAlign = "left"; g.fillText(tong ? so(100 * tich[j] / tong, 1) + "%" : "0", 136 + w, y + 22);
+      });
+      if (!tong) kl.innerHTML = "Cả hai tích đều bằng 0 — máy không so được. Bật làm mịn để sửa.";
+      else {
+        var i = tich[0] >= tich[1] ? 0 : 1, gap = tich[1 - i] ? tich[i] / tich[1 - i] : Infinity;
+        kl.innerHTML = "Naive Bayes đoán <b>" + k.ten_lop[i] + "</b>" + (isFinite(gap) ? " — tích lớn gấp " + so(gap, 1) + " lần." : " — tích bên kia bằng 0.");
+      }
+    }
+    ve();
+    return o;
+  }
+
   window.ML1_TT = {
     init: function (hamEl) { el = hamEl; },
     tra_bang: traBang, du_doan_tu: duDoanTu, phan_tan_3d: phanTan3d, loc_bang: locBang,
     histogram: histogram, chay_tung_dong: chayTungDong, keo_diem: keoDiem,
-    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d, knn: knn, mat_phang: matPhang, nguong_nham_lan: nguongNhamLan, chia_nhanh: chiaNhanh
+    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d, knn: knn, mat_phang: matPhang, nguong_nham_lan: nguongNhamLan, chia_nhanh: chiaNhanh, nhan_bayes: nhanBayes
   };
 })();
