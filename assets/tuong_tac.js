@@ -21,6 +21,8 @@
  *  nhan_bayes      chọn mức từng cột -> phép nhân Naive Bayes cho từng nhãn, bật/tắt làm mịn +1
  *  kiem_dinh_cheo  lưới ô, bấm từng vòng -> phần làm kiểm tra + điểm từng vòng + trung bình (tính sẵn)
  *  can_tieu_chi    kéo mức ưu tiên từng tiêu chí -> xếp hạng model (số đo thật + đánh giá định tính)
+ *  kmeans_buoc     chọn k và điểm xuất phát, bấm từng bước gán nhóm / dời tâm (tính sẵn)
+ *  me_cung         Q-learning trên mê cung: kéo số tập đã học -> mũi tên hướng tốt nhất + đường đi
  *  keo_diem        kéo các chấm trên trục số -> số trung bình, trung vị, độ lệch chuẩn (chia n, như SGK) đổi ngay
  */
 (function () {
@@ -54,7 +56,7 @@
     (vachY || []).forEach(function (y) {
       var py = T + H - (y - ymin) / (ymax - ymin) * H;
       g.beginPath(); g.moveTo(L, py); g.lineTo(L + W, py); g.stroke();
-      g.textAlign = "right"; g.fillText(so(y, y % 1 ? 1 : 0), L - 6, py + 4);
+      g.textAlign = "right"; g.fillText(so(y, y % 1 === 0 ? 0 : Math.abs(y * 10 - Math.round(y * 10)) < 1e-9 ? 1 : 2), L - 6, py + 4);
     });
     g.strokeStyle = MAU.xam; g.beginPath(); g.moveTo(L, T); g.lineTo(L, T + H); g.lineTo(L + W, T + H); g.stroke();
     g.textAlign = "center"; g.fillText(nhanX || "", L + W / 2, cv.h - 6);
@@ -900,10 +902,93 @@
     return o;
   }
 
+  // ---------------------------------------------------------------- kmeans_buoc (k, điểm xuất phát, bấm từng bước)
+  function kmeansBuoc(k) {
+    var o = khung(k, "kmeans-buoc"), K = String(k.k_mac_dinh), s = "0", i = 0;
+    var sk = el("select", { "aria-label": "số nhóm k" }, k.cac_k.map(function (x) { return el("option", { value: String(x), text: "k = " + x }); }));
+    var ss = el("select", { "aria-label": "điểm xuất phát" }, k.cac_seed.map(function (x, j) { return el("option", { value: String(j), text: "Xuất phát " + (j + 1) }); }));
+    sk.value = K;
+    var lui = el("button", { type: "button", class: "nut phu", text: "◀ Lùi" }), toi = el("button", { type: "button", class: "nut", text: "Bước tiếp ▶" });
+    var nhan = el("div", { class: "thong-bao" }), cv = canvas(640, 330);
+    var hang = el("div", { class: "tt-the-hang" }, [the("Bước", "b"), the("Tổng khoảng cách² tới tâm", "in")]);
+    o.appendChild(el("div", { class: "tt-hang" }, [el("label", {}, ["Số nhóm ", sk]), el("label", {}, ["", ss]), lui, toi]));
+    o.appendChild(nhan); o.appendChild(cv.c); o.appendChild(hang);
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    var MAUN = [MAU.chinh, MAU.vang, MAU.teal, "#7C3AED", "#DC2626"];
+    function ve() {
+      var ds = k.buoc[K + "|" + s], b = ds[i], g = cv.g;
+      var t = truc(cv, -0.03, 1.03, -0.03, 1.03, k.nhan_x, k.nhan_y, [0, 0.25, 0.5, 0.75, 1]);
+      g.fillStyle = MAU.phu; g.textAlign = "center";
+      [0, 0.25, 0.5, 0.75, 1].forEach(function (x) { g.fillText(so(x, 2), t.x(x), t.T + t.H + 16); });
+      for (var j = 0; j < k.x.length; j++) {
+        g.beginPath(); g.arc(t.x(k.x[j]), t.y(k.y[j]), 3.4, 0, 7);
+        g.fillStyle = b.gan ? MAUN[b.gan[j]] : "#94A3B8"; g.globalAlpha = 0.7; g.fill();
+      }
+      g.globalAlpha = 1;
+      b.tam.forEach(function (c, j) {
+        var px = t.x(c[0]), py = t.y(c[1]);
+        g.fillStyle = "#fff"; g.strokeStyle = MAUN[j]; g.lineWidth = 3;
+        g.beginPath(); g.moveTo(px - 9, py - 9); g.lineTo(px + 9, py + 9); g.moveTo(px + 9, py - 9); g.lineTo(px - 9, py + 9);
+        g.strokeStyle = "#0F172A"; g.lineWidth = 6; g.stroke(); g.strokeStyle = MAUN[j]; g.lineWidth = 3.5; g.stroke();
+      });
+      nhan.innerHTML = b.viec;
+      hang.querySelector('[data-id="b"]').textContent = i + " / " + (ds.length - 1);
+      hang.querySelector('[data-id="in"]').textContent = b.inertia === null ? "—" : so(b.inertia, 2);
+      lui.disabled = i === 0; toi.disabled = i === ds.length - 1;
+    }
+    lui.addEventListener("click", function () { if (i > 0) { i--; ve(); } });
+    toi.addEventListener("click", function () { var ds = k.buoc[K + "|" + s]; if (i < ds.length - 1) { i++; ve(); } });
+    sk.addEventListener("change", function () { K = sk.value; i = 0; ve(); });
+    ss.addEventListener("change", function () { s = ss.value; i = 0; ve(); });
+    ve();
+    return o;
+  }
+
+  // ---------------------------------------------------------------- me_cung (Q-learning: kéo số tập -> mũi tên + đường đi)
+  function meCung(k) {
+    var o = khung(k, "me-cung"), M = k.moc, n = k.luoi.length;
+    var r = el("input", { type: "range", min: 0, max: M.length - 1, step: 1, value: 0, "aria-label": "số tập đã học" });
+    var nhan = el("div", { class: "thong-bao" }), cv = canvas(420, 420), kq = el("div", { class: "tt-the-hang" }, [the("Đi theo bảng Q", "kq"), the("Số bước", "sb")]);
+    cv.c.style.maxWidth = "420px";
+    o.appendChild(nhan); o.appendChild(r); o.appendChild(el("div", { class: "tt-hai-cot" }, [cv.c, kq]));
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    var MUI = [[0, -1], [0, 1], [-1, 0], [1, 0]];                // lên, xuống, trái, phải (dx, dy)
+    function ve() {
+      var m = M[+r.value], g = cv.g, s = 400 / n, x0 = 10, y0 = 10;
+      nhan.innerHTML = "Đã học <b>" + m.tap + "</b> tập";
+      g.clearRect(0, 0, cv.w, cv.h);
+      var qmax = Math.max.apply(null, m.qmax.map(Math.abs).concat([1]));
+      for (var i = 0; i < n; i++) for (var j = 0; j < n; j++) {
+        var ky = k.luoi[i][j], x = x0 + j * s, y = y0 + i * s, q = m.qmax[i * n + j];
+        g.fillStyle = ky === "#" ? "#334155" : ky === "H" ? "#FCA5A5" : ky === "G" ? "#86EFAC" :
+          (q > 0 ? "rgba(37,99,235," + (0.12 + 0.5 * q / qmax) + ")" : q < 0 ? "rgba(245,158,11," + (0.1 + 0.4 * -q / qmax) + ")" : "#F8FAFC");
+        g.fillRect(x, y, s - 2, s - 2);
+        g.fillStyle = MAU.chu; g.font = "600 13px " + FONT; g.textAlign = "left";
+        if (ky === "S") g.fillText("Xuất phát", x + 4, y + 16);
+        if (ky === "G") g.fillText("Đích +10", x + 4, y + 16);
+        if (ky === "H") g.fillText("Hố −10", x + 4, y + 16);
+        if ((ky === "." || ky === "S") && m.huong[i * n + j] >= 0) {
+          var d = MUI[m.huong[i * n + j]], cx = x + s / 2, cy = y + s / 2 + 6, L = s * 0.28;
+          g.strokeStyle = MAU.dam; g.lineWidth = 3; g.beginPath(); g.moveTo(cx - d[0] * L, cy - d[1] * L); g.lineTo(cx + d[0] * L, cy + d[1] * L); g.stroke();
+          g.beginPath(); g.moveTo(cx + d[0] * L, cy + d[1] * L);
+          g.lineTo(cx + d[0] * L - d[0] * 9 - d[1] * 6, cy + d[1] * L - d[1] * 9 - d[0] * 6);
+          g.lineTo(cx + d[0] * L - d[0] * 9 + d[1] * 6, cy + d[1] * L - d[1] * 9 + d[0] * 6); g.closePath(); g.fillStyle = MAU.dam; g.fill();
+        }
+      }
+      g.strokeStyle = "#DC2626"; g.lineWidth = 5; g.globalAlpha = 0.7; g.beginPath();
+      m.duong.forEach(function (p, i) { var px = x0 + p[1] * s + s / 2, py = y0 + p[0] * s + s / 2; i ? g.lineTo(px, py) : g.moveTo(px, py); });
+      g.stroke(); g.globalAlpha = 1;
+      kq.querySelector('[data-id="kq"]').textContent = m.ket_qua;
+      kq.querySelector('[data-id="sb"]').textContent = m.ket_qua === "tới đích" ? (m.duong.length - 1) + " bước" : "—";
+    }
+    r.addEventListener("input", ve); ve();
+    return o;
+  }
+
   window.ML1_TT = {
     init: function (hamEl) { el = hamEl; },
     tra_bang: traBang, du_doan_tu: duDoanTu, phan_tan_3d: phanTan3d, loc_bang: locBang,
     histogram: histogram, chay_tung_dong: chayTungDong, keo_diem: keoDiem,
-    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d, knn: knn, mat_phang: matPhang, nguong_nham_lan: nguongNhamLan, chia_nhanh: chiaNhanh, nhan_bayes: nhanBayes, kiem_dinh_cheo: kiemDinhCheo, can_tieu_chi: canTieuChi
+    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d, knn: knn, mat_phang: matPhang, nguong_nham_lan: nguongNhamLan, chia_nhanh: chiaNhanh, nhan_bayes: nhanBayes, kiem_dinh_cheo: kiemDinhCheo, can_tieu_chi: canTieuChi, kmeans_buoc: kmeansBuoc, me_cung: meCung
   };
 })();
