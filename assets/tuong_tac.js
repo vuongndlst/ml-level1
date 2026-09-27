@@ -12,6 +12,8 @@
  *  mat_3d          mặt sai số 3D (Plotly) + thanh trượt đi từng bước của gradient descent
  *  cong_tac        bật/tắt từng bước (vd các bước làm sạch) -> số liệu của tổ hợp đó (tính sẵn) + dòng lệnh
  *  chia_du_lieu    lưới ô (mỗi ô một dòng): chọn test_size, bật stratify, chia lại -> ô nào vào tập kiểm tra
+ *  bieu_do_hop     chọn cột số × cách chia nhóm -> các hộp (tứ phân vị tính sẵn bằng pandas) + bảng số
+ *  phan_tan_2d     chọn cột trục ngang, trục đứng -> biểu đồ phân tán + hệ số r (tính sẵn bằng pandas)
  *  keo_diem        kéo các chấm trên trục số -> số trung bình, trung vị, độ lệch chuẩn (chia n, như SGK) đổi ngay
  */
 (function () {
@@ -52,6 +54,13 @@
     g.save(); g.translate(13, T + H / 2); g.rotate(-Math.PI / 2); g.fillText(nhanY || "", 0, 0); g.restore();
     return { x: function (x) { return L + (x - xmin) / (xmax - xmin) * W; },
              y: function (y) { return T + H - (y - ymin) / (ymax - ymin) * H; }, L: L, T: T, W: W, H: H };
+  }
+  // Vạch "đẹp" (bước 1, 2, 5 × 10^k) nằm trong [lo, hi].
+  function vachDep(lo, hi, n) {
+    var tho = (hi - lo) / (n || 5), mu = Math.pow(10, Math.floor(Math.log10(tho))), r = tho / mu;
+    var buoc = (r < 1.5 ? 1 : r < 3 ? 2 : r < 7 ? 5 : 10) * mu, a = [];
+    for (var x = Math.ceil(lo / buoc) * buoc; x <= hi + 1e-9; x += buoc) a.push(+x.toFixed(6));
+    return a;
   }
   function vachDeu(lo, hi, n) { var a = [], b = (hi - lo) / n; for (var i = 0; i <= n; i++) a.push(+(lo + i * b).toFixed(6)); return a; }
 
@@ -227,9 +236,19 @@
 
   // ---------------------------------------------------------------- histogram
   function histogram(k) {
-    var o = khung(k, "histogram"), a = k.gia_tri, lo = Math.min.apply(null, a), hi = Math.max.apply(null, a);
+    var o = khung(k, "histogram"), a, lo, hi;
+    function chonCot(c) {                                 // k.cot: nhiều cột để chọn; không có thì dùng k.gia_tri
+      a = c ? c.gia_tri : k.gia_tri; lo = Math.min.apply(null, a); hi = Math.max.apply(null, a);
+      if (c) { k.ma_cot = c.ma_cot; k.nhan_x = c.nhan_x; }
+    }
+    chonCot(k.cot ? k.cot[0] : null);
     var r = el("input", { type: "range", min: k.bins_min || 3, max: k.bins_max || 30, step: 1, value: k.mac_dinh || 10, "aria-label": "số cột" });
     var ma = el("pre", { class: "tt-ma" }), cv = canvas(640, 260);
+    if (k.cot) {
+      var sc = el("select", { "aria-label": "chọn cột" }, k.cot.map(function (c, i) { return el("option", { value: i, text: c.ten }); }));
+      sc.addEventListener("change", function () { chonCot(k.cot[+sc.value]); ve(); });
+      o.appendChild(el("div", { class: "tt-hang" }, [el("label", {}, ["Cột ", sc])]));
+    }
     o.appendChild(r); o.appendChild(ma); o.appendChild(cv.c);
     if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
     function ve() {
@@ -498,10 +517,94 @@
     return o;
   }
 
+  // ---------------------------------------------------------------- bieu_do_hop (chọn cột × cách chia nhóm)
+  function bieuDoHop(k) {
+    var o = khung(k, "bieu-do-hop");
+    var sc = el("select", { "aria-label": "cột số" }, k.cot.map(function (c) { return el("option", { value: c, text: c }); }));
+    var sn = el("select", { "aria-label": "chia nhóm theo" }, k.nhom.map(function (c) { return el("option", { value: c, text: c }); }));
+    o.appendChild(el("div", { class: "tt-hang" }, [el("label", {}, ["Cột ", sc]), el("label", {}, ["Chia nhóm theo ", sn])]));
+    var cv = canvas(640, 280), ma = el("pre", { class: "tt-ma" }), bang = el("table", { class: "bang" });
+    o.appendChild(cv.c); o.appendChild(bang); o.appendChild(ma);
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    function ve() {
+      var d = k.bang[sc.value + "|" + sn.value], ten = Object.keys(d), m = ten.length;
+      var lo = Infinity, hi = -Infinity;
+      ten.forEach(function (n) { var h = d[n]; lo = Math.min(lo, h.min); hi = Math.max(hi, h.max); });
+      var pad = (hi - lo) * 0.06; lo -= pad; hi += pad;
+      var g = cv.g, L = 96, R = 16, T = 10, B = 40, W = cv.w - L - R, H = cv.h - T - B;
+      g.clearRect(0, 0, cv.w, cv.h);
+      var X = function (x) { return L + (x - lo) / (hi - lo) * W; };
+      g.font = "12px " + FONT; g.strokeStyle = MAU.vien; g.fillStyle = MAU.phu; g.textAlign = "center";
+      vachDep(lo, hi, 6).forEach(function (x) { g.beginPath(); g.moveTo(X(x), T); g.lineTo(X(x), T + H); g.stroke(); g.fillText(so(x, x % 1 ? 1 : 0), X(x), T + H + 16); });
+      g.fillText(sc.value, L + W / 2, cv.h - 4);
+      ten.forEach(function (n, i) {
+        var h = d[n], y = T + (i + 0.5) * H / m, bh = Math.min(34, H / m * 0.55), mau = BANG_MAU[i % BANG_MAU.length];
+        g.strokeStyle = MAU.dam; g.lineWidth = 1.5;
+        g.beginPath(); g.moveTo(X(h.rau_duoi), y); g.lineTo(X(h.q1), y); g.moveTo(X(h.q3), y); g.lineTo(X(h.rau_tren), y);
+        g.moveTo(X(h.rau_duoi), y - bh / 3); g.lineTo(X(h.rau_duoi), y + bh / 3); g.moveTo(X(h.rau_tren), y - bh / 3); g.lineTo(X(h.rau_tren), y + bh / 3); g.stroke();
+        g.fillStyle = mau; g.globalAlpha = 0.28; g.fillRect(X(h.q1), y - bh / 2, X(h.q3) - X(h.q1), bh); g.globalAlpha = 1;
+        g.strokeStyle = mau; g.lineWidth = 2; g.strokeRect(X(h.q1), y - bh / 2, X(h.q3) - X(h.q1), bh);
+        g.strokeStyle = "#DC2626"; g.lineWidth = 2.5; g.beginPath(); g.moveTo(X(h.q2), y - bh / 2); g.lineTo(X(h.q2), y + bh / 2); g.stroke();
+        g.fillStyle = "#DC2626"; (h.la || []).forEach(function (x) { g.beginPath(); g.arc(X(x), y, 3.5, 0, 7); g.fill(); });
+        g.fillStyle = MAU.chu; g.textAlign = "right"; g.fillText(n + " (" + h.n + ")", L - 8, y + 4); g.textAlign = "center";
+      });
+      bang.innerHTML = "<tr><th>Nhóm</th><th>Số bạn</th><th>Q1</th><th>Trung vị</th><th>Q3</th><th>Giá trị bất thường</th></tr>" +
+        ten.map(function (n) { var h = d[n]; return "<tr><td>" + n + "</td><td>" + h.n + "</td><td>" + so(h.q1, 2) + "</td><td><b>" + so(h.q2, 2) + "</b></td><td>" + so(h.q3, 2) + "</td><td>" + (h.la.length || "—") + "</td></tr>"; }).join("");
+      var by = (k.cot_nhom || {})[sn.value];               // tên cột thật trong bảng; không có thì vẽ cả khối
+      ma.textContent = 'df.boxplot(column="' + sc.value + '"' + (by ? ', by="' + by + '"' : "") + ', vert=False)';
+    }
+    sc.addEventListener("change", ve); sn.addEventListener("change", ve); ve();
+    return o;
+  }
+
+  // ---------------------------------------------------------------- phan_tan_2d (chọn cột X, Y -> chấm + r tính sẵn)
+  function phanTan2d(k) {
+    var o = khung(k, "phan-tan-2d"), D = k.du_lieu, n = D[k.cot[0]].length;
+    function chon(ten, mac) { var s = el("select", { "aria-label": ten }, k.cot.map(function (c) { return el("option", { value: c, text: c }); })); s.value = mac; return s; }
+    var sx = chon("trục ngang", k.x0 || k.cot[0]), sy = chon("trục đứng", k.y0 || k.cot[1]);
+    o.appendChild(el("div", { class: "tt-hang" }, [el("label", {}, ["Trục ngang ", sx]), el("label", {}, ["Trục đứng ", sy])]));
+    var cv = canvas(640, 320), hang = el("div", { class: "tt-the-hang" }, [the("Hệ số tương quan r", "r"), the("Đọc là", "doc")]);
+    var ma = el("pre", { class: "tt-ma" });
+    o.appendChild(cv.c); o.appendChild(hang); o.appendChild(ma);
+    if (k.nhan) {
+      var nhom = {}; k.du_lieu[k.nhan].forEach(function (v) { nhom[v] = 1; });
+      o.appendChild(el("div", { class: "tt-chu-giai", html: (k.thu_tu || Object.keys(nhom)).map(function (v, i) {
+        return '<span class="tt-o" style="opacity:1;border-radius:50%;background:' + BANG_MAU[i % BANG_MAU.length] + '"></span> ' + ((k.ten_nhan || {})[v] || v); }).join(" &nbsp; ") }));
+    }
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    function doc(r) {
+      var a = Math.abs(r), muc = a >= 0.7 ? "mạnh" : a >= 0.3 ? "vừa" : "yếu hoặc gần như không";   // cùng mốc với bài 10
+      return (r > 0 ? "dương, " : "âm, ") + muc;
+    }
+    function ve() {
+      var X = D[sx.value], Y = D[sy.value];
+      var xlo = Math.min.apply(null, X), xhi = Math.max.apply(null, X), ylo = Math.min.apply(null, Y), yhi = Math.max.apply(null, Y);
+      var px = (xhi - xlo) * 0.05 || 1, py = (yhi - ylo) * 0.05 || 1; xlo -= px; xhi += px; ylo -= py; yhi += py;
+      var t = truc(cv, xlo, xhi, ylo, yhi, sx.value, sy.value, vachDep(ylo, yhi, 5)), g = cv.g;
+      g.fillStyle = MAU.phu; g.textAlign = "center";
+      vachDep(xlo, xhi, 6).forEach(function (x) { g.fillText(so(x, x % 1 ? 1 : 0), t.x(x), t.T + t.H + 16); });
+      var mauCua = {}, dem = 0;
+      (k.thu_tu || []).forEach(function (v) { mauCua[v] = BANG_MAU[dem++ % BANG_MAU.length]; });
+      for (var i = 0; i < n; i++) {
+        var nh = k.nhan ? D[k.nhan][i] : "";
+        if (!(nh in mauCua)) mauCua[nh] = BANG_MAU[dem++ % BANG_MAU.length];
+        g.fillStyle = mauCua[nh]; g.globalAlpha = 0.6; g.beginPath(); g.arc(t.x(X[i]), t.y(Y[i]), 3.2, 0, 7); g.fill();
+      }
+      g.globalAlpha = 1;
+      var r = sx.value === sy.value ? 1 : k.r[sx.value + "|" + sy.value];
+      hang.querySelector('[data-id="r"]').textContent = so(r, 2);
+      hang.querySelector('[data-id="doc"]').textContent = sx.value === sy.value ? "một cột với chính nó" : doc(r);
+      ma.textContent = 'plt.scatter(df["' + sx.value + '"], df["' + sy.value + '"])\n' +
+        'df["' + sx.value + '"].corr(df["' + sy.value + '"])   # ' + so(r, 3);
+    }
+    sx.addEventListener("change", ve); sy.addEventListener("change", ve); ve();
+    return o;
+  }
+
   window.ML1_TT = {
     init: function (hamEl) { el = hamEl; },
     tra_bang: traBang, du_doan_tu: duDoanTu, phan_tan_3d: phanTan3d, loc_bang: locBang,
     histogram: histogram, chay_tung_dong: chayTungDong, keo_diem: keoDiem,
-    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu
+    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d
   };
 })();
