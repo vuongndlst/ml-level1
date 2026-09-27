@@ -19,6 +19,8 @@
  *  nguong_nham_lan kéo ngưỡng xác suất -> chấm từng bạn (viền đỏ = sai) + ma trận nhầm lẫn (tính sẵn)
  *  chia_nhanh      chọn cột, kéo ngưỡng -> hai nhánh (số Đạt / Chưa đạt) + Gini còn lại (tính sẵn)
  *  nhan_bayes      chọn mức từng cột -> phép nhân Naive Bayes cho từng nhãn, bật/tắt làm mịn +1
+ *  kiem_dinh_cheo  lưới ô, bấm từng vòng -> phần làm kiểm tra + điểm từng vòng + trung bình (tính sẵn)
+ *  can_tieu_chi    kéo mức ưu tiên từng tiêu chí -> xếp hạng model (số đo thật + đánh giá định tính)
  *  keo_diem        kéo các chấm trên trục số -> số trung bình, trung vị, độ lệch chuẩn (chia n, như SGK) đổi ngay
  */
 (function () {
@@ -825,10 +827,83 @@
     return o;
   }
 
+  // ---------------------------------------------------------------- kiem_dinh_cheo (lưới ô, k vòng, điểm từng vòng)
+  function kiemDinhCheo(k) {
+    var o = khung(k, "kiem-dinh-cheo"), n = k.nhan.length, K = k.phan.length, v = 0;
+    var nut = [];
+    var hangNut = el("div", { class: "tt-hang" });
+    for (var i = 0; i < K; i++) (function (i) {
+      var b = el("button", { type: "button", class: "tt-chip", text: "Vòng " + (i + 1) });
+      b.addEventListener("click", function () { v = i; ve(); }); nut.push(b); hangNut.appendChild(b);
+    })(i);
+    var luoi = el("div", { class: "tt-luoi tt-luoi-nho" }), o_ = [];
+    for (i = 0; i < n; i++) { var c = el("span", { class: "tt-o " + (k.nhan[i] === k.nhan_it ? "it" : "nhieu") }); o_.push(c); luoi.appendChild(c); }
+    var cv = canvas(640, 150), hang = el("div", { class: "tt-the-hang" }, [the("Điểm vòng này", "d"), the("Trung bình tới vòng này", "tb"), the("Dao động", "dd")]);
+    o.appendChild(hangNut); o.appendChild(luoi);
+    o.appendChild(el("div", { class: "tt-chu-giai", html: '<span class="tt-o nhieu test"></span> ô viền đậm = phần đang làm <b>kiểm tra</b> ở vòng này; ô mờ = dùng để <b>huấn luyện</b>' }));
+    o.appendChild(hang); o.appendChild(cv.c);
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    function ve() {
+      var la = {}; k.phan[v].forEach(function (i) { la[i] = 1; });
+      o_.forEach(function (c, i) { c.classList.toggle("test", !!la[i]); });
+      nut.forEach(function (b, j) { b.classList.toggle("dang-chon", j === v); });
+      var d = k.diem.slice(0, v + 1), tb = d.reduce(function (a, b) { return a + b; }, 0) / d.length;
+      hang.querySelector('[data-id="d"]').textContent = so(k.diem[v], 1) + "%";
+      hang.querySelector('[data-id="tb"]').textContent = so(tb, 1) + "%";
+      hang.querySelector('[data-id="dd"]').textContent = so(Math.min.apply(null, d), 1) + " – " + so(Math.max.apply(null, d), 1) + "%";
+      var t = truc(cv, -0.5, K - 0.5, k.ymin, 100, "Vòng", "Đúng (%)", vachDep(k.ymin, 100, 3)), g = cv.g;
+      k.diem.forEach(function (s, j) {
+        var bw = t.W / K * 0.5; g.fillStyle = j <= v ? MAU.chinh : "#E2E8F0"; g.fillRect(t.x(j) - bw / 2, t.y(s), bw, t.y(k.ymin) - t.y(s));
+        g.fillStyle = MAU.phu; g.textAlign = "center"; g.fillText(String(j + 1), t.x(j), t.T + t.H + 16);
+      });
+      g.strokeStyle = "#DC2626"; g.setLineDash([6, 4]); g.lineWidth = 2; g.beginPath(); g.moveTo(t.L, t.y(tb)); g.lineTo(t.L + t.W, t.y(tb)); g.stroke(); g.setLineDash([]);
+    }
+    ve();
+    return o;
+  }
+
+  // ---------------------------------------------------------------- can_tieu_chi (trọng số tiêu chí -> xếp hạng model)
+  function canTieuChi(k) {
+    var o = khung(k, "can-tieu-chi"), tc = k.tieu_chi, md = Object.keys(k.model), w = tc.map(function (c) { return c.mac_dinh; });
+    var hop_ = el("div", { class: "tt-the-hang" });
+    tc.forEach(function (c, i) {
+      var r = el("input", { type: "range", min: 0, max: 3, step: 1, value: w[i], "aria-label": c.ten }), l = el("b", { class: "tt-muc" });
+      r.addEventListener("input", function () { w[i] = +r.value; ve(); });
+      hop_.appendChild(el("div", { class: "tt-the" }, [el("span", { text: c.ten }), l, r]));
+      c._l = l;
+    });
+    var cv = canvas(640, 40 + 34 * md.length), bang = el("table", { class: "bang" });
+    o.appendChild(hop_); o.appendChild(cv.c); o.appendChild(bang);
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    var MUC = ["không quan tâm", "hơi quan trọng", "quan trọng", "rất quan trọng"];
+    function chuan(c, v) {                                       // đưa về 0 – 1, 1 là tốt nhất
+      var a = md.map(function (m) { return k.model[m][c.khoa]; }), lo = Math.min.apply(null, a), hi = Math.max.apply(null, a);
+      if (hi === lo) return 1;
+      return c.cang_nho_cang_tot ? (hi - v) / (hi - lo) : (v - lo) / (hi - lo);
+    }
+    function ve() {
+      tc.forEach(function (c, i) { c._l.textContent = MUC[w[i]]; });
+      var tong = w.reduce(function (a, b) { return a + b; }, 0) || 1;
+      var diem = md.map(function (m) { return [m, tc.reduce(function (s, c, i) { return s + w[i] * chuan(c, k.model[m][c.khoa]); }, 0) / tong]; });
+      diem.sort(function (a, b) { return b[1] - a[1]; });
+      var g = cv.g; g.clearRect(0, 0, cv.w, cv.h); g.font = "13px " + FONT;
+      diem.forEach(function (d, j) {
+        var y = 14 + j * 34; g.fillStyle = MAU.chu; g.textAlign = "right"; g.fillText((j + 1) + ". " + d[0], 150, y + 18);
+        g.fillStyle = j === 0 ? MAU.chinh : "#93C5FD"; g.fillRect(160, y, 420 * d[1], 24);
+        g.fillStyle = MAU.chu; g.textAlign = "left"; g.fillText(so(100 * d[1], 0) + " điểm", 166 + 420 * d[1], y + 17);
+      });
+      bang.innerHTML = "<tr><th>Model</th>" + tc.map(function (c) { return "<th>" + (c.cot || c.ten) + "</th>"; }).join("") + "</tr>" +
+        md.map(function (m) { return "<tr><td>" + m + "</td>" + tc.map(function (c) { return "<td>" + c.hien(k.model[m][c.khoa]) + "</td>"; }).join("") + "</tr>"; }).join("");
+    }
+    tc.forEach(function (c) { c.hien = c.kieu === "phan_tram" ? function (v) { return so(v, 1) + "%"; } : c.kieu === "giay" ? function (v) { return so(v * 1000, 1) + " ms"; } : c.kieu === "sao" ? function (v) { return "★★★".slice(0, v) + "☆☆☆".slice(v); } : function (v) { return String(v); }; });
+    ve();
+    return o;
+  }
+
   window.ML1_TT = {
     init: function (hamEl) { el = hamEl; },
     tra_bang: traBang, du_doan_tu: duDoanTu, phan_tan_3d: phanTan3d, loc_bang: locBang,
     histogram: histogram, chay_tung_dong: chayTungDong, keo_diem: keoDiem,
-    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d, knn: knn, mat_phang: matPhang, nguong_nham_lan: nguongNhamLan, chia_nhanh: chiaNhanh, nhan_bayes: nhanBayes
+    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d, knn: knn, mat_phang: matPhang, nguong_nham_lan: nguongNhamLan, chia_nhanh: chiaNhanh, nhan_bayes: nhanBayes, kiem_dinh_cheo: kiemDinhCheo, can_tieu_chi: canTieuChi
   };
 })();

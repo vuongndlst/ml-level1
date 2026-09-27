@@ -164,6 +164,80 @@ window.BAI = {
      ]
     },
     {
+     "t": "can_tieu_chi",
+     "tieu_de": "con ưu tiên điều gì?",
+     "huong_dan": "Kéo mức ưu tiên cho từng tiêu chí. Xếp hạng sáu model đổi theo. <b>Thử:</b> đặt “giải thích được” là rất quan trọng (ngân hàng), rồi đặt “ít bỏ sót” là rất quan trọng (phát hiện bạn đang đuối).",
+     "tieu_chi": [
+      {
+       "ten": "Độ chính xác",
+       "khoa": "acc",
+       "kieu": "phan_tram",
+       "mac_dinh": 2
+      },
+      {
+       "ten": "Ít bỏ sót",
+       "cot": "Số bạn bị bỏ sót",
+       "khoa": "bo_sot",
+       "kieu": "so",
+       "cang_nho_cang_tot": true,
+       "mac_dinh": 1
+      },
+      {
+       "ten": "Dự đoán nhanh",
+       "cot": "Thời gian dự đoán",
+       "khoa": "dd",
+       "kieu": "giay",
+       "cang_nho_cang_tot": true,
+       "mac_dinh": 1
+      },
+      {
+       "ten": "Giải thích được",
+       "khoa": "gt",
+       "kieu": "sao",
+       "mac_dinh": 1
+      }
+     ],
+     "model": {
+      "KNN (K = 3)": {
+       "acc": 90.8,
+       "bo_sot": 11,
+       "dd": 0.4357,
+       "gt": 1
+      },
+      "Logistic": {
+       "acc": 90.4,
+       "bo_sot": 12,
+       "dd": 0.0008,
+       "gt": 2
+      },
+      "Cây sâu 2": {
+       "acc": 89.6,
+       "bo_sot": 9,
+       "dd": 0.0005,
+       "gt": 3
+      },
+      "Naïve Bayes": {
+       "acc": 90.8,
+       "bo_sot": 10,
+       "dd": 0.0009,
+       "gt": 2
+      },
+      "SVM": {
+       "acc": 90.8,
+       "bo_sot": 13,
+       "dd": 0.4006,
+       "gt": 1
+      },
+      "Rừng 100 cây": {
+       "acc": 90.8,
+       "bo_sot": 11,
+       "dd": 0.0474,
+       "gt": 1
+      }
+     },
+     "ghi": "Độ chính xác và số bạn bị bỏ sót: kiểm định chéo 5 phần trên 240 bạn (mô phỏng). Tốc độ dự đoán: đo trên 20 000 dòng mô phỏng (máy khác sẽ ra số khác). Giải thích được: đánh giá định tính 1 – 3 sao theo bài học — không phải số đo."
+    },
+    {
      "t": "dinh_nghia",
      "ten": "Không có model tốt nhất",
      "html": "Chỉ có model <b>phù hợp</b> với bài toán, với dữ liệu, và với người phải đọc kết quả.",

@@ -322,3 +322,8 @@ code, pre, .tt-dong, .tt-ma, .tt-man-hinh { font-variant-ligatures: none; font-f
 .tt table.tt-ma-tran td { text-align: center; font-weight: 600; font-size: 16px; }
 .tt table.tt-ma-tran td.dung { background: #DBEAFE; color: #1E3A8A; }
 .tt table.tt-ma-tran td.sai { background: #FEE2E2; color: #B91C1C; }
+.tt .tt-luoi.tt-luoi-nho { grid-template-columns: repeat(auto-fill, 16px); gap: 3px; }
+.tt .tt-luoi-nho .tt-o { width: 16px; height: 16px; border-radius: 4px; }
+.tt .tt-the input[type=range] { margin-top: 4px; }
+.tt .tt-the b:empty { display: none; }
+.tt .tt-the b.tt-muc { font-size: 15px; display: block; }
