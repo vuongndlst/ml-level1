@@ -53,108 +53,16 @@ window.BAI = {
      "ky_hieu": "Với n giá trị x<sub>1</sub>, x<sub>2</sub>, …, x<sub>n</sub>: &nbsp; <span class=\"frac\"><span>x<sub>1</sub> + x<sub>2</sub> + … + x<sub>n</sub></span><span>n</span></span>, ký hiệu x̄ (đọc là “x ngang”)."
     },
     {
-     "t": "anh",
-     "cap": "Công thức số trung bình",
-     "alt": "Công thức số trung bình",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260504115339060706/mean-formula.webp",
-     "du_phong": "img/minh-hoa-cong-thuc-tinh-trung-binh-cong.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Mean median mode",
-      "url": "https://www.geeksforgeeks.org/maths/mean-median-mode/"
-     },
-     "chu_giai": [
-      [
-       "Mean (X̄)",
-       "Số trung bình"
-      ],
-      [
-       "Sum Of Values",
-       "Tổng các giá trị"
-      ],
-      [
-       "Number Of Values",
-       "Số giá trị"
-      ]
-     ]
-    },
-    {
      "t": "dinh_nghia",
      "ten": "Trung vị (median)",
      "html": "Sắp xếp dãy theo thứ tự <b>không giảm</b>, trung vị là giá trị đứng chính giữa. Nếu số giá trị n là số chẵn, trung vị là <b>trung bình cộng của hai giá trị đứng giữa</b>.",
      "ky_hieu": "n lẻ: giá trị thứ <span class=\"frac\"><span>n + 1</span><span>2</span></span> · n chẵn: trung bình của giá trị thứ <span class=\"frac\"><span>n</span><span>2</span></span> và thứ <span class=\"frac\"><span>n</span><span>2</span></span> + 1"
     },
     {
-     "t": "anh",
-     "cap": "Trung vị khi n lẻ",
-     "alt": "Trung vị khi n lẻ",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260504115244608230/4.webp",
-     "du_phong": "img/minh-hoa-cong-thuc-median-khi-so-phan-tu-le.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Mean median mode",
-      "url": "https://www.geeksforgeeks.org/maths/mean-median-mode/"
-     },
-     "chu_giai": [
-      [
-       "Median",
-       "Trung vị"
-      ],
-      [
-       "N = Odd Number",
-       "n là số lẻ"
-      ],
-      [
-       "th Term",
-       "giá trị thứ …"
-      ]
-     ]
-    },
-    {
-     "t": "anh",
-     "cap": "Trung vị khi n chẵn",
-     "alt": "Trung vị khi n chẵn",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260504115244682842/5.webp",
-     "du_phong": "img/minh-hoa-cong-thuc-median-khi-so-phan-tu-chan.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Mean median mode",
-      "url": "https://www.geeksforgeeks.org/maths/mean-median-mode/"
-     },
-     "chu_giai": [
-      [
-       "N = Even Number",
-       "n là số chẵn"
-      ],
-      [
-       "term",
-       "giá trị (số hạng) thứ …"
-      ]
-     ]
-    },
-    {
      "t": "dinh_nghia",
      "ten": "Mốt (mode)",
      "html": "Giá trị xuất hiện <b>nhiều lần nhất</b> (có tần số lớn nhất). Một dãy có thể có nhiều mốt. Mốt dùng được cả với dữ liệu dạng chữ — ví dụ lớp nào đông học sinh nhất.",
      "ky_hieu": null
-    },
-    {
-     "t": "anh",
-     "cap": "Mốt là giá trị có tần số lớn nhất",
-     "alt": "Mốt là giá trị có tần số lớn nhất",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260504115244572635/3.webp",
-     "du_phong": "img/minh-hoa-dinh-nghia-mode.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Mean median mode",
-      "url": "https://www.geeksforgeeks.org/maths/mean-median-mode/"
-     },
-     "chu_giai": [
-      [
-       "Mode",
-       "Mốt"
-      ],
-      [
-       "Highest Frequency Term",
-       "Giá trị có tần số lớn nhất"
-      ]
-     ]
     },
     {
      "t": "vi_du",
@@ -247,9 +155,14 @@ window.BAI = {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Mean, Median and Mode",
-       "url": "https://www.geeksforgeeks.org/maths/mean-median-mode/",
-       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+       "ten": "Toán 10 — chương Thống kê: các số đặc trưng đo xu thế trung tâm",
+       "url": null,
+       "ghi_chu": "SGK — cùng tên gọi, cùng công thức"
+      },
+      {
+       "ten": "Khan Academy — Summarizing quantitative data",
+       "url": "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data",
+       "ghi_chu": "tiếng Anh, có bài tập tự chấm"
       }
      ]
     }
@@ -355,6 +268,261 @@ window.BAI = {
      "nhan_manh": []
     },
     {
+     "t": "histogram",
+     "tieu_de": "phút mạng xã hội của cả khối",
+     "huong_dan": "Kéo thanh trượt đổi số cột. Đường <b style=\"color:#DC2626\">đỏ nét đứt</b> là số trung bình, đường <b>xanh đậm</b> là trung vị. Vì sao đường đỏ luôn nằm bên phải?",
+     "gia_tri": [
+      126,
+      135,
+      111,
+      132,
+      69,
+      90,
+      113,
+      449,
+      277,
+      249,
+      136,
+      208,
+      38,
+      88,
+      73,
+      139,
+      115,
+      131,
+      65,
+      202,
+      114,
+      148,
+      147,
+      54,
+      159,
+      137,
+      100,
+      114,
+      235,
+      114,
+      205,
+      129,
+      116,
+      355,
+      277,
+      182,
+      182,
+      108,
+      124,
+      290,
+      102,
+      105,
+      182,
+      169,
+      185,
+      128,
+      147,
+      204,
+      295,
+      127,
+      205,
+      228,
+      70,
+      168,
+      182,
+      212,
+      144,
+      106,
+      261,
+      100,
+      128,
+      210,
+      142,
+      215,
+      154,
+      201,
+      145,
+      198,
+      46,
+      89,
+      98,
+      82,
+      187,
+      88,
+      234,
+      41,
+      144,
+      89,
+      60,
+      34,
+      236,
+      242,
+      88,
+      135,
+      92,
+      77,
+      65,
+      95,
+      223,
+      268,
+      256,
+      87,
+      180,
+      40,
+      198,
+      250,
+      34,
+      331,
+      201,
+      239,
+      151,
+      102,
+      64,
+      15,
+      117,
+      127,
+      139,
+      42,
+      316,
+      102,
+      131,
+      15,
+      100,
+      15,
+      187,
+      158,
+      265,
+      116,
+      151,
+      102,
+      71,
+      325,
+      205,
+      111,
+      130,
+      102,
+      167,
+      185,
+      233,
+      86,
+      137,
+      450,
+      105,
+      119,
+      121,
+      292,
+      117,
+      91,
+      90,
+      94,
+      138,
+      233,
+      85,
+      254,
+      189,
+      257,
+      70,
+      83,
+      87,
+      256,
+      200,
+      153,
+      182,
+      57,
+      150,
+      147,
+      69,
+      106,
+      155,
+      95,
+      102,
+      182,
+      126,
+      77,
+      170,
+      281,
+      141,
+      69,
+      105,
+      210,
+      116,
+      82,
+      92,
+      71,
+      233,
+      66,
+      86,
+      156,
+      396,
+      102,
+      120,
+      149,
+      88,
+      88,
+      258,
+      147,
+      150,
+      129,
+      135,
+      208,
+      174,
+      165,
+      57,
+      228,
+      111,
+      159,
+      445,
+      120,
+      164,
+      100,
+      84,
+      262,
+      120,
+      142,
+      176,
+      281,
+      185,
+      282,
+      85,
+      194,
+      222,
+      67,
+      184,
+      133,
+      125,
+      86,
+      133,
+      99,
+      450,
+      15,
+      124,
+      30,
+      274,
+      21,
+      207,
+      157,
+      116,
+      298,
+      157,
+      222,
+      49,
+      107,
+      310,
+      236,
+      111,
+      112,
+      15,
+      244,
+      123,
+      295
+     ],
+     "ma_cot": "df[\"PhutMangXH\"]",
+     "nhan_x": "Phút dùng mạng xã hội mỗi ngày",
+     "mac_dinh": 20,
+     "bins_min": 5,
+     "bins_max": 40,
+     "duong": true,
+     "so_le": 1,
+     "ghi": "Dữ liệu mô phỏng, 240 bạn. Vài bạn dùng mạng rất lâu nằm ở đuôi bên phải — chúng kéo số trung bình, không kéo được trung vị."
+    },
+    {
      "t": "dinh_nghia",
      "ten": "Giá trị bất thường (ngoại lai, outlier)",
      "html": "Giá trị khác biệt hẳn so với phần lớn các giá trị còn lại của dãy.",
@@ -456,23 +624,6 @@ window.BAI = {
      "ky_hieu": "Phương sai s<sup>2</sup> = <span class=\"frac\"><span>(x<sub>1</sub> − x̄)<sup>2</sup> + … + (x<sub>n</sub> − x̄)<sup>2</sup></span><span>n</span></span> &nbsp;·&nbsp; Độ lệch chuẩn s = √s<sup>2</sup>"
     },
     {
-     "t": "anh",
-     "cap": "Chiều cao (cm) của 6 người",
-     "alt": "Chiều cao (cm) của 6 người",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250917150004491761/how_spread_out_are_people_s_height_.webp",
-     "du_phong": "img/minh-hoa-chieu-cao-cua-sau-nguoi-phan-tan-the-nao.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Standard deviation formula",
-      "url": "https://www.geeksforgeeks.org/maths/standard-deviation-formula/"
-     },
-     "chu_giai": [
-      [
-       "How spread out are people's Height?",
-       "Chiều cao của mọi người tản ra đến mức nào?"
-      ]
-     ]
-    },
-    {
      "t": "vi_du",
      "tieu_de": "độ lệch chuẩn chiều cao 6 người",
      "de": "Chiều cao: 150 · 155 · 160 · 165 · 170 · 175 cm. Số trung bình x̄ = 975 : 6 = <b>162,5 cm</b>.",
@@ -525,49 +676,30 @@ window.BAI = {
     },
     {
      "t": "anh",
-     "cap": "Độ lệch của từng người so với số trung bình 162,5 cm",
-     "alt": "Độ lệch của từng người so với số trung bình 162,5 cm",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250917150004203472/deviation_from_the_mean.webp",
-     "du_phong": "img/minh-hoa-do-lech-cua-tung-gia-tri-so-voi-trung-binh.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Standard deviation formula",
-      "url": "https://www.geeksforgeeks.org/maths/standard-deviation-formula/"
-     },
-     "chu_giai": [
-      [
-       "Step 2: Deviation from the mean",
-       "Bước 2: độ lệch so với số trung bình"
-      ],
-      [
-       "Mean",
-       "Số trung bình"
-      ]
-     ]
+     "cap": "Mỗi mũi tên là độ lệch của một người; dải xanh là khoảng số trung bình ± 1 độ lệch chuẩn",
+     "alt": "Mỗi mũi tên là độ lệch của một người; dải xanh là khoảng số trung bình ± 1 độ lệch chuẩn",
+     "src": "img/do-lech-chieu-cao-6-nguoi.png"
     },
     {
-     "t": "anh",
-     "cap": "Kết quả: độ lệch chuẩn ≈ 8,5 cm",
-     "alt": "Kết quả: độ lệch chuẩn ≈ 8,5 cm",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250917150005316461/step_4_calculate_the_standard_deviation.webp",
-     "du_phong": "img/minh-hoa-ket-qua-tinh-do-lech-chuan.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Standard deviation formula",
-      "url": "https://www.geeksforgeeks.org/maths/standard-deviation-formula/"
-     },
-     "chu_giai": [
-      [
-       "Step 4: Calculate the Standard Deviation",
-       "Bước 4: tính độ lệch chuẩn"
-      ],
-      [
-       "Square root of Variance",
-       "Căn bậc hai của phương sai"
-      ],
-      [
-       "Standard Deviation shows the typical distance from the mean",
-       "Độ lệch chuẩn cho biết khoảng cách điển hình tới số trung bình"
-      ]
-     ]
+     "t": "keo_diem",
+     "tieu_de": "kéo chiều cao, xem độ lệch chuẩn",
+     "huong_dan": "Kéo các chấm (hoặc bấm vào hình rồi dùng phím mũi tên, phím cách để chọn chấm khác). <b>Thử thách:</b> giữ số trung bình 162,5 cm mà làm độ lệch chuẩn <b>nhỏ hơn 3 cm</b>. Rồi làm nó <b>lớn hơn 12 cm</b>.",
+     "gia_tri": [
+      150,
+      155,
+      160,
+      165,
+      170,
+      175
+     ],
+     "lo": 140,
+     "hi": 185,
+     "buoc": 0.5,
+     "nhan_x": "Chiều cao (cm)",
+     "don_vi": "cm",
+     "so_le": 2,
+     "so_vach": 9,
+     "ghi": "Trang này tính độ lệch chuẩn bằng cách <b>chia cho n</b>, đúng công thức SGK Toán 10."
     },
     {
      "t": "vi_du",
@@ -605,6 +737,12 @@ window.BAI = {
      "src": "img/hai-lop-gan-cung-trung-binh.png"
     },
     {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Pandas chia cho n − 1",
+     "html": "Lệnh <code>.std()</code> của Pandas mặc định chia cho <b>n − 1</b> thay vì n — cách tính dùng khi dữ liệu chỉ là một <b>mẫu</b> của nhóm lớn hơn. Muốn đúng công thức SGK thì viết <code>.std(ddof=0)</code>. Với 30 bạn một lớp, hai cách chênh chưa tới 2% và <b>thứ tự các lớp không đổi</b>: 10A1 là 1,92 (Pandas) hay 1,89 (chia n)."
+    },
+    {
      "t": "loi_hay_gap",
      "muc": [
       "Cộng các độ lệch rồi chia n — tổng các độ lệch luôn bằng 0, nên phải <b>bình phương</b> trước.",
@@ -628,9 +766,19 @@ window.BAI = {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Standard Deviation Formula",
-       "url": "https://www.geeksforgeeks.org/maths/standard-deviation-formula/",
-       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+       "ten": "Toán 10 — chương Thống kê: các số đặc trưng đo độ phân tán",
+       "url": null,
+       "ghi_chu": "SGK — phương sai, độ lệch chuẩn"
+      },
+      {
+       "ten": "Seeing Theory (Đại học Brown) — Basic Probability / Expectation, Variance",
+       "url": "https://seeing-theory.brown.edu/basic-probability/",
+       "ghi_chu": "tiếng Anh, hình động kéo thả"
+      },
+      {
+       "ten": "pandas — Series.std (tham số ddof)",
+       "url": "https://pandas.pydata.org/docs/reference/api/pandas.Series.std.html",
+       "ghi_chu": "tài liệu chính thức"
       }
      ]
     }
@@ -692,31 +840,6 @@ window.BAI = {
      "ten": "Xác suất của biến cố",
      "html": "Xác suất của biến cố A là số đo khả năng A xảy ra, nằm từ 0 (không thể xảy ra) đến 1 (chắc chắn xảy ra). Khi các kết quả có khả năng như nhau:",
      "ky_hieu": "P(A) = <span class=\"frac\"><span>n(A)</span><span>n(Ω)</span></span> — n(A): số kết quả thuận lợi cho A; n(Ω): số kết quả có thể."
-    },
-    {
-     "t": "anh",
-     "cap": "Công thức xác suất cổ điển",
-     "alt": "Công thức xác suất cổ điển",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260714155205639097/probability---------formula.webp",
-     "du_phong": "img/minh-hoa-cong-thuc-xac-suat-co-ban.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Probability formulas",
-      "url": "https://www.geeksforgeeks.org/maths/probability-formulas/"
-     },
-     "chu_giai": [
-      [
-       "Event",
-       "Biến cố"
-      ],
-      [
-       "Number of favourable outcomes",
-       "Số kết quả thuận lợi"
-      ],
-      [
-       "Total number of possible outcomes",
-       "Tổng số kết quả có thể"
-      ]
-     ]
     },
     {
      "t": "dinh_nghia",
@@ -876,9 +999,19 @@ window.BAI = {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Probability Formulas",
-       "url": "https://www.geeksforgeeks.org/maths/probability-formulas/",
-       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+       "ten": "Toán 10 — chương Đại số tổ hợp và Xác suất: định nghĩa cổ điển của xác suất",
+       "url": null,
+       "ghi_chu": "SGK"
+      },
+      {
+       "ten": "Seeing Theory (Đại học Brown) — Compound Probability, Conditional Probability",
+       "url": "https://seeing-theory.brown.edu/compound-probability/",
+       "ghi_chu": "tiếng Anh, hình động"
+      },
+      {
+       "ten": "Khan Academy — Conditional probability",
+       "url": "https://www.khanacademy.org/math/statistics-probability/probability-library",
+       "ghi_chu": "tiếng Anh"
       }
      ]
     }
@@ -1054,6 +1187,11 @@ window.BAI = {
     {
      "t": "doc_them",
      "link": [
+      {
+       "ten": "Google Machine Learning Crash Course — Logistic regression: calculating a probability",
+       "url": "https://developers.google.com/machine-learning/crash-course/logistic-regression",
+       "ghi_chu": "tiếng Anh"
+      },
       {
        "ten": "Probability in Machine Learning",
        "url": "https://www.geeksforgeeks.org/machine-learning/probability-in-machine-learning/",

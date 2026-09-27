@@ -300,6 +300,12 @@ table.chu-giai td.en { font-style: italic; color: var(--chu-phu); white-space: n
 .tt .tt-dong .tt-so { color: #64748B; min-width: 18px; text-align: right; }
 .tt .tt-dong.dang-chay { background: rgba(96, 165, 250, .25); box-shadow: inset 3px 0 0 #60A5FA; }
 .tt .tt-bien td, .tt .tt-bien th { font-size: 14px; }
+.tt .tt-the-hang { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 8px 0; }
+.tt .tt-the { background: var(--xanh-nhat); border: 1px solid #BFDBFE; border-radius: 10px; padding: 8px 12px; }
+.tt .tt-the span { display: block; font-size: 13px; color: var(--chu-phu); }
+.tt .tt-the b { font-size: 24px; color: var(--xanh-tuoi); font-variant-numeric: tabular-nums; }
+.tt canvas.tt-ve[tabindex] { cursor: grab; }
+.tt canvas.tt-ve:focus-visible { outline: 3px solid var(--xanh-tuoi); outline-offset: 2px; }
 
 /* Code: tat ghep ky tu (ligature) — hoc sinh phai thay dung ">=", "!=" nhu khi go, khong phai "≥", "≠" */
 code, pre, .tt-dong, .tt-ma, .tt-man-hinh { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }

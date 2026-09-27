@@ -226,9 +226,10 @@
         el("ul", { class: "ds" }, k.muc.map(function (m) { return el("li", { html: m }); }))]);
       case "tom_tat": return el("div", { class: "tom-tat", html: "<b>Tóm tắt:</b> " + k.html });
       case "doc_them": return el("div", { class: "hop doc-them" }, [
-        el("div", { class: "tieu-de-hop", text: "Đọc thêm ở bài gốc" }),
+        el("div", { class: "tieu-de-hop", text: "Đọc thêm" }),
         el("ul", { class: "ds" }, k.link.map(function (l) {
-          return el("li", { html: '<a href="' + l.url + '" target="_blank" rel="noopener">' + l.ten + "</a>" + (l.ghi_chu ? " — " + l.ghi_chu : "") });
+          var ten = l.url ? '<a href="' + l.url + '" target="_blank" rel="noopener">' + l.ten + "</a>" : "<b>" + l.ten + "</b>";
+          return el("li", { html: ten + (l.ghi_chu ? " — " + l.ghi_chu : "") });
         }))]);
       case "demo_tb_tv": return demoTbTv(k);
       case "demo_truot": return demoTruot(k);
