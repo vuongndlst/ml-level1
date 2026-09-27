@@ -309,3 +309,13 @@ table.chu-giai td.en { font-style: italic; color: var(--chu-phu); white-space: n
 
 /* Code: tat ghep ky tu (ligature) — hoc sinh phai thay dung ">=", "!=" nhu khi go, khong phai "≥", "≠" */
 code, pre, .tt-dong, .tt-ma, .tt-man-hinh { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }
+
+.tt .tt-cong-tac { display: grid; gap: 6px; margin: 8px 0; }
+.tt .tt-cong-tac-dong { display: flex; gap: 10px; align-items: center; font-size: 15px; color: var(--chu); background: #fff; border: 1px solid var(--vien); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+.tt .tt-cong-tac-dong input { width: 18px; height: 18px; accent-color: var(--xanh-tuoi); }
+.tt .tt-luoi { display: grid; grid-template-columns: repeat(auto-fill, 26px); gap: 5px; margin: 10px 0; }
+.tt .tt-o { display: inline-block; width: 26px; height: 26px; border-radius: 6px; opacity: .35; border: 2px solid transparent; vertical-align: middle; }
+.tt .tt-o.nhieu { background: var(--xanh-tuoi); } .tt .tt-o.it { background: #F59E0B; }
+.tt .tt-o.test { opacity: 1; border-color: #0F172A; }
+.tt .tt-chu-giai { font-size: 13.5px; color: var(--chu-phu); } .tt .tt-chu-giai .tt-o { width: 16px; height: 16px; }
+.tt .tt-chip.dang-chon { background: var(--xanh-tuoi); color: #fff; border-color: var(--xanh-tuoi); }

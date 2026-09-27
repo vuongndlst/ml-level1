@@ -191,9 +191,14 @@ window.BAI = {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Data Cleaning – Introduction",
-       "url": "https://www.geeksforgeeks.org/data-analysis/data-cleaning-introduction/",
-       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+       "ten": "Kaggle Learn — Data Cleaning (khoá ngắn, có bài tập trên notebook)",
+       "url": "https://www.kaggle.com/learn/data-cleaning",
+       "ghi_chu": "tiếng Anh"
+      },
+      {
+       "ten": "pandas — DataFrame.info, describe",
+       "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html",
+       "ghi_chu": "tài liệu chính thức"
       }
      ]
     }
@@ -429,9 +434,14 @@ window.BAI = {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Handling Missing Values in Machine Learning",
-       "url": "https://www.geeksforgeeks.org/data-analysis/handling-missing-values-machine-learning/",
-       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+       "ten": "pandas — Working with missing data (isnull, dropna, fillna)",
+       "url": "https://pandas.pydata.org/docs/user_guide/missing_data.html",
+       "ghi_chu": "tài liệu chính thức"
+      },
+      {
+       "ten": "scikit-learn — Imputation of missing values (SimpleImputer: điền trung vị, mốt)",
+       "url": "https://scikit-learn.org/stable/modules/impute.html",
+       "ghi_chu": "tài liệu chính thức"
       }
      ]
     }
@@ -588,9 +598,14 @@ window.BAI = {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Working with Missing Data and Duplicates in Pandas",
-       "url": "https://www.geeksforgeeks.org/data-analysis/data-cleaning-introduction/",
-       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+       "ten": "pandas — DataFrame.drop_duplicates",
+       "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html",
+       "ghi_chu": "tài liệu chính thức"
+      },
+      {
+       "ten": "pandas — Working with text data (str.strip, str.upper, str.replace)",
+       "url": "https://pandas.pydata.org/docs/user_guide/text.html",
+       "ghi_chu": "tài liệu chính thức"
       }
      ]
     }
@@ -785,9 +800,14 @@ window.BAI = {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Machine Learning Outlier",
-       "url": "https://www.geeksforgeeks.org/machine-learning/machine-learning-outlier/",
-       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+       "ten": "Toán 10 — chương Thống kê: tứ phân vị, biểu đồ hộp, giá trị bất thường",
+       "url": null,
+       "ghi_chu": "SGK — cùng quy tắc 1,5·ΔQ"
+      },
+      {
+       "ten": "Khan Academy — Identifying outliers",
+       "url": "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data/box-whisker-plots/a/identifying-outliers-iqr-rule",
+       "ghi_chu": "tiếng Anh"
       }
      ]
     }
@@ -885,6 +905,301 @@ window.BAI = {
      "src": "img/xoa-dong-hay-dien-o-trong.png"
     },
     {
+     "t": "cong_tac",
+     "tieu_de": "bật từng bước dọn bảng",
+     "huong_dan": "Bảng students_ban.csv có 95 dòng. Bật / tắt từng bước (máy luôn làm theo thứ tự 1 → 5) và xem bốn con số đổi thế nào. <b>Thử:</b> chỉ bật bước 4 — điểm trung bình có về gần 6,77 không? Vì sao?",
+     "cong_tac": [
+      {
+       "ten": "Xoá dòng trùng",
+       "ma": "df = df.drop_duplicates()"
+      },
+      {
+       "ten": "Thống nhất chữ ở cột Lớp, Giới tính",
+       "ma": "df[\"Lop\"] = df[\"Lop\"].str.strip().str.upper().str.replace(\" \", \"\")"
+      },
+      {
+       "ten": "Đổi điểm, giờ học phi lý thành ô trống",
+       "ma": "df.loc[(df[\"Score\"] < 0) | (df[\"Score\"] > 10), \"Score\"] = np.nan"
+      },
+      {
+       "ten": "Điền ô trống bằng trung vị (cột số), mốt (cột chữ)",
+       "ma": "df[\"Score\"] = df[\"Score\"].fillna(df[\"Score\"].median())"
+      },
+      {
+       "ten": "Xoá mọi dòng còn ô trống",
+       "ma": "df = df.dropna()"
+      }
+     ],
+     "chi_so": [
+      {
+       "khoa": "dong",
+       "ten": "Số dòng"
+      },
+      {
+       "khoa": "lop",
+       "ten": "Số cách viết cột Lớp",
+       "nguong": 3
+      },
+      {
+       "khoa": "trong",
+       "ten": "Số ô trống",
+       "nguong": 0
+      },
+      {
+       "khoa": "tb",
+       "ten": "Điểm trung bình",
+       "so_le": 2,
+       "nguong": 7.5
+      }
+     ],
+     "bang": {
+      "00000": {
+       "dong": 95,
+       "lop": 11,
+       "trong": 12,
+       "tb": 9.08,
+       "max": 100.0
+      },
+      "00001": {
+       "dong": 83,
+       "lop": 11,
+       "trong": 0,
+       "tb": 9.33,
+       "max": 100.0
+      },
+      "00010": {
+       "dong": 95,
+       "lop": 11,
+       "trong": 0,
+       "tb": 9.0,
+       "max": 100.0
+      },
+      "00011": {
+       "dong": 95,
+       "lop": 11,
+       "trong": 0,
+       "tb": 9.0,
+       "max": 100.0
+      },
+      "00100": {
+       "dong": 95,
+       "lop": 11,
+       "trong": 19,
+       "tb": 6.76,
+       "max": 10.0
+      },
+      "00101": {
+       "dong": 76,
+       "lop": 11,
+       "trong": 0,
+       "tb": 6.78,
+       "max": 10.0
+      },
+      "00110": {
+       "dong": 95,
+       "lop": 11,
+       "trong": 0,
+       "tb": 6.75,
+       "max": 10.0
+      },
+      "00111": {
+       "dong": 95,
+       "lop": 11,
+       "trong": 0,
+       "tb": 6.75,
+       "max": 10.0
+      },
+      "01000": {
+       "dong": 95,
+       "lop": 3,
+       "trong": 12,
+       "tb": 9.08,
+       "max": 100.0
+      },
+      "01001": {
+       "dong": 83,
+       "lop": 3,
+       "trong": 0,
+       "tb": 9.33,
+       "max": 100.0
+      },
+      "01010": {
+       "dong": 95,
+       "lop": 3,
+       "trong": 0,
+       "tb": 9.0,
+       "max": 100.0
+      },
+      "01011": {
+       "dong": 95,
+       "lop": 3,
+       "trong": 0,
+       "tb": 9.0,
+       "max": 100.0
+      },
+      "01100": {
+       "dong": 95,
+       "lop": 3,
+       "trong": 19,
+       "tb": 6.76,
+       "max": 10.0
+      },
+      "01101": {
+       "dong": 76,
+       "lop": 3,
+       "trong": 0,
+       "tb": 6.78,
+       "max": 10.0
+      },
+      "01110": {
+       "dong": 95,
+       "lop": 3,
+       "trong": 0,
+       "tb": 6.75,
+       "max": 10.0
+      },
+      "01111": {
+       "dong": 95,
+       "lop": 3,
+       "trong": 0,
+       "tb": 6.75,
+       "max": 10.0
+      },
+      "10000": {
+       "dong": 90,
+       "lop": 11,
+       "trong": 12,
+       "tb": 9.23,
+       "max": 100.0
+      },
+      "10001": {
+       "dong": 78,
+       "lop": 11,
+       "trong": 0,
+       "tb": 9.51,
+       "max": 100.0
+      },
+      "10010": {
+       "dong": 90,
+       "lop": 11,
+       "trong": 0,
+       "tb": 9.14,
+       "max": 100.0
+      },
+      "10011": {
+       "dong": 90,
+       "lop": 11,
+       "trong": 0,
+       "tb": 9.14,
+       "max": 100.0
+      },
+      "10100": {
+       "dong": 90,
+       "lop": 11,
+       "trong": 19,
+       "tb": 6.78,
+       "max": 10.0
+      },
+      "10101": {
+       "dong": 71,
+       "lop": 11,
+       "trong": 0,
+       "tb": 6.8,
+       "max": 10.0
+      },
+      "10110": {
+       "dong": 90,
+       "lop": 11,
+       "trong": 0,
+       "tb": 6.77,
+       "max": 10.0
+      },
+      "10111": {
+       "dong": 90,
+       "lop": 11,
+       "trong": 0,
+       "tb": 6.77,
+       "max": 10.0
+      },
+      "11000": {
+       "dong": 90,
+       "lop": 3,
+       "trong": 12,
+       "tb": 9.23,
+       "max": 100.0
+      },
+      "11001": {
+       "dong": 78,
+       "lop": 3,
+       "trong": 0,
+       "tb": 9.51,
+       "max": 100.0
+      },
+      "11010": {
+       "dong": 90,
+       "lop": 3,
+       "trong": 0,
+       "tb": 9.14,
+       "max": 100.0
+      },
+      "11011": {
+       "dong": 90,
+       "lop": 3,
+       "trong": 0,
+       "tb": 9.14,
+       "max": 100.0
+      },
+      "11100": {
+       "dong": 90,
+       "lop": 3,
+       "trong": 19,
+       "tb": 6.78,
+       "max": 10.0
+      },
+      "11101": {
+       "dong": 71,
+       "lop": 3,
+       "trong": 0,
+       "tb": 6.8,
+       "max": 10.0
+      },
+      "11110": {
+       "dong": 90,
+       "lop": 3,
+       "trong": 0,
+       "tb": 6.77,
+       "max": 10.0
+      },
+      "11111": {
+       "dong": 90,
+       "lop": 3,
+       "trong": 0,
+       "tb": 6.77,
+       "max": 10.0
+      }
+     },
+     "dau": "df = pd.read_csv(\"students_ban.csv\")",
+     "nhan_xet": [
+      {
+       "khi": "11110",
+       "html": "Đúng quy trình: giữ đủ 90 bạn, không còn ô trống, điểm trung bình 6,77."
+      },
+      {
+       "khi": "11101",
+       "html": "Sạch nhưng chỉ còn 71 dòng — mất 19 bạn vì xoá dòng thay vì điền."
+      },
+      {
+       "khi": "??01?",
+       "html": "Điền ô trống khi điểm 55, 100 vẫn còn trong bảng — con số dùng để điền đã bị lỗi lọt vào, điểm trung bình vẫn sai."
+      },
+      {
+       "khi": "?0???",
+       "html": "Cột Lớp còn nhiều cách viết — máy vẫn tưởng khối có hơn 3 lớp."
+      }
+     ],
+     "ghi": "Số đỏ là dấu hiệu bảng còn bẩn. Mọi con số tính sẵn bằng pandas trên chính file students_ban.csv (32 tổ hợp bật / tắt). Dòng lệnh bên dưới rút gọn — trong notebook mỗi bước có thêm cột khác."
+    },
+    {
      "t": "p",
      "html": "Với bảng students_ban.csv: bảng bẩn 95 dòng; xoá 5 dòng trùng còn 90. Nếu sau đó xoá mọi dòng có ô trống thì chỉ còn 71 — mất 19 bạn. Điền ô trống thì giữ đủ 90."
     },
@@ -929,6 +1244,11 @@ window.BAI = {
     {
      "t": "doc_them",
      "link": [
+      {
+       "ten": "Kaggle Learn — Data Cleaning",
+       "url": "https://www.kaggle.com/learn/data-cleaning",
+       "ghi_chu": "tiếng Anh"
+      },
       {
        "ten": "Data Preprocessing in Machine Learning",
        "url": "https://www.geeksforgeeks.org/data-analysis/data-preprocessing-machine-learning-python/",
