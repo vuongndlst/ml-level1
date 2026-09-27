@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 7,
  "ma": "bai07",
  "nhan": "Bài 7",
- "tieu_de": "Chuẩn bị feature và chia dữ liệu",
- "phan": "Phần A · Nền tảng dữ liệu",
- "cau_hoi": "Model đúng gần 90% — đã đáng tin chưa?",
+ "tieu_de": "Làm sạch dữ liệu",
+ "phan": "Module 06 · Data Preparation",
+ "cau_hoi": "Vì sao dữ liệu bẩn làm hỏng cả một model tốt?",
  "gioi_thieu": [
-  "Bảng học sinh đã được con dọn sạch ở Bài 6: 90 bạn, trong đó 79 Đạt và chỉ 11 Chưa đạt. Một model “lười” đoán <b>mọi bạn đều Đạt</b> vẫn đúng 87,8%. Vậy model đó có dùng được không?",
-  "Năm chặng dưới đây là những việc phải làm <b>sau khi làm sạch</b> và <b>trước khi huấn luyện</b>: chọn cột đầu vào, tạo cột mới, chia dữ liệu để kiểm tra, và cảnh giác với dữ liệu lệch nhãn. Bảng dùng trong bài là bảng mô phỏng.",
-  "Con dùng lại việc đưa về cùng thang đo (Bài 5) và làm sạch (Bài 6)."
+  "Đầu giờ máy báo điểm trung bình của bảng 95 học sinh là <b>9,08</b> — trên thang 10. Máy tính không cộng chia sai. Vậy sai ở đâu?",
+  "Năm chặng dưới đây giúp con nhận ra <b>năm loại lỗi</b> hay gặp trong dữ liệu, biết cách xử lý từng loại bằng Pandas, và sắp xếp các bước dọn theo đúng thứ tự. Ví dụ lấy từ bảng <b>students_ban.csv</b> — bảng mô phỏng, được cài sẵn lỗi để luyện tập, cũng là bảng con mở trên Colab.",
+  "Con sẽ dùng lại trung vị, mốt (Bài 5) và tứ phân vị (Toán 10)."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai07",
  "muc_tieu": [
-  "Phân biệt được feature (cột đầu vào) và nhãn (cột cần dự đoán).",
-  "Tạo được feature mới từ các cột có sẵn và đổi cột chữ thành số.",
-  "Chọn được feature phù hợp, loại được cột vô nghĩa và cột gây rò rỉ.",
-  "Giải thích được vì sao phải chia dữ liệu thành tập huấn luyện và tập kiểm tra, và vai trò của stratify.",
-  "Nhận ra bẫy độ chính xác khi dữ liệu lệch nhãn."
+  "Giải thích được vì sao dữ liệu bẩn làm kết quả tính toán và model sai.",
+  "Phát hiện và xử lý ô trống: xoá dòng hoặc điền bằng số trung bình, trung vị, mốt.",
+  "Phát hiện và xử lý dòng trùng, chữ viết nhiều kiểu.",
+  "Phân biệt giá trị phi lý (lỗi nhập liệu) với giá trị bất thường có thật.",
+  "Sắp xếp đúng thứ tự các bước làm sạch một bảng dữ liệu."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,128 +36,163 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Feature và nhãn",
-   "ten_ngan": "Feature và nhãn",
+   "ten": "Dữ liệu bẩn: rác vào, rác ra",
+   "ten_ngan": "Dữ liệu bẩn",
    "phut": 4,
-   "muc_tieu": "phân biệt được feature và nhãn trong một bảng dữ liệu.",
-   "khoi_dong": "Muốn máy đoán một bạn Đạt hay Chưa đạt, máy được nhìn những cột nào, và cột nào là câu trả lời?",
+   "muc_tieu": "giải thích được vì sao phải làm sạch dữ liệu trước khi tính toán hay huấn luyện model.",
+   "khoi_dong": "Máy báo điểm trung bình của bảng là 9,08 trên thang 10. Con có tin con số đó không?",
    "khoi": [
     {
      "t": "dinh_nghia",
-     "ten": "Feature (đặc trưng) và nhãn (label)",
-     "html": "<b>Feature</b> là các cột đầu vào mà model được nhìn để dự đoán. <b>Nhãn</b> (còn gọi là cột đích, target) là cột chứa câu trả lời mà model phải học cách đoán.",
-     "ky_hieu": "Ký hiệu thường gặp: X là bảng các feature, y là cột nhãn."
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "các cột của bảng học sinh",
-     "de": "Bài toán: đoán một bạn Đạt hay Chưa đạt.",
-     "cot": [
-      "Cột",
-      "Ví dụ",
-      "Vai trò",
-      "Vì sao"
-     ],
-     "dong": [
-      [
-       "StudentID",
-       "HS001",
-       "Bỏ",
-       "Mã số — không nói gì về việc học"
-      ],
-      [
-       "HoTen",
-       "Hoang Quan",
-       "Bỏ",
-       "Tên không làm một bạn học giỏi hơn"
-      ],
-      [
-       "Lop, GioiTinh",
-       "10A1, NU",
-       "Có thể dùng",
-       "Phải đổi chữ thành số trước (chặng 2)"
-      ],
-      [
-       "StudyHours, SleepHours",
-       "5,8 · 8,8",
-       "<b>Feature</b>",
-       "Thông tin có trước kỳ thi"
-      ],
-      [
-       "Score",
-       "9,7",
-       "<b>Bỏ</b>",
-       "Kết quả được xếp theo điểm — dùng là “nhìn trộm” đáp án"
-      ],
-      [
-       "Result",
-       "Pass",
-       "<b>Nhãn</b>",
-       "Câu trả lời cần đoán"
-      ]
-     ],
-     "ket_luan": "Chỉ những cột có trước lúc cần dự đoán mới được làm feature.",
-     "nhan_manh": [
-      4,
-      5
-     ]
-    },
-    {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Rò rỉ dữ liệu (data leakage)",
-     "html": "Kết quả Đạt được xếp theo điểm (từ 5 điểm trở lên). Nếu đưa cột Score vào làm feature, model “đoán” gần đúng tuyệt đối — nhưng ngoài đời, lúc cần dự đoán thì chưa có điểm. Dùng thông tin mà lúc dự đoán chưa thể có gọi là <b>rò rỉ dữ liệu</b>."
+     "ten": "Làm sạch dữ liệu (data cleaning)",
+     "html": "Là việc <b>phát hiện và xử lý các lỗi</b> trong bảng dữ liệu — ô bị thiếu, dòng bị lặp, chữ viết không thống nhất, con số không thể có thật — để bảng phản ánh đúng thực tế trước khi tính toán hay đưa cho model học.",
+     "ky_hieu": "Nguyên tắc “rác vào, rác ra” (garbage in, garbage out): dữ liệu vào sai thì kết quả ra sai, dù thuật toán tốt đến đâu."
     },
     {
      "t": "anh",
-     "cap": "Năm nhóm việc chuẩn bị feature",
-     "alt": "Năm nhóm việc chuẩn bị feature",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250701123223591115/processes.webp",
-     "du_phong": "img/minh-hoa-nam-nhom-viec-chuan-bi-feature.png",
+     "cap": "Làm sạch nằm ngay sau khi có dữ liệu thô — trước khi chuẩn bị feature và huấn luyện model",
+     "alt": "Làm sạch nằm ngay sau khi có dữ liệu thô — trước khi chuẩn bị feature và huấn luyện model",
+     "src": "img/quy-trinh-tu-du-lieu-tho-den-model.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "năm dòng đầu của bảng students_ban.csv",
+     "de": "Soi từng dòng, mỗi dòng có một chỗ bất ổn:",
+     "cot": [
+      "Mã",
+      "Lớp",
+      "Giới tính",
+      "Giờ tự học",
+      "Điểm",
+      "Chỗ bất ổn"
+     ],
+     "dong": [
+      [
+       "HS003",
+       "10a1",
+       "Nu",
+       "4,2",
+       "7,0",
+       "Lớp viết chữ thường"
+      ],
+      [
+       "HS004",
+       "10A3",
+       "Nam",
+       "3,7",
+       "6,6",
+       "Thiếu họ tên"
+      ],
+      [
+       "HS009",
+       "10A1",
+       "Nu",
+       "<b>25,0</b>",
+       "5,8",
+       "Học 25 giờ mỗi ngày"
+      ],
+      [
+       "HS010",
+       "10A2",
+       "<b>M</b>",
+       "1,8",
+       "5,2",
+       "Giới tính viết kiểu khác"
+      ],
+      [
+       "HS012",
+       "10A3",
+       "Nam",
+       "4,2",
+       "<b>55,0</b>",
+       "Điểm 55 trên thang 10"
+      ]
+     ],
+     "ket_luan": "Máy vẫn cộng cả 25 giờ và 55 điểm vào phép tính — nên điểm trung bình ra 9,08. Máy không sai; dữ liệu sai.",
+     "nhan_manh": [
+      2,
+      4
+     ]
+    },
+    {
+     "t": "p",
+     "html": "Quy tắc số một: <b>nhìn trước khi sửa</b>. Pandas có sẵn các lệnh để “soi” một bảng:"
+    },
+    {
+     "t": "bang",
+     "cot": [
+      "Lệnh Pandas",
+      "Cho biết"
+     ],
+     "dong": [
+      [
+       "<code>df.info()</code>",
+       "Số dòng, tên cột, số ô có dữ liệu của từng cột"
+      ],
+      [
+       "<code>df.isnull().sum()</code>",
+       "Số ô trống của từng cột"
+      ],
+      [
+       "<code>df.duplicated().sum()</code>",
+       "Số dòng lặp lại y hệt một dòng khác"
+      ],
+      [
+       "<code>df[\"cột\"].unique()</code>",
+       "Các cách viết khác nhau trong một cột chữ"
+      ],
+      [
+       "<code>df.describe()</code>",
+       "Nhỏ nhất, lớn nhất, trung bình… của các cột số"
+      ]
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Năm dòng đầu của bảng Titanic — bộ dữ liệu luyện tập nổi tiếng của Machine Learning; NaN là ô trống",
+     "alt": "Năm dòng đầu của bảng Titanic — bộ dữ liệu luyện tập nổi tiếng của Machine Learning; NaN là ô trống",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250829123024455235/Screenshot-2025-08-29-122408.webp",
+     "du_phong": "img/minh-hoa-bang-du-lieu-titanic-con-nguyen-ban.png",
      "nguon": {
-      "ten": "GeeksforGeeks — What is feature engineering",
-      "url": "https://www.geeksforgeeks.org/machine-learning/what-is-feature-engineering/"
+      "ten": "GeeksforGeeks — Data cleaning introduction",
+      "url": "https://www.geeksforgeeks.org/data-analysis/data-cleaning-introduction/"
      },
      "chu_giai": [
       [
-       "Feature Creation",
-       "Tạo feature mới (chặng 2)"
+       "PassengerId, Name, Sex, Age",
+       "Mã hành khách, họ tên, giới tính, tuổi"
       ],
       [
-       "Feature Transformation",
-       "Biến đổi feature, ví dụ đổi chữ thành số (chặng 2)"
+       "Survived",
+       "Sống sót (1) hay không (0)"
       ],
       [
-       "Feature Extraction",
-       "Rút gọn nhiều cột thành ít cột (đọc thêm)"
+       "Pclass, Fare, Cabin",
+       "Hạng vé, giá vé, số phòng"
       ],
       [
-       "Feature Selection",
-       "Chọn feature (chặng 3)"
-      ],
-      [
-       "Feature Scaling",
-       "Đưa về cùng thang đo (Bài 5)"
+       "NaN",
+       "Not a Number — ô không có dữ liệu"
       ]
      ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Đưa cả cột mã số, họ tên vào model.",
-      "Dùng cột được tính ra từ nhãn (Score) để đoán nhãn (Result)."
+      "Sửa ngay khi thấy một lỗi, chưa soi hết bảng — dễ bỏ sót và sửa sai thứ tự.",
+      "Tin một con số chỉ vì “máy tính ra như vậy”."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Feature là cột đầu vào (X), nhãn là cột cần đoán (y). Chỉ dùng thông tin có sẵn lúc dự đoán."
+     "html": "Dữ liệu bẩn thì kết quả sai (rác vào, rác ra). Luôn soi bảng bằng info, isnull, duplicated, unique, describe trước khi sửa."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "What is Feature Engineering?",
-       "url": "https://www.geeksforgeeks.org/machine-learning/what-is-feature-engineering/",
+       "ten": "Data Cleaning – Introduction",
+       "url": "https://www.geeksforgeeks.org/data-analysis/data-cleaning-introduction/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -167,314 +202,394 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai07-q1",
-     "q": "Bài toán: dự đoán giá một căn nhà. Cột nào là nhãn?",
-     "giai": "Nhãn là thứ cần dự đoán: giá bán. Diện tích, số phòng là feature; mã số thì bỏ.",
-     "goi_y": "Nhãn là câu trả lời mà model phải đoán ra.",
+     "q": "Máy tính điểm trung bình của một bảng điểm thang 10 ra 9,08. Giải thích nào hợp lý nhất?",
+     "giai": "Máy cộng chia đúng — nhưng cộng cả những điểm không thể có trên thang 10.",
+     "goi_y": "Điểm trung bình trên thang 10 mà gần 9 — thử nghĩ tới các con số lạ trong bảng.",
      "a": [
-      "Giá bán của căn nhà",
-      "Diện tích căn nhà",
-      "Số phòng ngủ",
-      "Mã số căn nhà"
+      "Bảng có vài điểm phi lý như 55, 100",
+      "Máy tính đã cộng chia bị sai",
+      "Cả lớp đều học rất giỏi thật",
+      "Trung bình luôn cao hơn thực tế"
      ],
-     "h": "3f70e0767079d"
+     "h": "bc4b99f334e7b"
     },
     {
-     "k": "ma",
+     "k": "dd",
      "id": "bai07-q2",
-     "q": "Dự đoán một bạn Đạt hay Chưa đạt. Những cột nào nên BỎ, không làm feature? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "Mã số không mang thông tin; Score là rò rỉ vì Đạt được xếp theo điểm.",
-     "goi_y": "Cột nào không nói gì về việc học? Cột nào lúc dự đoán chưa thể có?",
-     "a": [
-      "StudentID — mã học sinh",
-      "Score — điểm học kỳ",
-      "StudyHours — giờ tự học",
-      "SleepHours — giờ ngủ"
+     "q": "Chọn lệnh đúng cho mỗi chỗ trống.",
+     "giai": "isnull() đánh dấu ô trống, .sum() đếm; describe() cho min, max, trung bình…",
+     "goi_y": "Xem lại bảng “soi” năm lệnh ở trên.",
+     "mau": "Muốn đếm ô trống từng cột, dùng {0}; muốn xem giá trị nhỏ nhất, lớn nhất của các cột số, dùng {1}.",
+     "o": [
+      [
+       "df.isnull().sum()",
+       "df.duplicated().sum()",
+       "df.unique()",
+       "df.describe()"
+      ],
+      [
+       "df.describe()",
+       "df.info()",
+       "df.isnull().sum()",
+       "df.duplicated().sum()"
+      ]
      ],
-     "h": "91820d49bb3"
+     "h": "d03ec178b913"
     },
     {
      "k": "ds",
      "id": "bai07-q3",
-     "q": "Dùng cột Score để đoán Result là cách làm tốt vì model sẽ đoán rất chính xác.",
-     "giai": "Đó là rò rỉ dữ liệu: lúc cần dự đoán thì chưa có điểm.",
-     "goi_y": "Lúc thầy cô muốn dự đoán, đã có điểm học kỳ chưa?",
+     "q": "Nếu thuật toán Machine Learning đủ tốt thì không cần làm sạch dữ liệu.",
+     "giai": "Rác vào, rác ra: model học từ dữ liệu, nên học luôn cả lỗi.",
+     "goi_y": "Model học từ đâu?",
      "h": "185ec12befd871"
     }
    ]
   },
   {
-   "ten": "Tạo feature mới và đổi chữ thành số",
-   "ten_ngan": "Tạo feature",
-   "phut": 4,
-   "muc_tieu": "tạo được feature mới từ các cột có sẵn và đổi một cột chữ thành số.",
-   "khoi_dong": "Con có cột giờ học và giờ ngủ. Con nghĩ ra thêm được con số nào có thể giúp đoán kết quả?",
+   "ten": "Ô trống — giá trị bị thiếu",
+   "ten_ngan": "Ô trống",
+   "phut": 5,
+   "muc_tieu": "phát hiện ô trống và chọn được cách xử lý: xoá dòng hoặc điền bằng số trung bình, trung vị, mốt.",
+   "khoi_dong": "Một bạn quên ghi giờ ngủ nhưng các cột khác đầy đủ. Nên bỏ cả dòng của bạn ấy, hay giữ lại?",
    "khoi": [
     {
      "t": "dinh_nghia",
-     "ten": "Tạo feature (feature engineering)",
-     "html": "Dùng hiểu biết về bài toán để tạo cột mới từ các cột có sẵn — ví dụ cộng, chia hai cột. Máy không tự nghĩ ra ý nghĩa; con người đặt ra.",
-     "ky_hieu": "<code>df[\"TongGio\"] = df[\"StudyHours\"] + df[\"SleepHours\"]</code>"
+     "ten": "Ô trống (giá trị bị thiếu, missing value)",
+     "html": "Ô không có dữ liệu — Pandas hiển thị là <b>NaN</b>. Có hai cách xử lý: <b>xoá</b> dòng (hoặc cả cột) chứa ô trống, hoặc <b>điền</b> ô trống bằng một giá trị đại diện của cột.",
+     "ky_hieu": "Đếm: <code>df.isnull().sum()</code> · Xoá dòng: <code>df.dropna()</code> · Điền: <code>df[\"cột\"].fillna(giá_trị)</code>"
     },
     {
-     "t": "vi_du",
-     "tieu_de": "hai feature mới cho 3 bạn đầu bảng",
-     "de": null,
+     "t": "anh",
+     "cap": "Bảng Titanic có 891 hành khách: cột Age chỉ có 714 ô có dữ liệu, cột Cabin chỉ có 204",
+     "alt": "Bảng Titanic có 891 hành khách: cột Age chỉ có 714 ô có dữ liệu, cột Cabin chỉ có 204",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250829123024725201/Screenshot-2025-08-29-122359.webp",
+     "du_phong": "img/minh-hoa-bang-thong-ke-so-o-khong-trong-cua-tung-cot.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Data cleaning introduction",
+      "url": "https://www.geeksforgeeks.org/data-analysis/data-cleaning-introduction/"
+     },
+     "chu_giai": [
+      [
+       "RangeIndex: 891 entries",
+       "Bảng có 891 dòng"
+      ],
+      [
+       "Non-Null Count",
+       "Số ô CÓ dữ liệu (không trống)"
+      ],
+      [
+       "Dtype: int64, float64, object",
+       "Kiểu dữ liệu: số nguyên, số thập phân, chữ"
+      ]
+     ]
+    },
+    {
+     "t": "bang",
      "cot": [
-      "Mã",
-      "Giờ học",
-      "Giờ ngủ",
-      "TongGio = học + ngủ",
-      "TiLeHocNgu = học : ngủ"
+      "Loại cột",
+      "Điền bằng",
+      "Vì sao",
+      "Lệnh Pandas"
      ],
      "dong": [
       [
-       "HS001",
-       "5,8",
-       "8,8",
-       "14,6",
-       "0,66"
+       "Cột số, không có giá trị lạ",
+       "Số trung bình",
+       "Dùng hết mọi giá trị",
+       "<code>.fillna(df[\"cột\"].mean())</code>"
       ],
       [
-       "HS002",
-       "5,1",
-       "7,9",
-       "13,0",
-       "0,65"
+       "Cột số, có giá trị lạ",
+       "Trung vị",
+       "Không bị giá trị lạ kéo lệch (Bài 5)",
+       "<code>.fillna(df[\"cột\"].median())</code>"
       ],
       [
-       "HS003",
-       "4,2",
-       "6,2",
-       "10,4",
-       "0,68"
+       "Cột chữ: lớp, giới tính",
+       "Mốt",
+       "Chữ không cộng chia được",
+       "<code>.fillna(df[\"cột\"].mode()[0])</code>"
       ]
-     ],
-     "ket_luan": "Hai cột mới được tính từ hai cột cũ — không thêm dữ liệu nào ngoài bảng.",
-     "nhan_manh": []
-    },
-    {
-     "t": "dinh_nghia",
-     "ten": "Đổi chữ thành số (mã hoá)",
-     "html": "Model chỉ tính toán trên số. Cột chữ có hai giá trị như Giới tính có thể đổi thành 0 và 1.",
-     "ky_hieu": "<code>df[\"Nu\"] = (df[\"GioiTinh\"] == \"NU\").astype(int)</code> — NU thành 1, NAM thành 0"
+     ]
     },
     {
      "t": "vi_du",
-     "tieu_de": "mã hoá cột Giới tính",
-     "de": null,
+     "tieu_de": "điền một ô trống trong cột điểm",
+     "de": "Điểm của 6 bạn: 5 · 6 · 6,5 · 7 · 9,5 · <b>(trống)</b>.",
      "cot": [
-      "Mã",
-      "GioiTinh",
-      "Nu"
+      "Cách điền",
+      "Tính",
+      "Giá trị điền"
      ],
      "dong": [
       [
-       "HS001",
-       "NU",
-       "1"
+       "Số trung bình",
+       "(5 + 6 + 6,5 + 7 + 9,5) : 5",
+       "6,8"
       ],
       [
-       "HS002",
-       "NU",
-       "1"
+       "Trung vị",
+       "Sắp xếp 5 giá trị, lấy giá trị thứ 3",
+       "<b>6,5</b>"
       ],
       [
-       "HS003",
-       "NU",
-       "1"
-      ],
-      [
-       "HS004",
-       "NAM",
-       "0"
+       "Xoá dòng",
+       "Bỏ bạn thứ 6",
+       "Còn 5 bạn — mất cả các cột khác của bạn ấy"
       ]
      ],
-     "ket_luan": null,
+     "ket_luan": "Bạn 9,5 điểm kéo số trung bình lên 6,8; trung vị 6,5 ít bị ảnh hưởng hơn.",
      "nhan_manh": []
+    },
+    {
+     "t": "demo_tb_tv",
+     "tieu_de": "vì sao nên điền bằng trung vị",
+     "huong_dan": "Bảy điểm dưới đây có một điểm gõ nhầm (55). Sửa ô vàng thành 5,5 rồi thành 100. Số nào đổi nhiều nếu dùng để điền ô trống?",
+     "gia_tri": [
+      5.8,
+      6.2,
+      6.6,
+      6.7,
+      7.0,
+      7.4,
+      55
+     ],
+     "sua": 6
+    },
+    {
+     "t": "anh",
+     "cap": "Bảng mẫu có ô trống (NaN) ở nhiều cột",
+     "alt": "Bảng mẫu có ô trống (NaN) ở nhiều cột",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251201165310561104/MV1.png",
+     "du_phong": "img/minh-hoa-bang-du-lieu-co-o-trong.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Handling missing values machine learning",
+      "url": "https://www.geeksforgeeks.org/data-analysis/handling-missing-values-machine-learning/"
+     },
+     "chu_giai": [
+      [
+       "School ID, Name, Address, City",
+       "Mã trường, tên, địa chỉ, thành phố"
+      ],
+      [
+       "Subject, Marks, Rank, Grade",
+       "Môn, điểm, thứ hạng, xếp loại"
+      ],
+      [
+       "NaN",
+       "Ô trống"
+      ]
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Cùng bảng đó sau <code>dropna()</code>: 8 dòng chỉ còn 5",
+     "alt": "Cùng bảng đó sau <code>dropna()</code>: 8 dòng chỉ còn 5",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251201165442193836/MV2.png",
+     "du_phong": "img/minh-hoa-bang-sau-khi-xoa-cac-dong-bi-thieu.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Handling missing values machine learning",
+      "url": "https://www.geeksforgeeks.org/data-analysis/handling-missing-values-machine-learning/"
+     },
+     "chu_giai": [
+      [
+       "DataFrame after removing rows with missing values",
+       "Bảng sau khi xoá các dòng có ô trống"
+      ]
+     ]
     },
     {
      "t": "hop",
      "kieu": "chu-y",
-     "tieu_de": "Đặt số cho chữ phải cẩn thận",
-     "html": "Với cột Lớp có 3 giá trị, nếu đặt 10A1 = 1, 10A2 = 2, 10A3 = 3 thì model sẽ hiểu 10A3 “lớn gấp ba” 10A1 — điều vô nghĩa. Cách đúng là tạo mỗi lớp một cột 0/1 (con sẽ gặp lại ở các bài sau)."
+     "tieu_de": "Khi nào nên xoá?",
+     "html": "Xoá dòng khi ô trống rất ít và bảng rất lớn. Xoá <b>cả cột</b> khi cột thiếu gần hết — như Cabin thiếu 687/891 ô: điền đoán ngần ấy ô còn tệ hơn bỏ cột. Còn lại, ưu tiên điền để không mất dữ liệu tốt."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Tạo feature mới từ cột nhãn — lại là rò rỉ dữ liệu.",
-      "Đánh số 1, 2, 3 cho các giá trị chữ không có thứ tự."
+      "Điền ô trống bằng 0 — tự bịa ra một bạn được 0 điểm, kéo số trung bình xuống.",
+      "Dùng số trung bình để điền cột có giá trị lạ.",
+      "Xoá mọi dòng có ô trống mà không đếm xem mất bao nhiêu dữ liệu."
      ]
     },
     {
+     "t": "video",
+     "yt": "AmtvgajbmMw",
+     "ten": "Microsoft — Handling duplicated and missing data (Python for Beginners)",
+     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc — minh hoạ dropna, fillna, drop_duplicates",
+     "bat_dau": null,
+     "ket_thuc": null
+    },
+    {
      "t": "tom_tat",
-     "html": "Tạo feature: dùng hiểu biết để tính cột mới. Mã hoá: đổi chữ thành số, cột hai giá trị dùng 0/1."
+     "html": "Ô trống: đếm bằng isnull().sum(); ưu tiên điền — cột số có giá trị lạ dùng trung vị, cột chữ dùng mốt; chỉ xoá khi thiếu rất ít hoặc thiếu gần hết."
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Handling Missing Values in Machine Learning",
+       "url": "https://www.geeksforgeeks.org/data-analysis/handling-missing-values-machine-learning/",
+       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+      }
+     ]
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai07-q4",
-     "q": "Bạn An học 3 giờ, ngủ 6 giờ. Feature TiLeHocNgu = giờ học : giờ ngủ của An bằng bao nhiêu?",
-     "giai": "3 : 6 = 0,5. Số 2 là 6 : 3 (chia ngược); 9 là cộng.",
-     "goi_y": "Giờ học đứng trên, giờ ngủ đứng dưới.",
+     "q": "Cột điểm: 4 · 5 · 6 · 7 · 98 (số 98 chưa kiểm tra) và một ô trống. Nên điền ô trống bằng số nào?",
+     "giai": "Có giá trị lạ (98) nên dùng trung vị: dãy 4, 5, 6, 7, 98 có trung vị 6. Số trung bình bị kéo lên 24.",
+     "goi_y": "Dãy có giá trị lạ không? Số đặc trưng nào không bị giá trị lạ kéo lệch?",
      "a": [
-      "0,5",
-      "2",
-      "9",
-      "18"
+      "6 — trung vị",
+      "24 — số trung bình",
+      "98 — lớn nhất",
+      "0 — số không"
      ],
-     "h": "1e3e5e0cf04fe9"
+     "h": "1ce0e3551444f"
     },
     {
-     "k": "dd",
+     "k": "mc",
      "id": "bai07-q5",
-     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-     "giai": "(GioiTinh == \"NU\") cho True/False, đổi sang số: True = 1, False = 0.",
-     "goi_y": "Điều kiện GioiTinh == \"NU\" đúng thì được số mấy?",
-     "mau": "Mã hoá cột GioiTinh thành cột Nu: bạn NU có giá trị {0}, bạn NAM có giá trị {1}.",
-     "o": [
-      [
-       "1",
-       "0",
-       "2",
-       "−1"
-      ],
-      [
-       "0",
-       "1",
-       "2",
-       "−1"
-      ]
+     "q": "Cột Giới tính có vài ô trống. Nên điền bằng gì?",
+     "giai": "Cột chữ không cộng chia hay sắp xếp theo độ lớn được; chỉ đếm được giá trị gặp nhiều nhất.",
+     "goi_y": "Cột này là chữ hay số? Với chữ thì phép tính nào làm được?",
+     "a": [
+      "Mốt — giá trị gặp nhiều nhất",
+      "Số trung bình của cột",
+      "Trung vị của cột",
+      "Chữ “Không rõ” cho mọi ô"
      ],
-     "h": "bed8c174b1c2b"
+     "h": "a935dd22404bb"
     },
     {
      "k": "ds",
      "id": "bai07-q6",
-     "q": "Máy có thể tự hiểu cột “giờ học chia giờ ngủ” có ý nghĩa mà không cần con người tạo ra.",
-     "giai": "Tạo feature cần hiểu biết về bài toán — do con người đặt ra.",
-     "goi_y": "Ai quyết định lấy cột nào chia cột nào?",
-     "h": "4a13a1ea2ba07"
+     "q": "Lệnh df.dropna() xoá mọi dòng có ít nhất một ô trống.",
+     "giai": "dropna() bỏ cả dòng dù chỉ trống một ô — nên dễ mất nhiều dữ liệu tốt.",
+     "goi_y": "Nhìn lại hai bảng mẫu trước và sau khi xoá.",
+     "h": "19627c950b8114"
     }
    ]
   },
   {
-   "ten": "Chọn feature",
-   "ten_ngan": "Chọn feature",
-   "phut": 4,
-   "muc_tieu": "chọn được feature liên quan tới nhãn và loại được feature thừa.",
-   "khoi_dong": "Có bốn cột số: giờ học, giờ ngủ, tổng giờ, tỉ lệ học/ngủ. Dùng hết hay chỉ chọn vài cột?",
+   "ten": "Dòng trùng và chữ viết nhiều kiểu",
+   "ten_ngan": "Trùng và chữ",
+   "phut": 5,
+   "muc_tieu": "phát hiện, xoá dòng trùng và thống nhất cách viết của một cột chữ.",
+   "khoi_dong": "Cột Lớp có “10A1”, “10a1”, “ 10A1” và “10A 1”. Con thấy mấy lớp? Máy thấy mấy lớp?",
    "khoi": [
     {
      "t": "dinh_nghia",
-     "ten": "Chọn feature (feature selection)",
-     "html": "Giữ lại những feature <b>liên quan</b> tới nhãn và <b>không lặp lại</b> thông tin của nhau; bỏ những cột nhiễu. Ít feature tốt thường tốt hơn nhiều feature tệ.",
-     "ky_hieu": "Một cách đơn giản: xếp hạng feature theo mức liên quan, giữ những cột đứng đầu."
+     "ten": "Dòng trùng (duplicate)",
+     "html": "Dòng giống <b>hệt</b> một dòng khác ở <b>mọi cột</b> — thường do nhập hai lần. Dòng trùng làm một đối tượng bị đếm nhiều lần.",
+     "ky_hieu": "Đếm: <code>df.duplicated().sum()</code> · Xoá: <code>df.drop_duplicates()</code>"
+    },
+    {
+     "t": "p",
+     "html": "Chú ý: <b>trùng tên chưa chắc là dòng trùng</b>. Trong bảng có hai bạn tên Hoang Quan, mã HS001 và HS010, khác lớp, khác điểm — đó là hai người, phải giữ cả hai."
     },
     {
      "t": "dinh_nghia",
-     "ten": "Hệ số tương quan (xem trước Bài 9)",
-     "html": "Con số từ −1 đến 1 cho biết hai cột số đi cùng nhau mạnh tới đâu: gần 1 là cùng tăng, gần −1 là một cột tăng thì cột kia giảm, gần 0 là gần như không liên quan.",
-     "ky_hieu": "<code>df[[\"StudyHours\", \"SleepHours\"]].corrwith(df[\"Score\"])</code>"
+     "ten": "Chữ viết nhiều kiểu (không thống nhất)",
+     "html": "Cùng một giá trị nhưng được viết khác nhau: hoa/thường, thừa khoảng trắng, viết tắt. Máy so <b>từng ký tự</b> nên coi mỗi kiểu viết là một giá trị riêng.",
+     "ky_hieu": "<code>.str.strip()</code> bỏ khoảng trắng hai đầu · <code>.str.upper()</code> đưa về chữ hoa · <code>.str.replace(\" \", \"\")</code> bỏ khoảng trắng ở giữa · <code>.replace({\"M\": \"NAM\"})</code> đổi một giá trị thành giá trị khác"
+    },
+    {
+     "t": "demo_tung_buoc",
+     "tieu_de": "dọn cột Lớp từng bước",
+     "huong_dan": "Bấm “Bước tiếp” để áp dụng lần lượt từng thao tác lên cột Lớp của bảng. Theo dõi số lớp máy đếm được.",
+     "nhan_chon": "Cột",
+     "cot": [
+      "Bước",
+      "Thao tác",
+      "Các cách viết còn lại",
+      "Máy đếm"
+     ],
+     "mac_dinh": 0,
+     "lua_chon": [
+      {
+       "nhan": "Lớp",
+       "dong": [
+        [
+         "0",
+         "Chưa dọn",
+         "“ 10A1” · “ 10A2” · “10A 1” · “10A 2” · “10A 3” · “10A1” · “10A2” · “10A3” · “10a1” · “10a2” · “10a3”",
+         "<b>11 lớp</b>"
+        ],
+        [
+         "1",
+         "Bỏ khoảng trắng hai đầu: .str.strip()",
+         "“10A 1” · “10A 2” · “10A 3” · “10A1” · “10A2” · “10A3” · “10a1” · “10a2” · “10a3”",
+         "<b>9 lớp</b>"
+        ],
+        [
+         "2",
+         "Đưa về chữ hoa: .str.upper()",
+         "“10A 1” · “10A 2” · “10A 3” · “10A1” · “10A2” · “10A3”",
+         "<b>6 lớp</b>"
+        ],
+        [
+         "3",
+         "Bỏ khoảng trắng ở giữa: .str.replace(\" \", \"\")",
+         "“10A1” · “10A2” · “10A3”",
+         "<b>3 lớp</b>"
+        ]
+       ]
+      }
+     ]
     },
     {
      "t": "anh",
-     "cap": "Hệ số tương quan của từng cột với điểm Score",
-     "alt": "Hệ số tương quan của từng cột với điểm Score",
-     "src": "img/tuong-quan-tung-cot-voi-diem.png"
+     "cap": "Số dòng theo từng cách viết của cột Lớp trong bảng — 11 cách viết cho 3 lớp thật",
+     "alt": "Số dòng theo từng cách viết của cột Lớp trong bảng — 11 cách viết cho 3 lớp thật",
+     "src": "img/may-dem-ra-muoi-mot-lop.png"
     },
     {
      "t": "vi_du",
-     "tieu_de": "đọc hình tương quan",
-     "de": null,
+     "tieu_de": "dọn cột Giới tính",
+     "de": "Cột Giới tính có 7 cách viết: “F”, “M”, “NAM”, “Nam”, “Nu”, “nam”, “nu”.",
      "cot": [
-      "Feature",
-      "Tương quan với Score",
-      "Quyết định"
+      "Bước",
+      "Lệnh",
+      "Kết quả"
      ],
      "dong": [
       [
-       "StudyHours",
-       "0,82",
-       "<b>Giữ</b> — liên quan mạnh"
+       "1",
+       "<code>.str.strip().str.upper()</code>",
+       "“F”, “M”, “NAM”, “NU”"
       ],
       [
-       "TongGio",
-       "0,81",
-       "Cân nhắc bỏ — gần như lặp lại StudyHours (tương quan với StudyHours là 0,83)"
-      ],
-      [
-       "TiLeHocNgu",
-       "0,69",
-       "Có thể thử"
-      ],
-      [
-       "SleepHours",
-       "0,26",
-       "Liên quan yếu"
+       "2",
+       "<code>.replace({\"M\": \"NAM\", \"F\": \"NU\"})</code>",
+       "<b>“NAM”, “NU”</b>"
       ]
      ],
-     "ket_luan": "Chọn feature là cân nhắc, không phải chỉ lấy số lớn nhất: cột lặp lại thông tin thì thừa.",
-     "nhan_manh": [
-      0
-     ]
-    },
-    {
-     "t": "anh",
-     "cap": "Phương pháp lọc: xếp hạng feature rồi giữ những cột đứng đầu",
-     "alt": "Phương pháp lọc: xếp hạng feature rồi giữ những cột đứng đầu",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250512165146012474/1.webp",
-     "du_phong": "img/minh-hoa-xep-hang-va-chon-ra-feature-tot-nhat.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Feature selection techniques in machine learning",
-      "url": "https://www.geeksforgeeks.org/machine-learning/feature-selection-techniques-in-machine-learning/"
-     },
-     "chu_giai": [
-      [
-       "Filter Method",
-       "Phương pháp lọc"
-      ],
-      [
-       "Rank features by statistical score",
-       "Xếp hạng feature theo một chỉ số thống kê"
-      ],
-      [
-       "Select top-ranked features",
-       "Chọn các feature đứng đầu"
-      ],
-      [
-       "Feed into model",
-       "Đưa vào model"
-      ],
-      [
-       "Selection, Ranking",
-       "Chọn, xếp hạng"
-      ]
-     ]
-    },
-    {
-     "t": "hop",
-     "kieu": "ml",
-     "tieu_de": "Nhắc lại Bài 5",
-     "html": "Nếu model đo khoảng cách (như KNN, Bài 12), nhớ đưa các feature đã chọn về cùng thang đo trước khi huấn luyện."
+     "ket_luan": "Từ 7 cách viết còn đúng 2 giá trị. Bước 2 cần con người quyết định M là Nam, F là Nữ — máy không tự biết.",
+     "nhan_manh": []
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Giữ hai cột gần như giống nhau (TongGio và StudyHours) rồi nghĩ model có thêm thông tin.",
-      "Nghĩ tương quan thấp là cột vô dụng tuyệt đối — nó chỉ yếu khi đứng một mình."
+      "Viết <code>df[\"Lop\"].str.upper()</code> mà quên gán lại <code>df[\"Lop\"] = …</code> — bảng không đổi gì.",
+      "Coi hai bạn trùng tên là dòng trùng rồi xoá mất một bạn.",
+      "Đưa về chữ hoa nhưng quên bỏ khoảng trắng ở giữa: “10A 1” vẫn khác “10A1”."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Chọn feature liên quan tới nhãn, bỏ cột nhiễu và cột lặp thông tin. Tương quan là một công cụ xếp hạng."
+     "html": "Dòng trùng: drop_duplicates(). Chữ nhiều kiểu: strip → upper → replace, rồi đếm lại bằng unique() để kiểm tra."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Feature Selection Techniques in Machine Learning",
-       "url": "https://www.geeksforgeeks.org/machine-learning/feature-selection-techniques-in-machine-learning/",
+       "ten": "Working with Missing Data and Duplicates in Pandas",
+       "url": "https://www.geeksforgeeks.org/data-analysis/data-cleaning-introduction/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -484,261 +599,194 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai07-q7",
-     "q": "Theo hình, cột nào liên quan tới điểm Score yếu nhất?",
-     "giai": "SleepHours có tương quan 0,26 — nhỏ nhất trong bốn cột.",
-     "goi_y": "Thanh nào ngắn nhất trong hình?",
+     "q": "Cột Lớp có các giá trị “10A2”, “10a2”, “ 10A2”, “10A 2”. Sau khi dùng .str.strip() và .str.upper(), còn mấy cách viết?",
+     "giai": "Sau strip và upper còn “10A2” và “10A 2” — khoảng trắng ở giữa chưa bỏ.",
+     "goi_y": "strip chỉ bỏ khoảng trắng ở hai ĐẦU. Khoảng trắng ở giữa thì sao?",
      "a": [
-      "SleepHours",
-      "StudyHours",
-      "TongGio",
-      "TiLeHocNgu"
+      "2 cách viết",
+      "1 cách viết",
+      "3 cách viết",
+      "4 cách viết"
      ],
-     "h": "1f546c99208de"
+     "h": "21ed7b9e625cc"
     },
     {
-     "k": "mc",
+     "k": "sx",
      "id": "bai07-q8",
-     "q": "Hệ số tương quan giữa hai cột bằng −0,9. Điều đó nghĩa là gì?",
-     "giai": "Gần −1: liên quan mạnh nhưng ngược chiều.",
-     "goi_y": "Dấu âm nói về chiều, độ lớn gần 1 nói về mức mạnh.",
+     "q": "Sắp xếp các thao tác dọn cột Lớp theo thứ tự như phần Tự thử.",
+     "giai": "Dọn xong luôn đếm lại để kiểm tra.",
+     "goi_y": "Bước cuối cùng không sửa gì — nó dùng để kiểm tra.",
      "a": [
-      "Một cột tăng thì cột kia thường giảm",
-      "Hai cột gần như không liên quan",
-      "Hai cột cùng tăng cùng giảm",
-      "Hai cột có đơn vị khác nhau"
+      "Bỏ khoảng trắng hai đầu bằng .str.strip()",
+      "Đưa về chữ hoa bằng .str.upper()",
+      "Bỏ khoảng trắng ở giữa bằng .str.replace()",
+      "Đếm lại số cách viết bằng .unique()"
      ],
-     "h": "2a8a0eb5b792"
+     "h": "12cc097938f0ea"
     },
     {
      "k": "ds",
      "id": "bai07-q9",
-     "q": "Hai feature gần như lặp lại thông tin của nhau thì nên giữ cả hai để model mạnh hơn.",
-     "giai": "Cột lặp thông tin không thêm gì mới, chỉ làm model rối hơn.",
-     "goi_y": "Cột thứ hai cho model biết thêm điều gì mới không?",
+     "q": "Hai dòng cùng họ tên nhưng khác mã học sinh là dòng trùng, cần xoá một dòng.",
+     "giai": "Dòng trùng phải giống hệt ở MỌI cột. Khác mã học sinh là hai người khác nhau.",
+     "goi_y": "Dòng trùng phải giống nhau ở bao nhiêu cột?",
      "h": "c1aa603344fc1"
     }
    ]
   },
   {
-   "ten": "Chia dữ liệu: tập huấn luyện và tập kiểm tra",
-   "ten_ngan": "Chia dữ liệu",
+   "ten": "Giá trị phi lý và giá trị bất thường",
+   "ten_ngan": "Phi lý, bất thường",
    "phut": 5,
-   "muc_tieu": "giải thích được vì sao phải giữ riêng một tập kiểm tra và vai trò của stratify.",
-   "khoi_dong": "Nếu thầy cô cho đề kiểm tra y hệt đề đã chữa trên lớp, điểm cao có chứng minh con đã hiểu bài không?",
+   "muc_tieu": "phân biệt giá trị phi lý (lỗi nhập liệu) với giá trị bất thường có thật, và xử lý đúng từng loại.",
+   "khoi_dong": "Một bạn học 25 giờ mỗi ngày. Một bạn khác học 7 giờ và được 9,8 điểm. Hai trường hợp này có giống nhau không?",
    "khoi": [
     {
      "t": "dinh_nghia",
-     "ten": "Tập huấn luyện và tập kiểm tra",
-     "html": "Chia bảng thành hai phần: <b>tập huấn luyện</b> (train) cho model học, <b>tập kiểm tra</b> (test) giấu đi, chỉ dùng để chấm model ở cuối — như đề thi model chưa từng thấy.",
-     "ky_hieu": "<code>train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)</code>"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "chia bảng 90 bạn",
-     "de": "test_size = 0,3 nghĩa là 30% cho kiểm tra.",
-     "cot": [
-      "Phần",
-      "Số bạn",
-      "Trong đó Chưa đạt"
-     ],
-     "dong": [
-      [
-       "Tập huấn luyện (70%)",
-       "63",
-       "8"
-      ],
-      [
-       "Tập kiểm tra (30%)",
-       "27",
-       "3"
-      ],
-      [
-       "Cả bảng",
-       "90",
-       "11"
-      ]
-     ],
-     "ket_luan": "0,3 × 90 = 27 bạn kiểm tra; 63 bạn còn lại để học.",
-     "nhan_manh": []
+     "ten": "Giá trị phi lý",
+     "html": "Giá trị <b>không thể xảy ra</b> với đối tượng được đo: điểm 55 trên thang 10, học 25 giờ mỗi ngày, số giờ âm. Đây là <b>lỗi nhập liệu</b>.",
+     "ky_hieu": "Xử lý: đặt khoảng hợp lý (điểm 0 – 10, giờ học 0 – 16), đổi giá trị ngoài khoảng thành ô trống (NaN), rồi xử lý như ô trống."
     },
     {
      "t": "anh",
-     "cap": "Bộ dữ liệu lớn thường chia ba phần; bài này chia hai phần cho gọn",
-     "alt": "Bộ dữ liệu lớn thường chia ba phần; bài này chia hai phần cho gọn",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260903104045073711/frame_3386.webp",
-     "du_phong": "img/minh-hoa-chia-du-lieu-thanh-train-validation-test.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Splitting data for machine learning models",
-      "url": "https://www.geeksforgeeks.org/machine-learning/splitting-data-for-machine-learning-models/"
-     },
-     "chu_giai": [
-      [
-       "Original Dataset",
-       "Bộ dữ liệu ban đầu"
-      ],
-      [
-       "Training Set (70–80%)",
-       "Tập huấn luyện"
-      ],
-      [
-       "Validation / Dev Set",
-       "Tập kiểm định — dùng để chỉnh model (Bài 23)"
-      ],
-      [
-       "Test Set",
-       "Tập kiểm tra — chấm cuối cùng"
-      ]
-     ]
+     "cap": "Giờ học × điểm trong bảng: chấm đỏ là 7 giá trị phi lý",
+     "alt": "Giờ học × điểm trong bảng: chấm đỏ là 7 giá trị phi lý",
+     "src": "img/diem-phi-ly-trong-bang.png"
+    },
+    {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Vì sao đổi thành ô trống mà không tự sửa?",
+     "html": "Điểm 55 nhiều khả năng là 5,5 gõ thừa số 0 — nhưng đó chỉ là <b>đoán</b>. Đổi thành ô trống rồi điền bằng trung vị là cách thận trọng. Chỉ sửa trực tiếp khi <b>chắc chắn</b> nguyên nhân, ví dụ biết chắc cột ghi nhầm đơn vị."
     },
     {
      "t": "dinh_nghia",
-     "ten": "Stratify — chia giữ đúng tỉ lệ nhãn",
-     "html": "Khi nhãn lệch (ít bạn Chưa đạt), chia ngẫu nhiên có thể đưa quá nhiều hoặc quá ít bạn Chưa đạt vào tập kiểm tra. <code>stratify=y</code> giữ tỉ lệ Đạt / Chưa đạt ở hai tập giống như cả bảng.",
-     "ky_hieu": null
+     "ten": "Giá trị bất thường (Toán 10)",
+     "html": "Giá trị quá nhỏ hoặc quá lớn so với phần lớn dữ liệu. Toán 10 dùng tứ phân vị: với khoảng tứ phân vị Δ<sub>Q</sub> = Q<sub>3</sub> − Q<sub>1</sub>, giá trị x là bất thường nếu",
+     "ky_hieu": "x &gt; Q<sub>3</sub> + 1,5·Δ<sub>Q</sub> &nbsp;hoặc&nbsp; x &lt; Q<sub>1</sub> − 1,5·Δ<sub>Q</sub>"
     },
     {
-     "t": "demo_tung_buoc",
-     "tieu_de": "chia 10 lần, có và không có stratify",
-     "huong_dan": "Mỗi lần chia với một random_state khác. Bấm “Bước tiếp” để xem số bạn Chưa đạt rơi vào tập kiểm tra.",
-     "nhan_chon": "Cách chia",
+     "t": "vi_du",
+     "tieu_de": "tìm giá trị bất thường trong 11 điểm (số liệu minh hoạ)",
+     "de": "Dãy đã sắp xếp: 4,5 · 5,8 · 6 · 6,2 · 6,6 · 6,7 · 7 · 7,4 · 8,1 · 8,8 · 55.",
      "cot": [
-      "Lần chia",
-      "Số bạn Chưa đạt trong tập kiểm tra"
+      "Bước",
+      "Tính",
+      "Kết quả"
      ],
-     "mac_dinh": 0,
-     "lua_chon": [
-      {
-       "nhan": "Không stratify",
-       "dong": [
-        [
-         "—",
-         "(cả bảng có 11 bạn Chưa đạt)"
-        ],
-        [
-         "0",
-         "4"
-        ],
-        [
-         "1",
-         "8"
-        ],
-        [
-         "2",
-         "2"
-        ],
-        [
-         "3",
-         "1"
-        ],
-        [
-         "4",
-         "4"
-        ],
-        [
-         "5",
-         "3"
-        ],
-        [
-         "6",
-         "5"
-        ],
-        [
-         "7",
-         "4"
-        ],
-        [
-         "8",
-         "4"
-        ],
-        [
-         "9",
-         "5"
-        ]
-       ]
-      },
-      {
-       "nhan": "Có stratify",
-       "dong": [
-        [
-         "—",
-         "(cả bảng có 11 bạn Chưa đạt)"
-        ],
-        [
-         "0",
-         "3"
-        ],
-        [
-         "1",
-         "3"
-        ],
-        [
-         "2",
-         "3"
-        ],
-        [
-         "3",
-         "3"
-        ],
-        [
-         "4",
-         "3"
-        ],
-        [
-         "5",
-         "3"
-        ],
-        [
-         "6",
-         "3"
-        ],
-        [
-         "7",
-         "3"
-        ],
-        [
-         "8",
-         "3"
-        ],
-        [
-         "9",
-         "3"
-        ]
-       ]
-      }
+     "dong": [
+      [
+       "1",
+       "Trung vị Q<sub>2</sub> (giá trị thứ 6)",
+       "6,7"
+      ],
+      [
+       "2",
+       "Q<sub>1</sub> = trung vị 5 giá trị đầu; Q<sub>3</sub> = trung vị 5 giá trị cuối",
+       "Q<sub>1</sub> = 6, Q<sub>3</sub> = 8,1"
+      ],
+      [
+       "3",
+       "Δ<sub>Q</sub> = Q<sub>3</sub> − Q<sub>1</sub>",
+       "2,1"
+      ],
+      [
+       "4",
+       "Ngưỡng trên Q<sub>3</sub> + 1,5·Δ<sub>Q</sub> · ngưỡng dưới Q<sub>1</sub> − 1,5·Δ<sub>Q</sub>",
+       "11,25 · 2,85"
+      ],
+      [
+       "5",
+       "Giá trị nằm ngoài hai ngưỡng",
+       "<b>55</b> — bất thường"
+      ]
+     ],
+     "ket_luan": "Quy tắc chỉ ra 55 là bất thường. Con người mới quyết định: thang điểm 10 nên 55 là <b>phi lý</b> → đổi thành ô trống.",
+     "nhan_manh": [
+      4
      ]
     },
     {
      "t": "anh",
-     "cap": "Không stratify: số bạn Chưa đạt trong tập kiểm tra nhảy từ 1 đến 8",
-     "alt": "Không stratify: số bạn Chưa đạt trong tập kiểm tra nhảy từ 1 đến 8",
-     "src": "img/so-ban-chua-dat-trong-tap-test.png"
+     "cap": "Biểu đồ hộp của nhiều cột trong bảng rượu vang: các chấm tròn ngoài râu là giá trị bất thường",
+     "alt": "Biểu đồ hộp của nhiều cột trong bảng rượu vang: các chấm tròn ngoài râu là giá trị bất thường",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250912115313366349/boxplt.webp",
+     "du_phong": "img/minh-hoa-bieu-do-hop-phat-hien-gia-tri-ngoai-lai.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Machine learning outlier",
+      "url": "https://www.geeksforgeeks.org/machine-learning/machine-learning-outlier/"
+     },
+     "chu_giai": [
+      [
+       "Boxplots of Wine Features",
+       "Biểu đồ hộp các đặc điểm của rượu vang"
+      ],
+      [
+       "fixed acidity, citric acid, pH…",
+       "Các chỉ số hoá học của rượu"
+      ],
+      [
+       "o (chấm tròn)",
+       "Giá trị nằm ngoài râu — giá trị bất thường"
+      ]
+     ]
+    },
+    {
+     "t": "bang",
+     "cot": [
+      "Tình huống",
+      "Có thể xảy ra?",
+      "Xử lý"
+     ],
+     "dong": [
+      [
+       "Điểm 55 trên thang 10",
+       "Không — phi lý",
+       "Đổi thành ô trống"
+      ],
+      [
+       "Học 25 giờ mỗi ngày",
+       "Không — phi lý",
+       "Đổi thành ô trống"
+      ],
+      [
+       "Học 7 giờ, được 9,8 điểm",
+       "Có — hiếm nhưng thật",
+       "<b>Giữ lại</b>"
+      ],
+      [
+       "Điểm 0 trong một bài kiểm tra",
+       "Có — ví dụ bỏ thi",
+       "Giữ lại, ghi chú kiểm tra"
+      ]
+     ]
     },
     {
      "t": "video",
-     "yt": "fwY9Qv96DJY",
-     "ten": "codebasics — Training and Testing Data",
-     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc — cách dùng train_test_split",
+     "yt": "b2C9I8HuCe4",
+     "ten": "Khan Academy — Box and whisker plot",
+     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc — cách vẽ và đọc biểu đồ hộp",
      "bat_dau": null,
      "ket_thuc": null
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Chấm model trên chính tập nó đã học — điểm cao nhưng không chứng minh gì.",
-      "Nhìn vào tập kiểm tra để chỉnh model — tập kiểm tra không còn “giấu” nữa.",
-      "Quên stratify khi nhãn lệch."
+      "Thấy giá trị bất thường là xoá ngay — xoá mất những trường hợp thật và thú vị nhất.",
+      "Tự sửa 55 thành 5,5 khi chưa chắc chắn.",
+      "Chỉ dựa vào quy tắc biểu đồ hộp: một số âm như −1,5 giờ có thể nằm trong ngưỡng mà vẫn phi lý."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Train để học, test để chấm. Nhãn lệch thì chia với stratify=y."
+     "html": "Phi lý (không thể xảy ra) → đổi thành ô trống. Bất thường nhưng có thể xảy ra → giữ. Quy tắc tứ phân vị chỉ ra chỗ lạ; con người quyết định."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Splitting Data for Machine Learning Models",
-       "url": "https://www.geeksforgeeks.org/machine-learning/splitting-data-for-machine-learning-models/",
+       "ten": "Machine Learning Outlier",
+       "url": "https://www.geeksforgeeks.org/machine-learning/machine-learning-outlier/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -748,179 +796,142 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai07-q10",
-     "q": "Bảng có 200 dòng, chia với test_size=0.25. Tập kiểm tra có bao nhiêu dòng?",
-     "giai": "0,25 × 200 = 50; tập huấn luyện 150.",
-     "goi_y": "test_size là phần dành cho tập nào?",
+     "q": "Cột Tuổi của học sinh khối 10 có một ô ghi 150. Nên xử lý thế nào?",
+     "giai": "Tuổi 150 không thể xảy ra — phi lý. Có thể là 15 gõ thừa số 0 nhưng chỉ là đoán, nên đổi thành ô trống.",
+     "goi_y": "Giá trị này có thể xảy ra không? Con có chắc chắn nguyên nhân không?",
      "a": [
-      "50",
-      "25",
-      "150",
-      "75"
+      "Đổi thành ô trống rồi điền",
+      "Giữ nguyên vì là giá trị thật",
+      "Xoá luôn cả cột Tuổi",
+      "Sửa ngay thành tuổi 15"
      ],
-     "h": "1f3723fd57e75c"
+     "h": "1e1acd864aa9c3"
     },
     {
      "k": "mc",
      "id": "bai07-q11",
-     "q": "Vì sao không chấm model trên chính tập huấn luyện?",
-     "giai": "Giống làm lại đề đã chữa: điểm cao không chứng minh hiểu bài.",
-     "goi_y": "Nhớ ví dụ đề kiểm tra y hệt đề đã chữa.",
+     "q": "Dãy có Q<sub>1</sub> = 5 và Q<sub>3</sub> = 7. Theo quy tắc Toán 10, giá trị nào dưới đây là bất thường?",
+     "giai": "Δ<sub>Q</sub> = 2; ngưỡng trên 7 + 3 = 10, ngưỡng dưới 5 − 3 = 2. Chỉ 10,5 vượt ngưỡng.",
+     "goi_y": "Tính Δ<sub>Q</sub>, rồi hai ngưỡng Q<sub>3</sub> + 1,5·Δ<sub>Q</sub> và Q<sub>1</sub> − 1,5·Δ<sub>Q</sub>.",
      "a": [
-      "Model đã thấy đáp án nên điểm không đáng tin",
-      "Vì tập huấn luyện luôn chứa rất nhiều lỗi",
-      "Vì Pandas không cho phép làm như thế",
-      "Vì tập huấn luyện có quá ít dòng dữ liệu"
+      "10,5",
+      "9,5",
+      "3,0",
+      "7,0"
      ],
-     "h": "142436c1ef623b"
+     "h": "1e578529491d6b"
     },
     {
-     "k": "sx",
+     "k": "ds",
      "id": "bai07-q12",
-     "q": "Sắp xếp các bước chuẩn bị trước khi huấn luyện theo đúng thứ tự.",
-     "giai": "Làm sạch → feature → chia → huấn luyện.",
-     "goi_y": "Model học trên tập nào? Tập đó có từ bước nào?",
-     "a": [
-      "Làm sạch dữ liệu",
-      "Tạo và chọn feature",
-      "Chia tập huấn luyện và kiểm tra",
-      "Huấn luyện model trên tập huấn luyện"
-     ],
-     "h": "3834330154f48"
+     "q": "Mọi giá trị bất thường đều là lỗi nhập liệu và cần xoá.",
+     "giai": "Có giá trị bất thường có thật (hiếm nhưng có thể) — phải giữ.",
+     "goi_y": "Nhớ ví dụ học 7 giờ được 9,8 điểm.",
+     "h": "14a91c9e50da70"
     }
    ]
   },
   {
-   "ten": "Dữ liệu lệch nhãn và bẫy độ chính xác",
-   "ten_ngan": "Lệch nhãn",
-   "phut": 5,
-   "muc_tieu": "nhận ra bẫy độ chính xác khi dữ liệu lệch nhãn và biết hai cách cân bằng.",
-   "khoi_dong": "Một model đoán mọi bạn đều Đạt, không học gì cả. Nó đúng bao nhiêu phần trăm trên bảng này?",
+   "ten": "Quy trình làm sạch một bảng dữ liệu",
+   "ten_ngan": "Quy trình",
+   "phut": 3,
+   "muc_tieu": "sắp xếp đúng thứ tự các bước làm sạch và giải thích vì sao thứ tự đó quan trọng.",
+   "khoi_dong": "Nếu điền ô trống bằng trung vị TRƯỚC khi sửa điểm 55 và 100, con số dùng để điền có bị ảnh hưởng không?",
    "khoi": [
     {
-     "t": "dinh_nghia",
-     "ten": "Dữ liệu lệch nhãn (imbalanced data)",
-     "html": "Một nhãn có số dòng nhiều hơn hẳn nhãn kia. Bảng này có 79 Đạt và 11 Chưa đạt — gấp khoảng 7 lần.",
-     "ky_hieu": "Độ chính xác (accuracy) = <span class=\"frac\"><span>số lần đoán đúng</span><span>tổng số lần đoán</span></span>"
-    },
-    {
-     "t": "anh",
-     "cap": "Số bạn Đạt và Chưa đạt trong bảng 90 bạn",
-     "alt": "Số bạn Đạt và Chưa đạt trong bảng 90 bạn",
-     "src": "img/dat-nhieu-gap-bay-lan-chua-dat.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "model lười trên tập kiểm tra 27 bạn",
-     "de": "Model lười: đoán mọi bạn Đạt.",
+     "t": "bang",
      "cot": [
-      "",
-      "Thật: Đạt",
-      "Thật: Chưa đạt"
+      "Bước",
+      "Việc làm",
+      "Vì sao đứng ở vị trí này"
      ],
      "dong": [
       [
-       "Model đoán Đạt",
-       "24",
-       "3"
+       "1",
+       "Soi bảng: info, isnull, duplicated, unique, describe",
+       "Biết có lỗi gì trước"
       ],
       [
-       "Model đoán Chưa đạt",
-       "0",
-       "0"
-      ]
-     ],
-     "ket_luan": "Đúng 24/27 = 88,9% — nhưng bỏ sót <b>cả 3</b> bạn Chưa đạt, đúng những bạn cần giúp nhất.",
-     "nhan_manh": []
-    },
-    {
-     "t": "anh",
-     "cap": "Bảng nhầm lẫn của model lười trên tập kiểm tra",
-     "alt": "Bảng nhầm lẫn của model lười trên tập kiểm tra",
-     "src": "img/model-luoi-bo-sot-ban-chua-dat.png"
-    },
-    {
-     "t": "hop",
-     "kieu": "ml",
-     "tieu_de": "Cùng độ chính xác, khác giá trị",
-     "html": "Một model đơn giản “đoán Chưa đạt nếu học dưới 0,8 giờ” cũng đúng 88,9% trên tập kiểm tra, nhưng bắt được 2/3 bạn Chưa đạt. Cùng một con số độ chính xác — một model hữu ích, một model vô dụng."
-    },
-    {
-     "t": "dinh_nghia",
-     "ten": "Hai cách cân bằng dữ liệu",
-     "html": "<b>Undersampling</b>: bớt dòng của nhãn nhiều. <b>Oversampling</b>: nhân thêm dòng của nhãn ít. Với bảng này, undersampling còn 11 Đạt + 11 Chưa đạt = 22 dòng — model lười chỉ còn đúng 50%.",
-     "ky_hieu": null
-    },
-    {
-     "t": "anh",
-     "cap": "Một bộ dữ liệu lệch: khoảng 900 dòng nhãn 1, 100 dòng nhãn 0",
-     "alt": "Một bộ dữ liệu lệch: khoảng 900 dòng nhãn 1, 100 dòng nhãn 0",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251218115519613114/HID2.png",
-     "du_phong": "img/minh-hoa-du-lieu-lech-nhan-900-so-voi-100.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Handling imbalanced data for classification",
-      "url": "https://www.geeksforgeeks.org/machine-learning/handling-imbalanced-data-for-classification/"
-     },
-     "chu_giai": [
-      [
-       "Imbalanced Class Distribution",
-       "Phân bố nhãn bị lệch"
+       "2",
+       "Xoá dòng trùng",
+       "Để không đếm một bạn nhiều lần khi tính trung vị"
       ],
       [
-       "Class Label",
-       "Nhãn (0 hoặc 1)"
+       "3",
+       "Thống nhất chữ",
+       "Để đếm lớp, tính theo lớp cho đúng"
       ],
       [
-       "Count",
-       "Số dòng"
+       "4",
+       "Đổi giá trị phi lý thành ô trống",
+       "Để số phi lý không lọt vào số dùng để điền"
+      ],
+      [
+       "5",
+       "Điền ô trống (trung vị, mốt)",
+       "Lúc này bảng đã sạch lỗi khác"
+      ],
+      [
+       "6",
+       "Soi lại, lưu bảng sạch",
+       "Kiểm tra còn ô trống không; bảng dùng cho Bài 8"
       ]
      ]
     },
     {
      "t": "anh",
-     "cap": "Sau oversampling: 900 – 900; sau undersampling: 100 – 100",
-     "alt": "Sau oversampling: 900 – 900; sau undersampling: 100 – 100",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251218114034080341/HID1.png",
-     "du_phong": "img/minh-hoa-oversampling-va-undersampling.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Handling imbalanced data for classification",
-      "url": "https://www.geeksforgeeks.org/machine-learning/handling-imbalanced-data-for-classification/"
-     },
-     "chu_giai": [
+     "cap": "Số dòng còn lại qua từng bước dọn bảng students_ban.csv",
+     "alt": "Số dòng còn lại qua từng bước dọn bảng students_ban.csv",
+     "src": "img/xoa-dong-hay-dien-o-trong.png"
+    },
+    {
+     "t": "p",
+     "html": "Với bảng students_ban.csv: bảng bẩn 95 dòng; xoá 5 dòng trùng còn 90. Nếu sau đó xoá mọi dòng có ô trống thì chỉ còn 71 — mất 19 bạn. Điền ô trống thì giữ đủ 90."
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Nối với Machine Learning",
+     "html": "Người làm Machine Learning dành phần lớn thời gian cho dữ liệu chứ không phải cho model. Bảng sạch hôm nay là đầu vào của Bài 8 — chuẩn bị feature."
+    },
+    {
+     "t": "bang",
+     "cot": [
+      "Hôm nay con học",
+      "Sẽ dùng lại ở"
+     ],
+     "dong": [
       [
-       "Original class distribution",
-       "Phân bố nhãn ban đầu"
+       "Soi bảng, làm sạch",
+       "Mọi buổi thực hành nhóm (bước “Làm sạch”)"
       ],
       [
-       "Oversampled",
-       "Sau khi nhân thêm nhãn ít"
+       "Bảng students đã dọn",
+       "Bài 8 — chuẩn bị feature"
       ],
       [
-       "Undersampled",
-       "Sau khi bớt nhãn nhiều"
-      ],
-      [
-       "Counter({1: 900, 0: 100})",
-       "900 dòng nhãn 1, 100 dòng nhãn 0"
+       "Biểu đồ hộp, giá trị bất thường",
+       "Bài 9 — đọc biểu đồ"
       ]
      ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Thấy độ chính xác cao là tin ngay, không xem model đoán sai ở nhãn nào.",
-      "Undersampling làm mất nhiều dữ liệu — với bảng nhỏ phải cân nhắc."
+      "Điền ô trống trước khi sửa giá trị phi lý — số 55, 100 lọt vào trung vị dùng để điền.",
+      "Quên soi lại sau khi dọn: vẫn còn ô trống hoặc một cách viết lạ."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Nhãn lệch thì độ chính xác cao có thể vô nghĩa. Luôn xem model bắt được bao nhiêu dòng của nhãn ít."
+     "html": "Soi → xoá trùng → thống nhất chữ → phi lý thành ô trống → điền → soi lại và lưu."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Handling Imbalanced Data for Classification",
-       "url": "https://www.geeksforgeeks.org/machine-learning/handling-imbalanced-data-for-classification/",
+       "ten": "Data Preprocessing in Machine Learning",
+       "url": "https://www.geeksforgeeks.org/data-analysis/data-preprocessing-machine-learning-python/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -928,26 +939,32 @@ window.BAI = {
    ],
    "checkpoint": [
     {
-     "k": "mc",
+     "k": "sx",
      "id": "bai07-q13",
-     "q": "Một lớp có 38 bạn không bị cận và 2 bạn bị cận. Model đoán “không cận” cho mọi bạn đúng bao nhiêu phần trăm?",
-     "giai": "38 : 40 = 0,95 — dù model không phát hiện được bạn nào bị cận.",
-     "goi_y": "Đếm số lần đoán đúng rồi chia cho 40.",
+     "q": "Sắp xếp các bước làm sạch bảng theo đúng thứ tự.",
+     "giai": "Soi → xoá trùng → phi lý thành ô trống → điền.",
+     "goi_y": "Bước điền cần một con số “sạch” — những lỗi nào phải xử lý trước nó?",
      "a": [
-      "95%",
-      "5%",
-      "50%",
-      "100%"
+      "Soi bảng để biết có những lỗi gì",
+      "Xoá các dòng trùng lặp",
+      "Đổi giá trị phi lý thành ô trống",
+      "Điền ô trống bằng trung vị, mốt"
      ],
-     "h": "e8951dbd2a4a3"
+     "h": "1c1d28a5010c3"
     },
     {
-     "k": "ds",
+     "k": "mc",
      "id": "bai07-q14",
-     "q": "Model có độ chính xác 90% chắc chắn là một model tốt.",
-     "giai": "Nếu 90% dữ liệu cùng một nhãn, model lười cũng đạt 90%.",
-     "goi_y": "Nhớ model lười trên bảng này.",
-     "h": "17b4060cc43686"
+     "q": "Đã xoá trùng, sửa phi lý, điền ô trống. Soi lại thấy cột Lớp còn 1 ô trống. Nên làm gì?",
+     "giai": "Bước soi lại tìm ra chỗ còn sót. Cột chữ điền bằng mốt.",
+     "goi_y": "Cột Lớp là chữ hay số? Bảng ở chặng 2 nói điền cột chữ bằng gì?",
+     "a": [
+      "Điền ô đó bằng mốt của cột Lớp",
+      "Điền bằng trung vị của cột Lớp",
+      "Xoá luôn toàn bộ cột Lớp",
+      "Để nguyên vì chỉ có một ô"
+     ],
+     "h": "16668cecd733e3"
     }
    ]
   }
@@ -966,372 +983,407 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai07-q15",
-    "q": "Dự đoán một bệnh nhân có bệnh tiểu đường hay không. Cột nào là nhãn?",
-    "giai": "Nhãn là câu trả lời cần đoán; các chỉ số khác là feature, mã hồ sơ thì bỏ.",
+    "q": "Lệnh df.duplicated().sum() trả về 5. Điều đó nghĩa là gì?",
+    "giai": "duplicated() đánh dấu các dòng lặp lại dòng đứng trước nó; .sum() đếm số dòng đó.",
     "a": [
-     "Có hay không bệnh tiểu đường",
-     "Lượng đường trong máu",
-     "Tuổi của bệnh nhân",
-     "Mã hồ sơ bệnh nhân"
+     "Có 5 dòng lặp lại một dòng khác",
+     "Có 5 ô trống trong cả bảng",
+     "Có 5 cột bị trùng tên nhau",
+     "Bảng chỉ còn lại 5 dòng"
     ],
-    "h": "1c0b200214ca7b"
+    "h": "a3317459da863"
    },
    {
     "k": "mc",
     "id": "bai07-q16",
-    "q": "Bảng có 90 dòng, chia với test_size=0.3. Tập kiểm tra có bao nhiêu dòng?",
-    "giai": "0,3 × 90 = 27.",
+    "q": "Máy đếm cột Lớp ra 6 giá trị: “10A1”, “10a1”, “10A2”, “10a2”, “10A3”, “10a3”. Chỉ cần thêm lệnh nào là đủ?",
+    "giai": "Các cách viết chỉ khác hoa/thường, không có khoảng trắng — upper là đủ.",
     "a": [
-     "27",
-     "63",
-     "30",
-     "9"
+     ".str.upper()",
+     ".str.strip()",
+     ".dropna()",
+     ".drop_duplicates()"
     ],
-    "h": "8bf17b9886c4d"
+    "h": "1405ba38343e6b"
    },
    {
     "k": "mc",
     "id": "bai07-q17",
-    "q": "Nhìn hình. Không stratify, số bạn Chưa đạt trong tập kiểm tra thay đổi thế nào?",
-    "giai": "Từ 1 đến 8 tuỳ lần chia.",
-    "img": {
-     "src": "img/so-ban-chua-dat-trong-tap-test.png"
-    },
+    "q": "Cột Giờ ngủ có một ô ghi −7. Xử lý thế nào?",
+    "giai": "Giờ ngủ không thể âm — phi lý. Có thể là 7 gõ thừa dấu trừ, nhưng chỉ là đoán.",
     "a": [
-     "Nhảy lung tung giữa các lần chia",
-     "Lần nào cũng đúng bằng 3 bạn",
-     "Lần nào cũng bằng 0 bạn",
-     "Lần nào cũng bằng 11 bạn"
+     "Đổi thành ô trống rồi điền",
+     "Đổi thành 7 cho thành số dương",
+     "Giữ nguyên vì là số đã nhập",
+     "Xoá luôn cả cột Giờ ngủ"
     ],
-    "h": "bb91a48769240"
+    "h": "943fd6b70743e"
    },
    {
     "k": "mc",
     "id": "bai07-q18",
-    "q": "Nhìn hình. Model lười bỏ sót bao nhiêu bạn Chưa đạt trong tập kiểm tra?",
-    "giai": "Model lười không bao giờ đoán Chưa đạt.",
+    "q": "Nhìn hình. Cách nào giữ được nhiều học sinh hơn?",
+    "giai": "Điền giữ đủ 90 bạn; xoá dòng chỉ còn 71.",
     "img": {
-     "src": "img/model-luoi-bo-sot-ban-chua-dat.png"
+     "src": "img/xoa-dong-hay-dien-o-trong.png"
     },
     "a": [
-     "3 bạn — tất cả",
-     "0 bạn",
-     "24 bạn",
-     "1 bạn"
+     "Điền ô trống bằng trung vị",
+     "Xoá mọi dòng có ô trống",
+     "Hai cách giữ như nhau",
+     "Xoá dòng trùng thêm lần nữa"
     ],
-    "h": "167803c85721d6"
+    "h": "133901edbc58d2"
    },
    {
     "k": "mc",
     "id": "bai07-q19",
-    "q": "Bạn Bình học 4 giờ, ngủ 8 giờ. Feature TongGio của Bình là bao nhiêu?",
-    "giai": "4 + 8 = 12.",
+    "q": "Nhìn hình. Vì sao máy đếm ra 11 lớp?",
+    "giai": "Các thanh cùng màu là cùng một lớp thật, bị tách ra vì cách viết.",
+    "img": {
+     "src": "img/may-dem-ra-muoi-mot-lop.png"
+    },
     "a": [
-     "12",
-     "0,5",
-     "2",
-     "32"
+     "Máy so từng ký tự, viết khác là lớp khác",
+     "Trường thật sự có 11 lớp khối 10",
+     "Vài bạn bị nhập trùng hai lần vào bảng",
+     "Cột lớp có vài ô bị bỏ trống"
     ],
-    "h": "142beb14c5aa48"
+    "h": "106e4543f111c3"
    },
    {
     "k": "mc",
     "id": "bai07-q20",
-    "q": "Một bảng có 95 email thường và 5 email rác. Model đoán “email thường” cho mọi email đúng bao nhiêu phần trăm?",
-    "giai": "95 : 100 — nhưng không chặn được email rác nào.",
+    "q": "Nhìn hình. Có bao nhiêu chấm đỏ — giá trị phi lý?",
+    "giai": "4 điểm phi lý và 3 giờ học phi lý.",
+    "img": {
+     "src": "img/diem-phi-ly-trong-bang.png"
+    },
     "a": [
-     "95%",
-     "5%",
-     "50%",
-     "100%"
+     "7",
+     "5",
+     "10",
+     "4"
     ],
-    "h": "13e31d630efa05"
+    "h": "1ee200379a69c9"
    },
    {
     "k": "mc",
     "id": "bai07-q21",
-    "q": "Vì sao không nên đánh số 10A1 = 1, 10A2 = 2, 10A3 = 3 cho cột Lớp?",
-    "giai": "Lớp không có thứ tự; nên tạo mỗi lớp một cột 0/1.",
+    "q": "Nhìn hình. Cột nào thiếu dữ liệu nhiều nhất?",
+    "giai": "Cabin chỉ có 204/891 ô có dữ liệu.",
+    "img": {
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250829123024725201/Screenshot-2025-08-29-122359.webp",
+     "du_phong": "img/minh-hoa-bang-thong-ke-so-o-khong-trong-cua-tung-cot.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Data cleaning introduction",
+      "url": "https://www.geeksforgeeks.org/data-analysis/data-cleaning-introduction/"
+     }
+    },
     "a": [
-     "Model sẽ hiểu các lớp có thứ tự lớn nhỏ",
-     "Vì Pandas không đổi được chữ thành số",
-     "Vì cột Lớp luôn phải bỏ đi",
-     "Vì số 3 quá lớn so với các cột khác"
+     "Cabin",
+     "Age",
+     "Embarked",
+     "Name"
     ],
-    "h": "1a18714c6304cd"
+    "h": "1fbef38ea1725a"
    },
    {
     "k": "mc",
     "id": "bai07-q22",
-    "q": "Bảng có 1000 dòng: 900 nhãn 1, 100 nhãn 0. Undersampling thì còn bao nhiêu dòng?",
-    "giai": "Bớt nhãn 1 còn 100: 100 + 100 = 200.",
+    "q": "Cột Cabin thiếu 687 trên 891 ô. Cách xử lý nào hợp lý nhất?",
+    "giai": "Thiếu gần hết thì điền là đoán gần như toàn bộ; xoá dòng thì mất 3/4 bảng.",
     "a": [
-     "200 dòng",
-     "1000 dòng",
-     "1800 dòng",
-     "100 dòng"
+     "Bỏ cả cột Cabin",
+     "Điền 687 ô bằng mốt",
+     "Xoá 687 dòng có ô trống",
+     "Điền 687 ô bằng số 0"
     ],
-    "h": "1af524952937cf"
+    "h": "1966c75cacdfd7"
    },
    {
     "k": "mc",
     "id": "bai07-q23",
-    "q": "Nhìn hình. Cột nào liên quan tới điểm mạnh nhất?",
-    "giai": "StudyHours có tương quan 0,82 — cao nhất.",
-    "img": {
-     "src": "img/tuong-quan-tung-cot-voi-diem.png"
-    },
+    "q": "Dãy 4 · 5 · 6 · 7 · 100 có thêm một ô trống. Điền bằng số trung bình thì được bao nhiêu?",
+    "giai": "(4 + 5 + 6 + 7 + 100) : 5 = 24,4 — bị 100 kéo lên; trung vị là 6.",
     "a": [
-     "StudyHours",
-     "SleepHours",
-     "TiLeHocNgu",
-     "TongGio"
+     "24,4",
+     "6",
+     "100",
+     "0"
     ],
-    "h": "b525acd173e1a"
+    "h": "e01d7dd7ed4cb"
    },
    {
-    "k": "ma",
+    "k": "mc",
     "id": "bai07-q24",
-    "q": "Những việc nào thuộc về chuẩn bị feature? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Xoá trùng là làm sạch (Bài 6); vẽ biểu đồ là EDA (Bài 8).",
+    "q": "Q<sub>1</sub> = 6, Q<sub>3</sub> = 8. Ngưỡng trên của giá trị bất thường là bao nhiêu?",
+    "giai": "Δ<sub>Q</sub> = 2; Q<sub>3</sub> + 1,5 × 2 = 8 + 3 = 11.",
     "a": [
-     "Tạo cột mới từ các cột có sẵn",
-     "Đổi cột chữ thành số",
-     "Xoá các dòng bị trùng lặp",
-     "Vẽ biểu đồ cho báo cáo"
+     "11",
+     "9",
+     "10",
+     "14"
     ],
-    "h": "f5c7bc2fabc96"
+    "h": "8aa6602ea9228"
    },
    {
-    "k": "ma",
+    "k": "mc",
     "id": "bai07-q25",
-    "q": "Những cột nào KHÔNG nên làm feature khi dự đoán Đạt / Chưa đạt? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Mã số vô nghĩa; điểm học kỳ là rò rỉ.",
+    "q": "Máy tính điểm trung bình trên bảng bẩn và trên bảng đã dọn. Vì sao hai kết quả khác nhau?",
+    "giai": "Máy tính đúng cả hai lần; chỉ có dữ liệu là khác — rác vào, rác ra.",
     "a": [
-     "Mã học sinh",
-     "Điểm học kỳ",
-     "Giờ tự học",
-     "Giờ ngủ",
-     "Số lần nộp trễ"
+     "Dữ liệu đầu vào khác nhau",
+     "Máy tính cộng sai lần đầu",
+     "Lần hai máy làm tròn số",
+     "Bảng sạch bị xoá bạn giỏi"
     ],
-    "h": "d7c97ae55aa4d"
+    "h": "b693ba3b677ab"
    },
    {
     "k": "ma",
     "id": "bai07-q26",
-    "q": "Những phát biểu nào đúng về stratify=y? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Stratify chỉ thay đổi cách chia, không đổi kích thước hay xoá dòng.",
+    "q": "Những lỗi nào là lỗi dữ liệu hay gặp? <b>(Chọn 3 đáp án đúng.)</b>",
+    "giai": "Năm loại: ô trống, dòng trùng, chữ nhiều kiểu, giá trị phi lý (và nhãn lệch — Bài 8).",
     "a": [
-     "Giữ tỉ lệ nhãn ở hai tập giống cả bảng",
-     "Hữu ích khi nhãn bị lệch",
-     "Làm tập kiểm tra lớn hơn tập huấn luyện",
-     "Xoá các dòng có nhãn ít"
+     "Ô trống",
+     "Dòng trùng",
+     "Chữ viết nhiều kiểu",
+     "Cột có tên tiếng Anh",
+     "Bảng có hơn 50 dòng"
     ],
-    "h": "1a29bc51ca36ff"
+    "h": "dcacfe52430b2"
    },
    {
     "k": "ma",
     "id": "bai07-q27",
-    "q": "Những cách nào dùng để cân bằng dữ liệu lệch nhãn? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Hai cách: undersampling và oversampling.",
+    "q": "Những lệnh Pandas nào dùng để SOI bảng, chưa sửa gì? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "isnull().sum() và describe() chỉ cho thông tin; dropna, drop_duplicates, fillna thay đổi bảng.",
     "a": [
-     "Bớt dòng của nhãn nhiều (undersampling)",
-     "Nhân dòng của nhãn ít (oversampling)",
-     "Xoá hết dòng của nhãn ít",
-     "Đổi tên cột nhãn"
+     "df.isnull().sum()",
+     "df.describe()",
+     "df.dropna()",
+     "df.drop_duplicates()",
+     "df.fillna(0)"
     ],
-    "h": "15265d40b628ec"
+    "h": "83da5a66f633a"
    },
    {
     "k": "ma",
     "id": "bai07-q28",
-    "q": "Model đoán mọi bạn Đạt, đúng 88,9% trên tập kiểm tra. Những nhận xét nào đúng? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Độ chính xác cao chỉ vì Đạt chiếm đa số.",
+    "q": "Những giá trị nào là PHI LÝ trong bảng điểm thang 10 của học sinh? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Điểm phải trong 0 – 10; 0 và 10 vẫn có thể xảy ra.",
     "a": [
-     "Model bỏ sót mọi bạn Chưa đạt",
-     "Độ chính xác cao do nhãn lệch",
-     "Model đã học rất tốt",
-     "Model sẽ đúng 100% với bảng khác"
+     "Điểm 55",
+     "Điểm −3",
+     "Điểm 9,8",
+     "Điểm 0",
+     "Điểm 10"
     ],
-    "h": "dd17c8dcb3ee"
+    "h": "1f7bdc7f56283"
    },
    {
-    "k": "sx",
+    "k": "ma",
     "id": "bai07-q29",
-    "q": "Sắp xếp các bước tạo một feature mới trong Pandas.",
-    "giai": "Ý nghĩa → công thức → gán → kiểm tra.",
+    "q": "Những cách xử lý nào hợp lý với ô trống ở cột điểm có giá trị lạ? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Điền 0 hay giá trị lớn nhất là tự bịa ra một bạn điểm rất thấp hoặc rất cao.",
     "a": [
-     "Nghĩ ra ý nghĩa của cột mới",
-     "Viết công thức từ các cột có sẵn",
-     "Gán vào df[\"TenCotMoi\"]",
-     "Kiểm tra vài dòng bằng head()"
+     "Điền bằng trung vị của cột",
+     "Xoá dòng nếu ô trống rất ít",
+     "Điền bằng số 0",
+     "Điền bằng giá trị lớn nhất"
     ],
-    "h": "788b580d99140"
+    "h": "97aca3c967c97"
    },
    {
-    "k": "sx",
+    "k": "ma",
     "id": "bai07-q30",
-    "q": "Sắp xếp các bước chọn feature bằng phương pháp lọc.",
-    "giai": "Tính → xếp hạng → chọn → đưa vào model.",
+    "q": "Sau .str.strip().str.upper(), những cách viết nào của cột Lớp trở thành “10A1”? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "“10A 1” còn khoảng trắng ở giữa, cần thêm .str.replace(\" \", \"\").",
     "a": [
-     "Tính mức liên quan của từng cột với nhãn",
-     "Xếp hạng các cột",
-     "Giữ các cột đứng đầu, bỏ cột lặp thông tin",
-     "Đưa các cột đã chọn vào model"
+     "“10a1”",
+     "“ 10A1”",
+     "“10A 1”",
+     "“10A2”"
     ],
-    "h": "d55a74ca642d6"
+    "h": "1c68be9c86e9c0"
    },
    {
     "k": "sx",
     "id": "bai07-q31",
-    "q": "Sắp xếp quy trình từ dữ liệu thô tới đánh giá model.",
-    "giai": "Sạch → feature → chia → học → chấm.",
+    "q": "Sắp xếp các bước tìm giá trị bất thường theo quy tắc Toán 10.",
+    "giai": "Sắp xếp → tứ phân vị → ΔQ → so ngưỡng.",
     "a": [
-     "Làm sạch dữ liệu",
-     "Chuẩn bị feature",
-     "Chia train và test",
-     "Huấn luyện trên train",
-     "Chấm trên test"
+     "Sắp xếp dãy số liệu",
+     "Tìm Q1 và Q3",
+     "Tính khoảng tứ phân vị Q3 − Q1",
+     "So từng giá trị với hai ngưỡng"
     ],
-    "h": "8ccb98f86ef03"
+    "h": "1eb8bd56b79ea1"
    },
    {
-    "k": "dd",
+    "k": "sx",
     "id": "bai07-q32",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Feature là đầu vào; nhãn là câu trả lời.",
-    "mau": "Cột đầu vào gọi là {0}, cột cần dự đoán gọi là {1}.",
-    "o": [
-     [
-      "feature",
-      "nhãn",
-      "tập kiểm tra",
-      "tương quan"
-     ],
-     [
-      "nhãn",
-      "feature",
-      "tập huấn luyện",
-      "stratify"
-     ]
+    "q": "Sắp xếp các bước dọn cột Giới tính.",
+    "giai": "Soi → thống nhất → đổi viết tắt → kiểm tra.",
+    "a": [
+     "Xem các cách viết bằng .unique()",
+     "Bỏ khoảng trắng, đưa về chữ hoa",
+     "Đổi M thành NAM, F thành NU",
+     "Đếm lại bằng .unique() để kiểm tra"
     ],
-    "h": "916127eed793a"
+    "h": "129ee238482c0c"
    },
    {
-    "k": "dd",
+    "k": "sx",
     "id": "bai07-q33",
-    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "test_size là tỉ lệ (0.2); stratify nhận cột nhãn y.",
-    "mau": "train_test_split(X, y, test_size={0}, stratify={1}) dành 20% cho kiểm tra và giữ tỉ lệ nhãn.",
-    "o": [
-     [
-      "0.2",
-      "20",
-      "0.8",
-      "2"
-     ],
-     [
-      "y",
-      "X",
-      "True",
-      "0.2"
-     ]
+    "q": "Sắp xếp các bước xử lý một điểm 55 trên thang 10.",
+    "giai": "Phát hiện → ô trống → trung vị trên dữ liệu sạch → điền.",
+    "a": [
+     "Phát hiện điểm ngoài khoảng 0 – 10",
+     "Đổi điểm 55 thành ô trống",
+     "Tính trung vị của cột đã sạch",
+     "Điền ô trống bằng trung vị"
     ],
-    "h": "c8440bea6b551"
+    "h": "1914d8864ebb88"
    },
    {
     "k": "dd",
     "id": "bai07-q34",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Rò rỉ dữ liệu làm model trông giỏi hơn thật.",
-    "mau": "Dùng thông tin mà lúc dự đoán {0} gọi là {1}.",
+    "q": "Chọn lệnh đúng cho mỗi chỗ trống.",
+    "giai": "drop_duplicates bỏ dòng trùng; dropna bỏ dòng có ô trống.",
+    "mau": "Xoá dòng trùng dùng {0}; xoá mọi dòng có ô trống dùng {1}.",
     "o": [
      [
-      "chưa thể có",
-      "đã có sẵn",
-      "bị trùng",
-      "bị trống"
+      "df.drop_duplicates()",
+      "df.dropna()",
+      "df.duplicated()",
+      "df.fillna()"
      ],
      [
-      "rò rỉ dữ liệu",
-      "chọn feature",
-      "stratify",
-      "undersampling"
+      "df.dropna()",
+      "df.fillna()",
+      "df.drop_duplicates()",
+      "df.isnull()"
      ]
     ],
-    "h": "13ebaeed709504"
+    "h": "ce6a0dcf879c4"
    },
    {
     "k": "dd",
     "id": "bai07-q35",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Train để học, test để chấm.",
-    "mau": "Tập {0} dùng để model học; tập {1} giấu đi để chấm ở cuối.",
+    "giai": "Trung vị không bị kéo lệch; mốt dùng được cho chữ.",
+    "mau": "Cột số có giá trị lạ thì điền ô trống bằng {0}; cột chữ thì điền bằng {1}.",
     "o": [
      [
-      "huấn luyện",
-      "kiểm tra",
-      "nhãn",
-      "feature"
+      "trung vị",
+      "số trung bình",
+      "số 0",
+      "giá trị lớn nhất"
      ],
      [
-      "kiểm tra",
-      "huấn luyện",
-      "nhãn",
-      "feature"
+      "mốt",
+      "trung vị",
+      "số trung bình",
+      "chữ rỗng"
      ]
     ],
-    "h": "1fe5842b906cf1"
+    "h": "a4db1302d62d1"
    },
    {
     "k": "dd",
     "id": "bai07-q36",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "1: cùng tăng; −1: ngược chiều; 0: không liên quan.",
-    "mau": "Hệ số tương quan gần {0} nghĩa là hai cột cùng tăng; gần {1} nghĩa là gần như không liên quan.",
+    "giai": "Phi lý là lỗi nhập liệu → đổi thành ô trống rồi điền.",
+    "mau": "Giá trị không thể xảy ra gọi là giá trị {0}; ta đổi nó thành {1}.",
     "o": [
      [
-      "1",
-      "0",
-      "−1",
-      "10"
+      "phi lý",
+      "bất thường có thật",
+      "trung vị",
+      "trùng lặp"
      ],
      [
-      "0",
-      "1",
-      "−1",
-      "0,5"
+      "ô trống",
+      "số 0",
+      "giá trị lớn nhất",
+      "chữ hoa"
      ]
     ],
-    "h": "527996616ff30"
+    "h": "15a87eca3c40e5"
    },
    {
-    "k": "ds",
+    "k": "dd",
     "id": "bai07-q37",
-    "q": "Tập kiểm tra được dùng để model học thêm cho tốt hơn.",
-    "giai": "Tập kiểm tra chỉ để chấm; model không được học trên đó.",
-    "h": "b9645128184e"
+    "q": "Chọn lệnh đúng cho mỗi chỗ trống.",
+    "giai": "strip bỏ khoảng trắng hai đầu; upper đưa về chữ hoa.",
+    "mau": "Lệnh {0} bỏ khoảng trắng hai đầu; lệnh {1} đưa chữ về chữ hoa.",
+    "o": [
+     [
+      ".str.strip()",
+      ".str.upper()",
+      ".str.replace()",
+      ".unique()"
+     ],
+     [
+      ".str.upper()",
+      ".str.strip()",
+      ".str.lower()",
+      ".unique()"
+     ]
+    ],
+    "h": "1e26edd2e21dc7"
    },
    {
-    "k": "ds",
+    "k": "dd",
     "id": "bai07-q38",
-    "q": "Cùng một độ chính xác, hai model có thể có giá trị rất khác nhau.",
-    "giai": "Model ngưỡng giờ học và model lười cùng 88,9% nhưng một model bắt được bạn Chưa đạt.",
-    "h": "16e290db7ecae1"
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "Garbage in, garbage out.",
+    "mau": "Nguyên tắc “rác vào, {0}”: dữ liệu sai thì {1} sai.",
+    "o": [
+     [
+      "rác ra",
+      "vàng ra",
+      "sạch ra",
+      "số ra"
+     ],
+     [
+      "kết quả",
+      "máy tính",
+      "bàn phím",
+      "tên cột"
+     ]
+    ],
+    "h": "1ff339b22c8bb1"
    },
    {
     "k": "ds",
     "id": "bai07-q39",
-    "q": "Mã hoá cột Giới tính thành 0 và 1 là một cách biến đổi feature.",
-    "giai": "Đổi chữ thành số là feature transformation.",
-    "h": "cd3b66acac8e6"
+    "q": "Lệnh .str.upper() biến “10A 1” thành “10A1”.",
+    "giai": "upper chỉ đổi chữ thường thành chữ hoa; khoảng trắng ở giữa vẫn còn.",
+    "h": "11a00b75888895"
    },
    {
     "k": "ds",
     "id": "bai07-q40",
-    "q": "Undersampling làm tăng số dòng của bảng.",
-    "giai": "Undersampling bớt dòng của nhãn nhiều nên bảng nhỏ đi.",
+    "q": "Hai dòng giống hệt nhau ở mọi cột thì nên giữ lại cả hai.",
+    "giai": "Đó là dòng trùng — giữ cả hai thì một bạn bị đếm hai lần.",
     "h": "1d7d304b876c86"
+   },
+   {
+    "k": "ds",
+    "id": "bai07-q41",
+    "q": "Xoá mọi dòng có ô trống luôn là cách tốt nhất.",
+    "giai": "Xoá dòng làm mất cả các ô còn tốt — với bảng này mất 19 bạn.",
+    "h": "83b5ad2fa7529"
+   },
+   {
+    "k": "ds",
+    "id": "bai07-q42",
+    "q": "Quy tắc tứ phân vị có thể bỏ sót một giá trị phi lý.",
+    "giai": "Ví dụ giờ học −1,5 nằm trong ngưỡng của quy tắc nhưng vẫn phi lý (giờ không thể âm).",
+    "h": "1f612fd29706b3"
    }
   ]
  },

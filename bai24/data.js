@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 24,
  "ma": "bai24",
  "nhan": "Bài 24",
- "tieu_de": "Chọn model nào?",
- "phan": "Phần C · Đánh giá và chọn model",
- "cau_hoi": "Có model nào tốt nhất cho mọi bài toán không?",
+ "tieu_de": "Đánh giá cho công bằng",
+ "phan": "Module 12 · Evaluating Models",
+ "cau_hoi": "Một lần chia train / test có phải là may rủi?",
  "gioi_thieu": [
-  "Con đã xây sáu model phân loại và một model hồi quy. Bài này không có thuật toán mới: con <b>xếp lại</b> chúng thành một bản đồ và học cách <b>chọn</b> model theo mục đích.",
-  "Năm chặng: bản đồ các model, tiêu chí ngoài độ chính xác, so sánh thực nghiệm, chọn theo tình huống, và quy trình làm một dự án trọn vẹn. Bảng khối 10 là bảng mô phỏng.",
-  "Con dùng lại toàn bộ Bài 11 – 23, đặc biệt kiểm định chéo (Bài 23)."
+  "Từ Bài 12, con luôn chia dữ liệu <b>một lần</b> (random_state = 42) rồi tin con số trên tập kiểm tra. Hôm nay con kiểm tra lại niềm tin đó — và học cách đo cho công bằng hơn: <b>kiểm định chéo</b>.",
+  "Năm chặng: một lần chia là may rủi, kiểm định chéo, so model công bằng, chọn tham số đúng cách, và scikit-learn. Bảng khối 10 là bảng mô phỏng.",
+  "Con dùng lại: chia dữ liệu (Bài 8), học vẹt và chọn K (Bài 13), các model đã học (Bài 11 – 17)."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai24",
  "muc_tieu": [
-  "Xếp các model đã học theo cách chúng “nghĩ”.",
-  "Nêu được các tiêu chí chọn model ngoài độ chính xác.",
-  "Đọc được bảng so sánh các model bằng kiểm định chéo.",
-  "Chọn và bảo vệ được một model cho một tình huống cụ thể.",
-  "Trình bày lại quy trình trọn vẹn của một dự án học có giám sát."
+  "Giải thích được vì sao một lần chia train / test có thể cho kết quả may rủi.",
+  "Mô tả được kiểm định chéo k phần.",
+  "Dùng kiểm định chéo để so các model công bằng hơn.",
+  "Chọn tham số (như K) bằng kiểm định chéo trên tập huấn luyện, giữ tập kiểm tra đến cuối.",
+  "Dùng cross_val_score và GridSearchCV trong scikit-learn."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,424 +36,203 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Bản đồ các model",
-   "ten_ngan": "Bản đồ",
+   "ten": "Một lần chia là may rủi",
+   "ten_ngan": "May rủi",
    "phut": 4,
-   "muc_tieu": "xếp các model đã học theo cách chúng “nghĩ”.",
-   "khoi_dong": "Kể tên các model con đã học từ Bài 12. Chúng giống nhau ở điểm nào?",
+   "muc_tieu": "giải thích được vì sao một lần chia train / test có thể cho kết quả may rủi.",
+   "khoi_dong": "Đổi random_state từ 42 sang số khác. Độ chính xác có đổi không?",
    "khoi": [
     {
-     "t": "anh",
-     "cap": "Bốn cách “nghĩ” của các model đã học",
-     "alt": "Bốn cách “nghĩ” của các model đã học",
-     "src": "img/ban-do-cac-model-da-hoc.png"
-    },
-    {
-     "t": "bang",
-     "cot": [
-      "Cách nghĩ",
-      "Model",
-      "Ghi nhớ"
+     "t": "demo_truot",
+     "tieu_de": "mười lần chia khác nhau",
+     "huong_dan": "Kéo để đổi cách chia (random_state). Cùng model logistic, cùng dữ liệu — chỉ khác những bạn nào rơi vào tập kiểm tra.",
+     "dieu_kien": "random_state = <b>{x}</b>",
+     "moc": [
+      {
+       "x": 0,
+       "n": "lần chia số 0",
+       "p": 91.7
+      },
+      {
+       "x": 1,
+       "n": "lần chia số 1",
+       "p": 90.3
+      },
+      {
+       "x": 2,
+       "n": "lần chia số 2",
+       "p": 88.9
+      },
+      {
+       "x": 3,
+       "n": "lần chia số 3",
+       "p": 84.7
+      },
+      {
+       "x": 4,
+       "n": "lần chia số 4",
+       "p": 83.3
+      },
+      {
+       "x": 5,
+       "n": "lần chia số 5",
+       "p": 93.1
+      },
+      {
+       "x": 6,
+       "n": "lần chia số 6",
+       "p": 91.7
+      },
+      {
+       "x": 7,
+       "n": "lần chia số 7",
+       "p": 93.1
+      },
+      {
+       "x": 8,
+       "n": "lần chia số 8",
+       "p": 93.1
+      },
+      {
+       "x": 9,
+       "n": "lần chia số 9",
+       "p": 93.1
+      }
      ],
-     "dong": [
-      [
-       "Đo khoảng cách",
-       "KNN, SVM",
-       "Cần đưa về cùng thang đo"
-      ],
-      [
-       "Vẽ đường / xác suất",
-       "Hồi quy tuyến tính, logistic",
-       "Đọc được hệ số a, b"
-      ],
-      [
-       "Hỏi câu Có / Không",
-       "Cây quyết định, Random Forest",
-       "Cây đọc được luật"
-      ],
-      [
-       "Đếm rồi nhân",
-       "Naïve Bayes",
-       "Rất nhanh, cần ít dữ liệu"
-      ]
-     ]
+     "nhan_n": "Cách chia",
+     "nhan_p": "Độ chính xác trên tập kiểm tra",
+     "so_le_x": 0,
+     "bat_dau": 0
     },
     {
-     "t": "hop",
-     "kieu": "ml",
-     "tieu_de": "Điều không đổi",
-     "html": "Model nào cũng đi qua cùng quy trình 5 bước của Bài 11: dữ liệu → chia → huấn luyện → dự đoán → đánh giá. Thuật toán khác nhau, quy trình như nhau."
+     "t": "anh",
+     "cap": "Cùng một model, mười con số từ 83,3% tới 93,1%",
+     "alt": "Cùng một model, mười con số từ 83,3% tới 93,1%",
+     "src": "img/muoi-lan-chia-khac-nhau.png"
+    },
+    {
+     "t": "p",
+     "html": "Tập kiểm tra chỉ 72 bạn: vài bạn “khó” rơi vào hay không đã đủ làm con số nhảy gần 9,8 điểm. Một lần đo giống như một bài kiểm tra 15 phút — có thể may, có thể xui."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ hồi quy tuyến tính dùng cho bài Đạt / Chưa đạt — nó dự đoán con số.",
-      "Nghĩ Random Forest là một cách nghĩ riêng — nó là nhiều cây quyết định."
+      "Chọn random_state cho con số đẹp nhất để báo cáo.",
+      "So hai model trên hai cách chia khác nhau."
      ]
     },
     {
+     "t": "video",
+     "yt": "fSytzGwwBVw",
+     "ten": "StatQuest — Machine Learning Fundamentals: Cross Validation",
+     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc",
+     "bat_dau": null,
+     "ket_thuc": null
+    },
+    {
      "t": "tom_tat",
-     "html": "Bốn cách nghĩ: khoảng cách · đường / xác suất · câu hỏi Có / Không · đếm rồi nhân."
+     "html": "Một lần chia chỉ là một mẫu thử; con số có thể lệch vài điểm do may rủi."
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Cross Validation in Machine Learning",
+       "url": "https://www.geeksforgeeks.org/machine-learning/cross-validation-machine-learning/",
+       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+      }
+     ]
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai24-q1",
-     "q": "Model nào thuộc nhóm “đo khoảng cách”?",
-     "giai": "KNN hỏi các láng giềng gần nhất.",
-     "goi_y": "Model nào cần đưa về cùng thang đo?",
+     "q": "Trong mười lần chia, độ chính xác thấp nhất là bao nhiêu?",
+     "giai": "Lần chia random_state = 4.",
+     "goi_y": "Kéo thanh trượt, tìm cột đỏ.",
      "a": [
-      "KNN",
-      "Naïve Bayes",
-      "Cây quyết định",
-      "Hồi quy logistic"
+      "83,3%",
+      "93,1%",
+      "91,7%",
+      "50,0%"
      ],
-     "h": "17d5d5116dfb2"
+     "h": "9629bf2da5cd6"
     },
     {
      "k": "ds",
      "id": "bai24-q2",
-     "q": "Mọi model đã học đều dùng chung quy trình 5 bước.",
-     "giai": "Chỉ đổi dòng gọi thuật toán.",
-     "goi_y": "Nhớ lại Bài 11.",
+     "q": "Đổi random_state có thể làm độ chính xác trên tập kiểm tra thay đổi vài điểm.",
+     "giai": "Khác bạn nào rơi vào tập kiểm tra.",
+     "goi_y": "Nhìn lại mười cột.",
      "h": "158b2260f7e668"
     }
    ]
   },
   {
-   "ten": "Không chỉ độ chính xác",
-   "ten_ngan": "Tiêu chí",
-   "phut": 4,
-   "muc_tieu": "nêu được các tiêu chí chọn model ngoài độ chính xác.",
-   "khoi_dong": "Hai model cùng đúng 90%. Con còn muốn biết gì trước khi chọn?",
+   "ten": "Kiểm định chéo",
+   "ten_ngan": "Kiểm định chéo",
+   "phut": 5,
+   "muc_tieu": "mô tả được kiểm định chéo k phần.",
+   "khoi_dong": "Làm sao cho mọi bạn đều được một lần “làm kiểm tra”?",
    "khoi": [
-    {
-     "t": "bang",
-     "cot": [
-      "Tiêu chí",
-      "Câu hỏi cần đặt",
-      "Model mạnh ở tiêu chí này"
-     ],
-     "dong": [
-      [
-       "Giải thích được",
-       "Có phải nói lý do bằng lời?",
-       "Cây quyết định nông"
-      ],
-      [
-       "Cho xác suất",
-       "Cần chỉnh ngưỡng cảnh báo?",
-       "Logistic"
-      ],
-      [
-       "Tốc độ",
-       "Dữ liệu rất lớn, cần trả lời ngay?",
-       "Naïve Bayes, logistic"
-      ],
-      [
-       "Kiểu sai",
-       "Bỏ sót hay báo nhầm nguy hiểm hơn?",
-       "Đo bằng bảng nhầm lẫn"
-      ],
-      [
-       "Ổn định",
-       "Kết quả có nhảy khi dữ liệu đổi?",
-       "Random Forest"
-      ]
-     ]
-    },
     {
      "t": "dinh_nghia",
-     "ten": "Không có model tốt nhất",
-     "html": "Chỉ có model <b>phù hợp</b> với bài toán, với dữ liệu, và với người phải đọc kết quả.",
-     "ky_hieu": null
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Chỉ nhìn độ chính xác rồi chọn.",
-      "Chọn model phức tạp nhất vì nghe “xịn” hơn."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "Chọn model: độ chính xác + giải thích + xác suất + tốc độ + kiểu sai + ổn định."
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
-     "id": "bai24-q3",
-     "q": "Ngân hàng phải nói cho khách lý do từ chối vay. Tiêu chí nào quan trọng nhất?",
-     "giai": "Khách có quyền biết lý do.",
-     "goi_y": "Khách hỏi “vì sao?” thì model cần gì?",
-     "a": [
-      "Giải thích được bằng lời",
-      "Huấn luyện nhanh nhất",
-      "Chạy được trên điện thoại",
-      "Có nhiều tham số nhất"
-     ],
-     "h": "bd7f7a8afdf3a"
-    },
-    {
-     "k": "ma",
-     "id": "bai24-q4",
-     "q": "Hai tiêu chí nào KHÔNG phải độ chính xác? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "Tiêu chí khác.",
-     "goi_y": "Xem bảng tiêu chí.",
-     "a": [
-      "Tốc độ dự đoán",
-      "Giải thích được",
-      "Tỉ lệ đoán đúng",
-      "Số bạn đoán đúng"
-     ],
-     "h": "21ac0e2637e69"
-    }
-   ]
-  },
-  {
-   "ten": "So sánh bằng thực nghiệm",
-   "ten_ngan": "Thực nghiệm",
-   "phut": 5,
-   "muc_tieu": "đọc được bảng so sánh các model bằng kiểm định chéo.",
-   "khoi_dong": "Sáu model trên cùng bảng khối 10, đo bằng kiểm định chéo. Ai thắng?",
-   "khoi": [
-    {
-     "t": "anh",
-     "cap": "Kiểm định chéo 5 phần: độ chính xác và số bạn bị bỏ sót",
-     "alt": "Kiểm định chéo 5 phần: độ chính xác và số bạn bị bỏ sót",
-     "src": "img/sau-model-dung-va-bo-sot.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "bảng lớp",
-     "de": null,
-     "cot": [
-      "Model",
-      "Đúng",
-      "Bỏ sót",
-      "Báo nhầm"
-     ],
-     "dong": [
-      [
-       "KNN (K = 3)",
-       "90,8%",
-       "11",
-       "11"
-      ],
-      [
-       "Logistic",
-       "90,4%",
-       "12",
-       "11"
-      ],
-      [
-       "Cây sâu 2",
-       "89,6%",
-       "9",
-       "16"
-      ],
-      [
-       "Naïve Bayes",
-       "90,8%",
-       "10",
-       "12"
-      ],
-      [
-       "SVM",
-       "90,8%",
-       "13",
-       "9"
-      ],
-      [
-       "Rừng 100 cây",
-       "90,8%",
-       "11",
-       "11"
-      ]
-     ],
-     "ket_luan": "Độ chính xác chỉ chênh 1,2 điểm; bỏ sót từ 9 tới 13 bạn. Trên bảng này, các model gần như ngang nhau.",
-     "nhan_manh": []
+     "ten": "Kiểm định chéo k phần (k-fold cross-validation)",
+     "html": "Chia dữ liệu thành k phần bằng nhau. Lần lượt mỗi phần làm tập kiểm tra, k − 1 phần còn lại huấn luyện. Được k điểm → lấy <b>trung bình</b> (và xem khoảng dao động).",
+     "ky_hieu": "Thường dùng k = 5 hoặc 10."
     },
     {
      "t": "anh",
-     "cap": "Trên dữ liệu mô phỏng 20 000 dòng: tốc độ chênh hàng trăm lần",
-     "alt": "Trên dữ liệu mô phỏng 20 000 dòng: tốc độ chênh hàng trăm lần",
-     "src": "img/toc-do-huan-luyen-va-du-doan.png"
+     "cap": "Kiểm định chéo 5 phần: 5 vòng, 5 điểm",
+     "alt": "Kiểm định chéo 5 phần: 5 vòng, 5 điểm",
+     "src": "img/so-do-kiem-dinh-cheo-5-phan.png"
     },
-    {
-     "t": "p",
-     "html": "Tốc độ thì khác xa: Naïve Bayes huấn luyện nhanh nhất, Rừng 100 cây chậm nhất; KNN (K = 3) dự đoán chậm nhất vì phải đo tới mọi điểm cũ."
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Kết luận model tốt nhất từ chênh lệch nhỏ hơn độ dao động.",
-      "Đo thời gian trên dữ liệu 240 dòng rồi suy cho dữ liệu lớn."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "Khi độ chính xác ngang nhau, các tiêu chí khác quyết định."
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
-     "id": "bai24-q5",
-     "q": "Theo bảng, model nào bỏ sót ít bạn Chưa đạt nhất?",
-     "giai": "9 bạn.",
-     "goi_y": "Tìm số nhỏ nhất ở cột Bỏ sót.",
-     "a": [
-      "Cây sâu 2",
-      "SVM",
-      "Logistic",
-      "Rừng 100 cây"
-     ],
-     "h": "19aef741582284"
-    },
-    {
-     "k": "dd",
-     "id": "bai24-q6",
-     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-     "giai": "Chênh chưa tới 2 điểm.",
-     "goi_y": "Đọc cột “Đúng”.",
-     "mau": "Độ chính xác các model từ {0} tới {1}.",
-     "o": [
-      [
-       "89,6%",
-       "90,8%",
-       "50,0%",
-       "100%"
-      ],
-      [
-       "90,8%",
-       "89,6%",
-       "100%",
-       "75,0%"
-      ]
-     ],
-     "h": "16569cc93f0319"
-    }
-   ]
-  },
-  {
-   "ten": "Chọn theo tình huống",
-   "ten_ngan": "Tình huống",
-   "phut": 5,
-   "muc_tieu": "chọn và bảo vệ được một model cho một tình huống cụ thể.",
-   "khoi_dong": "Cùng dữ liệu, bốn người dùng khác nhau có chọn cùng một model không?",
-   "khoi": [
     {
      "t": "demo_tung_buoc",
-     "tieu_de": "chọn model cho bốn tình huống",
-     "huong_dan": "Chọn một tình huống, bấm “Bước tiếp” để đi qua từng câu hỏi.",
-     "nhan_chon": "Tình huống",
+     "tieu_de": "năm vòng của model logistic",
+     "huong_dan": "Bấm “Bước tiếp” để chạy từng vòng. Cột cuối là trung bình tính tới vòng đó.",
+     "nhan_chon": "Model",
      "cot": [
-      "#",
-      "Câu hỏi",
-      "Trả lời"
+      "Vòng",
+      "Việc",
+      "Điểm vòng này",
+      "Trung bình tới giờ"
      ],
      "mac_dinh": 0,
      "lua_chon": [
       {
-       "nhan": "Bệnh viện cần giải thích cho bệnh nhân",
+       "nhan": "Logistic",
        "dong": [
         [
          "1",
-         "Có phải giải thích lý do bằng lời không?",
-         "Có — bác sĩ phải nói được vì sao"
+         "Phần 1 làm kiểm tra, 4 phần còn lại huấn luyện",
+         "89,6%",
+         "89,6%"
         ],
         [
          "2",
-         "Model nào đọc được luật NẾU… THÌ…?",
-         "Cây quyết định (nông)"
+         "Phần 2 làm kiểm tra, 4 phần còn lại huấn luyện",
+         "91,7%",
+         "90,7%"
         ],
         [
          "3",
-         "Cần giảm bỏ sót người bệnh?",
-         "Đo bảng nhầm lẫn; cây sâu 2 bỏ sót ít nhất ở bảng lớp"
+         "Phần 3 làm kiểm tra, 4 phần còn lại huấn luyện",
+         "97,9%",
+         "93,1%"
         ],
         [
-         "→",
-         "Gợi ý",
-         "<b>Cây quyết định nông</b>, kiểm tra bằng kiểm định chéo"
-        ]
-       ]
-      },
-      {
-       "nhan": "Lọc hàng triệu tin nhắn mỗi giây",
-       "dong": [
-        [
-         "1",
-         "Có phải giải thích từng tin không?",
-         "Không bắt buộc"
+         "4",
+         "Phần 4 làm kiểm tra, 4 phần còn lại huấn luyện",
+         "87,5%",
+         "91,7%"
         ],
         [
-         "2",
-         "Tốc độ quan trọng tới đâu?",
-         "Rất quan trọng — huấn luyện và dự đoán phải nhanh"
-        ],
-        [
-         "3",
-         "Dữ liệu dạng đếm từ?",
-         "Có — hợp với đếm rồi nhân"
-        ],
-        [
-         "→",
-         "Gợi ý",
-         "<b>Naïve Bayes</b>; tránh KNN (dự đoán chậm khi dữ liệu lớn)"
-        ]
-       ]
-      },
-      {
-       "nhan": "Thầy chủ nhiệm muốn chỉnh mức cảnh báo",
-       "dong": [
-        [
-         "1",
-         "Cần xác suất, không chỉ nhãn?",
-         "Có — để chọn ngưỡng cảnh báo"
-        ],
-        [
-         "2",
-         "Cần đọc cột nào kéo lên, kéo xuống?",
-         "Có — hệ số dương / âm"
-        ],
-        [
-         "3",
-         "Dữ liệu vừa phải, ranh giới gần thẳng?",
-         "Có"
-        ],
-        [
-         "→",
-         "Gợi ý",
-         "<b>Hồi quy logistic</b>, chỉnh ngưỡng như Bài 15"
-        ]
-       ]
-      },
-      {
-       "nhan": "Cần đúng nhất, không cần giải thích",
-       "dong": [
-        [
-         "1",
-         "Có phải giải thích bằng lời không?",
-         "Không"
-        ],
-        [
-         "2",
-         "Dữ liệu có nhiều cột hữu ích?",
-         "Có"
-        ],
-        [
-         "3",
-         "Chấp nhận huấn luyện chậm hơn?",
-         "Có"
-        ],
-        [
-         "→",
-         "Gợi ý",
-         "<b>Random Forest</b> (thử thêm KNN, SVM); so bằng kiểm định chéo"
+         "5",
+         "Phần 5 làm kiểm tra, 4 phần còn lại huấn luyện",
+         "85,4%",
+         "90,4%"
         ]
        ]
       }
@@ -462,139 +241,325 @@ window.BAI = {
     {
      "t": "hop",
      "kieu": "chu-y",
-     "tieu_de": "Bảo vệ lựa chọn bằng 3 câu",
-     "html": "(1) Tiêu chí quan trọng nhất của tình huống là gì. (2) Model nào mạnh ở tiêu chí đó. (3) Số liệu kiểm định chéo cho thấy model đó không kém hơn đáng kể."
+     "tieu_de": "Kiểm định chéo đo gì?",
+     "html": "Nó đo <b>cách làm</b> (model + tham số) tốt tới đâu trên dữ liệu chưa thấy — trung bình qua nhiều lần, ít phụ thuộc may rủi của một lần chia."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Chọn cùng một model cho mọi tình huống.",
-      "Bảo vệ lựa chọn chỉ bằng “vì nó hay”."
+      "Nghĩ kiểm định chéo cho ra một model mới — nó chỉ đo; muốn dùng thì fit lại trên dữ liệu huấn luyện.",
+      "Quên xem khoảng dao động giữa các phần."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Mục đích quyết định tiêu chí; tiêu chí quyết định model; số liệu để bảo vệ."
+     "html": "k phần, mỗi phần làm kiểm tra một lần → k điểm → lấy trung bình."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai24-q3",
+     "q": "Trong kiểm định chéo 5 phần, mỗi dòng dữ liệu được làm kiểm tra mấy lần?",
+     "giai": "Mỗi phần làm kiểm tra đúng một vòng.",
+     "goi_y": "Nhìn cột màu vàng trong sơ đồ.",
+     "a": [
+      "Đúng 1 lần",
+      "0 lần",
+      "5 lần",
+      "4 lần"
+     ],
+     "h": "17496b5ea9b58a"
+    },
+    {
+     "k": "sx",
+     "id": "bai24-q4",
+     "q": "Sắp xếp các bước kiểm định chéo 5 phần.",
+     "giai": "Chia → luân phiên → lặp → trung bình.",
+     "goi_y": "Bắt đầu từ việc chia dữ liệu.",
+     "a": [
+      "Chia dữ liệu thành 5 phần",
+      "Lấy một phần làm kiểm tra, 4 phần huấn luyện",
+      "Lặp lại cho đủ 5 phần",
+      "Lấy trung bình 5 điểm"
+     ],
+     "h": "1e05b64ac4ef6c"
+    }
+   ]
+  },
+  {
+   "ten": "So model cho công bằng",
+   "ten_ngan": "So model",
+   "phut": 4,
+   "muc_tieu": "dùng kiểm định chéo để so các model công bằng hơn.",
+   "khoi_dong": "Bài 22: KNN đúng 95,8%, bốn model khác 91,7%. KNN có thật sự giỏi hơn?",
+   "khoi": [
+    {
+     "t": "anh",
+     "cap": "Sáu model, kiểm định chéo 5 phần trên cả 240 bạn",
+     "alt": "Sáu model, kiểm định chéo 5 phần trên cả 240 bạn",
+     "src": "img/sau-model-kiem-dinh-cheo.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "trung bình 5 phần",
+     "de": null,
+     "cot": [
+      "Model",
+      "Trung bình",
+      "Thấp nhất – cao nhất"
+     ],
+     "dong": [
+      [
+       "KNN (K = 9)",
+       "91,3%",
+       "89,6 – 93,8"
+      ],
+      [
+       "Logistic",
+       "90,4%",
+       "85,4 – 97,9"
+      ],
+      [
+       "Cây sâu 2",
+       "89,6%",
+       "85,4 – 95,8"
+      ],
+      [
+       "Naïve Bayes",
+       "90,8%",
+       "87,5 – 95,8"
+      ],
+      [
+       "SVM",
+       "90,8%",
+       "87,5 – 97,9"
+      ],
+      [
+       "Rừng 100 cây",
+       "90,9%",
+       "89,6 – 93,8"
+      ]
+     ],
+     "ket_luan": "Các model chỉ chênh 1,7 điểm trung bình, trong khi mỗi model tự dao động vài điểm giữa các phần — không model nào hơn hẳn.",
+     "nhan_manh": []
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Kết luận model A giỏi hơn chỉ vì hơn 1 – 2 bạn trên một lần chia.",
+      "Chỉ nhìn trung bình mà bỏ qua khoảng dao động."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "So model bằng kiểm định chéo: xem trung bình và khoảng dao động, không chỉ một con số."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai24-q5",
+     "q": "Theo kiểm định chéo, chênh lệch trung bình giữa model cao nhất và thấp nhất khoảng bao nhiêu điểm?",
+     "giai": "Nhỏ hơn cả độ dao động của một model.",
+     "goi_y": "Trừ trung bình cao nhất cho thấp nhất.",
+     "a": [
+      "1,7 điểm",
+      "4,1 điểm",
+      "15,0 điểm",
+      "0,0 điểm"
+     ],
+     "h": "8ea83946d6b16"
+    },
+    {
+     "k": "ds",
+     "id": "bai24-q6",
+     "q": "Theo kiểm định chéo, KNN hơn hẳn mọi model khác trên bảng khối 10.",
+     "giai": "Chênh chưa tới 2 điểm.",
+     "goi_y": "So cột trung bình của bảng.",
+     "h": "ea251cea0ba76"
+    }
+   ]
+  },
+  {
+   "ten": "Chọn tham số đúng cách",
+   "ten_ngan": "Dò tham số",
+   "phut": 5,
+   "muc_tieu": "chọn tham số bằng kiểm định chéo trên tập huấn luyện, giữ tập kiểm tra đến cuối.",
+   "khoi_dong": "Bài 13 chọn K = 9 vì cao nhất trên tập kiểm tra. Vì sao làm vậy là “gian lận nhẹ”?",
+   "khoi": [
+    {
+     "t": "p",
+     "html": "Nếu dùng tập kiểm tra để <b>chọn</b> K, tập kiểm tra đã góp phần huấn luyện — nó không còn là dữ liệu “chưa thấy”. Con số đo trên nó sẽ lạc quan hơn thực tế."
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "Dò tham số (tuning) đúng cách",
+     "html": "Chỉ dùng <b>tập huấn luyện</b>: thử từng giá trị tham số bằng kiểm định chéo, chọn giá trị tốt nhất. Sau cùng mới đo <b>một lần</b> trên tập kiểm tra.",
+     "ky_hieu": "Phần dữ liệu dùng để chọn tham số gọi là <b>tập kiểm định</b> (validation)."
+    },
+    {
+     "t": "anh",
+     "cap": "Kiểm định chéo chọn K = 3; tập kiểm tra (nếu dùng để chọn) sẽ chọn K = 9",
+     "alt": "Kiểm định chéo chọn K = 3; tập kiểm tra (nếu dùng để chọn) sẽ chọn K = 9",
+     "src": "img/chon-k-bang-kiem-dinh-cheo.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "hai cách chọn K",
+     "de": null,
+     "cot": [
+      "Cách chọn",
+      "K được chọn",
+      "Con số báo cáo"
+     ],
+     "dong": [
+      [
+       "Theo tập kiểm tra (Bài 13)",
+       "9",
+       "95,8% — lạc quan"
+      ],
+      [
+       "Kiểm định chéo trên tập huấn luyện",
+       "3",
+       "<b>91,7%</b> — trung thực"
+      ]
+     ],
+     "ket_luan": "Con số trung thực thấp hơn — nhưng đó mới là điều ta có thể hứa với dữ liệu mới.",
+     "nhan_manh": [
+      1
+     ]
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Thử hàng trăm cấu hình trên tập kiểm tra rồi báo cáo con số cao nhất.",
+      "Đưa MinMaxScaler ra ngoài kiểm định chéo — min, max của phần kiểm tra bị lọt vào."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "Chọn tham số bằng kiểm định chéo trên tập huấn luyện; tập kiểm tra chỉ dùng một lần ở cuối."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai24-q7",
-     "q": "Theo phần Tự thử, tình huống lọc hàng triệu tin nhắn gợi ý model nào?",
-     "giai": "Nhanh, hợp dữ liệu đếm từ.",
-     "goi_y": "Chọn tình huống thứ hai, bấm tới dòng Gợi ý.",
+     "q": "Kiểm định chéo trên tập huấn luyện chọn K bằng bao nhiêu?",
+     "giai": "Điểm cao nhất của đường xanh.",
+     "goi_y": "Tìm đỉnh của đường liền màu xanh.",
      "a": [
-      "Naïve Bayes",
-      "KNN",
-      "Random Forest",
-      "Cây sâu 10"
+      "3",
+      "9",
+      "1",
+      "41"
      ],
-     "h": "1ae2ad2380d71c"
+     "h": "11b221fbc98463"
     },
     {
-     "k": "sx",
+     "k": "dd",
      "id": "bai24-q8",
-     "q": "Sắp xếp các bước bảo vệ lựa chọn model.",
-     "giai": "Tiêu chí → model → đo → trình bày.",
-     "goi_y": "Bắt đầu từ nhu cầu của người dùng.",
-     "a": [
-      "Xác định tiêu chí quan trọng nhất",
-      "Tìm model mạnh ở tiêu chí đó",
-      "So bằng kiểm định chéo",
-      "Trình bày lý do kèm số liệu"
+     "q": "Chọn từ đúng cho mỗi chỗ trống.",
+     "giai": "Giữ tập kiểm tra tới phút cuối.",
+     "goi_y": "Tập nào phải giữ “chưa thấy”?",
+     "mau": "Chọn tham số bằng tập {0}; đo kết quả cuối cùng một lần trên tập {1}.",
+     "o": [
+      [
+       "huấn luyện",
+       "kiểm tra",
+       "toàn bộ",
+       "ngẫu nhiên"
+      ],
+      [
+       "kiểm tra",
+       "huấn luyện",
+       "kiểm định",
+       "toàn bộ"
+      ]
      ],
-     "h": "b02677219baef"
+     "h": "1c29ab6db0034b"
     }
    ]
   },
   {
-   "ten": "Một dự án trọn vẹn",
-   "ten_ngan": "Dự án",
+   "ten": "Kiểm định chéo trong scikit-learn",
+   "ten_ngan": "scikit-learn",
    "phut": 4,
-   "muc_tieu": "trình bày lại quy trình trọn vẹn của một dự án học có giám sát.",
-   "khoi_dong": "Nếu phải làm một dự án từ đầu, con làm những bước nào?",
+   "muc_tieu": "dùng cross_val_score và GridSearchCV trong scikit-learn.",
+   "khoi_dong": "Viết tay 5 vòng thì dài. scikit-learn làm giúp thế nào?",
    "khoi": [
     {
      "t": "bang",
      "cot": [
-      "Bước",
       "Việc",
-      "Học ở"
+      "Lệnh"
      ],
      "dong": [
       [
-       "1 · Câu hỏi",
-       "Phân loại hay hồi quy? Ai dùng kết quả?",
-       "Bài 11, 14"
+       "Gộp chuẩn hoá + model",
+       "<code>m = make_pipeline(MinMaxScaler(), KNeighborsClassifier(9))</code>"
       ],
       [
-       "2 · Dữ liệu",
-       "Khám phá, làm sạch, EDA",
-       "Bài 6 – 9"
+       "Kiểm định chéo 5 phần",
+       "<code>cross_val_score(m, X, y, cv=5)</code>"
       ],
       [
-       "3 · Chuẩn bị",
-       "Chia train / test; thang đo trong pipeline",
-       "Bài 7, 12, 23"
+       "Dò tham số",
+       "<code>GridSearchCV(m, {\"kneighborsclassifier__n_neighbors\": [1, 3, 5, …]}, cv=5)</code>"
       ],
       [
-       "4 · Chọn model",
-       "So vài model bằng kiểm định chéo; dò tham số",
-       "Bài 12 – 23"
-      ],
-      [
-       "5 · Đánh giá",
-       "Một lần trên tập kiểm tra; mốc; bảng nhầm lẫn",
-       "Bài 11, 15"
-      ],
-      [
-       "6 · Báo cáo",
-       "Số liệu, hạn chế, không nói “gây ra”",
-       "Thực hành nhóm"
+       "Kết quả",
+       "<code>.best_params_</code> · <code>.best_score_</code> · <code>.score(X_test, y_test)</code>"
       ]
      ]
     },
     {
      "t": "hop",
      "kieu": "ml",
-     "tieu_de": "Sắp tới",
-     "html": "Bài 25 bước sang một nhánh mới: dữ liệu <b>không có nhãn</b> — máy tự chia nhóm (K-Means)."
+     "tieu_de": "Vì sao dùng make_pipeline?",
+     "html": "Để MinMaxScaler được fit lại <b>bên trong</b> mỗi vòng — chỉ trên phần huấn luyện của vòng đó. Nếu scale cả bảng trước rồi mới kiểm định chéo, thông tin phần kiểm tra đã lọt vào."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nhảy thẳng tới chọn model, bỏ qua làm sạch và EDA.",
-      "Báo cáo con số mà không nói hạn chế của dữ liệu."
+      "Gọi GridSearchCV trên cả X, y rồi báo best_score_ như kết quả cuối.",
+      "Quên rằng best_score_ là điểm kiểm định chéo, không phải điểm tập kiểm tra."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Câu hỏi → dữ liệu → chuẩn bị → chọn model → đánh giá → báo cáo trung thực."
+     "html": "cross_val_score để đo; GridSearchCV để chọn tham số; make_pipeline để không rò rỉ."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai24-q9",
-     "q": "Bước nào nên làm trước khi so các model?",
-     "giai": "Dữ liệu trước, model sau.",
-     "goi_y": "Nhìn thứ tự các bước trong bảng.",
+     "q": "Hàm nào chạy kiểm định chéo và trả về điểm từng phần?",
+     "giai": "Trả về mảng k điểm.",
+     "goi_y": "Tên có chữ cross (chéo).",
      "a": [
-      "Làm sạch và khám phá dữ liệu",
-      "Báo cáo kết quả cuối",
-      "Đo trên tập kiểm tra",
-      "Chọn ngưỡng cảnh báo"
+      "cross_val_score",
+      "train_test_split",
+      "accuracy_score",
+      "MinMaxScaler"
      ],
-     "h": "a311c97bdf0f5"
+     "h": "1a49c2d5a1efc3"
     },
     {
-     "k": "ds",
+     "k": "ma",
      "id": "bai24-q10",
-     "q": "Tập kiểm tra nên được dùng nhiều lần trong lúc chọn model.",
-     "giai": "Chỉ một lần ở cuối.",
-     "goi_y": "Nhớ lại Bài 23.",
-     "h": "15a78c9ed9fad3"
+     "q": "Hai lý do nào để đặt MinMaxScaler trong pipeline? <b>(Chọn 2 đáp án đúng.)</b>",
+     "giai": "Fit trên phần huấn luyện của từng vòng.",
+     "goi_y": "Đọc hộp “Vì sao dùng make_pipeline?”.",
+     "a": [
+      "Scaler chỉ học từ phần huấn luyện mỗi vòng",
+      "Tránh rò rỉ thông tin phần kiểm tra",
+      "Để model chạy nhanh gấp đôi",
+      "Để không cần tập kiểm tra"
+     ],
+     "h": "c0e7d6d41095c"
     }
    ]
   }
@@ -613,316 +578,319 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai24-q11",
-    "q": "Nhìn hình. Nhóm “Hỏi câu Có / Không” gồm model nào?",
-    "giai": "Cả rừng cũng hỏi câu Có / Không.",
+    "q": "Nhìn hình. Lần chia nào cho độ chính xác thấp nhất?",
+    "giai": "Cột đỏ: 83,3%.",
     "img": {
-     "src": "img/ban-do-cac-model-da-hoc.png"
+     "src": "img/muoi-lan-chia-khac-nhau.png"
     },
     "a": [
-     "Cây quyết định, Random Forest",
-     "KNN và SVM",
-     "Hồi quy tuyến tính, logistic",
-     "Naïve Bayes và KNN"
+     "random_state = 4",
+     "random_state = 0",
+     "random_state = 5",
+     "random_state = 9"
     ],
-    "h": "1d3e4db5423691"
+    "h": "2398da94e6ea2"
    },
    {
     "k": "mc",
     "id": "bai24-q12",
-    "q": "Nhìn hình. Model nào bỏ sót nhiều bạn Chưa đạt nhất?",
-    "giai": "13 bạn.",
+    "q": "Nhìn hình. Ở vòng 3, phần nào làm tập kiểm tra?",
+    "giai": "Ô vàng ở vòng 3.",
     "img": {
-     "src": "img/sau-model-dung-va-bo-sot.png"
+     "src": "img/so-do-kiem-dinh-cheo-5-phan.png"
     },
     "a": [
-     "SVM",
-     "Cây sâu 2",
-     "Naïve Bayes",
-     "Logistic"
+     "Phần thứ ba",
+     "Phần thứ nhất",
+     "Cả năm phần",
+     "Không phần nào"
     ],
-    "h": "88376d03b335d"
+    "h": "12ebf69c24d128"
    },
    {
     "k": "mc",
     "id": "bai24-q13",
-    "q": "Nhìn hình. Model nào dự đoán chậm nhất trên dữ liệu lớn?",
-    "giai": "Phải đo tới mọi điểm cũ.",
+    "q": "Nhìn hình. Model nào có khoảng dao động giữa các phần RỘNG nhất?",
+    "giai": "Thanh xanh nhạt dài nhất.",
     "img": {
-     "src": "img/toc-do-huan-luyen-va-du-doan.png"
+     "src": "img/sau-model-kiem-dinh-cheo.png"
     },
     "a": [
-     "KNN (K = 3)",
-     "Naïve Bayes",
-     "Cây sâu 2",
-     "Logistic"
+     "Logistic",
+     "KNN (K = 9)",
+     "Rừng 100 cây",
+     "Naïve Bayes"
     ],
-    "h": "1d1ee00c510eaa"
+    "h": "18537e8dd3df7a"
    },
    {
     "k": "mc",
     "id": "bai24-q14",
-    "q": "Một app cần đoán giá thuê nhà theo diện tích. Model nào đúng loại bài toán?",
-    "giai": "Giá là con số.",
+    "q": "Nhìn hình. Đường nét đứt xám cao hơn đường xanh ở hầu hết K. Vì sao?",
+    "giai": "Chọn trên tập nào thì tập đó cho số lạc quan.",
+    "img": {
+     "src": "img/chon-k-bang-kiem-dinh-cheo.png"
+    },
     "a": [
-     "Hồi quy tuyến tính",
-     "Hồi quy logistic",
-     "Naïve Bayes",
-     "Cây phân loại"
+     "Nó đo trên đúng tập dùng để chọn",
+     "Tập kiểm tra dễ hơn hẳn",
+     "Đường xanh bị vẽ sai",
+     "Kiểm định chéo luôn thấp"
     ],
-    "h": "3124b3af08b04"
+    "h": "31f66cb5c2078"
    },
    {
     "k": "mc",
     "id": "bai24-q15",
-    "q": "Hai model: A đúng 91% và giải thích được; B đúng 91,5% nhưng không giải thích được. Phòng tuyển sinh cần nói lý do. Chọn?",
-    "giai": "Giải thích quan trọng hơn 0,5 điểm.",
+    "q": "Một bạn thi thử 5 lần được 6, 9, 7, 8, 5 điểm. Cách ước lượng sức học nào hợp lý nhất?",
+    "giai": "Giống kiểm định chéo.",
     "a": [
-     "Model A",
-     "Model B",
-     "Không chọn model nào",
-     "Chọn ngẫu nhiên"
+     "Lấy trung bình 5 lần: 7 điểm",
+     "Lấy lần cao nhất: 9 điểm",
+     "Lấy lần đầu tiên: 6 điểm",
+     "Lấy lần thấp nhất: 5 điểm"
     ],
-    "h": "1b6cf69a8c4a2"
+    "h": "15a95dd3ca9b3e"
    },
    {
     "k": "mc",
     "id": "bai24-q16",
-    "q": "Dữ liệu có 10 triệu dòng, cần trả lời trong tích tắc. Model nào nên tránh?",
-    "giai": "KNN đo tới mọi điểm.",
+    "q": "Nhóm thử 200 cấu hình model, mỗi lần đo trên tập kiểm tra, rồi báo con số cao nhất. Vấn đề là gì?",
+    "giai": "Tập kiểm tra đã bị dùng để chọn.",
     "a": [
-     "KNN",
-     "Naïve Bayes",
-     "Logistic",
-     "Cây nông"
+     "Con số đó lạc quan, không trung thực",
+     "Con số đó quá thấp so với thật",
+     "Không có vấn đề gì cả",
+     "Model sẽ chạy quá chậm"
     ],
-    "h": "1a56447ccf2e6c"
+    "h": "805f0ee3e8c6c"
    },
    {
     "k": "mc",
     "id": "bai24-q17",
-    "q": "Bệnh hiếm: bỏ sót nguy hiểm hơn báo nhầm. Nên so model bằng gì ngoài độ chính xác?",
-    "giai": "Đọc bảng nhầm lẫn.",
+    "q": "Kiểm định chéo 10 phần trên 200 dòng. Mỗi vòng tập kiểm tra có bao nhiêu dòng?",
+    "giai": "200 : 10.",
     "a": [
-     "Số ca bị bỏ sót",
-     "Thời gian huấn luyện",
-     "Số cột dữ liệu",
-     "Tên thuật toán"
+     "20 dòng",
+     "10 dòng",
+     "180 dòng",
+     "200 dòng"
     ],
-    "h": "10f72f94facc79"
+    "h": "11b46acf0d1f1a"
    },
    {
     "k": "mc",
     "id": "bai24-q18",
-    "q": "Sáu model trên bảng khối 10 chênh chưa tới 2 điểm. Kết luận khách quan nhất?",
-    "giai": "Chênh nhỏ hơn dao động.",
+    "q": "best_score_ của GridSearchCV là điểm gì?",
+    "giai": "Chưa phải điểm tập kiểm tra.",
     "a": [
-     "Chưa model nào hơn hẳn",
-     "KNN là tốt nhất mọi lúc",
-     "Cây quyết định vô dụng",
-     "Cần bỏ bảng khối 10"
+     "Trung bình kiểm định chéo của cấu hình tốt",
+     "Điểm trên tập kiểm tra cuối cùng",
+     "Điểm trên toàn bộ dữ liệu huấn luyện",
+     "Điểm cao nhất trong một phần"
     ],
-    "h": "f8f79332f9896"
+    "h": "e52ef2aa63351"
    },
    {
     "k": "mc",
     "id": "bai24-q19",
-    "q": "Model nào vừa cho xác suất vừa đọc được hệ số dương / âm của từng cột?",
-    "giai": "Bài 15.",
+    "q": "Vì sao con số “trung thực” (K = 3) thấp hơn con số Bài 13 (K = 9)?",
+    "giai": "Chọn trên tập kiểm tra → lạc quan.",
     "a": [
-     "Hồi quy logistic",
-     "KNN",
-     "Random Forest",
-     "SVM kernel rbf"
+     "Bài 13 đã nhìn tập kiểm tra khi chọn K",
+     "K = 3 là giá trị K tệ nhất",
+     "Kiểm định chéo làm model kém đi",
+     "Bài 13 dùng dữ liệu khác hẳn"
     ],
-    "h": "181965a4b15b15"
+    "h": "134d04cbe186e9"
    },
    {
     "k": "ma",
     "id": "bai24-q20",
-    "q": "Những tiêu chí nào dùng để chọn model? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Ngoài độ chính xác.",
+    "q": "Những phát biểu nào đúng về kiểm định chéo? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "k vòng, k điểm.",
     "a": [
-     "Giải thích được",
-     "Tốc độ",
-     "Tên model dài",
-     "Màu biểu đồ"
+     "Mỗi dòng được làm kiểm tra đúng một lần",
+     "Cho trung bình và độ dao động",
+     "Chỉ dùng một lần chia",
+     "Thay hoàn toàn tập huấn luyện"
     ],
-    "h": "b303d43913e75"
+    "h": "77a9f282fe45d"
    },
    {
     "k": "ma",
     "id": "bai24-q21",
-    "q": "Hai model nào cần đưa về cùng thang đo? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Đo khoảng cách.",
+    "q": "Hai việc nào là dò tham số đúng cách? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Giữ tập kiểm tra tới cuối.",
     "a": [
-     "KNN",
-     "SVM",
-     "Cây quyết định",
-     "Naïve Bayes"
+     "Kiểm định chéo trên tập huấn luyện",
+     "Đo tập kiểm tra một lần ở cuối",
+     "Chọn tham số theo tập kiểm tra",
+     "Đổi random_state tới khi đẹp"
     ],
-    "h": "541be8140e454"
+    "h": "2ee89798da0fc"
    },
    {
     "k": "ma",
     "id": "bai24-q22",
-    "q": "Hai model nào đọc được lý do bằng lời tốt nhất? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Luật / hệ số.",
+    "q": "Vì sao một lần chia có thể may rủi? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Mẫu thử nhỏ.",
     "a": [
-     "Cây quyết định nông",
-     "Hồi quy logistic",
-     "Random Forest 500 cây",
-     "SVM kernel rbf"
+     "Tập kiểm tra nhỏ",
+     "Vài dòng khó rơi vào hay không",
+     "Máy tính cộng sai",
+     "Model đổi thuật toán mỗi lần"
     ],
-    "h": "407283013383b"
+    "h": "1ad8929279a692"
    },
    {
     "k": "ma",
     "id": "bai24-q23",
-    "q": "Hai bước nào nằm trong một dự án trọn vẹn? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Quy trình trung thực.",
+    "q": "Hai lệnh nào dùng trong bài? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Đo và dò.",
     "a": [
-     "Làm sạch dữ liệu",
-     "Nêu hạn chế",
-     "Chọn random_state đẹp nhất",
-     "Bỏ qua mốc model lười"
+     "cross_val_score",
+     "GridSearchCV",
+     "export_text",
+     "predict_proba_cv"
     ],
-    "h": "185237ad1e07e6"
+    "h": "1d9150ebb3f9f0"
    },
    {
     "k": "sx",
     "id": "bai24-q24",
-    "q": "Sắp xếp các bước một dự án học có giám sát.",
-    "giai": "Câu hỏi → dữ liệu → chia → so → đo.",
+    "q": "Sắp xếp quy trình chọn K đúng cách.",
+    "giai": "Chia → CV → chọn → fit → đo.",
     "a": [
-     "Đặt câu hỏi",
-     "Khám phá và làm sạch dữ liệu",
-     "Chia train / test",
-     "So model bằng kiểm định chéo",
+     "Chia tập huấn luyện và tập kiểm tra",
+     "Kiểm định chéo từng K trên tập huấn luyện",
+     "Chọn K có điểm trung bình cao nhất",
+     "Fit lại với K đó trên tập huấn luyện",
      "Đo một lần trên tập kiểm tra"
     ],
-    "h": "5aa5efdbebe42"
+    "h": "69eac5cef544c"
    },
    {
     "k": "sx",
     "id": "bai24-q25",
-    "q": "Sắp xếp các bước bảo vệ lựa chọn model.",
-    "giai": "Nhu cầu → tiêu chí → model → số liệu.",
+    "q": "Sắp xếp các bước kiểm định chéo 5 phần.",
+    "giai": "Chia → luân phiên → trung bình.",
     "a": [
-     "Nêu nhu cầu người dùng",
-     "Chọn tiêu chí quan trọng",
-     "Chọn model mạnh ở tiêu chí đó",
-     "Đưa số liệu kiểm định chéo"
+     "Chia thành 5 phần",
+     "Vòng 1: phần 1 làm kiểm tra",
+     "Lặp tới vòng 5",
+     "Tính trung bình 5 điểm"
     ],
-    "h": "72e373bc0b431"
+    "h": "192a6c6bc8d313"
    },
    {
     "k": "dd",
     "id": "bai24-q26",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Bản đồ.",
-    "mau": "KNN thuộc nhóm {0}; Naïve Bayes thuộc nhóm {1}.",
+    "giai": "k-fold.",
+    "mau": "Kiểm định chéo {0} phần: mỗi phần làm kiểm tra {1} lần.",
     "o": [
      [
-      "đo khoảng cách",
-      "đếm rồi nhân",
-      "hỏi Có / Không",
-      "vẽ đường"
+      "k",
+      "2",
+      "0",
+      "100"
      ],
      [
-      "đếm rồi nhân",
-      "đo khoảng cách",
-      "hỏi Có / Không",
-      "vẽ đường"
+      "đúng một",
+      "hai",
+      "không",
+      "k"
      ]
     ],
-    "h": "d3afc3e7d659a"
+    "h": "11d30ce3b51efd"
    },
    {
     "k": "dd",
     "id": "bai24-q27",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Theo tiêu chí.",
-    "mau": "Cần xác suất để chỉnh ngưỡng: chọn {0}; cần luật đọc được: chọn {1}.",
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "Cùng model, khác cách chia.",
+    "mau": "Mười lần chia cho kết quả từ {0} tới {1}.",
     "o": [
      [
-      "logistic",
-      "KNN",
-      "SVM",
-      "rừng"
+      "83,3%",
+      "93,1%",
+      "50,0%",
+      "100%"
      ],
      [
-      "cây nông",
-      "KNN",
-      "SVM",
-      "rừng 500 cây"
+      "93,1%",
+      "83,3%",
+      "100%",
+      "75,0%"
      ]
     ],
-    "h": "1aa7a1fc79da3b"
+    "h": "1694f657fcf935"
    },
    {
     "k": "dd",
     "id": "bai24-q28",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Đọc biểu đồ.",
-    "mau": "Bỏ sót ít nhất: {0}; nhiều nhất: {1}.",
+    "giai": "Bài 24 sửa Bài 13.",
+    "mau": "Kiểm định chéo chọn K = {0}; con số trung thực trên tập kiểm tra là {1}.",
     "o": [
      [
-      "Cây sâu 2",
-      "Logistic",
-      "SVM",
-      "KNN (K = 3)"
+      "3",
+      "9",
+      "1",
+      "41"
      ],
      [
-      "SVM",
-      "Cây sâu 2",
-      "Naïve Bayes",
-      "Logistic"
+      "91,7%",
+      "95,8%",
+      "100%",
+      "83,3%"
      ]
     ],
-    "h": "5758e20c8c8f9"
+    "h": "87426eea88645"
    },
    {
     "k": "dd",
     "id": "bai24-q29",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Câu chốt.",
-    "mau": "Không có model {0}; chỉ có model {1}.",
+    "giai": "Validation / test.",
+    "mau": "Dữ liệu dùng để chọn tham số gọi là tập {0}; dữ liệu đo một lần cuối là tập {1}.",
     "o": [
      [
-      "tốt nhất",
-      "chậm nhất",
-      "đắt nhất",
-      "mới nhất"
+      "kiểm định",
+      "kiểm tra",
+      "huấn luyện",
+      "ngẫu nhiên"
      ],
      [
-      "phù hợp",
-      "phức tạp",
-      "nổi tiếng",
-      "mới nhất"
+      "kiểm tra",
+      "kiểm định",
+      "huấn luyện",
+      "toàn bộ"
      ]
     ],
-    "h": "6ceaccfb00eb6"
+    "h": "4f9810ad4bc01"
    },
    {
     "k": "ds",
     "id": "bai24-q30",
-    "q": "Model có độ chính xác cao nhất luôn là lựa chọn đúng.",
-    "giai": "Còn nhiều tiêu chí khác.",
+    "q": "Báo cáo con số cao nhất trong nhiều lần chia là trung thực.",
+    "giai": "Đó là chọn may.",
     "h": "1a8350f1864740"
    },
    {
     "k": "ds",
     "id": "bai24-q31",
-    "q": "Random Forest thường huấn luyện chậm hơn Naïve Bayes.",
-    "giai": "Nhiều cây.",
+    "q": "Kiểm định chéo cho biết cả độ dao động của kết quả.",
+    "giai": "Xem thấp nhất – cao nhất.",
     "h": "1829035da37dbd"
    },
    {
     "k": "ds",
     "id": "bai24-q32",
-    "q": "Hồi quy tuyến tính dùng để phân loại Đạt / Chưa đạt.",
-    "giai": "Nó dự đoán con số.",
-    "h": "1f8977b4f3a30"
+    "q": "Đặt MinMaxScaler trong pipeline giúp tránh rò rỉ dữ liệu khi kiểm định chéo.",
+    "giai": "Fit trên phần huấn luyện mỗi vòng.",
+    "h": "11b6366c3c4834"
    }
   ]
  },

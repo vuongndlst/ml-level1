@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 15,
  "ma": "bai15",
  "nhan": "Bài 15",
- "tieu_de": "Hồi quy logistic",
- "phan": "Phần B · Học có giám sát",
- "cau_hoi": "Model nói “bạn này đạt với xác suất bao nhiêu” bằng cách nào?",
+ "tieu_de": "Hồi quy tuyến tính",
+ "phan": "Module 09 · Regression Models",
+ "cau_hoi": "Chiếc điện thoại cũ này nên rao bao nhiêu tiền?",
  "gioi_thieu": [
-  "Bài 14 dự đoán một con số bằng đường thẳng. Hôm nay quay lại câu hỏi Đạt / Chưa đạt, nhưng model không phán ngay mà trả lời bằng <b>xác suất</b>.",
-  "Năm chặng: vì sao đường thẳng hỏng với nhãn 0/1, đường cong sigmoid, đọc xác suất, ma trận nhầm lẫn, và tự chọn ngưỡng. Bảng khối 10 là bảng mô phỏng.",
-  "Con dùng lại: xác suất (Bài 4), đường thẳng y = a·x + b (Bài 14), bỏ sót và báo nhầm (Bài 13 – thực hành), mốc model lười (Bài 11)."
+  "Từ Bài 12 tới giờ, các model của con đều đoán một <b>nhãn</b> (Đạt / Chưa đạt). Hôm nay con dự đoán một <b>con số</b>: giá của một chiếc điện thoại cũ. Đó là bài toán <b>hồi quy</b>.",
+  "Năm chặng: hồi quy là gì, tự kẻ đường tốt nhất, đọc hai số a và b, đo model hồi quy tốt tới đâu, và dùng nhiều cột trong scikit-learn. Bảng 120 tin rao là bảng <b>mô phỏng</b>.",
+  "Con dùng lại: biểu đồ phân tán và tương quan (Bài 10), gradient descent (Bài 6), chia dữ liệu và mốc model lười (Bài 8, 12)."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai15",
  "muc_tieu": [
-  "Giải thích được vì sao hồi quy tuyến tính không hợp với nhãn 0/1.",
-  "Mô tả được hàm sigmoid biến mọi số thành xác suất từ 0 tới 1.",
-  "Đọc được xác suất model trả về và quy tắc ngưỡng 0,5.",
-  "Đọc được ma trận nhầm lẫn: bỏ sót và báo nhầm.",
-  "Chọn ngưỡng theo kiểu sai mình chấp nhận được."
+  "Phân biệt được bài toán hồi quy với bài toán phân loại.",
+  "Giải thích được “đường tốt nhất” là đường có tổng bình phương sai số nhỏ nhất.",
+  "Đọc được ý nghĩa của hệ số góc a và hệ số chặn b trong bối cảnh.",
+  "Đánh giá model hồi quy bằng MAE và R², so với model lười.",
+  "Huấn luyện hồi quy nhiều cột bằng scikit-learn và nhận ra cột vô dụng."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,94 +36,142 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Đường thẳng hỏng với nhãn 0/1",
-   "ten_ngan": "Đường thẳng hỏng",
+   "ten": "Dự đoán một con số",
+   "ten_ngan": "Hồi quy là gì",
    "phut": 4,
-   "muc_tieu": "giải thích được vì sao hồi quy tuyến tính không hợp với nhãn 0/1.",
-   "khoi_dong": "Đổi Đạt = 1, Chưa đạt = 0 rồi kẻ đường thẳng của Bài 14. Có gì sai không?",
+   "muc_tieu": "phân biệt được bài toán hồi quy với bài toán phân loại.",
+   "khoi_dong": "Đoán “Đạt hay Chưa đạt” và đoán “giá bao nhiêu triệu” — hai câu hỏi khác nhau ở chỗ nào?",
    "khoi": [
     {
+     "t": "dinh_nghia",
+     "ten": "Hồi quy (regression)",
+     "html": "Bài toán học có giám sát mà cột cần dự đoán là <b>một con số liên tục</b>: giá tiền, nhiệt độ, chiều cao, số điểm. Phân loại thì dự đoán <b>một nhãn</b> trong vài nhãn cho trước.",
+     "ky_hieu": "Hồi quy tuyến tính: dự đoán bằng một đường thẳng <code>y = a·x + b</code>."
+    },
+    {
      "t": "anh",
-     "cap": "Đường thẳng đoán ra 1,21 và -0,13 — không phải xác suất nào",
-     "alt": "Đường thẳng đoán ra 1,21 và -0,13 — không phải xác suất nào",
-     "src": "img/duong-thang-tren-du-lieu-0-va-1.png"
+     "cap": "Học có giám sát chia hai nhánh",
+     "alt": "Học có giám sát chia hai nhánh",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250902175259468148/difff.webp",
+     "du_phong": "img/minh-hoa-hai-nhanh-phan-loai-va-hoi-quy.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Supervised machine learning",
+      "url": "https://www.geeksforgeeks.org/machine-learning/supervised-machine-learning/"
+     },
+     "chu_giai": [
+      [
+       "Supervised Learning",
+       "Học có giám sát"
+      ],
+      [
+       "Classification (defined Labels)",
+       "Phân loại — nhãn cho trước"
+      ],
+      [
+       "Regression (no Labels defined)",
+       "Hồi quy — dự đoán con số"
+      ]
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "120 chiếc điện thoại cũ đang rao bán (mô phỏng): máy càng cũ, giá càng thấp",
+     "alt": "120 chiếc điện thoại cũ đang rao bán (mô phỏng): máy càng cũ, giá càng thấp",
+     "src": "img/gia-theo-tuoi-may.png"
     },
     {
      "t": "vi_du",
-     "tieu_de": "đếm các dự đoán vô nghĩa",
+     "tieu_de": "bảng dữ liệu",
      "de": null,
      "cot": [
-      "Đường thẳng đoán",
-      "Số bạn",
-      "Vì sao vô nghĩa"
+      "Cột",
+      "Ý nghĩa",
+      "Vai trò"
      ],
      "dong": [
       [
-       "Lớn hơn 1",
-       "45",
-       "“Đạt 121%” — không có"
+       "TuoiMay",
+       "Số tháng đã dùng",
+       "feature"
       ],
       [
-       "Nhỏ hơn 0",
-       "22",
-       "“Đạt −13%” — không có"
+       "DungLuong",
+       "Bộ nhớ (GB)",
+       "feature"
+      ],
+      [
+       "PinConLai",
+       "Pin còn lại (%)",
+       "feature"
+      ],
+      [
+       "SoLanRoi",
+       "Số lần làm rơi máy",
+       "feature"
+      ],
+      [
+       "Gia",
+       "Giá rao bán (triệu đồng)",
+       "<b>cột cần dự đoán</b>"
       ]
      ],
-     "ket_luan": "67 trên 240 bạn bị đoán ra con số không thể là xác suất.",
+     "ket_luan": "Tương quan giữa tuổi máy và giá: r = -0,91 — xu hướng giảm rất rõ.",
      "nhan_manh": []
     },
     {
      "t": "anh",
-     "cap": "Hồi quy tuyến tính và hồi quy logistic",
-     "alt": "Hồi quy tuyến tính và hồi quy logistic",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251216101013909567/logistic_regression_vs_linear_regression.webp",
-     "du_phong": "img/minh-hoa-so-sanh-hoi-quy-tuyen-tinh-va-logistic.png",
+     "cap": "Bốn ứng dụng của hồi quy tuyến tính",
+     "alt": "Bốn ứng dụng của hồi quy tuyến tính",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251212171555881822/real_world_use_cases_of_linear_regression.webp",
+     "du_phong": "img/minh-hoa-bon-ung-dung-thuc-te-cua-hoi-quy.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Understanding logistic regression",
-      "url": "https://www.geeksforgeeks.org/machine-learning/understanding-logistic-regression/"
+      "ten": "GeeksforGeeks — Ml linear regression",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
      },
      "chu_giai": [
       [
-       "Predicts continuous values",
-       "Dự đoán con số liên tục"
+       "Stock Market Prediction",
+       "Dự đoán giá cổ phiếu"
       ],
       [
-       "Uses best-fit line",
-       "Dùng đường thẳng khớp nhất"
+       "Real Estate Price Prediction",
+       "Dự đoán giá nhà đất"
       ],
       [
-       "Predicts categorical classes",
-       "Dự đoán nhãn"
+       "Medical Risk Prediction",
+       "Dự đoán nguy cơ bệnh"
       ],
       [
-       "Uses sigmoid S-curve",
-       "Dùng đường cong chữ S (sigmoid)"
+       "Sales Forecasting",
+       "Dự báo doanh số"
       ]
      ]
     },
     {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Tên gọi dễ nhầm",
-     "html": "Hồi quy logistic có chữ “hồi quy” nhưng dùng cho bài toán <b>phân loại</b>: nó dự đoán xác suất thuộc một nhãn."
-    },
-    {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ “hồi quy logistic” là bài toán hồi quy vì có chữ hồi quy.",
-      "Dùng thẳng giá trị đường thẳng làm xác suất."
+      "Nghĩ cột cần dự đoán là số thì luôn là hồi quy — mã số học sinh là số nhưng không phải đại lượng.",
+      "Nhầm “hồi quy” với “quay lại” — ở đây hồi quy chỉ việc dự đoán một con số."
      ]
     },
     {
+     "t": "video",
+     "yt": "7ArmBVF2dCs",
+     "ten": "StatQuest — Linear Regression, Clearly Explained!!!",
+     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc",
+     "bat_dau": null,
+     "ket_thuc": null
+    },
+    {
      "t": "tom_tat",
-     "html": "Nhãn 0/1 cần câu trả lời nằm trong 0 – 1; đường thẳng thì chạy ra ngoài."
+     "html": "Hồi quy dự đoán một con số; phân loại dự đoán một nhãn."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Understanding Logistic Regression",
-       "url": "https://www.geeksforgeeks.org/machine-learning/understanding-logistic-regression/",
+       "ten": "Linear Regression in Machine Learning",
+       "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -133,588 +181,652 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai15-q1",
-     "q": "Vì sao đường thẳng không hợp để đoán Đạt (1) hay Chưa đạt (0)?",
-     "giai": "45 bạn bị đoán > 1, 22 bạn < 0.",
-     "goi_y": "Nhìn hai vùng tô đỏ trên hình.",
+     "q": "Bài toán nào là hồi quy?",
+     "giai": "Nhiệt độ là một con số liên tục.",
+     "goi_y": "Câu trả lời nào là một con số có thể lẻ tới phần thập phân?",
      "a": [
-      "Nó đoán ra số lớn hơn 1 hoặc âm",
-      "Nó chỉ dùng được một cột",
-      "Nó không có hệ số chặn",
-      "Nó luôn đoán đúng 50%"
+      "Dự đoán nhiệt độ ngày mai (°C)",
+      "Dự đoán thư có phải thư rác",
+      "Dự đoán ảnh là chó hay mèo",
+      "Dự đoán học sinh Đạt hay Chưa đạt"
      ],
-     "h": "1261bc5509b736"
+     "h": "1ac0bc7cb6a9c2"
     },
     {
      "k": "ds",
      "id": "bai15-q2",
-     "q": "Hồi quy logistic dùng cho bài toán phân loại.",
-     "giai": "Nó dự đoán xác suất thuộc một nhãn.",
-     "goi_y": "Cột cần dự đoán hôm nay là con số hay nhãn?",
-     "h": "7f1224df1838b"
+     "q": "Dự đoán giá một chiếc điện thoại cũ là bài toán phân loại.",
+     "giai": "Giá là con số liên tục → hồi quy.",
+     "goi_y": "Giá có phải là một trong vài nhãn cho trước không?",
+     "h": "105ca662ccc758"
     }
    ]
   },
   {
-   "ten": "Đường cong sigmoid",
-   "ten_ngan": "Sigmoid",
+   "ten": "Tự kẻ đường tốt nhất",
+   "ten_ngan": "Đường tốt nhất",
    "phut": 5,
-   "muc_tieu": "mô tả được hàm sigmoid biến mọi số thành xác suất từ 0 tới 1.",
-   "khoi_dong": "Làm sao ép một đường thẳng chạy mãi lên, mãi xuống vào trong khoảng 0 – 1?",
+   "muc_tieu": "giải thích được đường tốt nhất là đường có tổng bình phương sai số nhỏ nhất.",
+   "khoi_dong": "Ba bạn kẻ ba đường khác nhau qua cùng một đám điểm. Đường nào tốt nhất — và đo bằng gì?",
    "khoi": [
     {
-     "t": "dinh_nghia",
-     "ten": "Hàm sigmoid",
-     "html": "Nhận vào một số z bất kỳ, trả về một số nằm giữa 0 và 1. z rất lớn → gần 1; z rất âm → gần 0; z = 0 → đúng 0,5.",
-     "ky_hieu": "sigmoid(z) = 1 / (1 + e<sup>−z</sup>), với z = a·x + b như Bài 14."
-    },
-    {
      "t": "anh",
-     "cap": "Đường cong chữ S của hàm sigmoid",
-     "alt": "Đường cong chữ S của hàm sigmoid",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251118174609019862/2.webp",
-     "du_phong": "img/minh-hoa-ham-sigmoid.png",
+     "cap": "Sai số của một điểm = giá thật − giá đường đoán, đo theo chiều dọc",
+     "alt": "Sai số của một điểm = giá thật − giá đường đoán, đo theo chiều dọc",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260112155359063476/observed_value.webp",
+     "du_phong": "img/minh-hoa-gia-tri-quan-sat-va-gia-tri-du-doan.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Understanding logistic regression",
-      "url": "https://www.geeksforgeeks.org/machine-learning/understanding-logistic-regression/"
+      "ten": "GeeksforGeeks — Ml linear regression",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
      },
      "chu_giai": [
       [
-       "sig(t)",
-       "sigmoid của t (t chính là z)"
+       "Observed value",
+       "Giá trị thật"
+      ],
+      [
+       "Predicted value",
+       "Giá trị đoán"
+      ],
+      [
+       "Random error",
+       "Sai số"
+      ],
+      [
+       "Intercept",
+       "Hệ số chặn b"
+      ],
+      [
+       "Slope",
+       "Hệ số góc a"
       ]
      ]
     },
     {
-     "t": "anh",
-     "cap": "Cùng dữ liệu: đường thẳng chạy khỏi 0 – 1, đường sigmoid luôn ở trong",
-     "alt": "Cùng dữ liệu: đường thẳng chạy khỏi 0 – 1, đường sigmoid luôn ở trong",
-     "src": "img/duong-thang-va-duong-sigmoid.png"
+     "t": "dinh_nghia",
+     "ten": "Tổng bình phương sai số",
+     "html": "Với mỗi điểm: lấy sai số (thật − đoán), bình phương lên, rồi cộng tất cả lại. <b>Đường tốt nhất là đường có tổng này nhỏ nhất.</b>",
+     "ky_hieu": "Bình phương để sai số âm và dương không triệt tiêu nhau, và phạt nặng sai số lớn."
     },
     {
-     "t": "demo_truot",
-     "tieu_de": "xác suất Đạt theo giờ tự học",
-     "huong_dan": "Kéo thanh trượt để đổi số giờ tự học mỗi ngày. Model logistic một cột trả về xác suất Đạt; ngưỡng 0,5 biến xác suất thành nhãn.",
-     "dieu_kien": "Bạn tự học <b>{x}</b> giờ mỗi ngày",
-     "moc": [
-      {
-       "x": 0.5,
-       "n": "Chưa đạt",
-       "p": 0.5
-      },
-      {
-       "x": 1.0,
-       "n": "Chưa đạt",
-       "p": 1.3
-      },
-      {
-       "x": 1.5,
-       "n": "Chưa đạt",
-       "p": 3.2
-      },
-      {
-       "x": 2.0,
-       "n": "Chưa đạt",
-       "p": 7.6
-      },
-      {
-       "x": 2.5,
-       "n": "Chưa đạt",
-       "p": 17.0
-      },
-      {
-       "x": 3.0,
-       "n": "Chưa đạt",
-       "p": 33.7
-      },
-      {
-       "x": 3.5,
-       "n": "Đạt",
-       "p": 55.7
-      },
-      {
-       "x": 4.0,
-       "n": "Đạt",
-       "p": 75.7
-      },
-      {
-       "x": 4.5,
-       "n": "Đạt",
-       "p": 88.5
-      },
-      {
-       "x": 5.0,
-       "n": "Đạt",
-       "p": 95.0
-      },
-      {
-       "x": 5.5,
-       "n": "Đạt",
-       "p": 97.9
-      },
-      {
-       "x": 6.0,
-       "n": "Đạt",
-       "p": 99.2
-      },
-      {
-       "x": 6.5,
-       "n": "Đạt",
-       "p": 99.7
-      },
-      {
-       "x": 7.0,
-       "n": "Đạt",
-       "p": 99.9
-      }
+     "t": "demo_ke_duong",
+     "id": "kd2",
+     "tieu_de": "kẻ đường qua 90 máy của tập huấn luyện",
+     "huong_dan": "Kéo a (độ dốc) và b (điểm cắt trục tung). Mỗi vạch đỏ là sai số của một máy. Cố làm tổng bình phương sai số nhỏ nhất, rồi bấm nút để so với đường của máy.",
+     "diem": [
+      [
+       21,
+       6.2
+      ],
+      [
+       33,
+       2.0
+      ],
+      [
+       37,
+       7.6
+      ],
+      [
+       22,
+       7.4
+      ],
+      [
+       13,
+       8.2
+      ],
+      [
+       4,
+       10.9
+      ],
+      [
+       2,
+       10.7
+      ],
+      [
+       22,
+       5.3
+      ],
+      [
+       47,
+       3.2
+      ],
+      [
+       4,
+       12.2
+      ],
+      [
+       23,
+       8.0
+      ],
+      [
+       4,
+       11.0
+      ],
+      [
+       11,
+       10.2
+      ],
+      [
+       33,
+       4.3
+      ],
+      [
+       10,
+       9.6
+      ],
+      [
+       2,
+       14.3
+      ],
+      [
+       5,
+       16.5
+      ],
+      [
+       30,
+       3.1
+      ],
+      [
+       25,
+       4.7
+      ],
+      [
+       11,
+       8.3
+      ],
+      [
+       40,
+       2.4
+      ],
+      [
+       27,
+       6.9
+      ],
+      [
+       4,
+       11.8
+      ],
+      [
+       23,
+       7.1
+      ],
+      [
+       6,
+       14.9
+      ],
+      [
+       4,
+       9.9
+      ],
+      [
+       6,
+       11.7
+      ],
+      [
+       35,
+       3.1
+      ],
+      [
+       14,
+       13.0
+      ],
+      [
+       30,
+       4.1
+      ],
+      [
+       44,
+       1.5
+      ],
+      [
+       28,
+       11.5
+      ],
+      [
+       40,
+       2.6
+      ],
+      [
+       13,
+       13.3
+      ],
+      [
+       10,
+       11.6
+      ],
+      [
+       3,
+       10.8
+      ],
+      [
+       33,
+       1.5
+      ],
+      [
+       48,
+       1.5
+      ],
+      [
+       46,
+       1.5
+      ],
+      [
+       48,
+       1.5
+      ],
+      [
+       34,
+       3.1
+      ],
+      [
+       35,
+       3.3
+      ],
+      [
+       19,
+       5.0
+      ],
+      [
+       33,
+       3.4
+      ],
+      [
+       23,
+       6.2
+      ],
+      [
+       12,
+       9.1
+      ],
+      [
+       38,
+       1.5
+      ],
+      [
+       27,
+       6.3
+      ],
+      [
+       12,
+       10.9
+      ],
+      [
+       4,
+       11.8
+      ],
+      [
+       18,
+       7.8
+      ],
+      [
+       34,
+       4.3
+      ],
+      [
+       35,
+       4.2
+      ],
+      [
+       13,
+       9.7
+      ],
+      [
+       34,
+       1.9
+      ],
+      [
+       36,
+       2.8
+      ],
+      [
+       41,
+       3.5
+      ],
+      [
+       47,
+       1.5
+      ],
+      [
+       19,
+       8.1
+      ],
+      [
+       42,
+       1.5
+      ],
+      [
+       35,
+       1.8
+      ],
+      [
+       29,
+       2.9
+      ],
+      [
+       7,
+       15.7
+      ],
+      [
+       16,
+       8.0
+      ],
+      [
+       20,
+       4.3
+      ],
+      [
+       20,
+       6.1
+      ],
+      [
+       39,
+       3.5
+      ],
+      [
+       43,
+       2.9
+      ],
+      [
+       47,
+       1.5
+      ],
+      [
+       22,
+       7.2
+      ],
+      [
+       36,
+       3.1
+      ],
+      [
+       8,
+       11.6
+      ],
+      [
+       36,
+       2.0
+      ],
+      [
+       1,
+       13.7
+      ],
+      [
+       24,
+       5.4
+      ],
+      [
+       38,
+       1.9
+      ],
+      [
+       28,
+       3.0
+      ],
+      [
+       41,
+       3.1
+      ],
+      [
+       33,
+       5.3
+      ],
+      [
+       30,
+       3.9
+      ],
+      [
+       6,
+       12.7
+      ],
+      [
+       29,
+       6.7
+      ],
+      [
+       38,
+       2.5
+      ],
+      [
+       1,
+       14.4
+      ],
+      [
+       39,
+       1.5
+      ],
+      [
+       47,
+       1.5
+      ],
+      [
+       27,
+       4.3
+      ],
+      [
+       17,
+       5.0
+      ],
+      [
+       12,
+       8.8
+      ],
+      [
+       7,
+       11.6
+      ]
      ],
-     "nhan_n": "Model đoán (ngưỡng 0,5)",
-     "nhan_p": "Xác suất Đạt",
-     "so_le_x": 1,
-     "bat_dau": 5
+     "mien": {
+      "x": [
+       0,
+       50
+      ],
+      "y": [
+       0,
+       18
+      ]
+     },
+     "a": {
+      "min": -0.6,
+      "max": 0.1,
+      "buoc": 0.01,
+      "dau": -0.1,
+      "so_le": 2
+     },
+     "b": {
+      "min": 0,
+      "max": 20,
+      "buoc": 0.1,
+      "dau": 9,
+      "so_le": 1
+     },
+     "tot": {
+      "a": -0.2688,
+      "b": 13.0795,
+      "sse": 290.4
+     },
+     "nhan_x": "Tuổi máy (tháng)",
+     "nhan_y": "Giá (triệu)",
+     "vach_x": [
+      0,
+      12,
+      24,
+      36,
+      48
+     ],
+     "vach_y": [
+      0,
+      5,
+      10,
+      15
+     ],
+     "nhan_a": null,
+     "nhan_b": null,
+     "nhan_tot": null,
+     "nhan": null
+    },
+    {
+     "t": "anh",
+     "cap": "Ba đường, ba tổng bình phương sai số: 800 · 705 · 290",
+     "alt": "Ba đường, ba tổng bình phương sai số: 800 · 705 · 290",
+     "src": "img/ba-duong-ke-tay-khac-nhau.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "so ba đường",
+     "de": null,
+     "cot": [
+      "Đường",
+      "a",
+      "b",
+      "Tổng bình phương sai số"
+     ],
+     "dong": [
+      [
+       "Đường 1",
+       "-0,10",
+       "9,00",
+       "800"
+      ],
+      [
+       "Đường 2",
+       "-0,42",
+       "16,50",
+       "705"
+      ],
+      [
+       "Đường 3",
+       "-0,27",
+       "13,08",
+       "290"
+      ]
+     ],
+     "ket_luan": "Đường 3 có tổng nhỏ nhất — đó là đường máy tìm ra.",
+     "nhan_manh": [
+      2
+     ]
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Máy tìm a, b thế nào?",
+     "html": "Giống gradient descent ở Bài 6: bắt đầu từ một cặp a, b bất kỳ, mỗi bước dịch một chút về phía tổng bình phương sai số giảm, cho tới đáy. (Riêng hồi quy tuyến tính còn có công thức tính thẳng ra đáy.)"
+    },
+    {
+     "t": "anh",
+     "cap": "Đi xuống dốc tới chỗ sai số nhỏ nhất",
+     "alt": "Đi xuống dốc tới chỗ sai số nhỏ nhất",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260529101329191488/derivative_of_cost.webp",
+     "du_phong": "img/minh-hoa-duong-cong-sai-so-va-cac-buoc-di-xuong.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Ml linear regression",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
+     },
+     "chu_giai": [
+      [
+       "Cost J(θ)",
+       "Sai số"
+      ],
+      [
+       "Weight(θ)",
+       "Tham số (a hoặc b)"
+      ],
+      [
+       "Initial Weight",
+       "Điểm xuất phát"
+      ],
+      [
+       "Steps",
+       "Các bước"
+      ],
+      [
+       "Minimum Cost",
+       "Sai số nhỏ nhất"
+      ],
+      [
+       "Derivative of Cost",
+       "Độ dốc"
+      ]
+     ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ sigmoid làm thay đổi thứ tự: giờ học nhiều hơn vẫn luôn có xác suất cao hơn.",
-      "Quên rằng sigmoid(0) = 0,5."
+      "Nghĩ đường tốt là đường chạm qua nhiều điểm nhất.",
+      "Đo sai số theo đường vuông góc thay vì theo chiều dọc."
      ]
     },
     {
-     "t": "video",
-     "yt": "yIYKR4sgzI8",
-     "ten": "StatQuest — Logistic Regression",
-     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc",
-     "bat_dau": null,
-     "ket_thuc": null
-    },
-    {
      "t": "tom_tat",
-     "html": "Logistic = đường thẳng z = a·x + b, rồi đưa qua sigmoid để thành xác suất 0 – 1."
+     "html": "Đường tốt nhất = tổng bình phương sai số nhỏ nhất."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai15-q3",
-     "q": "sigmoid(0) bằng bao nhiêu?",
-     "giai": "Đúng giữa: 1 / (1 + 1) = 0,5.",
-     "goi_y": "e mũ 0 bằng 1.",
+     "q": "Theo phần Tự thử, đường của máy có tổng bình phương sai số bằng bao nhiêu?",
+     "giai": "Không đường thẳng nào có tổng nhỏ hơn trên 90 máy này.",
+     "goi_y": "Bấm nút hiện đường của máy rồi đọc ô bên phải.",
      "a": [
-      "0,5",
-      "0",
-      "1",
-      "−1"
+      "290",
+      "800",
+      "705",
+      "0"
      ],
-     "h": "1af18fb0d1a1fe"
+     "h": "11024d62ce26a6"
     },
     {
      "k": "mc",
      "id": "bai15-q4",
-     "q": "Theo phần Tự thử, học bao nhiêu giờ thì model bắt đầu đoán Đạt?",
-     "giai": "Xác suất vượt 0,5 khi học khoảng 3,37 giờ.",
-     "goi_y": "Kéo tới lúc ô bên trái đổi từ Chưa đạt sang Đạt.",
+     "q": "Vì sao phải bình phương sai số trước khi cộng?",
+     "giai": "Cộng thẳng thì +3 và −3 thành 0 — trông như không sai.",
+     "goi_y": "Một máy đoán thừa 3 triệu, một máy đoán thiếu 3 triệu. Cộng thẳng được bao nhiêu?",
      "a": [
-      "Khoảng 3,5 giờ",
-      "Khoảng 1,5 giờ",
-      "Khoảng 5,5 giờ",
-      "Khoảng 7 giờ"
+      "Để sai số âm, dương không triệt tiêu",
+      "Để con số nhỏ lại cho dễ tính",
+      "Vì máy tính chỉ cộng được số dương",
+      "Để đường thẳng dốc hơn"
      ],
-     "h": "cda5be72b1488"
+     "h": "13440d67213413"
     }
    ]
   },
   {
-   "ten": "Đọc xác suất",
-   "ten_ngan": "Xác suất",
+   "ten": "Đọc a và b",
+   "ten_ngan": "a và b",
    "phut": 4,
-   "muc_tieu": "đọc được xác suất model trả về và quy tắc ngưỡng 0,5.",
-   "khoi_dong": "Model nói “0,34”. Con hiểu câu đó thế nào?",
+   "muc_tieu": "đọc được ý nghĩa của hệ số góc a, hệ số chặn b và biết giới hạn của đường thẳng.",
+   "khoi_dong": "Máy trả về a = -0,27, b = 13,08. Hai con số này nói gì về điện thoại cũ?",
    "khoi": [
     {
      "t": "anh",
-     "cap": "Xác suất Đạt theo giờ tự học — 50% tại 3,37 giờ",
-     "alt": "Xác suất Đạt theo giờ tự học — 50% tại 3,37 giờ",
-     "src": "img/xac-suat-theo-gio-hoc.png"
+     "cap": "Giá = -0,27 × TuoiMay + 13,08",
+     "alt": "Giá = -0,27 × TuoiMay + 13,08",
+     "src": "img/duong-tot-nhat-va-hai-so-a-b.png"
     },
     {
      "t": "vi_du",
      "tieu_de": "đọc thành lời",
      "de": null,
      "cot": [
-      "Giờ tự học",
-      "Xác suất Đạt",
-      "Đọc là"
+      "Số",
+      "Ý nghĩa"
      ],
      "dong": [
       [
-       "2 giờ",
-       "0,08",
-       "Khoảng 8 trên 100 bạn như vậy Đạt"
+       "a = -0,27",
+       "Mỗi tháng tuổi máy, giá giảm khoảng 269 nghìn đồng"
       ],
       [
-       "3 giờ",
-       "0,34",
-       "Khoảng 34 trên 100 bạn như vậy Đạt"
+       "b = 13,08",
+       "Giá đường thẳng đoán cho máy 0 tháng tuổi"
       ],
       [
-       "4 giờ",
-       "0,76",
-       "Khoảng 76 trên 100 bạn như vậy Đạt"
+       "Máy 24 tháng",
+       "-0,27 × 24 + 13,08 ≈ <b>6,63 triệu</b>"
       ]
      ],
-     "ket_luan": "Xác suất không phải điểm số, cũng không phải lời phán chắc chắn.",
-     "nhan_manh": []
-    },
-    {
-     "t": "bang",
-     "cot": [
-      "Việc",
-      "Lệnh"
-     ],
-     "dong": [
-      [
-       "Huấn luyện",
-       "<code>model = LogisticRegression().fit(X_train_s, y_train)</code>"
-      ],
-      [
-       "Xác suất từng nhãn",
-       "<code>model.predict_proba(X_test_s)</code>"
-      ],
-      [
-       "Nhãn (ngưỡng 0,5)",
-       "<code>model.predict(X_test_s)</code>"
-      ]
-     ]
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "model hai cột (đã đưa về 0 – 1)",
-     "de": null,
-     "cot": [
-      "Model",
-      "Độ chính xác trên tập kiểm tra"
-     ],
-     "dong": [
-      [
-       "Model lười",
-       "54,2%"
-      ],
-      [
-       "Logistic 1 cột (giờ học)",
-       "93,1%"
-      ],
-      [
-       "Logistic 2 cột (giờ học, phút mạng)",
-       "<b>91,7%</b>"
-      ]
-     ],
-     "ket_luan": "Hệ số giờ học dương (5,08), phút mạng âm (-1,89): học nhiều → xác suất Đạt tăng, lướt mạng nhiều → giảm.",
-     "nhan_manh": []
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Đọc 0,34 thành “bạn ấy được 3,4 điểm”.",
-      "Nghĩ xác suất 0,76 là chắc chắn Đạt."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "predict_proba cho xác suất; predict dùng ngưỡng 0,5 để ra nhãn."
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
-     "id": "bai15-q5",
-     "q": "Model trả về xác suất Đạt 0,34 cho một bạn. Cách hiểu nào đúng?",
-     "giai": "Xác suất là khả năng, không phải điểm.",
-     "goi_y": "Xác suất 0,34 = 34%. Của cái gì?",
-     "a": [
-      "Khoảng 34 trên 100 bạn như vậy Đạt",
-      "Bạn ấy chắc chắn Chưa đạt",
-      "Bạn ấy được 3,4 điểm",
-      "Bạn ấy đúng 34% số câu"
-     ],
-     "h": "cf5de0df9ee3a"
-    },
-    {
-     "k": "dd",
-     "id": "bai15-q6",
-     "q": "Chọn lệnh đúng cho mỗi chỗ trống.",
-     "giai": "proba = probability = xác suất.",
-     "goi_y": "Chữ proba là viết tắt của từ nào?",
-     "mau": "Lệnh {0} trả về xác suất; lệnh {1} trả về nhãn theo ngưỡng 0,5.",
-     "o": [
-      [
-       "predict_proba",
-       "predict",
-       "fit",
-       "score"
-      ],
-      [
-       "predict",
-       "predict_proba",
-       "fit",
-       "coef_"
-      ]
-     ],
-     "h": "1737b65feff5e5"
-    }
-   ]
-  },
-  {
-   "ten": "Ma trận nhầm lẫn",
-   "ten_ngan": "Nhầm lẫn",
-   "phut": 4,
-   "muc_tieu": "đọc được ma trận nhầm lẫn và phân biệt bỏ sót với báo nhầm.",
-   "khoi_dong": "Model đúng 91,7%. 6 bạn còn lại bị sai theo cùng một kiểu không?",
-   "khoi": [
-    {
-     "t": "anh",
-     "cap": "Bốn ô của 72 bạn tập kiểm tra",
-     "alt": "Bốn ô của 72 bạn tập kiểm tra",
-     "src": "img/ma-tran-nham-lan-cua-lop.png"
-    },
-    {
-     "t": "bang",
-     "cot": [
-      "",
-      "Model đoán Chưa đạt",
-      "Model đoán Đạt"
-     ],
-     "dong": [
-      [
-       "Thật Chưa đạt",
-       "<b>30</b> đúng",
-       "<b>3</b> bỏ sót"
-      ],
-      [
-       "Thật Đạt",
-       "<b>3</b> báo nhầm",
-       "<b>36</b> đúng"
-      ]
-     ]
-    },
-    {
-     "t": "anh",
-     "cap": "Bỏ sót và báo nhầm — hai kiểu sai với cái giá khác nhau",
-     "alt": "Bỏ sót và báo nhầm — hai kiểu sai với cái giá khác nhau",
-     "src": "img/hai-kieu-sai-khac-nhau.png"
-    },
-    {
-     "t": "hop",
-     "kieu": "ml",
-     "tieu_de": "Nối với bài 13 (thực hành)",
-     "html": "Ở Bài 13, bỏ sót là một khối u ác tính bị đoán lành tính. Ở đây, bỏ sót là một bạn đang đuối không được thầy cô để ý hỗ trợ."
-    },
-    {
-     "t": "anh",
-     "cap": "Ma trận nhầm lẫn của một model khác (GfG)",
-     "alt": "Ma trận nhầm lẫn của một model khác (GfG)",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260314101951023240/Screenshot-2026-03-14-101930.png",
-     "du_phong": "img/minh-hoa-ma-tran-nham-lan.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Xgboost",
-      "url": "https://www.geeksforgeeks.org/machine-learning/xgboost/"
-     },
-     "chu_giai": [
-      [
-       "Confusion Matrix",
-       "Ma trận nhầm lẫn"
-      ],
-      [
-       "Actual",
-       "Nhãn thật"
-      ],
-      [
-       "Predicted",
-       "Nhãn model đoán"
-      ]
-     ]
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Đọc nhầm hàng và cột: hàng là nhãn thật, cột là nhãn đoán.",
-      "Chỉ báo độ chính xác, không nói model sai kiểu nào."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "Đường chéo là đoán đúng; hai ô còn lại là hai kiểu sai: bỏ sót và báo nhầm."
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
-     "id": "bai15-q7",
-     "q": "Trong bảng của lớp, bao nhiêu bạn Chưa đạt bị model đoán là Đạt?",
-     "giai": "Ô bỏ sót: thật Chưa đạt, đoán Đạt.",
-     "goi_y": "Tìm hàng “Thật Chưa đạt”, cột “đoán Đạt”.",
-     "a": [
-      "3",
-      "30",
-      "36",
-      "0"
-     ],
-     "h": "10dc09508c88bc"
-    },
-    {
-     "k": "ds",
-     "id": "bai15-q8",
-     "q": "Trên đường chéo của ma trận nhầm lẫn là các lần model đoán đúng.",
-     "giai": "Nhãn thật trùng nhãn đoán.",
-     "goi_y": "Ô nào có hàng và cột cùng một nhãn?",
-     "h": "15089dedb3a08a"
-    }
-   ]
-  },
-  {
-   "ten": "Chọn ngưỡng",
-   "ten_ngan": "Ngưỡng",
-   "phut": 5,
-   "muc_tieu": "chọn ngưỡng theo kiểu sai mình chấp nhận được.",
-   "khoi_dong": "Ngưỡng 0,5 do máy đặt sẵn. Thầy chủ nhiệm muốn không bỏ sót bạn nào — nên đổi ngưỡng thế nào?",
-   "khoi": [
-    {
-     "t": "p",
-     "html": "Quy tắc: xác suất Đạt ≥ ngưỡng → đoán Đạt; nhỏ hơn → đoán Chưa đạt. Nâng ngưỡng lên thì model khó đoán Đạt hơn — nhiều bạn bị gắn cờ Chưa đạt hơn."
-    },
-    {
-     "t": "demo_truot",
-     "tieu_de": "kéo ngưỡng trên 72 bạn tập kiểm tra",
-     "huong_dan": "Kéo thanh trượt để đổi ngưỡng. Theo dõi số bạn bị bỏ sót, bị báo nhầm và độ chính xác.",
-     "dieu_kien": "Ngưỡng xác suất Đạt = <b>{x}</b>",
-     "moc": [
-      {
-       "x": 0.1,
-       "n": "29 bỏ sót · 0 báo nhầm",
-       "p": 59.7
-      },
-      {
-       "x": 0.15,
-       "n": "22 bỏ sót · 0 báo nhầm",
-       "p": 69.4
-      },
-      {
-       "x": 0.2,
-       "n": "16 bỏ sót · 0 báo nhầm",
-       "p": 77.8
-      },
-      {
-       "x": 0.25,
-       "n": "12 bỏ sót · 0 báo nhầm",
-       "p": 83.3
-      },
-      {
-       "x": 0.3,
-       "n": "7 bỏ sót · 0 báo nhầm",
-       "p": 90.3
-      },
-      {
-       "x": 0.35,
-       "n": "7 bỏ sót · 0 báo nhầm",
-       "p": 90.3
-      },
-      {
-       "x": 0.4,
-       "n": "5 bỏ sót · 1 báo nhầm",
-       "p": 91.7
-      },
-      {
-       "x": 0.45,
-       "n": "3 bỏ sót · 2 báo nhầm",
-       "p": 93.1
-      },
-      {
-       "x": 0.5,
-       "n": "3 bỏ sót · 3 báo nhầm",
-       "p": 91.7
-      },
-      {
-       "x": 0.55,
-       "n": "1 bỏ sót · 5 báo nhầm",
-       "p": 91.7
-      },
-      {
-       "x": 0.6,
-       "n": "0 bỏ sót · 9 báo nhầm",
-       "p": 87.5
-      },
-      {
-       "x": 0.65,
-       "n": "0 bỏ sót · 13 báo nhầm",
-       "p": 81.9
-      },
-      {
-       "x": 0.7,
-       "n": "0 bỏ sót · 14 báo nhầm",
-       "p": 80.6
-      },
-      {
-       "x": 0.75,
-       "n": "0 bỏ sót · 17 báo nhầm",
-       "p": 76.4
-      },
-      {
-       "x": 0.8,
-       "n": "0 bỏ sót · 20 báo nhầm",
-       "p": 72.2
-      },
-      {
-       "x": 0.85,
-       "n": "0 bỏ sót · 22 báo nhầm",
-       "p": 69.4
-      },
-      {
-       "x": 0.9,
-       "n": "0 bỏ sót · 26 báo nhầm",
-       "p": 63.9
-      }
-     ],
-     "nhan_n": "Trên 72 bạn",
-     "nhan_p": "Độ chính xác",
-     "so_le_x": 2,
-     "bat_dau": 8
-    },
-    {
-     "t": "anh",
-     "cap": "Ngưỡng càng cao: bỏ sót càng ít, báo nhầm càng nhiều",
-     "alt": "Ngưỡng càng cao: bỏ sót càng ít, báo nhầm càng nhiều",
-     "src": "img/bo-sot-va-bao-dong-nham-theo-nguong.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "ba ngưỡng",
-     "de": null,
-     "cot": [
-      "Ngưỡng",
-      "Bỏ sót",
-      "Báo nhầm",
-      "Độ chính xác"
-     ],
-     "dong": [
-      [
-       "0,30",
-       "7",
-       "0",
-       "90,3%"
-      ],
-      [
-       "0,50",
-       "3",
-       "3",
-       "91,7%"
-      ],
-      [
-       "0,60",
-       "0",
-       "9",
-       "87,5%"
-      ]
-     ],
-     "ket_luan": "Ngưỡng 0,6: không bỏ sót ai, đổi lại 9 bạn bị báo nhầm và độ chính xác giảm.",
+     "ket_luan": null,
      "nhan_manh": [
       2
      ]
@@ -722,49 +834,320 @@ window.BAI = {
     {
      "t": "hop",
      "kieu": "chu-y",
-     "tieu_de": "Chọn ngưỡng là việc của con người",
-     "html": "Máy chỉ đưa xác suất. Chọn ngưỡng nghĩa là chọn mình chịu kiểu sai nào: gọi nhầm một bạn ổn đi phụ đạo (báo nhầm) hay bỏ quên một bạn đang đuối (bỏ sót)."
+     "tieu_de": "Đường thẳng chỉ đáng tin trong vùng dữ liệu đã học",
+     "html": "Dữ liệu có máy từ 1 tới 48 tháng. Máy 80 tháng: đường đoán -8,42 triệu — giá âm, vô lý. Ra ngoài vùng đã học, model không biết gì."
+    },
+    {
+     "t": "anh",
+     "cap": "Không phải dữ liệu nào cũng đi theo đường thẳng",
+     "alt": "Không phải dữ liệu nào cũng đi theo đường thẳng",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251212171555560592/linear.webp",
+     "du_phong": "img/minh-hoa-du-lieu-tuyen-tinh-va-phi-tuyen.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Ml linear regression",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
+     },
+     "chu_giai": [
+      [
+       "Linear",
+       "Tuyến tính — theo đường thẳng"
+      ],
+      [
+       "Non-Linear",
+       "Phi tuyến — không theo đường thẳng"
+      ]
+     ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Luôn chọn ngưỡng có độ chính xác cao nhất mà không hỏi hai kiểu sai.",
-      "Nghĩ ngưỡng phải luôn là 0,5."
+      "Đọc a âm thành “model sai” — a âm chỉ là giá giảm khi tuổi tăng.",
+      "Dùng đường thẳng dự đoán xa ngoài vùng dữ liệu."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Đổi ngưỡng: bỏ sót và báo nhầm đổi chỗ cho nhau. Chọn theo cái giá của từng kiểu sai."
+     "html": "a: mỗi đơn vị x tăng thì y đổi bao nhiêu. b: y khi x = 0. Chỉ tin đường trong vùng dữ liệu đã học."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai15-q5",
+     "q": "Với a = -0,27, máy già thêm 10 tháng thì giá đoán thay đổi thế nào?",
+     "giai": "10 × -0,27 = -2,69.",
+     "goi_y": "a là mức thay đổi cho MỖI tháng. 10 tháng thì nhân lên.",
+     "a": [
+      "Giảm khoảng 2,69 triệu",
+      "Tăng khoảng 2,69 triệu",
+      "Giảm khoảng 0,27 triệu",
+      "Không đổi"
+     ],
+     "h": "121b766584288f"
+    },
+    {
+     "k": "ds",
+     "id": "bai15-q6",
+     "q": "Đường thẳng của bài dự đoán tốt cho cả máy đã dùng 80 tháng.",
+     "giai": "Ngoài vùng 1 – 48 tháng; đường còn cho giá âm.",
+     "goi_y": "Máy cũ nhất trong dữ liệu bao nhiêu tháng?",
+     "h": "1dcb292580f7b2"
+    }
+   ]
+  },
+  {
+   "ten": "Model hồi quy tốt tới đâu?",
+   "ten_ngan": "MAE và R²",
+   "phut": 4,
+   "muc_tieu": "đánh giá model hồi quy bằng MAE và R², so với model lười.",
+   "khoi_dong": "Model hồi quy không “đúng” hay “sai” như phân loại. Vậy đo nó bằng gì?",
+   "khoi": [
+    {
+     "t": "dinh_nghia",
+     "ten": "MAE — sai trung bình",
+     "html": "Trung bình của |thật − đoán| trên tập kiểm tra. Cùng đơn vị với cột cần dự đoán (ở đây: triệu đồng). <b>Càng nhỏ càng tốt.</b>",
+     "ky_hieu": null
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "R² — hơn model lười bao nhiêu",
+     "html": "Model lười luôn đoán giá trung bình → R² = 0. Đoán đúng tuyệt đối → R² = 1. <b>Càng gần 1 càng tốt.</b>",
+     "ky_hieu": "R² âm: còn tệ hơn đoán trung bình."
+    },
+    {
+     "t": "anh",
+     "cap": "Ba model trên cùng 30 máy của tập kiểm tra",
+     "alt": "Ba model trên cùng 30 máy của tập kiểm tra",
+     "src": "img/moc-luoi-va-hai-model.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "ba model",
+     "de": null,
+     "cot": [
+      "Model",
+      "MAE (triệu)",
+      "R²"
+     ],
+     "dong": [
+      [
+       "Lười — đoán giá trung bình",
+       "3,99",
+       "≈ 0"
+      ],
+      [
+       "1 cột — tuổi máy",
+       "1,34",
+       "0,84"
+      ],
+      [
+       "3 cột — tuổi, dung lượng, pin",
+       "<b>0,75</b>",
+       "<b>0,95</b>"
+      ]
+     ],
+     "ket_luan": "Thêm hai cột có ích, sai trung bình giảm từ 1,34 xuống 0,75 triệu.",
+     "nhan_manh": [
+      2
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Giá thật và giá model 3 cột đoán — điểm càng sát đường chéo càng tốt",
+     "alt": "Giá thật và giá model 3 cột đoán — điểm càng sát đường chéo càng tốt",
+     "src": "img/gia-that-va-gia-du-doan.png"
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Đo model hồi quy bằng độ chính xác (%) như phân loại.",
+      "Báo R² trên tập huấn luyện thay vì tập kiểm tra."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "MAE: sai trung bình, cùng đơn vị. R²: 0 là ngang model lười, 1 là hoàn hảo. Luôn đo trên tập kiểm tra."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai15-q7",
+     "q": "Model đoán giá có MAE = 0,75 triệu. Nghĩa là gì?",
+     "giai": "MAE là sai trung bình, cùng đơn vị với giá.",
+     "goi_y": "Chữ M trong MAE là Mean — trung bình.",
+     "a": [
+      "Trung bình mỗi máy đoán lệch 0,75 triệu",
+      "Đoán đúng 0,75% số máy",
+      "Máy nào cũng lệch đúng 0,75 triệu",
+      "Tổng lệch của cả tập là 0,75 triệu"
+     ],
+     "h": "166b5d21c9ba4b"
+    },
+    {
+     "k": "dd",
+     "id": "bai15-q8",
+     "q": "Chọn từ đúng cho mỗi chỗ trống.",
+     "giai": "R² so model với model lười.",
+     "goi_y": "R² đo model hơn việc luôn đoán trung bình bao nhiêu.",
+     "mau": "Model lười có R² bằng {0}; model càng tốt thì R² càng gần {1}.",
+     "o": [
+      [
+       "0",
+       "1",
+       "100",
+       "−1"
+      ],
+      [
+       "1",
+       "0",
+       "−1",
+       "50"
+      ]
+     ],
+     "h": "1c64ad92bfc0f"
+    }
+   ]
+  },
+  {
+   "ten": "Nhiều cột và scikit-learn",
+   "ten_ngan": "Nhiều cột",
+   "phut": 5,
+   "muc_tieu": "huấn luyện hồi quy nhiều cột bằng scikit-learn và nhận ra cột vô dụng.",
+   "khoi_dong": "Thêm cột thì model có luôn tốt hơn không?",
+   "khoi": [
+    {
+     "t": "anh",
+     "cap": "Hồi quy một cột và hồi quy nhiều cột",
+     "alt": "Hồi quy một cột và hồi quy nhiều cột",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251212171556082327/types_of_linear_regression.webp",
+     "du_phong": "img/minh-hoa-hai-dang-hoi-quy-tuyen-tinh.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Ml linear regression",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
+     },
+     "chu_giai": [
+      [
+       "Types of Linear Regression",
+       "Hai dạng hồi quy tuyến tính"
+      ],
+      [
+       "Simple Linear Regression",
+       "Hồi quy một cột"
+      ],
+      [
+       "Multiple Linear Regression",
+       "Hồi quy nhiều cột"
+      ]
+     ]
+    },
+    {
+     "t": "bang",
+     "cot": [
+      "Bước (quy trình 5 bước)",
+      "Lệnh"
+     ],
+     "dong": [
+      [
+       "Chia dữ liệu",
+       "<code>train_test_split(X, y, test_size=0.25, random_state=42)</code>"
+      ],
+      [
+       "Huấn luyện",
+       "<code>model = LinearRegression().fit(X_train, y_train)</code>"
+      ],
+      [
+       "Đọc a, b",
+       "<code>model.coef_</code> · <code>model.intercept_</code>"
+      ],
+      [
+       "Dự đoán",
+       "<code>du_doan = model.predict(X_test)</code>"
+      ],
+      [
+       "Đánh giá",
+       "<code>mean_absolute_error</code> · <code>r2_score</code>"
+      ]
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Thêm cột SoLanRoi (gần như không liên quan tới giá)",
+     "alt": "Thêm cột SoLanRoi (gần như không liên quan tới giá)",
+     "src": "img/them-cot-vo-dung-r2-van-tang.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "cái bẫy của cột vô dụng",
+     "de": null,
+     "cot": [
+      "Model",
+      "R² tập huấn luyện",
+      "R² tập kiểm tra"
+     ],
+     "dong": [
+      [
+       "3 cột",
+       "0,9569",
+       "0,9505"
+      ],
+      [
+       "3 cột + SoLanRoi",
+       "<b>0,9590 ↑</b>",
+       "<b>0,9482 ↓</b>"
+      ]
+     ],
+     "ket_luan": "Trên dữ liệu đã học R² luôn tăng khi thêm cột — kể cả cột vô dụng. Chỉ tập kiểm tra mới lộ ra (r của SoLanRoi với giá: -0,05).",
+     "nhan_manh": [
+      1
+     ]
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Không cần đưa về cùng thang đo?",
+     "html": "Hồi quy tuyến tính không đo khoảng cách như KNN, nên kết quả dự đoán không đổi khi đổi thang đo. (Hệ số a của từng cột thì đổi theo đơn vị.)"
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Thêm cột thấy R² train tăng liền kết luận cột đó có ích.",
+      "Quên rằng hồi quy tuyến tính chỉ vẽ được đường thẳng (hoặc mặt phẳng)."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "LinearRegression().fit → coef_, intercept_ → predict → MAE, R² trên tập kiểm tra. Cột vô dụng lộ ra ở tập kiểm tra."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai15-q9",
-     "q": "Theo phần Tự thử, ngưỡng nhỏ nhất để không bỏ sót bạn nào là bao nhiêu?",
-     "giai": "Từ ngưỡng này, ô bỏ sót bằng 0.",
-     "goi_y": "Kéo dần sang phải tới khi số bỏ sót về 0.",
+     "q": "Lệnh nào cho biết hệ số chặn b của model?",
+     "giai": "coef_ là các hệ số góc a; intercept_ là b.",
+     "goi_y": "Intercept nghĩa là điểm cắt trục.",
      "a": [
-      "0,60",
-      "0,50",
-      "0,30",
-      "0,90"
+      "model.intercept_",
+      "model.coef_",
+      "model.predict",
+      "model.score_b"
      ],
-     "h": "b28bf398542df"
+     "h": "10b9d451234dd"
     },
     {
      "k": "ma",
      "id": "bai15-q10",
-     "q": "Nâng ngưỡng từ 0,5 lên 0,7. Hai điều nào xảy ra? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "Hai kiểu sai đổi chỗ cho nhau.",
-     "goi_y": "Ngưỡng cao hơn thì model dễ đoán Chưa đạt hơn hay khó hơn?",
+     "q": "Thêm SoLanRoi vào model 3 cột. Hai điều nào xảy ra? <b>(Chọn 2 đáp án đúng.)</b>",
+     "giai": "Đây là cái bẫy: dữ liệu đã học luôn khen cột mới.",
+     "goi_y": "Xem bảng “cái bẫy của cột vô dụng”.",
      "a": [
-      "Bỏ sót ít đi",
-      "Báo nhầm nhiều lên",
-      "Bỏ sót nhiều lên",
-      "Độ chính xác luôn tăng"
+      "R² trên tập huấn luyện tăng",
+      "R² trên tập kiểm tra giảm",
+      "R² trên tập kiểm tra tăng mạnh",
+      "MAE trên tập kiểm tra về 0"
      ],
-     "h": "e460957eedeaf"
+     "h": "1658a84417ecdc"
     }
    ]
   }
@@ -783,322 +1166,326 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai15-q11",
-    "q": "Nhìn hình. Vùng tô đỏ phía trên cho biết điều gì?",
-    "giai": "Xác suất không thể lớn hơn 1.",
+    "q": "Nhìn hình. Nhánh bên phải của sơ đồ dự đoán loại kết quả nào?",
+    "giai": "Regression = hồi quy: dự đoán con số.",
     "img": {
-     "src": "img/duong-thang-tren-du-lieu-0-va-1.png"
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250902175259468148/difff.webp",
+     "du_phong": "img/minh-hoa-hai-nhanh-phan-loai-va-hoi-quy.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Supervised machine learning",
+      "url": "https://www.geeksforgeeks.org/machine-learning/supervised-machine-learning/"
+     }
     },
     "a": [
-     "Đường thẳng đoán ra số lớn hơn 1",
-     "Các bạn học nhiều nhất lớp",
-     "Các bạn Chưa đạt học kỳ",
-     "Đường sigmoid đi qua đó"
+     "Một con số liên tục",
+     "Một nhãn cho trước",
+     "Một nhóm tự chia",
+     "Một hình ảnh"
     ],
-    "h": "1905d7d757c680"
+    "h": "b289978ab53ba"
    },
    {
     "k": "mc",
     "id": "bai15-q12",
-    "q": "Nhìn hình. Đường cong xanh khác đường thẳng vàng ở điểm nào?",
-    "giai": "Sigmoid ép mọi giá trị vào 0 – 1.",
+    "q": "Nhìn hình. Vạch đỏ nối mỗi điểm với đường thẳng là gì?",
+    "giai": "Sai số đo theo chiều dọc: thật − đoán.",
     "img": {
-     "src": "img/duong-thang-va-duong-sigmoid.png"
+     "src": "img/sai-so-doc-tu-diem-toi-duong.png"
     },
     "a": [
-     "Luôn nằm trong khoảng 0 – 1",
-     "Dốc hơn ở mọi điểm",
-     "Đi qua gốc toạ độ",
-     "Chỉ dùng cho hồi quy"
+     "Sai số của từng chiếc máy",
+     "Khoảng cách tới điểm gần nhất",
+     "Độ dốc của đường thẳng",
+     "Giá trung bình của các máy"
     ],
-    "h": "15571d854fc88c"
+    "h": "1565237006230a"
    },
    {
     "k": "mc",
     "id": "bai15-q13",
-    "q": "Nhìn hình. Học 4 giờ mỗi ngày, xác suất Đạt khoảng bao nhiêu?",
-    "giai": "Đọc điểm tại 4 giờ.",
+    "q": "Nhìn hình. Đường nào có tổng bình phương sai số nhỏ nhất?",
+    "giai": "Đường 3: 290.",
     "img": {
-     "src": "img/xac-suat-theo-gio-hoc.png"
+     "src": "img/ba-duong-ke-tay-khac-nhau.png"
     },
     "a": [
-     "0,76",
-     "0,34",
-     "0,95",
-     "0,08"
+     "Đường 3",
+     "Đường 1",
+     "Đường 2",
+     "Ba đường bằng nhau"
     ],
-    "h": "1cd7939eb2c9d1"
+    "h": "1b010c40c71c9a"
    },
    {
     "k": "mc",
     "id": "bai15-q14",
-    "q": "Nhìn hình. Ô có số 3 màu đỏ nhạt là loại gì?",
-    "giai": "Thật Chưa đạt nhưng đoán Đạt.",
+    "q": "Nhìn hình. Model nào có R² gần 0?",
+    "giai": "R² = 0 nghĩa là ngang model lười.",
     "img": {
-     "src": "img/ma-tran-nham-lan-cua-lop.png"
+     "src": "img/moc-luoi-va-hai-model.png"
     },
     "a": [
-     "Bỏ sót",
-     "Báo nhầm",
-     "Đoán đúng Đạt",
-     "Đoán đúng Chưa đạt"
+     "Model lười đoán trung bình",
+     "Model chỉ dùng 1 cột",
+     "Model dùng đủ 3 cột",
+     "Không có model nào"
     ],
-    "h": "10ca75f5be61b5"
+    "h": "20930cd6683fc"
    },
    {
     "k": "mc",
     "id": "bai15-q15",
-    "q": "Nhìn hình. Ở ngưỡng 0,7 có bao nhiêu bạn bị báo nhầm?",
-    "giai": "Cột vàng tại ngưỡng 0,7.",
+    "q": "Nhìn hình. Điểm nằm xa đường chéo nét đứt nhất cho biết gì?",
+    "giai": "Lệch 2,53 triệu.",
     "img": {
-     "src": "img/bo-sot-va-bao-dong-nham-theo-nguong.png"
+     "src": "img/gia-that-va-gia-du-doan.png"
     },
     "a": [
-     "14",
-     "3",
-     "9",
-     "0"
+     "Máy model đoán lệch nhiều nhất",
+     "Máy đắt nhất trong dữ liệu",
+     "Máy mới nhất trong dữ liệu",
+     "Máy model đoán đúng tuyệt đối"
     ],
-    "h": "14b4c0c293c68"
+    "h": "52bb90ab74662"
    },
    {
     "k": "mc",
     "id": "bai15-q16",
-    "q": "Model dự báo mưa trả về 0,8. Cách nói nào đúng?",
-    "giai": "Xác suất là khả năng.",
+    "q": "Tiền điện = 3 × số kWh + 50 (nghìn đồng). Hệ số góc 3 nghĩa là gì?",
+    "giai": "a là mức tăng của y khi x tăng 1.",
     "a": [
-     "Khả năng mưa khoảng 80%",
-     "Chắc chắn sẽ mưa to",
-     "Mưa trong 80 phút",
-     "80% diện tích sẽ mưa"
+     "Mỗi kWh dùng thêm, trả thêm 3 nghìn",
+     "Tháng nào cũng trả 3 nghìn",
+     "Dùng 3 kWh thì miễn phí",
+     "Tiền điện tăng gấp 3 mỗi tháng"
     ],
-    "h": "102e18e3901c71"
+    "h": "1f5d6ebbe60daa"
    },
    {
     "k": "mc",
     "id": "bai15-q17",
-    "q": "Trường muốn gọi phụ đạo mọi bạn có nguy cơ, chấp nhận gọi nhầm vài bạn. Nên chỉnh ngưỡng xác suất Đạt thế nào?",
-    "giai": "Ngưỡng cao → ít bỏ sót.",
+    "q": "Model dự đoán chiều cao trẻ em theo tuổi học từ trẻ 2 – 12 tuổi. Đoán chiều cao người 40 tuổi thì sao?",
+    "giai": "Đường thẳng cứ tăng mãi, người lớn thì ngừng cao.",
     "a": [
-     "Nâng ngưỡng lên cao hơn 0,5",
-     "Hạ ngưỡng xuống dưới 0,5",
-     "Giữ đúng ngưỡng 0,5",
-     "Bỏ ngưỡng, dùng đường thẳng"
+     "Không đáng tin — ngoài vùng đã học",
+     "Rất chính xác vì đã học kỹ",
+     "Chính xác hơn trẻ 5 tuổi",
+     "Luôn ra đúng 170 cm"
     ],
-    "h": "1946f55a0939ca"
+    "h": "655aa1b696727"
    },
    {
     "k": "mc",
     "id": "bai15-q18",
-    "q": "Ô báo nhầm trong ma trận nhầm lẫn của bài là gì?",
-    "giai": "Báo nhầm: báo động sai cho bạn ổn.",
+    "q": "Model A có MAE 2 triệu, model B có MAE 0,8 triệu trên cùng tập kiểm tra. Nhận xét nào đúng?",
+    "giai": "MAE càng nhỏ càng tốt.",
     "a": [
-     "Bạn thật Đạt bị đoán Chưa đạt",
-     "Bạn thật Chưa đạt bị đoán Đạt",
-     "Bạn Đạt được đoán Đạt",
-     "Bạn Chưa đạt được đoán Chưa đạt"
+     "Model B đoán sát hơn model A",
+     "Model A đoán sát hơn model B",
+     "Hai model tốt như nhau",
+     "Không so sánh được hai model"
     ],
-    "h": "bb91cf3aad3a7"
+    "h": "14abb93d9fbba1"
    },
    {
     "k": "mc",
     "id": "bai15-q19",
-    "q": "Hệ số của PhutMangXH trong model hai cột âm. Nghĩa là gì?",
-    "giai": "Dấu âm: cột tăng thì xác suất giảm.",
+    "q": "Model hồi quy có R² = −0,2 trên tập kiểm tra. Điều đó cho thấy gì?",
+    "giai": "R² âm: thua model lười.",
     "a": [
-     "Lướt mạng nhiều → xác suất Đạt giảm",
-     "Lướt mạng nhiều → xác suất Đạt tăng",
-     "Phút mạng không ảnh hưởng gì",
-     "Model bị lỗi dấu"
+     "Còn tệ hơn luôn đoán trung bình",
+     "Tốt hơn model lười một chút",
+     "Đoán đúng 20% số dòng",
+     "Model hoàn hảo trên tập kiểm tra"
     ],
-    "h": "17fad861f558fd"
+    "h": "10e5702f792370"
    },
    {
     "k": "ma",
     "id": "bai15-q20",
-    "q": "Những phát biểu nào đúng về hàm sigmoid? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Đường cong chữ S, từ 0 tới 1.",
+    "q": "Những bài toán nào là hồi quy? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Hồi quy: kết quả là con số liên tục.",
     "a": [
-     "Kết quả luôn nằm giữa 0 và 1",
-     "sigmoid(0) = 0,5",
-     "Kết quả có thể lớn hơn 1",
-     "sigmoid là đường thẳng"
+     "Dự đoán giá vé máy bay",
+     "Dự đoán lượng mưa ngày mai (mm)",
+     "Dự đoán email là thư rác",
+     "Dự đoán loài hoa từ ảnh"
     ],
-    "h": "18d8b35ca4960"
+    "h": "ffe679b4f1d85"
    },
    {
     "k": "ma",
     "id": "bai15-q21",
-    "q": "Những lệnh nào dùng trong bài? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Logistic và xác suất.",
+    "q": "Những phát biểu nào đúng về đường tốt nhất? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Tốt nhất theo tổng bình phương sai số.",
     "a": [
-     "LogisticRegression",
-     "predict_proba",
-     "KNeighborsClassifier",
-     "LinearRegression"
+     "Có tổng bình phương sai số nhỏ nhất",
+     "Sai số đo theo chiều dọc",
+     "Phải đi qua nhiều điểm nhất",
+     "Luôn đi qua gốc toạ độ"
     ],
-    "h": "9580f4b1a1167"
+    "h": "b2f915b5c364"
    },
    {
     "k": "ma",
     "id": "bai15-q22",
-    "q": "Hai ô nào là hai kiểu sai trong ma trận nhầm lẫn? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Hai ô ngoài đường chéo.",
+    "q": "Những chỉ số nào dùng để đánh giá model hồi quy? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Hồi quy đo độ lệch, không đo đúng/sai.",
     "a": [
-     "Bỏ sót",
-     "Báo nhầm",
-     "Đúng Đạt",
-     "Đúng Chưa đạt"
+     "MAE",
+     "R²",
+     "Độ chính xác (%)",
+     "Số láng giềng K"
     ],
-    "h": "18ec75331d24bc"
+    "h": "1bc31d19ac74b1"
    },
    {
     "k": "ma",
     "id": "bai15-q23",
-    "q": "Hạ ngưỡng từ 0,5 xuống 0,3. Hai điều nào xảy ra? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Ngưỡng thấp → dễ đoán Đạt.",
+    "q": "Thêm cột SoLanRoi vô dụng vào model. Hai điều nào đúng? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Dữ liệu đã học luôn khen cột mới.",
     "a": [
-     "Bỏ sót nhiều lên",
-     "Báo nhầm ít đi",
-     "Bỏ sót về 0",
-     "Báo nhầm nhiều lên"
+     "R² tập huấn luyện vẫn tăng",
+     "Tập kiểm tra mới lộ ra cột vô dụng",
+     "R² tập kiểm tra tăng mạnh",
+     "Model tự bỏ cột vô dụng"
     ],
-    "h": "14f1f26544c5c7"
+    "h": "12ca48c80e58a2"
    },
    {
     "k": "sx",
     "id": "bai15-q24",
-    "q": "Sắp xếp các bước model logistic dự đoán một bạn mới.",
-    "giai": "Thẳng → sigmoid → xác suất → ngưỡng.",
+    "q": "Sắp xếp các bước tìm đường tốt nhất bằng tay.",
+    "giai": "Chọn → tính sai số → bình phương, cộng → chỉnh.",
     "a": [
-     "Tính z = a·x + b",
-     "Đưa z qua hàm sigmoid",
-     "Được xác suất Đạt",
-     "So với ngưỡng để ra nhãn"
+     "Chọn một cặp a, b",
+     "Tính sai số từng điểm",
+     "Bình phương rồi cộng lại",
+     "Đổi a, b để tổng nhỏ hơn"
     ],
-    "h": "e1113550af8b8"
+    "h": "17ea1687b2779c"
    },
    {
     "k": "sx",
     "id": "bai15-q25",
-    "q": "Sắp xếp các bước dùng LogisticRegression trong scikit-learn.",
-    "giai": "Chia → scale → fit → xác suất → đánh giá.",
+    "q": "Sắp xếp các bước dùng LinearRegression trong scikit-learn.",
+    "giai": "Chia → fit → predict → chấm.",
     "a": [
      "Chia tập huấn luyện và kiểm tra",
-     "Đưa các cột về 0 – 1",
-     "Fit LogisticRegression",
-     "predict_proba trên tập kiểm tra",
-     "Lập ma trận nhầm lẫn"
+     "Fit LinearRegression trên tập huấn luyện",
+     "Predict tập kiểm tra",
+     "Tính MAE và R²"
     ],
-    "h": "1ced6c31b6a8fa"
+    "h": "4308f168854ad"
    },
    {
     "k": "dd",
     "id": "bai15-q26",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Phân loại bằng xác suất.",
-    "mau": "Hồi quy logistic dùng cho bài toán {0}; nó trả về {1}.",
+    "giai": "a: độ dốc; b: điểm cắt trục tung.",
+    "mau": "Trong y = a·x + b, số đứng trước x là {0}; số cộng thêm ở cuối là {1}.",
     "o": [
      [
-      "phân loại",
-      "hồi quy",
-      "gom nhóm",
-      "làm sạch"
+      "hệ số góc",
+      "hệ số chặn",
+      "sai số",
+      "feature"
      ],
      [
-      "xác suất",
-      "điểm số",
-      "khoảng cách",
-      "số láng giềng"
+      "hệ số chặn",
+      "hệ số góc",
+      "sai số",
+      "nhãn"
      ]
     ],
-    "h": "55f0ecb02bbf6"
+    "h": "10f5742eaad835"
    },
    {
     "k": "dd",
     "id": "bai15-q27",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Hai ô ngoài đường chéo.",
-    "mau": "Ở ngưỡng 0,5 model bỏ sót {0} bạn và báo nhầm {1} bạn.",
+    "giai": "a = -0,27; -0,27 × 24 + 13,08.",
+    "mau": "Mỗi tháng tuổi máy, giá giảm khoảng {0} nghìn; máy 24 tháng đoán khoảng {1} triệu.",
     "o": [
      [
-      "3",
-      "9",
-      "30",
-      "0"
+      "269",
+      "1308",
+      "27",
+      "1 000"
      ],
      [
-      "3",
-      "14",
-      "36",
-      "1"
+      "6,63",
+      "13,08",
+      "-8,42",
+      "6,50"
      ]
     ],
-    "h": "d23d347e22509"
+    "h": "1889de2d4c3499"
    },
    {
     "k": "dd",
     "id": "bai15-q28",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Hàng thật, cột đoán.",
-    "mau": "Trong ma trận nhầm lẫn, hàng là nhãn {0}, cột là nhãn {1}.",
+    "giai": "MAE là sai số; R² tối đa bằng 1.",
+    "mau": "MAE càng {0} càng tốt; R² càng {1} càng tốt.",
     "o": [
      [
-      "thật",
-      "đoán",
-      "trung bình",
-      "ngẫu nhiên"
+      "nhỏ",
+      "lớn",
+      "âm",
+      "gần 100"
      ],
      [
-      "model đoán",
-      "thật",
-      "trung bình",
-      "ngẫu nhiên"
+      "gần 1",
+      "gần 0",
+      "âm",
+      "nhỏ"
      ]
     ],
-    "h": "130249c2a6c6bf"
+    "h": "b604e8abbc010"
    },
    {
     "k": "dd",
     "id": "bai15-q29",
-    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Đọc từ đường sigmoid và bảng kết quả.",
-    "mau": "Học {0} giờ thì xác suất Đạt khoảng 50%; model hai cột đúng {1} trên tập kiểm tra.",
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "coef_ = a; intercept_ = b.",
+    "mau": "Lệnh {0} trả về các hệ số góc; lệnh {1} trả về hệ số chặn.",
     "o": [
      [
-      "3,37",
-      "2,00",
-      "5,00",
-      "6,00"
+      "coef_",
+      "intercept_",
+      "predict",
+      "fit"
      ],
      [
-      "91,7%",
-      "54,2%",
-      "100%",
-      "50,0%"
+      "intercept_",
+      "coef_",
+      "predict",
+      "score"
      ]
     ],
-    "h": "158e8bf350c09d"
+    "h": "1c1eb784237db4"
    },
    {
     "k": "ds",
     "id": "bai15-q30",
-    "q": "Hồi quy logistic là thuật toán cho bài toán hồi quy.",
-    "giai": "Tên có chữ hồi quy nhưng dùng cho phân loại.",
+    "q": "Hồi quy tuyến tính cần đưa các cột về cùng thang đo như KNN thì dự đoán mới đúng.",
+    "giai": "Dự đoán không đổi khi đổi thang đo; chỉ hệ số a đổi theo đơn vị.",
     "h": "3cab0543a3e4b"
    },
    {
     "k": "ds",
     "id": "bai15-q31",
-    "q": "Đổi ngưỡng có thể làm giảm bỏ sót nhưng tăng báo nhầm.",
-    "giai": "Hai kiểu sai đổi chỗ cho nhau.",
+    "q": "R² bằng 0 nghĩa là model chỉ ngang với luôn đoán giá trung bình.",
+    "giai": "Đó chính là định nghĩa qua model lười.",
     "h": "11e578c033b20b"
    },
    {
     "k": "ds",
     "id": "bai15-q32",
-    "q": "Xác suất 0,76 nghĩa là bạn đó chắc chắn Đạt.",
-    "giai": "Khoảng 76 trên 100 bạn như vậy Đạt.",
-    "h": "18a5bde7da4334"
+    "q": "Dữ liệu điện thoại cũ trong bài là dữ liệu mô phỏng.",
+    "giai": "Sinh bằng máy tính cho bài học (seed 9).",
+    "h": "10e7fe349879ec"
    }
   ]
  },

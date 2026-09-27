@@ -238,6 +238,7 @@
       case "demo_phan_tan": return demoPhanTan(k);
       case "demo_ke_duong": return demoKeDuong(k);
     }
+    if (window.ML1_TT && window.ML1_TT[k.t]) { window.ML1_TT.init(el); return window.ML1_TT[k.t](k); }
     return el("p", { text: "[khối chưa hỗ trợ: " + k.t + "]" });
   }
   function veBang(cot, dong, nhan_manh) {
@@ -380,12 +381,12 @@
       var b = k.bo[+r.value];
       while (svg.firstChild) svg.removeChild(svg.firstChild);
       var tr = document.createElementNS(NS, "path");
-      tr.setAttribute("d", "M20 10 V200 H310"); tr.setAttribute("stroke", "#55636E"); tr.setAttribute("fill", "none");
+      tr.setAttribute("d", "M20 10 V200 H310"); tr.setAttribute("stroke", "#475569"); tr.setAttribute("fill", "none");
       svg.appendChild(tr);
       b.x.forEach(function (x, i) {
         var c = document.createElementNS(NS, "circle");
         c.setAttribute("cx", 20 + x * 285); c.setAttribute("cy", 200 - b.y[i] * 185); c.setAttribute("r", 4);
-        c.setAttribute("fill", "#1E7B45"); c.setAttribute("fill-opacity", "0.75");
+        c.setAttribute("fill", "#1D4ED8"); c.setAttribute("fill-opacity", "0.75");
         svg.appendChild(c);
       });
       bR.textContent = b.r; bY.textContent = b.doc;
@@ -426,7 +427,7 @@
     }
     function chu(x, y, t, anchor) {
       var e = document.createElementNS(NS, "text");
-      e.setAttribute("x", x); e.setAttribute("y", y); e.setAttribute("font-size", "10"); e.setAttribute("fill", "#55636E");
+      e.setAttribute("x", x); e.setAttribute("y", y); e.setAttribute("font-size", "10"); e.setAttribute("fill", "#475569");
       e.setAttribute("text-anchor", anchor || "middle"); e.textContent = t; svg.appendChild(e);
     }
     function duong(a, b, mau, w, dash) {
@@ -444,7 +445,7 @@
       var a = +A.i.value, b = +B.i.value;
       A.nh.textContent = sv(a, A.d); B.nh.textContent = sv(b, B.d);
       while (svg.firstChild) svg.removeChild(svg.firstChild);
-      net(36, 10, 36, 210, "#55636E", 1); net(36, 210, 330, 210, "#55636E", 1);
+      net(36, 10, 36, 210, "#475569", 1); net(36, 210, 330, 210, "#475569", 1);
       chu(183, 236, k.nhan_x); chu(4, 12, k.nhan_y, "start");
       (k.vach_x || []).forEach(function (v) { chu(px(v), 222, so(v, 0)); });
       (k.vach_y || []).forEach(function (v) { chu(32, py(v) + 3, so(v, 0), "end"); });
@@ -459,22 +460,22 @@
         });
         if (hienMay) {
           var h = k.tot.le * Math.sqrt(k.tot.a * k.tot.a + 1);
-          duong(k.tot.a, k.tot.b + h, "#C8A02C", 1, "3 3"); duong(k.tot.a, k.tot.b - h, "#C8A02C", 1, "3 3");
+          duong(k.tot.a, k.tot.b + h, "#D97706", 1, "3 3"); duong(k.tot.a, k.tot.b - h, "#D97706", 1, "3 3");
         }
       } else {
         k.diem.forEach(function (d) {
           var yh = a * d[0] + b; sse += (d[1] - yh) * (d[1] - yh);
-          net(px(d[0]), py(d[1]), px(d[0]), py(Math.max(Y0, Math.min(Y1, yh))), "#C0392B", 0.8);
+          net(px(d[0]), py(d[1]), px(d[0]), py(Math.max(Y0, Math.min(Y1, yh))), "#DC2626", 0.8);
         });
       }
       k.diem.forEach(function (d, i) {
         var c = document.createElementNS(NS, "circle");
         c.setAttribute("cx", px(d[0])); c.setAttribute("cy", py(d[1])); c.setAttribute("r", LE ? 4 : 3.2);
-        c.setAttribute("fill", LE ? (k.nhan[i] ? "#C8A02C" : "#C0392B") : "#1E7B45");
+        c.setAttribute("fill", LE ? (k.nhan[i] ? "#D97706" : "#DC2626") : "#1D4ED8");
         c.setAttribute("fill-opacity", "0.85"); svg.appendChild(c);
       });
-      if (hienMay) duong(k.tot.a, k.tot.b, "#C8A02C", 2.2, "5 3");
-      duong(a, b, "#146B3A", 2.4);
+      if (hienMay) duong(k.tot.a, k.tot.b, "#D97706", 2.2, "5 3");
+      duong(a, b, "#0F172A", 2.4);
       if (LE) {
         bL.textContent = String(sai);
         bS.textContent = sai ? "—" : so(le, 2);
@@ -754,28 +755,28 @@
     cv.width = W; cv.height = H;
     var g = cv.getContext("2d");
     var ma = maXacNhan(B.bai, TT.ten, TT.lop);
-    var F = "Quicksand, 'Segoe UI', sans-serif";
+    var F = "Be Vietnam Pro, 'Segoe UI', sans-serif";
     function ve(logo) {
       g.fillStyle = "#FFFFFF"; g.fillRect(0, 0, W, H);
-      g.fillStyle = "#146B3A"; g.fillRect(0, 0, W, 150);
-      g.strokeStyle = "#C8A02C"; g.lineWidth = 6; g.strokeRect(40, 190, W - 80, H - 230);
-      g.strokeStyle = "#E1F1E8"; g.lineWidth = 2; g.strokeRect(56, 206, W - 112, H - 262);
+      g.fillStyle = "#0F172A"; g.fillRect(0, 0, W, 150);
+      g.strokeStyle = "#D97706"; g.lineWidth = 6; g.strokeRect(40, 190, W - 80, H - 230);
+      g.strokeStyle = "#DBEAFE"; g.lineWidth = 2; g.strokeRect(56, 206, W - 112, H - 262);
       if (logo) { var lh = 104, lw = logo.width * lh / logo.height; g.drawImage(logo, 50, 23, lw, lh); }
       g.fillStyle = "#FFFFFF"; g.textAlign = "left";
       g.font = "700 30px " + F; g.fillText(B.truong.toUpperCase(), 230, 70);
       g.font = "500 24px " + F; g.fillText(B.khoa + " · " + B.khoi, 230, 110);
       g.textAlign = "center";
-      g.fillStyle = "#178B8B"; g.font = "700 30px " + F; g.fillText("CHỨNG NHẬN HOÀN THÀNH", W / 2, 290);
-      g.fillStyle = "#146B3A"; g.font = "700 50px " + F; g.fillText(B.nhan + " — " + B.tieu_de, W / 2, 370);
-      g.fillStyle = "#55636E"; g.font = "500 28px " + F; g.fillText("Chứng nhận học sinh", W / 2, 470);
-      g.fillStyle = "#1F2A33"; g.font = "700 76px " + F; g.fillText(TT.ten.toUpperCase(), W / 2, 565);
-      g.fillStyle = "#55636E"; g.font = "600 32px " + F; g.fillText("Lớp " + TT.lop, W / 2, 625);
-      g.fillStyle = "#1F2A33"; g.font = "500 30px " + F;
+      g.fillStyle = "#0D9488"; g.font = "700 30px " + F; g.fillText("CHỨNG NHẬN HOÀN THÀNH", W / 2, 290);
+      g.fillStyle = "#0F172A"; g.font = "700 50px " + F; g.fillText(B.nhan + " — " + B.tieu_de, W / 2, 370);
+      g.fillStyle = "#475569"; g.font = "500 28px " + F; g.fillText("Chứng nhận học sinh", W / 2, 470);
+      g.fillStyle = "#0F172A"; g.font = "700 76px " + F; g.fillText(TT.ten.toUpperCase(), W / 2, 565);
+      g.fillStyle = "#475569"; g.font = "600 32px " + F; g.fillText("Lớp " + TT.lop, W / 2, 625);
+      g.fillStyle = "#0F172A"; g.font = "500 30px " + F;
       g.fillText("đã học hết " + B.chang.length + " chặng và trả lời đúng " + diem + "/" + B.cuoi.so_cau + " câu checkpoint cuối bài", W / 2, 710);
-      g.fillStyle = "#E1F1E8"; g.fillRect(W / 2 - 250, 780, 500, 120);
-      g.fillStyle = "#55636E"; g.font = "600 24px " + F; g.fillText("MÃ XÁC NHẬN", W / 2, 820);
-      g.fillStyle = "#146B3A"; g.font = "700 52px Consolas, monospace"; g.fillText(ma, W / 2, 880);
-      g.fillStyle = "#55636E"; g.font = "500 26px " + F; g.fillText("Ngày " + ngay, W / 2, 985);
+      g.fillStyle = "#DBEAFE"; g.fillRect(W / 2 - 250, 780, 500, 120);
+      g.fillStyle = "#475569"; g.font = "600 24px " + F; g.fillText("MÃ XÁC NHẬN", W / 2, 820);
+      g.fillStyle = "#0F172A"; g.font = "700 52px Consolas, monospace"; g.fillText(ma, W / 2, 880);
+      g.fillStyle = "#475569"; g.font = "500 26px " + F; g.fillText("Ngày " + ngay, W / 2, 985);
       var ten = "ChungChi_" + B.ma + "_" + khongDau(TT.ten).split(" ").map(function (w) {
         return w.charAt(0).toUpperCase() + w.slice(1); }).join("") + "_" + TT.lop + ".png";
       var url;
@@ -794,7 +795,7 @@
     function chay(l) { if (xong) return; xong = true; ve(l); }
     logo.onload = function () { chay(logo); };
     logo.onerror = function () { chay(null); };
-    var fonts = (document.fonts && document.fonts.load) ? document.fonts.load("700 50px Quicksand") : Promise.resolve();
+    var fonts = (document.fonts && document.fonts.load) ? document.fonts.load("700 50px Be Vietnam Pro") : Promise.resolve();
     fonts.then(function () { logo.src = "../assets/logo_lsts_trang.png"; }, function () { logo.src = "../assets/logo_lsts_trang.png"; });
     setTimeout(function () { chay(logo.complete && logo.naturalWidth ? logo : null); }, 2500);
   }

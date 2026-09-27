@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 25,
  "ma": "bai25",
  "nhan": "Bài 25",
- "tieu_de": "K-Means: máy tự chia nhóm",
- "phan": "Phần D · Học không giám sát",
- "cau_hoi": "Không có nhãn, máy có tự chia được nhóm không?",
+ "tieu_de": "Chọn model nào?",
+ "phan": "Module 12 · Evaluating Models",
+ "cau_hoi": "Có model nào tốt nhất cho mọi bài toán không?",
  "gioi_thieu": [
-  "Từ Bài 11 tới Bài 24, bảng nào cũng có cột <b>nhãn</b> (Đạt / Chưa đạt) để máy học theo. Nhưng rất nhiều dữ liệu ngoài đời không có nhãn: danh sách khách hàng, bài hát, ảnh.",
-  "Bài này con gặp nhánh thứ hai của Machine Learning: <b>học không giám sát</b>. Thuật toán K-Means tự chia dữ liệu thành k nhóm chỉ bằng khoảng cách. Bảng khối 10 là bảng mô phỏng; lần này máy không được nhìn cột Result.",
-  "Con dùng lại khoảng cách và việc đưa về cùng thang đo (Bài 12)."
+  "Con đã xây sáu model phân loại và một model hồi quy. Bài này không có thuật toán mới: con <b>xếp lại</b> chúng thành một bản đồ và học cách <b>chọn</b> model theo mục đích.",
+  "Năm chặng: bản đồ các model, tiêu chí ngoài độ chính xác, so sánh thực nghiệm, chọn theo tình huống, và quy trình làm một dự án trọn vẹn. Bảng khối 10 là bảng mô phỏng.",
+  "Con dùng lại toàn bộ Bài 12 – 24, đặc biệt kiểm định chéo (Bài 24)."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai25",
  "muc_tieu": [
-  "Phân biệt học có giám sát và học không giám sát.",
-  "Mô tả được hai bước lặp của K-Means: gán vào tâm gần nhất, dời tâm.",
-  "Dùng đường khuỷu tay để chọn số nhóm k.",
-  "Giải thích vì sao phải đưa các cột về cùng thang đo trước K-Means.",
-  "Đặt tên và diễn giải các nhóm bằng tâm của nhóm."
+  "Xếp các model đã học theo cách chúng “nghĩ”.",
+  "Nêu được các tiêu chí chọn model ngoài độ chính xác.",
+  "Đọc được bảng so sánh các model bằng kiểm định chéo.",
+  "Chọn và bảo vệ được một model cho một tình huống cụ thể.",
+  "Trình bày lại quy trình trọn vẹn của một dự án học có giám sát."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,544 +36,565 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Khi không có nhãn",
-   "ten_ngan": "Không nhãn",
+   "ten": "Bản đồ các model",
+   "ten_ngan": "Bản đồ",
    "phut": 4,
-   "muc_tieu": "phân biệt học có giám sát và học không giám sát.",
-   "khoi_dong": "Một cửa hàng có danh sách 10 000 khách nhưng không ai ghi “khách loại gì”. Cửa hàng có thể làm gì với danh sách đó?",
+   "muc_tieu": "xếp các model đã học theo cách chúng “nghĩ”.",
+   "khoi_dong": "Kể tên các model con đã học từ Bài 13. Chúng giống nhau ở điểm nào?",
    "khoi": [
     {
      "t": "anh",
-     "cap": "Chỉ có hai cột số — không có cột Đạt / Chưa đạt",
-     "alt": "Chỉ có hai cột số — không có cột Đạt / Chưa đạt",
-     "src": "img/du-lieu-khong-co-nhan.png"
+     "cap": "Bốn cách “nghĩ” của các model đã học",
+     "alt": "Bốn cách “nghĩ” của các model đã học",
+     "src": "img/ban-do-cac-model-da-hoc.png"
     },
     {
      "t": "bang",
      "cot": [
-      "",
-      "Học có giám sát (Bài 11 – 24)",
-      "Học không giám sát (Bài 25)"
+      "Cách nghĩ",
+      "Model",
+      "Ghi nhớ"
      ],
      "dong": [
       [
-       "Dữ liệu",
-       "Có cột nhãn để học theo",
-       "Không có cột nhãn"
+       "Đo khoảng cách",
+       "KNN, SVM",
+       "Cần đưa về cùng thang đo"
       ],
       [
-       "Máy làm gì",
-       "Học cách đoán nhãn cho dòng mới",
-       "Tự tìm các nhóm giống nhau"
+       "Vẽ đường / xác suất",
+       "Hồi quy tuyến tính, logistic",
+       "Đọc được hệ số a, b"
       ],
       [
-       "Ví dụ",
-       "Đoán Đạt / Chưa đạt",
-       "Chia khách hàng thành nhóm"
+       "Hỏi câu Có / Không",
+       "Cây quyết định, Random Forest",
+       "Cây đọc được luật"
       ],
       [
-       "Đánh giá",
-       "So với nhãn thật: độ chính xác",
-       "Không có đáp án — con người diễn giải"
+       "Đếm rồi nhân",
+       "Naïve Bayes",
+       "Rất nhanh, cần ít dữ liệu"
       ]
      ]
     },
     {
-     "t": "dinh_nghia",
-     "ten": "Gom nhóm (clustering)",
-     "html": "Chia các dòng dữ liệu thành các nhóm sao cho dòng <b>cùng nhóm thì giống nhau</b>, khác nhóm thì khác nhau. Máy không biết tên nhóm — con người đặt tên sau.",
-     "ky_hieu": null
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Điều không đổi",
+     "html": "Model nào cũng đi qua cùng quy trình 5 bước của Bài 12: dữ liệu → chia → huấn luyện → dự đoán → đánh giá. Thuật toán khác nhau, quy trình như nhau."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ gom nhóm là phân loại — phân loại cần nhãn có sẵn, gom nhóm thì không.",
-      "Nghĩ máy tự biết “nhóm 1 là nhóm học giỏi” — máy chỉ đánh số nhóm."
+      "Nghĩ hồi quy tuyến tính dùng cho bài Đạt / Chưa đạt — nó dự đoán con số.",
+      "Nghĩ Random Forest là một cách nghĩ riêng — nó là nhiều cây quyết định."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Không có nhãn → học không giám sát; gom nhóm tìm các dòng giống nhau."
+     "html": "Bốn cách nghĩ: khoảng cách · đường / xác suất · câu hỏi Có / Không · đếm rồi nhân."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai25-q1",
-     "q": "Bài toán nào là học không giám sát?",
-     "giai": "Không có nhãn sẵn cho bài hát.",
-     "goi_y": "Bài toán nào không có cột đáp án để học theo?",
+     "q": "Model nào thuộc nhóm “đo khoảng cách”?",
+     "giai": "KNN hỏi các láng giềng gần nhất.",
+     "goi_y": "Model nào cần đưa về cùng thang đo?",
      "a": [
-      "Chia 5 000 bài hát thành các nhóm giống nhau",
-      "Đoán email có phải thư rác theo mẫu đã gắn nhãn",
-      "Đoán giá nhà từ bảng có sẵn giá",
-      "Đoán Đạt / Chưa đạt theo bảng năm trước"
+      "KNN",
+      "Naïve Bayes",
+      "Cây quyết định",
+      "Hồi quy logistic"
      ],
-     "h": "4ed8412906882"
+     "h": "adcc9f17a4a1f"
     },
     {
      "k": "ds",
      "id": "bai25-q2",
-     "q": "Sau khi gom nhóm, máy tự đặt tên nhóm như “nhóm chăm học”.",
-     "giai": "Máy chỉ đánh số 0, 1, 2… Con người đặt tên.",
-     "goi_y": "Máy có biết ý nghĩa của các cột không?",
-     "h": "16332eaf973728"
+     "q": "Mọi model đã học đều dùng chung quy trình 5 bước.",
+     "giai": "Chỉ đổi dòng gọi thuật toán.",
+     "goi_y": "Nhớ lại Bài 12.",
+     "h": "59d980f0e5099"
     }
    ]
   },
   {
-   "ten": "K-Means làm thế nào?",
-   "ten_ngan": "Thuật toán",
-   "phut": 5,
-   "muc_tieu": "mô tả được hai bước lặp của K-Means: gán vào tâm gần nhất, dời tâm.",
-   "khoi_dong": "Nếu phải chia 240 bạn thành 2 nhóm chỉ bằng cách nhìn chấm trên hình, con sẽ làm thế nào?",
+   "ten": "Không chỉ độ chính xác",
+   "ten_ngan": "Tiêu chí",
+   "phut": 4,
+   "muc_tieu": "nêu được các tiêu chí chọn model ngoài độ chính xác.",
+   "khoi_dong": "Hai model cùng đúng 90%. Con còn muốn biết gì trước khi chọn?",
    "khoi": [
     {
-     "t": "p",
-     "html": "K-Means chọn trước <b>k</b> tâm, rồi lặp hai bước tới khi không bạn nào đổi nhóm:"
-    },
-    {
-     "t": "ds",
-     "muc": [
-      "<b>Gán:</b> mỗi bạn vào nhóm của tâm gần nhất (khoảng cách Bài 12).",
-      "<b>Dời tâm:</b> mỗi tâm dời về điểm giữa (trung bình) của các bạn trong nhóm."
-     ]
-    },
-    {
-     "t": "demo_tung_buoc",
-     "tieu_de": "K-Means với k = 2 trên bảng khối 10",
-     "huong_dan": "Bấm “Bước tiếp” để xem từng lần gán và dời tâm. Toạ độ đã đưa về 0 – 1 (giờ tự học ; phút mạng XH).",
-     "nhan_chon": "Lần chạy",
+     "t": "bang",
      "cot": [
-      "Vòng",
-      "Việc",
-      "Kết quả"
+      "Tiêu chí",
+      "Câu hỏi cần đặt",
+      "Model mạnh ở tiêu chí này"
      ],
-     "mac_dinh": 0,
-     "lua_chon": [
-      {
-       "nhan": "Bắt đầu từ 2 tâm ngẫu nhiên",
-       "dong": [
-        [
-         "0",
-         "Chọn ngẫu nhiên 2 bạn làm tâm",
-         "Tâm A (0,09 ; 0,13), tâm B (0,71 ; 0,24)"
-        ],
-        [
-         "0",
-         "Gán mỗi bạn vào tâm gần nhất",
-         "A: 96 bạn, B: 144 bạn — tổng khoảng cách² 21,11"
-        ],
-        [
-         "1",
-         "Dời tâm về giữa nhóm",
-         "Tâm A (0,18 ; 0,39), tâm B (0,69 ; 0,27)"
-        ],
-        [
-         "1",
-         "Gán lại mỗi bạn vào tâm gần nhất",
-         "A: 110 bạn, B: 130 bạn — tổng khoảng cách² 13,11"
-        ],
-        [
-         "2",
-         "Dời tâm về giữa nhóm",
-         "Tâm A (0,21 ; 0,39), tâm B (0,72 ; 0,25)"
-        ],
-        [
-         "2",
-         "Gán lại mỗi bạn vào tâm gần nhất",
-         "A: 119 bạn, B: 121 bạn — tổng khoảng cách² 12,68"
-        ],
-        [
-         "3",
-         "Dời tâm về giữa nhóm",
-         "Tâm A (0,23 ; 0,40), tâm B (0,74 ; 0,24)"
-        ],
-        [
-         "3",
-         "Gán lại mỗi bạn vào tâm gần nhất",
-         "A: 127 bạn, B: 113 bạn — tổng khoảng cách² 12,46"
-        ],
-        [
-         "…",
-         "Lặp tới khi không bạn nào đổi nhóm",
-         "Dừng — hai nhóm ổn định"
-        ]
-       ]
-      }
+     "dong": [
+      [
+       "Giải thích được",
+       "Có phải nói lý do bằng lời?",
+       "Cây quyết định nông"
+      ],
+      [
+       "Cho xác suất",
+       "Cần chỉnh ngưỡng cảnh báo?",
+       "Logistic"
+      ],
+      [
+       "Tốc độ",
+       "Dữ liệu rất lớn, cần trả lời ngay?",
+       "Naïve Bayes, logistic"
+      ],
+      [
+       "Kiểu sai",
+       "Bỏ sót hay báo nhầm nguy hiểm hơn?",
+       "Đo bằng bảng nhầm lẫn"
+      ],
+      [
+       "Ổn định",
+       "Kết quả có nhảy khi dữ liệu đổi?",
+       "Random Forest"
+      ]
      ]
     },
     {
-     "t": "anh",
-     "cap": "Sau mỗi vòng, tổng khoảng cách² giảm: 21,11 → 13,11 → 12,68 → 12,46",
-     "alt": "Sau mỗi vòng, tổng khoảng cách² giảm: 21,11 → 13,11 → 12,68 → 12,46",
-     "src": "img/k-means-tung-vong.png"
-    },
-    {
-     "t": "hop",
-     "kieu": "ml",
-     "tieu_de": "Tổng khoảng cách² (inertia)",
-     "html": "Cộng bình phương khoảng cách từ mỗi bạn tới tâm nhóm mình. Càng nhỏ, các nhóm càng “chặt”. Mỗi vòng K-Means chỉ làm con số này nhỏ đi hoặc giữ nguyên."
+     "t": "dinh_nghia",
+     "ten": "Không có model tốt nhất",
+     "html": "Chỉ có model <b>phù hợp</b> với bài toán, với dữ liệu, và với người phải đọc kết quả.",
+     "ky_hieu": null
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ tâm phải là một bạn có thật — sau vòng đầu, tâm là điểm trung bình.",
-      "Nghĩ K-Means chạy một lần là xong — nó lặp tới khi ổn định."
+      "Chỉ nhìn độ chính xác rồi chọn.",
+      "Chọn model phức tạp nhất vì nghe “xịn” hơn."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "K-Means = lặp (gán vào tâm gần nhất → dời tâm về giữa nhóm) tới khi ổn định."
+     "html": "Chọn model: độ chính xác + giải thích + xác suất + tốc độ + kiểu sai + ổn định."
     }
    ],
    "checkpoint": [
     {
-     "k": "sx",
+     "k": "mc",
      "id": "bai25-q3",
-     "q": "Sắp xếp các bước của K-Means.",
-     "giai": "Chọn tâm → gán → dời → lặp.",
-     "goi_y": "Xem thứ tự các dòng trong phần Tự thử.",
+     "q": "Ngân hàng phải nói cho khách lý do từ chối vay. Tiêu chí nào quan trọng nhất?",
+     "giai": "Khách có quyền biết lý do.",
+     "goi_y": "Khách hỏi “vì sao?” thì model cần gì?",
      "a": [
-      "Chọn k tâm ban đầu",
-      "Gán mỗi điểm vào tâm gần nhất",
-      "Dời tâm về giữa nhóm",
-      "Lặp tới khi không điểm nào đổi nhóm"
+      "Giải thích được bằng lời",
+      "Huấn luyện nhanh nhất",
+      "Chạy được trên điện thoại",
+      "Có nhiều tham số nhất"
      ],
-     "h": "4ad0e6841fe7b"
+     "h": "10a0d4c78aeb16"
     },
     {
-     "k": "mc",
+     "k": "ma",
      "id": "bai25-q4",
-     "q": "Theo phần Tự thử, sau vòng 1 tổng khoảng cách² còn bao nhiêu?",
-     "giai": "Giảm từ 21,11 xuống 13,11.",
-     "goi_y": "Bấm “Bước tiếp” tới dòng gán lại ở vòng 1.",
+     "q": "Hai tiêu chí nào KHÔNG phải độ chính xác? <b>(Chọn 2 đáp án đúng.)</b>",
+     "giai": "Tiêu chí khác.",
+     "goi_y": "Xem bảng tiêu chí.",
      "a": [
-      "13,11",
-      "21,11",
-      "12,46",
-      "29,67"
+      "Tốc độ dự đoán",
+      "Giải thích được",
+      "Tỉ lệ đoán đúng",
+      "Số bạn đoán đúng"
      ],
-     "h": "133d8b54f6e65b"
+     "h": "1604d5131dc5c1"
     }
    ]
   },
   {
-   "ten": "Chọn số nhóm k",
-   "ten_ngan": "Chọn k",
+   "ten": "So sánh bằng thực nghiệm",
+   "ten_ngan": "Thực nghiệm",
    "phut": 5,
-   "muc_tieu": "dùng đường khuỷu tay để chọn số nhóm k.",
-   "khoi_dong": "Nếu cho mỗi bạn một nhóm riêng (k = 240), tổng khoảng cách² bằng bao nhiêu? Có nên chọn k lớn nhất không?",
+   "muc_tieu": "đọc được bảng so sánh các model bằng kiểm định chéo.",
+   "khoi_dong": "Sáu model trên cùng bảng khối 10, đo bằng kiểm định chéo. Ai thắng?",
    "khoi": [
     {
-     "t": "demo_truot",
-     "tieu_de": "thử số nhóm k",
-     "huong_dan": "Kéo để đổi k. Thanh cho biết tổng khoảng cách² đã giảm bao nhiêu phần trăm so với k = 1. Chú ý chỗ phần giảm thêm bắt đầu nhỏ lại.",
-     "dieu_kien": "k = <b>{x}</b> nhóm",
-     "moc": [
-      {
-       "x": 1,
-       "n": "tổng khoảng cách² = 29,67",
-       "p": 0.0
-      },
-      {
-       "x": 2,
-       "n": "tổng khoảng cách² = 12,33; giảm thêm 17,34 so với k = 1",
-       "p": 58.4
-      },
-      {
-       "x": 3,
-       "n": "tổng khoảng cách² = 8,81; giảm thêm 3,52 so với k = 2",
-       "p": 70.3
-      },
-      {
-       "x": 4,
-       "n": "tổng khoảng cách² = 6,18; giảm thêm 2,63 so với k = 3",
-       "p": 79.2
-      },
-      {
-       "x": 5,
-       "n": "tổng khoảng cách² = 4,85; giảm thêm 1,33 so với k = 4",
-       "p": 83.7
-      },
-      {
-       "x": 6,
-       "n": "tổng khoảng cách² = 4,11; giảm thêm 0,74 so với k = 5",
-       "p": 86.1
-      },
-      {
-       "x": 7,
-       "n": "tổng khoảng cách² = 3,52; giảm thêm 0,59 so với k = 6",
-       "p": 88.1
-      }
+     "t": "anh",
+     "cap": "Kiểm định chéo 5 phần: độ chính xác và số bạn bị bỏ sót",
+     "alt": "Kiểm định chéo 5 phần: độ chính xác và số bạn bị bỏ sót",
+     "src": "img/sau-model-dung-va-bo-sot.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "bảng lớp",
+     "de": null,
+     "cot": [
+      "Model",
+      "Đúng",
+      "Bỏ sót",
+      "Báo nhầm"
      ],
-     "nhan_n": "Tổng khoảng cách²",
-     "nhan_p": "Đã giảm so với k = 1",
-     "so_le_x": 0,
-     "bat_dau": 0
+     "dong": [
+      [
+       "KNN (K = 3)",
+       "90,8%",
+       "11",
+       "11"
+      ],
+      [
+       "Logistic",
+       "90,4%",
+       "12",
+       "11"
+      ],
+      [
+       "Cây sâu 2",
+       "89,6%",
+       "9",
+       "16"
+      ],
+      [
+       "Naïve Bayes",
+       "90,8%",
+       "10",
+       "12"
+      ],
+      [
+       "SVM",
+       "90,8%",
+       "13",
+       "9"
+      ],
+      [
+       "Rừng 100 cây",
+       "90,8%",
+       "11",
+       "11"
+      ]
+     ],
+     "ket_luan": "Độ chính xác chỉ chênh 1,2 điểm; bỏ sót từ 9 tới 13 bạn. Trên bảng này, các model gần như ngang nhau.",
+     "nhan_manh": []
     },
     {
      "t": "anh",
-     "cap": "Đường khuỷu tay của bảng khối 10 (đã đưa về 0 – 1)",
-     "alt": "Đường khuỷu tay của bảng khối 10 (đã đưa về 0 – 1)",
-     "src": "img/duong-khuyu-tay.png"
+     "cap": "Trên dữ liệu mô phỏng 20 000 dòng: tốc độ chênh hàng trăm lần",
+     "alt": "Trên dữ liệu mô phỏng 20 000 dòng: tốc độ chênh hàng trăm lần",
+     "src": "img/toc-do-huan-luyen-va-du-doan.png"
     },
     {
      "t": "p",
-     "html": "Từ k = 1 lên k = 2, tổng khoảng cách² giảm 58,4%. Từ k = 2 lên k = 3 chỉ giảm thêm 3,52. Chỗ “gập” như khuỷu tay là k = 2."
-    },
-    {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Khuỷu tay chỉ là gợi ý",
-     "html": "k càng lớn thì tổng khoảng cách² càng nhỏ — k = số bạn thì bằng 0, nhưng vô nghĩa. Chọn k còn tuỳ mục đích: thầy cô muốn chia lớp phụ đạo thành 3 nhóm thì k = 3 hợp lý hơn."
+     "html": "Tốc độ thì khác xa: Naïve Bayes huấn luyện nhanh nhất, Rừng 100 cây chậm nhất; KNN (K = 3) dự đoán chậm nhất vì phải đo tới mọi điểm cũ."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Chọn k có tổng khoảng cách² nhỏ nhất.",
-      "Tin rằng đường khuỷu tay luôn có một chỗ gập rõ ràng."
+      "Kết luận model tốt nhất từ chênh lệch nhỏ hơn độ dao động.",
+      "Đo thời gian trên dữ liệu 240 dòng rồi suy cho dữ liệu lớn."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Chọn k ở chỗ gập của đường khuỷu tay, rồi kiểm tra bằng mục đích sử dụng."
+     "html": "Khi độ chính xác ngang nhau, các tiêu chí khác quyết định."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai25-q5",
-     "q": "Theo phần Tự thử, k = 2 đã làm tổng khoảng cách² giảm bao nhiêu so với k = 1?",
-     "giai": "29,67 → 12,33.",
-     "goi_y": "Kéo thanh tới k = 2.",
+     "q": "Theo bảng, model nào bỏ sót ít bạn Chưa đạt nhất?",
+     "giai": "9 bạn.",
+     "goi_y": "Tìm số nhỏ nhất ở cột Bỏ sót.",
      "a": [
-      "58,4%",
-      "70,3%",
-      "100%",
-      "83,7%"
+      "Cây sâu 2",
+      "SVM",
+      "Logistic",
+      "Rừng 100 cây"
      ],
-     "h": "360a98918f19e"
+     "h": "18d11cb56951ca"
     },
-    {
-     "k": "ds",
-     "id": "bai25-q6",
-     "q": "Nên chọn k có tổng khoảng cách² nhỏ nhất.",
-     "giai": "k lớn nhất luôn nhỏ nhất nhưng vô nghĩa.",
-     "goi_y": "Nếu mỗi bạn một nhóm thì sao?",
-     "h": "18207befb9bbd0"
-    }
-   ]
-  },
-  {
-   "ten": "Thang đo và kiểm tra nhóm",
-   "ten_ngan": "Thang đo",
-   "phut": 4,
-   "muc_tieu": "giải thích vì sao phải đưa các cột về cùng thang đo trước K-Means.",
-   "khoi_dong": "Giờ tự học từ 0 tới 8, phút mạng XH từ 0 tới hơn 300. Khi đo khoảng cách, cột nào sẽ “nói to” hơn?",
-   "khoi": [
-    {
-     "t": "anh",
-     "cap": "Máy không được xem nhãn, nhưng hai nhóm trùng 87,1% với Đạt / Chưa đạt",
-     "alt": "Máy không được xem nhãn, nhưng hai nhóm trùng 87,1% với Đạt / Chưa đạt",
-     "src": "img/hai-nhom-va-nhan-that.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "so sánh",
-     "de": "K-Means k = 2 trên cùng hai cột, đối chiếu với cột Result sau khi chia.",
-     "cot": [
-      "Cách làm",
-      "Trùng với Đạt / Chưa đạt"
-     ],
-     "dong": [
-      [
-       "Đưa về 0 – 1 (MinMaxScaler)",
-       "87,1%"
-      ],
-      [
-       "Để nguyên đơn vị",
-       "70,0%"
-      ]
-     ],
-     "ket_luan": "Để nguyên, phút mạng XH lấn át giờ tự học: máy gần như chỉ chia theo phút mạng XH.",
-     "nhan_manh": []
-    },
-    {
-     "t": "hop",
-     "kieu": "ml",
-     "tieu_de": "Nhãn chỉ để kiểm tra",
-     "html": "Bảng khối 10 có sẵn cột Result nên con <b>đối chiếu</b> được. Máy vẫn không dùng cột đó khi chia. Với dữ liệu thật không có nhãn, con kiểm tra bằng cách đọc tâm nhóm."
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Quên đưa về cùng thang đo — lỗi giống KNN ở Bài 12.",
-      "Nghĩ 87,1% là “độ chính xác” — K-Means không đoán nhãn, đây chỉ là mức trùng khớp."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "K-Means đo khoảng cách → phải đưa các cột về cùng thang đo."
-    }
-   ],
-   "checkpoint": [
     {
      "k": "dd",
-     "id": "bai25-q7",
+     "id": "bai25-q6",
      "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-     "giai": "Đưa về cùng thang đo giúp cả hai cột cùng được tính.",
-     "goi_y": "Đọc bảng so sánh.",
-     "mau": "Đưa về 0 – 1: trùng {0}; để nguyên đơn vị: trùng {1}.",
+     "giai": "Chênh chưa tới 2 điểm.",
+     "goi_y": "Đọc cột “Đúng”.",
+     "mau": "Độ chính xác các model từ {0} tới {1}.",
      "o": [
       [
-       "87,1%",
-       "70,0%",
-       "100%",
-       "50,0%"
+       "89,6%",
+       "90,8%",
+       "50,0%",
+       "100%"
       ],
       [
-       "70,0%",
-       "87,1%",
+       "90,8%",
+       "89,6%",
        "100%",
-       "95,0%"
+       "75,0%"
       ]
      ],
-     "h": "1358a2409488aa"
-    },
-    {
-     "k": "mc",
-     "id": "bai25-q8",
-     "q": "Vì sao để nguyên đơn vị thì kết quả kém hơn?",
-     "giai": "Khoảng cách bị cột số lớn chi phối.",
-     "goi_y": "Hai cột có thang đo chênh nhau bao nhiêu?",
-     "a": [
-      "Phút mạng XH có số lớn, lấn át giờ học",
-      "K-Means không dùng được cột số",
-      "Giờ tự học có quá nhiều ô trống",
-      "Máy đã nhìn thấy cột Result"
-     ],
-     "h": "9248c458b9b41"
+     "h": "18cb43eaa496ee"
     }
    ]
   },
   {
-   "ten": "Đặt tên và dùng các nhóm",
-   "ten_ngan": "Diễn giải",
-   "phut": 4,
-   "muc_tieu": "đặt tên và diễn giải các nhóm bằng tâm của nhóm.",
-   "khoi_dong": "Máy trả về nhóm 0, 1, 2. Làm sao biết nhóm nào là nhóm nào?",
+   "ten": "Chọn theo tình huống",
+   "ten_ngan": "Tình huống",
+   "phut": 5,
+   "muc_tieu": "chọn và bảo vệ được một model cho một tình huống cụ thể.",
+   "khoi_dong": "Cùng dữ liệu, bốn người dùng khác nhau có chọn cùng một model không?",
    "khoi": [
     {
-     "t": "anh",
-     "cap": "k = 3: ba nhóm với ba tâm",
-     "alt": "k = 3: ba nhóm với ba tâm",
-     "src": "img/ba-nhom-cua-khoi-10.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "đọc tâm nhóm",
-     "de": "Tâm nhóm đổi lại về đơn vị gốc (giờ, phút) để dễ đọc.",
+     "t": "demo_tung_buoc",
+     "tieu_de": "chọn model cho bốn tình huống",
+     "huong_dan": "Chọn một tình huống, bấm “Bước tiếp” để đi qua từng câu hỏi.",
+     "nhan_chon": "Tình huống",
      "cot": [
-      "Tên con đặt",
-      "Số bạn",
-      "Giờ tự học",
-      "Phút mạng XH",
-      "Đạt (đối chiếu)"
+      "#",
+      "Câu hỏi",
+      "Trả lời"
      ],
-     "dong": [
-      [
-       "Học ít",
-       "91",
-       "1,64",
-       "193",
-       "4 / 91"
-      ],
-      [
-       "Ở giữa",
-       "75",
-       "3,82",
-       "159",
-       "51 / 75"
-      ],
-      [
-       "Học nhiều",
-       "74",
-       "6,05",
-       "97",
-       "74 / 74"
-      ]
-     ],
-     "ket_luan": "Nhóm “Ở giữa” có 51 / 75 bạn Đạt — nhóm cần thầy cô để ý nhất.",
-     "nhan_manh": []
-    },
-    {
-     "t": "bang",
-     "cot": [
-      "Ngoài đời",
-      "Gom nhóm để làm gì"
-     ],
-     "dong": [
-      [
-       "Cửa hàng",
-       "Chia khách thành nhóm để gửi ưu đãi phù hợp"
-      ],
-      [
-       "Ứng dụng nhạc",
-       "Gom bài hát giống nhau thành playlist"
-      ],
-      [
-       "Ảnh",
-       "Gom màu gần nhau để nén ảnh"
-      ]
+     "mac_dinh": 0,
+     "lua_chon": [
+      {
+       "nhan": "Bệnh viện cần giải thích cho bệnh nhân",
+       "dong": [
+        [
+         "1",
+         "Có phải giải thích lý do bằng lời không?",
+         "Có — bác sĩ phải nói được vì sao"
+        ],
+        [
+         "2",
+         "Model nào đọc được luật NẾU… THÌ…?",
+         "Cây quyết định (nông)"
+        ],
+        [
+         "3",
+         "Cần giảm bỏ sót người bệnh?",
+         "Đo bảng nhầm lẫn; cây sâu 2 bỏ sót ít nhất ở bảng lớp"
+        ],
+        [
+         "→",
+         "Gợi ý",
+         "<b>Cây quyết định nông</b>, kiểm tra bằng kiểm định chéo"
+        ]
+       ]
+      },
+      {
+       "nhan": "Lọc hàng triệu tin nhắn mỗi giây",
+       "dong": [
+        [
+         "1",
+         "Có phải giải thích từng tin không?",
+         "Không bắt buộc"
+        ],
+        [
+         "2",
+         "Tốc độ quan trọng tới đâu?",
+         "Rất quan trọng — huấn luyện và dự đoán phải nhanh"
+        ],
+        [
+         "3",
+         "Dữ liệu dạng đếm từ?",
+         "Có — hợp với đếm rồi nhân"
+        ],
+        [
+         "→",
+         "Gợi ý",
+         "<b>Naïve Bayes</b>; tránh KNN (dự đoán chậm khi dữ liệu lớn)"
+        ]
+       ]
+      },
+      {
+       "nhan": "Thầy chủ nhiệm muốn chỉnh mức cảnh báo",
+       "dong": [
+        [
+         "1",
+         "Cần xác suất, không chỉ nhãn?",
+         "Có — để chọn ngưỡng cảnh báo"
+        ],
+        [
+         "2",
+         "Cần đọc cột nào kéo lên, kéo xuống?",
+         "Có — hệ số dương / âm"
+        ],
+        [
+         "3",
+         "Dữ liệu vừa phải, ranh giới gần thẳng?",
+         "Có"
+        ],
+        [
+         "→",
+         "Gợi ý",
+         "<b>Hồi quy logistic</b>, chỉnh ngưỡng như Bài 16"
+        ]
+       ]
+      },
+      {
+       "nhan": "Cần đúng nhất, không cần giải thích",
+       "dong": [
+        [
+         "1",
+         "Có phải giải thích bằng lời không?",
+         "Không"
+        ],
+        [
+         "2",
+         "Dữ liệu có nhiều cột hữu ích?",
+         "Có"
+        ],
+        [
+         "3",
+         "Chấp nhận huấn luyện chậm hơn?",
+         "Có"
+        ],
+        [
+         "→",
+         "Gợi ý",
+         "<b>Random Forest</b> (thử thêm KNN, SVM); so bằng kiểm định chéo"
+        ]
+       ]
+      }
      ]
     },
     {
      "t": "hop",
      "kieu": "chu-y",
-     "tieu_de": "Dùng nhóm cho đúng",
-     "html": "Nhóm chỉ mô tả dữ liệu đã có — không phải nhãn dán lên một người. Ở thực hành, con dùng K-Means để gom bài hát, không để xếp loại bạn bè."
+     "tieu_de": "Bảo vệ lựa chọn bằng 3 câu",
+     "html": "(1) Tiêu chí quan trọng nhất của tình huống là gì. (2) Model nào mạnh ở tiêu chí đó. (3) Số liệu kiểm định chéo cho thấy model đó không kém hơn đáng kể."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Đặt tên nhóm mà không đọc tâm nhóm.",
-      "Dùng nhóm như lời phán xét về một người."
+      "Chọn cùng một model cho mọi tình huống.",
+      "Bảo vệ lựa chọn chỉ bằng “vì nó hay”."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Đọc tâm nhóm (đơn vị gốc) → đặt tên → dùng cho mục đích cụ thể."
+     "html": "Mục đích quyết định tiêu chí; tiêu chí quyết định model; số liệu để bảo vệ."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai25-q7",
+     "q": "Theo phần Tự thử, tình huống lọc hàng triệu tin nhắn gợi ý model nào?",
+     "giai": "Nhanh, hợp dữ liệu đếm từ.",
+     "goi_y": "Chọn tình huống thứ hai, bấm tới dòng Gợi ý.",
+     "a": [
+      "Naïve Bayes",
+      "KNN",
+      "Random Forest",
+      "Cây sâu 10"
+     ],
+     "h": "1f2e97b943a8ac"
+    },
+    {
+     "k": "sx",
+     "id": "bai25-q8",
+     "q": "Sắp xếp các bước bảo vệ lựa chọn model.",
+     "giai": "Tiêu chí → model → đo → trình bày.",
+     "goi_y": "Bắt đầu từ nhu cầu của người dùng.",
+     "a": [
+      "Xác định tiêu chí quan trọng nhất",
+      "Tìm model mạnh ở tiêu chí đó",
+      "So bằng kiểm định chéo",
+      "Trình bày lý do kèm số liệu"
+     ],
+     "h": "e0279c09a804b"
+    }
+   ]
+  },
+  {
+   "ten": "Một dự án trọn vẹn",
+   "ten_ngan": "Dự án",
+   "phut": 4,
+   "muc_tieu": "trình bày lại quy trình trọn vẹn của một dự án học có giám sát.",
+   "khoi_dong": "Nếu phải làm một dự án từ đầu, con làm những bước nào?",
+   "khoi": [
+    {
+     "t": "bang",
+     "cot": [
+      "Bước",
+      "Việc",
+      "Học ở"
+     ],
+     "dong": [
+      [
+       "1 · Câu hỏi",
+       "Phân loại hay hồi quy? Ai dùng kết quả?",
+       "Bài 12, 15"
+      ],
+      [
+       "2 · Dữ liệu",
+       "Khám phá, làm sạch, EDA",
+       "Bài 7 – 10"
+      ],
+      [
+       "3 · Chuẩn bị",
+       "Chia train / test; thang đo trong pipeline",
+       "Bài 8, 13, 24"
+      ],
+      [
+       "4 · Chọn model",
+       "So vài model bằng kiểm định chéo; dò tham số",
+       "Bài 13 – 24"
+      ],
+      [
+       "5 · Đánh giá",
+       "Một lần trên tập kiểm tra; mốc; bảng nhầm lẫn",
+       "Bài 12, 16"
+      ],
+      [
+       "6 · Báo cáo",
+       "Số liệu, hạn chế, không nói “gây ra”",
+       "Thực hành nhóm"
+      ]
+     ]
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Sắp tới",
+     "html": "Bài 26 bước sang một nhánh mới: dữ liệu <b>không có nhãn</b> — máy tự chia nhóm (K-Means)."
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Nhảy thẳng tới chọn model, bỏ qua làm sạch và EDA.",
+      "Báo cáo con số mà không nói hạn chế của dữ liệu."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "Câu hỏi → dữ liệu → chuẩn bị → chọn model → đánh giá → báo cáo trung thực."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai25-q9",
-     "q": "Nhóm có tâm 6,05 giờ tự học, 97 phút mạng XH nên được đặt tên gì?",
-     "giai": "Giờ học cao nhất, phút mạng XH thấp nhất.",
-     "goi_y": "So với hai tâm còn lại trong bảng.",
+     "q": "Bước nào nên làm trước khi so các model?",
+     "giai": "Dữ liệu trước, model sau.",
+     "goi_y": "Nhìn thứ tự các bước trong bảng.",
      "a": [
-      "Học nhiều, ít mạng XH",
-      "Học ít, nhiều mạng XH",
-      "Học vừa, mạng XH vừa",
-      "Không đặt tên được"
+      "Làm sạch và khám phá dữ liệu",
+      "Báo cáo kết quả cuối",
+      "Đo trên tập kiểm tra",
+      "Chọn ngưỡng cảnh báo"
      ],
-     "h": "1f423d09d2d5ec"
+     "h": "9e3e768df59c3"
     },
     {
-     "k": "ma",
+     "k": "ds",
      "id": "bai25-q10",
-     "q": "Hai việc nào hợp với gom nhóm? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "Không cần nhãn có sẵn.",
-     "goi_y": "Việc nào không có cột đáp án?",
-     "a": [
-      "Gom bài hát thành playlist",
-      "Chia khách hàng để gửi ưu đãi",
-      "Đoán giá nhà từ diện tích",
-      "Đoán email thư rác theo nhãn"
-     ],
-     "h": "fcdcb0491c9b5"
+     "q": "Tập kiểm tra nên được dùng nhiều lần trong lúc chọn model.",
+     "giai": "Chỉ một lần ở cuối.",
+     "goi_y": "Nhớ lại Bài 24.",
+     "h": "1e2c8a6e5c4306"
     }
    ]
   }
@@ -592,318 +613,315 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai25-q11",
-    "q": "Nhìn hình. Vì sao các chấm chỉ có một màu xám?",
-    "giai": "Chưa ai gắn nhãn.",
+    "q": "Nhìn hình. Nhóm “Hỏi câu Có / Không” gồm model nào?",
+    "giai": "Cả rừng cũng hỏi câu Có / Không.",
     "img": {
-     "src": "img/du-lieu-khong-co-nhan.png"
+     "src": "img/ban-do-cac-model-da-hoc.png"
     },
     "a": [
-     "Dữ liệu không có nhãn",
-     "Máy đã chia xong nhóm",
-     "Chỉ có một bạn",
-     "Hình bị lỗi màu"
+     "Cây quyết định, Random Forest",
+     "KNN và SVM",
+     "Hồi quy tuyến tính, logistic",
+     "Naïve Bayes và KNN"
     ],
-    "h": "1f8e07cb1e52df"
+    "h": "1eea4db1aba8f8"
    },
    {
     "k": "mc",
     "id": "bai25-q12",
-    "q": "Nhìn hình. Khuỷu tay của đường nằm ở k bằng mấy?",
-    "giai": "Sau k = 2 đường giảm chậm.",
+    "q": "Nhìn hình. Model nào bỏ sót nhiều bạn Chưa đạt nhất?",
+    "giai": "13 bạn.",
     "img": {
-     "src": "img/duong-khuyu-tay.png"
+     "src": "img/sau-model-dung-va-bo-sot.png"
     },
     "a": [
-     "k = 2",
-     "k = 1",
-     "k = 5",
-     "k = 7"
+     "SVM",
+     "Cây sâu 2",
+     "Naïve Bayes",
+     "Logistic"
     ],
-    "h": "1f2fff50f44617"
+    "h": "1dd7b6e622227e"
    },
    {
     "k": "mc",
     "id": "bai25-q13",
-    "q": "Nhìn hình. Nhóm nào có ít bạn Đạt nhất?",
-    "giai": "4 / 91 bạn.",
+    "q": "Nhìn hình. Model nào dự đoán chậm nhất trên dữ liệu lớn?",
+    "giai": "Phải đo tới mọi điểm cũ.",
     "img": {
-     "src": "img/ba-nhom-cua-khoi-10.png"
+     "src": "img/toc-do-huan-luyen-va-du-doan.png"
     },
     "a": [
-     "Học ít",
-     "Ở giữa",
-     "Học nhiều",
-     "Ba nhóm bằng nhau"
+     "KNN (K = 3)",
+     "Naïve Bayes",
+     "Cây sâu 2",
+     "Logistic"
     ],
-    "h": "12f5f29fd3b50"
+    "h": "35ecdf5686704"
    },
    {
     "k": "mc",
     "id": "bai25-q14",
-    "q": "Nhìn hình. Qua các vòng, tổng khoảng cách² thay đổi thế nào?",
-    "giai": "K-Means luôn làm nó nhỏ đi.",
-    "img": {
-     "src": "img/k-means-tung-vong.png"
-    },
+    "q": "Một app cần đoán giá thuê nhà theo diện tích. Model nào đúng loại bài toán?",
+    "giai": "Giá là con số.",
     "a": [
-     "Giảm dần",
-     "Tăng dần",
-     "Giữ nguyên",
-     "Tăng rồi giảm"
+     "Hồi quy tuyến tính",
+     "Hồi quy logistic",
+     "Naïve Bayes",
+     "Cây phân loại"
     ],
-    "h": "8ad2e75e79270"
+    "h": "14cd9daf21188b"
    },
    {
     "k": "mc",
     "id": "bai25-q15",
-    "q": "Trong K-Means, chữ K là gì?",
-    "giai": "Khác K trong KNN.",
+    "q": "Hai model: A đúng 91% và giải thích được; B đúng 91,5% nhưng không giải thích được. Phòng tuyển sinh cần nói lý do. Chọn?",
+    "giai": "Giải thích quan trọng hơn 0,5 điểm.",
     "a": [
-     "Số nhóm cần chia",
-     "Số láng giềng gần nhất",
-     "Số cột dữ liệu",
-     "Số vòng lặp tối đa"
+     "Model A",
+     "Model B",
+     "Không chọn model nào",
+     "Chọn ngẫu nhiên"
     ],
-    "h": "dc96783f38df7"
+    "h": "1e7407d2dc4f58"
    },
    {
     "k": "mc",
     "id": "bai25-q16",
-    "q": "Sau vòng đầu, tâm của một nhóm là gì?",
-    "giai": "Dời tâm về giữa.",
+    "q": "Dữ liệu có 10 triệu dòng, cần trả lời trong tích tắc. Model nào nên tránh?",
+    "giai": "KNN đo tới mọi điểm.",
     "a": [
-     "Trung bình các điểm trong nhóm",
-     "Điểm xa nhất trong nhóm",
-     "Điểm đầu tiên của bảng",
-     "Một điểm chọn ngẫu nhiên mới"
+     "KNN",
+     "Naïve Bayes",
+     "Logistic",
+     "Cây nông"
     ],
-    "h": "1270700dd78e51"
+    "h": "140b46e69266af"
    },
    {
     "k": "mc",
     "id": "bai25-q17",
-    "q": "Dữ liệu có cột tuổi (10 – 18) và thu nhập gia đình (triệu). Trước K-Means cần làm gì?",
-    "giai": "Khoảng cách.",
+    "q": "Bệnh hiếm: bỏ sót nguy hiểm hơn báo nhầm. Nên so model bằng gì ngoài độ chính xác?",
+    "giai": "Đọc bảng nhầm lẫn.",
     "a": [
-     "Đưa các cột về cùng thang đo",
-     "Xoá hẳn cột tuổi khỏi bảng",
-     "Thêm một cột nhãn mới",
-     "Sắp xếp các dòng theo tuổi"
+     "Số ca bị bỏ sót",
+     "Thời gian huấn luyện",
+     "Số cột dữ liệu",
+     "Tên thuật toán"
     ],
-    "h": "1594989b6bf31c"
+    "h": "10a4be0dded884"
    },
    {
     "k": "mc",
     "id": "bai25-q18",
-    "q": "Ứng dụng nhạc muốn tự tạo playlist từ đặc điểm bài hát, không có nhãn thể loại. Dùng gì?",
-    "giai": "Không có nhãn.",
+    "q": "Sáu model trên bảng khối 10 chênh chưa tới 2 điểm. Kết luận khách quan nhất?",
+    "giai": "Chênh nhỏ hơn dao động.",
     "a": [
-     "Gom nhóm bằng K-Means",
-     "Hồi quy tuyến tính",
-     "Hồi quy logistic",
-     "Cây phân loại"
+     "Chưa model nào hơn hẳn",
+     "KNN là tốt nhất mọi lúc",
+     "Cây quyết định vô dụng",
+     "Cần bỏ bảng khối 10"
     ],
-    "h": "1d2c49eb03d44f"
+    "h": "1b06a86cbc5420"
    },
    {
     "k": "mc",
     "id": "bai25-q19",
-    "q": "Thầy cô chỉ có đủ người phụ đạo cho 3 nhóm. Khuỷu tay gợi ý k = 2. Chọn k nào hợp lý?",
-    "giai": "Mục đích sử dụng.",
+    "q": "Model nào vừa cho xác suất vừa đọc được hệ số dương / âm của từng cột?",
+    "giai": "Bài 16.",
     "a": [
-     "k = 3 theo mục đích",
-     "k = 2 bắt buộc",
-     "k = 240",
-     "k = 1"
+     "Hồi quy logistic",
+     "KNN",
+     "Random Forest",
+     "SVM kernel rbf"
     ],
-    "h": "a01ad4e256e98"
+    "h": "1222002cf066e5"
    },
    {
     "k": "ma",
     "id": "bai25-q20",
-    "q": "Hai điều nào đúng về học không giám sát? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Không có đáp án sẵn.",
+    "q": "Những tiêu chí nào dùng để chọn model? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Ngoài độ chính xác.",
     "a": [
-     "Không cần cột nhãn",
-     "Con người diễn giải kết quả",
-     "Đo bằng độ chính xác",
-     "Luôn cần tập kiểm tra có nhãn"
+     "Giải thích được",
+     "Tốc độ",
+     "Tên model dài",
+     "Màu biểu đồ"
     ],
-    "h": "26c1dbdfd985d"
+    "h": "136f8281274737"
    },
    {
     "k": "ma",
     "id": "bai25-q21",
-    "q": "Hai bước nào lặp lại trong K-Means? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Hai bước.",
+    "q": "Hai model nào cần đưa về cùng thang đo? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Đo khoảng cách.",
     "a": [
-     "Gán vào tâm gần nhất",
-     "Dời tâm về giữa nhóm",
-     "Chia train / test",
-     "Tính độ chính xác"
+     "KNN",
+     "SVM",
+     "Cây quyết định",
+     "Naïve Bayes"
     ],
-    "h": "7e0258fe019e1"
+    "h": "1a645dbeb7d73b"
    },
    {
     "k": "ma",
     "id": "bai25-q22",
-    "q": "Hai cách nào giúp đặt tên nhóm? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Diễn giải.",
+    "q": "Hai model nào đọc được lý do bằng lời tốt nhất? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Luật / hệ số.",
     "a": [
-     "Đọc tâm nhóm theo đơn vị gốc",
-     "So các tâm với nhau",
-     "Đếm số vòng lặp",
-     "Xem random_state"
+     "Cây quyết định nông",
+     "Hồi quy logistic",
+     "Random Forest 500 cây",
+     "SVM kernel rbf"
     ],
-    "h": "15f81aab70c55c"
+    "h": "c50333427061b"
    },
    {
     "k": "ma",
     "id": "bai25-q23",
-    "q": "Hai lỗi nào hay gặp với K-Means? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Hai lỗi.",
+    "q": "Hai bước nào nằm trong một dự án trọn vẹn? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Quy trình trung thực.",
     "a": [
-     "Quên đưa về cùng thang đo",
-     "Chọn k có tổng khoảng cách² nhỏ nhất",
-     "Đọc tâm nhóm",
-     "Vẽ đường khuỷu tay"
+     "Làm sạch dữ liệu",
+     "Nêu hạn chế",
+     "Chọn random_state đẹp nhất",
+     "Bỏ qua mốc model lười"
     ],
-    "h": "27f4dc9ab0a8c"
+    "h": "18e33c4c774ce6"
    },
    {
     "k": "sx",
     "id": "bai25-q24",
-    "q": "Sắp xếp các bước dùng K-Means trên một bảng mới.",
-    "giai": "Chuẩn bị → chọn k → chạy → diễn giải.",
+    "q": "Sắp xếp các bước một dự án học có giám sát.",
+    "giai": "Câu hỏi → dữ liệu → chia → so → đo.",
     "a": [
-     "Chọn các cột số",
-     "Đưa về cùng thang đo",
-     "Vẽ đường khuỷu tay chọn k",
-     "Chạy K-Means",
-     "Đọc tâm và đặt tên nhóm"
+     "Đặt câu hỏi",
+     "Khám phá và làm sạch dữ liệu",
+     "Chia train / test",
+     "So model bằng kiểm định chéo",
+     "Đo một lần trên tập kiểm tra"
     ],
-    "h": "6723c19085a98"
+    "h": "1296c6d850d803"
    },
    {
     "k": "sx",
     "id": "bai25-q25",
-    "q": "Sắp xếp một vòng K-Means từ đầu.",
-    "giai": "Một vòng.",
+    "q": "Sắp xếp các bước bảo vệ lựa chọn model.",
+    "giai": "Nhu cầu → tiêu chí → model → số liệu.",
     "a": [
-     "Chọn k tâm",
-     "Gán điểm vào tâm gần nhất",
-     "Dời tâm",
-     "Kiểm tra còn điểm đổi nhóm không"
+     "Nêu nhu cầu người dùng",
+     "Chọn tiêu chí quan trọng",
+     "Chọn model mạnh ở tiêu chí đó",
+     "Đưa số liệu kiểm định chéo"
     ],
-    "h": "5023d29a0a085"
+    "h": "2d812fb4fa669"
    },
    {
     "k": "dd",
     "id": "bai25-q26",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Hai nhánh.",
-    "mau": "Học có giám sát cần {0}; gom nhóm là học {1}.",
+    "giai": "Bản đồ.",
+    "mau": "KNN thuộc nhóm {0}; Naïve Bayes thuộc nhóm {1}.",
     "o": [
      [
-      "nhãn",
-      "tâm",
-      "khuỷu tay",
-      "k nhóm"
+      "đo khoảng cách",
+      "đếm rồi nhân",
+      "hỏi Có / Không",
+      "vẽ đường"
      ],
      [
-      "không giám sát",
-      "có giám sát",
-      "tăng cường",
-      "hồi quy"
+      "đếm rồi nhân",
+      "đo khoảng cách",
+      "hỏi Có / Không",
+      "vẽ đường"
      ]
     ],
-    "h": "a03a366a09a8b"
+    "h": "163f3578176088"
    },
    {
     "k": "dd",
     "id": "bai25-q27",
-    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Đường khuỷu tay.",
-    "mau": "Tổng khoảng cách² với k = 1 là {0}; với k = 2 là {1}.",
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "Theo tiêu chí.",
+    "mau": "Cần xác suất để chỉnh ngưỡng: chọn {0}; cần luật đọc được: chọn {1}.",
     "o": [
      [
-      "29,67",
-      "8,81",
-      "3,52",
-      "0,00"
+      "logistic",
+      "KNN",
+      "SVM",
+      "rừng"
      ],
      [
-      "12,33",
-      "6,18",
-      "4,11",
-      "0,00"
+      "cây nông",
+      "KNN",
+      "SVM",
+      "rừng 500 cây"
      ]
     ],
-    "h": "3df551e88215c"
+    "h": "44ae4bcf0cc3b"
    },
    {
     "k": "dd",
     "id": "bai25-q28",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Hai bước.",
-    "mau": "K-Means gán mỗi điểm vào tâm {0} rồi dời tâm về {1} của nhóm.",
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "Đọc biểu đồ.",
+    "mau": "Bỏ sót ít nhất: {0}; nhiều nhất: {1}.",
     "o": [
      [
-      "gần nhất",
-      "xa nhất",
-      "đầu tiên",
-      "ngẫu nhiên"
+      "Cây sâu 2",
+      "Logistic",
+      "SVM",
+      "KNN (K = 3)"
      ],
      [
-      "trung bình",
-      "điểm xa nhất",
-      "điểm đầu",
-      "góc trái"
+      "SVM",
+      "Cây sâu 2",
+      "Naïve Bayes",
+      "Logistic"
      ]
     ],
-    "h": "fd31c82412a33"
+    "h": "2b398ef181011"
    },
    {
     "k": "dd",
     "id": "bai25-q29",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Diễn giải.",
-    "mau": "Máy đặt tên nhóm là {0}; tên có ý nghĩa do {1} đặt.",
+    "giai": "Câu chốt.",
+    "mau": "Không có model {0}; chỉ có model {1}.",
     "o": [
      [
-      "số 0, 1, 2",
-      "tên tiếng Việt",
-      "màu sắc",
-      "chữ cái"
+      "tốt nhất",
+      "chậm nhất",
+      "đắt nhất",
+      "mới nhất"
      ],
      [
-      "con người",
-      "máy",
-      "thư viện",
-      "tập kiểm tra"
+      "phù hợp",
+      "phức tạp",
+      "nổi tiếng",
+      "mới nhất"
      ]
     ],
-    "h": "bc74dbc514fbb"
+    "h": "109e2a2c7f209d"
    },
    {
     "k": "ds",
     "id": "bai25-q30",
-    "q": "K-Means có thể chạy khi bảng không có cột nhãn.",
-    "giai": "Học không giám sát.",
-    "h": "1d11ddbbb94e93"
+    "q": "Model có độ chính xác cao nhất luôn là lựa chọn đúng.",
+    "giai": "Còn nhiều tiêu chí khác.",
+    "h": "d958cdb86358e"
    },
    {
     "k": "ds",
     "id": "bai25-q31",
-    "q": "Tổng khoảng cách² luôn giảm hoặc giữ nguyên khi tăng k.",
-    "giai": "Nhiều tâm hơn, gần hơn.",
+    "q": "Random Forest thường huấn luyện chậm hơn Naïve Bayes.",
+    "giai": "Nhiều cây.",
     "h": "1b0c85c5d7fa46"
    },
    {
     "k": "ds",
     "id": "bai25-q32",
-    "q": "K trong K-Means và K trong KNN có cùng ý nghĩa.",
-    "giai": "Số nhóm khác số láng giềng.",
+    "q": "Hồi quy tuyến tính dùng để phân loại Đạt / Chưa đạt.",
+    "giai": "Nó dự đoán con số.",
     "h": "1b1dfd34888dc9"
    }
   ]

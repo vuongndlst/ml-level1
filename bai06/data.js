@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 6,
  "ma": "bai06",
  "nhan": "Bài 6",
- "tieu_de": "Làm sạch dữ liệu",
- "phan": "Phần A · Nền tảng dữ liệu",
- "cau_hoi": "Vì sao dữ liệu bẩn làm hỏng cả một model tốt?",
+ "tieu_de": "Vector và khoảng cách",
+ "phan": "Module 05 · Math for Machine Learning",
+ "cau_hoi": "Máy so hai học sinh bằng cách nào?",
  "gioi_thieu": [
-  "Đầu giờ máy báo điểm trung bình của bảng 95 học sinh là <b>9,08</b> — trên thang 10. Máy tính không cộng chia sai. Vậy sai ở đâu?",
-  "Năm chặng dưới đây giúp con nhận ra <b>năm loại lỗi</b> hay gặp trong dữ liệu, biết cách xử lý từng loại bằng Pandas, và sắp xếp các bước dọn theo đúng thứ tự. Ví dụ lấy từ bảng <b>students_ban.csv</b> — bảng mô phỏng, được cài sẵn lỗi để luyện tập, cũng là bảng con mở trên Colab.",
-  "Con sẽ dùng lại trung vị, mốt (Bài 4) và tứ phân vị (Toán 10)."
+  "Đầu giờ con đã nhìn ba bạn <b>A, B, C</b> trong bảng khối 10 và đoán A giống ai hơn. Máy không “nhìn” được như con — máy chỉ có các con số.",
+  "Năm chặng dưới đây cho con thấy máy <b>so hai học sinh</b> bằng khoảng cách, vì sao phải đo cho <b>công bằng</b>, và máy tìm ra một <b>đường dự đoán tốt</b> bằng cách đi từng bước xuống dốc. Mọi ví dụ lấy từ <b>bảng dữ liệu 240 học sinh khối 10</b> — bảng mô phỏng, dựng giống một khối lớp thật để luyện tập.",
+  "Nhiều kiến thức con đã gặp ở Toán 10: tọa độ của vectơ, khoảng cách giữa hai điểm, đường thẳng y = ax + b. Ở đây con dùng lại chúng theo cách của Machine Learning."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai06",
  "muc_tieu": [
-  "Giải thích được vì sao dữ liệu bẩn làm kết quả tính toán và model sai.",
-  "Phát hiện và xử lý ô trống: xoá dòng hoặc điền bằng số trung bình, trung vị, mốt.",
-  "Phát hiện và xử lý dòng trùng, chữ viết nhiều kiểu.",
-  "Phân biệt giá trị phi lý (lỗi nhập liệu) với giá trị bất thường có thật.",
-  "Sắp xếp đúng thứ tự các bước làm sạch một bảng dữ liệu."
+  "Biểu diễn được một học sinh thành vector và cả bảng dữ liệu thành ma trận.",
+  "Tính được khoảng cách Euclid giữa hai vector và dùng nó để so mức giống nhau.",
+  "Giải thích được vì sao phải đưa các cột về cùng thang đo trước khi đo khoảng cách, và đưa được một giá trị về khoảng 0 – 1.",
+  "Tính được sai số trung bình bình phương (MSE) của một đường dự đoán.",
+  "Mô tả được cách gradient descent đi từng bước để giảm sai số và vai trò của bước nhảy."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,163 +36,139 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Dữ liệu bẩn: rác vào, rác ra",
-   "ten_ngan": "Dữ liệu bẩn",
+   "ten": "Vector và ma trận",
+   "ten_ngan": "Vector",
    "phut": 4,
-   "muc_tieu": "giải thích được vì sao phải làm sạch dữ liệu trước khi tính toán hay huấn luyện model.",
-   "khoi_dong": "Máy báo điểm trung bình của bảng là 9,08 trên thang 10. Con có tin con số đó không?",
+   "muc_tieu": "biểu diễn được một học sinh thành vector và cả bảng dữ liệu thành ma trận.",
+   "khoi_dong": "Máy tính không “thấy” bạn A như con thấy. Vậy máy lưu bạn A dưới dạng gì?",
    "khoi": [
     {
-     "t": "dinh_nghia",
-     "ten": "Làm sạch dữ liệu (data cleaning)",
-     "html": "Là việc <b>phát hiện và xử lý các lỗi</b> trong bảng dữ liệu — ô bị thiếu, dòng bị lặp, chữ viết không thống nhất, con số không thể có thật — để bảng phản ánh đúng thực tế trước khi tính toán hay đưa cho model học.",
-     "ky_hieu": "Nguyên tắc “rác vào, rác ra” (garbage in, garbage out): dữ liệu vào sai thì kết quả ra sai, dù thuật toán tốt đến đâu."
-    },
-    {
-     "t": "anh",
-     "cap": "Làm sạch nằm ngay sau khi có dữ liệu thô — trước khi chuẩn bị feature và huấn luyện model",
-     "alt": "Làm sạch nằm ngay sau khi có dữ liệu thô — trước khi chuẩn bị feature và huấn luyện model",
-     "src": "img/quy-trinh-tu-du-lieu-tho-den-model.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "năm dòng đầu của bảng students_ban.csv",
-     "de": "Soi từng dòng, mỗi dòng có một chỗ bất ổn:",
-     "cot": [
-      "Mã",
-      "Lớp",
-      "Giới tính",
-      "Giờ tự học",
-      "Điểm",
-      "Chỗ bất ổn"
-     ],
-     "dong": [
-      [
-       "HS003",
-       "10a1",
-       "Nu",
-       "4,2",
-       "7,0",
-       "Lớp viết chữ thường"
-      ],
-      [
-       "HS004",
-       "10A3",
-       "Nam",
-       "3,7",
-       "6,6",
-       "Thiếu họ tên"
-      ],
-      [
-       "HS009",
-       "10A1",
-       "Nu",
-       "<b>25,0</b>",
-       "5,8",
-       "Học 25 giờ mỗi ngày"
-      ],
-      [
-       "HS010",
-       "10A2",
-       "<b>M</b>",
-       "1,8",
-       "5,2",
-       "Giới tính viết kiểu khác"
-      ],
-      [
-       "HS012",
-       "10A3",
-       "Nam",
-       "4,2",
-       "<b>55,0</b>",
-       "Điểm 55 trên thang 10"
-      ]
-     ],
-     "ket_luan": "Máy vẫn cộng cả 25 giờ và 55 điểm vào phép tính — nên điểm trung bình ra 9,08. Máy không sai; dữ liệu sai.",
-     "nhan_manh": [
-      2,
-      4
-     ]
-    },
-    {
      "t": "p",
-     "html": "Quy tắc số một: <b>nhìn trước khi sửa</b>. Pandas có sẵn các lệnh để “soi” một bảng:"
+     "html": "Ở Toán 10, một vectơ trong mặt phẳng tọa độ được xác định bởi <b>hai số</b> (x; y). Machine Learning dùng đúng ý đó để lưu dữ liệu, và cho phép dùng bao nhiêu số cũng được."
     },
     {
-     "t": "bang",
-     "cot": [
-      "Lệnh Pandas",
-      "Cho biết"
-     ],
-     "dong": [
-      [
-       "<code>df.info()</code>",
-       "Số dòng, tên cột, số ô có dữ liệu của từng cột"
-      ],
-      [
-       "<code>df.isnull().sum()</code>",
-       "Số ô trống của từng cột"
-      ],
-      [
-       "<code>df.duplicated().sum()</code>",
-       "Số dòng lặp lại y hệt một dòng khác"
-      ],
-      [
-       "<code>df[\"cột\"].unique()</code>",
-       "Các cách viết khác nhau trong một cột chữ"
-      ],
-      [
-       "<code>df.describe()</code>",
-       "Nhỏ nhất, lớn nhất, trung bình… của các cột số"
-      ]
-     ]
+     "t": "dinh_nghia",
+     "ten": "Vector (trong Machine Learning)",
+     "html": "Một <b>dãy số có thứ tự</b>; mỗi số ứng với một đặc điểm (một cột) của đối tượng. Số lượng số trong dãy gọi là <b>số chiều</b> của vector.",
+     "ky_hieu": "Bạn A với hai cột (giờ tự học; phút mạng xã hội): A = (2,6; 86) — vector 2 chiều."
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "Ma trận",
+     "html": "Bảng số gồm nhiều dòng và nhiều cột. Bảng dữ liệu có m dòng, n cột là một ma trận <b>cỡ m × n</b> (ghi số dòng trước, số cột sau); mỗi dòng là vector của một đối tượng.",
+     "ky_hieu": "Bảng khối 10 lấy 2 cột: ma trận cỡ 240 × 2."
     },
     {
      "t": "anh",
-     "cap": "Năm dòng đầu của bảng Titanic — bộ dữ liệu luyện tập nổi tiếng của Machine Learning; NaN là ô trống",
-     "alt": "Năm dòng đầu của bảng Titanic — bộ dữ liệu luyện tập nổi tiếng của Machine Learning; NaN là ô trống",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250829123024455235/Screenshot-2025-08-29-122408.webp",
-     "du_phong": "img/minh-hoa-bang-du-lieu-titanic-con-nguyen-ban.png",
+     "cap": "Vector, ma trận và tensor",
+     "alt": "Vector, ma trận và tensor",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250820180052737722/vector_tensor.webp",
+     "du_phong": "img/minh-hoa-vector-ma-tran-va-tensor.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Data cleaning introduction",
-      "url": "https://www.geeksforgeeks.org/data-analysis/data-cleaning-introduction/"
+      "ten": "GeeksforGeeks — Machine learning mathematics",
+      "url": "https://www.geeksforgeeks.org/machine-learning/machine-learning-mathematics/"
      },
      "chu_giai": [
       [
-       "PassengerId, Name, Sex, Age",
-       "Mã hành khách, họ tên, giới tính, tuổi"
+       "Vector",
+       "Vector — một dãy số"
       ],
       [
-       "Survived",
-       "Sống sót (1) hay không (0)"
+       "Matrix",
+       "Ma trận — bảng số nhiều dòng, nhiều cột"
       ],
       [
-       "Pclass, Fare, Cabin",
-       "Hạng vé, giá vé, số phòng"
-      ],
-      [
-       "NaN",
-       "Not a Number — ô không có dữ liệu"
+       "Tensor",
+       "Tensor — nhiều ma trận xếp chồng lên nhau (gặp lại ở Level 2)"
       ]
      ]
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "ba bạn A, B, C thành ba vector",
+     "de": "Lấy hai cột trong bảng khối 10, theo thứ tự (giờ tự học; phút mạng xã hội):",
+     "cot": [
+      "Bạn",
+      "Mã học sinh",
+      "Giờ tự học",
+      "Phút mạng xã hội",
+      "Vector"
+     ],
+     "dong": [
+      [
+       "A",
+       "HS130",
+       "2,6",
+       "86",
+       "<b>(2,6; 86)</b>"
+      ],
+      [
+       "B",
+       "HS147",
+       "6,7",
+       "70",
+       "<b>(6,7; 70)</b>"
+      ],
+      [
+       "C",
+       "HS043",
+       "2,2",
+       "182",
+       "<b>(2,2; 182)</b>"
+      ]
+     ],
+     "ket_luan": "Ba vector xếp chồng thành một ma trận 3 × 2. Cả khối 240 bạn là ma trận 240 × 2 — chính là bảng con mở bằng Pandas.",
+     "nhan_manh": []
+    },
+    {
+     "t": "anh",
+     "cap": "Một bức ảnh cũng là ma trận: ô trắng (đường viền trái tim) ghi 1, ô nền xanh ghi 0",
+     "alt": "Một bức ảnh cũng là ma trận: ô trắng (đường viền trái tim) ghi 1, ô nền xanh ghi 0",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250707145023542851/matrix_image.webp",
+     "du_phong": "img/minh-hoa-mot-buc-anh-duoc-luu-duoi-dang-ma-tran.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Machine learning mathematics",
+      "url": "https://www.geeksforgeeks.org/machine-learning/machine-learning-mathematics/"
+     },
+     "chu_giai": [
+      [
+       "Example using matrices for image processing",
+       "Ví dụ dùng ma trận để xử lý ảnh"
+      ]
+     ]
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Vì sao máy cần vector?",
+     "html": "Mọi thuật toán Machine Learning đều tính toán trên số. Biến mỗi học sinh, mỗi bức ảnh, mỗi câu văn thành vector là bước đầu tiên để máy có thể so sánh và học."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Sửa ngay khi thấy một lỗi, chưa soi hết bảng — dễ bỏ sót và sửa sai thứ tự.",
-      "Tin một con số chỉ vì “máy tính ra như vậy”."
+      "Đổi thứ tự các số: (2,6; 86) và (86; 2,6) là hai vector khác nhau — thứ tự số phải khớp thứ tự cột.",
+      "Ghi cỡ ma trận ngược: bảng 240 dòng, 2 cột là 240 × 2, không phải 2 × 240.",
+      "Nghĩ vector bắt buộc phải là mũi tên. Trong Machine Learning, vector đơn giản là một dãy số có thứ tự."
      ]
     },
     {
+     "t": "video",
+     "yt": "fNk_zzaMoSs",
+     "ten": "3Blue1Brown — Vectors, what even are they?",
+     "ghi_chu": "tiếng Anh, có phụ đề (CC); không bắt buộc — 3 phút đầu nói về ba cách nhìn vector",
+     "bat_dau": null,
+     "ket_thuc": 200
+    },
+    {
      "t": "tom_tat",
-     "html": "Dữ liệu bẩn thì kết quả sai (rác vào, rác ra). Luôn soi bảng bằng info, isnull, duplicated, unique, describe trước khi sửa."
+     "html": "Một đối tượng là một vector — dãy số có thứ tự. Nhiều vector xếp chồng thành ma trận, chính là bảng dữ liệu."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Data Cleaning – Introduction",
-       "url": "https://www.geeksforgeeks.org/data-analysis/data-cleaning-introduction/",
+       "ten": "Machine Learning Mathematics",
+       "url": "https://www.geeksforgeeks.org/machine-learning/machine-learning-mathematics/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -202,235 +178,205 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai06-q1",
-     "q": "Máy tính điểm trung bình của một bảng điểm thang 10 ra 9,08. Giải thích nào hợp lý nhất?",
-     "giai": "Máy cộng chia đúng — nhưng cộng cả những điểm không thể có trên thang 10.",
-     "goi_y": "Điểm trung bình trên thang 10 mà gần 9 — thử nghĩ tới các con số lạ trong bảng.",
+     "q": "Bạn D tự học 3,5 giờ và dùng mạng xã hội 120 phút mỗi ngày. Theo thứ tự cột (giờ tự học; phút mạng xã hội), vector của bạn D là gì?",
+     "giai": "Hai cột nên vector có 2 số, theo đúng thứ tự cột: giờ tự học trước, phút mạng sau. Tên bạn D không phải là số đo.",
+     "goi_y": "Mỗi số ứng với một cột, và thứ tự các số phải theo đúng thứ tự cột.",
      "a": [
-      "Bảng có vài điểm phi lý như 55, 100",
-      "Máy tính đã cộng chia bị sai",
-      "Cả lớp đều học rất giỏi thật",
-      "Trung bình luôn cao hơn thực tế"
+      "(3,5; 120)",
+      "(120; 3,5)",
+      "(123,5)",
+      "(3,5; 120; D)"
      ],
-     "h": "e0bde83b78aab"
+     "h": "1c65f1f025dca4"
     },
     {
      "k": "dd",
      "id": "bai06-q2",
-     "q": "Chọn lệnh đúng cho mỗi chỗ trống.",
-     "giai": "isnull() đánh dấu ô trống, .sum() đếm; describe() cho min, max, trung bình…",
-     "goi_y": "Xem lại bảng “soi” năm lệnh ở trên.",
-     "mau": "Muốn đếm ô trống từng cột, dùng {0}; muốn xem giá trị nhỏ nhất, lớn nhất của các cột số, dùng {1}.",
+     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+     "giai": "Cỡ ma trận ghi số dòng (30) trước, số cột (4) sau. Số chiều của vector bằng số cột.",
+     "goi_y": "Mỗi dòng là một học sinh. Số chiều của vector bằng số cột.",
+     "mau": "Bảng có 30 học sinh, mỗi học sinh 4 cột số. Bảng là ma trận cỡ {0}; mỗi học sinh là một vector {1} chiều.",
      "o": [
       [
-       "df.isnull().sum()",
-       "df.duplicated().sum()",
-       "df.unique()",
-       "df.describe()"
+       "30 × 4",
+       "4 × 30",
+       "30 × 30",
+       "34 × 1"
       ],
       [
-       "df.describe()",
-       "df.info()",
-       "df.isnull().sum()",
-       "df.duplicated().sum()"
+       "4",
+       "30",
+       "2",
+       "120"
       ]
      ],
-     "h": "fa208f6e15395"
+     "h": "196425732a164f"
     },
     {
      "k": "ds",
      "id": "bai06-q3",
-     "q": "Nếu thuật toán Machine Learning đủ tốt thì không cần làm sạch dữ liệu.",
-     "giai": "Rác vào, rác ra: model học từ dữ liệu, nên học luôn cả lỗi.",
-     "goi_y": "Model học từ đâu?",
+     "q": "Vector (2,6; 86) và vector (86; 2,6) biểu diễn cùng một học sinh.",
+     "giai": "Thứ tự số phải khớp thứ tự cột: (86; 2,6) nghĩa là học 86 giờ và dùng mạng 2,6 phút — một học sinh khác hẳn.",
+     "goi_y": "Nếu đọc (86; 2,6) theo thứ tự cột (giờ tự học; phút mạng) thì được gì?",
      "h": "11157f65fe677f"
     }
    ]
   },
   {
-   "ten": "Ô trống — giá trị bị thiếu",
-   "ten_ngan": "Ô trống",
+   "ten": "Khoảng cách Euclid",
+   "ten_ngan": "Khoảng cách",
    "phut": 5,
-   "muc_tieu": "phát hiện ô trống và chọn được cách xử lý: xoá dòng hoặc điền bằng số trung bình, trung vị, mốt.",
-   "khoi_dong": "Một bạn quên ghi giờ ngủ nhưng các cột khác đầy đủ. Nên bỏ cả dòng của bạn ấy, hay giữ lại?",
+   "muc_tieu": "tính được khoảng cách Euclid giữa hai vector và dùng nó để so sánh mức giống nhau.",
+   "khoi_dong": "Nếu mỗi bạn là một điểm trên mặt phẳng tọa độ, làm sao đo được hai bạn “gần” nhau đến mức nào?",
    "khoi": [
     {
-     "t": "dinh_nghia",
-     "ten": "Ô trống (giá trị bị thiếu, missing value)",
-     "html": "Ô không có dữ liệu — Pandas hiển thị là <b>NaN</b>. Có hai cách xử lý: <b>xoá</b> dòng (hoặc cả cột) chứa ô trống, hoặc <b>điền</b> ô trống bằng một giá trị đại diện của cột.",
-     "ky_hieu": "Đếm: <code>df.isnull().sum()</code> · Xoá dòng: <code>df.dropna()</code> · Điền: <code>df[\"cột\"].fillna(giá_trị)</code>"
+     "t": "p",
+     "html": "Toán 10: khoảng cách giữa hai điểm A(x<sub>1</sub>; y<sub>1</sub>) và B(x<sub>2</sub>; y<sub>2</sub>) là AB = √[(x<sub>2</sub> − x<sub>1</sub>)<sup>2</sup> + (y<sub>2</sub> − y<sub>1</sub>)<sup>2</sup>]. Công thức có từ <b>định lý Pythagoras</b>: hai hiệu là hai cạnh góc vuông, khoảng cách là cạnh huyền."
     },
     {
      "t": "anh",
-     "cap": "Bảng Titanic có 891 hành khách: cột Age chỉ có 714 ô có dữ liệu, cột Cabin chỉ có 204",
-     "alt": "Bảng Titanic có 891 hành khách: cột Age chỉ có 714 ô có dữ liệu, cột Cabin chỉ có 204",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250829123024725201/Screenshot-2025-08-29-122359.webp",
-     "du_phong": "img/minh-hoa-bang-thong-ke-so-o-khong-trong-cua-tung-cot.png",
+     "cap": "Khoảng cách d giữa A và B là cạnh huyền của tam giác vuông ABC",
+     "alt": "Khoảng cách d giữa A và B là cạnh huyền của tam giác vuông ABC",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260729183612327319/euclidean-distance-formula-derivation-2.png",
+     "du_phong": "img/minh-hoa-cong-thuc-khoang-cach-euclid-tu-dinh-ly-pythagoras.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Data cleaning introduction",
-      "url": "https://www.geeksforgeeks.org/data-analysis/data-cleaning-introduction/"
+      "ten": "GeeksforGeeks — Euclidean distance",
+      "url": "https://www.geeksforgeeks.org/maths/euclidean-distance/"
      },
      "chu_giai": [
       [
-       "RangeIndex: 891 entries",
-       "Bảng có 891 dòng"
+       "d",
+       "Khoảng cách (distance) giữa A và B"
       ],
       [
-       "Non-Null Count",
-       "Số ô CÓ dữ liệu (không trống)"
+       "x<sub>2</sub> − x<sub>1</sub>",
+       "Cạnh góc vuông nằm ngang: hiệu hoành độ"
       ],
       [
-       "Dtype: int64, float64, object",
-       "Kiểu dữ liệu: số nguyên, số thập phân, chữ"
+       "y<sub>2</sub> − y<sub>1</sub>",
+       "Cạnh góc vuông thẳng đứng: hiệu tung độ"
       ]
      ]
     },
     {
-     "t": "bang",
-     "cot": [
-      "Loại cột",
-      "Điền bằng",
-      "Vì sao",
-      "Lệnh Pandas"
-     ],
-     "dong": [
-      [
-       "Cột số, không có giá trị lạ",
-       "Số trung bình",
-       "Dùng hết mọi giá trị",
-       "<code>.fillna(df[\"cột\"].mean())</code>"
-      ],
-      [
-       "Cột số, có giá trị lạ",
-       "Trung vị",
-       "Không bị giá trị lạ kéo lệch (Bài 4)",
-       "<code>.fillna(df[\"cột\"].median())</code>"
-      ],
-      [
-       "Cột chữ: lớp, giới tính",
-       "Mốt",
-       "Chữ không cộng chia được",
-       "<code>.fillna(df[\"cột\"].mode()[0])</code>"
-      ]
-     ]
+     "t": "dinh_nghia",
+     "ten": "Khoảng cách Euclid",
+     "html": "Với hai vector cùng số chiều: lấy <b>hiệu</b> từng cặp số cùng cột, <b>bình phương</b>, <b>cộng</b> lại rồi lấy <b>căn bậc hai</b>. Khoảng cách càng nhỏ, hai đối tượng càng giống nhau; bằng 0 khi hai vector trùng nhau.",
+     "ky_hieu": "d(A, B) = √[(a<sub>1</sub> − b<sub>1</sub>)<sup>2</sup> + (a<sub>2</sub> − b<sub>2</sub>)<sup>2</sup> + … + (a<sub>n</sub> − b<sub>n</sub>)<sup>2</sup>]"
     },
     {
      "t": "vi_du",
-     "tieu_de": "điền một ô trống trong cột điểm",
-     "de": "Điểm của 6 bạn: 5 · 6 · 6,5 · 7 · 9,5 · <b>(trống)</b>.",
+     "tieu_de": "khoảng cách từ A đến B và từ A đến C",
+     "de": "A = (2,6; 86), B = (6,7; 70), C = (2,2; 182).",
      "cot": [
-      "Cách điền",
-      "Tính",
-      "Giá trị điền"
+      "Bước",
+      "A → B",
+      "A → C"
      ],
      "dong": [
       [
-       "Số trung bình",
-       "(5 + 6 + 6,5 + 7 + 9,5) : 5",
-       "6,8"
+       "Hiệu giờ tự học",
+       "2,6 − 6,7 = −4,1",
+       "2,6 − 2,2 = 0,4"
       ],
       [
-       "Trung vị",
-       "Sắp xếp 5 giá trị, lấy giá trị thứ 3",
-       "<b>6,5</b>"
+       "Hiệu phút mạng",
+       "86 − 70 = 16",
+       "86 − 182 = −96"
       ],
       [
-       "Xoá dòng",
-       "Bỏ bạn thứ 6",
-       "Còn 5 bạn — mất cả các cột khác của bạn ấy"
+       "Bình phương hai hiệu",
+       "16,81 và 256",
+       "0,16 và 9216"
+      ],
+      [
+       "Cộng lại",
+       "272,81",
+       "9216,16"
+      ],
+      [
+       "Lấy căn bậc hai",
+       "<b>≈ 16,5</b>",
+       "<b>≈ 96,0</b>"
       ]
      ],
-     "ket_luan": "Bạn 9,5 điểm kéo số trung bình lên 6,8; trung vị 6,5 ít bị ảnh hưởng hơn.",
-     "nhan_manh": []
-    },
-    {
-     "t": "demo_tb_tv",
-     "tieu_de": "vì sao nên điền bằng trung vị",
-     "huong_dan": "Bảy điểm dưới đây có một điểm gõ nhầm (55). Sửa ô vàng thành 5,5 rồi thành 100. Số nào đổi nhiều nếu dùng để điền ô trống?",
-     "gia_tri": [
-      5.8,
-      6.2,
-      6.6,
-      6.7,
-      7.0,
-      7.4,
-      55
-     ],
-     "sua": 6
-    },
-    {
-     "t": "anh",
-     "cap": "Bảng mẫu có ô trống (NaN) ở nhiều cột",
-     "alt": "Bảng mẫu có ô trống (NaN) ở nhiều cột",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251201165310561104/MV1.png",
-     "du_phong": "img/minh-hoa-bang-du-lieu-co-o-trong.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Handling missing values machine learning",
-      "url": "https://www.geeksforgeeks.org/data-analysis/handling-missing-values-machine-learning/"
-     },
-     "chu_giai": [
-      [
-       "School ID, Name, Address, City",
-       "Mã trường, tên, địa chỉ, thành phố"
-      ],
-      [
-       "Subject, Marks, Rank, Grade",
-       "Môn, điểm, thứ hạng, xếp loại"
-      ],
-      [
-       "NaN",
-       "Ô trống"
-      ]
+     "ket_luan": "Theo phép đo này, A gần B hơn nhiều (16,5 so với 96,0) — ngược với điều mắt con thấy trên hình đầu giờ. Chặng 3 giải thích vì sao.",
+     "nhan_manh": [
+      4
      ]
     },
     {
+     "t": "demo_khoang_cach",
+     "tieu_de": "khoảng cách giữa hai bạn",
+     "huong_dan": "Sửa số trong các ô vàng để đổi số liệu của A và B. Máy hiện từng bước tính — con so với bảng ví dụ ở trên.",
+     "cot": [
+      "Giờ tự học",
+      "Phút mạng xã hội"
+     ],
+     "diem": {
+      "A": [
+       2.6,
+       86
+      ],
+      "B": [
+       6.7,
+       70
+      ]
+     },
+     "mien": null,
+     "nhan_thang_do": null
+    },
+    {
      "t": "anh",
-     "cap": "Cùng bảng đó sau <code>dropna()</code>: 8 dòng chỉ còn 5",
-     "alt": "Cùng bảng đó sau <code>dropna()</code>: 8 dòng chỉ còn 5",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251201165442193836/MV2.png",
-     "du_phong": "img/minh-hoa-bang-sau-khi-xoa-cac-dong-bi-thieu.png",
+     "cap": "Ba ứng dụng của khoảng cách Euclid ngoài đời",
+     "alt": "Ba ứng dụng của khoảng cách Euclid ngoài đời",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260729183611662101/2056958497.webp",
+     "du_phong": "img/minh-hoa-ba-ung-dung-thuc-te-cua-khoang-cach-euclid.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Handling missing values machine learning",
-      "url": "https://www.geeksforgeeks.org/data-analysis/handling-missing-values-machine-learning/"
+      "ten": "GeeksforGeeks — Euclidean distance",
+      "url": "https://www.geeksforgeeks.org/maths/euclidean-distance/"
      },
      "chu_giai": [
       [
-       "DataFrame after removing rows with missing values",
-       "Bảng sau khi xoá các dòng có ô trống"
+       "In Geographic Navigation",
+       "Dẫn đường trên bản đồ — khoảng cách đường chim bay"
+      ],
+      [
+       "Between Two Facial Points",
+       "Giữa hai điểm trên khuôn mặt — dùng trong nhận diện khuôn mặt"
+      ],
+      [
+       "Between Two Coordinates",
+       "Giữa hai toạ độ trên bản đồ — ví dụ Paris và Berlin"
       ]
      ]
-    },
-    {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Khi nào nên xoá?",
-     "html": "Xoá dòng khi ô trống rất ít và bảng rất lớn. Xoá <b>cả cột</b> khi cột thiếu gần hết — như Cabin thiếu 687/891 ô: điền đoán ngần ấy ô còn tệ hơn bỏ cột. Còn lại, ưu tiên điền để không mất dữ liệu tốt."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Điền ô trống bằng 0 — tự bịa ra một bạn được 0 điểm, kéo số trung bình xuống.",
-      "Dùng số trung bình để điền cột có giá trị lạ.",
-      "Xoá mọi dòng có ô trống mà không đếm xem mất bao nhiêu dữ liệu."
+      "Quên bình phương: cộng thẳng hai hiệu (−4,1) + 16 thì số âm và số dương bù trừ nhau, ra kết quả sai.",
+      "Quên lấy căn bậc hai ở bước cuối.",
+      "Gõ số thập phân trong Python bằng dấu phẩy: phải viết <code>2.6</code>, không viết <code>2,6</code>."
      ]
     },
     {
      "t": "video",
-     "yt": "AmtvgajbmMw",
-     "ten": "Microsoft — Handling duplicated and missing data (Python for Beginners)",
-     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc — minh hoạ dropna, fillna, drop_duplicates",
+     "yt": "nyZuite17Pc",
+     "ten": "Khan Academy — Distance formula",
+     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc — ôn lại công thức Toán 10",
      "bat_dau": null,
      "ket_thuc": null
     },
     {
      "t": "tom_tat",
-     "html": "Ô trống: đếm bằng isnull().sum(); ưu tiên điền — cột số có giá trị lạ dùng trung vị, cột chữ dùng mốt; chỉ xoá khi thiếu rất ít hoặc thiếu gần hết."
+     "html": "Khoảng cách Euclid: hiệu từng cột → bình phương → cộng → lấy căn. Khoảng cách càng nhỏ, hai đối tượng càng giống nhau."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Handling Missing Values in Machine Learning",
-       "url": "https://www.geeksforgeeks.org/data-analysis/handling-missing-values-machine-learning/",
+       "ten": "Euclidean Distance",
+       "url": "https://www.geeksforgeeks.org/maths/euclidean-distance/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -440,156 +386,253 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai06-q4",
-     "q": "Cột điểm: 4 · 5 · 6 · 7 · 98 (số 98 chưa kiểm tra) và một ô trống. Nên điền ô trống bằng số nào?",
-     "giai": "Có giá trị lạ (98) nên dùng trung vị: dãy 4, 5, 6, 7, 98 có trung vị 6. Số trung bình bị kéo lên 24.",
-     "goi_y": "Dãy có giá trị lạ không? Số đặc trưng nào không bị giá trị lạ kéo lệch?",
+     "q": "Hai điểm P(1; 2) và Q(4; 6). Khoảng cách PQ bằng bao nhiêu?",
+     "giai": "Hiệu hoành độ 3, hiệu tung độ 4 → √(3² + 4²) = √25 = 5. Số 7 là cộng thẳng hai hiệu, số 25 là quên lấy căn.",
+     "goi_y": "Tính hai hiệu, bình phương, cộng — rồi đừng quên bước cuối.",
      "a": [
-      "6 — trung vị",
-      "24 — số trung bình",
-      "98 — lớn nhất",
-      "0 — số không"
+      "5",
+      "7",
+      "25",
+      "3"
      ],
-     "h": "ef481f82fe99"
+     "h": "1b0c0120ef3726"
     },
     {
-     "k": "mc",
+     "k": "sx",
      "id": "bai06-q5",
-     "q": "Cột Giới tính có vài ô trống. Nên điền bằng gì?",
-     "giai": "Cột chữ không cộng chia hay sắp xếp theo độ lớn được; chỉ đếm được giá trị gặp nhiều nhất.",
-     "goi_y": "Cột này là chữ hay số? Với chữ thì phép tính nào làm được?",
+     "q": "Sắp xếp các bước tính khoảng cách Euclid giữa hai vector theo đúng thứ tự.",
+     "giai": "Hiệu → bình phương → cộng → căn.",
+     "goi_y": "Bước cuối cùng làm cho kết quả trở về cùng đơn vị với dữ liệu.",
      "a": [
-      "Mốt — giá trị gặp nhiều nhất",
-      "Số trung bình của cột",
-      "Trung vị của cột",
-      "Chữ “Không rõ” cho mọi ô"
+      "Lấy hiệu từng cặp số cùng cột",
+      "Bình phương từng hiệu",
+      "Cộng các bình phương lại",
+      "Lấy căn bậc hai của tổng"
      ],
-     "h": "1dca047d83668a"
+     "h": "1e22fd093eb90d"
     },
     {
      "k": "ds",
      "id": "bai06-q6",
-     "q": "Lệnh df.dropna() xoá mọi dòng có ít nhất một ô trống.",
-     "giai": "dropna() bỏ cả dòng dù chỉ trống một ô — nên dễ mất nhiều dữ liệu tốt.",
-     "goi_y": "Nhìn lại hai bảng mẫu trước và sau khi xoá.",
+     "q": "Khoảng cách Euclid giữa hai học sinh bằng 0 nghĩa là số liệu của hai bạn giống hệt nhau ở mọi cột đã dùng để đo.",
+     "giai": "Tổng các bình phương bằng 0 chỉ khi mọi hiệu đều bằng 0.",
+     "goi_y": "Tổng của các số không âm bằng 0 khi nào?",
      "h": "1fa2540c8ff20b"
     }
    ]
   },
   {
-   "ten": "Dòng trùng và chữ viết nhiều kiểu",
-   "ten_ngan": "Trùng và chữ",
+   "ten": "Đưa các cột về cùng thang đo",
+   "ten_ngan": "Cùng thang đo",
    "phut": 5,
-   "muc_tieu": "phát hiện, xoá dòng trùng và thống nhất cách viết của một cột chữ.",
-   "khoi_dong": "Cột Lớp có “10A1”, “10a1”, “ 10A1” và “10A 1”. Con thấy mấy lớp? Máy thấy mấy lớp?",
+   "muc_tieu": "giải thích được vì sao cột có số lớn lấn át cột có số nhỏ, và đưa được một giá trị về khoảng 0 – 1.",
+   "khoi_dong": "Trên hình đầu giờ, A trông gần C. Phép đo ở chặng 2 lại bảo A gần B. Tin mắt hay tin phép đo?",
    "khoi": [
     {
-     "t": "dinh_nghia",
-     "ten": "Dòng trùng (duplicate)",
-     "html": "Dòng giống <b>hệt</b> một dòng khác ở <b>mọi cột</b> — thường do nhập hai lần. Dòng trùng làm một đối tượng bị đếm nhiều lần.",
-     "ky_hieu": "Đếm: <code>df.duplicated().sum()</code> · Xoá: <code>df.drop_duplicates()</code>"
-    },
-    {
      "t": "p",
-     "html": "Chú ý: <b>trùng tên chưa chắc là dòng trùng</b>. Trong bảng có hai bạn tên Hoang Quan, mã HS001 và HS010, khác lớp, khác điểm — đó là hai người, phải giữ cả hai."
+     "html": "Nhìn lại ví dụ chặng 2: hiệu phút mạng (16 và 96) lớn hơn hiệu giờ học (4,1 và 0,4) rất nhiều. Sau khi bình phương, cột phút quyết định gần như toàn bộ khoảng cách — cột giờ tự học gần như không được tính. Lý do nằm ở <b>khoảng biến thiên</b> của hai cột:"
+    },
+    {
+     "t": "bang",
+     "cot": [
+      "Cột",
+      "Nhỏ nhất",
+      "Lớn nhất",
+      "Khoảng biến thiên (lớn nhất − nhỏ nhất)"
+     ],
+     "dong": [
+      [
+       "Giờ tự học",
+       "0,5",
+       "7,0",
+       "6,5"
+      ],
+      [
+       "Phút mạng xã hội",
+       "15",
+       "450",
+       "435"
+      ]
+     ]
     },
     {
      "t": "dinh_nghia",
-     "ten": "Chữ viết nhiều kiểu (không thống nhất)",
-     "html": "Cùng một giá trị nhưng được viết khác nhau: hoa/thường, thừa khoảng trắng, viết tắt. Máy so <b>từng ký tự</b> nên coi mỗi kiểu viết là một giá trị riêng.",
-     "ky_hieu": "<code>.str.strip()</code> bỏ khoảng trắng hai đầu · <code>.str.upper()</code> đưa về chữ hoa · <code>.str.replace(\" \", \"\")</code> bỏ khoảng trắng ở giữa · <code>.replace({\"M\": \"NAM\"})</code> đổi một giá trị thành giá trị khác"
+     "ten": "Đưa về khoảng 0 – 1 (chuẩn hoá min – max)",
+     "html": "Biến đổi mỗi giá trị x của một cột thành x′: giá trị <b>nhỏ nhất</b> của cột thành <b>0</b>, giá trị <b>lớn nhất</b> thành <b>1</b>, các giá trị khác nằm ở giữa theo đúng tỉ lệ. Sau khi đổi, mọi cột có cùng thang đo nên đóng góp công bằng vào khoảng cách.",
+     "ky_hieu": "x′ = <span class=\"frac\"><span>x − min</span><span>max − min</span></span> — min, max là giá trị nhỏ nhất, lớn nhất của chính cột đó."
     },
     {
-     "t": "demo_tung_buoc",
-     "tieu_de": "dọn cột Lớp từng bước",
-     "huong_dan": "Bấm “Bước tiếp” để áp dụng lần lượt từng thao tác lên cột Lớp của bảng. Theo dõi số lớp máy đếm được.",
-     "nhan_chon": "Cột",
+     "t": "vi_du",
+     "tieu_de": "đưa A, B, C về 0 – 1",
+     "de": "Giờ tự học: min 0,5, max 7,0. Phút mạng: min 15, max 450.",
      "cot": [
-      "Bước",
-      "Thao tác",
-      "Các cách viết còn lại",
-      "Máy đếm"
+      "Bạn",
+      "Giờ tự học → 0 – 1",
+      "Phút mạng → 0 – 1"
      ],
-     "mac_dinh": 0,
-     "lua_chon": [
-      {
-       "nhan": "Lớp",
-       "dong": [
-        [
-         "0",
-         "Chưa dọn",
-         "“ 10A1” · “ 10A2” · “10A 1” · “10A 2” · “10A 3” · “10A1” · “10A2” · “10A3” · “10a1” · “10a2” · “10a3”",
-         "<b>11 lớp</b>"
-        ],
-        [
-         "1",
-         "Bỏ khoảng trắng hai đầu: .str.strip()",
-         "“10A 1” · “10A 2” · “10A 3” · “10A1” · “10A2” · “10A3” · “10a1” · “10a2” · “10a3”",
-         "<b>9 lớp</b>"
-        ],
-        [
-         "2",
-         "Đưa về chữ hoa: .str.upper()",
-         "“10A 1” · “10A 2” · “10A 3” · “10A1” · “10A2” · “10A3”",
-         "<b>6 lớp</b>"
-        ],
-        [
-         "3",
-         "Bỏ khoảng trắng ở giữa: .str.replace(\" \", \"\")",
-         "“10A1” · “10A2” · “10A3”",
-         "<b>3 lớp</b>"
-        ]
-       ]
-      }
+     "dong": [
+      [
+       "A",
+       "(2,6 − 0,5) : 6,5 ≈ <b>0,323</b>",
+       "(86 − 15) : 435 ≈ <b>0,163</b>"
+      ],
+      [
+       "B",
+       "(6,7 − 0,5) : 6,5 ≈ <b>0,954</b>",
+       "(70 − 15) : 435 ≈ <b>0,126</b>"
+      ],
+      [
+       "C",
+       "(2,2 − 0,5) : 6,5 ≈ <b>0,262</b>",
+       "(182 − 15) : 435 ≈ <b>0,384</b>"
+      ]
+     ],
+     "ket_luan": "Đo lại bằng số mới: A → B ≈ 0,632, A → C ≈ 0,229. <b>Kết luận đảo ngược</b>: A gần C hơn — khớp với điều mắt con thấy, và A, C cùng học ít, cùng Chưa đạt.",
+     "nhan_manh": []
+    },
+    {
+     "t": "anh",
+     "cap": "Khoảng cách A → B và A → C: đo thẳng số gốc (trái) và sau khi đưa hai cột về 0 – 1 (phải)",
+     "alt": "Khoảng cách A → B và A → C: đo thẳng số gốc (trái) và sau khi đưa hai cột về 0 – 1 (phải)",
+     "src": "img/truoc-va-sau-khi-cung-thang-do.png"
+    },
+    {
+     "t": "demo_khoang_cach",
+     "tieu_de": "đo lại sau khi đưa về 0 – 1",
+     "huong_dan": "Đánh dấu ô “Đưa từng cột về 0 – 1” để máy đổi số trước khi đo. So khoảng cách A → C trước và sau khi đánh dấu.",
+     "cot": [
+      "Giờ tự học",
+      "Phút mạng xã hội"
+     ],
+     "diem": {
+      "A": [
+       2.6,
+       86
+      ],
+      "C": [
+       2.2,
+       182
+      ]
+     },
+     "mien": [
+      [
+       0.5,
+       7.0
+      ],
+      [
+       15.0,
+       450.0
+      ]
+     ],
+     "nhan_thang_do": null
+    },
+    {
+     "t": "anh",
+     "cap": "Bảng giá nhà trước khi đổi: cột giá lên tới hàng chục triệu, cột số phòng chỉ vài đơn vị",
+     "alt": "Bảng giá nhà trước khi đổi: cột giá lên tới hàng chục triệu, cột số phòng chỉ vài đơn vị",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250829163533984164/Screenshot-2025-08-29-163245.webp",
+     "du_phong": "img/minh-hoa-du-lieu-goc-truoc-khi-chuan-hoa.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Ml feature scaling part 2",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-feature-scaling-part-2/"
+     },
+     "chu_giai": [
+      [
+       "price",
+       "Giá nhà"
+      ],
+      [
+       "area",
+       "Diện tích"
+      ],
+      [
+       "bedrooms",
+       "Số phòng ngủ"
+      ],
+      [
+       "bathrooms",
+       "Số phòng tắm"
+      ],
+      [
+       "stories",
+       "Số tầng"
+      ],
+      [
+       "parking",
+       "Số chỗ đỗ xe"
+      ]
      ]
     },
     {
      "t": "anh",
-     "cap": "Số dòng theo từng cách viết của cột Lớp trong bảng — 11 cách viết cho 3 lớp thật",
-     "alt": "Số dòng theo từng cách viết của cột Lớp trong bảng — 11 cách viết cho 3 lớp thật",
-     "src": "img/may-dem-ra-muoi-mot-lop.png"
+     "cap": "Cùng bảng đó sau khi đưa từng cột về 0 – 1 — mọi cột giờ đều nằm trong cùng một thang đo",
+     "alt": "Cùng bảng đó sau khi đưa từng cột về 0 – 1 — mọi cột giờ đều nằm trong cùng một thang đo",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250829163652707844/Screenshot-2025-08-29-163253.webp",
+     "du_phong": "img/minh-hoa-du-lieu-sau-khi-chuan-hoa-ve-khoang-0-den-1.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Ml feature scaling part 2",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-feature-scaling-part-2/"
+     },
+     "chu_giai": [
+      [
+       "price, area, bedrooms…",
+       "Các cột giống bảng trên, giá trị đã đổi về 0 – 1"
+      ]
+     ]
     },
     {
-     "t": "vi_du",
-     "tieu_de": "dọn cột Giới tính",
-     "de": "Cột Giới tính có 7 cách viết: “F”, “M”, “NAM”, “Nam”, “Nu”, “nam”, “nu”.",
-     "cot": [
-      "Bước",
-      "Lệnh",
-      "Kết quả"
-     ],
-     "dong": [
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Nối với Machine Learning: K láng giềng gần nhất (KNN)",
+     "html": "Gặp một học sinh mới, thuật toán KNN đo khoảng cách tới mọi học sinh cũ, lấy K bạn gần nhất rồi cho các bạn đó “bỏ phiếu” đoán kết quả. Đo sai thang đo thì chọn nhầm láng giềng. Bài 13 con sẽ tự xây model này."
+    },
+    {
+     "t": "anh",
+     "cap": "KNN: điểm mới (ô vàng có dấu ?) được gán nhãn theo đa số trong K láng giềng gần nhất",
+     "alt": "KNN: điểm mới (ô vàng có dấu ?) được gán nhãn theo đa số trong K láng giềng gần nhất",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250512162457630554/Finding_Neighbor_Voting_for_Labels.webp",
+     "du_phong": "img/minh-hoa-ba-hang-xom-gan-nhat-bo-phieu-chon-nhan.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — K nearest neighbours",
+      "url": "https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/"
+     },
+     "chu_giai": [
       [
-       "1",
-       "<code>.str.strip().str.upper()</code>",
-       "“F”, “M”, “NAM”, “NU”"
+       "Finding Neighbors & Voting for Labels",
+       "Tìm láng giềng và bỏ phiếu chọn nhãn"
       ],
       [
-       "2",
-       "<code>.replace({\"M\": \"NAM\", \"F\": \"NU\"})</code>",
-       "<b>“NAM”, “NU”</b>"
+       "Class A, Class B",
+       "Nhóm A, nhóm B — hai nhãn"
+      ],
+      [
+       "K = 3",
+       "Lấy 3 láng giềng gần nhất"
+      ],
+      [
+       "X-Axis, Y-Axis",
+       "Trục hoành, trục tung"
       ]
-     ],
-     "ket_luan": "Từ 7 cách viết còn đúng 2 giá trị. Bước 2 cần con người quyết định M là Nam, F là Nữ — máy không tự biết.",
-     "nhan_manh": []
+     ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Viết <code>df[\"Lop\"].str.upper()</code> mà quên gán lại <code>df[\"Lop\"] = …</code> — bảng không đổi gì.",
-      "Coi hai bạn trùng tên là dòng trùng rồi xoá mất một bạn.",
-      "Đưa về chữ hoa nhưng quên bỏ khoảng trắng ở giữa: “10A 1” vẫn khác “10A1”."
+      "Chỉ đổi một cột về 0 – 1 còn cột kia giữ nguyên — phải đổi <b>mọi cột</b> dùng để đo.",
+      "Dùng min, max của cột này để đổi cột khác.",
+      "Nghĩ cột có số lớn là cột quan trọng hơn — số lớn chỉ do đơn vị đo (phút), không do mức quan trọng."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Dòng trùng: drop_duplicates(). Chữ nhiều kiểu: strip → upper → replace, rồi đếm lại bằng unique() để kiểm tra."
+     "html": "Cột có số lớn lấn át khoảng cách. Đưa mọi cột về 0 – 1 bằng x′ = (x − min) : (max − min) rồi mới đo."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Working with Missing Data and Duplicates in Pandas",
-       "url": "https://www.geeksforgeeks.org/data-analysis/data-cleaning-introduction/",
+       "ten": "ML | Feature Scaling – Part 2",
+       "url": "https://www.geeksforgeeks.org/machine-learning/ml-feature-scaling-part-2/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -599,194 +642,189 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai06-q7",
-     "q": "Cột Lớp có các giá trị “10A2”, “10a2”, “ 10A2”, “10A 2”. Sau khi dùng .str.strip() và .str.upper(), còn mấy cách viết?",
-     "giai": "Sau strip và upper còn “10A2” và “10A 2” — khoảng trắng ở giữa chưa bỏ.",
-     "goi_y": "strip chỉ bỏ khoảng trắng ở hai ĐẦU. Khoảng trắng ở giữa thì sao?",
+     "q": "Cột nhiệt độ có giá trị nhỏ nhất 20 °C, lớn nhất 40 °C. Đưa về 0 – 1 thì 35 °C thành bao nhiêu?",
+     "giai": "(35 − 20) : (40 − 20) = 15 : 20 = 0,75. Số 0,875 là 35 : 40 (quên trừ min); 15 là quên chia.",
+     "goi_y": "Lấy giá trị trừ min trước, rồi chia cho (max − min).",
      "a": [
-      "2 cách viết",
-      "1 cách viết",
-      "3 cách viết",
-      "4 cách viết"
+      "0,75",
+      "0,875",
+      "0,35",
+      "15"
      ],
-     "h": "cf6f6ce48e69e"
+     "h": "11e521ff3ca30d"
     },
     {
-     "k": "sx",
+     "k": "mc",
      "id": "bai06-q8",
-     "q": "Sắp xếp các thao tác dọn cột Lớp theo thứ tự như phần Tự thử.",
-     "giai": "Dọn xong luôn đếm lại để kiểm tra.",
-     "goi_y": "Bước cuối cùng không sửa gì — nó dùng để kiểm tra.",
+     "q": "Vì sao khi đo thô, cột phút mạng quyết định gần như toàn bộ khoảng cách giữa hai bạn?",
+     "giai": "Khoảng biến thiên của cột phút là 435, của cột giờ chỉ 6,5. Bình phương lên, chênh lệch càng lớn.",
+     "goi_y": "So khoảng biến thiên của hai cột trong bảng đầu chặng.",
      "a": [
-      "Bỏ khoảng trắng hai đầu bằng .str.strip()",
-      "Đưa về chữ hoa bằng .str.upper()",
-      "Bỏ khoảng trắng ở giữa bằng .str.replace()",
-      "Đếm lại số cách viết bằng .unique()"
+      "Số ở cột phút lớn hơn cột giờ rất nhiều",
+      "Phút mạng quan trọng hơn giờ tự học",
+      "Cột giờ tự học có nhiều ô bị trống",
+      "Máy tính cột giờ tự học bị sai"
      ],
-     "h": "17b4d869a98ce4"
+     "h": "28cce4b2520ef"
     },
     {
-     "k": "ds",
+     "k": "dd",
      "id": "bai06-q9",
-     "q": "Hai dòng cùng họ tên nhưng khác mã học sinh là dòng trùng, cần xoá một dòng.",
-     "giai": "Dòng trùng phải giống hệt ở MỌI cột. Khác mã học sinh là hai người khác nhau.",
-     "goi_y": "Dòng trùng phải giống nhau ở bao nhiêu cột?",
-     "h": "13057086198b2f"
+     "q": "Chọn số đúng cho mỗi chỗ trống.",
+     "giai": "Thay x = min vào công thức được 0; thay x = max được (max − min) : (max − min) = 1.",
+     "goi_y": "Thay x = min, rồi x = max vào công thức x′.",
+     "mau": "Sau khi đưa một cột về 0 – 1, giá trị nhỏ nhất của cột thành {0}, giá trị lớn nhất thành {1}.",
+     "o": [
+      [
+       "0",
+       "1",
+       "0,5",
+       "−1"
+      ],
+      [
+       "1",
+       "0",
+       "100",
+       "10"
+      ]
+     ],
+     "h": "4ab1cfe4287fe"
     }
    ]
   },
   {
-   "ten": "Giá trị phi lý và giá trị bất thường",
-   "ten_ngan": "Phi lý, bất thường",
-   "phut": 5,
-   "muc_tieu": "phân biệt giá trị phi lý (lỗi nhập liệu) với giá trị bất thường có thật, và xử lý đúng từng loại.",
-   "khoi_dong": "Một bạn học 25 giờ mỗi ngày. Một bạn khác học 7 giờ và được 9,8 điểm. Hai trường hợp này có giống nhau không?",
+   "ten": "Sai số của một đường dự đoán",
+   "ten_ngan": "Sai số",
+   "phut": 4,
+   "muc_tieu": "tính được sai số trung bình bình phương (MSE) của một đường dự đoán và dùng nó để chọn đường tốt hơn.",
+   "khoi_dong": "Muốn đoán điểm học kỳ từ giờ tự học, con vẽ một đường thẳng qua đám điểm. Có vô số đường — đường nào tốt nhất?",
    "khoi": [
     {
-     "t": "dinh_nghia",
-     "ten": "Giá trị phi lý",
-     "html": "Giá trị <b>không thể xảy ra</b> với đối tượng được đo: điểm 55 trên thang 10, học 25 giờ mỗi ngày, số giờ âm. Đây là <b>lỗi nhập liệu</b>.",
-     "ky_hieu": "Xử lý: đặt khoảng hợp lý (điểm 0 – 10, giờ học 0 – 16), đổi giá trị ngoài khoảng thành ô trống (NaN), rồi xử lý như ô trống."
+     "t": "p",
+     "html": "Đường dự đoán có dạng <b>ŷ = a·x + b</b> — đường thẳng quen thuộc y = ax + b. Ở đây x là giờ tự học, ŷ (đọc là “y mũ”) là điểm máy đoán; <b>a là hệ số góc</b> (độ dốc của đường), <b>b là hệ số chặn</b> (chỗ đường cắt trục tung)."
     },
     {
      "t": "anh",
-     "cap": "Giờ học × điểm trong bảng: chấm đỏ là 7 giá trị phi lý",
-     "alt": "Giờ học × điểm trong bảng: chấm đỏ là 7 giá trị phi lý",
-     "src": "img/diem-phi-ly-trong-bang.png"
-    },
-    {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Vì sao đổi thành ô trống mà không tự sửa?",
-     "html": "Điểm 55 nhiều khả năng là 5,5 gõ thừa số 0 — nhưng đó chỉ là <b>đoán</b>. Đổi thành ô trống rồi điền bằng trung vị là cách thận trọng. Chỉ sửa trực tiếp khi <b>chắc chắn</b> nguyên nhân, ví dụ biết chắc cột ghi nhầm đơn vị."
+     "cap": "Đường dự đoán, hệ số góc, hệ số chặn và sai số của một điểm",
+     "alt": "Đường dự đoán, hệ số góc, hệ số chặn và sai số của một điểm",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260112155359063476/observed_value.webp",
+     "du_phong": "img/minh-hoa-he-so-goc-he-so-chan-va-sai-so-trong-hoi-quy.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Ml linear regression",
+      "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/"
+     },
+     "chu_giai": [
+      [
+       "Observed value y<sub>i</sub>",
+       "Giá trị thật quan sát được"
+      ],
+      [
+       "Predicted value <sup>y</sup>P<sub>i</sub>",
+       "Giá trị đường dự đoán — trong bài viết là ŷ"
+      ],
+      [
+       "Random error ε<sub>i</sub>",
+       "Sai số — khoảng lệch giữa giá trị thật và dự đoán"
+      ],
+      [
+       "Slope = tanθ = θ<sub>2</sub>",
+       "Hệ số góc (độ dốc) — trong bài là a"
+      ],
+      [
+       "Intercept θ<sub>1</sub>",
+       "Hệ số chặn — trong bài là b"
+      ]
+     ]
     },
     {
      "t": "dinh_nghia",
-     "ten": "Giá trị bất thường (Toán 10)",
-     "html": "Giá trị quá nhỏ hoặc quá lớn so với phần lớn dữ liệu. Toán 10 dùng tứ phân vị: với khoảng tứ phân vị Δ<sub>Q</sub> = Q<sub>3</sub> − Q<sub>1</sub>, giá trị x là bất thường nếu",
-     "ky_hieu": "x &gt; Q<sub>3</sub> + 1,5·Δ<sub>Q</sub> &nbsp;hoặc&nbsp; x &lt; Q<sub>1</sub> − 1,5·Δ<sub>Q</sub>"
+     "ten": "Sai số trung bình bình phương (MSE — Mean Squared Error)",
+     "html": "Với mỗi điểm, <b>sai lệch</b> là giá trị thật trừ giá trị dự đoán: y − ŷ. Bình phương từng sai lệch rồi lấy <b>trung bình cộng</b>. MSE càng nhỏ, đường càng khớp với dữ liệu.",
+     "ky_hieu": "MSE = <span class=\"frac\"><span>(y<sub>1</sub> − ŷ<sub>1</sub>)<sup>2</sup> + … + (y<sub>n</sub> − ŷ<sub>n</sub>)<sup>2</sup></span><span>n</span></span>"
     },
     {
      "t": "vi_du",
-     "tieu_de": "tìm giá trị bất thường trong 11 điểm (số liệu minh hoạ)",
-     "de": "Dãy đã sắp xếp: 4,5 · 5,8 · 6 · 6,2 · 6,6 · 6,7 · 7 · 7,4 · 8,1 · 8,8 · 55.",
+     "tieu_de": "MSE của đường ŷ = x + 2 với 4 bạn (số liệu minh hoạ)",
+     "de": null,
      "cot": [
-      "Bước",
-      "Tính",
-      "Kết quả"
+      "Giờ tự học x",
+      "Điểm thật y",
+      "Dự đoán ŷ = x + 2",
+      "Sai lệch y − ŷ",
+      "Bình phương (y − ŷ)<sup>2</sup>"
      ],
      "dong": [
       [
        "1",
-       "Trung vị Q<sub>2</sub> (giá trị thứ 6)",
-       "6,7"
+       "3,5",
+       "3",
+       "0,5",
+       "0,25"
       ],
       [
        "2",
-       "Q<sub>1</sub> = trung vị 5 giá trị đầu; Q<sub>3</sub> = trung vị 5 giá trị cuối",
-       "Q<sub>1</sub> = 6, Q<sub>3</sub> = 8,1"
+       "3,5",
+       "4",
+       "−0,5",
+       "0,25"
       ],
       [
        "3",
-       "Δ<sub>Q</sub> = Q<sub>3</sub> − Q<sub>1</sub>",
-       "2,1"
+       "5,5",
+       "5",
+       "0,5",
+       "0,25"
       ],
       [
        "4",
-       "Ngưỡng trên Q<sub>3</sub> + 1,5·Δ<sub>Q</sub> · ngưỡng dưới Q<sub>1</sub> − 1,5·Δ<sub>Q</sub>",
-       "11,25 · 2,85"
+       "6,0",
+       "6",
+       "0,0",
+       "0,00"
       ],
       [
-       "5",
-       "Giá trị nằm ngoài hai ngưỡng",
-       "<b>55</b> — bất thường"
+       "Tổng",
+       "",
+       "",
+       "",
+       "<b>0,75</b>"
       ]
      ],
-     "ket_luan": "Quy tắc chỉ ra 55 là bất thường. Con người mới quyết định: thang điểm 10 nên 55 là <b>phi lý</b> → đổi thành ô trống.",
+     "ket_luan": "MSE = 0,75 : 4 ≈ <b>0,19</b>. Làm tương tự với đường ŷ = 1,5x + 1 được MSE ≈ 0,56 — lớn hơn, nên đường ŷ = x + 2 khớp với 4 bạn này hơn.",
      "nhan_manh": [
       4
      ]
     },
     {
      "t": "anh",
-     "cap": "Biểu đồ hộp của nhiều cột trong bảng rượu vang: các chấm tròn ngoài râu là giá trị bất thường",
-     "alt": "Biểu đồ hộp của nhiều cột trong bảng rượu vang: các chấm tròn ngoài râu là giá trị bất thường",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250912115313366349/boxplt.webp",
-     "du_phong": "img/minh-hoa-bieu-do-hop-phat-hien-gia-tri-ngoai-lai.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Machine learning outlier",
-      "url": "https://www.geeksforgeeks.org/machine-learning/machine-learning-outlier/"
-     },
-     "chu_giai": [
-      [
-       "Boxplots of Wine Features",
-       "Biểu đồ hộp các đặc điểm của rượu vang"
-      ],
-      [
-       "fixed acidity, citric acid, pH…",
-       "Các chỉ số hoá học của rượu"
-      ],
-      [
-       "o (chấm tròn)",
-       "Giá trị nằm ngoài râu — giá trị bất thường"
-      ]
-     ]
+     "cap": "Ba đường thử trên 240 bạn — cùng hệ số chặn b, chỉ khác hệ số góc a; đường có sai số nhỏ nhất khớp nhất",
+     "alt": "Ba đường thử trên 240 bạn — cùng hệ số chặn b, chỉ khác hệ số góc a; đường có sai số nhỏ nhất khớp nhất",
+     "src": "img/ba-duong-thu-cho-diem-va-gio-hoc.png"
     },
     {
-     "t": "bang",
-     "cot": [
-      "Tình huống",
-      "Có thể xảy ra?",
-      "Xử lý"
-     ],
-     "dong": [
-      [
-       "Điểm 55 trên thang 10",
-       "Không — phi lý",
-       "Đổi thành ô trống"
-      ],
-      [
-       "Học 25 giờ mỗi ngày",
-       "Không — phi lý",
-       "Đổi thành ô trống"
-      ],
-      [
-       "Học 7 giờ, được 9,8 điểm",
-       "Có — hiếm nhưng thật",
-       "<b>Giữ lại</b>"
-      ],
-      [
-       "Điểm 0 trong một bài kiểm tra",
-       "Có — ví dụ bỏ thi",
-       "Giữ lại, ghi chú kiểm tra"
-      ]
-     ]
-    },
-    {
-     "t": "video",
-     "yt": "b2C9I8HuCe4",
-     "ten": "Khan Academy — Box and whisker plot",
-     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc — cách vẽ và đọc biểu đồ hộp",
-     "bat_dau": null,
-     "ket_thuc": null
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Vì sao phải bình phương?",
+     "html": "Sai lệch có thể âm (đoán cao hơn thật) hoặc dương (đoán thấp hơn thật); cộng thẳng thì chúng bù trừ nhau — ví dụ 0,5 + (−0,5) = 0 dù cả hai điểm đều lệch. Bình phương làm mọi số không âm, và phạt nặng hơn những điểm lệch nhiều."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Thấy giá trị bất thường là xoá ngay — xoá mất những trường hợp thật và thú vị nhất.",
-      "Tự sửa 55 thành 5,5 khi chưa chắc chắn.",
-      "Chỉ dựa vào quy tắc biểu đồ hộp: một số âm như −1,5 giờ có thể nằm trong ngưỡng mà vẫn phi lý."
+      "Cộng thẳng các sai lệch rồi chia n — số âm và số dương bù trừ nhau.",
+      "Quên chia cho số điểm n: tổng các bình phương chưa phải là MSE.",
+      "Nghĩ đường khớp nhất phải đi qua đúng mọi điểm — với dữ liệu thật, điều đó gần như không bao giờ xảy ra."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Phi lý (không thể xảy ra) → đổi thành ô trống. Bất thường nhưng có thể xảy ra → giữ. Quy tắc tứ phân vị chỉ ra chỗ lạ; con người quyết định."
+     "html": "MSE = trung bình cộng các bình phương sai lệch y − ŷ. Đường nào có MSE nhỏ nhất là đường khớp nhất."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Machine Learning Outlier",
-       "url": "https://www.geeksforgeeks.org/machine-learning/machine-learning-outlier/",
+       "ten": "ML | Linear Regression",
+       "url": "https://www.geeksforgeeks.org/machine-learning/ml-linear-regression/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -796,103 +834,431 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai06-q10",
-     "q": "Cột Tuổi của học sinh khối 10 có một ô ghi 150. Nên xử lý thế nào?",
-     "giai": "Tuổi 150 không thể xảy ra — phi lý. Có thể là 15 gõ thừa số 0 nhưng chỉ là đoán, nên đổi thành ô trống.",
-     "goi_y": "Giá trị này có thể xảy ra không? Con có chắc chắn nguyên nhân không?",
+     "q": "Đường dự đoán ŷ = 2x. Một bạn có x = 3 và điểm thật y = 7. Bình phương sai lệch của bạn này bằng bao nhiêu?",
+     "giai": "ŷ = 2 × 3 = 6; sai lệch 7 − 6 = 1; bình phương bằng 1. Bình phương không bao giờ âm.",
+     "goi_y": "Tính ŷ trước, rồi y − ŷ, rồi bình phương.",
      "a": [
-      "Đổi thành ô trống rồi điền",
-      "Giữ nguyên vì là giá trị thật",
-      "Xoá luôn cả cột Tuổi",
-      "Sửa ngay thành tuổi 15"
+      "1",
+      "−1",
+      "13",
+      "49"
      ],
-     "h": "94f459da3a36"
-    },
-    {
-     "k": "mc",
-     "id": "bai06-q11",
-     "q": "Dãy có Q<sub>1</sub> = 5 và Q<sub>3</sub> = 7. Theo quy tắc Toán 10, giá trị nào dưới đây là bất thường?",
-     "giai": "Δ<sub>Q</sub> = 2; ngưỡng trên 7 + 3 = 10, ngưỡng dưới 5 − 3 = 2. Chỉ 10,5 vượt ngưỡng.",
-     "goi_y": "Tính Δ<sub>Q</sub>, rồi hai ngưỡng Q<sub>3</sub> + 1,5·Δ<sub>Q</sub> và Q<sub>1</sub> − 1,5·Δ<sub>Q</sub>.",
-     "a": [
-      "10,5",
-      "9,5",
-      "3,0",
-      "7,0"
-     ],
-     "h": "1392c8aa490abd"
+     "h": "1b52e5eef4afdd"
     },
     {
      "k": "ds",
+     "id": "bai06-q11",
+     "q": "Đường có MSE bằng 0,46 khớp với dữ liệu hơn đường có MSE bằng 5,67.",
+     "giai": "MSE đo mức lệch trung bình: càng nhỏ càng khớp.",
+     "goi_y": "MSE đo mức khớp hay mức lệch?",
+     "h": "1b677c810e0ee0"
+    },
+    {
+     "k": "mc",
      "id": "bai06-q12",
-     "q": "Mọi giá trị bất thường đều là lỗi nhập liệu và cần xoá.",
-     "giai": "Có giá trị bất thường có thật (hiếm nhưng có thể) — phải giữ.",
-     "goi_y": "Nhớ ví dụ học 7 giờ được 9,8 điểm.",
-     "h": "1c06b0d5531ac3"
+     "q": "Vì sao khi tính MSE phải bình phương các sai lệch?",
+     "giai": "Cộng thẳng 0,5 và −0,5 được 0 dù cả hai điểm đều lệch. Bình phương làm mọi số không âm.",
+     "goi_y": "Thử cộng thẳng hai sai lệch 0,5 và −0,5 xem được bao nhiêu.",
+     "a": [
+      "Để sai lệch âm và dương không bù trừ nhau",
+      "Để kết quả luôn là một số nguyên",
+      "Để đường dự đoán dốc lên hơn",
+      "Để các điểm dữ liệu được sắp xếp"
+     ],
+     "h": "1ec5279c690043"
     }
    ]
   },
   {
-   "ten": "Quy trình làm sạch một bảng dữ liệu",
-   "ten_ngan": "Quy trình",
-   "phut": 3,
-   "muc_tieu": "sắp xếp đúng thứ tự các bước làm sạch và giải thích vì sao thứ tự đó quan trọng.",
-   "khoi_dong": "Nếu điền ô trống bằng trung vị TRƯỚC khi sửa điểm 55 và 100, con số dùng để điền có bị ảnh hưởng không?",
+   "ten": "Gradient descent — đi từng bước xuống đáy sai số",
+   "ten_ngan": "Gradient descent",
+   "phut": 5,
+   "muc_tieu": "mô tả được cách gradient descent đi từng bước để giảm sai số, và giải thích vai trò của bước nhảy.",
+   "khoi_dong": "Máy không vẽ thử hàng nghìn đường rồi chọn. Vậy máy tìm ra hệ số a tốt nhất bằng cách nào?",
    "khoi": [
     {
-     "t": "bang",
+     "t": "p",
+     "html": "Giữ b cố định (b ≈ 2,13), chỉ thay đổi a. Mỗi giá trị a cho một MSE. Vẽ MSE theo a được một đường cong hình <b>thung lũng</b>: đáy thung lũng là a tốt nhất."
+    },
+    {
+     "t": "anh",
+     "cap": "MSE theo hệ số a trên 240 bạn — một thung lũng; chấm đỏ là các bước máy đi xuống đáy",
+     "alt": "MSE theo hệ số a trên 240 bạn — một thung lũng; chấm đỏ là các bước máy đi xuống đáy",
+     "src": "img/duong-sai-so-hinh-thung-lung.png"
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "Gradient descent (đi xuống theo độ dốc)",
+     "html": "Thuật toán lặp. Bắt đầu từ một giá trị a bất kỳ. Ở mỗi bước, máy tính <b>độ dốc</b> của sai số tại a (dốc dương nghĩa là tăng a thì sai số tăng), rồi dịch a một đoạn nhỏ <b>ngược chiều dốc</b>. Lặp lại tới khi sai số gần như không giảm nữa.",
+     "ky_hieu": "a mới = a cũ − η × độ dốc &nbsp;— η (đọc là “ê-ta”) là <b>bước nhảy</b> (learning rate), do người lập trình chọn."
+    },
+    {
+     "t": "p",
+     "html": "Độ dốc do máy tính sẵn — lên lớp 11 học đạo hàm, con sẽ biết cách tính. Ở đây chỉ cần đọc <b>dấu</b> của nó: dốc âm thì a tăng, dốc dương thì a giảm."
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "ba bước đầu với bước nhảy η = 0,02",
+     "de": "Bắt đầu từ a = 0, giữ b ≈ 2,13.",
      "cot": [
       "Bước",
-      "Việc làm",
-      "Vì sao đứng ở vị trí này"
+      "a hiện tại",
+      "Sai số MSE",
+      "Độ dốc tại a",
+      "a mới = a − 0,02 × độ dốc"
      ],
      "dong": [
       [
+       "0",
+       "0,000",
+       "12,92",
+       "−29,34",
+       "0,000 − 0,02 × (−29,34) ≈ <b>0,587</b>"
+      ],
+      [
        "1",
-       "Soi bảng: info, isnull, duplicated, unique, describe",
-       "Biết có lỗi gì trước"
+       "0,587",
+       "1,65",
+       "−9,06",
+       "0,587 − 0,02 × (−9,06) ≈ <b>0,768</b>"
       ],
       [
        "2",
-       "Xoá dòng trùng",
-       "Để không đếm một bạn nhiều lần khi tính trung vị"
+       "0,768",
+       "0,58",
+       "−2,80",
+       "0,768 − 0,02 × (−2,80) ≈ <b>0,824</b>"
+      ]
+     ],
+     "ket_luan": "Độ dốc âm nên a tăng dần; càng gần đáy dốc càng thoải nên a đổi càng ít. Sau 8 bước a ≈ 0,849, MSE ≈ 0,46 — đúng đáy thung lũng.",
+     "nhan_manh": []
+    },
+    {
+     "t": "demo_tung_buoc",
+     "tieu_de": "gradient descent với bước nhảy khác nhau",
+     "huong_dan": "Chọn một bước nhảy η, rồi bấm “Bước tiếp” để máy đi thêm một bước. Theo dõi cột sai số: giảm nhanh, giảm rất chậm, dao động, hay tăng vọt?",
+     "nhan_chon": "Bước nhảy η",
+     "cot": [
+      "Bước",
+      "a",
+      "Sai số MSE",
+      "Độ dốc tại a"
+     ],
+     "mac_dinh": 1,
+     "lua_chon": [
+      {
+       "nhan": "0,005",
+       "dong": [
+        [
+         "0",
+         "0,000",
+         "12,92",
+         "−29,34"
+        ],
+        [
+         "1",
+         "0,147",
+         "8,98",
+         "−24,27"
+        ],
+        [
+         "2",
+         "0,268",
+         "6,29",
+         "−20,08"
+        ],
+        [
+         "3",
+         "0,368",
+         "4,45",
+         "−16,61"
+        ],
+        [
+         "4",
+         "0,451",
+         "3,19",
+         "−13,74"
+        ],
+        [
+         "5",
+         "0,520",
+         "2,33",
+         "−11,36"
+        ],
+        [
+         "6",
+         "0,577",
+         "1,74",
+         "−9,40"
+        ],
+        [
+         "7",
+         "0,624",
+         "1,34",
+         "−7,78"
+        ],
+        [
+         "8",
+         "0,663",
+         "1,06",
+         "−6,43"
+        ]
+       ]
+      },
+      {
+       "nhan": "0,02",
+       "dong": [
+        [
+         "0",
+         "0,000",
+         "12,92",
+         "−29,34"
+        ],
+        [
+         "1",
+         "0,587",
+         "1,65",
+         "−9,06"
+        ],
+        [
+         "2",
+         "0,768",
+         "0,58",
+         "−2,80"
+        ],
+        [
+         "3",
+         "0,824",
+         "0,47",
+         "−0,86"
+        ],
+        [
+         "4",
+         "0,841",
+         "0,46",
+         "−0,27"
+        ],
+        [
+         "5",
+         "0,847",
+         "0,46",
+         "−0,08"
+        ],
+        [
+         "6",
+         "0,848",
+         "0,46",
+         "−0,03"
+        ],
+        [
+         "7",
+         "0,849",
+         "0,46",
+         "−0,01"
+        ],
+        [
+         "8",
+         "0,849",
+         "0,46",
+         "−0,00"
+        ]
+       ]
+      },
+      {
+       "nhan": "0,05",
+       "dong": [
+        [
+         "0",
+         "0,000",
+         "12,92",
+         "−29,34"
+        ],
+        [
+         "1",
+         "1,467",
+         "7,07",
+         "21,36"
+        ],
+        [
+         "2",
+         "0,399",
+         "3,96",
+         "−15,56"
+        ],
+        [
+         "3",
+         "1,177",
+         "2,32",
+         "11,33"
+        ],
+        [
+         "4",
+         "0,610",
+         "1,45",
+         "−8,25"
+        ],
+        [
+         "5",
+         "1,023",
+         "0,98",
+         "6,00"
+        ],
+        [
+         "6",
+         "0,722",
+         "0,74",
+         "−4,37"
+        ],
+        [
+         "7",
+         "0,941",
+         "0,61",
+         "3,18"
+        ],
+        [
+         "8",
+         "0,782",
+         "0,54",
+         "−2,32"
+        ]
+       ]
+      },
+      {
+       "nhan": "0,1",
+       "dong": [
+        [
+         "0",
+         "0,000",
+         "12,92",
+         "−29,34"
+        ],
+        [
+         "1",
+         "2,934",
+         "75,60",
+         "72,07"
+        ],
+        [
+         "2",
+         "−4,273",
+         "453,78",
+         "−177,02"
+        ],
+        [
+         "3",
+         "13,429",
+         "2 735",
+         "434,80"
+        ],
+        [
+         "4",
+         "−30,051",
+         "16 501",
+         "−1 068"
+        ],
+        [
+         "5",
+         "76,746",
+         "99 548",
+         "2 623"
+        ],
+        [
+         "6",
+         "−185,574",
+         "600 581",
+         "−6 443"
+        ],
+        [
+         "7",
+         "458,748",
+         "3 623 375",
+         "15 826"
+        ],
+        [
+         "8",
+         "−1 124",
+         "21 860 266",
+         "−38 873"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Chọn bước nhảy",
+     "html": "<b>Quá nhỏ</b> (0,005): đi đúng hướng nhưng rất chậm. <b>Vừa</b> (0,02): về đáy sau vài bước. <b>Hơi lớn</b> (0,05): nhảy qua lại hai bên đáy rồi mới dần về. <b>Quá lớn</b> (0,1): mỗi bước văng xa hơn — sai số tăng vọt, không bao giờ về đáy."
+    },
+    {
+     "t": "anh",
+     "cap": "Người đi xe đạp tìm chỗ thấp nhất: bước quá dài từ A vượt qua đáy B lên tận C",
+     "alt": "Người đi xe đạp tìm chỗ thấp nhất: bước quá dài từ A vượt qua đáy B lên tận C",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260311090914419699/gradient_intuition.webp",
+     "du_phong": "img/minh-hoa-gradient-descent-nhu-di-xuong-doc-tim-day.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Gradient descent algorithm and its variants",
+      "url": "https://www.geeksforgeeks.org/machine-learning/gradient-descent-algorithm-and-its-variants/"
+     },
+     "chu_giai": [
+      [
+       "Position A, B, C",
+       "Vị trí A, B, C"
       ],
       [
-       "3",
-       "Thống nhất chữ",
-       "Để đếm lớp, tính theo lớp cho đúng"
+       "Global cost minimum",
+       "Chỗ sai số thấp nhất (đáy thấp nhất)"
       ],
       [
-       "4",
-       "Đổi giá trị phi lý thành ô trống",
-       "Để số phi lý không lọt vào số dùng để điền"
-      ],
-      [
-       "5",
-       "Điền ô trống (trung vị, mốt)",
-       "Lúc này bảng đã sạch lỗi khác"
-      ],
-      [
-       "6",
-       "Soi lại, lưu bảng sạch",
-       "Kiểm tra còn ô trống không; bảng dùng cho Bài 7"
+       "Gradient",
+       "Độ dốc"
       ]
      ]
     },
     {
      "t": "anh",
-     "cap": "Số dòng còn lại qua từng bước dọn bảng students_ban.csv",
-     "alt": "Số dòng còn lại qua từng bước dọn bảng students_ban.csv",
-     "src": "img/xoa-dong-hay-dien-o-trong.png"
+     "cap": "Khi đổi cả a và b cùng lúc, sai số là một mặt cong; gradient descent vẫn đi xuống điểm thấp nhất",
+     "alt": "Khi đổi cả a và b cùng lúc, sai số là một mặt cong; gradient descent vẫn đi xuống điểm thấp nhất",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260311162535133531/mean_squared_error_mse_.webp",
+     "du_phong": "img/minh-hoa-mat-sai-so-va-diem-thap-nhat.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Gradient descent algorithm and its variants",
+      "url": "https://www.geeksforgeeks.org/machine-learning/gradient-descent-algorithm-and-its-variants/"
+     },
+     "chu_giai": [
+      [
+       "Mean Squared Error (MSE)",
+       "Sai số trung bình bình phương"
+      ],
+      [
+       "Weight (w)",
+       "Trọng số — trong bài là a"
+      ],
+      [
+       "Bias",
+       "Hệ số chặn — trong bài là b"
+      ],
+      [
+       "Minimum",
+       "Điểm thấp nhất"
+      ]
+     ]
     },
     {
-     "t": "p",
-     "html": "Với bảng students_ban.csv: bảng bẩn 95 dòng; xoá 5 dòng trùng còn 90. Nếu sau đó xoá mọi dòng có ô trống thì chỉ còn 71 — mất 19 bạn. Điền ô trống thì giữ đủ 90."
+     "t": "loi_hay_gap",
+     "muc": [
+      "Cộng thay vì trừ: a mới = a cũ + η × độ dốc thì đi lên dốc, sai số tăng.",
+      "Nghĩ bước nhảy càng lớn càng về đáy nhanh.",
+      "Nghĩ gradient descent thử hết mọi giá trị a — nó chỉ đi từng bước theo độ dốc."
+     ]
     },
     {
-     "t": "hop",
-     "kieu": "ml",
-     "tieu_de": "Nối với Machine Learning",
-     "html": "Người làm Machine Learning dành phần lớn thời gian cho dữ liệu chứ không phải cho model. Bảng sạch hôm nay là đầu vào của Bài 7 — chuẩn bị feature."
+     "t": "video",
+     "yt": "sDv4f4s2SB8",
+     "ten": "StatQuest — Gradient Descent, Step-by-Step",
+     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc — 9 phút đầu",
+     "bat_dau": null,
+     "ket_thuc": 540
     },
     {
      "t": "bang",
@@ -902,36 +1268,33 @@ window.BAI = {
      ],
      "dong": [
       [
-       "Soi bảng, làm sạch",
-       "Mọi buổi thực hành nhóm (bước “Làm sạch”)"
+       "Vector, khoảng cách Euclid",
+       "Bài 13 — K láng giềng gần nhất (KNN)"
       ],
       [
-       "Bảng students đã dọn",
-       "Bài 7 — chuẩn bị feature"
+       "Đưa về cùng thang đo",
+       "Bài 8 — chuẩn bị feature; Bài 13 — KNN"
       ],
       [
-       "Biểu đồ hộp, giá trị bất thường",
-       "Bài 8 — đọc biểu đồ"
+       "MSE, đường dự đoán ŷ = a·x + b",
+       "Phần B — hồi quy tuyến tính"
+      ],
+      [
+       "Gradient descent, bước nhảy",
+       "Phần B và Level 2 — mạng nơ-ron"
       ]
      ]
     },
     {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Điền ô trống trước khi sửa giá trị phi lý — số 55, 100 lọt vào trung vị dùng để điền.",
-      "Quên soi lại sau khi dọn: vẫn còn ô trống hoặc một cách viết lạ."
-     ]
-    },
-    {
      "t": "tom_tat",
-     "html": "Soi → xoá trùng → thống nhất chữ → phi lý thành ô trống → điền → soi lại và lưu."
+     "html": "Gradient descent lặp lại: tính độ dốc, bước ngược chiều dốc một đoạn η. η quá nhỏ thì chậm, quá lớn thì văng khỏi đáy."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Data Preprocessing in Machine Learning",
-       "url": "https://www.geeksforgeeks.org/data-analysis/data-preprocessing-machine-learning-python/",
+       "ten": "Gradient Descent Algorithm and Its Variants",
+       "url": "https://www.geeksforgeeks.org/machine-learning/gradient-descent-algorithm-and-its-variants/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -939,32 +1302,46 @@ window.BAI = {
    ],
    "checkpoint": [
     {
-     "k": "sx",
+     "k": "mc",
      "id": "bai06-q13",
-     "q": "Sắp xếp các bước làm sạch bảng theo đúng thứ tự.",
-     "giai": "Soi → xoá trùng → phi lý thành ô trống → điền.",
-     "goi_y": "Bước điền cần một con số “sạch” — những lỗi nào phải xử lý trước nó?",
+     "q": "Tại giá trị a hiện tại, độ dốc của sai số là một số dương. Bước tiếp theo, a nên thay đổi thế nào?",
+     "giai": "Dốc dương: tăng a thì sai số tăng, nên đi ngược lại. Theo công thức, a − η × (số dương) nhỏ hơn a.",
+     "goi_y": "Dốc dương nghĩa là đi sang phải (tăng a) thì sai số cao hơn hay thấp hơn?",
      "a": [
-      "Soi bảng để biết có những lỗi gì",
-      "Xoá các dòng trùng lặp",
-      "Đổi giá trị phi lý thành ô trống",
-      "Điền ô trống bằng trung vị, mốt"
+      "Giảm a một đoạn nhỏ",
+      "Tăng a một đoạn nhỏ",
+      "Giữ nguyên giá trị a",
+      "Đặt a về 0 rồi làm lại"
      ],
-     "h": "5d10445f4f6ab"
+     "h": "1e777da3b2a511"
+    },
+    {
+     "k": "sx",
+     "id": "bai06-q14",
+     "q": "Sắp xếp một vòng lặp gradient descent theo đúng thứ tự.",
+     "giai": "Phải có a thì mới tính được độ dốc tại a; cập nhật xong mới lặp lại.",
+     "goi_y": "Muốn tính độ dốc tại a thì phải có a trước.",
+     "a": [
+      "Chọn giá trị a ban đầu",
+      "Tính độ dốc của sai số tại a",
+      "Cập nhật a mới = a − η × độ dốc",
+      "Lặp lại tới khi sai số gần như không giảm"
+     ],
+     "h": "17ef86b014c545"
     },
     {
      "k": "mc",
-     "id": "bai06-q14",
-     "q": "Đã xoá trùng, sửa phi lý, điền ô trống. Soi lại thấy cột Lớp còn 1 ô trống. Nên làm gì?",
-     "giai": "Bước soi lại tìm ra chỗ còn sót. Cột chữ điền bằng mốt.",
-     "goi_y": "Cột Lớp là chữ hay số? Bảng ở chặng 2 nói điền cột chữ bằng gì?",
+     "id": "bai06-q15",
+     "q": "Trong phần Tự thử, với bước nhảy 0,1 thì sai số thay đổi thế nào sau mỗi bước?",
+     "giai": "Bước nhảy quá lớn: mỗi bước vượt qua đáy và rơi xa hơn lần trước, sai số lên tới hàng triệu.",
+     "goi_y": "Chọn nút 0,1 trong phần Tự thử rồi bấm “Bước tiếp” vài lần.",
      "a": [
-      "Điền ô đó bằng mốt của cột Lớp",
-      "Điền bằng trung vị của cột Lớp",
-      "Xoá luôn toàn bộ cột Lớp",
-      "Để nguyên vì chỉ có một ô"
+      "Tăng vọt, a văng ngày càng xa đáy",
+      "Giảm đều và về đáy nhanh nhất",
+      "Giảm rất chậm nhưng đúng hướng",
+      "Đứng yên ngay từ bước đầu tiên"
      ],
-     "h": "dee1049f2f11a"
+     "h": "1e98265f8aa79b"
     }
    ]
   }
@@ -982,408 +1359,439 @@ window.BAI = {
   "ngan_hang": [
    {
     "k": "mc",
-    "id": "bai06-q15",
-    "q": "Lệnh df.duplicated().sum() trả về 5. Điều đó nghĩa là gì?",
-    "giai": "duplicated() đánh dấu các dòng lặp lại dòng đứng trước nó; .sum() đếm số dòng đó.",
-    "a": [
-     "Có 5 dòng lặp lại một dòng khác",
-     "Có 5 ô trống trong cả bảng",
-     "Có 5 cột bị trùng tên nhau",
-     "Bảng chỉ còn lại 5 dòng"
-    ],
-    "h": "10f3325fff64aa"
-   },
-   {
-    "k": "mc",
     "id": "bai06-q16",
-    "q": "Máy đếm cột Lớp ra 6 giá trị: “10A1”, “10a1”, “10A2”, “10a2”, “10A3”, “10a3”. Chỉ cần thêm lệnh nào là đủ?",
-    "giai": "Các cách viết chỉ khác hoa/thường, không có khoảng trắng — upper là đủ.",
+    "q": "Bảng có 50 học sinh, mỗi bạn 3 cột số. Bảng là ma trận cỡ bao nhiêu?",
+    "giai": "Số dòng (50) trước, số cột (3) sau.",
     "a": [
-     ".str.upper()",
-     ".str.strip()",
-     ".dropna()",
-     ".drop_duplicates()"
+     "50 × 3",
+     "3 × 50",
+     "50 × 50",
+     "53 × 1"
     ],
-    "h": "5f07404fc495a"
+    "h": "1f3f8d8507961b"
    },
    {
     "k": "mc",
     "id": "bai06-q17",
-    "q": "Cột Giờ ngủ có một ô ghi −7. Xử lý thế nào?",
-    "giai": "Giờ ngủ không thể âm — phi lý. Có thể là 7 gõ thừa dấu trừ, nhưng chỉ là đoán.",
+    "q": "Khoảng cách giữa hai điểm M(0; 0) và N(6; 8) bằng bao nhiêu?",
+    "giai": "√(6² + 8²) = √100 = 10.",
     "a": [
-     "Đổi thành ô trống rồi điền",
-     "Đổi thành 7 cho thành số dương",
-     "Giữ nguyên vì là số đã nhập",
-     "Xoá luôn cả cột Giờ ngủ"
+     "10",
+     "14",
+     "100",
+     "48"
     ],
-    "h": "16af9c739ee787"
+    "h": "3de9f7dd1cd11"
    },
    {
     "k": "mc",
     "id": "bai06-q18",
-    "q": "Nhìn hình. Cách nào giữ được nhiều học sinh hơn?",
-    "giai": "Điền giữ đủ 90 bạn; xoá dòng chỉ còn 71.",
-    "img": {
-     "src": "img/xoa-dong-hay-dien-o-trong.png"
-    },
+    "q": "Hai bạn có vector (2; 100) và (5; 104). Khoảng cách Euclid giữa hai bạn bằng bao nhiêu?",
+    "giai": "Hiệu 3 và 4 → √(9 + 16) = √25 = 5.",
     "a": [
-     "Điền ô trống bằng trung vị",
-     "Xoá mọi dòng có ô trống",
-     "Hai cách giữ như nhau",
-     "Xoá dòng trùng thêm lần nữa"
+     "5",
+     "7",
+     "25",
+     "4"
     ],
-    "h": "1ce521b0749bc9"
+    "h": "12a61f022fa8df"
    },
    {
     "k": "mc",
     "id": "bai06-q19",
-    "q": "Nhìn hình. Vì sao máy đếm ra 11 lớp?",
-    "giai": "Các thanh cùng màu là cùng một lớp thật, bị tách ra vì cách viết.",
-    "img": {
-     "src": "img/may-dem-ra-muoi-mot-lop.png"
-    },
+    "q": "Cột cân nặng có min 40 kg, max 80 kg. Đưa về 0 – 1 thì 50 kg thành bao nhiêu?",
+    "giai": "(50 − 40) : (80 − 40) = 10 : 40 = 0,25.",
     "a": [
-     "Máy so từng ký tự, viết khác là lớp khác",
-     "Trường thật sự có 11 lớp khối 10",
-     "Vài bạn bị nhập trùng hai lần vào bảng",
-     "Cột lớp có vài ô bị bỏ trống"
+     "0,25",
+     "0,5",
+     "0,625",
+     "10"
     ],
-    "h": "1bf0bd6f3754c0"
+    "h": "dbe1cd71ee423"
    },
    {
     "k": "mc",
     "id": "bai06-q20",
-    "q": "Nhìn hình. Có bao nhiêu chấm đỏ — giá trị phi lý?",
-    "giai": "4 điểm phi lý và 3 giờ học phi lý.",
-    "img": {
-     "src": "img/diem-phi-ly-trong-bang.png"
-    },
+    "q": "A = (0,3; 0,2) và B = (0,7; 0,5) đã đưa về 0 – 1. Khoảng cách A → B bằng bao nhiêu?",
+    "giai": "Hiệu 0,4 và 0,3 → √(0,16 + 0,09) = √0,25 = 0,5.",
     "a": [
-     "7",
-     "5",
-     "10",
-     "4"
+     "0,5",
+     "0,7",
+     "0,25",
+     "1,2"
     ],
-    "h": "1c76dcc32fafe7"
+    "h": "1a27bf62ee7d4e"
    },
    {
     "k": "mc",
     "id": "bai06-q21",
-    "q": "Nhìn hình. Cột nào thiếu dữ liệu nhiều nhất?",
-    "giai": "Cabin chỉ có 204/891 ô có dữ liệu.",
+    "q": "Nhìn hình. Sau khi đưa hai cột về 0 – 1, bạn gần A hơn thay đổi thế nào?",
+    "giai": "Đo thô: A gần B (16,5 < 96,0). Sau khi đổi: A gần C (0,229 < 0,632).",
     "img": {
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250829123024725201/Screenshot-2025-08-29-122359.webp",
-     "du_phong": "img/minh-hoa-bang-thong-ke-so-o-khong-trong-cua-tung-cot.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Data cleaning introduction",
-      "url": "https://www.geeksforgeeks.org/data-analysis/data-cleaning-introduction/"
-     }
+     "src": "img/truoc-va-sau-khi-cung-thang-do.png"
     },
     "a": [
-     "Cabin",
-     "Age",
-     "Embarked",
-     "Name"
+     "Đổi từ B sang C",
+     "Đổi từ C sang B",
+     "Vẫn là B như cũ",
+     "Vẫn là C như cũ"
     ],
-    "h": "2263339df2d03"
+    "h": "16e4adbbf4d54a"
    },
    {
     "k": "mc",
     "id": "bai06-q22",
-    "q": "Cột Cabin thiếu 687 trên 891 ô. Cách xử lý nào hợp lý nhất?",
-    "giai": "Thiếu gần hết thì điền là đoán gần như toàn bộ; xoá dòng thì mất 3/4 bảng.",
+    "q": "Nhìn hình. Vì sao đường a = 1,40 chưa tốt?",
+    "giai": "Đường a = 1,40 dốc hơn đám điểm; sai số 5,71 lớn hơn nhiều so với 0,46 của đường a = 0,85.",
+    "img": {
+     "src": "img/ba-duong-thu-cho-diem-va-gio-hoc.png"
+    },
     "a": [
-     "Bỏ cả cột Cabin",
-     "Điền 687 ô bằng mốt",
-     "Xoá 687 dòng có ô trống",
-     "Điền 687 ô bằng số 0"
+     "Quá dốc, đoán quá cao cho bạn học nhiều",
+     "Quá thoải, đoán quá thấp cho bạn học nhiều",
+     "Không đi qua điểm nào của dữ liệu",
+     "Có sai số nhỏ nhất trong ba đường"
     ],
-    "h": "15e3fe3d647dd3"
+    "h": "1fa91756631a22"
    },
    {
     "k": "mc",
     "id": "bai06-q23",
-    "q": "Dãy 4 · 5 · 6 · 7 · 100 có thêm một ô trống. Điền bằng số trung bình thì được bao nhiêu?",
-    "giai": "(4 + 5 + 6 + 7 + 100) : 5 = 24,4 — bị 100 kéo lên; trung vị là 6.",
+    "q": "Nhìn hình. Đáy của thung lũng ứng với điều gì?",
+    "giai": "Đáy là chỗ MSE thấp nhất, a ≈ 0,85.",
+    "img": {
+     "src": "img/duong-sai-so-hinh-thung-lung.png"
+    },
     "a": [
-     "24,4",
-     "6",
-     "100",
-     "0"
+     "Hệ số a làm sai số nhỏ nhất",
+     "Hệ số a làm sai số lớn nhất",
+     "Bước đầu tiên của thuật toán",
+     "Giá trị a bằng đúng 0"
     ],
-    "h": "1c4e17fc6963ee"
+    "h": "18ded1ee0611a1"
    },
    {
     "k": "mc",
     "id": "bai06-q24",
-    "q": "Q<sub>1</sub> = 6, Q<sub>3</sub> = 8. Ngưỡng trên của giá trị bất thường là bao nhiêu?",
-    "giai": "Δ<sub>Q</sub> = 2; Q<sub>3</sub> + 1,5 × 2 = 8 + 3 = 11.",
+    "q": "Đường ŷ = x + 1 với hai bạn (x; y) = (1; 3) và (3; 4). MSE bằng bao nhiêu?",
+    "giai": "Dự đoán 2 và 4; sai lệch 1 và 0; bình phương 1 và 0; MSE = (1 + 0) : 2 = 0,5.",
     "a": [
-     "11",
-     "9",
-     "10",
-     "14"
+     "0,5",
+     "1",
+     "0,25",
+     "2"
     ],
-    "h": "6f9ce0631a6c3"
+    "h": "322517aa529e1"
    },
    {
     "k": "mc",
     "id": "bai06-q25",
-    "q": "Máy tính điểm trung bình trên bảng bẩn và trên bảng đã dọn. Vì sao hai kết quả khác nhau?",
-    "giai": "Máy tính đúng cả hai lần; chỉ có dữ liệu là khác — rác vào, rác ra.",
+    "q": "Với η = 0,005, sau 8 bước a mới tới 0,663 trong khi đáy ở a ≈ 0,85. Nên chỉnh thế nào?",
+    "giai": "η nhỏ thì đúng hướng nhưng chậm; tăng vừa phải (0,02) là 8 bước về đáy. η = 1 thì văng khỏi đáy; đổi dấu cộng thì đi lên dốc.",
     "a": [
-     "Dữ liệu đầu vào khác nhau",
-     "Máy tính cộng sai lần đầu",
-     "Lần hai máy làm tròn số",
-     "Bảng sạch bị xoá bạn giỏi"
+     "Tăng η lên một chút, ví dụ 0,02",
+     "Tăng η lên thật lớn, ví dụ 1",
+     "Đổi dấu trừ thành dấu cộng",
+     "Dừng lại và lấy luôn a hiện tại"
     ],
-    "h": "bb90aa2f97d37"
+    "h": "f8d2de5650295"
    },
    {
-    "k": "ma",
+    "k": "mc",
     "id": "bai06-q26",
-    "q": "Những lỗi nào là lỗi dữ liệu hay gặp? <b>(Chọn 3 đáp án đúng.)</b>",
-    "giai": "Năm loại: ô trống, dòng trùng, chữ nhiều kiểu, giá trị phi lý (và nhãn lệch — Bài 7).",
+    "q": "Nhìn hình. Người đi xe đạp đi từ vị trí A vượt qua đáy B lên tận C. Hình minh hoạ điều gì?",
+    "giai": "Bước quá dài nên nhảy qua chỗ thấp nhất sang sườn bên kia.",
+    "img": {
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260311090914419699/gradient_intuition.webp",
+     "du_phong": "img/minh-hoa-gradient-descent-nhu-di-xuong-doc-tim-day.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Gradient descent algorithm and its variants",
+      "url": "https://www.geeksforgeeks.org/machine-learning/gradient-descent-algorithm-and-its-variants/"
+     }
+    },
     "a": [
-     "Ô trống",
-     "Dòng trùng",
-     "Chữ viết nhiều kiểu",
-     "Cột có tên tiếng Anh",
-     "Bảng có hơn 50 dòng"
+     "Bước nhảy quá lớn, vượt qua đáy",
+     "Bước nhảy quá nhỏ, đi quá chậm",
+     "Đi cùng chiều dốc, lên cao dần",
+     "Dữ liệu chưa được đưa về 0 – 1"
     ],
-    "h": "1f37aee4f6226d"
+    "h": "6b538ff94b1fb"
    },
    {
-    "k": "ma",
+    "k": "mc",
     "id": "bai06-q27",
-    "q": "Những lệnh Pandas nào dùng để SOI bảng, chưa sửa gì? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "isnull().sum() và describe() chỉ cho thông tin; dropna, drop_duplicates, fillna thay đổi bảng.",
+    "q": "Vì sao phải đưa các cột về cùng thang đo trước khi dùng KNN?",
+    "giai": "KNN chọn láng giềng theo khoảng cách; cột có số lớn sẽ lấn át nếu không đổi.",
     "a": [
-     "df.isnull().sum()",
-     "df.describe()",
-     "df.dropna()",
-     "df.drop_duplicates()",
-     "df.fillna(0)"
+     "Để mọi cột đóng góp công bằng vào khoảng cách",
+     "Để máy chạy nhanh hơn gấp nhiều lần",
+     "Để bảng dữ liệu có ít dòng hơn",
+     "Để kết quả luôn là Đạt"
     ],
-    "h": "f6a2c968f5ce7"
+    "h": "7411fb7abbf18"
    },
    {
     "k": "ma",
     "id": "bai06-q28",
-    "q": "Những giá trị nào là PHI LÝ trong bảng điểm thang 10 của học sinh? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Điểm phải trong 0 – 10; 0 và 10 vẫn có thể xảy ra.",
+    "q": "Những việc nào có trong cách tính khoảng cách Euclid? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Hiệu → bình phương → cộng → căn; không chia, không sắp xếp.",
     "a": [
-     "Điểm 55",
-     "Điểm −3",
-     "Điểm 9,8",
-     "Điểm 0",
-     "Điểm 10"
+     "Bình phương hiệu của từng cột",
+     "Lấy căn bậc hai của tổng",
+     "Chia tổng cho số cột",
+     "Sắp xếp các số tăng dần"
     ],
-    "h": "86f3c5a8da995"
+    "h": "eeff638ed5f2f"
    },
    {
     "k": "ma",
     "id": "bai06-q29",
-    "q": "Những cách xử lý nào hợp lý với ô trống ở cột điểm có giá trị lạ? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Điền 0 hay giá trị lớn nhất là tự bịa ra một bạn điểm rất thấp hoặc rất cao.",
+    "q": "Những phát biểu nào đúng về việc đưa một cột về 0 – 1? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Min thành 0, max thành 1, các giá trị khác nằm giữa; phải đổi mọi cột dùng để đo.",
     "a": [
-     "Điền bằng trung vị của cột",
-     "Xoá dòng nếu ô trống rất ít",
-     "Điền bằng số 0",
-     "Điền bằng giá trị lớn nhất"
+     "Giá trị nhỏ nhất của cột thành 0",
+     "Giá trị lớn nhất của cột thành 1",
+     "Mọi giá trị của cột đều thành 0,5",
+     "Chỉ cần đổi cột có số lớn nhất"
     ],
-    "h": "eabe24e5b5ae"
+    "h": "4c81683073d00"
    },
    {
     "k": "ma",
     "id": "bai06-q30",
-    "q": "Sau .str.strip().str.upper(), những cách viết nào của cột Lớp trở thành “10A1”? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "“10A 1” còn khoảng trắng ở giữa, cần thêm .str.replace(\" \", \"\").",
+    "q": "Những phát biểu nào đúng về MSE của một đường dự đoán? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "MSE là trung bình các bình phương nên không âm; càng nhỏ càng khớp.",
     "a": [
-     "“10a1”",
-     "“ 10A1”",
-     "“10A 1”",
-     "“10A2”"
+     "Luôn lớn hơn hoặc bằng 0",
+     "Càng nhỏ thì đường càng khớp",
+     "Có thể âm nếu đường dốc xuống",
+     "Bằng tổng các sai lệch chia 2"
     ],
-    "h": "10b87531d792c4"
+    "h": "90d42fd76261"
    },
    {
-    "k": "sx",
+    "k": "ma",
     "id": "bai06-q31",
-    "q": "Sắp xếp các bước tìm giá trị bất thường theo quy tắc Toán 10.",
-    "giai": "Sắp xếp → tứ phân vị → ΔQ → so ngưỡng.",
+    "q": "Những phát biểu nào đúng về bước nhảy η trong gradient descent? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "η do người lập trình chọn; quá nhỏ thì chậm, quá lớn thì không hội tụ.",
     "a": [
-     "Sắp xếp dãy số liệu",
-     "Tìm Q1 và Q3",
-     "Tính khoảng tứ phân vị Q3 − Q1",
-     "So từng giá trị với hai ngưỡng"
+     "Quá nhỏ thì về đáy rất chậm",
+     "Quá lớn thì có thể văng xa khỏi đáy",
+     "Càng lớn thì luôn càng tốt",
+     "Máy luôn tự chọn giúp mình"
     ],
-    "h": "97a966314ab51"
+    "h": "1f257b1de61b79"
    },
    {
-    "k": "sx",
+    "k": "ma",
     "id": "bai06-q32",
-    "q": "Sắp xếp các bước dọn cột Giới tính.",
-    "giai": "Soi → thống nhất → đổi viết tắt → kiểm tra.",
+    "q": "Theo hình “Ba ứng dụng của khoảng cách Euclid”, những ứng dụng nào có trong hình? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Hình có: dẫn đường, hai điểm trên khuôn mặt, hai toạ độ trên bản đồ.",
+    "img": {
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260729183611662101/2056958497.webp",
+     "du_phong": "img/minh-hoa-ba-ung-dung-thuc-te-cua-khoang-cach-euclid.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Euclidean distance",
+      "url": "https://www.geeksforgeeks.org/maths/euclidean-distance/"
+     }
+    },
     "a": [
-     "Xem các cách viết bằng .unique()",
-     "Bỏ khoảng trắng, đưa về chữ hoa",
-     "Đổi M thành NAM, F thành NU",
-     "Đếm lại bằng .unique() để kiểm tra"
+     "Dẫn đường trên bản đồ",
+     "Đo giữa hai điểm trên khuôn mặt",
+     "Dự báo thời tiết ngày mai",
+     "Sắp xếp danh sách học sinh"
     ],
-    "h": "18bb11bb6e76ba"
+    "h": "5b8691d78f988"
+   },
+   {
+    "k": "ma",
+    "id": "bai06-q33",
+    "q": "Bảng khối 10 lấy 2 cột là ma trận 240 × 2. Những phát biểu nào đúng? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "240 × 2: 240 dòng (học sinh), 2 cột (đặc điểm).",
+    "a": [
+     "Có 240 dòng, mỗi dòng là một học sinh",
+     "Mỗi học sinh là một vector 2 chiều",
+     "Có 240 cột, mỗi cột là một học sinh",
+     "Mỗi học sinh là vector 240 chiều"
+    ],
+    "h": "18980f6da863d8"
    },
    {
     "k": "sx",
-    "id": "bai06-q33",
-    "q": "Sắp xếp các bước xử lý một điểm 55 trên thang 10.",
-    "giai": "Phát hiện → ô trống → trung vị trên dữ liệu sạch → điền.",
-    "a": [
-     "Phát hiện điểm ngoài khoảng 0 – 10",
-     "Đổi điểm 55 thành ô trống",
-     "Tính trung vị của cột đã sạch",
-     "Điền ô trống bằng trung vị"
-    ],
-    "h": "170a325cd1c1eb"
-   },
-   {
-    "k": "dd",
     "id": "bai06-q34",
-    "q": "Chọn lệnh đúng cho mỗi chỗ trống.",
-    "giai": "drop_duplicates bỏ dòng trùng; dropna bỏ dòng có ô trống.",
-    "mau": "Xoá dòng trùng dùng {0}; xoá mọi dòng có ô trống dùng {1}.",
-    "o": [
-     [
-      "df.drop_duplicates()",
-      "df.dropna()",
-      "df.duplicated()",
-      "df.fillna()"
-     ],
-     [
-      "df.dropna()",
-      "df.fillna()",
-      "df.drop_duplicates()",
-      "df.isnull()"
-     ]
+    "q": "Sắp xếp các bước đưa một giá trị x về khoảng 0 – 1.",
+    "giai": "x′ = (x − min) : (max − min).",
+    "a": [
+     "Tìm giá trị nhỏ nhất và lớn nhất của cột",
+     "Tính max − min của cột",
+     "Lấy x trừ đi giá trị nhỏ nhất",
+     "Chia kết quả cho max − min"
     ],
-    "h": "15f88264e0d0c8"
+    "h": "5e532b2cdead5"
    },
    {
-    "k": "dd",
+    "k": "sx",
     "id": "bai06-q35",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Trung vị không bị kéo lệch; mốt dùng được cho chữ.",
-    "mau": "Cột số có giá trị lạ thì điền ô trống bằng {0}; cột chữ thì điền bằng {1}.",
-    "o": [
-     [
-      "trung vị",
-      "số trung bình",
-      "số 0",
-      "giá trị lớn nhất"
-     ],
-     [
-      "mốt",
-      "trung vị",
-      "số trung bình",
-      "chữ rỗng"
-     ]
+    "q": "Sắp xếp các bước tính MSE của một đường dự đoán.",
+    "giai": "Dự đoán → sai lệch → bình phương → trung bình.",
+    "a": [
+     "Tính giá trị dự đoán ŷ cho từng điểm",
+     "Tính sai lệch y − ŷ của từng điểm",
+     "Bình phương từng sai lệch",
+     "Lấy trung bình cộng các bình phương"
     ],
-    "h": "1bc385eaf09606"
+    "h": "1f465e9e3942e3"
    },
    {
-    "k": "dd",
+    "k": "sx",
     "id": "bai06-q36",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Phi lý là lỗi nhập liệu → đổi thành ô trống rồi điền.",
-    "mau": "Giá trị không thể xảy ra gọi là giá trị {0}; ta đổi nó thành {1}.",
-    "o": [
-     [
-      "phi lý",
-      "bất thường có thật",
-      "trung vị",
-      "trùng lặp"
-     ],
-     [
-      "ô trống",
-      "số 0",
-      "giá trị lớn nhất",
-      "chữ hoa"
-     ]
+    "q": "Sắp xếp các bước tìm bạn giống A nhất trong cả khối một cách công bằng.",
+    "giai": "Đổi thang đo trước, rồi đo, rồi sắp xếp, bạn có khoảng cách nhỏ nhất là giống nhất.",
+    "a": [
+     "Đưa mọi cột về khoảng 0 – 1",
+     "Tính khoảng cách từ A tới từng bạn",
+     "Sắp xếp khoảng cách tăng dần",
+     "Lấy bạn đứng đầu danh sách"
     ],
-    "h": "94ac8cfdfe453"
+    "h": "15352ca453394a"
    },
    {
     "k": "dd",
     "id": "bai06-q37",
-    "q": "Chọn lệnh đúng cho mỗi chỗ trống.",
-    "giai": "strip bỏ khoảng trắng hai đầu; upper đưa về chữ hoa.",
-    "mau": "Lệnh {0} bỏ khoảng trắng hai đầu; lệnh {1} đưa chữ về chữ hoa.",
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "Hiệu từng cột, bình phương, cộng, lấy căn bậc hai.",
+    "mau": "Khoảng cách Euclid: lấy {0} từng cột, bình phương, cộng lại rồi lấy {1}.",
     "o": [
      [
-      ".str.strip()",
-      ".str.upper()",
-      ".str.replace()",
-      ".unique()"
+      "hiệu",
+      "tổng",
+      "tích",
+      "thương"
      ],
      [
-      ".str.upper()",
-      ".str.strip()",
-      ".str.lower()",
-      ".unique()"
+      "căn bậc hai",
+      "trung bình",
+      "bình phương",
+      "giá trị lớn nhất"
      ]
     ],
-    "h": "14564cd1de856e"
+    "h": "102d354b23f6f0"
    },
    {
     "k": "dd",
     "id": "bai06-q38",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Garbage in, garbage out.",
-    "mau": "Nguyên tắc “rác vào, {0}”: dữ liệu sai thì {1} sai.",
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "x′ = (x − min) : (max − min).",
+    "mau": "Công thức đưa về 0 – 1: x′ = (x − {0}) : ({1}).",
     "o": [
      [
-      "rác ra",
-      "vàng ra",
-      "sạch ra",
-      "số ra"
+      "min",
+      "max",
+      "x",
+      "trung bình"
      ],
      [
-      "kết quả",
-      "máy tính",
-      "bàn phím",
-      "tên cột"
+      "max − min",
+      "max + min",
+      "x − min",
+      "max"
      ]
     ],
-    "h": "157cef22da3bc8"
+    "h": "1b3bff8d25eb9d"
    },
    {
-    "k": "ds",
+    "k": "dd",
     "id": "bai06-q39",
-    "q": "Lệnh .str.upper() biến “10A 1” thành “10A1”.",
-    "giai": "upper chỉ đổi chữ thường thành chữ hoa; khoảng trắng ở giữa vẫn còn.",
-    "h": "fb7981e951154"
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "Đi ngược chiều dốc nên dùng dấu trừ; η là bước nhảy (learning rate).",
+    "mau": "Gradient descent: a mới = a cũ {0} η × độ dốc; η gọi là {1}.",
+    "o": [
+     [
+      "−",
+      "+",
+      "×",
+      ":"
+     ],
+     [
+      "bước nhảy",
+      "độ dốc",
+      "sai số",
+      "hệ số chặn"
+     ]
+    ],
+    "h": "b1c0546ace2"
    },
    {
-    "k": "ds",
+    "k": "dd",
     "id": "bai06-q40",
-    "q": "Hai dòng giống hệt nhau ở mọi cột thì nên giữ lại cả hai.",
-    "giai": "Đó là dòng trùng — giữ cả hai thì một bạn bị đếm hai lần.",
-    "h": "11be48efd363b"
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "a quyết định độ dốc của đường; b là chỗ đường cắt trục tung.",
+    "mau": "Trong đường dự đoán ŷ = a·x + b, a là {0} và b là {1}.",
+    "o": [
+     [
+      "hệ số góc",
+      "hệ số chặn",
+      "sai số",
+      "bước nhảy"
+     ],
+     [
+      "hệ số chặn",
+      "hệ số góc",
+      "độ dốc",
+      "sai số"
+     ]
+    ],
+    "h": "dc74094c5b803"
    },
    {
-    "k": "ds",
+    "k": "dd",
     "id": "bai06-q41",
-    "q": "Xoá mọi dòng có ô trống luôn là cách tốt nhất.",
-    "giai": "Xoá dòng làm mất cả các ô còn tốt — với bảng này mất 19 bạn.",
-    "h": "495bd85494108"
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "Phút mạng biến thiên 435 phút, giờ học chỉ 6,5 giờ.",
+    "mau": "Khi đo thô, cột {0} lấn át vì có {1} lớn hơn nhiều.",
+    "o": [
+     [
+      "phút mạng xã hội",
+      "giờ tự học",
+      "kết quả",
+      "mã học sinh"
+     ],
+     [
+      "khoảng biến thiên",
+      "số ô trống",
+      "số học sinh",
+      "số chữ số thập phân"
+     ]
+    ],
+    "h": "14d1756e19b3a6"
    },
    {
     "k": "ds",
     "id": "bai06-q42",
-    "q": "Quy tắc tứ phân vị có thể bỏ sót một giá trị phi lý.",
-    "giai": "Ví dụ giờ học −1,5 nằm trong ngưỡng của quy tắc nhưng vẫn phi lý (giờ không thể âm).",
+    "q": "Khoảng cách Euclid từ A đến B luôn bằng khoảng cách từ B đến A.",
+    "giai": "Hiệu đổi dấu nhưng bình phương thì như nhau.",
     "h": "1f0a0288332f2e"
+   },
+   {
+    "k": "ds",
+    "id": "bai06-q43",
+    "q": "Sau khi đưa về 0 – 1, thứ tự lớn nhỏ của các giá trị trong một cột bị đảo ngược.",
+    "giai": "Công thức giữ nguyên thứ tự: giá trị lớn hơn vẫn thành số lớn hơn.",
+    "h": "14d095f3d840a5"
+   },
+   {
+    "k": "ds",
+    "id": "bai06-q44",
+    "q": "Gradient descent chắc chắn về tới đáy với mọi bước nhảy.",
+    "giai": "Bước nhảy quá lớn (ví dụ 0,1 trong bài) làm a văng ngày càng xa đáy.",
+    "h": "35d07aaa6692f"
+   },
+   {
+    "k": "ds",
+    "id": "bai06-q45",
+    "q": "MSE bằng 0 nghĩa là đường dự đoán đi qua đúng mọi điểm dữ liệu.",
+    "giai": "Mọi sai lệch đều bằng 0 thì MSE mới bằng 0.",
+    "h": "118cb7f4a1a6b3"
    }
   ]
  },

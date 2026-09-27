@@ -3,12 +3,12 @@ window.BAI = {
  "ma": "bai01",
  "nhan": "Bài 1",
  "tieu_de": "AI là gì?",
- "phan": "Mở đầu · AI và Machine Learning",
+ "phan": "Module 03 · Introduction to AI",
  "cau_hoi": "AI là gì — và AI không phải là gì?",
  "gioi_thieu": [
   "Con dùng AI mỗi ngày: mở khoá bằng khuôn mặt, xem video được gợi ý, hỏi chatbot. Nhưng “AI” thật ra là gì? Nó có “hiểu” và “nghĩ” như con người không?",
   "Bài đầu tiên của khoá: con khám phá bốn nhóm ứng dụng AI, xem một máy thật đoán chữ số viết tay và một máy nhỏ tự đoán từ tiếp theo — rồi tập nói về AI cho đúng.",
-  "Không cần biết lập trình. Mọi con số trên trang là kết quả chạy thật của notebook bài học."
+  "Không cần biết lập trình. Mọi con số và hình trên trang là kết quả máy chạy thật trên dữ liệu thật."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai01",
@@ -51,7 +51,13 @@ window.BAI = {
     {
      "t": "dinh_nghia",
      "ten": "Trí tuệ nhân tạo (AI)",
-     "html": "Các hệ thống máy tính làm được những việc thường cần trí tuệ con người — như nhận ra khuôn mặt, dịch câu, gợi ý — bằng cách <b>đưa ra dự đoán</b> dựa trên dữ liệu.",
+     "html": "Các hệ thống máy tính làm được những việc thường cần trí tuệ con người — như nhận ra khuôn mặt, dịch câu, gợi ý bài hát.",
+     "ky_hieu": null
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "Machine Learning (học máy)",
+     "html": "Một cách làm AI: máy <b>học quy luật từ dữ liệu</b> rồi dùng quy luật đó để <b>đưa ra dự đoán</b> cho trường hợp mới. Hầu hết ứng dụng AI con gặp hằng ngày được làm theo cách này.",
      "ky_hieu": null
     },
     {
@@ -59,6 +65,21 @@ window.BAI = {
      "kieu": "ml",
      "tieu_de": "Điểm chung",
      "html": "Mọi ứng dụng trong hình đều <b>dự đoán</b>: đây là mặt ai, câu này dịch thế nào, con thích video nào, từ tiếp theo là gì. Dự đoán có thể đúng hoặc sai."
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Elements of AI — What is AI? (Đại học Helsinki)",
+       "url": "https://course.elementsofai.com/1",
+       "ghi_chu": "khoá học mở, có bản tiếng Việt"
+      },
+      {
+       "ten": "Experience AI (Raspberry Pi Foundation và Google DeepMind)",
+       "url": "https://experience-ai.org/",
+       "ghi_chu": "ý tưởng các hoạt động của bài"
+      }
+     ]
     },
     {
      "t": "loi_hay_gap",
@@ -69,7 +90,7 @@ window.BAI = {
     },
     {
      "t": "tom_tat",
-     "html": "AI là hệ thống máy tính đưa ra dự đoán từ dữ liệu, có mặt khắp quanh con."
+     "html": "AI làm những việc thường cần trí tuệ con người; hầu hết AI quanh con là Machine Learning — học từ dữ liệu để dự đoán."
     }
    ],
    "checkpoint": [
@@ -157,13 +178,13 @@ window.BAI = {
      "t": "bang",
      "cot": [
       "",
-      "Chương trình quy tắc",
-      "Hệ thống AI"
+      "Chương trình thông thường",
+      "Hệ thống AI học từ dữ liệu"
      ],
      "dong": [
       [
        "Làm thế nào",
-       "Con người viết sẵn từng quy tắc",
+       "Con người viết sẵn từng bước",
        "Học quy luật từ dữ liệu"
       ],
       [
@@ -179,15 +200,21 @@ window.BAI = {
      ]
     },
     {
+     "t": "hop",
+     "kieu": "doc-them",
+     "tieu_de": "Biết thêm",
+     "html": "Những hệ AI đời đầu (thập niên 1970–1980) được làm bằng hàng nghìn quy tắc do chuyên gia viết — gọi là <b>hệ chuyên gia</b>. Nhưng việc như nhận ra khuôn mặt có quá nhiều trường hợp để viết thành quy tắc, nên ngày nay người ta cho máy <b>học từ dữ liệu</b>."
+    },
+    {
      "t": "loi_hay_gap",
      "muc": [
-      "Gọi mọi thứ “thông minh” là AI — máy tính bỏ túi không học, không dự đoán.",
+      "Gọi mọi thứ tự động là AI — máy tính bỏ túi, đèn hẹn giờ chỉ làm đúng các bước viết sẵn.",
       "Nghĩ AI luôn đúng như máy tính bỏ túi."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Quy tắc viết sẵn thì không phải AI; học từ dữ liệu để dự đoán mới là AI."
+     "html": "Máy chỉ làm đúng các bước viết sẵn thì chưa phải AI; hệ thống học từ dữ liệu để dự đoán là AI (Machine Learning)."
     }
    ],
    "checkpoint": [
@@ -233,6 +260,16 @@ window.BAI = {
      "cap": "Bộ 1797 ảnh chữ số viết tay có sẵn trong thư viện scikit-learn",
      "alt": "Bộ 1797 ảnh chữ số viết tay có sẵn trong thư viện scikit-learn",
      "src": "img/chu-so-viet-tay.png"
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Bộ dữ liệu chữ số viết tay (UCI Machine Learning Repository)",
+       "url": "https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits",
+       "ghi_chu": "nguồn gốc bộ ảnh, giấy phép CC BY 4.0"
+      }
+     ]
     },
     {
      "t": "p",
@@ -330,6 +367,272 @@ window.BAI = {
      "html": "Sau từ “trời”, trong 37 câu máy đã học có 9 lần “nắng”, 8 lần “mưa”, 2 lần “lạnh”. Vì thế máy đoán “nắng” với xác suất 47,4%."
     },
     {
+     "t": "du_doan_tu",
+     "tieu_de": "máy đoán từ tiếp theo",
+     "huong_dan": "Gõ một từ (hoặc bấm một gợi ý). Máy chỉ biết 37 câu mẫu — xem nó đoán từ tiếp theo thế nào, rồi bấm “Cho máy viết tiếp 5 từ”.",
+     "cap": {
+      "hôm": {
+       "nay": 4,
+       "qua": 1
+      },
+      "nay": {
+       "trời": 4,
+       "có": 1,
+       "khó": 1
+      },
+      "trời": {
+       "nắng": 9,
+       "mưa": 8,
+       "lạnh": 2
+      },
+      "nắng": {
+       "đẹp": 2,
+       "thì": 1,
+       "nóng": 1,
+       "gắt": 1,
+       "ra": 1,
+       "ráo": 1
+      },
+      "mưa": {
+       "to": 1,
+       "thì": 2,
+       "phùn": 1,
+       "rào": 1,
+       "nhỏ": 1,
+       "suốt": 1
+      },
+      "thì": {
+       "đi": 1,
+       "ở": 1,
+       "tập": 1
+      },
+      "đi": {
+       "chơi": 1,
+       "học": 4
+      },
+      "ở": {
+       "nhà": 1
+      },
+      "chiều": {
+       "nay": 1
+      },
+      "sáng": {
+       "nay": 1
+      },
+      "nóng": {
+       "quá": 1
+      },
+      "phùn": {
+       "cả": 1
+      },
+      "cả": {
+       "ngày": 1,
+       "lớp": 1
+      },
+      "lạnh": {
+       "nhớ": 1
+      },
+      "nhớ": {
+       "mặc": 1
+      },
+      "mặc": {
+       "áo": 1
+      },
+      "qua": {
+       "trời": 1
+      },
+      "gắt": {
+       "buổi": 1
+      },
+      "buổi": {
+       "trưa": 1,
+       "chiều": 1
+      },
+      "rào": {
+       "buổi": 1
+      },
+      "em": {
+       "đi": 1
+      },
+      "học": {
+       "đúng": 1,
+       "bằng": 1,
+       "sớm": 1,
+       "đầy": 1,
+       "toán": 1,
+       "tin": 1,
+       "từ": 2
+      },
+      "đúng": {
+       "giờ": 1
+      },
+      "chúng": {
+       "mình": 1
+      },
+      "mình": {
+       "đi": 1,
+       "thích": 3
+      },
+      "bằng": {
+       "xe": 1
+      },
+      "xe": {
+       "buýt": 1
+      },
+      "bạn": {
+       "ấy": 2
+      },
+      "ấy": {
+       "đi": 1,
+       "thích": 1
+      },
+      "lớp": {
+       "đi": 1
+      },
+      "đầy": {
+       "đủ": 1
+      },
+      "thích": {
+       "học": 2,
+       "đọc": 1,
+       "chơi": 1
+      },
+      "tin": {
+       "học": 1
+      },
+      "đọc": {
+       "sách": 1
+      },
+      "chơi": {
+       "bóng": 1
+      },
+      "thầy": {
+       "cho": 1
+      },
+      "cho": {
+       "bài": 2
+      },
+      "bài": {
+       "tập": 3,
+       "kiểm": 3
+      },
+      "tập": {
+       "về": 1,
+       "xong": 1,
+       "hôm": 1,
+       "thể": 1,
+       "trong": 1
+      },
+      "về": {
+       "nhà": 1
+      },
+      "cô": {
+       "cho": 1
+      },
+      "kiểm": {
+       "tra": 3
+      },
+      "làm": {
+       "bài": 1
+      },
+      "xong": {
+       "mới": 1
+      },
+      "mới": {
+       "chơi": 1
+      },
+      "có": {
+       "bài": 1
+      },
+      "tra": {
+       "khá": 1
+      },
+      "khá": {
+       "dễ": 1
+      },
+      "máy": {
+       "tính": 2,
+       "học": 1
+      },
+      "tính": {
+       "dự": 1,
+       "học": 1
+      },
+      "dự": {
+       "đoán": 1
+      },
+      "đoán": {
+       "thời": 1
+      },
+      "thời": {
+       "tiết": 1
+      },
+      "từ": {
+       "dữ": 1,
+       "ví": 1
+      },
+      "dữ": {
+       "liệu": 2
+      },
+      "liệu": {
+       "càng": 1
+      },
+      "càng": {
+       "nhiều": 1,
+       "tốt": 1
+      },
+      "nhiều": {
+       "càng": 1
+      },
+      "ví": {
+       "dụ": 1
+      },
+      "ra": {
+       "sân": 1
+      },
+      "sân": {
+       "tập": 1
+      },
+      "thể": {
+       "dục": 1
+      },
+      "trong": {
+       "nhà": 1
+      },
+      "ngày": {
+       "mai": 2
+      },
+      "mai": {
+       "trời": 2
+      },
+      "đẹp": {
+       "quá": 1
+      },
+      "suốt": {
+       "đêm": 1
+      },
+      "cuối": {
+       "tuần": 1
+      },
+      "tuần": {
+       "trời": 1
+      },
+      "quá": {}
+     },
+     "so_cau": 37,
+     "mac_dinh": "trời",
+     "goi_y": [
+      "trời",
+      "hôm",
+      "đi",
+      "thích",
+      "bài",
+      "máy",
+      "robot"
+     ],
+     "top": 5
+    },
+    {
      "t": "demo_tung_buoc",
      "tieu_de": "máy tự sinh một câu",
      "huong_dan": "Bấm “Bước tiếp”: mỗi bước máy chọn từ hay đi sau nhất.",
@@ -382,7 +685,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "ml",
      "tieu_de": "Chatbot cũng vậy — ở quy mô khổng lồ",
-     "html": "Chatbot học từ hàng tỉ câu thay vì 37 câu, và nhìn cả đoạn văn phía trước thay vì một từ. Nhưng ý tưởng giống nhau: <b>đoán từ tiếp theo</b>, lặp lại nhiều lần."
+     "html": "Chatbot học từ hàng tỉ câu thay vì 37 câu, nhìn cả đoạn văn phía trước thay vì một từ, và đoán từng mảnh từ nhỏ (gọi là <i>token</i>). Nhưng ý tưởng cốt lõi giống nhau: <b>đoán phần chữ tiếp theo</b>, lặp lại nhiều lần."
     },
     {
      "t": "loi_hay_gap",
@@ -522,6 +825,113 @@ window.BAI = {
      "h": "aec66a9f587f6"
     }
    ]
+  },
+  {
+   "ten": "Thử thách cặp đôi",
+   "ten_ngan": "Thử thách cặp",
+   "phut": 15,
+   "muc_tieu": "cùng bạn thử máy đoán từ và thấy dữ liệu quyết định dự đoán.",
+   "khoi_dong": "Hai bạn một máy: một bạn thao tác, một bạn ghi kết quả vào vở. Sang thử thách 2 đổi vai.",
+   "khoi": [
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Thử thách 1 — Săn giới hạn của máy (cơ bản)",
+     "html": "Dùng ô “máy đoán từ tiếp theo” ở chặng 4. Tìm <b>2 từ</b> máy đoán được và <b>1 từ</b> máy không đoán được. Ghi vào vở: vì sao máy không đoán được từ đó?"
+    },
+    {
+     "t": "tra_bang",
+     "tieu_de": "dữ liệu lệch thì dự đoán lệch",
+     "huong_dan": "Thử thách 2 (cơ bản): kéo thanh trượt để <b>thêm dần câu “trời mưa to”</b> vào dữ liệu học. Sau từ “trời”, máy đoán từ gì? Ghi vào vở: cần thêm ít nhất bao nhiêu câu thì máy đổi ý?",
+     "nhan_truot": "Số câu “trời mưa to” thêm vào",
+     "khoa": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+     ],
+     "so": [
+      42.1,
+      45.0,
+      47.6,
+      50.0,
+      52.2,
+      54.2,
+      56.0,
+      57.7,
+      59.3,
+      60.7,
+      62.1
+     ],
+     "don_vi": "%",
+     "nhan_so": "Xác suất “mưa” sau “trời”",
+     "kieu": "duong",
+     "ymin": 0,
+     "ymax": 100,
+     "truc_x": "Số câu thêm vào",
+     "truc_y": "Xác suất “mưa” (%)",
+     "ghi": [
+      "Máy đoán: <b>nắng</b> · “nắng” 47,4% · “mưa” 42,1%",
+      "Máy đoán: <b>nắng</b> · “nắng” 45,0% · “mưa” 45,0% — hai từ bằng nhau, máy chọn từ gặp trước",
+      "Máy đoán: <b>mưa</b> · “nắng” 42,9% · “mưa” 47,6%",
+      "Máy đoán: <b>mưa</b> · “nắng” 40,9% · “mưa” 50,0%",
+      "Máy đoán: <b>mưa</b> · “nắng” 39,1% · “mưa” 52,2%",
+      "Máy đoán: <b>mưa</b> · “nắng” 37,5% · “mưa” 54,2%",
+      "Máy đoán: <b>mưa</b> · “nắng” 36,0% · “mưa” 56,0%",
+      "Máy đoán: <b>mưa</b> · “nắng” 34,6% · “mưa” 57,7%",
+      "Máy đoán: <b>mưa</b> · “nắng” 33,3% · “mưa” 59,3%",
+      "Máy đoán: <b>mưa</b> · “nắng” 32,1% · “mưa” 60,7%",
+      "Máy đoán: <b>mưa</b> · “nắng” 31,0% · “mưa” 62,1%"
+     ]
+    },
+    {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Nâng cao — cặp xong sớm",
+     "html": "Một ứng dụng gợi ý bài hát chỉ học từ lịch sử nghe của người lớn. Theo con, nó sẽ gợi ý thế nào cho học sinh lớp 10? Viết 2 câu vào vở, dùng từ “dữ liệu” và “dự đoán”."
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Ba câu để chia sẻ trước lớp",
+     "html": "1. Từ máy không đoán được và lý do.<br>2. Cần thêm bao nhiêu câu thì máy đổi ý?<br>3. Nên nói “AI hiểu thời tiết” hay “ứng dụng dự đoán từ dữ liệu”? Vì sao?"
+    },
+    {
+     "t": "tom_tat",
+     "html": "Máy chỉ đoán được từ những gì có trong dữ liệu; dữ liệu lệch thì dự đoán lệch."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai01-q11",
+     "q": "Theo thử thách 2, thêm ít nhất bao nhiêu câu “trời mưa to” thì máy đổi sang đoán “mưa”?",
+     "giai": "Kéo thanh trượt, xem dòng “Máy đoán”.",
+     "goi_y": "Kéo từng nấc và đọc dòng dưới biểu đồ.",
+     "a": [
+      "2",
+      "0",
+      "5",
+      "10"
+     ],
+     "h": "6c0a3d840c321"
+    },
+    {
+     "k": "ds",
+     "id": "bai01-q12",
+     "q": "Máy đoán được từ tiếp theo của một từ chưa từng có trong dữ liệu học.",
+     "giai": "Không có trong dữ liệu thì không đếm được.",
+     "goi_y": "Thử gõ “robot”.",
+     "h": "234d8c42e5384"
+    }
+   ]
   }
  ],
  "cuoi": {
@@ -537,7 +947,7 @@ window.BAI = {
   "ngan_hang": [
    {
     "k": "mc",
-    "id": "bai01-q11",
+    "id": "bai01-q13",
     "q": "Nhìn hình. “Bài hát gợi ý” thuộc nhóm nào?",
     "giai": "Đoán con thích gì.",
     "img": {
@@ -549,11 +959,11 @@ window.BAI = {
      "Xử lý ngôn ngữ",
      "AI tạo sinh"
     ],
-    "h": "629d00d414f8d"
+    "h": "14ad66484590bd"
    },
    {
     "k": "mc",
-    "id": "bai01-q12",
+    "id": "bai01-q14",
     "q": "Nhìn hình. Mỗi ảnh chữ số có kích thước bao nhiêu ô?",
     "giai": "64 con số.",
     "img": {
@@ -565,11 +975,11 @@ window.BAI = {
      "28 × 28 ô",
      "100 × 100 ô"
     ],
-    "h": "4e90bf09e2859"
+    "h": "1605b8c912e16"
    },
    {
     "k": "mc",
-    "id": "bai01-q13",
+    "id": "bai01-q15",
     "q": "Nhìn hình. Khung màu đỏ nghĩa là gì?",
     "giai": "Đỏ = sai.",
     "img": {
@@ -581,11 +991,11 @@ window.BAI = {
      "Máy chưa đoán ảnh đó",
      "Ảnh có độ tin cậy 100%"
     ],
-    "h": "10244a3bef71c5"
+    "h": "8e7ce80a06d95"
    },
    {
     "k": "mc",
-    "id": "bai01-q14",
+    "id": "bai01-q16",
     "q": "Nhìn hình. Sau “trời”, từ nào có xác suất cao nhất?",
     "giai": "47,4%.",
     "img": {
@@ -597,11 +1007,11 @@ window.BAI = {
      "lạnh",
      "đẹp"
     ],
-    "h": "1a0fade053ad8"
+    "h": "1a53af513783a5"
    },
    {
     "k": "mc",
-    "id": "bai01-q15",
+    "id": "bai01-q17",
     "q": "Điểm chung của mọi ứng dụng AI trong bài là gì?",
     "giai": "Dự đoán.",
     "a": [
@@ -610,24 +1020,24 @@ window.BAI = {
      "Đều không bao giờ sai",
      "Đều chạy không cần điện"
     ],
-    "h": "1c9797b868251c"
+    "h": "32b3128a662b5"
    },
    {
     "k": "mc",
-    "id": "bai01-q16",
+    "id": "bai01-q18",
     "q": "Vì sao máy tính bỏ túi không được coi là AI?",
     "giai": "Không học, không dự đoán.",
     "a": [
-     "Nó chỉ làm theo quy tắc viết sẵn",
+     "Nó chỉ làm đúng các bước viết sẵn",
      "Nó quá nhỏ để chứa AI",
      "Nó không có kết nối mạng",
      "Nó chỉ tính được số nguyên"
     ],
-    "h": "1ecb4bda4de81a"
+    "h": "10f02eda3ada39"
    },
    {
     "k": "mc",
-    "id": "bai01-q17",
+    "id": "bai01-q19",
     "q": "Chatbot tạo ra câu trả lời bằng cách nào?",
     "giai": "AI tạo sinh.",
     "a": [
@@ -636,11 +1046,11 @@ window.BAI = {
      "Hỏi một người đang ngồi trả lời",
      "Chọn ngẫu nhiên một câu có sẵn"
     ],
-    "h": "1fdb8541e91fc5"
+    "h": "36cd42d821ab2"
    },
    {
     "k": "mc",
-    "id": "bai01-q18",
+    "id": "bai01-q20",
     "q": "Máy đoán một chữ số với độ tin cậy 99%. Kết luận nào đúng?",
     "giai": "Dự đoán không phải chắc chắn.",
     "a": [
@@ -649,11 +1059,11 @@ window.BAI = {
      "Chắc chắn là đoán sai rồi",
      "Máy đã hiểu chữ số như người"
     ],
-    "h": "566137564d690"
+    "h": "56059fe084f17"
    },
    {
     "k": "mc",
-    "id": "bai01-q19",
+    "id": "bai01-q21",
     "q": "Ai chịu trách nhiệm khi một hệ thống AI được dùng sai?",
     "giai": "Con người.",
     "a": [
@@ -662,11 +1072,11 @@ window.BAI = {
      "Không ai cả",
      "Chiếc máy tính chạy nó"
     ],
-    "h": "196995bff33b59"
+    "h": "106ef66e0d2e44"
    },
    {
     "k": "ma",
-    "id": "bai01-q20",
+    "id": "bai01-q22",
     "q": "Hai việc nào cần AI (học từ dữ liệu để dự đoán)? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Dự đoán.",
     "a": [
@@ -675,11 +1085,11 @@ window.BAI = {
      "Cộng hai số",
      "Hẹn giờ báo thức"
     ],
-    "h": "11fd01c415c7d1"
+    "h": "97df700685071"
    },
    {
     "k": "ma",
-    "id": "bai01-q21",
+    "id": "bai01-q23",
     "q": "Hai cách nói nào là cách nói kỹ thuật? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Nói về dự đoán.",
     "a": [
@@ -688,11 +1098,11 @@ window.BAI = {
      "AI hiểu con buồn",
      "AI muốn giúp con"
     ],
-    "h": "e6c93c56ff920"
+    "h": "17642133ddbc6d"
    },
    {
     "k": "ma",
-    "id": "bai01-q22",
+    "id": "bai01-q24",
     "q": "Hai điều nào là lợi ích của AI? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Lợi ích.",
     "a": [
@@ -701,11 +1111,11 @@ window.BAI = {
      "Tạo tin giả như thật",
      "Đoán sai mà vẫn tự tin"
     ],
-    "h": "fdb349b54e3e8"
+    "h": "1034a2fc24a068"
    },
    {
     "k": "ma",
-    "id": "bai01-q23",
+    "id": "bai01-q25",
     "q": "Hai điều nào giúp máy nhìn chữ số giỏi hơn? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Dữ liệu tốt.",
     "a": [
@@ -714,11 +1124,11 @@ window.BAI = {
      "Đổi màu máy tính",
      "Tắt bớt ô tin cậy"
     ],
-    "h": "1a567045be0200"
+    "h": "f86ed9bec05d5"
    },
    {
     "k": "sx",
-    "id": "bai01-q24",
+    "id": "bai01-q26",
     "q": "Sắp xếp cách máy học nhìn chữ số.",
     "giai": "Dữ liệu → học → ảnh mới → dự đoán.",
     "a": [
@@ -727,11 +1137,11 @@ window.BAI = {
      "Đưa ảnh mới chưa thấy",
      "Máy đưa ra dự đoán"
     ],
-    "h": "f977c6c43fc2e"
+    "h": "15d10a1a6ccb18"
    },
    {
     "k": "sx",
-    "id": "bai01-q25",
+    "id": "bai01-q27",
     "q": "Sắp xếp cách máy nhỏ sinh một câu.",
     "giai": "Đoán từ tiếp theo.",
     "a": [
@@ -740,14 +1150,14 @@ window.BAI = {
      "Chọn từ hay đi sau nhất",
      "Lặp lại cho tới khi đủ câu"
     ],
-    "h": "18ace80b21db03"
+    "h": "71bb77cedac6c"
    },
    {
     "k": "dd",
-    "id": "bai01-q26",
+    "id": "bai01-q28",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
     "giai": "Định nghĩa.",
-    "mau": "AI đưa ra {0} dựa trên {1}.",
+    "mau": "Machine Learning đưa ra {0} dựa trên {1}.",
     "o": [
      [
       "dự đoán",
@@ -762,17 +1172,17 @@ window.BAI = {
       "may mắn"
      ]
     ],
-    "h": "13b092be7afdeb"
+    "h": "fcd4dd3efeb54"
    },
    {
     "k": "dd",
-    "id": "bai01-q27",
+    "id": "bai01-q29",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
     "giai": "Quy tắc vs học.",
     "mau": "Máy tính bỏ túi làm theo {0}; bộ lọc thư rác {1} từ dữ liệu.",
     "o": [
      [
-      "quy tắc viết sẵn",
+      "các bước viết sẵn",
       "dữ liệu",
       "dự đoán",
       "cảm xúc"
@@ -784,11 +1194,11 @@ window.BAI = {
       "đếm ngược"
      ]
     ],
-    "h": "318da021b560b"
+    "h": "9b500355e6251"
    },
    {
     "k": "dd",
-    "id": "bai01-q28",
+    "id": "bai01-q30",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
     "giai": "Chia ảnh học / ảnh thử.",
     "mau": "Máy học trên {0} ảnh và thử trên {1} ảnh chưa thấy.",
@@ -806,11 +1216,11 @@ window.BAI = {
       "8"
      ]
     ],
-    "h": "5220320fcadfe"
+    "h": "151e22394fb50"
    },
    {
     "k": "dd",
-    "id": "bai01-q29",
+    "id": "bai01-q31",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
     "giai": "AI tạo sinh.",
     "mau": "Chatbot đoán từ {0}; nó có thể {1} thông tin.",
@@ -828,28 +1238,28 @@ window.BAI = {
       "gửi"
      ]
     ],
-    "h": "b851c6b5646de"
-   },
-   {
-    "k": "ds",
-    "id": "bai01-q30",
-    "q": "AI có thể đoán sai dù độ tin cậy cao.",
-    "giai": "Dự đoán, không phải chắc chắn.",
-    "h": "115ebf06bf5f49"
-   },
-   {
-    "k": "ds",
-    "id": "bai01-q31",
-    "q": "Đèn giao thông hẹn giờ là một hệ thống AI.",
-    "giai": "Quy tắc cố định.",
-    "h": "40ff9f5ad2dc7"
+    "h": "1af5de82458a3f"
    },
    {
     "k": "ds",
     "id": "bai01-q32",
+    "q": "AI có thể đoán sai dù độ tin cậy cao.",
+    "giai": "Dự đoán, không phải chắc chắn.",
+    "h": "1f083bd2c066da"
+   },
+   {
+    "k": "ds",
+    "id": "bai01-q33",
+    "q": "Đèn giao thông hẹn giờ là một hệ thống AI.",
+    "giai": "Quy tắc cố định.",
+    "h": "181f77804432a"
+   },
+   {
+    "k": "ds",
+    "id": "bai01-q34",
     "q": "Nói “AI muốn…” là cách nói kỹ thuật chính xác.",
     "giai": "Nói về dự đoán của hệ thống.",
-    "h": "dfeae80b04e18"
+    "h": "1b6f4dfdb7f775"
    }
   ]
  },

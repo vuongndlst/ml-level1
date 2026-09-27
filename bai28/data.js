@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 28,
  "ma": "bai28",
  "nhan": "Bài 28",
- "tieu_de": "Dự báo theo thời gian: bụi mịn PM2.5",
- "phan": "Phần E · Trải nghiệm",
- "cau_hoi": "Nhìn các ngày trước, máy có đoán được bụi mịn ngày mai không?",
+ "tieu_de": "Học tăng cường: học qua thử và sai",
+ "phan": "Module 13 · Unsupervised and Reinforcement Learning",
+ "cau_hoi": "Không ai chỉ đường, máy có tự học cách thoát mê cung không?",
  "gioi_thieu": [
-  "Ứng dụng chất lượng không khí trên điện thoại thường có dòng “dự báo ngày mai”. Bài này con thử làm việc đó với số đo bụi mịn PM2.5 thật của Bắc Kinh, 2010 – 2014.",
-  "Dữ liệu theo thời gian có một điều khác mọi bảng trước: <b>thứ tự quan trọng</b>. Con sẽ biến chuỗi thành bảng bằng <b>cửa sổ trượt</b>, so hồi quy tuyến tính với một mạng LSTM (dùng như hộp đen), và thấy vì sao dữ liệu đúng quan trọng hơn model phức tạp.",
-  "Con dùng lại hồi quy tuyến tính và MAE (Bài 14), Random Forest (Bài 21)."
+  "Học có giám sát cần đáp án, gom nhóm cần dữ liệu. Nhánh thứ ba — <b>học tăng cường</b> — không cần cả hai: máy tự <b>hành động</b>, nhận <b>điểm thưởng</b> hoặc bị trừ điểm, và dần rút ra cách làm tốt nhất.",
+  "Bài này là bài trải nghiệm: con chạy và quan sát một máy học thoát mê cung 5 × 5 bằng Q-learning. Mọi con số trên trang được tính lại từ chính mê cung đó.",
+  "Con dùng lại ý tưởng “đánh giá bằng con số” và “lặp tới khi ổn định” của các bài trước."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai28",
  "muc_tieu": [
-  "Nhận ra đặc điểm của dữ liệu chuỗi thời gian: thứ tự, mùa, ngày trống.",
-  "Dùng mốc “mai giống hôm nay” và đo sai số bằng MAE.",
-  "Biến chuỗi thành bảng bằng cửa sổ trượt; chia train / test theo thời gian.",
-  "So sánh hồi quy tuyến tính với LSTM (hộp đen) một cách trung thực.",
-  "Giải thích vì sao đoán càng xa càng khó và vì sao thêm dữ liệu thời tiết giúp ích."
+  "Nêu được các thành phần của học tăng cường: tác tử, môi trường, hành động, phần thưởng.",
+  "Mô tả được một tập học: thử, nhận thưởng, cập nhật điểm.",
+  "Đọc được bảng Q và đường đi máy chọn.",
+  "Giải thích được khám phá và khai thác.",
+  "Nhận ra hậu quả của phần thưởng đặt sai."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,478 +36,573 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Dữ liệu theo thời gian",
-   "ten_ngan": "Chuỗi",
+   "ten": "Nhánh thứ ba của ML",
+   "ten_ngan": "Ba nhánh",
    "phut": 4,
-   "muc_tieu": "nhận ra đặc điểm của dữ liệu chuỗi thời gian.",
-   "khoi_dong": "Nếu xáo trộn thứ tự các ngày trong bảng, dữ liệu thời tiết có còn ý nghĩa không?",
+   "muc_tieu": "nêu được các thành phần của học tăng cường.",
+   "khoi_dong": "Con học đi xe đạp thế nào? Có ai đưa con bảng đáp án không?",
    "khoi": [
     {
      "t": "anh",
-     "cap": "PM2.5 trung bình mỗi ngày và trung bình theo tháng",
-     "alt": "PM2.5 trung bình mỗi ngày và trung bình theo tháng",
-     "src": "img/pm25-theo-ngay.png"
+     "cap": "Mê cung của bài: đi từ Xuất phát tới Đích, tránh Hố",
+     "alt": "Mê cung của bài: đi từ Xuất phát tới Đích, tránh Hố",
+     "src": "img/me-cung.png"
     },
     {
      "t": "bang",
      "cot": [
-      "Đặc điểm",
-      "Trong bảng bụi mịn"
+      "",
+      "Có giám sát",
+      "Không giám sát",
+      "Tăng cường"
      ],
      "dong": [
       [
-       "Thứ tự quan trọng",
-       "Hôm nay liên quan hôm qua; không xáo trộn được"
+       "Máy nhận gì",
+       "Dữ liệu + đáp án",
+       "Dữ liệu, không đáp án",
+       "Điểm thưởng sau mỗi hành động"
       ],
       [
-       "Có mùa",
-       "Tháng 10 – 2 cao hơn (tháng 2: 126, tháng 5: 81 µg/m³)"
+       "Máy học gì",
+       "Đoán nhãn / con số",
+       "Tìm nhóm",
+       "Cách hành động tốt nhất"
       ],
       [
-       "Có ngày trống",
-       "37 / 1826 ngày không có số đo nào"
-      ],
-      [
-       "Dao động mạnh",
-       "Có ngày trên 400, có ngày dưới 10"
+       "Ví dụ",
+       "Đạt / Chưa đạt",
+       "Playlist",
+       "Thoát mê cung, chơi cờ, robot đi lại"
       ]
      ]
     },
     {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Điền ngày trống theo thời gian",
-     "html": "Với chuỗi thời gian, ngày trống thường được nội suy từ ngày trước và ngày sau (<code>interpolate()</code>), không lấy trung bình của cả 5 năm."
+     "t": "bang",
+     "cot": [
+      "Thành phần",
+      "Trong mê cung"
+     ],
+     "dong": [
+      [
+       "Tác tử (agent)",
+       "Người máy đi trong mê cung"
+      ],
+      [
+       "Môi trường",
+       "Mê cung 5 × 5 với tường, hố, đích"
+      ],
+      [
+       "Trạng thái",
+       "Ô đang đứng"
+      ],
+      [
+       "Hành động",
+       "Lên, xuống, trái, phải"
+      ],
+      [
+       "Phần thưởng",
+       "Mỗi bước −1 · rơi hố −10 · tới đích +10"
+      ]
+     ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Xáo trộn các dòng như bảng học sinh — mất thông tin thứ tự.",
-      "Điền ngày trống bằng trung bình cả chuỗi, bỏ qua mùa."
+      "Nghĩ học tăng cường cần bảng dữ liệu có đáp án.",
+      "Nghĩ phần thưởng chỉ có ở cuối — ở đây mỗi bước đều có điểm (−1)."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Chuỗi thời gian: thứ tự, mùa, ngày trống — phải giữ nguyên thứ tự."
+     "html": "Học tăng cường: hành động → nhận điểm thưởng → điều chỉnh cách hành động."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai28-q1",
-     "q": "Theo biểu đồ theo tháng, bụi mịn thường cao nhất vào mùa nào?",
-     "giai": "Mùa lạnh, sưởi ấm và ít gió.",
-     "goi_y": "Tìm các cột cao nhất.",
+     "q": "Trong mê cung của bài, “hành động” là gì?",
+     "giai": "Trạng thái là ô, phần thưởng là điểm.",
+     "goi_y": "Người máy có thể làm gì ở mỗi ô?",
      "a": [
-      "Tháng 10 tới tháng 2",
-      "Tháng 4 tới tháng 5",
-      "Tháng 6 tới tháng 8",
-      "Không khác nhau giữa các tháng"
+      "Đi lên, xuống, trái hoặc phải",
+      "Ô người máy đang đứng",
+      "Điểm +10 khi tới đích",
+      "Bức tường màu xám đậm"
      ],
-     "h": "1c47ff557edb53"
+     "h": "3c70f95340e89"
     },
     {
      "k": "ds",
      "id": "bai28-q2",
-     "q": "Với chuỗi thời gian, có thể xáo trộn thứ tự các ngày mà không mất thông tin.",
-     "giai": "Thứ tự mang thông tin: hôm nay liên quan hôm qua.",
-     "goi_y": "Hôm qua ô nhiễm, hôm nay có hay ô nhiễm không?",
+     "q": "Học tăng cường cần một bảng dữ liệu có sẵn đáp án.",
+     "giai": "Máy tự tạo trải nghiệm bằng cách hành động.",
+     "goi_y": "Máy lấy thông tin từ đâu để học?",
      "h": "8f553b6ac193c"
     }
    ]
   },
   {
-   "ten": "Mốc đơn giản và MAE",
-   "ten_ngan": "Mốc",
-   "phut": 4,
-   "muc_tieu": "dùng mốc “mai giống hôm nay” và đo sai số bằng MAE.",
-   "khoi_dong": "Không có model nào, con đoán bụi mịn ngày mai bằng cách nào?",
+   "ten": "Một tập học: thử và nhận điểm",
+   "ten_ngan": "Thử và sai",
+   "phut": 5,
+   "muc_tieu": "mô tả được một tập học: thử, nhận thưởng, cập nhật điểm.",
+   "khoi_dong": "Lần đầu vào mê cung, người máy chưa biết gì. Nó sẽ đi thế nào?",
    "khoi": [
     {
      "t": "p",
-     "html": "Học trên 2010 – 2013, kiểm tra trên cả 365 ngày năm 2014. Sai số đo bằng <b>MAE</b> (Bài 14): trung bình độ lệch giữa số đoán và số thật, đơn vị µg/m³."
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "hai mốc",
-     "de": "Năm 2014, PM2.5 trung bình 97,8 µg/m³.",
-     "cot": [
-      "Mốc",
-      "Cách đoán",
-      "MAE năm 2014"
-     ],
-     "dong": [
-      [
-       "Đoán trung bình chung",
-       "Ngày nào cũng đoán 98,8 (trung bình 2010 – 2013)",
-       "59,5"
-      ],
-      [
-       "“Mai giống hôm nay”",
-       "Lấy đúng số của hôm trước",
-       "52,8"
-      ]
-     ],
-     "ket_luan": "Chỉ nhìn hôm qua đã giảm sai số từ 59,5 xuống 52,8 — thứ tự có thông tin.",
-     "nhan_manh": []
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Khoe model sai số 47 mà không so với mốc.",
-      "Nghĩ MAE là phần trăm — đơn vị của MAE là đơn vị của dữ liệu (µg/m³)."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "Luôn có mốc: đoán trung bình chung và “mai giống hôm nay”."
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
-     "id": "bai28-q3",
-     "q": "Theo ví dụ, MAE của mốc “mai giống hôm nay” năm 2014 là bao nhiêu?",
-     "giai": "Nhỏ hơn đoán trung bình chung.",
-     "goi_y": "Đọc cột MAE ở dòng thứ hai.",
-     "a": [
-      "52,8",
-      "59,5",
-      "47,3",
-      "35,6"
-     ],
-     "h": "1ceed14b5d229c"
-    },
-    {
-     "k": "dd",
-     "id": "bai28-q4",
-     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-     "giai": "Bài 14.",
-     "goi_y": "MAE = Mean Absolute Error.",
-     "mau": "MAE là trung bình {0} giữa số đoán và số thật; đơn vị là {1}.",
-     "o": [
-      [
-       "độ lệch",
-       "tổng",
-       "tích",
-       "tỉ lệ"
-      ],
-      [
-       "µg/m³",
-       "%",
-       "ngày",
-       "điểm"
-      ]
-     ],
-     "h": "4fed336bd9d5e"
-    }
-   ]
-  },
-  {
-   "ten": "Cửa sổ trượt và chia theo thời gian",
-   "ten_ngan": "Cửa sổ",
-   "phut": 5,
-   "muc_tieu": "biến chuỗi thành bảng bằng cửa sổ trượt; chia train / test theo thời gian.",
-   "khoi_dong": "Hồi quy tuyến tính cần bảng có cột X và cột y. Chuỗi chỉ có một cột. Làm sao?",
-   "khoi": [
-    {
-     "t": "anh",
-     "cap": "7 ngày trước là 7 cột đầu vào; ngày tiếp theo là y",
-     "alt": "7 ngày trước là 7 cột đầu vào; ngày tiếp theo là y",
-     "src": "img/cua-so-truot.png"
+     "html": "Một <b>tập</b> (episode) là một lần đi từ ô Xuất phát tới khi tới đích, rơi hố, hoặc hết 100 bước. Máy ghi nhớ điểm của từng cặp (ô, hướng) trong một bảng gọi là <b>bảng Q</b>."
     },
     {
      "t": "demo_tung_buoc",
-     "tieu_de": "cửa sổ trượt 7 ngày",
-     "huong_dan": "Bấm “Bước tiếp” để trượt cửa sổ qua từng ngày đầu năm 2014.",
-     "nhan_chon": "Chuỗi",
+     "tieu_de": "tập học đầu tiên",
+     "huong_dan": "Bấm “Bước tiếp” để xem người máy đi từng bước trong tập đầu tiên. Ô ghi (hàng, cột).",
+     "nhan_chon": "Tập",
      "cot": [
       "Bước",
-      "Việc",
-      "Dòng mới của bảng"
+      "Người máy làm gì",
+      "Điểm"
      ],
      "mac_dinh": 0,
      "lua_chon": [
       {
-       "nhan": "PM2.5 đầu năm 2014",
+       "nhan": "Tập 1 (bảng Q ban đầu toàn số 0)",
        "dong": [
         [
          "0",
-         "Chuỗi PM2.5 đầu năm 2014: 53, 163, 62, 150, 104, 151, 121, 19, 32, 80",
-         "Chưa có bảng"
+         "Đứng ở ô Xuất phát (1, 1); bảng Q toàn số 0",
+         "Tổng điểm 0"
         ],
         [
          "1",
-         "Đầu vào: 01/01 → 07/01 (7 ngày)",
-         "Dòng 1: [53; 163; 62; 150; 104; 151; 121] → y = 19 (ngày 08/01)"
+         "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): xuống → (2, 1)",
+         "thưởng −1 · Q[(1, 1), xuống]: 0,0 → −0,5 · tổng −1"
         ],
         [
          "2",
-         "Đầu vào: 02/01 → 08/01 (7 ngày)",
-         "Dòng 2: [163; 62; 150; 104; 151; 121; 19] → y = 32 (ngày 09/01)"
+         "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): phải → (2, 1) (đâm tường, đứng yên)",
+         "thưởng −1 · Q[(2, 1), phải]: 0,0 → −0,5 · tổng −2"
         ],
         [
          "3",
-         "Đầu vào: 03/01 → 09/01 (7 ngày)",
-         "Dòng 3: [62; 150; 104; 151; 121; 19; 32] → y = 80 (ngày 10/01)"
+         "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): xuống → (3, 1)",
+         "thưởng −1 · Q[(2, 1), xuống]: 0,0 → −0,5 · tổng −3"
+        ],
+        [
+         "4",
+         "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): trái → (3, 1) (đâm tường, đứng yên)",
+         "thưởng −1 · Q[(3, 1), trái]: 0,0 → −0,5 · tổng −4"
+        ],
+        [
+         "5",
+         "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): phải → (3, 2)",
+         "thưởng −1 · Q[(3, 1), phải]: 0,0 → −0,5 · tổng −5"
+        ],
+        [
+         "6",
+         "Thử ngẫu nhiên: lên → (3, 2) (đâm tường, đứng yên)",
+         "thưởng −1 · Q[(3, 2), lên]: 0,0 → −0,5 · tổng −6"
+        ],
+        [
+         "7",
+         "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): phải → (3, 3)",
+         "thưởng −1 · Q[(3, 2), phải]: 0,0 → −0,5 · tổng −7"
         ],
         [
          "…",
-         "Trượt tiếp tới hết chuỗi",
-         "Chuỗi 1 826 ngày thành bảng khoảng 1 800 dòng"
+         "Đi tiếp 39 bước nữa, cuối cùng rơi xuống hố",
+         "Tập 1 kết thúc: tổng −55 điểm"
         ]
        ]
       }
      ]
     },
     {
-     "t": "p",
-     "html": "Hồi quy tuyến tính trên bảng 7 cột cho MAE 47,3, tốt hơn cả hai mốc. Hệ số của hôm qua là 0,66 — lớn nhất; các ngày xa hơn gần 0."
+     "t": "anh",
+     "cap": "Trung bình 20 lần học: số bước mỗi tập giảm dần về 8",
+     "alt": "Trung bình 20 lần học: số bước mỗi tập giảm dần về 8",
+     "src": "img/so-buoc-moi-tap.png"
     },
     {
-     "t": "hop",
-     "kieu": "ml",
-     "tieu_de": "Chia theo thời gian, không xáo trộn",
-     "html": "Học trên các năm trước, kiểm tra trên năm sau — giống như dự báo thật: chỉ được dùng quá khứ để đoán tương lai. Không dùng <code>train_test_split</code> xáo trộn như các bài trước."
+     "t": "p",
+     "html": "5 tập đầu, người máy cần trung bình 52,4 bước; 50 tập cuối chỉ còn 8,8 bước — gần bằng đường ngắn nhất 8 bước."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Xáo trộn rồi chia — model được “nhìn” những ngày sau ngày cần đoán.",
-      "Quên rằng dòng đầu tiên cần đủ 7 ngày trước nó."
+      "Nghĩ tập đầu tiên máy đã đi đúng — nó gần như đi mò.",
+      "Nghĩ máy nhớ đường đi — nó nhớ <b>điểm</b> của từng (ô, hướng)."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Cửa sổ trượt: 7 ngày trước → ngày sau. Chia theo thời gian: quá khứ học, tương lai kiểm tra."
+     "html": "Mỗi tập: thử → nhận điểm → cập nhật bảng Q. Qua nhiều tập, đường đi ngắn dần."
     }
    ],
    "checkpoint": [
     {
-     "k": "sx",
-     "id": "bai28-q5",
-     "q": "Sắp xếp các bước dự báo bằng cửa sổ trượt.",
-     "giai": "Làm sạch → bảng → học → đo.",
-     "goi_y": "Bảng phải có trước khi học.",
+     "k": "mc",
+     "id": "bai28-q3",
+     "q": "Theo phần Tự thử, ở bước 1 của tập đầu, điểm thưởng người máy nhận là bao nhiêu?",
+     "giai": "Mỗi bước bình thường bị trừ 1.",
+     "goi_y": "Xem cột Điểm ở dòng bước 1.",
      "a": [
-      "Điền ngày trống bằng nội suy",
-      "Tạo bảng 7 ngày trước → ngày sau",
-      "Học trên 2010 – 2013",
-      "Đo MAE trên năm 2014"
+      "−1",
+      "+10",
+      "0",
+      "−10"
      ],
-     "h": "14da2a22726d98"
+     "h": "dbd49064e126d"
     },
     {
-     "k": "mc",
-     "id": "bai28-q6",
-     "q": "Theo phần Tự thử, dòng 1 của bảng có y bằng bao nhiêu?",
-     "giai": "Ngày thứ 8 (08/01).",
-     "goi_y": "Bấm “Bước tiếp” một lần, đọc số sau “y =”.",
+     "k": "sx",
+     "id": "bai28-q4",
+     "q": "Sắp xếp những gì xảy ra trong một bước học.",
+     "giai": "Chọn → nhận → cập nhật → tiếp.",
+     "goi_y": "Hành động phải có trước điểm thưởng.",
      "a": [
-      "19",
-      "53",
-      "121",
-      "32"
+      "Người máy chọn một hướng",
+      "Môi trường cho ô mới và điểm thưởng",
+      "Máy cập nhật điểm của (ô, hướng) vừa đi",
+      "Người máy đứng ở ô mới, chọn tiếp"
      ],
-     "h": "c6dcc4762d6ac"
+     "h": "1da0f4463e0f9f"
     }
    ]
   },
   {
-   "ten": "LSTM — hộp đen có trí nhớ",
-   "ten_ngan": "LSTM",
+   "ten": "Bảng Q và cách cập nhật",
+   "ten_ngan": "Bảng Q",
    "phut": 5,
-   "muc_tieu": "so sánh hồi quy tuyến tính với LSTM (hộp đen) một cách trung thực.",
-   "khoi_dong": "Mạng nơ-ron “có trí nhớ” nghe rất mạnh. Con đoán nó sẽ thắng hồi quy bao nhiêu?",
+   "muc_tieu": "đọc được bảng Q và đường đi máy chọn.",
+   "khoi_dong": "Nếu mỗi ô có 4 hướng, bảng Q của mê cung 5 × 5 có bao nhiêu ô số?",
    "khoi": [
     {
-     "t": "p",
-     "html": "<b>LSTM</b> là một loại mạng nơ-ron đọc chuỗi theo thứ tự và giữ lại “trí nhớ” về những ngày đã đọc. Bài này dùng nó như <b>hộp đen</b>: con chỉ gọi <code>hoc_lstm(s)</code> và đo kết quả."
+     "t": "dinh_nghia",
+     "ten": "Điểm Q",
+     "html": "Q[ô, hướng] ước lượng <b>tổng điểm sẽ nhận được</b> nếu đứng ở ô đó, đi hướng đó, rồi sau đó đi khôn ngoan. Điểm cao hơn = hướng tốt hơn.",
+     "ky_hieu": null
     },
     {
-     "t": "anh",
-     "cap": "MAE năm 2014 của các cách dự báo",
-     "alt": "MAE năm 2014 của các cách dự báo",
-     "src": "img/so-sanh-sai-so.png"
+     "t": "cong_thuc",
+     "html": "Q mới = Q cũ + 0,5 × (thưởng + 0,9 × Q tốt nhất ở ô mới − Q cũ)"
     },
     {
-     "t": "bang",
+     "t": "vi_du",
+     "tieu_de": "cập nhật một lần",
+     "de": "Q cũ = −0,5; đi một bước được thưởng −1; ở ô mới, hướng tốt nhất có Q = 2,0.",
      "cot": [
-      "Cách",
-      "MAE 2014",
-      "Nhận xét"
+      "Bước",
+      "Tính",
+      "Kết quả"
      ],
      "dong": [
       [
-       "Hồi quy 7 ngày",
-       "47,3",
-       "Đơn giản, đọc được hệ số"
+       "1",
+       "Mục tiêu = −1 + 0,9 × 2,0",
+       "0,8"
       ],
       [
-       "LSTM, 3 lần học",
-       "47,0 – 49,6",
-       "Ngang hồi quy; mỗi lần học ra số khác"
+       "2",
+       "Chênh lệch = 0,8 − (−0,5)",
+       "1,3"
       ],
       [
-       "Rừng 7 ngày",
-       "47,7",
-       "Ngang hồi quy"
+       "3",
+       "Q mới = −0,5 + 0,5 × 1,3",
+       "0,15"
       ]
-     ]
-    },
-    {
-     "t": "demo_truot",
-     "tieu_de": "đoán trước bao nhiêu ngày",
-     "huong_dan": "Kéo để đoán xa hơn. Thanh cho biết hồi quy tốt hơn “đoán trung bình chung” bao nhiêu phần trăm (0% nghĩa là không hơn).",
-     "dieu_kien": "Đoán trước <b>{x}</b> ngày",
-     "moc": [
-      {
-       "x": 1,
-       "n": "hồi quy 47,3 · lấy ngày gần nhất đã biết 52,8 · đoán trung bình chung 59,5",
-       "p": 20.5
-      },
-      {
-       "x": 2,
-       "n": "hồi quy 59,3 · lấy ngày gần nhất đã biết 74,7 · đoán trung bình chung 59,5",
-       "p": 0.3
-      },
-      {
-       "x": 3,
-       "n": "hồi quy 59,9 · lấy ngày gần nhất đã biết 82,4 · đoán trung bình chung 59,5",
-       "p": 0.0
-      },
-      {
-       "x": 7,
-       "n": "hồi quy 59,3 · lấy ngày gần nhất đã biết 78,4 · đoán trung bình chung 59,5",
-       "p": 0.3
-      }
      ],
-     "nhan_n": "MAE năm 2014",
-     "nhan_p": "Tốt hơn đoán trung bình",
-     "so_le_x": 0,
-     "bat_dau": 0
+     "ket_luan": "Ô mới có triển vọng (Q = 2,0) kéo điểm của bước đi này lên, dù bước đi bị trừ 1.",
+     "nhan_manh": []
     },
     {
      "t": "anh",
-     "cap": "Từ 2 ngày trở đi, các cách đều không hơn đoán trung bình chung",
-     "alt": "Từ 2 ngày trở đi, các cách đều không hơn đoán trung bình chung",
-     "src": "img/du-bao-cang-xa-cang-kho.png"
+     "cap": "Sau 300 tập: điểm của 4 hướng ở ô Xuất phát",
+     "alt": "Sau 300 tập: điểm của 4 hướng ở ô Xuất phát",
+     "src": "img/bang-q-o-xuat-phat.png"
+    },
+    {
+     "t": "anh",
+     "cap": "Mỗi ô: mũi tên chỉ hướng có điểm Q cao nhất",
+     "alt": "Mỗi ô: mũi tên chỉ hướng có điểm Q cao nhất",
+     "src": "img/duong-di-sau-khi-hoc.png"
+    },
+    {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Ô ít khi đi qua",
+     "html": "Ở góc dưới bên trái, người máy hiếm khi ghé nên mũi tên có thể chỉ vào tường. Bảng Q chỉ đáng tin ở những ô đã được thử nhiều."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Tin model phức tạp luôn thắng — ở đây LSTM chỉ ngang hồi quy.",
-      "Chỉ chạy LSTM một lần rồi kết luận — mỗi lần học ra một con số khác."
+      "Nghĩ 0,5 và 0,9 là xác suất — đây là tốc độ học và mức coi trọng tương lai.",
+      "Tin mọi mũi tên trên hình, kể cả ở ô hiếm khi đi qua."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "LSTM ≈ hồi quy trên chuỗi này. Đoán xa hơn 1 ngày gần như không hơn đoán trung bình."
+     "html": "Bảng Q: điểm của mỗi (ô, hướng). Đi theo điểm cao nhất → đường đi của máy."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai28-q5",
+     "q": "Theo hình bảng Q ở ô Xuất phát, người máy sẽ đi hướng nào?",
+     "giai": "Hướng có cột cao nhất (-0,43).",
+     "goi_y": "Tìm cột cao nhất.",
+     "a": [
+      "Phải",
+      "Lên",
+      "Xuống",
+      "Trái"
+     ],
+     "h": "1b9485aac59cab"
+    },
+    {
+     "k": "dd",
+     "id": "bai28-q6",
+     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+     "giai": "25 × 4 = 100.",
+     "goi_y": "Nhân số ô với số hướng; đếm đoạn thẳng trên hình đường đi.",
+     "mau": "Mê cung 5 × 5, mỗi ô 4 hướng: bảng Q có {0} ô số. Đường đi sau khi học dài {1} bước.",
+     "o": [
+      [
+       "100",
+       "25",
+       "20",
+       "9"
+      ],
+      [
+       "8",
+       "5",
+       "12",
+       "25"
+      ]
+     ],
+     "h": "149e1bb7ba8003"
+    }
+   ]
+  },
+  {
+   "ten": "Học bao nhiêu, thử bao nhiêu?",
+   "ten_ngan": "Khám phá",
+   "phut": 5,
+   "muc_tieu": "giải thích được khám phá và khai thác.",
+   "khoi_dong": "Quán ăn quen luôn ngon. Có nên thỉnh thoảng thử quán mới không?",
+   "khoi": [
+    {
+     "t": "demo_truot",
+     "tieu_de": "số tập học",
+     "huong_dan": "Kéo để đổi số tập. Mỗi số tập được học lại 20 lần với cách thử ngẫu nhiên khác nhau; thanh cho biết bao nhiêu lần người máy học được đường tới đích.",
+     "dieu_kien": "Học <b>{x}</b> tập",
+     "moc": [
+      {
+       "x": 1,
+       "n": "0 / 20 lần học tới đích, 0 lần đi đường ngắn nhất 8 bước",
+       "p": 0.0
+      },
+      {
+       "x": 5,
+       "n": "0 / 20 lần học tới đích, 0 lần đi đường ngắn nhất 8 bước",
+       "p": 0.0
+      },
+      {
+       "x": 10,
+       "n": "2 / 20 lần học tới đích, 2 lần đi đường ngắn nhất 8 bước",
+       "p": 10.0
+      },
+      {
+       "x": 20,
+       "n": "20 / 20 lần học tới đích, 20 lần đi đường ngắn nhất 8 bước",
+       "p": 100.0
+      },
+      {
+       "x": 50,
+       "n": "20 / 20 lần học tới đích, 20 lần đi đường ngắn nhất 8 bước",
+       "p": 100.0
+      },
+      {
+       "x": 100,
+       "n": "20 / 20 lần học tới đích, 20 lần đi đường ngắn nhất 8 bước",
+       "p": 100.0
+      },
+      {
+       "x": 300,
+       "n": "20 / 20 lần học tới đích, 20 lần đi đường ngắn nhất 8 bước",
+       "p": 100.0
+      }
+     ],
+     "nhan_n": "Kết quả 20 lần học",
+     "nhan_p": "Tỉ lệ tới đích",
+     "so_le_x": 0,
+     "bat_dau": 0
+    },
+    {
+     "t": "bang",
+     "cot": [
+      "",
+      "Khai thác",
+      "Khám phá"
+     ],
+     "dong": [
+      [
+       "Làm gì",
+       "Đi hướng có điểm Q cao nhất",
+       "Thử một hướng ngẫu nhiên"
+      ],
+      [
+       "Lợi",
+       "Dùng điều đã học",
+       "Có thể tìm ra đường tốt hơn"
+      ],
+      [
+       "Hại",
+       "Có thể kẹt ở đường “tạm được”",
+       "Mắc lỗi, mất điểm khi đang học"
+      ]
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Tỉ lệ bước thử ngẫu nhiên và điểm trung bình khi học (300 tập, 20 lần)",
+     "alt": "Tỉ lệ bước thử ngẫu nhiên và điểm trung bình khi học (300 tập, 20 lần)",
+     "src": "img/kham-pha-va-khai-thac.png"
+    },
+    {
+     "t": "p",
+     "html": "Mê cung nhỏ nên mọi mức đều tìm ra đường. Nhưng thử ngẫu nhiên 50% số bước thì điểm trung bình mỗi tập khi học chỉ còn -12,2, so với -1,0 khi thử 10%."
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Vì sao 0% vẫn học được ở đây?",
+     "html": "Bảng Q bắt đầu bằng 0, còn mỗi bước đi bị trừ điểm — nên hướng chưa thử luôn trông “hấp dẫn” hơn hướng đã thử. Ở bài toán lớn, không khám phá thì dễ kẹt ở cách làm tạm được."
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Nghĩ học càng ít tập càng tốt — dưới 20 tập người máy thường chưa tới được đích.",
+      "Nghĩ khám phá càng nhiều càng tốt."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "Cân bằng: khai thác điều đã biết, khám phá một phần để tìm cách tốt hơn."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai28-q7",
-     "q": "Theo phần Tự thử, đoán trước 2 ngày thì hồi quy có MAE bao nhiêu?",
-     "giai": "Gần bằng đoán trung bình chung (59,5).",
-     "goi_y": "Kéo thanh tới 2 ngày.",
+     "q": "Theo phần Tự thử, học 20 tập thì bao nhiêu lần trên 20 người máy tới được đích?",
+     "giai": "Từ 20 tập trở lên, lần học nào cũng tới đích.",
+     "goi_y": "Kéo thanh tới 20 tập.",
      "a": [
-      "59,3",
-      "47,3",
-      "74,7",
-      "82,4"
+      "20 / 20",
+      "2 / 20",
+      "0 / 20",
+      "10 / 20"
      ],
-     "h": "5094738296825"
+     "h": "1cf7e9ec9739e2"
     },
     {
-     "k": "ds",
+     "k": "ma",
      "id": "bai28-q8",
-     "q": "Trên chuỗi bụi mịn này, LSTM thắng hồi quy tuyến tính rất xa.",
-     "giai": "MAE 47,0 – 49,6 so với 47,3.",
-     "goi_y": "So hai cột tím và xanh ngọc.",
-     "h": "19e2f310294715"
+     "q": "Hai câu nào đúng về khám phá? <b>(Chọn 2 đáp án đúng.)</b>",
+     "giai": "Khám phá = thử ngẫu nhiên.",
+     "goi_y": "Xem bảng Khai thác – Khám phá.",
+     "a": [
+      "Có thể tìm ra đường tốt hơn",
+      "Làm mất điểm khi đang học",
+      "Luôn chọn điểm Q cao nhất",
+      "Không bao giờ mắc lỗi"
+     ],
+     "h": "3872260732bcd"
     }
    ]
   },
   {
-   "ten": "Dữ liệu đúng hơn model to",
-   "ten_ngan": "Thời tiết",
+   "ten": "Phần thưởng quyết định tất cả",
+   "ten_ngan": "Phần thưởng",
    "phut": 4,
-   "muc_tieu": "giải thích vì sao thêm dữ liệu thời tiết giúp ích.",
-   "khoi_dong": "Hôm nào gió mạnh, bầu trời thường thế nào?",
+   "muc_tieu": "nhận ra hậu quả của phần thưởng đặt sai.",
+   "khoi_dong": "Nếu thầy cô chấm điểm theo số trang viết, không theo nội dung, học sinh sẽ làm gì?",
    "khoi": [
     {
-     "t": "p",
-     "html": "Bụi mịn phụ thuộc nhiều vào <b>thời tiết</b>: gió mạnh thổi bụi đi, không khí ẩm và lặng gió giữ bụi lại. Thêm hai cột của chính ngày cần đoán — gió mạnh nhất và điểm sương (độ ẩm) — rừng ngẫu nhiên giảm MAE từ 47,7 xuống 35,6."
+     "t": "anh",
+     "cap": "Cùng mê cung, cùng thuật toán — chỉ đổi điểm của hố",
+     "alt": "Cùng mê cung, cùng thuật toán — chỉ đổi điểm của hố",
+     "src": "img/phan-thuong-dat-sai.png"
     },
     {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Lấy thời tiết ngày mai ở đâu?",
-     "html": "Khi dự báo thật, gió và độ ẩm ngày mai lấy từ <b>dự báo thời tiết</b> — cũng có sai số. Con số 35,6 trong bài dùng thời tiết đo thật nên lạc quan hơn thực tế một chút."
+     "t": "p",
+     "html": "Hố −10: 20 / 20 lần học tới đích. Lỡ đặt hố +5: 20 / 20 lần người máy lao thẳng vào hố — với phần thưởng đó, vào hố thật sự “lời” hơn đi tới đích."
     },
     {
      "t": "bang",
      "cot": [
       "Ngoài đời",
-      "Dự báo theo thời gian"
+      "Học tăng cường làm gì"
      ],
      "dong": [
       [
-       "Không khí",
-       "App AQI dự báo bụi mịn ngày mai"
+       "Trò chơi",
+       "AlphaGo tự chơi hàng triệu ván cờ vây"
       ],
       [
-       "Điện",
-       "Dự báo lượng điện cả thành phố cần"
+       "Robot",
+       "Học giữ thăng bằng, cầm nắm đồ vật"
       ],
       [
-       "Cửa hàng",
-       "Dự báo số hàng bán tuần sau"
+       "Chatbot",
+       "Học trả lời theo điểm người dùng chấm"
       ]
      ]
     },
     {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Đặt phần thưởng là việc của con người",
+     "html": "Máy chỉ tối ưu con số được giao. Phần thưởng lệch khỏi ý muốn thật thì máy sẽ “khôn” theo hướng sai — người thiết kế phải kiểm tra hành vi, không chỉ nhìn điểm."
+    },
+    {
      "t": "loi_hay_gap",
      "muc": [
-      "Đổi sang model phức tạp hơn thay vì tìm dữ liệu giải thích được hiện tượng.",
-      "Quên rằng dữ liệu thời tiết ngày mai cũng chỉ là dự báo."
+      "Đổ lỗi cho thuật toán khi máy làm điều lạ — thường là do phần thưởng.",
+      "Nghĩ điểm cao nghĩa là máy làm đúng ý mình."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Dữ liệu giải thích được hiện tượng (gió, độ ẩm) giúp nhiều hơn model phức tạp."
+     "html": "Máy tối ưu đúng phần thưởng — không phải đúng ý người đặt."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai28-q9",
-     "q": "Thêm gió và điểm sương, rừng ngẫu nhiên có MAE bao nhiêu?",
-     "giai": "Giảm khoảng 12 µg/m³.",
-     "goi_y": "Đọc cột xanh đậm cuối cùng.",
+     "q": "Khi lỡ đặt hố +5 điểm, người máy làm gì?",
+     "giai": "Vào hố lời hơn với phần thưởng đó.",
+     "goi_y": "Xem hình bên phải.",
      "a": [
-      "35,6",
-      "47,7",
-      "47,3",
-      "52,8"
+      "Lao vào hố trong cả 20 lần học",
+      "Vẫn tới đích như cũ trong 20 lần",
+      "Đứng yên ở ô Xuất phát mãi mãi",
+      "Đi vòng quanh mê cung không dừng"
      ],
-     "h": "f86767500c29f"
+     "h": "1afffcc5d668d9"
     },
     {
-     "k": "ma",
+     "k": "ds",
      "id": "bai28-q10",
-     "q": "Hai điều nào đúng về dự báo bụi mịn trong bài? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "Dữ liệu đúng quan trọng.",
-     "goi_y": "Đọc lại đoạn đầu chặng và hộp chú ý.",
-     "a": [
-      "Gió mạnh giúp thổi bụi đi",
-      "Thời tiết ngày mai cũng là dự báo",
-      "LSTM luôn thắng hồi quy",
-      "Đoán 7 ngày tới rất chính xác"
-     ],
-     "h": "1b9205633bc27c"
+     "q": "Người máy lao vào hố vì thuật toán Q-learning bị lỗi.",
+     "giai": "Thuật toán đúng; phần thưởng đặt sai.",
+     "goi_y": "Hai hình chỉ khác nhau ở điều gì?",
+     "h": "14ac4b14e75a61"
     }
    ]
   }
@@ -526,318 +621,317 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai28-q11",
-    "q": "Nhìn hình. Năm nào có ngày PM2.5 cao nhất (trên 500)?",
-    "giai": "Đầu năm 2013.",
+    "q": "Nhìn hình. Ô nào cho +10 điểm?",
+    "giai": "Đích +10.",
     "img": {
-     "src": "img/pm25-theo-ngay.png"
+     "src": "img/me-cung.png"
     },
     "a": [
-     "2013",
-     "2010",
-     "2012",
-     "2014"
+     "Ô Đích ở góc dưới phải",
+     "Ô Hố ở giữa mê cung",
+     "Ô Xuất phát ở góc trên",
+     "Ô màu xám đậm bất kỳ"
     ],
-    "h": "816b08d726e8"
+    "h": "d759c727ea2c9"
    },
    {
     "k": "mc",
     "id": "bai28-q12",
-    "q": "Nhìn hình. Cột màu đỏ trong hình cửa sổ trượt là gì?",
-    "giai": "7 cột xanh là đầu vào.",
+    "q": "Nhìn hình. Khoảng bao nhiêu tập thì số bước gần chạm đường 8 bước?",
+    "giai": "Đường cong giảm nhanh rồi đi ngang.",
     "img": {
-     "src": "img/cua-so-truot.png"
+     "src": "img/so-buoc-moi-tap.png"
     },
     "a": [
-     "Ngày cần đoán (y)",
-     "Ngày đầu tiên của cửa sổ",
-     "Ngày không có số đo",
-     "Ngày có PM2.5 cao nhất"
+     "Khoảng 20 – 40 tập",
+     "Ngay tập đầu tiên",
+     "Sau đúng 100 tập",
+     "Không bao giờ chạm"
     ],
-    "h": "e724e29c75db0"
+    "h": "27514f955be99"
    },
    {
     "k": "mc",
     "id": "bai28-q13",
-    "q": "Nhìn hình. So với đường thực tế, đường dự báo thường thế nào?",
-    "giai": "Dự báo dựa nhiều vào hôm qua.",
+    "q": "Nhìn hình. Từ ô Xuất phát, đường đi rẽ xuống ở cột thứ mấy?",
+    "giai": "Đi phải 3 ô rồi xuống.",
     "img": {
-     "src": "img/du-bao-va-thuc-te.png"
+     "src": "img/duong-di-sau-khi-hoc.png"
     },
     "a": [
-     "Chậm một nhịp",
-     "Đi trước một nhịp",
-     "Trùng khít hoàn toàn",
-     "Là đường thẳng ngang"
+     "Cột 4",
+     "Cột 1",
+     "Cột 2",
+     "Cột 5"
     ],
-    "h": "781ab62491786"
+    "h": "a207e71a62e1f"
    },
    {
     "k": "mc",
     "id": "bai28-q14",
-    "q": "Nhìn hình. Cách nào có MAE nhỏ nhất?",
-    "giai": "35,6.",
+    "q": "Nhìn hình. Mức thử ngẫu nhiên nào cho điểm trung bình thấp nhất?",
+    "giai": "Thử nhiều, mắc lỗi nhiều.",
     "img": {
-     "src": "img/so-sanh-sai-so.png"
+     "src": "img/kham-pha-va-khai-thac.png"
     },
     "a": [
-     "Rừng 7 ngày + gió, điểm sương",
-     "LSTM (hộp đen)",
-     "Hồi quy 7 ngày",
-     "“Mai giống hôm nay”"
+     "50%",
+     "0%",
+     "10%",
+     "30%"
     ],
-    "h": "78ebca7fb6358"
+    "h": "b4247382244a3"
    },
    {
     "k": "mc",
     "id": "bai28-q15",
-    "q": "Vì sao không dùng train_test_split xáo trộn cho chuỗi thời gian?",
-    "giai": "Chia theo thời gian.",
+    "q": "Trong học tăng cường, “tác tử” là gì?",
+    "giai": "Tác tử = agent.",
     "a": [
-     "Model sẽ được nhìn tương lai",
-     "Hàm đó quá chậm",
-     "Hàm đó chỉ cho số nguyên",
-     "Chuỗi không có cột y"
+     "Người máy ra quyết định hành động",
+     "Mê cung chứa tường và hố",
+     "Điểm thưởng sau mỗi bước",
+     "Bảng dữ liệu có đáp án"
     ],
-    "h": "d6c00ce729ac3"
+    "h": "15df9d6ccac6a8"
    },
    {
     "k": "mc",
     "id": "bai28-q16",
-    "q": "Một cửa sổ 14 ngày tạo ra bao nhiêu cột đầu vào?",
-    "giai": "Mỗi ngày một cột.",
+    "q": "Điểm Q[ô, hướng] ước lượng điều gì?",
+    "giai": "Điểm tương lai.",
     "a": [
-     "14",
-     "7",
-     "1",
-     "28"
+     "Tổng điểm sẽ nhận nếu đi hướng đó",
+     "Số lần người máy đã đi qua ô đó",
+     "Khoảng cách từ ô đó tới ô Đích",
+     "Xác suất rơi xuống hố từ ô đó"
     ],
-    "h": "fe669d4c1847c"
+    "h": "a15c9d9674c62"
    },
    {
     "k": "mc",
     "id": "bai28-q17",
-    "q": "Nhà máy điện muốn dự báo điện tiêu thụ tuần sau. Việc nào cần làm đầu tiên?",
-    "giai": "Mốc trước.",
+    "q": "Vì sao mỗi bước đi bị trừ 1 điểm?",
+    "giai": "Càng nhiều bước càng mất điểm.",
     "a": [
-     "Đặt mốc “tuần sau giống tuần này”",
-     "Chạy ngay LSTM thật lớn",
-     "Xáo trộn dữ liệu các tuần",
-     "Bỏ các tuần có số trống"
+     "Để máy ưu tiên đường ngắn",
+     "Để máy đi chậm lại",
+     "Để máy đâm vào tường",
+     "Để bảng Q luôn bằng 0"
     ],
-    "h": "1087cfbe77ae8f"
+    "h": "1859be2f310496"
    },
    {
     "k": "mc",
     "id": "bai28-q18",
-    "q": "LSTM chạy 3 lần cho 3 MAE khác nhau. Nên báo cáo thế nào?",
-    "giai": "Trung thực.",
+    "q": "Robot hút bụi được thưởng theo số lần bật máy hút, không theo độ sạch. Rủi ro là gì?",
+    "giai": "Phần thưởng lệch ý muốn.",
     "a": [
-     "Nêu cả khoảng dao động",
-     "Chỉ báo lần tốt nhất",
-     "Chỉ báo lần đầu tiên",
-     "Không báo LSTM"
+     "Robot bật tắt liên tục mà nhà vẫn bẩn",
+     "Robot hút sạch hơn bình thường",
+     "Robot không bao giờ bật máy hút",
+     "Robot tự sửa lại phần thưởng"
     ],
-    "h": "85db5adac2df1"
+    "h": "125a7934d2669"
    },
    {
     "k": "mc",
     "id": "bai28-q19",
-    "q": "Hệ số lớn nhất của hồi quy 7 ngày thuộc về ngày nào?",
-    "giai": "0,66.",
+    "q": "Q cũ = 0; bước đi được −1; Q tốt nhất ở ô mới = 0. Q mới bằng bao nhiêu?",
+    "giai": "0 + 0,5 × (−1 + 0 − 0).",
     "a": [
-     "Hôm qua (t-1)",
-     "7 ngày trước (t-7)",
-     "3 ngày trước (t-3)",
-     "Các ngày bằng nhau"
+     "−0,5",
+     "−1",
+     "0",
+     "+0,5"
     ],
-    "h": "13a0ac9cb4bed"
+    "h": "179040c13d9dd3"
    },
    {
     "k": "ma",
     "id": "bai28-q20",
-    "q": "Hai đặc điểm nào của dữ liệu chuỗi thời gian? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Chuỗi.",
+    "q": "Hai thứ nào là thành phần của học tăng cường? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Tác tử, môi trường, hành động, phần thưởng.",
     "a": [
-     "Thứ tự quan trọng",
-     "Có thể có mùa",
-     "Xáo trộn thoải mái",
-     "Luôn không có ô trống"
+     "Hành động",
+     "Phần thưởng",
+     "Cột nhãn",
+     "Tâm nhóm"
     ],
-    "h": "2a753b8f714fe"
+    "h": "1597cb18d4f40e"
    },
    {
     "k": "ma",
     "id": "bai28-q21",
-    "q": "Hai mốc nào dùng trong bài? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Mốc đơn giản.",
+    "q": "Hai việc nào là khai thác? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Khai thác = dùng cái đã biết.",
     "a": [
-     "Đoán trung bình chung",
-     "“Mai giống hôm nay”",
-     "LSTM 3 lớp",
-     "Rừng 500 cây"
+     "Đi hướng có điểm Q cao nhất",
+     "Dùng điều đã học",
+     "Thử một hướng ngẫu nhiên",
+     "Đi thử vào ô chưa tới"
     ],
-    "h": "e5bfbcc84891e"
+    "h": "1b01d28023447d"
    },
    {
     "k": "ma",
     "id": "bai28-q22",
-    "q": "Hai điều nào đúng về đoán xa? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Hình đoán xa.",
+    "q": "Hai ví dụ nào dùng học tăng cường? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Học qua hành động.",
     "a": [
-     "Càng xa càng khó",
-     "Từ 2 ngày gần bằng đoán trung bình",
-     "Càng xa càng chính xác",
-     "Đoán 7 ngày tốt hơn 1 ngày"
+     "Máy tự chơi cờ vây",
+     "Robot học giữ thăng bằng",
+     "Chia khách hàng thành nhóm",
+     "Đoán giá nhà từ diện tích"
     ],
-    "h": "1a95d45be44bff"
+    "h": "52b5e04bece2"
    },
    {
     "k": "ma",
     "id": "bai28-q23",
-    "q": "Hai cột thời tiết nào được thêm vào? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Thời tiết.",
+    "q": "Hai điều nào đúng về bảng Q? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Bảng Q.",
     "a": [
-     "Gió mạnh nhất",
-     "Điểm sương",
-     "Tên thành phố",
-     "Số thứ tự ngày"
+     "Mỗi (ô, hướng) có một điểm",
+     "Được cập nhật sau mỗi bước",
+     "Được nhập tay từ trước",
+     "Chỉ có một số duy nhất"
     ],
-    "h": "7a3934972dd53"
+    "h": "126744ad76d33c"
    },
    {
     "k": "sx",
     "id": "bai28-q24",
-    "q": "Sắp xếp quy trình dự báo trong bài.",
-    "giai": "Chuỗi → mốc → bảng → model → so.",
+    "q": "Sắp xếp một bước học Q-learning.",
+    "giai": "Một bước.",
     "a": [
-     "Vẽ chuỗi, tìm ngày trống",
-     "Đặt mốc và đo MAE",
-     "Tạo cửa sổ trượt",
-     "Học hồi quy, LSTM",
-     "So với mốc trên năm 2014"
+     "Chọn hướng (khai thác hoặc khám phá)",
+     "Nhận ô mới và điểm thưởng",
+     "Tính mục tiêu = thưởng + 0,9 × Q tốt nhất ô mới",
+     "Cập nhật Q của (ô, hướng) cũ"
     ],
-    "h": "2df2bd20972ef"
+    "h": "2717b804bd6bf"
    },
    {
     "k": "sx",
     "id": "bai28-q25",
-    "q": "Sắp xếp các cách theo MAE năm 2014 từ lớn tới nhỏ.",
-    "giai": "59,5 → 52,8 → 47,3 → 35,6.",
+    "q": "Sắp xếp các giai đoạn người máy học mê cung.",
+    "giai": "Qua nhiều tập.",
     "a": [
-     "Đoán trung bình chung",
-     "“Mai giống hôm nay”",
-     "Hồi quy 7 ngày",
-     "Rừng + thời tiết"
+     "Đi mò, rất nhiều bước",
+     "Bảng Q dần có điểm",
+     "Số bước giảm dần",
+     "Đi đúng đường ngắn nhất"
     ],
-    "h": "152348db770e33"
+    "h": "cae8900596c78"
    },
    {
     "k": "dd",
     "id": "bai28-q26",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Chia theo thời gian.",
-    "mau": "Học trên năm {0}, kiểm tra trên năm {1}.",
+    "giai": "Ba nhánh.",
+    "mau": "Học có giám sát cần {0}; học tăng cường cần {1}.",
     "o": [
      [
-      "2010 – 2013",
-      "2014",
-      "2012",
-      "2010"
+      "đáp án",
+      "phần thưởng",
+      "tâm nhóm",
+      "khuỷu tay"
      ],
      [
-      "2014",
-      "2010",
-      "2011",
-      "2012"
+      "phần thưởng",
+      "đáp án",
+      "tâm nhóm",
+      "cột nhãn"
      ]
     ],
-    "h": "8b16e63de4855"
+    "h": "12e33855ac09b5"
    },
    {
     "k": "dd",
     "id": "bai28-q27",
-    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Bảng sai số.",
-    "mau": "MAE của hồi quy 7 ngày là {0}; của “mai giống hôm nay” là {1}.",
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "Hai lựa chọn.",
+    "mau": "Đi theo điểm Q cao nhất là {0}; thử hướng ngẫu nhiên là {1}.",
     "o": [
      [
-      "47,3",
-      "59,5",
-      "35,6",
-      "0,0"
+      "khai thác",
+      "khám phá",
+      "gom nhóm",
+      "phân loại"
      ],
      [
-      "52,8",
-      "59,5",
-      "35,6",
-      "100,0"
+      "khám phá",
+      "khai thác",
+      "hồi quy",
+      "phân loại"
      ]
     ],
-    "h": "5af40f81a70d1"
+    "h": "35a9154e78e78"
    },
    {
     "k": "dd",
     "id": "bai28-q28",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Chuỗi.",
-    "mau": "Ngày trống trong chuỗi nên được {0}; dữ liệu không được {1}.",
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "Phần thưởng của bài.",
+    "mau": "Tới đích được {0} điểm; rơi hố bị {1} điểm.",
     "o": [
      [
-      "nội suy",
-      "xoá cột",
-      "nhân đôi",
-      "làm tròn"
+      "+10",
+      "−1",
+      "+5",
+      "0"
      ],
      [
-      "xáo trộn",
-      "vẽ",
-      "lưu",
-      "đọc"
+      "−10",
+      "−1",
+      "+10",
+      "0"
      ]
     ],
-    "h": "ae9aac9afcf7f"
+    "h": "f84a46f9253c"
    },
    {
     "k": "dd",
     "id": "bai28-q29",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Thời tiết.",
-    "mau": "Gió mạnh làm bụi mịn {0}; LSTM trong bài được dùng như {1}.",
+    "giai": "Câu chốt.",
+    "mau": "Máy tối ưu đúng {0}, không phải đúng {1} người đặt.",
     "o": [
      [
-      "giảm",
-      "tăng",
-      "đứng yên",
-      "gấp đôi"
+      "phần thưởng",
+      "mê cung",
+      "bảng dữ liệu",
+      "khoảng cách"
      ],
      [
-      "hộp đen",
+      "ý muốn",
+      "mê cung",
       "bảng Q",
-      "cây quyết định",
-      "mốc"
+      "thuật toán"
      ]
     ],
-    "h": "1b52eb3406129f"
+    "h": "18bff319b794c2"
    },
    {
     "k": "ds",
     "id": "bai28-q30",
-    "q": "Có 37 ngày trong chuỗi không có số đo PM2.5 nào.",
-    "giai": "Nội suy.",
+    "q": "Trong tập học đầu tiên, người máy gần như đi mò.",
+    "giai": "Bảng Q toàn số 0.",
     "h": "1bfd41d38bebe7"
    },
    {
     "k": "ds",
     "id": "bai28-q31",
-    "q": "Đoán trước 7 ngày, hồi quy tốt hơn hẳn đoán trung bình chung.",
-    "giai": "Gần bằng nhau.",
+    "q": "Khám phá càng nhiều, điểm khi đang học càng cao.",
+    "giai": "Thử nhiều, mắc lỗi nhiều.",
     "h": "1259857886478"
    },
    {
     "k": "ds",
     "id": "bai28-q32",
-    "q": "Thêm dữ liệu thời tiết giúp giảm sai số nhiều hơn đổi sang LSTM.",
-    "giai": "Dữ liệu đúng.",
+    "q": "Đổi phần thưởng có thể làm máy học hành vi hoàn toàn khác.",
+    "giai": "Hố +5.",
     "h": "103a0669541a3f"
    }
   ]

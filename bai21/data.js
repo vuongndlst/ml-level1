@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 21,
  "ma": "bai21",
  "nhan": "Bài 21",
- "tieu_de": "Tổ hợp model và Random Forest",
- "phan": "Phần B · Học có giám sát",
- "cau_hoi": "Nhiều model “bình thường” hợp lại có thành một model giỏi không?",
+ "tieu_de": "Naïve Bayes",
+ "phan": "Module 11 · More Classifiers",
+ "cau_hoi": "Đếm, rồi nhân xác suất — máy đoán được gì?",
  "gioi_thieu": [
-  "Mỗi model con đã học đều có lúc sai. Nếu ta cho <b>nhiều model</b> cùng bỏ phiếu thì sao? Đó là ý tưởng của <b>tổ hợp model</b> (ensemble), và Random Forest — rừng gồm nhiều cây quyết định — là ví dụ nổi tiếng nhất.",
-  "Năm chặng: trí tuệ đám đông, rừng ngẫu nhiên, rừng trên bảng của lớp, khi rừng không thắng, và rừng trong scikit-learn. Bảng khối 10 là bảng mô phỏng; bài dùng 4 cột.",
-  "Con dùng lại: cây quyết định và học vẹt (Bài 17), bỏ phiếu (Bài 12), tương quan (Bài 9)."
+  "Ở Bài 5 con đã tính xác suất có điều kiện: biết thêm một điều thì xác suất đổi. Hôm nay con dùng đúng ý đó để xây một model: <b>Naïve Bayes</b> — đếm trong dữ liệu, rồi nhân các xác suất lại.",
+  "Năm chặng: ý tưởng đếm và nhân, bảng tần suất của lớp, tự nhân cho một bạn, ô bằng 0, và Naïve Bayes trong scikit-learn. Bảng khối 10 là bảng mô phỏng.",
+  "Con dùng lại: xác suất có điều kiện (Bài 5), chia dữ liệu và mốc (Bài 12)."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai21",
  "muc_tieu": [
-  "Giải thích được vì sao trung bình / bỏ phiếu của nhiều dự đoán thường tốt hơn phần lớn từng dự đoán.",
-  "Mô tả được Random Forest: nhiều cây, mỗi cây học một tập con ngẫu nhiên, rồi bỏ phiếu.",
-  "Đọc được kết quả rừng so với từng cây, và thấy rừng ổn định hơn.",
-  "Nhận ra rừng không phải lúc nào cũng thắng cây tốt nhất.",
-  "Dùng RandomForestClassifier và đọc mức quan trọng của từng cột."
+  "Giải thích được ý tưởng của Naïve Bayes: đếm tần suất rồi nhân xác suất.",
+  "Lập và đọc được bảng tần suất của từng cột theo nhãn.",
+  "Tự nhân xác suất để dự đoán nhãn cho một điểm mới.",
+  "Giải thích được vì sao một ô bằng 0 là vấn đề và cách khắc phục.",
+  "Dùng GaussianNB trong scikit-learn và so với mốc."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,109 +36,103 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Trí tuệ đám đông",
-   "ten_ngan": "Đám đông",
+   "ten": "Đếm rồi nhân",
+   "ten_ngan": "Ý tưởng",
    "phut": 4,
-   "muc_tieu": "giải thích được vì sao trung bình của nhiều dự đoán thường tốt hơn phần lớn từng dự đoán.",
-   "khoi_dong": "Ba mươi bạn đoán số kẹo trong lọ. Nên tin bạn giỏi nhất, hay tin trung bình cả lớp?",
+   "muc_tieu": "giải thích được ý tưởng của Naïve Bayes: đếm tần suất rồi nhân xác suất.",
+   "khoi_dong": "Hôm qua trời nắng, gió nhẹ. Có nên đi đá bóng không? Con sẽ tra lại những ngày trước đó thế nào?",
    "khoi": [
     {
-     "t": "anh",
-     "cap": "30 bạn đoán số kẹo (số liệu minh hoạ)",
-     "alt": "30 bạn đoán số kẹo (số liệu minh hoạ)",
-     "src": "img/keo-trong-lo-minh-hoa.png"
-    },
-    {
-     "t": "vi_du",
-     "tieu_de": "đọc hình",
-     "de": null,
-     "cot": [
-      "",
-      "Giá trị"
-     ],
-     "dong": [
-      [
-       "Số kẹo thật",
-       "250"
-      ],
-      [
-       "Các bạn đoán",
-       "từ 131 tới 535"
-      ],
-      [
-       "Trung bình cả lớp",
-       "<b>266</b>"
-      ],
-      [
-       "Số bạn đoán xa hơn trung bình",
-       "<b>25 / 30</b>"
-      ]
-     ],
-     "ket_luan": "Sai lệch của từng bạn lệch theo nhiều hướng khác nhau nên phần lớn triệt tiêu nhau khi lấy trung bình.",
-     "nhan_manh": [
-      3
-     ]
-    },
-    {
      "t": "dinh_nghia",
-     "ten": "Tổ hợp model (ensemble)",
-     "html": "Kết hợp nhiều model: phân loại thì <b>bỏ phiếu</b>, hồi quy thì <b>lấy trung bình</b>. Hiệu quả nhất khi các model <b>sai theo những cách khác nhau</b>.",
-     "ky_hieu": null
+     "ten": "Naïve Bayes",
+     "html": "Với mỗi nhãn, nhân: <b>tỉ lệ nhãn đó</b> × tỉ lệ giá trị cột 1 trong nhãn đó × tỉ lệ giá trị cột 2 trong nhãn đó × … Nhãn nào có tích lớn hơn là dự đoán.",
+     "ky_hieu": "“Naïve” (ngây thơ): máy nhân các cột như thể chúng không liên quan gì tới nhau — một giả định đơn giản hoá, thường sai một chút nhưng vẫn dùng tốt."
     },
     {
      "t": "anh",
-     "cap": "Nhiều model học rồi kết hợp dự đoán",
-     "alt": "Nhiều model học rồi kết hợp dự đoán",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251216112827581506/ensemble_learning.webp",
-     "du_phong": "img/minh-hoa-hoc-to-hop-nhieu-model.png",
+     "cap": "Ví dụ GfG: đếm số ngày đi chơi theo thời tiết",
+     "alt": "Ví dụ GfG: đếm số ngày đi chơi theo thời tiết",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260227115947481605/outlook.webp",
+     "du_phong": "img/minh-hoa-bang-tan-suat-cot-outlook.png",
      "nguon": {
-      "ten": "GeeksforGeeks — A comprehensive guide to ensemble learning",
-      "url": "https://www.geeksforgeeks.org/machine-learning/a-comprehensive-guide-to-ensemble-learning/"
+      "ten": "GeeksforGeeks — Naive bayes classifiers",
+      "url": "https://www.geeksforgeeks.org/machine-learning/naive-bayes-classifiers/"
      },
      "chu_giai": [
       [
-       "Training data",
-       "Dữ liệu huấn luyện"
+       "Outlook",
+       "Bầu trời"
       ],
       [
-       "Base learners",
-       "Các model con"
+       "Sunny / Overcast / Rainy",
+       "Nắng / Âm u / Mưa"
       ],
       [
-       "Individual predictions",
-       "Dự đoán riêng"
+       "Yes / No",
+       "Có / Không đi chơi"
       ],
       [
-       "Ensemble prediction",
-       "Dự đoán của cả nhóm"
+       "P(yes)",
+       "Tỉ lệ trong nhóm Có"
       ]
      ]
+    },
+    {
+     "t": "anh",
+     "cap": "Tỉ lệ của từng cột cho một ngày cụ thể",
+     "alt": "Tỉ lệ của từng cột cho một ngày cụ thể",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251216105654598399/feature.webp",
+     "du_phong": "img/minh-hoa-bang-xac-suat-cua-tung-dac-trung.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Naive bayes classifiers",
+      "url": "https://www.geeksforgeeks.org/machine-learning/naive-bayes-classifiers/"
+     },
+     "chu_giai": [
+      [
+       "Feature / Value",
+       "Cột / Giá trị"
+      ],
+      [
+       "P(Value | Yes)",
+       "Tỉ lệ giá trị đó trong nhóm Có"
+      ],
+      [
+       "Temperature, Humidity, Wind",
+       "Nhiệt độ, độ ẩm, gió"
+      ]
+     ]
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Nối Bài 5",
+     "html": "P(học Nhiều | Đạt) chính là xác suất có điều kiện: trong các bạn Đạt, bao nhiêu phần trăm học nhiều?"
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ trung bình luôn tốt hơn mọi cá nhân — chỉ tốt hơn phần lớn.",
-      "Ghép nhiều model giống hệt nhau — chúng sai cùng chỗ nên không giúp gì."
+      "Lấy tỉ lệ trong cả lớp thay vì tỉ lệ trong từng nhóm nhãn.",
+      "Cộng các xác suất thay vì nhân."
      ]
     },
     {
      "t": "video",
-     "yt": "J4Wdy0Wc_xQ",
-     "ten": "StatQuest — Random Forests Part 1",
+     "yt": "O2L2Uv9pdDA",
+     "ten": "StatQuest — Naive Bayes, Clearly Explained!!!",
      "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc",
      "bat_dau": null,
      "ket_thuc": null
     },
     {
      "t": "tom_tat",
-     "html": "Nhiều dự đoán sai theo nhiều hướng → gộp lại thường sát hơn phần lớn từng dự đoán."
+     "html": "Naïve Bayes: với mỗi nhãn, nhân tỉ lệ nhãn với tỉ lệ từng cột trong nhãn đó; nhãn có tích lớn nhất thắng."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "A Comprehensive Guide to Ensemble Learning",
-       "url": "https://www.geeksforgeeks.org/machine-learning/a-comprehensive-guide-to-ensemble-learning/",
+       "ten": "Naive Bayes Classifiers",
+       "url": "https://www.geeksforgeeks.org/machine-learning/naive-bayes-classifiers/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -148,468 +142,416 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai21-q1",
-     "q": "Trong hình đoán kẹo, bao nhiêu bạn đoán xa số thật hơn trung bình cả lớp?",
-     "giai": "Trung bình 266, số thật 250.",
-     "goi_y": "Đọc dòng cuối của bảng ví dụ.",
+     "q": "Naïve Bayes làm phép toán gì với các xác suất của từng cột?",
+     "giai": "Tích của tỉ lệ nhãn và tỉ lệ từng cột.",
+     "goi_y": "Tên thuật toán nhắc tới Bayes — quy tắc của xác suất có điều kiện.",
      "a": [
-      "25 / 30",
-      "0 / 30",
-      "15 / 30",
-      "30 / 30"
+      "Nhân lại với nhau",
+      "Cộng lại với nhau",
+      "Lấy số lớn nhất",
+      "Lấy trung bình"
      ],
-     "h": "19dc97d2931f50"
+     "h": "1a42d06a1265e9"
     },
     {
      "k": "ds",
      "id": "bai21-q2",
-     "q": "Tổ hợp nhiều model giống hệt nhau giúp tăng độ chính xác rất nhiều.",
-     "giai": "Chúng sai cùng chỗ — bỏ phiếu không sửa được.",
-     "goi_y": "Mười bạn chép cùng một bài thì trung bình có khác bài gốc không?",
-     "h": "eb899003fa2b5"
+     "q": "Chữ “naïve” nghĩa là máy coi các cột như không liên quan tới nhau.",
+     "giai": "Giả định đơn giản hoá để chỉ cần nhân.",
+     "goi_y": "Naïve nghĩa là ngây thơ, đơn giản quá mức.",
+     "h": "1e80cc99638588"
     }
    ]
   },
   {
-   "ten": "Rừng ngẫu nhiên",
-   "ten_ngan": "Random Forest",
-   "phut": 5,
-   "muc_tieu": "mô tả được Random Forest: nhiều cây, mỗi cây học một tập con ngẫu nhiên, rồi bỏ phiếu.",
-   "khoi_dong": "Nếu 100 cây học cùng một dữ liệu thì cây nào cũng giống hệt nhau. Làm sao cho chúng khác nhau?",
+   "ten": "Bảng tần suất của lớp",
+   "ten_ngan": "Bảng tần suất",
+   "phut": 4,
+   "muc_tieu": "lập và đọc được bảng tần suất của từng cột theo nhãn.",
+   "khoi_dong": "Chia giờ học thành Ít / Vừa / Nhiều. Trong 90 bạn Đạt, bao nhiêu bạn học Nhiều?",
    "khoi": [
     {
-     "t": "dinh_nghia",
-     "ten": "Random Forest",
-     "html": "Tạo nhiều cây quyết định; mỗi cây học trên <b>một tập con dữ liệu rút ngẫu nhiên</b> (có lặp lại) và mỗi lần chia chỉ được xét <b>vài cột ngẫu nhiên</b>. Dự đoán: các cây <b>bỏ phiếu</b>.",
-     "ky_hieu": "Rút ngẫu nhiên rồi bỏ phiếu gọi là <b>bagging</b>."
-    },
-    {
      "t": "anh",
-     "cap": "Mỗi cây một tập con ngẫu nhiên, rồi bỏ phiếu",
-     "alt": "Mỗi cây một tập con ngẫu nhiên, rồi bỏ phiếu",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250521100554969405/XG-Boost.webp",
-     "du_phong": "img/minh-hoa-nhieu-cay-tren-cac-tap-con-ngau-nhien.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Xgboost",
-      "url": "https://www.geeksforgeeks.org/machine-learning/xgboost/"
-     },
-     "chu_giai": [
-      [
-       "Instance",
-       "Mẫu cần dự đoán"
-      ],
-      [
-       "Random Subset",
-       "Tập con ngẫu nhiên"
-      ],
-      [
-       "Tree 1 … Tree n",
-       "Cây 1 … cây n"
-      ],
-      [
-       "Final Result",
-       "Kết quả cuối (đa số)"
-      ]
-     ]
+     "cap": "Bảng tần suất trên 168 bạn của tập huấn luyện",
+     "alt": "Bảng tần suất trên 168 bạn của tập huấn luyện",
+     "src": "img/bang-tan-suat-dem-tay.png"
     },
     {
-     "t": "anh",
-     "cap": "Một cây và cả rừng",
-     "alt": "Một cây và cả rừng",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251216121929207068/random_forest.webp",
-     "du_phong": "img/minh-hoa-mot-cay-so-voi-ca-rung.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Random forest algorithm in machine learning",
-      "url": "https://www.geeksforgeeks.org/machine-learning/random-forest-algorithm-in-machine-learning/"
-     },
-     "chu_giai": [
-      [
-       "Single Decision Tree",
-       "Một cây quyết định"
-      ],
-      [
-       "Random Forest",
-       "Rừng ngẫu nhiên — nhiều cây"
-      ],
-      [
-       "Prediction from a single decision path",
-       "Mỗi cây một đường dự đoán"
-      ]
-     ]
-    },
-    {
-     "t": "demo_tung_buoc",
-     "tieu_de": "11 cây bỏ phiếu cho một bạn mới",
-     "huong_dan": "Bạn mới: học 3,3 giờ, mạng 180 phút, ngủ 7 giờ, nộp trễ 1 lần. Bấm “Bước tiếp” để xem từng cây bỏ phiếu.",
-     "nhan_chon": "Bạn mới",
+     "t": "vi_du",
+     "tieu_de": "đọc một ô",
+     "de": null,
      "cot": [
-      "#",
-      "Cây",
-      "Phiếu",
-      "Kiểm phiếu"
+      "Ô",
+      "Nghĩa là",
+      "Tỉ lệ"
      ],
-     "mac_dinh": 0,
-     "lua_chon": [
-      {
-       "nhan": "11 cây đầu của rừng",
-       "dong": [
-        [
-         "1",
-         "Cây 1",
-         "Đạt",
-         "1 Đạt – 0 Chưa đạt"
-        ],
-        [
-         "2",
-         "Cây 2",
-         "Chưa đạt",
-         "1 Đạt – 1 Chưa đạt"
-        ],
-        [
-         "3",
-         "Cây 3",
-         "Chưa đạt",
-         "1 Đạt – 2 Chưa đạt"
-        ],
-        [
-         "4",
-         "Cây 4",
-         "Đạt",
-         "2 Đạt – 2 Chưa đạt"
-        ],
-        [
-         "5",
-         "Cây 5",
-         "Chưa đạt",
-         "2 Đạt – 3 Chưa đạt"
-        ],
-        [
-         "6",
-         "Cây 6",
-         "Đạt",
-         "3 Đạt – 3 Chưa đạt"
-        ],
-        [
-         "7",
-         "Cây 7",
-         "Đạt",
-         "4 Đạt – 3 Chưa đạt"
-        ],
-        [
-         "8",
-         "Cây 8",
-         "Đạt",
-         "5 Đạt – 3 Chưa đạt"
-        ],
-        [
-         "9",
-         "Cây 9",
-         "Đạt",
-         "6 Đạt – 3 Chưa đạt"
-        ],
-        [
-         "10",
-         "Cây 10",
-         "Đạt",
-         "7 Đạt – 3 Chưa đạt"
-        ],
-        [
-         "11",
-         "Cây 11",
-         "Đạt",
-         "8 Đạt – 3 Chưa đạt"
-        ],
-        [
-         "—",
-         "Cả rừng (11 cây)",
-         "<b>Đạt</b>",
-         "đa số thắng"
-        ]
-       ]
-      }
-     ]
+     "dong": [
+      [
+       "Học Nhiều · Đạt",
+       "69 trong 90 bạn Đạt học > 4 giờ",
+       "0,767"
+      ],
+      [
+       "Học Nhiều · Chưa đạt",
+       "4 trong 78 bạn Chưa đạt",
+       "0,051"
+      ],
+      [
+       "Mạng Ít · Đạt",
+       "71 trong 90 bạn Đạt",
+       "0,789"
+      ]
+     ],
+     "ket_luan": "Tỉ lệ luôn tính <b>trong nhóm nhãn</b>: chia cho 90 (Đạt) hoặc 78 (Chưa đạt).",
+     "nhan_manh": []
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ “ngẫu nhiên” là rừng đoán bừa — mỗi cây vẫn học thật, chỉ trên dữ liệu khác nhau.",
-      "Nhầm Random Forest với một cây rất sâu."
+      "Chia cho 168 (cả lớp) thay vì cho số bạn trong nhóm nhãn.",
+      "Quên rằng tỉ lệ trong mỗi cột của một nhãn cộng lại bằng 1."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Random Forest = nhiều cây, mỗi cây một tập con ngẫu nhiên + vài cột ngẫu nhiên → bỏ phiếu."
+     "html": "Mỗi ô: số bạn có giá trị đó trong nhãn ÷ tổng số bạn của nhãn."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai21-q3",
-     "q": "Theo phần Tự thử, 11 cây bỏ phiếu cho bạn mới thế nào?",
-     "giai": "Rừng đoán theo đa số.",
-     "goi_y": "Bấm tới dòng cuối cùng rồi đọc cột kiểm phiếu.",
+     "q": "Trong bảng, tỉ lệ học Nhiều ở nhóm Đạt bằng bao nhiêu?",
+     "giai": "69 : 90.",
+     "goi_y": "Tìm cột Giờ tự học, dòng Nhiều, cột Đạt.",
      "a": [
-      "8 Đạt – 3 Chưa đạt",
-      "11 Đạt – 0 Chưa đạt",
-      "3 Đạt – 8 Chưa đạt",
-      "6 Đạt – 5 Chưa đạt"
+      "0,767",
+      "0,051",
+      "0,789",
+      "0,536"
      ],
-     "h": "1808e78a64022a"
+     "h": "98dcdcaa73e00"
     },
     {
-     "k": "ma",
+     "k": "dd",
      "id": "bai21-q4",
-     "q": "Hai điều nào làm các cây trong rừng khác nhau? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "Hai nguồn ngẫu nhiên.",
-     "goi_y": "Đọc lại định nghĩa Random Forest.",
-     "a": [
-      "Mỗi cây học một tập con ngẫu nhiên",
-      "Mỗi lần chia chỉ xét vài cột ngẫu nhiên",
-      "Mỗi cây dùng một nhãn khác nhau",
-      "Mỗi cây có độ sâu bằng 0"
+     "q": "Chọn số đúng cho mỗi chỗ trống.",
+     "giai": "Chia cho tổng số bạn của nhãn đó.",
+     "goi_y": "Mỗi nhóm nhãn có bao nhiêu bạn?",
+     "mau": "Tỉ lệ trong nhóm Đạt chia cho {0}; trong nhóm Chưa đạt chia cho {1}.",
+     "o": [
+      [
+       "90",
+       "78",
+       "168",
+       "100"
+      ],
+      [
+       "78",
+       "90",
+       "168",
+       "72"
+      ]
      ],
-     "h": "1b7ec42df057ba"
+     "h": "1492374a61c3d2"
     }
    ]
   },
   {
-   "ten": "Rừng trên bảng của lớp",
-   "ten_ngan": "Bảng lớp",
+   "ten": "Tự nhân cho một bạn",
+   "ten_ngan": "Nhân tay",
    "phut": 5,
-   "muc_tieu": "đọc được kết quả rừng so với từng cây, và thấy rừng ổn định hơn.",
-   "khoi_dong": "Rừng 100 cây. Cây giỏi nhất và cây dở nhất khác nhau bao nhiêu?",
+   "muc_tieu": "tự nhân xác suất để dự đoán nhãn cho một điểm mới.",
+   "khoi_dong": "Một bạn học Nhiều, dùng mạng Ít. Nhân thế nào để biết bạn ấy Đạt hay Chưa đạt?",
    "khoi": [
     {
+     "t": "demo_tung_buoc",
+     "tieu_de": "nhân từng bước cho ba bạn mới",
+     "huong_dan": "Chọn một bạn, bấm “Bước tiếp” để nhân từng thừa số cho cả hai nhãn.",
+     "nhan_chon": "Bạn mới",
+     "cot": [
+      "Bước",
+      "Việc",
+      "Đạt",
+      "Chưa đạt"
+     ],
+     "mac_dinh": 0,
+     "lua_chon": [
+      {
+       "nhan": "Học nhiều · mạng ít",
+       "dong": [
+        [
+         "1",
+         "Tỉ lệ Đạt / Chưa đạt ban đầu",
+         "0,536",
+         "0,464"
+        ],
+        [
+         "2",
+         "× tỉ lệ học “Nhiều” trong nhóm",
+         "0,767",
+         "0,051"
+        ],
+        [
+         "3",
+         "× tỉ lệ mạng “Ít” trong nhóm",
+         "0,789",
+         "0,372"
+        ],
+        [
+         "4",
+         "= Tích",
+         "0,3242",
+         "0,0088"
+        ],
+        [
+         "5",
+         "Kết luận",
+         "<b>ĐẠT</b>",
+         "—"
+        ]
+       ]
+      },
+      {
+       "nhan": "Học vừa · mạng vừa",
+       "dong": [
+        [
+         "1",
+         "Tỉ lệ Đạt / Chưa đạt ban đầu",
+         "0,536",
+         "0,464"
+        ],
+        [
+         "2",
+         "× tỉ lệ học “Vừa” trong nhóm",
+         "0,233",
+         "0,372"
+        ],
+        [
+         "3",
+         "× tỉ lệ mạng “Vừa” trong nhóm",
+         "0,189",
+         "0,538"
+        ],
+        [
+         "4",
+         "= Tích",
+         "0,0236",
+         "0,0929"
+        ],
+        [
+         "5",
+         "Kết luận",
+         "—",
+         "<b>CHƯA ĐẠT</b>"
+        ]
+       ]
+      },
+      {
+       "nhan": "Học vừa · mạng ít",
+       "dong": [
+        [
+         "1",
+         "Tỉ lệ Đạt / Chưa đạt ban đầu",
+         "0,536",
+         "0,464"
+        ],
+        [
+         "2",
+         "× tỉ lệ học “Vừa” trong nhóm",
+         "0,233",
+         "0,372"
+        ],
+        [
+         "3",
+         "× tỉ lệ mạng “Ít” trong nhóm",
+         "0,789",
+         "0,372"
+        ],
+        [
+         "4",
+         "= Tích",
+         "0,0987",
+         "0,0641"
+        ],
+        [
+         "5",
+         "Kết luận",
+         "<b>ĐẠT</b>",
+         "—"
+        ]
+       ]
+      }
+     ]
+    },
+    {
      "t": "anh",
-     "cap": "100 cây lẻ và cả rừng trên 72 bạn kiểm tra",
-     "alt": "100 cây lẻ và cả rừng trên 72 bạn kiểm tra",
-     "src": "img/tram-cay-le-va-ca-rung.png"
+     "cap": "Học Nhiều, mạng Ít: Đạt gấp 37 lần",
+     "alt": "Học Nhiều, mạng Ít: Đạt gấp 37 lần",
+     "src": "img/nhan-xac-suat-mot-ban-cu-the.png"
     },
     {
      "t": "vi_du",
-     "tieu_de": "đọc hình",
+     "tieu_de": "đổi tích ra phần trăm",
      "de": null,
      "cot": [
       "",
-      "Độ chính xác"
+      "Giá trị"
      ],
      "dong": [
       [
-       "Cây lẻ dở nhất · giỏi nhất",
-       "66,7% · 95,8%"
+       "Tích Đạt",
+       "0,3240"
       ],
       [
-       "Trung bình một cây",
-       "86,8%"
+       "Tích Chưa đạt",
+       "0,0089"
       ],
       [
-       "Cả rừng",
-       "<b>93,1%</b>"
+       "% Đạt = Đạt ÷ (Đạt + Chưa đạt)",
+       "<b>97,3%</b>"
       ]
      ],
-     "ket_luan": "Rừng hơn 90 / 100 cây của chính nó, không hơn cây giỏi nhất — nhưng ta không biết trước cây nào sẽ giỏi nhất.",
+     "ket_luan": "Hai tích rất nhỏ, nhưng chỉ cần so với nhau.",
      "nhan_manh": [
       2
      ]
     },
     {
-     "t": "demo_truot",
-     "tieu_de": "thử số cây trong rừng",
-     "huong_dan": "Kéo để đổi số cây. Mỗi số cây được huấn luyện 20 lần với cách rút ngẫu nhiên khác nhau. So khoảng dao động và độ chính xác trung bình.",
-     "dieu_kien": "Rừng có <b>{x}</b> cây",
-     "moc": [
-      {
-       "x": 1,
-       "n": "77,8 – 97,2",
-       "p": 86.8
-      },
-      {
-       "x": 3,
-       "n": "80,6 – 94,4",
-       "p": 89.0
-      },
-      {
-       "x": 5,
-       "n": "86,1 – 95,8",
-       "p": 91.2
-      },
-      {
-       "x": 11,
-       "n": "88,9 – 97,2",
-       "p": 92.6
-      },
-      {
-       "x": 25,
-       "n": "88,9 – 95,8",
-       "p": 93.1
-      },
-      {
-       "x": 51,
-       "n": "91,7 – 97,2",
-       "p": 93.8
-      },
-      {
-       "x": 101,
-       "n": "91,7 – 95,8",
-       "p": 93.8
-      }
-     ],
-     "nhan_n": "Dao động qua 20 lần (%)",
-     "nhan_p": "Trung bình",
-     "so_le_x": 0,
-     "bat_dau": 3
-    },
-    {
-     "t": "anh",
-     "cap": "Càng nhiều cây, kết quả càng ổn định",
-     "alt": "Càng nhiều cây, kết quả càng ổn định",
-     "src": "img/rung-theo-so-cay.png"
-    },
-    {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ rừng luôn giỏi hơn mọi cây của nó.",
-      "Nghĩ càng nhiều cây độ chính xác càng tăng mãi — nó chững lại, chỉ ổn định hơn."
+      "Nghĩ tích 0,3240 là “32% Đạt” — phải chia cho tổng hai tích.",
+      "Quên nhân tỉ lệ nhãn ban đầu (bước 1)."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Rừng không giỏi nhất ở mọi lần, nhưng ổn định: ít phụ thuộc may rủi của một cây."
+     "html": "Nhân cho từng nhãn, so hai tích; đổi ra % bằng cách chia cho tổng."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai21-q5",
-     "q": "Rừng 100 cây đúng bao nhiêu trên tập kiểm tra?",
-     "giai": "Trung bình một cây chỉ 86,8%.",
-     "goi_y": "Đường đậm trên biểu đồ.",
+     "q": "Theo phần Tự thử, bạn học Vừa và mạng Vừa được đoán thế nào?",
+     "giai": "Tích Đạt 0,0236, tích Chưa đạt 0,0929.",
+     "goi_y": "Chọn bạn đó, bấm tới dòng Kết luận.",
      "a": [
-      "93,1%",
-      "86,8%",
-      "95,8%",
-      "66,7%"
+      "Chưa đạt",
+      "Đạt",
+      "Hoà",
+      "Không đoán được"
      ],
-     "h": "1cbe49d87f5d3"
+     "h": "dfb8238edf1ab"
     },
     {
-     "k": "dd",
+     "k": "sx",
      "id": "bai21-q6",
-     "q": "Chọn số đúng cho mỗi chỗ trống.",
-     "giai": "Nhiều cây → ổn định hơn.",
-     "goi_y": "Kéo thanh trượt tới 1 cây rồi tới 101 cây.",
-     "mau": "Rừng 1 cây dao động khoảng {0} điểm; rừng 101 cây dao động khoảng {1} điểm.",
-     "o": [
-      [
-       "19,4",
-       "4,1",
-       "0,0",
-       "50,0"
-      ],
-      [
-       "4,1",
-       "19,4",
-       "0,0",
-       "50,0"
-      ]
+     "q": "Sắp xếp các bước Naïve Bayes đoán một bạn mới.",
+     "giai": "Tỉ lệ nhãn → nhân → so → chọn.",
+     "goi_y": "Bắt đầu từ việc lớp có bao nhiêu phần trăm Đạt.",
+     "a": [
+      "Lấy tỉ lệ mỗi nhãn ban đầu",
+      "Nhân với tỉ lệ từng cột trong nhãn",
+      "So tích của các nhãn",
+      "Chọn nhãn có tích lớn nhất"
      ],
-     "h": "a5eac17e8973e"
+     "h": "1e3e73ee91bed4"
     }
    ]
   },
   {
-   "ten": "Khi rừng không thắng",
-   "ten_ngan": "Không luôn thắng",
-   "phut": 3,
-   "muc_tieu": "nhận ra rừng không phải lúc nào cũng thắng cây tốt nhất.",
-   "khoi_dong": "Chỉ dùng 2 cột (giờ học, phút mạng) thì rừng còn thắng không?",
+   "ten": "Một ô bằng 0",
+   "ten_ngan": "Ô bằng 0",
+   "phut": 4,
+   "muc_tieu": "giải thích được vì sao một ô bằng 0 là vấn đề và cách khắc phục.",
+   "khoi_dong": "Trong 90 bạn Đạt, không bạn nào học Ít. Chuyện gì xảy ra khi nhân?",
    "khoi": [
     {
      "t": "anh",
-     "cap": "Cây không giới hạn, cây sâu 2 và rừng — với 2 cột và 4 cột",
-     "alt": "Cây không giới hạn, cây sâu 2 và rừng — với 2 cột và 4 cột",
-     "src": "img/hai-cot-va-bon-cot.png"
+     "cap": "Một thừa số bằng 0 → cả tích bằng 0",
+     "alt": "Một thừa số bằng 0 → cả tích bằng 0",
+     "src": "img/o-bang-0-nuot-mat-bang-chung.png"
     },
     {
-     "t": "vi_du",
-     "tieu_de": "so hai bảng cột",
-     "de": null,
-     "cot": [
-      "Model",
-      "2 cột",
-      "4 cột"
-     ],
-     "dong": [
-      [
-       "Cây không giới hạn",
-       "87,5%",
-       "87,5%"
-      ],
-      [
-       "Cây sâu 2",
-       "91,7%",
-       "91,7%"
-      ],
-      [
-       "Rừng 100 cây",
-       "90,3%",
-       "<b>93,1%</b>"
-      ]
-     ],
-     "ket_luan": "Với 2 cột, rừng (90,3%) thua cây sâu 2 (91,7%). Có thêm cột, các cây khác nhau hơn và rừng mới phát huy.",
-     "nhan_manh": [
-      2
-     ]
+     "t": "p",
+     "html": "Nhân với 0 thì kết quả luôn là 0 — mọi thông tin khác (mạng Ít nghiêng về Đạt) bị “nuốt” mất. Máy sẽ không bao giờ đoán Đạt cho bạn học Ít, chỉ vì tập huấn luyện chưa gặp trường hợp đó."
     },
     {
-     "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Nói cho đúng",
-     "html": "Rừng <b>thường</b> tốt và <b>ổn định hơn</b> một cây. Nó không phải phép màu: dữ liệu ít cột hoặc một câu hỏi đã đủ tốt thì một cây nông có thể ngang hoặc hơn."
+     "t": "dinh_nghia",
+     "ten": "Làm mịn (Laplace)",
+     "html": "Cộng thêm 1 vào mọi ô khi đếm, để không ô nào bằng 0. Ô 0 thành một số rất nhỏ — vẫn nói “hiếm”, nhưng không xoá hết bằng chứng khác.",
+     "ky_hieu": "scikit-learn làm sẵn qua tham số <code>alpha</code> (mặc định 1)."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nói “rừng luôn thắng cây”.",
-      "Chỉ so trên một lần chia dữ liệu rồi kết luận chắc chắn."
+      "Nghĩ ô 0 là lỗi nhập liệu — đó là trường hợp chưa gặp trong tập huấn luyện.",
+      "Nghĩ chưa gặp nghĩa là không thể xảy ra."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Rừng mạnh khi các cây đủ khác nhau; không phải lúc nào cũng thắng cây tốt nhất."
+     "html": "Ô bằng 0 xoá sạch tích; làm mịn bằng cách cộng thêm 1 vào mọi ô."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai21-q7",
-     "q": "Với 2 cột, model nào đúng nhất trong bảng?",
-     "giai": "91,7% so với rừng 90,3%.",
-     "goi_y": "So cột “2 cột”.",
+     "q": "Vì sao một ô tỉ lệ bằng 0 gây rắc rối cho Naïve Bayes?",
+     "giai": "Nhân với 0 → 0, bất kể các cột khác.",
+     "goi_y": "Nhân một số bất kỳ với 0 được bao nhiêu?",
      "a": [
-      "Cây sâu 2",
-      "Rừng 100 cây",
-      "Cây không giới hạn",
-      "Ba model bằng nhau"
+      "Cả tích thành 0",
+      "Máy báo lỗi chia cho 0",
+      "Tích lớn vô hạn",
+      "Bảng không vẽ được"
      ],
-     "h": "53c8468daa91"
+     "h": "be6d896b0e058"
     },
     {
      "k": "ds",
      "id": "bai21-q8",
-     "q": "Random Forest luôn chính xác hơn mọi cây quyết định.",
-     "giai": "Với 2 cột, cây sâu 2 hơn rừng.",
-     "goi_y": "Nhìn lại bảng hai cột.",
-     "h": "5e3e3b7972dac"
+     "q": "Làm mịn Laplace cộng thêm 1 vào mọi ô khi đếm.",
+     "giai": "Để không còn ô nào bằng 0.",
+     "goi_y": "Làm mịn là làm gì với các ô đếm?",
+     "h": "1365e4ef255555"
     }
    ]
   },
   {
-   "ten": "Rừng trong scikit-learn",
+   "ten": "Naïve Bayes trong scikit-learn",
    "ten_ngan": "scikit-learn",
    "phut": 5,
-   "muc_tieu": "dùng RandomForestClassifier và đọc mức quan trọng của từng cột.",
-   "khoi_dong": "Rừng có 100 cây — ta còn đọc được “vì sao” như một cây không?",
+   "muc_tieu": "dùng GaussianNB trong scikit-learn và so với mốc.",
+   "khoi_dong": "Chia giờ học thành 3 mức thì mất thông tin. Có cách nào dùng thẳng số giờ?",
    "khoi": [
+    {
+     "t": "anh",
+     "cap": "GaussianNB: thay bảng đếm bằng đường cong hình chuông cho mỗi nhãn",
+     "alt": "GaussianNB: thay bảng đếm bằng đường cong hình chuông cho mỗi nhãn",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250514094215279104/Gaussian-Naive-Bayes.webp",
+     "du_phong": "img/minh-hoa-naive-bayes-voi-phan-bo-chuan.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Gaussian naive bayes",
+      "url": "https://www.geeksforgeeks.org/machine-learning/gaussian-naive-bayes/"
+     },
+     "chu_giai": [
+      [
+       "Gaussian Naive Bayes",
+       "Naïve Bayes với phân bố chuẩn"
+      ],
+      [
+       "p(x|A), p(x|B)",
+       "Mật độ của x trong nhóm A, nhóm B"
+      ],
+      [
+       "Class A / Class B",
+       "Nhóm A / nhóm B"
+      ]
+     ]
+    },
     {
      "t": "bang",
      "cot": [
@@ -619,108 +561,95 @@ window.BAI = {
      "dong": [
       [
        "Huấn luyện",
-       "<code>rung = RandomForestClassifier(n_estimators=100, random_state=42)</code><br><code>rung.fit(X_train, y_train)</code>"
+       "<code>nb = GaussianNB().fit(X_train, y_train)</code>"
       ],
       [
-       "Mức quan trọng",
-       "<code>rung.feature_importances_</code>"
+       "Dự đoán",
+       "<code>nb.predict(X_test)</code> · <code>nb.predict_proba(X_test)</code>"
       ],
       [
-       "Dự đoán, đánh giá",
-       "<code>rung.predict(X_test)</code> · <code>accuracy_score</code>"
+       "Đánh giá",
+       "<code>accuracy_score(y_test, du_doan)</code>"
       ]
      ]
     },
     {
-     "t": "anh",
-     "cap": "Mức quan trọng trong rừng và tương quan với điểm (Bài 9)",
-     "alt": "Mức quan trọng trong rừng và tương quan với điểm (Bài 9)",
-     "src": "img/muc-quan-trong-cua-cot.png"
-    },
-    {
-     "t": "p",
-     "html": "Không đọc được 100 cây, nhưng rừng cho biết mỗi cột giúp giảm độ lẫn lộn bao nhiêu — <b>mức quan trọng</b>. Thứ tự ở đây trùng thứ tự tương quan của Bài 9: giờ học > phút mạng > giờ ngủ > nộp trễ."
-    },
-    {
-     "t": "anh",
-     "cap": "Boosting: model sau học sửa lỗi của model trước (chỉ cần biết tên)",
-     "alt": "Boosting: model sau học sửa lỗi của model trước (chỉ cần biết tên)",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251216112827912821/boosting.webp",
-     "du_phong": "img/minh-hoa-cach-boosting-hoat-dong.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — A comprehensive guide to ensemble learning",
-      "url": "https://www.geeksforgeeks.org/machine-learning/a-comprehensive-guide-to-ensemble-learning/"
-     },
-     "chu_giai": [
+     "t": "vi_du",
+     "tieu_de": "kết quả trên tập kiểm tra",
+     "de": null,
+     "cot": [
+      "Model",
+      "Độ chính xác"
+     ],
+     "dong": [
       [
-       "Base Models",
-       "Các model con"
+       "Model lười",
+       "54,2%"
       ],
       [
-       "Prediction",
-       "Dự đoán"
+       "Naïve Bayes đếm 3 mức",
+       "88,9%"
       ],
       [
-       "The training is modified based on the predictions",
-       "Lần học sau dựa trên chỗ sai của lần trước"
+       "GaussianNB (số giờ, số phút thật)",
+       "<b>91,7%</b>"
+      ],
+      [
+       "Logistic (Bài 16) · cây sâu 2 (Bài 18)",
+       "91,7%"
       ]
+     ],
+     "ket_luan": "Dùng số thật tốt hơn chia mức; ngang logistic và cây.",
+     "nhan_manh": [
+      2
      ]
     },
     {
      "t": "hop",
      "kieu": "ml",
-     "tieu_de": "Ba cách tổ hợp — chỉ cần biết tên",
-     "html": "<b>Bagging</b> (Random Forest): học song song, bỏ phiếu. <b>Boosting</b> (AdaBoost, Gradient Boosting, XGBoost): học nối tiếp, sửa lỗi nhau. <b>Stacking</b>: một model học cách gộp các model khác."
+     "tieu_de": "Naïve Bayes ở đâu ngoài đời?",
+     "html": "Bộ lọc thư rác đời đầu: đếm mỗi từ xuất hiện trong thư rác và thư thường bao nhiêu lần, rồi nhân. Nhanh, cần ít dữ liệu, dễ cập nhật khi có thư mới."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ mức quan trọng là tương quan — nó đo cột giúp cây chia tốt tới đâu.",
-      "Quên random_state nên mỗi lần chạy ra số hơi khác."
+      "Đưa về 0 – 1 trước GaussianNB — không cần, mỗi cột có đường cong riêng.",
+      "Nghĩ Naïve Bayes luôn kém vì “ngây thơ”."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "RandomForestClassifier(n_estimators=...) → fit → feature_importances_ → predict."
+     "html": "GaussianNB().fit → predict / predict_proba; nhanh, ít tham số, dùng tốt với nhiều cột."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai21-q9",
-     "q": "Cột nào quan trọng nhất trong rừng của lớp?",
-     "giai": "Mức quan trọng 0,68.",
-     "goi_y": "Thanh dài nhất bên trái.",
+     "q": "Lớp scikit-learn nào dùng Naïve Bayes với cột số liên tục?",
+     "giai": "Gaussian = phân bố chuẩn (hình chuông).",
+     "goi_y": "Tên lớp có chữ NB.",
      "a": [
-      "Giờ tự học",
-      "Phút mạng xã hội",
-      "Giờ ngủ",
-      "Số lần nộp trễ"
+      "GaussianNB",
+      "LinearRegression",
+      "KNeighborsClassifier",
+      "MinMaxScaler"
      ],
-     "h": "3c8b84d58eb9e"
+     "h": "79ee23bae36e1"
     },
     {
-     "k": "dd",
+     "k": "ma",
      "id": "bai21-q10",
-     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-     "giai": "Song song / nối tiếp.",
-     "goi_y": "Cách nào học song song, cách nào sửa lỗi nối tiếp?",
-     "mau": "Random Forest thuộc kiểu {0}; AdaBoost thuộc kiểu {1}.",
-     "o": [
-      [
-       "bagging",
-       "boosting",
-       "stacking",
-       "kernel"
-      ],
-      [
-       "boosting",
-       "bagging",
-       "stacking",
-       "làm mịn"
-      ]
+     "q": "GaussianNB so với cách đếm 3 mức: hai điều nào đúng? <b>(Chọn 2 đáp án đúng.)</b>",
+     "giai": "Không mất thông tin khi chia mức.",
+     "goi_y": "So hai dòng giữa của bảng kết quả.",
+     "a": [
+      "Dùng thẳng số giờ, số phút",
+      "Đúng hơn trên tập kiểm tra của bài",
+      "Bắt buộc chia mức trước",
+      "Cần đưa về 0 – 1 trước"
      ],
-     "h": "1940f194e1495"
+     "h": "fcf8d4e3b8fc5"
     }
    ]
   }
@@ -739,326 +668,330 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai21-q11",
-    "q": "Nhìn hình. Đường nét đứt xanh trong hình đoán kẹo biểu diễn gì?",
-    "giai": "Trung bình 266.",
+    "q": "Nhìn hình. Trong nhóm Chưa đạt, tỉ lệ học Ít bằng bao nhiêu?",
+    "giai": "45 : 78.",
     "img": {
-     "src": "img/keo-trong-lo-minh-hoa.png"
+     "src": "img/bang-tan-suat-dem-tay.png"
     },
     "a": [
-     "Trung bình cả lớp",
-     "Số kẹo thật",
-     "Bạn đoán giỏi nhất",
-     "Bạn đoán lớn nhất"
+     "0,577",
+     "0,000",
+     "0,372",
+     "0,538"
     ],
-    "h": "74a100d91c924"
+    "h": "125fe38a6caa64"
    },
    {
     "k": "mc",
     "id": "bai21-q12",
-    "q": "Nhìn hình. Cây lẻ dở nhất đúng khoảng bao nhiêu?",
-    "giai": "Cột ngoài cùng bên trái.",
+    "q": "Nhìn hình. Tích của nhãn Đạt bằng bao nhiêu?",
+    "giai": "Tích ba thừa số.",
     "img": {
-     "src": "img/tram-cay-le-va-ca-rung.png"
+     "src": "img/nhan-xac-suat-mot-ban-cu-the.png"
     },
     "a": [
-     "66,7%",
-     "95,8%",
-     "93,1%",
-     "86,8%"
+     "0,3240",
+     "0,0089",
+     "0,536",
+     "1,0000"
     ],
-    "h": "3c254fb3a76c3"
+    "h": "30cb95984644b"
    },
    {
     "k": "mc",
     "id": "bai21-q13",
-    "q": "Nhìn hình. Khi tăng số cây, vùng tô nhạt thay đổi thế nào?",
-    "giai": "Kết quả ổn định hơn.",
+    "q": "Nhìn hình. Vì sao tích Đạt bằng 0?",
+    "giai": "P(học Ít | Đạt) = 0.",
     "img": {
-     "src": "img/rung-theo-so-cay.png"
+     "src": "img/o-bang-0-nuot-mat-bang-chung.png"
     },
     "a": [
-     "Hẹp dần lại",
-     "Rộng dần ra",
-     "Không thay đổi",
-     "Biến mất ngay từ 3 cây"
+     "Không bạn Đạt nào học Ít",
+     "Không bạn nào dùng mạng Ít",
+     "Tỉ lệ Đạt ban đầu bằng 0",
+     "Máy tính bị lỗi làm tròn"
     ],
-    "h": "13d6e179a55485"
+    "h": "1197cc74adabff"
    },
    {
     "k": "mc",
     "id": "bai21-q14",
-    "q": "Nhìn hình. Với 4 cột, model nào cao nhất?",
-    "giai": "93,1%.",
+    "q": "Nhìn hình. Trong bảng Outlook, có bao nhiêu ngày Overcast đi chơi (Yes)?",
+    "giai": "Dòng Overcast, cột Yes.",
     "img": {
-     "src": "img/hai-cot-va-bon-cot.png"
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260227115947481605/outlook.webp",
+     "du_phong": "img/minh-hoa-bang-tan-suat-cot-outlook.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Naive bayes classifiers",
+      "url": "https://www.geeksforgeeks.org/machine-learning/naive-bayes-classifiers/"
+     }
     },
     "a": [
-     "Rừng 100 cây",
-     "Cây sâu 2",
-     "Cây không giới hạn",
-     "Ba model bằng nhau"
+     "4",
+     "0",
+     "2",
+     "3"
     ],
-    "h": "702868270b4c0"
+    "h": "13c060612b5dfb"
    },
    {
     "k": "mc",
     "id": "bai21-q15",
-    "q": "Nhìn hình. Mỗi cây trong rừng nhận dữ liệu gì?",
-    "giai": "Bagging.",
+    "q": "Nhìn hình. Đường cong màu đỏ và xanh biểu diễn điều gì?",
+    "giai": "Mỗi nhóm một đường chuông.",
     "img": {
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250521100554969405/XG-Boost.webp",
-     "du_phong": "img/minh-hoa-nhieu-cay-tren-cac-tap-con-ngau-nhien.png",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250514094215279104/Gaussian-Naive-Bayes.webp",
+     "du_phong": "img/minh-hoa-naive-bayes-voi-phan-bo-chuan.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Xgboost",
-      "url": "https://www.geeksforgeeks.org/machine-learning/xgboost/"
+      "ten": "GeeksforGeeks — Gaussian naive bayes",
+      "url": "https://www.geeksforgeeks.org/machine-learning/gaussian-naive-bayes/"
      }
     },
     "a": [
-     "Một tập con rút ngẫu nhiên",
-     "Toàn bộ dữ liệu như nhau",
-     "Chỉ các điểm bị đoán sai",
-     "Chỉ một dòng dữ liệu"
+     "Phân bố giá trị x trong từng nhóm",
+     "Ranh giới giữa hai nhóm",
+     "Đường hồi quy của x",
+     "Số lần x xuất hiện trong cả bảng"
     ],
-    "h": "13da0c8e51db37"
+    "h": "455e9aeadda37"
    },
    {
     "k": "mc",
     "id": "bai21-q16",
-    "q": "Một đội bóng hỏi ý kiến 11 huấn luyện viên có cách nhìn khác nhau rồi theo đa số. Đó là ý tưởng của gì?",
-    "giai": "Ensemble / bagging.",
+    "q": "Trong 50 email lừa đảo, 30 email có chữ “khẩn cấp”. Tỉ lệ “khẩn cấp” trong nhóm lừa đảo là bao nhiêu?",
+    "giai": "30 : 50.",
     "a": [
-     "Tổ hợp model bỏ phiếu",
-     "Cây quyết định một tầng",
-     "Hồi quy tuyến tính",
-     "Đưa về cùng thang đo"
+     "0,6",
+     "0,3",
+     "0,5",
+     "30"
     ],
-    "h": "8898fc3dc5a3e"
+    "h": "4f0829fe13360"
    },
    {
     "k": "mc",
     "id": "bai21-q17",
-    "q": "Rừng dự đoán giá nhà (con số) gộp các cây thế nào?",
-    "giai": "Hồi quy → trung bình.",
+    "q": "Naïve Bayes cho tích Có = 0,02, tích Không = 0,06. Dự đoán là gì?",
+    "giai": "Tích lớn hơn thắng.",
     "a": [
-     "Lấy trung bình dự đoán các cây",
-     "Chọn cây sâu nhất",
-     "Bỏ phiếu theo đa số",
-     "Lấy dự đoán lớn nhất"
+     "Không",
+     "Có",
+     "Hoà",
+     "Không đoán được"
     ],
-    "h": "133dda6ce8a068"
+    "h": "13781390e72fd1"
    },
    {
     "k": "mc",
     "id": "bai21-q18",
-    "q": "Vì sao mỗi cây trong rừng chỉ xét vài cột ngẫu nhiên khi chia?",
-    "giai": "Cây khác nhau → sai khác nhau → bỏ phiếu hiệu quả.",
+    "q": "Bộ lọc thư rác chưa từng thấy từ “voucher” trong thư thường. Không làm mịn thì sao?",
+    "giai": "Tỉ lệ 0 trong nhóm thường → tích nhóm thường bằng 0.",
     "a": [
-     "Để các cây khác nhau hơn",
-     "Để cây chạy chậm hơn",
-     "Để bỏ hết cột yếu",
-     "Để cây sâu vô hạn"
+     "Mọi thư có “voucher” bị coi là rác",
+     "Thư đó chắc chắn là thư thường",
+     "Bộ lọc tự học thêm từ mới",
+     "Không ảnh hưởng gì tới kết quả"
     ],
-    "h": "1ee1fd1d58ce45"
+    "h": "a3f97e2a1f77e"
    },
    {
     "k": "mc",
     "id": "bai21-q19",
-    "q": "AdaBoost và Gradient Boosting thuộc cách tổ hợp nào?",
-    "giai": "Học nối tiếp, sửa lỗi.",
+    "q": "Vì sao Naïve Bayes được gọi là “ngây thơ”?",
+    "giai": "Giả định đơn giản để chỉ cần nhân.",
     "a": [
-     "Boosting",
-     "Bagging",
-     "Stacking",
-     "Kernel"
+     "Coi các cột như không liên quan nhau",
+     "Chỉ dùng được cho trẻ em",
+     "Luôn đoán nhãn nhiều nhất",
+     "Không cần dữ liệu huấn luyện"
     ],
-    "h": "1c228cef06f4a3"
+    "h": "b3072c358808c"
    },
    {
     "k": "ma",
     "id": "bai21-q20",
-    "q": "Những phát biểu nào đúng về Random Forest? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Nhiều cây + bỏ phiếu.",
+    "q": "Những bước nào có trong Naïve Bayes? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Đếm rồi nhân.",
     "a": [
-     "Gồm nhiều cây quyết định",
-     "Các cây bỏ phiếu",
-     "Chỉ có đúng một cây",
-     "Không cần dữ liệu huấn luyện"
+     "Đếm tần suất theo nhãn",
+     "Nhân các tỉ lệ",
+     "Tìm K láng giềng gần nhất",
+     "Kẻ đường có lề rộng nhất"
     ],
-    "h": "169c438d5ee42f"
+    "h": "189b77cd8a5966"
    },
    {
     "k": "ma",
     "id": "bai21-q21",
-    "q": "Hai điều nào đúng về rừng trên bảng lớp (4 cột)? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Ổn định, thường tốt.",
+    "q": "Hai điểm mạnh nào của Naïve Bayes? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Đơn giản, nhanh.",
     "a": [
-     "Thắng phần lớn cây của nó",
-     "Ổn định hơn một cây",
-     "Thắng mọi cây của nó",
-     "Kém hơn model lười"
+     "Huấn luyện rất nhanh",
+     "Cần ít dữ liệu",
+     "Luôn chính xác nhất",
+     "Không bao giờ gặp ô bằng 0"
     ],
-    "h": "61c189b0c0cea"
+    "h": "1a7e633b043150"
    },
    {
     "k": "ma",
     "id": "bai21-q22",
-    "q": "Tổ hợp model hiệu quả nhất khi nào? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Đa dạng + đủ tốt.",
+    "q": "Tỉ lệ P(học Nhiều | Đạt) được tính thế nào? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Trong nhóm nhãn Đạt.",
     "a": [
-     "Các model sai theo cách khác nhau",
-     "Mỗi model tự nó khá tốt",
-     "Các model giống hệt nhau",
-     "Chỉ có một model"
+     "Đếm bạn Đạt học Nhiều",
+     "Chia cho tổng số bạn Đạt",
+     "Chia cho cả lớp",
+     "Chia cho số bạn học Nhiều"
     ],
-    "h": "192d05fffbd2ed"
+    "h": "34a4b65668b00"
    },
    {
     "k": "ma",
     "id": "bai21-q23",
-    "q": "Lệnh nào dùng với rừng trong scikit-learn? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Rừng + mức quan trọng.",
+    "q": "Cách nào tránh được tích bằng 0? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Làm mịn Laplace.",
     "a": [
-     "RandomForestClassifier",
-     "feature_importances_",
-     "KNeighborsClassifier",
-     "predict_proba_ngau_nhien"
+     "Cộng thêm 1 vào mọi ô",
+     "Dùng tham số alpha",
+     "Xoá cột có ô bằng 0",
+     "Nhân thêm với 0"
     ],
-    "h": "168f10ae335258"
+    "h": "e7902173c64c3"
    },
    {
     "k": "sx",
     "id": "bai21-q24",
-    "q": "Sắp xếp các bước Random Forest đoán một mẫu mới.",
-    "giai": "Rút → học → đoán → bỏ phiếu.",
+    "q": "Sắp xếp các bước lập bảng tần suất.",
+    "giai": "Chia mức → đếm → chia → ghi.",
     "a": [
-     "Rút nhiều tập con ngẫu nhiên",
-     "Mỗi tập con huấn luyện một cây",
-     "Mỗi cây dự đoán mẫu mới",
-     "Bỏ phiếu lấy đa số"
+     "Chia giá trị cột thành các mức",
+     "Đếm số bạn mỗi mức trong từng nhãn",
+     "Chia cho tổng số bạn của nhãn",
+     "Ghi tỉ lệ vào bảng"
     ],
-    "h": "8882cf46a39e6"
+    "h": "1cae65e1a375a1"
    },
    {
     "k": "sx",
     "id": "bai21-q25",
-    "q": "Sắp xếp các bước dùng rừng trong scikit-learn.",
-    "giai": "Chia → tạo → fit → đo → đọc.",
+    "q": "Sắp xếp các bước dùng GaussianNB.",
+    "giai": "Chia → fit → predict → so mốc.",
     "a": [
      "Chia tập huấn luyện và kiểm tra",
-     "Tạo RandomForestClassifier",
-     "Fit trên tập huấn luyện",
-     "Đo trên tập kiểm tra",
-     "Đọc feature_importances_"
+     "Fit GaussianNB",
+     "Predict tập kiểm tra",
+     "So với mốc model lười"
     ],
-    "h": "5c2a95c9a5e0"
+    "h": "105b5dc2181b13"
    },
    {
     "k": "dd",
     "id": "bai21-q26",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Nhãn → phiếu; số → trung bình.",
-    "mau": "Phân loại: rừng {0}; hồi quy: rừng {1}.",
+    "giai": "Nhân rồi chọn lớn nhất.",
+    "mau": "Naïve Bayes {0} các tỉ lệ; nhãn có tích {1} là dự đoán.",
     "o": [
      [
-      "bỏ phiếu",
-      "lấy trung bình",
-      "chọn cây đầu",
-      "nhân xác suất"
+      "nhân",
+      "cộng",
+      "trừ",
+      "chia"
      ],
      [
-      "lấy trung bình",
-      "bỏ phiếu",
-      "chọn cây sâu nhất",
-      "đếm lá"
+      "lớn nhất",
+      "nhỏ nhất",
+      "bằng 0",
+      "bằng 1"
      ]
     ],
-    "h": "8d1eeff43a6a8"
+    "h": "1021ee23c52dfa"
    },
    {
     "k": "dd",
     "id": "bai21-q27",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Đọc biểu đồ 100 cây.",
-    "mau": "Rừng đúng {0}; trung bình một cây đúng {1}.",
+    "giai": "Đọc từ hình nhân tay.",
+    "mau": "Học Nhiều, mạng Ít: Đạt gấp {0} lần, tức khoảng {1} Đạt.",
     "o": [
      [
-      "93,1%",
-      "86,8%",
-      "66,7%",
-      "100%"
+      "37",
+      "2",
+      "10",
+      "100"
      ],
      [
-      "86,8%",
-      "93,1%",
-      "95,8%",
-      "50,0%"
+      "97,3%",
+      "50,0%",
+      "32,4%",
+      "100%"
      ]
     ],
-    "h": "4221d31fef0a1"
+    "h": "d456f1b8142a7"
    },
    {
     "k": "dd",
     "id": "bai21-q28",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "n_estimators, feature_importances_.",
-    "mau": "Tham số {0} là số cây; thuộc tính {1} cho mức quan trọng.",
+    "giai": "Laplace.",
+    "mau": "Một ô bằng 0 làm tích bằng {0}; cách khắc phục gọi là {1}.",
     "o": [
      [
-      "n_estimators",
-      "max_depth",
-      "n_neighbors",
-      "alpha"
+      "0",
+      "1",
+      "vô cùng",
+      "0,5"
      ],
      [
-      "feature_importances_",
-      "coef_",
-      "support_",
-      "classes_"
+      "làm mịn",
+      "đưa về 0 – 1",
+      "cắt tỉa",
+      "bỏ phiếu"
      ]
     ],
-    "h": "16a119d06ceb8f"
+    "h": "12422398b73875"
    },
    {
     "k": "dd",
     "id": "bai21-q29",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Rừng không luôn thắng.",
-    "mau": "Với 2 cột, rừng đúng {0}, thua cây sâu 2 ({1}).",
+    "giai": "So với mốc.",
+    "mau": "GaussianNB đúng {0} trên tập kiểm tra; mốc model lười là {1}.",
     "o": [
      [
-      "90,3%",
       "91,7%",
-      "93,1%",
-      "100%"
+      "54,2%",
+      "100%",
+      "50,0%"
      ],
      [
+      "54,2%",
       "91,7%",
-      "90,3%",
-      "87,5%",
-      "50,0%"
+      "100%",
+      "90,0%"
      ]
     ],
-    "h": "110fc8469483a4"
+    "h": "16969557b9b752"
    },
    {
     "k": "ds",
     "id": "bai21-q30",
-    "q": "Mức quan trọng trong rừng của lớp xếp cùng thứ tự với tương quan ở Bài 9.",
-    "giai": "Giờ học > phút mạng > giờ ngủ > nộp trễ.",
-    "h": "69b3f3ad83c10"
+    "q": "Naïve Bayes cần đưa các cột về cùng thang đo.",
+    "giai": "Mỗi cột được xét riêng trong từng nhãn.",
+    "h": "75bc14782835c"
    },
    {
     "k": "ds",
     "id": "bai21-q31",
-    "q": "Tăng số cây từ 100 lên 1 000 chắc chắn làm độ chính xác tăng mạnh.",
-    "giai": "Nó chững lại; chỉ ổn định hơn.",
-    "h": "627bcc0154d91"
+    "q": "Tỉ lệ trong bảng tần suất của một nhãn tính trên số bạn của nhãn đó.",
+    "giai": "Xác suất có điều kiện.",
+    "h": "188a7a42a0698c"
    },
    {
     "k": "ds",
     "id": "bai21-q32",
-    "q": "Mỗi cây trong Random Forest học trên đúng cùng một dữ liệu.",
-    "giai": "Mỗi cây một tập con ngẫu nhiên.",
+    "q": "Tích 0,3240 nghĩa là bạn đó có 32,4% khả năng Đạt.",
+    "giai": "Phải chia cho tổng hai tích: 97,3%.",
     "h": "1884f913bd3e1d"
    }
   ]

@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 3,
  "ma": "bai03",
  "nhan": "Bài 3",
- "tieu_de": "Python cho Machine Learning",
- "phan": "Mở đầu · Công cụ Python",
+ "tieu_de": "Python cơ bản trên Colab",
+ "phan": "Module 04 · Python for Machine Learning",
  "cau_hoi": "Con có cần học thuộc Python để làm được Machine Learning không?",
  "gioi_thieu": [
-  "Hai bài đầu con chỉ đổi con số và chạy ô. Từ bài này con bắt đầu <b>tự viết</b> vài dòng Python — đủ để đọc một bảng dữ liệu, tính toán, vẽ biểu đồ và hiểu một chương trình Machine Learning.",
-  "Không cần học thuộc: con cần hiểu mỗi dòng làm gì, biết đọc thông báo lỗi và biết tra cứu. Dữ liệu là bảng khối 10 (mô phỏng) — con sẽ gặp lại nó ở nhiều bài sau.",
-  "Mọi bảng, biểu đồ, thông báo lỗi trên trang là kết quả chạy thật của notebook bài học."
+  "Từ bài này con bắt đầu <b>tự viết</b> Python trên Google Colab: lưu giá trị vào biến, cho máy chọn theo điều kiện, lặp lại một việc cho cả lớp, và gói việc đó thành một hàm.",
+  "Không cần học thuộc: con cần hiểu mỗi dòng làm gì, biết đọc thông báo lỗi và biết hỏi đúng cách — kể cả hỏi trợ lý <b>Gemini</b> có sẵn trong Colab. Bài 4 con sẽ dùng Python để đọc cả một bảng dữ liệu.",
+  "Mọi bảng, biểu đồ và thông báo lỗi trên trang là kết quả chạy thật."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai03",
  "muc_tieu": [
-  "Chạy ô code trong Colab đúng thứ tự và đọc kết quả.",
-  "Dùng biến, kiểu dữ liệu, phép toán, câu lệnh if.",
+  "Chạy ô code trong Colab đúng thứ tự; biết Gemini trong Colab giúp được gì.",
+  "Dùng biến, kiểu dữ liệu và câu lệnh if.",
   "Dùng list, vòng lặp for và tự viết một hàm đơn giản.",
-  "Đọc bảng bằng pandas: head, shape, mean, value_counts; vẽ biểu đồ đầu tiên.",
-  "Đọc hiểu chương trình Machine Learning 5 dòng và sửa ba lỗi hay gặp."
+  "Lần theo từng dòng khi máy chạy một chương trình.",
+  "Đọc thông báo lỗi, tự sửa lỗi; hỏi Gemini để hiểu chứ không để chép."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,11 +36,11 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Colab và ô code",
+   "ten": "Colab, ô code và Gemini",
    "ten_ngan": "Colab",
    "phut": 4,
-   "muc_tieu": "chạy ô code trong Colab đúng thứ tự và đọc kết quả.",
-   "khoi_dong": "Con đã chạy ô ở Bài 1, 2. Nếu chạy ô ở giữa trước ô đầu thì sao?",
+   "muc_tieu": "chạy ô code trong Colab đúng thứ tự; biết Gemini trong Colab giúp được gì.",
+   "khoi_dong": "Ở Bài 1, 2 con làm thí nghiệm trên web. Viết code thật thì con làm ở đâu?",
    "khoi": [
     {
      "t": "p",
@@ -96,15 +96,36 @@ window.BAI = {
      ]
     },
     {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Gemini trong Colab",
+     "html": "Colab có trợ lý AI <b>Gemini</b>: nút ✨ trên thanh công cụ để hỏi, và nút <b>Explain error</b> (giải thích lỗi) hiện dưới ô bị lỗi. Trong khoá học, con dùng Gemini để <b>hiểu</b> — hỏi một dòng code làm gì, lỗi nghĩa là gì — rồi <b>tự sửa</b>. Không nhờ Gemini viết cả lời giải, và luôn chạy lại để kiểm tra vì Gemini có thể sai."
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Google Colab — Welcome to Colab",
+       "url": "https://colab.research.google.com/notebooks/intro.ipynb",
+       "ghi_chu": "notebook giới thiệu chính thức"
+      },
+      {
+       "ten": "Hướng dẫn Python chính thức (Python Tutorial)",
+       "url": "https://docs.python.org/3/tutorial/",
+       "ghi_chu": "tiếng Anh"
+      }
+     ]
+    },
+    {
      "t": "loi_hay_gap",
      "muc": [
       "Chạy ô ở giữa khi chưa chạy ô phía trên — biến chưa được tạo.",
-      "Mở lại notebook và nghĩ biến vẫn còn — Colab xoá bộ nhớ khi tắt."
+      "Mở lại notebook và nghĩ biến vẫn còn — Colab xoá bộ nhớ khi phiên làm việc kết thúc."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Shift + Enter để chạy; chạy từ trên xuống; mở lại thì chạy lại từ đầu."
+     "html": "Shift + Enter để chạy; chạy từ trên xuống; Gemini giúp hiểu, không làm thay."
     }
    ],
    "checkpoint": [
@@ -123,12 +144,18 @@ window.BAI = {
      "h": "4f6169b7dbbb6"
     },
     {
-     "k": "ds",
+     "k": "mc",
      "id": "bai03-q2",
-     "q": "Tắt Colab rồi mở lại, các biến đã tạo vẫn còn nguyên.",
-     "giai": "Phải chạy lại từ đầu.",
-     "goi_y": "Xem dòng Quy tắc.",
-     "h": "26c4937929afa"
+     "q": "Cách dùng Gemini nào đúng tinh thần của khoá học?",
+     "giai": "Gemini để hiểu.",
+     "goi_y": "Đọc hộp “Gemini trong Colab”.",
+     "a": [
+      "Hỏi lỗi nghĩa là gì rồi tự sửa",
+      "Nhờ viết cả lời giải để nộp",
+      "Chép câu trả lời, không chạy thử",
+      "Hỏi đáp án câu checkpoint"
+     ],
+     "h": "1ba5536144a2d8"
     }
    ]
   },
@@ -136,9 +163,15 @@ window.BAI = {
    "ten": "Biến, kiểu dữ liệu, điều kiện",
    "ten_ngan": "Biến và if",
    "phut": 5,
-   "muc_tieu": "dùng biến, kiểu dữ liệu, phép toán, câu lệnh if.",
+   "muc_tieu": "dùng biến, kiểu dữ liệu và câu lệnh if.",
    "khoi_dong": "Một bạn được 7,5 điểm. Con lưu con số đó vào máy tính thế nào?",
    "khoi": [
+    {
+     "t": "anh",
+     "cap": "Kết quả thật của type() với năm giá trị",
+     "alt": "Kết quả thật của type() với năm giá trị",
+     "src": "img/kieu-du-lieu.png"
+    },
     {
      "t": "bang",
      "cot": [
@@ -166,16 +199,21 @@ window.BAI = {
        "bool (đúng/sai)",
        "<code>dat = gio_hoc &gt;= 3</code>",
        "Kết quả so sánh: True / False"
+      ],
+      [
+       "list (danh sách)",
+       "<code>diem = [7, 8, 9]</code>",
+       "Nhiều giá trị trong một biến"
       ]
      ]
     },
     {
      "t": "p",
-     "html": "Câu lệnh <b>if</b> chọn việc làm theo điều kiện. Dòng bên trong phải <b>thụt vào 4 dấu cách</b>:"
+     "html": "Câu lệnh <b>if</b> chọn việc làm theo điều kiện. Cuối dòng <code>if</code> có <b>dấu hai chấm</b>; dòng bên trong phải <b>thụt vào 4 dấu cách</b>:"
     },
     {
      "t": "cong_thuc",
-     "html": "if gio_hoc >= 3:  print(\"Nhiều\")   else:  print(\"Ít\")"
+     "html": "if gio_hoc >= 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Nhiều\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Ít\")"
     },
     {
      "t": "loi_hay_gap",
@@ -186,7 +224,7 @@ window.BAI = {
     },
     {
      "t": "tom_tat",
-     "html": "Biến lưu giá trị; bốn kiểu hay dùng: int, float, str, bool; if chọn theo điều kiện."
+     "html": "Biến lưu giá trị; kiểu hay dùng: int, float, str, bool, list; if chọn theo điều kiện."
     }
    ],
    "checkpoint": [
@@ -195,7 +233,7 @@ window.BAI = {
      "id": "bai03-q3",
      "q": "<code>gio_hoc = 3.5</code> có kiểu dữ liệu gì?",
      "giai": "Số có phần thập phân.",
-     "goi_y": "Xem bảng kiểu dữ liệu.",
+     "goi_y": "Xem hình kết quả type().",
      "a": [
       "float",
       "int",
@@ -268,7 +306,13 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Hàm <code>xep_loai(d)</code> trả về “Giỏi” nếu d ≥ 8, “Đạt” nếu d ≥ 5, còn lại “Chưa đạt”. Kết hợp với for, con xếp loại cả lớp chỉ bằng vài dòng."
+     "html": "Hàm <code>xep_loai(d)</code> trả về “Giỏi” nếu d ≥ 8, “Đạt” nếu d ≥ 5, còn lại “Chưa đạt”. Kết hợp với <code>for</code>, con xếp loại cả lớp chỉ bằng vài dòng. Hình dưới là hàm đó chạy thật trên điểm 30 bạn lớp 10A1 (dữ liệu mô phỏng)."
+    },
+    {
+     "t": "anh",
+     "cap": "Hàm xep_loai chạy trên 30 điểm: 4 Giỏi, 16 Đạt, 10 Chưa đạt",
+     "alt": "Hàm xep_loai chạy trên 30 điểm: 4 Giỏi, 16 Đạt, 10 Chưa đạt",
+     "src": "img/xep-loai-ca-lop.png"
     },
     {
      "t": "loi_hay_gap",
@@ -298,140 +342,446 @@ window.BAI = {
      "h": "1b91d147546b32"
     },
     {
-     "k": "sx",
+     "k": "mc",
      "id": "bai03-q6",
-     "q": "Sắp xếp các dòng để xếp loại cả lớp.",
-     "giai": "Dữ liệu → hàm → lặp → dùng hàm.",
-     "goi_y": "Hàm phải được định nghĩa trước khi dùng.",
+     "q": "Theo hình, lớp 10A1 có bao nhiêu bạn được hàm xếp loại “Giỏi”?",
+     "giai": "Đọc biểu đồ “Đếm theo loại”.",
+     "goi_y": "Xem thanh màu xanh đậm.",
      "a": [
-      "diem = [7, 8, 4]",
-      "def xep_loai(d): …",
-      "for d in diem:",
-      "    print(xep_loai(d))"
+      "4",
+      "16",
+      "10",
+      "30"
      ],
-     "h": "ce803bc5a4ada"
+     "h": "130327d36d4b39"
     }
    ]
   },
   {
-   "ten": "Đọc bảng bằng pandas",
-   "ten_ngan": "pandas",
-   "phut": 5,
-   "muc_tieu": "đọc bảng bằng pandas và vẽ biểu đồ đầu tiên.",
-   "khoi_dong": "Bảng khối 10 có 240 bạn. Làm sao xem nhanh vài dòng đầu và tính trung bình?",
+   "ten": "Máy chạy code từng dòng",
+   "ten_ngan": "Từng dòng",
+   "phut": 4,
+   "muc_tieu": "lần theo từng dòng khi máy chạy một chương trình.",
+   "khoi_dong": "Khi con bấm Shift + Enter, máy đọc cả ô cùng lúc hay từng dòng một?",
    "khoi": [
     {
-     "t": "anh",
-     "cap": "Kết quả thật của df.head(6)",
-     "alt": "Kết quả thật của df.head(6)",
-     "src": "img/bang-khoi-10.png"
+     "t": "p",
+     "html": "Máy chạy <b>từng dòng, từ trên xuống</b>. Gặp <code>for</code>, máy quay lại đầu vòng lặp cho mỗi giá trị; gặp lời gọi hàm, máy nhảy vào hàm, chạy tới <code>return</code> rồi quay về. Phần dưới được ghi lại từ một lần chạy thật — bấm “Chạy dòng tiếp” và xem bảng biến thay đổi."
     },
     {
-     "t": "bang",
-     "cot": [
-      "Lệnh",
-      "Làm gì",
-      "Kết quả với bảng khối 10"
+     "t": "chay_tung_dong",
+     "tieu_de": "chạy từng dòng",
+     "huong_dan": "Dòng đang chạy được tô sáng. Theo dõi biến <code>d</code> và màn hình sau mỗi bước.",
+     "code": [
+      "diem = [9, 7.5, 4]",
+      "def xep_loai(d):",
+      "    if d >= 8:",
+      "        return \"Giỏi\"",
+      "    elif d >= 5:",
+      "        return \"Đạt\"",
+      "    return \"Chưa đạt\"",
+      "for d in diem:",
+      "    print(d, xep_loai(d))"
      ],
-     "dong": [
-      [
-       "<code>pd.read_csv(\"khoi10_hocky2.csv\")</code>",
-       "Đọc file thành bảng",
-       "Bảng df"
-      ],
-      [
-       "<code>df.shape</code>",
-       "Số dòng, số cột",
-       "(240, 10)"
-      ],
-      [
-       "<code>df[\"StudyHours\"].mean()</code>",
-       "Trung bình một cột",
-       "3,68 giờ"
-      ],
-      [
-       "<code>df[\"Result\"].value_counts()</code>",
-       "Đếm từng nhãn",
-       "Pass 129 · Fail 111"
-      ]
+     "buoc": [
+      {
+       "dong": -1,
+       "bien": {},
+       "in": ""
+      },
+      {
+       "dong": 0,
+       "bien": {},
+       "in": ""
+      },
+      {
+       "dong": 1,
+       "bien": {
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ]
+       },
+       "in": ""
+      },
+      {
+       "dong": 7,
+       "bien": {
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ]
+       },
+       "in": ""
+      },
+      {
+       "dong": 8,
+       "bien": {
+        "d": [
+         "9",
+         "int"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ]
+       },
+       "in": ""
+      },
+      {
+       "dong": 2,
+       "bien": {
+        "d": [
+         "9",
+         "int"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ],
+        "d (trong hàm)": [
+         "9",
+         "int"
+        ]
+       },
+       "in": ""
+      },
+      {
+       "dong": 3,
+       "bien": {
+        "d": [
+         "9",
+         "int"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ],
+        "d (trong hàm)": [
+         "9",
+         "int"
+        ]
+       },
+       "in": ""
+      },
+      {
+       "dong": 7,
+       "bien": {
+        "d": [
+         "9",
+         "int"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ]
+       },
+       "in": "9 Giỏi\n"
+      },
+      {
+       "dong": 8,
+       "bien": {
+        "d": [
+         "7.5",
+         "float"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ]
+       },
+       "in": "9 Giỏi\n"
+      },
+      {
+       "dong": 2,
+       "bien": {
+        "d": [
+         "7.5",
+         "float"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ],
+        "d (trong hàm)": [
+         "7.5",
+         "float"
+        ]
+       },
+       "in": "9 Giỏi\n"
+      },
+      {
+       "dong": 4,
+       "bien": {
+        "d": [
+         "7.5",
+         "float"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ],
+        "d (trong hàm)": [
+         "7.5",
+         "float"
+        ]
+       },
+       "in": "9 Giỏi\n"
+      },
+      {
+       "dong": 5,
+       "bien": {
+        "d": [
+         "7.5",
+         "float"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ],
+        "d (trong hàm)": [
+         "7.5",
+         "float"
+        ]
+       },
+       "in": "9 Giỏi\n"
+      },
+      {
+       "dong": 7,
+       "bien": {
+        "d": [
+         "7.5",
+         "float"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ]
+       },
+       "in": "9 Giỏi\n7.5 Đạt\n"
+      },
+      {
+       "dong": 8,
+       "bien": {
+        "d": [
+         "4",
+         "int"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ]
+       },
+       "in": "9 Giỏi\n7.5 Đạt\n"
+      },
+      {
+       "dong": 2,
+       "bien": {
+        "d": [
+         "4",
+         "int"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ],
+        "d (trong hàm)": [
+         "4",
+         "int"
+        ]
+       },
+       "in": "9 Giỏi\n7.5 Đạt\n"
+      },
+      {
+       "dong": 4,
+       "bien": {
+        "d": [
+         "4",
+         "int"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ],
+        "d (trong hàm)": [
+         "4",
+         "int"
+        ]
+       },
+       "in": "9 Giỏi\n7.5 Đạt\n"
+      },
+      {
+       "dong": 6,
+       "bien": {
+        "d": [
+         "4",
+         "int"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ],
+        "d (trong hàm)": [
+         "4",
+         "int"
+        ]
+       },
+       "in": "9 Giỏi\n7.5 Đạt\n"
+      },
+      {
+       "dong": 7,
+       "bien": {
+        "d": [
+         "4",
+         "int"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ]
+       },
+       "in": "9 Giỏi\n7.5 Đạt\n4 Chưa đạt\n"
+      },
+      {
+       "dong": -1,
+       "bien": {
+        "d": [
+         "4",
+         "int"
+        ],
+        "diem": [
+         "[9, 7.5, 4]",
+         "list"
+        ],
+        "xep_loai": [
+         "hàm xep_loai",
+         "function"
+        ]
+       },
+       "in": "9 Giỏi\n7.5 Đạt\n4 Chưa đạt\n"
+      }
      ]
     },
     {
-     "t": "anh",
-     "cap": "plt.hist vẽ phân bố giờ tự học",
-     "alt": "plt.hist vẽ phân bố giờ tự học",
-     "src": "img/bieu-do-dau-tien.png"
-    },
-    {
-     "t": "anh",
-     "cap": "Đếm Đạt / Chưa đạt",
-     "alt": "Đếm Đạt / Chưa đạt",
-     "src": "img/dat-va-chua-dat.png"
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Để ý",
+     "html": "Có <b>hai</b> biến tên <code>d</code>: <code>d</code> của vòng lặp, và <code>d</code> bên trong hàm (nhận giá trị khi gọi <code>xep_loai(d)</code>). Hàm dùng bản sao riêng của nó."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Gõ sai hoa thường tên cột: <code>studyhours</code> khác <code>StudyHours</code>.",
-      "Quên <code>import pandas as pd</code> ở đầu notebook."
+      "Nghĩ dòng <code>def</code> chạy luôn phần bên trong — máy chỉ ghi nhớ hàm, chạy khi được gọi.",
+      "Nghĩ <code>return</code> xong thì hàm vẫn chạy tiếp các dòng dưới."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "pandas: read_csv → head, shape, mean, value_counts; matplotlib: plt.hist, plt.bar."
+     "html": "Máy chạy từng dòng; for lặp lại khối bên trong; gọi hàm thì nhảy vào hàm rồi quay về."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai03-q7",
-     "q": "Lệnh nào cho biết bảng có bao nhiêu dòng, bao nhiêu cột?",
-     "giai": "shape = kích thước.",
-     "goi_y": "Xem bảng lệnh.",
+     "q": "Khi máy gặp dòng <code>def xep_loai(d):</code> lần đầu, máy làm gì?",
+     "giai": "Hàm chỉ chạy khi được gọi.",
+     "goi_y": "Bấm vài bước đầu và xem dòng nào được tô sáng.",
      "a": [
-      "df.shape",
-      "df.head()",
-      "df.mean()",
-      "df.value_counts()"
+      "Ghi nhớ hàm, chưa chạy bên trong",
+      "Chạy ngay các dòng bên trong",
+      "Báo lỗi vì chưa có biến d",
+      "Bỏ qua và xoá hàm đó"
      ],
-     "h": "1ed25671cdb8b4"
+     "h": "1ff3746b3c7f62"
     },
     {
      "k": "mc",
      "id": "bai03-q8",
-     "q": "Theo bảng lệnh, trung bình giờ tự học của khối 10 là bao nhiêu?",
-     "giai": "mean().",
-     "goi_y": "Dòng df[\"StudyHours\"].mean().",
+     "q": "Theo phần Tự thử, màn hình cuối cùng in ra mấy dòng?",
+     "giai": "Mỗi phần tử của diem một dòng.",
+     "goi_y": "Bấm tới bước cuối, đếm số dòng ở ô Màn hình.",
      "a": [
-      "3,68 giờ",
-      "7,04 giờ",
-      "7,00 giờ",
-      "0,50 giờ"
+      "3",
+      "1",
+      "2",
+      "9"
      ],
-     "h": "17d65746985cd6"
+     "h": "94ddcb0574223"
     }
    ]
   },
   {
-   "ten": "Chương trình ML 5 dòng và săn lỗi",
-   "ten_ngan": "5 dòng ML",
+   "ten": "Đọc lỗi và hỏi Gemini",
+   "ten_ngan": "Đọc lỗi",
    "phut": 4,
-   "muc_tieu": "đọc hiểu chương trình Machine Learning 5 dòng và sửa ba lỗi hay gặp.",
-   "khoi_dong": "Bài 2 con đã cho máy học chữ số. Bên trong, chương trình dài bao nhiêu dòng?",
+   "muc_tieu": "đọc thông báo lỗi, tự sửa lỗi; hỏi Gemini để hiểu chứ không để chép.",
+   "khoi_dong": "Ô code hiện một khối chữ đỏ. Con đọc dòng nào trước?",
    "khoi": [
     {
      "t": "anh",
-     "cap": "Chương trình chạy thật trên bảng khối 10",
-     "alt": "Chương trình chạy thật trên bảng khối 10",
-     "src": "img/nam-dong-ml.png"
-    },
-    {
-     "t": "p",
-     "html": "Máy học từ giờ tự học và giờ ngủ để đoán Đạt / Chưa đạt, đúng 93,1% trên 72 bạn dùng để thử. Con chưa cần hiểu hết — từ Bài 11 con sẽ học kỹ từng dòng."
-    },
-    {
-     "t": "anh",
-     "cap": "Thông báo lỗi thật khi gõ sai tên biến, tên cột, tên file",
-     "alt": "Thông báo lỗi thật khi gõ sai tên biến, tên cột, tên file",
+     "cap": "Thông báo lỗi thật do Python 3.12 in ra (cùng phiên bản với Colab)",
+     "alt": "Thông báo lỗi thật do Python 3.12 in ra (cùng phiên bản với Colab)",
      "src": "img/ba-loi-thuong-gap.png"
     },
     {
@@ -448,14 +798,39 @@ window.BAI = {
        "Kiểm tra chính tả, chạy ô tạo biến"
       ],
       [
-       "<code>KeyError</code>",
-       "Không có cột tên đó",
-       "Xem <code>df.columns</code>, sửa đúng tên"
+       "<code>SyntaxError</code>",
+       "Viết sai cú pháp — ở đây thiếu dấu hai chấm",
+       "Thêm <code>:</code> cuối dòng if"
       ],
       [
-       "<code>FileNotFoundError</code>",
-       "Không tìm thấy file",
-       "Kiểm tra tên file, file đã tải lên chưa"
+       "<code>TypeError</code>",
+       "Cộng chữ với số",
+       "Đổi số thành chữ: <code>str(8)</code>"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "html": "<b>Đọc dòng cuối</b> của thông báo trước: tên lỗi + lời giải thích ngắn. Chưa hiểu thì bấm <b>Explain error</b> để Gemini giải thích — đọc xong, <b>tự sửa</b> rồi chạy lại."
+    },
+    {
+     "t": "bang",
+     "cot": [
+      "Hỏi Gemini như thế này",
+      "Không nên"
+     ],
+     "dong": [
+      [
+       "“Lỗi TypeError này nghĩa là gì?”",
+       "“Sửa hết code cho mình.”"
+      ],
+      [
+       "“Dòng <code>return</code> trong hàm để làm gì?”",
+       "“Viết lời giải thử thách 2.”"
+      ],
+      [
+       "“Vì sao Python đếm từ 0?”",
+       "Chép câu trả lời mà không chạy thử"
       ]
      ]
     },
@@ -468,30 +843,30 @@ window.BAI = {
     },
     {
      "t": "tom_tat",
-     "html": "ML 5 dòng: chọn X, y → chia → tạo model → fit → đo. Đọc dòng cuối của thông báo lỗi để sửa."
+     "html": "Đọc dòng cuối thông báo lỗi; chưa hiểu thì hỏi Gemini để hiểu, rồi tự sửa và chạy lại."
     }
    ],
    "checkpoint": [
     {
      "k": "ma",
      "id": "bai03-q9",
-     "q": "Hai lỗi nào do gõ sai tên? <b>(Chọn 2 đáp án đúng.)</b>",
-     "giai": "Sai tên biến, sai tên cột.",
-     "goi_y": "Xem bảng lỗi.",
+     "q": "Hai lỗi nào trong hình do người gõ code viết sai chính tả hoặc cú pháp? <b>(Chọn 2 đáp án đúng.)</b>",
+     "giai": "Sai tên biến; thiếu dấu hai chấm.",
+     "goi_y": "Xem hai ô đầu của hình.",
      "a": [
       "NameError",
-      "KeyError",
-      "SyntaxWarning",
-      "ZeroDivisionError"
+      "SyntaxError",
+      "ZeroDivisionError",
+      "IndexError"
      ],
-     "h": "1156f729025641"
+     "h": "1bbce820dd11f9"
     },
     {
      "k": "ds",
      "id": "bai03-q10",
-     "q": "Thấy lỗi FileNotFoundError, trước hết nên kiểm tra tên file và file đã có trong Colab chưa.",
-     "giai": "Không tìm thấy file.",
-     "goi_y": "Xem dòng thứ ba của bảng lỗi.",
+     "q": "Gặp lỗi, nên đọc dòng cuối của thông báo trước khi hỏi Gemini.",
+     "giai": "Dòng cuối nói tên lỗi và lý do.",
+     "goi_y": "Đọc đoạn ngay dưới bảng lỗi.",
      "h": "1880fb6b656d62"
     }
    ]
@@ -511,70 +886,54 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai03-q11",
-    "q": "Nhìn hình. Cột nào là nhãn Đạt / Chưa đạt?",
-    "giai": "Pass / Fail.",
+    "q": "Nhìn hình. <code>diem = [7, 8, 9]</code> có kiểu gì?",
+    "giai": "Danh sách.",
     "img": {
-     "src": "img/bang-khoi-10.png"
+     "src": "img/kieu-du-lieu.png"
     },
     "a": [
-     "Result",
-     "Score",
-     "StudyHours",
-     "StudentID"
+     "list",
+     "int",
+     "str",
+     "float"
     ],
-    "h": "cfd9489fea48c"
+    "h": "d1a6ecaa3f748"
    },
    {
     "k": "mc",
     "id": "bai03-q12",
-    "q": "Nhìn hình. Đường nét đứt đỏ trong biểu đồ là gì?",
-    "giai": "mean().",
+    "q": "Nhìn hình. Đường nét đứt màu xanh ở mức điểm nào?",
+    "giai": "Ngưỡng Giỏi.",
     "img": {
-     "src": "img/bieu-do-dau-tien.png"
+     "src": "img/xep-loai-ca-lop.png"
     },
     "a": [
-     "Giờ tự học trung bình",
-     "Giờ tự học cao nhất",
-     "Số bạn Đạt",
-     "Giờ ngủ trung bình"
+     "8",
+     "5",
+     "10",
+     "7"
     ],
-    "h": "f68b72b20c4c1"
+    "h": "1b294524cae76b"
    },
    {
     "k": "mc",
     "id": "bai03-q13",
-    "q": "Nhìn hình. Dòng nào cho máy học?",
-    "giai": "fit = học.",
-    "img": {
-     "src": "img/nam-dong-ml.png"
-    },
-    "a": [
-     "may.fit(X_hoc, y_hoc)",
-     "may.score(X_thu, y_thu)",
-     "train_test_split(...)",
-     "DecisionTreeClassifier(...)"
-    ],
-    "h": "1893628fbfd867"
-   },
-   {
-    "k": "mc",
-    "id": "bai03-q14",
-    "q": "Nhìn hình. Gõ <code>df[\"Diem\"]</code> thì Python báo lỗi gì?",
-    "giai": "Không có cột.",
+    "q": "Nhìn hình. Thiếu dấu hai chấm sau <code>if</code> thì Python báo lỗi gì?",
+    "giai": "Sai cú pháp.",
     "img": {
      "src": "img/ba-loi-thuong-gap.png"
     },
     "a": [
-     "KeyError",
+     "SyntaxError",
      "NameError",
-     "FileNotFoundError",
-     "TypeError"
+     "TypeError",
+     "IndexError"
     ],
-    "h": "154b4777dc5e5a"
+    "h": "16fdbc59436712"
    },
    {
     "k": "mc",
-    "id": "bai03-q15",
+    "id": "bai03-q14",
     "q": "Phím tắt để chạy một ô trong Colab là gì?",
     "giai": "Chạy ô.",
     "a": [
@@ -583,11 +942,11 @@ window.BAI = {
      "Alt + F4",
      "Tab"
     ],
-    "h": "1d33545e251062"
+    "h": "1be1cb97129420"
    },
    {
     "k": "mc",
-    "id": "bai03-q16",
+    "id": "bai03-q15",
     "q": "Viết số 7,5 trong Python thế nào?",
     "giai": "Dấu chấm.",
     "a": [
@@ -596,11 +955,11 @@ window.BAI = {
      "\"7,5\"",
      "7 5"
     ],
-    "h": "140cf256aed3da"
+    "h": "b4f646adb6c6"
    },
    {
     "k": "mc",
-    "id": "bai03-q17",
+    "id": "bai03-q16",
     "q": "<code>for d in [1, 2, 3]: print(d * 2)</code> in ra gì?",
     "giai": "Mỗi phần tử nhân 2.",
     "a": [
@@ -609,33 +968,46 @@ window.BAI = {
      "6",
      "123"
     ],
-    "h": "198d1e0861e7c8"
+    "h": "10707fb98cd4fc"
+   },
+   {
+    "k": "mc",
+    "id": "bai03-q17",
+    "q": "<code>print(\"Điểm: \" + 8)</code> báo lỗi gì?",
+    "giai": "Cộng chữ với số.",
+    "a": [
+     "TypeError",
+     "NameError",
+     "SyntaxError",
+     "IndexError"
+    ],
+    "h": "154e6331dffc5c"
    },
    {
     "k": "mc",
     "id": "bai03-q18",
-    "q": "Muốn đếm có bao nhiêu bạn Pass, Fail, dùng lệnh nào?",
-    "giai": "Đếm nhãn.",
+    "q": "Muốn hàm gửi kết quả ra ngoài, dùng từ khoá nào?",
+    "giai": "Trả kết quả.",
     "a": [
-     "value_counts()",
-     "mean()",
-     "head()",
-     "shape"
+     "return",
+     "print",
+     "def",
+     "for"
     ],
-    "h": "1b411600fcdf34"
+    "h": "165109b50636a1"
    },
    {
     "k": "mc",
     "id": "bai03-q19",
-    "q": "Muốn xem 5 dòng đầu của bảng, dùng lệnh nào?",
-    "giai": "head.",
+    "q": "Nút nào trong Colab nhờ Gemini giải thích một ô bị lỗi?",
+    "giai": "Giải thích lỗi.",
     "a": [
-     "df.head()",
-     "df.shape",
-     "df.tail(0)",
-     "df.mean()"
+     "Explain error",
+     "Run all",
+     "Share",
+     "Save"
     ],
-    "h": "1b2ad3ad9e32b0"
+    "h": "194e26c271196d"
    },
    {
     "k": "ma",
@@ -666,55 +1038,54 @@ window.BAI = {
    {
     "k": "ma",
     "id": "bai03-q22",
-    "q": "Hai lệnh nào của pandas? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "pandas.",
-    "a": [
-     "read_csv",
-     "value_counts",
-     "print_all",
-     "draw_table"
-    ],
-    "h": "c9f3e1ba23716"
-   },
-   {
-    "k": "ma",
-    "id": "bai03-q23",
     "q": "Hai việc nào nên làm khi gặp lỗi? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Săn lỗi.",
     "a": [
      "Đọc dòng cuối thông báo",
      "Kiểm tra chính tả tên",
      "Xoá hết notebook",
-     "Tắt máy tính ngay"
+     "Nhờ Gemini viết lại cả bài"
     ],
-    "h": "c1351df5d2a17"
+    "h": "3973b8d70f375"
+   },
+   {
+    "k": "ma",
+    "id": "bai03-q23",
+    "q": "Hai cách hỏi Gemini nào đúng tinh thần khoá học? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Hỏi để hiểu.",
+    "a": [
+     "Hỏi lỗi này nghĩa là gì",
+     "Hỏi một dòng code làm gì",
+     "Nhờ viết cả lời giải",
+     "Hỏi đáp án checkpoint"
+    ],
+    "h": "e730465271e94"
    },
    {
     "k": "sx",
     "id": "bai03-q24",
-    "q": "Sắp xếp chương trình ML 5 dòng.",
-    "giai": "Năm dòng.",
+    "q": "Sắp xếp các dòng để xếp loại cả lớp.",
+    "giai": "Dữ liệu → hàm → lặp → dùng hàm.",
     "a": [
-     "Chọn X và y",
-     "Chia dữ liệu học / thử",
-     "Tạo model",
-     "Cho máy học (fit)",
-     "Đo trên dữ liệu thử"
+     "diem = [7, 8, 4]",
+     "def xep_loai(d): …",
+     "for d in diem:",
+     "    print(xep_loai(d))"
     ],
-    "h": "e97fb709bd4ea"
+    "h": "17f42f765e156c"
    },
    {
     "k": "sx",
     "id": "bai03-q25",
-    "q": "Sắp xếp các bước xem nhanh một bảng dữ liệu.",
-    "giai": "Đọc rồi xem.",
+    "q": "Sắp xếp các bước khi gặp lỗi.",
+    "giai": "Đọc → hỏi → sửa → chạy lại.",
     "a": [
-     "import pandas as pd",
-     "df = pd.read_csv(...)",
-     "df.head()",
-     "df.shape"
+     "Đọc dòng cuối thông báo",
+     "Chưa hiểu thì hỏi Gemini",
+     "Tự sửa code",
+     "Chạy lại để kiểm tra"
     ],
-    "h": "9eaa792aa349"
+    "h": "fac18517c32b4"
    },
    {
     "k": "dd",
@@ -741,28 +1112,6 @@ window.BAI = {
    {
     "k": "dd",
     "id": "bai03-q27",
-    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "shape.",
-    "mau": "Bảng khối 10 có {0} dòng và {1} cột.",
-    "o": [
-     [
-      "240",
-      "10",
-      "100",
-      "6"
-     ],
-     [
-      "10",
-      "240",
-      "6",
-      "100"
-     ]
-    ],
-    "h": "b0f2881b95756"
-   },
-   {
-    "k": "dd",
-    "id": "bai03-q28",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
     "giai": "List và for.",
     "mau": "Python đếm vị trí trong list từ {0}; lệnh lặp qua từng phần tử là {1}.",
@@ -780,34 +1129,56 @@ window.BAI = {
       "print"
      ]
     ],
-    "h": "1015224e6eaf2e"
+    "h": "1a054c72442b6f"
+   },
+   {
+    "k": "dd",
+    "id": "bai03-q28",
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "Hàm.",
+    "mau": "Hàm bắt đầu bằng {0} và gửi kết quả ra bằng {1}.",
+    "o": [
+     [
+      "def",
+      "for",
+      "if",
+      "print"
+     ],
+     [
+      "return",
+      "print",
+      "input",
+      "len"
+     ]
+    ],
+    "h": "31ecfe0f0449b"
    },
    {
     "k": "dd",
     "id": "bai03-q29",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "value_counts và score.",
-    "mau": "Có 129 bạn Pass và {0} bạn Fail; model 5 dòng đúng {1}.",
+    "giai": "Đếm theo loại.",
+    "mau": "Lớp 10A1: {0} bạn Giỏi và {1} bạn Chưa đạt.",
     "o": [
      [
-      "111",
-      "129",
-      "240",
+      "4",
+      "16",
+      "30",
       "0"
      ],
      [
-      "93,1%",
-      "100%",
-      "50,0%",
-      "0%"
+      "10",
+      "16",
+      "0",
+      "30"
      ]
     ],
-    "h": "c20723585410e"
+    "h": "e8283912f1c61"
    },
    {
     "k": "ds",
     "id": "bai03-q30",
-    "q": "Trong Python, <code>StudyHours</code> và <code>studyhours</code> là hai tên khác nhau.",
+    "q": "Trong Python, <code>Diem</code> và <code>diem</code> là hai tên khác nhau.",
     "giai": "Phân biệt hoa thường.",
     "h": "174e9f161dd085"
    },

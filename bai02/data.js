@@ -3,12 +3,12 @@ window.BAI = {
  "ma": "bai02",
  "nhan": "Bài 2",
  "tieu_de": "Máy học như thế nào?",
- "phan": "Mở đầu · AI và Machine Learning",
+ "phan": "Module 03 · Introduction to AI",
  "cau_hoi": "Máy “học” nghĩa là gì — và học từ đâu?",
  "gioi_thieu": [
   "Bài 1 cho thấy AI dự đoán từ dữ liệu. Bài này trả lời: máy <b>học</b> để dự đoán như thế nào? Khác gì với lập trình bình thường, và vì sao dữ liệu quyết định máy giỏi hay dở?",
   "Con tiếp tục dùng bộ ảnh chữ số viết tay: cho máy học ít hoặc nhiều ví dụ, giấu một chữ số, gắn nhãn sai — và xem chuyện gì xảy ra. Cuối bài là bản đồ ba loại học máy và quy trình một dự án.",
-  "Mọi con số trên trang là kết quả chạy thật của notebook bài học."
+  "Mọi con số và hình trên trang là kết quả máy chạy thật trên bộ ảnh chữ số viết tay."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai02",
@@ -95,8 +95,18 @@ window.BAI = {
     {
      "t": "dinh_nghia",
      "ten": "Học máy (Machine Learning)",
-     "html": "Cách làm cho máy tính <b>tự tìm quy luật từ ví dụ có đáp án</b>, thay vì con người viết sẵn từng quy tắc. Quy luật máy tìm được gọi là <b>model</b>.",
+     "html": "Cách làm cho máy tính <b>tự tìm quy luật từ dữ liệu</b>, thay vì con người viết sẵn từng quy tắc. Quy luật máy tìm được gọi là <b>model</b>. Với bài nhận chữ số, dữ liệu là các ảnh <b>kèm đáp án</b> (gọi là <i>nhãn</i>).",
      "ky_hieu": null
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Google Machine Learning Crash Course — What is ML?",
+       "url": "https://developers.google.com/machine-learning/intro-to-ml/what-is-ml",
+       "ghi_chu": "tiếng Anh, có hình minh hoạ"
+      }
+     ]
     },
     {
      "t": "loi_hay_gap",
@@ -107,7 +117,7 @@ window.BAI = {
     },
     {
      "t": "tom_tat",
-     "html": "Lập trình thường: quy tắc → kết quả. Học máy: ví dụ + đáp án → quy tắc (model)."
+     "html": "Lập trình thường: người viết quy tắc → kết quả. Học máy: dữ liệu (thường kèm đáp án) → máy tìm quy luật (model)."
     }
    ],
    "checkpoint": [
@@ -115,15 +125,15 @@ window.BAI = {
      "k": "mc",
      "id": "bai02-q1",
      "q": "Trong học máy, thứ gì do máy tự tìm ra?",
-     "giai": "Máy tìm quy tắc từ ví dụ.",
-     "goi_y": "Xem ô màu đỏ ở hình bên phải.",
+     "giai": "Máy tìm quy luật từ ví dụ.",
+     "goi_y": "Xem ô màu cam ở hình bên phải.",
      "a": [
-      "Quy tắc (model)",
+      "Quy luật (model)",
       "Dữ liệu đầu vào",
       "Đáp án của ví dụ",
       "Câu hỏi của bài toán"
      ],
-     "h": "c7ad7ba825021"
+     "h": "1b4f80ff32b175"
     },
     {
      "k": "ds",
@@ -143,51 +153,44 @@ window.BAI = {
    "khoi_dong": "Con học một kiểu bài toán qua 2 ví dụ hay 50 ví dụ thì làm bài chắc hơn?",
    "khoi": [
     {
-     "t": "demo_truot",
+     "t": "tra_bang",
      "tieu_de": "số ảnh cho máy học",
-     "huong_dan": "Kéo để đổi số ảnh có đáp án. Mỗi mức học 5 lần (5 cách chia khác nhau), thanh là độ chính xác trung bình trên ảnh mới.",
-     "dieu_kien": "Học <b>{x}</b> ảnh",
-     "moc": [
-      {
-       "x": 10,
-       "n": "học 10 ảnh",
-       "p": 41.6
-      },
-      {
-       "x": 20,
-       "n": "học 20 ảnh",
-       "p": 57.4
-      },
-      {
-       "x": 50,
-       "n": "học 50 ảnh",
-       "p": 80.1
-      },
-      {
-       "x": 100,
-       "n": "học 100 ảnh",
-       "p": 88.7
-      },
-      {
-       "x": 200,
-       "n": "học 200 ảnh",
-       "p": 92.6
-      },
-      {
-       "x": 500,
-       "n": "học 500 ảnh",
-       "p": 94.9
-      },
-      {
-       "x": 1000,
-       "n": "học 1000 ảnh",
-       "p": 95.9
-      }
+     "huong_dan": "Kéo để đổi số ảnh có đáp án cho máy học. Mỗi mức học 5 lần (5 cách chia khác nhau); con số là độ chính xác trung bình trên 540 ảnh <b>mới</b>.",
+     "nhan_truot": "Số ảnh cho máy học",
+     "khoa": [
+      "10",
+      "20",
+      "50",
+      "100",
+      "200",
+      "500",
+      "1000"
      ],
-     "nhan_n": "Máy học",
-     "nhan_p": "Đoán đúng ảnh mới",
-     "so_le_x": 0,
-     "bat_dau": 0
+     "so": [
+      41.6,
+      57.4,
+      80.1,
+      88.7,
+      92.6,
+      94.9,
+      95.9
+     ],
+     "don_vi": "%",
+     "nhan_so": "Đoán đúng ảnh mới",
+     "kieu": "duong",
+     "ymin": 0,
+     "ymax": 100,
+     "truc_x": "Số ảnh học",
+     "truc_y": "Đoán đúng (%)",
+     "ghi": [
+      "Mốc đầu tiên.",
+      "Từ 10 ảnh lên 20 ảnh: tăng 15,8 điểm.",
+      "Từ 20 ảnh lên 50 ảnh: tăng 22,7 điểm.",
+      "Từ 50 ảnh lên 100 ảnh: tăng 8,6 điểm.",
+      "Từ 100 ảnh lên 200 ảnh: tăng 3,9 điểm.",
+      "Từ 200 ảnh lên 500 ảnh: tăng 2,3 điểm.",
+      "Từ 500 ảnh lên 1000 ảnh: tăng 1,0 điểm."
+     ]
     },
     {
      "t": "anh",
@@ -217,7 +220,7 @@ window.BAI = {
      "id": "bai02-q3",
      "q": "Theo phần Tự thử, học 100 ảnh thì máy đoán đúng bao nhiêu?",
      "giai": "Kéo tới 100.",
-     "goi_y": "Kéo thanh tới 100 ảnh.",
+     "goi_y": "Kéo thanh tới 100 ảnh, đọc số to màu xanh.",
      "a": [
       "88,7%",
       "41,6%",
@@ -276,13 +279,13 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Gắn sai 20% nhãn: còn 87,4%. Gắn sai 60%: còn 77,2%. Đáp án mẫu sai thì máy học theo cái sai."
+     "html": "Gắn sai 20% nhãn: còn 87,7%. Gắn sai 60%: còn 75,4% (trung bình 5 lần gắn sai ngẫu nhiên). Đáp án mẫu sai thì máy học theo cái sai."
     },
     {
      "t": "hop",
      "kieu": "ml",
      "tieu_de": "Thử ở nhà: Teachable Machine",
-     "html": "Trang <b>teachablemachine.withgoogle.com</b> (Google, không cần đăng nhập) cho con dạy máy nhận ra cử chỉ bằng webcam trong vài phút. Thử dạy chỉ với ảnh nền sáng rồi kiểm tra ở chỗ tối — máy sẽ đoán kém, đúng như bài học."
+     "html": "Trang <a href=\"https://teachablemachine.withgoogle.com/\" target=\"_blank\" rel=\"noopener\">teachablemachine.withgoogle.com</a> (Google, không cần đăng nhập) cho con dạy máy nhận ra cử chỉ bằng webcam trong vài phút. Thử dạy chỉ với ảnh nền sáng rồi kiểm tra ở chỗ tối — máy sẽ đoán kém, đúng như bài học."
     },
     {
      "t": "loi_hay_gap",
@@ -315,7 +318,7 @@ window.BAI = {
      "k": "ds",
      "id": "bai02-q6",
      "q": "Khi 60% nhãn học bị sai, máy vẫn đoán đúng như khi nhãn đúng.",
-     "giai": "77,2% so với 96,3%.",
+     "giai": "75,4% so với 96,3%.",
      "goi_y": "So cột đầu và cột cuối.",
      "h": "2353bcc228893"
     }
@@ -349,21 +352,21 @@ window.BAI = {
        "Có đáp án",
        "Đoán đáp án cho dữ liệu mới",
        "Nhận chữ số, lọc thư rác",
-       "Bài 11 – 24"
+       "Bài 12 – 25"
       ],
       [
        "Không giám sát",
        "Không đáp án",
        "Tự tìm nhóm giống nhau",
        "Gom bài hát thành playlist",
-       "Bài 25"
+       "Bài 26"
       ],
       [
        "Tăng cường",
        "Điểm thưởng sau mỗi lần thử",
        "Cách hành động tốt nhất",
        "Máy chơi cờ, robot đi",
-       "Bài 27"
+       "Bài 28"
       ]
      ]
     },
@@ -434,27 +437,27 @@ window.BAI = {
       [
        "1 · Câu hỏi",
        "Cần đoán gì? Ai dùng kết quả?",
-       "Bài 11"
+       "Bài 12"
       ],
       [
        "2 · Dữ liệu",
        "Thu thập, làm sạch, khám phá",
-       "Bài 4 – 9"
+       "Bài 5 – 10"
       ],
       [
        "3 · Huấn luyện",
        "Chọn model, cho máy học",
-       "Bài 12 – 21"
+       "Bài 13 – 22, 29"
       ],
       [
        "4 · Đánh giá",
        "Thử trên dữ liệu mới, so với mốc",
-       "Bài 11, 23"
+       "Bài 12, 24"
       ],
       [
        "5 · Dùng và theo dõi",
        "Đưa thành app, kiểm tra khi dùng",
-       "Bài 29"
+       "Bài 31"
       ]
      ]
     },
@@ -462,7 +465,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "ml",
      "tieu_de": "Khoá học của con",
-     "html": "Bài 3 học Python; Bài 4 – 9 học về dữ liệu; từ Bài 11 bắt đầu xây model. Xen giữa là 6 bài thực hành nhóm và dự án cuối khoá (Bài 30 – 32)."
+     "html": "Bài 3 – 4 học Python và công cụ dữ liệu; Bài 5 – 10 học về dữ liệu; từ Bài 12 xây model; Bài 29 – 31 mạng nơ-ron và đưa model thành ứng dụng. Xen giữa là 6 bài thực hành nhóm và dự án cuối khoá (Bài 32 – 34)."
     },
     {
      "t": "loi_hay_gap",
@@ -507,6 +510,433 @@ window.BAI = {
      "h": "70b6dec62fcf"
     }
    ]
+  },
+  {
+   "ten": "Thử thách cặp đôi",
+   "ten_ngan": "Thử thách cặp",
+   "phut": 15,
+   "muc_tieu": "cùng bạn làm thí nghiệm với dữ liệu và thấy dữ liệu quyết định máy giỏi hay dở.",
+   "khoi_dong": "Hai bạn một máy: một bạn kéo thanh trượt, một bạn ghi kết quả vào vở. Sang thử thách 2 đổi vai.",
+   "khoi": [
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Thử thách 1 — Bao nhiêu ví dụ là đủ? (cơ bản)",
+     "html": "Quay lại thanh trượt “số ảnh cho máy học” ở chặng 2. Ghi vào vở: số ảnh <b>ít nhất</b> để máy đoán đúng từ 90% trở lên. Từ đó lên 1000 ảnh, máy tăng thêm bao nhiêu điểm?"
+    },
+    {
+     "t": "tra_bang",
+     "tieu_de": "giấu một chữ số",
+     "huong_dan": "Thử thách 2 (cơ bản): chọn chữ số bị <b>giấu</b> khỏi dữ liệu học. Biểu đồ dưới cho biết các ảnh của chữ số đó bị máy đoán thành số nào. Thử ít nhất 3 chữ số, ghi vào vở: máy nhầm thành số nào nhiều nhất, vì sao (hai số trông giống nhau ở đâu)?",
+     "nhan_truot": "Chữ số bị giấu",
+     "khoa": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+     ],
+     "so": [
+      96.1,
+      96.9,
+      95.9,
+      96.7,
+      96.1,
+      96.7,
+      96.3,
+      96.9,
+      97.5,
+      95.7
+     ],
+     "don_vi": "%",
+     "nhan_so": "Vẫn đoán đúng các chữ số còn lại",
+     "kieu": "cot",
+     "ymin": 80,
+     "ymax": 100,
+     "truc_x": "Chữ số bị giấu",
+     "truc_y": "Đúng các số còn lại (%)",
+     "phan_bo": [
+      {
+       "nhan": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+       ],
+       "gia_tri": [
+        0,
+        1,
+        7,
+        0,
+        4,
+        23,
+        8,
+        2,
+        1,
+        8
+       ],
+       "to": [
+        5
+       ]
+      },
+      {
+       "nhan": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+       ],
+       "gia_tri": [
+        0,
+        0,
+        7,
+        1,
+        5,
+        2,
+        1,
+        0,
+        31,
+        8
+       ],
+       "to": [
+        8
+       ]
+      },
+      {
+       "nhan": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+       ],
+       "gia_tri": [
+        0,
+        10,
+        0,
+        38,
+        0,
+        0,
+        0,
+        2,
+        3,
+        0
+       ],
+       "to": [
+        3
+       ]
+      },
+      {
+       "nhan": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+       ],
+       "gia_tri": [
+        0,
+        0,
+        8,
+        0,
+        0,
+        8,
+        0,
+        2,
+        13,
+        24
+       ],
+       "to": [
+        9
+       ]
+      },
+      {
+       "nhan": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+       ],
+       "gia_tri": [
+        1,
+        27,
+        0,
+        0,
+        0,
+        1,
+        14,
+        9,
+        0,
+        2
+       ],
+       "to": [
+        1
+       ]
+      },
+      {
+       "nhan": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+       ],
+       "gia_tri": [
+        4,
+        1,
+        0,
+        17,
+        6,
+        0,
+        2,
+        6,
+        2,
+        17
+       ],
+       "to": [
+        3,
+        9
+       ]
+      },
+      {
+       "nhan": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+       ],
+       "gia_tri": [
+        1,
+        2,
+        0,
+        0,
+        1,
+        2,
+        0,
+        0,
+        48,
+        0
+       ],
+       "to": [
+        8
+       ]
+      },
+      {
+       "nhan": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+       ],
+       "gia_tri": [
+        1,
+        0,
+        1,
+        11,
+        13,
+        3,
+        0,
+        0,
+        3,
+        22
+       ],
+       "to": [
+        9
+       ]
+      },
+      {
+       "nhan": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+       ],
+       "gia_tri": [
+        1,
+        7,
+        0,
+        7,
+        5,
+        1,
+        6,
+        3,
+        0,
+        22
+       ],
+       "to": [
+        9
+       ]
+      },
+      {
+       "nhan": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+       ],
+       "gia_tri": [
+        2,
+        4,
+        0,
+        17,
+        0,
+        9,
+        0,
+        1,
+        21,
+        0
+       ],
+       "to": [
+        8
+       ]
+      }
+     ],
+     "nhan_phan_bo": "Các ảnh của chữ số bị giấu bị đoán thành:",
+     "truc_x_phu": "Máy đoán là",
+     "truc_y_phu": "Số ảnh",
+     "ghi": [
+      "54 ảnh số 0: <b>không ảnh nào</b> được đoán đúng — nhiều nhất bị đoán thành <b>5</b> (23 ảnh).",
+      "55 ảnh số 1: <b>không ảnh nào</b> được đoán đúng — nhiều nhất bị đoán thành <b>8</b> (31 ảnh).",
+      "53 ảnh số 2: <b>không ảnh nào</b> được đoán đúng — nhiều nhất bị đoán thành <b>3</b> (38 ảnh).",
+      "55 ảnh số 3: <b>không ảnh nào</b> được đoán đúng — nhiều nhất bị đoán thành <b>9</b> (24 ảnh).",
+      "54 ảnh số 4: <b>không ảnh nào</b> được đoán đúng — nhiều nhất bị đoán thành <b>1</b> (27 ảnh).",
+      "55 ảnh số 5: <b>không ảnh nào</b> được đoán đúng — nhiều nhất bị đoán thành <b>3</b> và <b>9</b> (mỗi số 17 ảnh).",
+      "54 ảnh số 6: <b>không ảnh nào</b> được đoán đúng — nhiều nhất bị đoán thành <b>8</b> (48 ảnh).",
+      "54 ảnh số 7: <b>không ảnh nào</b> được đoán đúng — nhiều nhất bị đoán thành <b>9</b> (22 ảnh).",
+      "52 ảnh số 8: <b>không ảnh nào</b> được đoán đúng — nhiều nhất bị đoán thành <b>9</b> (22 ảnh).",
+      "54 ảnh số 9: <b>không ảnh nào</b> được đoán đúng — nhiều nhất bị đoán thành <b>8</b> (21 ảnh)."
+     ]
+    },
+    {
+     "t": "tra_bang",
+     "tieu_de": "nhãn sai",
+     "huong_dan": "Nâng cao — cặp xong sớm: kéo để tăng tỉ lệ ảnh học bị gắn nhãn sai (trung bình 5 lần). Từ bao nhiêu phần trăm nhãn sai thì máy đoán đúng dưới 80%? Theo con, ai nên kiểm tra nhãn trước khi cho máy học?",
+     "nhan_truot": "Tỉ lệ nhãn sai",
+     "khoa": [
+      "0%",
+      "10%",
+      "20%",
+      "30%",
+      "40%",
+      "50%",
+      "60%",
+      "70%"
+     ],
+     "so": [
+      96.3,
+      88.5,
+      87.7,
+      85.8,
+      83.7,
+      80.7,
+      75.4,
+      65.9
+     ],
+     "don_vi": "%",
+     "nhan_so": "Đoán đúng ảnh mới",
+     "kieu": "duong",
+     "ymin": 0,
+     "ymax": 100,
+     "truc_x": "Tỉ lệ nhãn sai",
+     "truc_y": "Đoán đúng (%)"
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Ba câu để chia sẻ trước lớp",
+     "html": "1. Cần ít nhất bao nhiêu ảnh để đạt 90%?<br>2. Giấu số nào thì máy nhầm thành số nào — vì sao?<br>3. Muốn máy giỏi, con cần dữ liệu thế nào?"
+    },
+    {
+     "t": "tom_tat",
+     "html": "Nhiều ví dụ đúng, đủ mọi loại → máy giỏi; thiếu loại nào hay nhãn sai → máy đoán sai."
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai02-q11",
+     "q": "Theo thử thách 2, khi giấu một chữ số khỏi dữ liệu học, ảnh của chữ số đó được đoán đúng bao nhiêu?",
+     "giai": "Máy chỉ chọn trong các số đã học.",
+     "goi_y": "Đọc dòng dưới biểu đồ cột.",
+     "a": [
+      "Không ảnh nào",
+      "Hầu hết các ảnh",
+      "Khoảng một nửa",
+      "Đúng tất cả"
+     ],
+     "h": "e0656258f7c07"
+    },
+    {
+     "k": "ds",
+     "id": "bai02-q12",
+     "q": "Giấu một chữ số làm máy đoán sai hàng loạt cả các chữ số khác.",
+     "giai": "Các số còn lại vẫn đúng khoảng 95,7% – 97,5%.",
+     "goi_y": "Xem số to màu xanh khi kéo thanh.",
+     "h": "1f51a00cc70cf9"
+    }
+   ]
   }
  ],
  "cuoi": {
@@ -522,7 +952,7 @@ window.BAI = {
   "ngan_hang": [
    {
     "k": "mc",
-    "id": "bai02-q11",
+    "id": "bai02-q13",
     "q": "Nhìn hình. Trong học máy, “Kết quả mẫu” đóng vai trò gì?",
     "giai": "Đáp án là đầu vào.",
     "img": {
@@ -534,11 +964,11 @@ window.BAI = {
      "Thứ máy tự nghĩ ra",
      "Thứ không cần thiết"
     ],
-    "h": "a6dbf49c36e56"
+    "h": "104508803b77e6"
    },
    {
     "k": "mc",
-    "id": "bai02-q12",
+    "id": "bai02-q14",
     "q": "Nhìn hình. Từ 500 lên 1000 ảnh, độ chính xác thay đổi thế nào?",
     "giai": "Chậm dần.",
     "img": {
@@ -550,11 +980,11 @@ window.BAI = {
      "Giảm mạnh",
      "Về 0"
     ],
-    "h": "1cf0108e5b238b"
+    "h": "14d194753ec653"
    },
    {
     "k": "mc",
-    "id": "bai02-q13",
+    "id": "bai02-q15",
     "q": "Nhìn hình. Ảnh số 5 thường bị đoán thành số nào nhiều nhất?",
     "giai": "Cột cao nhất.",
     "img": {
@@ -566,11 +996,11 @@ window.BAI = {
      "1",
      "2"
     ],
-    "h": "1dff97c46363ed"
+    "h": "f07d7d84dabd3"
    },
    {
     "k": "mc",
-    "id": "bai02-q14",
+    "id": "bai02-q16",
     "q": "Nhìn hình. Loại học nào có các chấm cùng một màu xám?",
     "giai": "Không có đáp án.",
     "img": {
@@ -582,11 +1012,11 @@ window.BAI = {
      "Tăng cường",
      "Lập trình quy tắc"
     ],
-    "h": "171c658dd22aae"
+    "h": "bbad725c23c58"
    },
    {
     "k": "mc",
-    "id": "bai02-q15",
+    "id": "bai02-q17",
     "q": "Bước đầu tiên của một dự án học máy là gì?",
     "giai": "Câu hỏi trước.",
     "a": [
@@ -595,11 +1025,11 @@ window.BAI = {
      "Đánh giá",
      "Dùng app"
     ],
-    "h": "a2845100c8224"
+    "h": "1cad10906a9df3"
    },
    {
     "k": "mc",
-    "id": "bai02-q16",
+    "id": "bai02-q18",
     "q": "Muốn máy lọc thư rác tốt hơn, cách nào hiệu quả nhất?",
     "giai": "Dữ liệu tốt.",
     "a": [
@@ -608,11 +1038,11 @@ window.BAI = {
      "Bớt số thư dùng để học",
      "Gắn nhãn ngẫu nhiên cho thư"
     ],
-    "h": "1518cb1d9028e7"
+    "h": "1bb551c59eb321"
    },
    {
     "k": "mc",
-    "id": "bai02-q17",
+    "id": "bai02-q19",
     "q": "Một app nhận diện cây chỉ học ảnh cây xoài. Gặp cây ổi, app sẽ?",
     "giai": "Chỉ biết điều đã học.",
     "a": [
@@ -621,11 +1051,11 @@ window.BAI = {
      "Tự tìm ảnh cây ổi để học",
      "Báo rằng mình không chắc"
     ],
-    "h": "1c1031abe87e83"
+    "h": "166d63f0bbf551"
    },
    {
     "k": "mc",
-    "id": "bai02-q18",
+    "id": "bai02-q20",
     "q": "Gắn nhãn sai nhiều ảnh học thì điều gì xảy ra?",
     "giai": "Học theo cái sai.",
     "a": [
@@ -634,11 +1064,11 @@ window.BAI = {
      "Không ảnh hưởng gì",
      "Máy tự sửa nhãn"
     ],
-    "h": "1a2274d4e4305"
+    "h": "19d89c5b902238"
    },
    {
     "k": "mc",
-    "id": "bai02-q19",
+    "id": "bai02-q21",
     "q": "Máy chơi cờ học bằng cách tự chơi và nhận điểm khi thắng. Đó là loại học nào?",
     "giai": "Điểm thưởng.",
     "a": [
@@ -647,11 +1077,11 @@ window.BAI = {
      "Không giám sát",
      "Lập trình quy tắc"
     ],
-    "h": "f0e7fc9fbddde"
+    "h": "13ac91e019b9de"
    },
    {
     "k": "ma",
-    "id": "bai02-q20",
+    "id": "bai02-q22",
     "q": "Hai điều nào đúng về học máy? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Học từ ví dụ.",
     "a": [
@@ -660,11 +1090,11 @@ window.BAI = {
      "Con người viết sẵn mọi quy tắc",
      "Không cần dữ liệu"
     ],
-    "h": "1f336369202c57"
+    "h": "1fcd053d9860ff"
    },
    {
     "k": "ma",
-    "id": "bai02-q21",
+    "id": "bai02-q23",
     "q": "Hai bài toán nào là học có giám sát? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Có đáp án.",
     "a": [
@@ -673,11 +1103,11 @@ window.BAI = {
      "Gom bài hát thành nhóm",
      "Robot tự học đi"
     ],
-    "h": "ec3ecc5ee7c4f"
+    "h": "1185c161725894"
    },
    {
     "k": "ma",
-    "id": "bai02-q22",
+    "id": "bai02-q24",
     "q": "Hai việc nào nằm trong bước “Dữ liệu”? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Bước 2.",
     "a": [
@@ -686,11 +1116,11 @@ window.BAI = {
      "Đưa app lên mạng",
      "Đặt tên cho model"
     ],
-    "h": "1d00a2a83bac4c"
+    "h": "e124678b17ce6"
    },
    {
     "k": "ma",
-    "id": "bai02-q23",
+    "id": "bai02-q25",
     "q": "Hai nguyên nhân nào làm máy đoán kém? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Dữ liệu kém.",
     "a": [
@@ -699,11 +1129,11 @@ window.BAI = {
      "Dữ liệu nhiều và đúng",
      "Thử trên ảnh mới"
     ],
-    "h": "1fcb0b76286051"
+    "h": "1d8ddbf9c97c39"
    },
    {
     "k": "sx",
-    "id": "bai02-q24",
+    "id": "bai02-q26",
     "q": "Sắp xếp cách máy học nhận chữ số.",
     "giai": "Học → thử → đo.",
     "a": [
@@ -712,11 +1142,11 @@ window.BAI = {
      "Thử trên ảnh mới",
      "Đo độ chính xác"
     ],
-    "h": "e4f1d2155bdb1"
+    "h": "995c38cfafdc1"
    },
    {
     "k": "sx",
-    "id": "bai02-q25",
+    "id": "bai02-q27",
     "q": "Sắp xếp theo số ảnh học, độ chính xác từ thấp tới cao.",
     "giai": "Nhiều ví dụ hơn.",
     "a": [
@@ -725,14 +1155,14 @@ window.BAI = {
      "Học 200 ảnh",
      "Học 1000 ảnh"
     ],
-    "h": "3e70ca4239ba3"
+    "h": "133c4a26aa6625"
    },
    {
     "k": "dd",
-    "id": "bai02-q26",
+    "id": "bai02-q28",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
     "giai": "Hai cách.",
-    "mau": "Lập trình thường: con người viết {0}; học máy: máy tìm {1} từ ví dụ.",
+    "mau": "Lập trình thường: con người viết {0}; học máy: máy tìm {1} từ dữ liệu.",
     "o": [
      [
       "quy tắc",
@@ -747,11 +1177,11 @@ window.BAI = {
       "màn hình"
      ]
     ],
-    "h": "7f90c101b4fe6"
+    "h": "19c83e9db98548"
    },
    {
     "k": "dd",
-    "id": "bai02-q27",
+    "id": "bai02-q29",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
     "giai": "Ba loại.",
     "mau": "Dữ liệu có đáp án: học {0}; không có đáp án: học {1}.",
@@ -769,33 +1199,33 @@ window.BAI = {
       "lập trình"
      ]
     ],
-    "h": "bb1f5805d28af"
+    "h": "124ca65741e5e2"
    },
    {
     "k": "dd",
-    "id": "bai02-q28",
+    "id": "bai02-q30",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
     "giai": "Nhãn sai.",
     "mau": "Nhãn đúng: đoán đúng {0}; sai 60%% nhãn: còn {1}.",
     "o": [
      [
       "96,3%",
-      "77,2%",
+      "75,4%",
       "100%",
       "0%"
      ],
      [
-      "77,2%",
+      "75,4%",
       "96,3%",
       "100%",
       "0%"
      ]
     ],
-    "h": "1183632ce8bc8d"
+    "h": "e136f3fc1b13a"
    },
    {
     "k": "dd",
-    "id": "bai02-q29",
+    "id": "bai02-q31",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
     "giai": "Quy trình.",
     "mau": "Kết quả chưa tốt thì {0} lấy thêm dữ liệu; model dùng thật vẫn cần {1}.",
@@ -813,28 +1243,28 @@ window.BAI = {
       "giấu"
      ]
     ],
-    "h": "9c6d091df0897"
-   },
-   {
-    "k": "ds",
-    "id": "bai02-q30",
-    "q": "Máy có thể đoán đúng một chữ số mà nó chưa từng được học.",
-    "giai": "Chỉ biết điều đã học.",
-    "h": "cd8efbdf4b351"
-   },
-   {
-    "k": "ds",
-    "id": "bai02-q31",
-    "q": "Tăng từ 10 lên 100 ảnh học làm độ chính xác tăng rõ rệt.",
-    "giai": "41,6% → 88,7%.",
-    "h": "172f383e6040eb"
+    "h": "32660fac4890"
    },
    {
     "k": "ds",
     "id": "bai02-q32",
+    "q": "Máy có thể đoán đúng một chữ số mà nó chưa từng được học.",
+    "giai": "Chỉ biết điều đã học.",
+    "h": "1e2fce846b1482"
+   },
+   {
+    "k": "ds",
+    "id": "bai02-q33",
+    "q": "Tăng từ 10 lên 100 ảnh học làm độ chính xác tăng rõ rệt.",
+    "giai": "41,6% → 88,7%.",
+    "h": "62a4d503f1d36"
+   },
+   {
+    "k": "ds",
+    "id": "bai02-q34",
     "q": "Học tăng cường cần sẵn đáp án cho từng ví dụ.",
     "giai": "Cần điểm thưởng.",
-    "h": "1e2fce846b1482"
+    "h": "1a91b1785fa7b3"
    }
   ]
  },

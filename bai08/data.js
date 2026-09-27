@@ -2,22 +2,22 @@ window.BAI = {
  "bai": 8,
  "ma": "bai08",
  "nhan": "Bài 8",
- "tieu_de": "Đọc dữ liệu bằng biểu đồ",
- "phan": "Phần A · Nền tảng dữ liệu",
- "cau_hoi": "Làm sao nhìn ra câu chuyện mà một bảng số đang giấu?",
+ "tieu_de": "Chuẩn bị feature và chia dữ liệu",
+ "phan": "Module 06 · Data Preparation",
+ "cau_hoi": "Model đúng gần 90% — đã đáng tin chưa?",
  "gioi_thieu": [
-  "Bảng khối 10 có 240 dòng và 10 cột — hơn hai nghìn con số. Không ai đọc hết từng ô. Người làm dữ liệu <b>nhìn tổng quan</b> rồi <b>vẽ</b>.",
-  "Năm chặng dưới đây là bước đầu của <b>phân tích khám phá dữ liệu (EDA)</b>: soi bảng, đọc hình dạng một cột số bằng biểu đồ tần số, đếm cột chữ bằng biểu đồ cột, so các nhóm bằng biểu đồ hộp, và cảnh giác với biểu đồ gây hiểu nhầm. Bảng dùng trong bài là bảng mô phỏng.",
-  "Con dùng lại số trung bình, trung vị, mốt (Bài 4) và tứ phân vị (Bài 6, Toán 10)."
+  "Bảng học sinh đã được con dọn sạch ở Bài 7: 90 bạn, trong đó 79 Đạt và chỉ 11 Chưa đạt. Một model “lười” đoán <b>mọi bạn đều Đạt</b> vẫn đúng 87,8%. Vậy model đó có dùng được không?",
+  "Năm chặng dưới đây là những việc phải làm <b>sau khi làm sạch</b> và <b>trước khi huấn luyện</b>: chọn cột đầu vào, tạo cột mới, chia dữ liệu để kiểm tra, và cảnh giác với dữ liệu lệch nhãn. Bảng dùng trong bài là bảng mô phỏng.",
+  "Con dùng lại việc đưa về cùng thang đo (Bài 6) và làm sạch (Bài 7)."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai08",
  "muc_tieu": [
-  "Nêu được mục đích của phân tích khám phá dữ liệu (EDA).",
-  "Dùng head, info, describe để nhìn tổng quan một bảng dữ liệu.",
-  "Đọc được hình dạng phân bố (cân đối, lệch phải, lệch trái) trên biểu đồ tần số.",
-  "Đọc và so sánh các nhóm bằng biểu đồ hộp.",
-  "Chọn đúng loại biểu đồ và nhận ra biểu đồ gây hiểu nhầm."
+  "Phân biệt được feature (cột đầu vào) và nhãn (cột cần dự đoán).",
+  "Tạo được feature mới từ các cột có sẵn và đổi cột chữ thành số.",
+  "Chọn được feature phù hợp, loại được cột vô nghĩa và cột gây rò rỉ.",
+  "Giải thích được vì sao phải chia dữ liệu thành tập huấn luyện và tập kiểm tra, và vai trò của stratify.",
+  "Nhận ra bẫy độ chính xác khi dữ liệu lệch nhãn."
  ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
@@ -36,128 +36,128 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "EDA và nhìn tổng quan một bảng",
-   "ten_ngan": "Nhìn tổng quan",
+   "ten": "Feature và nhãn",
+   "ten_ngan": "Feature và nhãn",
    "phut": 4,
-   "muc_tieu": "nêu được mục đích của EDA và dùng các lệnh xem tổng quan một bảng.",
-   "khoi_dong": "Được giao một bảng 240 dòng. Con làm gì đầu tiên?",
+   "muc_tieu": "phân biệt được feature và nhãn trong một bảng dữ liệu.",
+   "khoi_dong": "Muốn máy đoán một bạn Đạt hay Chưa đạt, máy được nhìn những cột nào, và cột nào là câu trả lời?",
    "khoi": [
     {
      "t": "dinh_nghia",
-     "ten": "Phân tích khám phá dữ liệu (EDA — Exploratory Data Analysis)",
-     "html": "Bước <b>nhìn và vẽ</b> dữ liệu trước khi xây model: bảng có gì, mỗi cột phân bố thế nào, các nhóm khác nhau ra sao, có điều gì bất thường. EDA đặt câu hỏi; model chưa được xây.",
-     "ky_hieu": "Trực quan hoá dữ liệu (data visualization): biến số liệu thành hình để mắt người đọc nhanh."
+     "ten": "Feature (đặc trưng) và nhãn (label)",
+     "html": "<b>Feature</b> là các cột đầu vào mà model được nhìn để dự đoán. <b>Nhãn</b> (còn gọi là cột đích, target) là cột chứa câu trả lời mà model phải học cách đoán.",
+     "ky_hieu": "Ký hiệu thường gặp: X là bảng các feature, y là cột nhãn."
     },
     {
-     "t": "anh",
-     "cap": "Trực quan hoá dữ liệu là gì",
-     "alt": "Trực quan hoá dữ liệu là gì",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251211110903742649/what_is_data_visualization_.webp",
-     "du_phong": "img/minh-hoa-truc-quan-hoa-du-lieu-la-gi.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Data visualization and its importance",
-      "url": "https://www.geeksforgeeks.org/data-visualization/data-visualization-and-its-importance/"
-     },
-     "chu_giai": [
-      [
-       "What is Data Visualization?",
-       "Trực quan hoá dữ liệu là gì?"
-      ],
-      [
-       "Turning data into visual formats like charts, graphs, and maps",
-       "Biến dữ liệu thành biểu đồ, đồ thị, bản đồ"
-      ],
-      [
-       "Makes complex data easy to understand at a glance",
-       "Giúp dữ liệu phức tạp dễ hiểu chỉ trong một cái nhìn"
-      ],
-      [
-       "Helps identify trends, patterns, and insights",
-       "Giúp nhận ra xu hướng, quy luật và điều đáng chú ý"
-      ]
-     ]
-    },
-    {
-     "t": "bang",
+     "t": "vi_du",
+     "tieu_de": "các cột của bảng học sinh",
+     "de": "Bài toán: đoán một bạn Đạt hay Chưa đạt.",
      "cot": [
-      "Lệnh Pandas",
-      "Cho biết",
-      "Với bảng khối 10"
+      "Cột",
+      "Ví dụ",
+      "Vai trò",
+      "Vì sao"
      ],
      "dong": [
       [
-       "<code>df.head()</code>",
-       "Vài dòng đầu",
-       "Tên cột, kiểu giá trị"
+       "StudentID",
+       "HS001",
+       "Bỏ",
+       "Mã số — không nói gì về việc học"
       ],
       [
-       "<code>df.shape</code>",
-       "(số dòng, số cột)",
-       "(240, 10)"
+       "HoTen",
+       "Hoang Quan",
+       "Bỏ",
+       "Tên không làm một bạn học giỏi hơn"
       ],
       [
-       "<code>df.info()</code>",
-       "Kiểu và số ô có dữ liệu của từng cột",
-       "0 ô trống"
+       "Lop, GioiTinh",
+       "10A1, NU",
+       "Có thể dùng",
+       "Phải đổi chữ thành số trước (chặng 2)"
       ],
       [
-       "<code>df.describe()</code>",
-       "count, mean, std, min, 25%, 50%, 75%, max",
-       "Phút mạng: trung bình 152,8, trung vị 135"
+       "StudyHours, SleepHours",
+       "5,8 · 8,8",
+       "<b>Feature</b>",
+       "Thông tin có trước kỳ thi"
       ],
       [
-       "<code>df[\"cột\"].value_counts()</code>",
-       "Đếm từng giá trị của cột chữ",
-       "Mỗi lớp 30 bạn"
+       "Score",
+       "9,7",
+       "<b>Bỏ</b>",
+       "Kết quả được xếp theo điểm — dùng là “nhìn trộm” đáp án"
+      ],
+      [
+       "Result",
+       "Pass",
+       "<b>Nhãn</b>",
+       "Câu trả lời cần đoán"
       ]
+     ],
+     "ket_luan": "Chỉ những cột có trước lúc cần dự đoán mới được làm feature.",
+     "nhan_manh": [
+      4,
+      5
      ]
     },
     {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Rò rỉ dữ liệu (data leakage)",
+     "html": "Kết quả Đạt được xếp theo điểm (từ 5 điểm trở lên). Nếu đưa cột Score vào làm feature, model “đoán” gần đúng tuyệt đối — nhưng ngoài đời, lúc cần dự đoán thì chưa có điểm. Dùng thông tin mà lúc dự đoán chưa thể có gọi là <b>rò rỉ dữ liệu</b>."
+    },
+    {
      "t": "anh",
-     "cap": "Kết quả describe() của một bảng rượu vang: mỗi hàng một cột số",
-     "alt": "Kết quả describe() của một bảng rượu vang: mỗi hàng một cột số",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250731152213452639/describe.webp",
-     "du_phong": "img/minh-hoa-bang-thong-ke-mo-ta-describe.png",
+     "cap": "Năm nhóm việc chuẩn bị feature",
+     "alt": "Năm nhóm việc chuẩn bị feature",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250701123223591115/processes.webp",
+     "du_phong": "img/minh-hoa-nam-nhom-viec-chuan-bi-feature.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Exploratory data analysis in python",
-      "url": "https://www.geeksforgeeks.org/data-analysis/exploratory-data-analysis-in-python/"
+      "ten": "GeeksforGeeks — What is feature engineering",
+      "url": "https://www.geeksforgeeks.org/machine-learning/what-is-feature-engineering/"
      },
      "chu_giai": [
       [
-       "count",
-       "Số ô có dữ liệu"
+       "Feature Creation",
+       "Tạo feature mới (chặng 2)"
       ],
       [
-       "mean, std",
-       "Số trung bình, độ lệch chuẩn"
+       "Feature Transformation",
+       "Biến đổi feature, ví dụ đổi chữ thành số (chặng 2)"
       ],
       [
-       "min, max",
-       "Giá trị nhỏ nhất, lớn nhất"
+       "Feature Extraction",
+       "Rút gọn nhiều cột thành ít cột (đọc thêm)"
       ],
       [
-       "25%, 50%, 75%",
-       "Tứ phân vị Q1, trung vị Q2, Q3"
+       "Feature Selection",
+       "Chọn feature (chặng 3)"
+      ],
+      [
+       "Feature Scaling",
+       "Đưa về cùng thang đo (Bài 6)"
       ]
      ]
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Vẽ ngay mà chưa xem bảng có bao nhiêu dòng, có ô trống không.",
-      "Đọc describe() mà quên rằng 50% chính là trung vị."
+      "Đưa cả cột mã số, họ tên vào model.",
+      "Dùng cột được tính ra từ nhãn (Score) để đoán nhãn (Result)."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "EDA là nhìn và vẽ để hiểu dữ liệu trước khi xây model. Bắt đầu bằng head, shape, info, describe."
+     "html": "Feature là cột đầu vào (X), nhãn là cột cần đoán (y). Chỉ dùng thông tin có sẵn lúc dự đoán."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Exploratory Data Analysis in Python",
-       "url": "https://www.geeksforgeeks.org/data-analysis/exploratory-data-analysis-in-python/",
+       "ten": "What is Feature Engineering?",
+       "url": "https://www.geeksforgeeks.org/machine-learning/what-is-feature-engineering/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -165,623 +165,316 @@ window.BAI = {
    ],
    "checkpoint": [
     {
-     "k": "dd",
+     "k": "mc",
      "id": "bai08-q1",
-     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-     "giai": "50% là giá trị đứng giữa — trung vị; count đếm số ô có dữ liệu.",
-     "goi_y": "Trung vị chia dãy thành hai nửa bằng nhau.",
-     "mau": "Trong bảng describe(), dòng {0} là trung vị, dòng {1} là số ô có dữ liệu.",
-     "o": [
-      [
-       "50%",
-       "mean",
-       "25%",
-       "max"
-      ],
-      [
-       "count",
-       "mean",
-       "std",
-       "min"
-      ]
+     "q": "Bài toán: dự đoán giá một căn nhà. Cột nào là nhãn?",
+     "giai": "Nhãn là thứ cần dự đoán: giá bán. Diện tích, số phòng là feature; mã số thì bỏ.",
+     "goi_y": "Nhãn là câu trả lời mà model phải đoán ra.",
+     "a": [
+      "Giá bán của căn nhà",
+      "Diện tích căn nhà",
+      "Số phòng ngủ",
+      "Mã số căn nhà"
      ],
-     "h": "1feee5b5609cc"
+     "h": "18306709fe0330"
     },
     {
-     "k": "mc",
+     "k": "ma",
      "id": "bai08-q2",
-     "q": "Lệnh nào cho biết bảng có bao nhiêu dòng và bao nhiêu cột?",
-     "giai": "shape trả về (số dòng, số cột).",
-     "goi_y": "Xem bảng năm lệnh ở trên.",
+     "q": "Dự đoán một bạn Đạt hay Chưa đạt. Những cột nào nên BỎ, không làm feature? <b>(Chọn 2 đáp án đúng.)</b>",
+     "giai": "Mã số không mang thông tin; Score là rò rỉ vì Đạt được xếp theo điểm.",
+     "goi_y": "Cột nào không nói gì về việc học? Cột nào lúc dự đoán chưa thể có?",
      "a": [
-      "df.shape",
-      "df.head()",
-      "df.describe()",
-      "df.value_counts()"
+      "StudentID — mã học sinh",
+      "Score — điểm học kỳ",
+      "StudyHours — giờ tự học",
+      "SleepHours — giờ ngủ"
      ],
-     "h": "a32955e557318"
+     "h": "190724921f578d"
     },
     {
      "k": "ds",
      "id": "bai08-q3",
-     "q": "EDA là bước xây model dự đoán.",
-     "giai": "EDA là nhìn và vẽ dữ liệu để hiểu nó — trước khi xây model.",
-     "goi_y": "Chữ E trong EDA là Exploratory — khám phá.",
+     "q": "Dùng cột Score để đoán Result là cách làm tốt vì model sẽ đoán rất chính xác.",
+     "giai": "Đó là rò rỉ dữ liệu: lúc cần dự đoán thì chưa có điểm.",
+     "goi_y": "Lúc thầy cô muốn dự đoán, đã có điểm học kỳ chưa?",
      "h": "5b6520e755747"
     }
    ]
   },
   {
-   "ten": "Biểu đồ tần số và hình dạng phân bố",
-   "ten_ngan": "Biểu đồ tần số",
-   "phut": 5,
-   "muc_tieu": "đọc được hình dạng phân bố của một cột số trên biểu đồ tần số.",
-   "khoi_dong": "Số trung bình phút mạng là 152,8 nhưng trung vị chỉ 135. Hình dạng dữ liệu như thế nào thì hai số này lệch nhau?",
+   "ten": "Tạo feature mới và đổi chữ thành số",
+   "ten_ngan": "Tạo feature",
+   "phut": 4,
+   "muc_tieu": "tạo được feature mới từ các cột có sẵn và đổi một cột chữ thành số.",
+   "khoi_dong": "Con có cột giờ học và giờ ngủ. Con nghĩ ra thêm được con số nào có thể giúp đoán kết quả?",
    "khoi": [
     {
      "t": "dinh_nghia",
-     "ten": "Biểu đồ tần số (histogram)",
-     "html": "Chia trục ngang thành các khoảng bằng nhau, mỗi cột cao bằng <b>số giá trị rơi vào khoảng đó</b>. Biểu đồ cho thấy dữ liệu tập trung ở đâu và trải ra thế nào.",
-     "ky_hieu": "<code>plt.hist(df[\"cột\"], bins=10)</code> — bins là số khoảng"
-    },
-    {
-     "t": "anh",
-     "cap": "Phút mạng xã hội của 240 học sinh",
-     "alt": "Phút mạng xã hội của 240 học sinh",
-     "src": "img/bieu-do-tan-suat-phut-mang-xa-hoi.png"
-    },
-    {
-     "t": "dinh_nghia",
-     "ten": "Ba hình dạng phân bố",
-     "html": "<b>Cân đối</b>: hai bên gần như đối xứng. <b>Lệch phải</b>: đuôi dài kéo sang phải (vài giá trị rất lớn). <b>Lệch trái</b>: đuôi dài kéo sang trái.",
-     "ky_hieu": "Lệch phải: số trung bình &gt; trung vị · Lệch trái: số trung bình &lt; trung vị"
-    },
-    {
-     "t": "anh",
-     "cap": "Ba hình dạng phân bố",
-     "alt": "Ba hình dạng phân bố",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260317165726003916/customized_histogram.webp",
-     "du_phong": "img/minh-hoa-ba-dang-lech-cua-phan-bo.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Advanced eda",
-      "url": "https://www.geeksforgeeks.org/data-analysis/advanced-eda/"
-     },
-     "chu_giai": [
-      [
-       "Right Skew",
-       "Lệch phải — đuôi dài bên phải"
-      ],
-      [
-       "Left Skew",
-       "Lệch trái — đuôi dài bên trái"
-      ],
-      [
-       "Zero Skew",
-       "Không lệch — cân đối"
-      ],
-      [
-       "Frequency",
-       "Tần số"
-      ]
-     ]
+     "ten": "Tạo feature (feature engineering)",
+     "html": "Dùng hiểu biết về bài toán để tạo cột mới từ các cột có sẵn — ví dụ cộng, chia hai cột. Máy không tự nghĩ ra ý nghĩa; con người đặt ra.",
+     "ky_hieu": "<code>df[\"TongGio\"] = df[\"StudyHours\"] + df[\"SleepHours\"]</code>"
     },
     {
      "t": "vi_du",
-     "tieu_de": "đọc hai cột của bảng khối 10",
+     "tieu_de": "hai feature mới cho 3 bạn đầu bảng",
      "de": null,
      "cot": [
-      "Cột",
-      "Số trung bình",
-      "Trung vị",
-      "Hình dạng",
-      "Nên mô tả bằng"
+      "Mã",
+      "Giờ học",
+      "Giờ ngủ",
+      "TongGio = học + ngủ",
+      "TiLeHocNgu = học : ngủ"
      ],
      "dong": [
       [
-       "Phút mạng xã hội",
-       "152,8",
-       "135",
-       "Lệch phải",
-       "<b>Trung vị</b>"
+       "HS001",
+       "5,8",
+       "8,8",
+       "14,6",
+       "0,66"
       ],
       [
-       "Điểm học kỳ",
-       "5,26",
-       "5,2",
-       "Gần cân đối",
-       "Số trung bình"
+       "HS002",
+       "5,1",
+       "7,9",
+       "13,0",
+       "0,65"
       ],
       [
-       "Số lần nộp trễ",
-       "1,48",
-       "1",
-       "Lệch phải rất mạnh",
-       "<b>Trung vị</b>"
+       "HS003",
+       "4,2",
+       "6,2",
+       "10,4",
+       "0,68"
       ]
      ],
-     "ket_luan": "Lệch phải thì vài giá trị lớn kéo số trung bình về bên phải — giống bài học giá trị bất thường ở Bài 4.",
-     "nhan_manh": [
-      0,
-      2
-     ]
+     "ket_luan": "Hai cột mới được tính từ hai cột cũ — không thêm dữ liệu nào ngoài bảng.",
+     "nhan_manh": []
     },
-    {
-     "t": "anh",
-     "cap": "Điểm học kỳ của 240 học sinh",
-     "alt": "Điểm học kỳ của 240 học sinh",
-     "src": "img/bieu-do-tan-suat-diem.png"
-    },
-    {
-     "t": "anh",
-     "cap": "Trên phân bố lệch phải: mốt ở đỉnh, trung vị ở giữa, số trung bình bị kéo xa nhất",
-     "alt": "Trên phân bố lệch phải: mốt ở đỉnh, trung vị ở giữa, số trung bình bị kéo xa nhất",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250501122658765639/mean_mod_median.webp",
-     "du_phong": "img/minh-hoa-mode-median-mean-tren-phan-bo-lech.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Advanced eda",
-      "url": "https://www.geeksforgeeks.org/data-analysis/advanced-eda/"
-     },
-     "chu_giai": [
-      [
-       "MODE — the most frequent value",
-       "Mốt — giá trị gặp nhiều nhất (đỉnh)"
-      ],
-      [
-       "MEDIAN — the middle value",
-       "Trung vị — chia diện tích làm đôi 50% / 50%"
-      ],
-      [
-       "MEAN — the average",
-       "Số trung bình"
-      ]
-     ]
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Nhầm “lệch phải” là đỉnh nằm bên phải — thật ra là ĐUÔI dài bên phải, đỉnh thường lệch về bên trái.",
-      "Dùng số trung bình để mô tả cột lệch mạnh."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "Biểu đồ tần số cho thấy hình dạng: cân đối, lệch phải (trung bình > trung vị), lệch trái (trung bình < trung vị)."
-    },
-    {
-     "t": "doc_them",
-     "link": [
-      {
-       "ten": "Advanced EDA",
-       "url": "https://www.geeksforgeeks.org/data-analysis/advanced-eda/",
-       "ghi_chu": "GeeksforGeeks, tiếng Anh"
-      }
-     ]
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
-     "id": "bai08-q4",
-     "q": "Một cột có số trung bình 1,43 nhưng trung vị là 1. Hình dạng phân bố nhiều khả năng là gì?",
-     "giai": "Số trung bình lớn hơn trung vị: vài giá trị lớn kéo sang phải.",
-     "goi_y": "Số trung bình bị kéo về phía đuôi dài.",
-     "a": [
-      "Lệch phải",
-      "Lệch trái",
-      "Cân đối",
-      "Không đọc được"
-     ],
-     "h": "1fd4cf1861b11"
-    },
-    {
-     "k": "mc",
-     "id": "bai08-q5",
-     "q": "Trên biểu đồ tần số, chiều cao mỗi cột cho biết điều gì?",
-     "giai": "Cột càng cao, càng nhiều giá trị nằm trong khoảng.",
-     "goi_y": "Trục đứng của biểu đồ ghi gì?",
-     "a": [
-      "Số giá trị rơi vào khoảng đó",
-      "Giá trị lớn nhất của khoảng đó",
-      "Số trung bình của cả cột dữ liệu",
-      "Thứ tự của khoảng trên trục ngang"
-     ],
-     "h": "6dce1bb1cfa91"
-    },
-    {
-     "k": "ds",
-     "id": "bai08-q6",
-     "q": "Với cột lệch phải, số trung bình mô tả “một bạn bình thường” tốt hơn trung vị.",
-     "giai": "Lệch phải thì số trung bình bị kéo lên — trung vị đại diện tốt hơn.",
-     "goi_y": "Nhớ phút mạng: trung bình hay trung vị gần với đa số các bạn?",
-     "h": "14a32743a65931"
-    }
-   ]
-  },
-  {
-   "ten": "Biểu đồ cột đếm và biểu đồ tròn cho cột chữ",
-   "ten_ngan": "Cột chữ",
-   "phut": 3,
-   "muc_tieu": "chọn được biểu đồ phù hợp để mô tả một cột chữ hoặc một cột số nguyên ít giá trị.",
-   "khoi_dong": "Cột Lớp, cột Giới tính là chữ. Không vẽ được biểu đồ tần số — vậy vẽ gì?",
-   "khoi": [
     {
      "t": "dinh_nghia",
-     "ten": "Biểu đồ cột đếm (count plot)",
-     "html": "Mỗi giá trị một cột, cột cao bằng <b>số lần giá trị đó xuất hiện</b>. Dùng cho cột chữ hoặc cột số nguyên có ít giá trị. Cột cao nhất là <b>mốt</b>.",
-     "ky_hieu": "<code>df[\"cột\"].value_counts().plot(kind=\"bar\")</code>"
-    },
-    {
-     "t": "anh",
-     "cap": "Số học sinh theo số lần nộp trễ — cột cao nhất ở 0",
-     "alt": "Số học sinh theo số lần nộp trễ — cột cao nhất ở 0",
-     "src": "img/so-hoc-sinh-theo-so-lan-nop-tre.png"
+     "ten": "Đổi chữ thành số (mã hoá)",
+     "html": "Model chỉ tính toán trên số. Cột chữ có hai giá trị như Giới tính có thể đổi thành 0 và 1.",
+     "ky_hieu": "<code>df[\"Nu\"] = (df[\"GioiTinh\"] == \"NU\").astype(int)</code> — NU thành 1, NAM thành 0"
     },
     {
      "t": "vi_du",
-     "tieu_de": "đọc biểu đồ số lần nộp trễ",
+     "tieu_de": "mã hoá cột Giới tính",
      "de": null,
      "cot": [
-      "Câu hỏi",
-      "Trả lời"
+      "Mã",
+      "GioiTinh",
+      "Nu"
      ],
      "dong": [
       [
-       "Mốt là bao nhiêu?",
-       "0 lần (93 bạn)"
+       "HS001",
+       "NU",
+       "1"
       ],
       [
-       "Có bao nhiêu bạn nộp trễ từ 4 lần trở lên?",
-       "25"
+       "HS002",
+       "NU",
+       "1"
       ],
       [
-       "Giá trị lớn nhất?",
-       "14 lần — chỉ 1 bạn, cần kiểm tra lại"
+       "HS003",
+       "NU",
+       "1"
+      ],
+      [
+       "HS004",
+       "NAM",
+       "0"
       ]
      ],
      "ket_luan": null,
      "nhan_manh": []
     },
     {
-     "t": "anh",
-     "cap": "Biểu đồ cột đếm số chai rượu theo điểm chất lượng",
-     "alt": "Biểu đồ cột đếm số chai rượu theo điểm chất lượng",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250508160319714718/eda7.webp",
-     "du_phong": "img/minh-hoa-bieu-do-cot-dem-so-luong.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Exploratory data analysis in python",
-      "url": "https://www.geeksforgeeks.org/data-analysis/exploratory-data-analysis-in-python/"
-     },
-     "chu_giai": [
-      [
-       "Count Plot of Quality",
-       "Biểu đồ cột đếm theo điểm chất lượng"
-      ],
-      [
-       "Quality",
-       "Điểm chất lượng (3 đến 8)"
-      ],
-      [
-       "Count",
-       "Số lượng"
-      ]
-     ]
-    },
-    {
-     "t": "dinh_nghia",
-     "ten": "Biểu đồ tròn (pie chart)",
-     "html": "Mỗi phần là tỉ lệ của một nhóm trong tổng. Chỉ dùng khi ít nhóm (2 – 5) và các phần cộng lại đúng 100%.",
-     "ky_hieu": null
-    },
-    {
-     "t": "anh",
-     "cap": "Một biểu đồ tròn không có chú thích tên nhóm — người xem không biết phần 35% là gì",
-     "alt": "Một biểu đồ tròn không có chú thích tên nhóm — người xem không biết phần 35% là gì",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260317151457654718/123.webp",
-     "du_phong": "img/minh-hoa-bieu-do-tron.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Advanced eda",
-      "url": "https://www.geeksforgeeks.org/data-analysis/advanced-eda/"
-     },
-     "chu_giai": [
-      [
-       "35%, 23%, 20%, 18%, 4%",
-       "Tỉ lệ của từng nhóm — cộng lại 100%, nhưng hình không ghi tên nhóm"
-      ]
-     ]
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Đặt số cho chữ phải cẩn thận",
+     "html": "Với cột Lớp có 3 giá trị, nếu đặt 10A1 = 1, 10A2 = 2, 10A3 = 3 thì model sẽ hiểu 10A3 “lớn gấp ba” 10A1 — điều vô nghĩa. Cách đúng là tạo mỗi lớp một cột 0/1 (con sẽ gặp lại ở các bài sau)."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Vẽ biểu đồ tròn khi có quá nhiều nhóm — các lát nhỏ không đọc được.",
-      "Vẽ biểu đồ không có tên trục, tên nhóm."
+      "Tạo feature mới từ cột nhãn — lại là rò rỉ dữ liệu.",
+      "Đánh số 1, 2, 3 cho các giá trị chữ không có thứ tự."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Cột chữ: biểu đồ cột đếm (cột cao nhất là mốt). Biểu đồ tròn chỉ cho ít nhóm, luôn ghi chú thích."
+     "html": "Tạo feature: dùng hiểu biết để tính cột mới. Mã hoá: đổi chữ thành số, cột hai giá trị dùng 0/1."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
-     "id": "bai08-q7",
-     "q": "Muốn biết mỗi lớp trong khối có bao nhiêu học sinh, vẽ biểu đồ nào?",
-     "giai": "Lớp là cột chữ — đếm số bạn mỗi lớp bằng biểu đồ cột đếm.",
-     "goi_y": "Cột Lớp là chữ hay số?",
+     "id": "bai08-q4",
+     "q": "Bạn An học 3 giờ, ngủ 6 giờ. Feature TiLeHocNgu = giờ học : giờ ngủ của An bằng bao nhiêu?",
+     "giai": "3 : 6 = 0,5. Số 2 là 6 : 3 (chia ngược); 9 là cộng.",
+     "goi_y": "Giờ học đứng trên, giờ ngủ đứng dưới.",
      "a": [
-      "Biểu đồ cột đếm",
-      "Biểu đồ tần số",
-      "Biểu đồ hộp",
-      "Biểu đồ đường"
+      "0,5",
+      "2",
+      "9",
+      "18"
      ],
-     "h": "1a1bd3c6c0afc9"
+     "h": "1f247f39f5af04"
+    },
+    {
+     "k": "dd",
+     "id": "bai08-q5",
+     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+     "giai": "(GioiTinh == \"NU\") cho True/False, đổi sang số: True = 1, False = 0.",
+     "goi_y": "Điều kiện GioiTinh == \"NU\" đúng thì được số mấy?",
+     "mau": "Mã hoá cột GioiTinh thành cột Nu: bạn NU có giá trị {0}, bạn NAM có giá trị {1}.",
+     "o": [
+      [
+       "1",
+       "0",
+       "2",
+       "−1"
+      ],
+      [
+       "0",
+       "1",
+       "2",
+       "−1"
+      ]
+     ],
+     "h": "9c86a07ede132"
     },
     {
      "k": "ds",
-     "id": "bai08-q8",
-     "q": "Trên biểu đồ cột đếm, cột cao nhất cho biết mốt của cột dữ liệu.",
-     "giai": "Mốt là giá trị gặp nhiều nhất — cột cao nhất.",
-     "goi_y": "Nhớ định nghĩa mốt ở Bài 4.",
-     "h": "1d5b47338591f6"
+     "id": "bai08-q6",
+     "q": "Máy có thể tự hiểu cột “giờ học chia giờ ngủ” có ý nghĩa mà không cần con người tạo ra.",
+     "giai": "Tạo feature cần hiểu biết về bài toán — do con người đặt ra.",
+     "goi_y": "Ai quyết định lấy cột nào chia cột nào?",
+     "h": "14a32743a65931"
     }
    ]
   },
   {
-   "ten": "Biểu đồ hộp — so sánh các nhóm",
-   "ten_ngan": "Biểu đồ hộp",
-   "phut": 5,
-   "muc_tieu": "đọc được biểu đồ hộp và dùng nó để so sánh các nhóm.",
-   "khoi_dong": "Các bạn Đạt và Chưa đạt khác nhau về giờ tự học đến mức nào? Làm sao vẽ hai nhóm trên cùng một hình?",
+   "ten": "Chọn feature",
+   "ten_ngan": "Chọn feature",
+   "phut": 4,
+   "muc_tieu": "chọn được feature liên quan tới nhãn và loại được feature thừa.",
+   "khoi_dong": "Có bốn cột số: giờ học, giờ ngủ, tổng giờ, tỉ lệ học/ngủ. Dùng hết hay chỉ chọn vài cột?",
    "khoi": [
     {
      "t": "dinh_nghia",
-     "ten": "Biểu đồ hộp (box plot)",
-     "html": "Hộp kéo dài từ Q<sub>1</sub> tới Q<sub>3</sub>, vạch giữa hộp là trung vị. Râu kéo tới giá trị nhỏ nhất và lớn nhất <b>không bất thường</b>; chấm tròn ngoài râu là giá trị bất thường (quy tắc 1,5·Δ<sub>Q</sub> — Bài 6).",
-     "ky_hieu": "Hộp chứa 50% dữ liệu ở giữa · <code>df.boxplot(column=\"cột\", by=\"nhóm\")</code>"
+     "ten": "Chọn feature (feature selection)",
+     "html": "Giữ lại những feature <b>liên quan</b> tới nhãn và <b>không lặp lại</b> thông tin của nhau; bỏ những cột nhiễu. Ít feature tốt thường tốt hơn nhiều feature tệ.",
+     "ky_hieu": "Một cách đơn giản: xếp hạng feature theo mức liên quan, giữ những cột đứng đầu."
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "Hệ số tương quan (xem trước Bài 10)",
+     "html": "Con số từ −1 đến 1 cho biết hai cột số đi cùng nhau mạnh tới đâu: gần 1 là cùng tăng, gần −1 là một cột tăng thì cột kia giảm, gần 0 là gần như không liên quan.",
+     "ky_hieu": "<code>df[[\"StudyHours\", \"SleepHours\"]].corrwith(df[\"Score\"])</code>"
     },
     {
      "t": "anh",
-     "cap": "Cấu tạo biểu đồ hộp",
-     "alt": "Cấu tạo biểu đồ hộp",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250819105344705834/boxplot.webp",
-     "du_phong": "img/minh-hoa-cau-tao-bieu-do-hop.png",
-     "nguon": {
-      "ten": "GeeksforGeeks — Advanced eda",
-      "url": "https://www.geeksforgeeks.org/data-analysis/advanced-eda/"
-     },
-     "chu_giai": [
-      [
-       "IQR (Q3 − Q1)",
-       "Khoảng tứ phân vị Δ<sub>Q</sub>"
-      ],
-      [
-       "Q1, Q2/Median, Q3",
-       "Tứ phân vị thứ nhất, trung vị, tứ phân vị thứ ba"
-      ],
-      [
-       "Minimum / Maximum Non-outlier",
-       "Giá trị nhỏ / lớn nhất không bất thường (đầu râu)"
-      ],
-      [
-       "Q1 − 1.5*IQR, Q3 + 1.5*IQR",
-       "Hai ngưỡng của giá trị bất thường"
-      ]
-     ]
-    },
-    {
-     "t": "anh",
-     "cap": "Giờ tự học của nhóm Đạt và nhóm Chưa đạt",
-     "alt": "Giờ tự học của nhóm Đạt và nhóm Chưa đạt",
-     "src": "img/gio-tu-hoc-theo-ket-qua.png"
+     "cap": "Hệ số tương quan của từng cột với điểm Score",
+     "alt": "Hệ số tương quan của từng cột với điểm Score",
+     "src": "img/tuong-quan-tung-cot-voi-diem.png"
     },
     {
      "t": "vi_du",
-     "tieu_de": "đọc hai hộp",
+     "tieu_de": "đọc hình tương quan",
      "de": null,
      "cot": [
-      "",
-      "Chưa đạt",
-      "Đạt"
+      "Feature",
+      "Tương quan với Score",
+      "Quyết định"
      ],
      "dong": [
       [
-       "Trung vị",
-       "1,9 giờ",
-       "5,4 giờ"
+       "StudyHours",
+       "0,82",
+       "<b>Giữ</b> — liên quan mạnh"
       ],
       [
-       "Hộp (Q<sub>1</sub> – Q<sub>3</sub>)",
-       "1,3 – 2,5",
-       "4,1 – 6,3"
+       "TongGio",
+       "0,81",
+       "Cân nhắc bỏ — gần như lặp lại StudyHours (tương quan với StudyHours là 0,83)"
       ],
       [
-       "Giá trị bất thường",
-       "Vài bạn học trên 4,5 giờ vẫn Chưa đạt",
-       "Không có"
+       "TiLeHocNgu",
+       "0,69",
+       "Có thể thử"
+      ],
+      [
+       "SleepHours",
+       "0,26",
+       "Liên quan yếu"
       ]
      ],
-     "ket_luan": "Hai hộp không chồng lên nhau: giờ tự học của hai nhóm khác nhau rõ rệt. Nhưng vẫn có bạn học nhiều mà Chưa đạt — biểu đồ hộp cho thấy cả ngoại lệ.",
-     "nhan_manh": []
+     "ket_luan": "Chọn feature là cân nhắc, không phải chỉ lấy số lớn nhất: cột lặp lại thông tin thì thừa.",
+     "nhan_manh": [
+      0
+     ]
     },
     {
      "t": "anh",
-     "cap": "Nồng độ cồn của rượu vang theo từng điểm chất lượng",
-     "alt": "Nồng độ cồn của rượu vang theo từng điểm chất lượng",
-     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250728152858175356/box-plot.png",
-     "du_phong": "img/minh-hoa-bieu-do-hop-theo-tung-nhom.png",
+     "cap": "Phương pháp lọc: xếp hạng feature rồi giữ những cột đứng đầu",
+     "alt": "Phương pháp lọc: xếp hạng feature rồi giữ những cột đứng đầu",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20250512165146012474/1.webp",
+     "du_phong": "img/minh-hoa-xep-hang-va-chon-ra-feature-tot-nhat.png",
      "nguon": {
-      "ten": "GeeksforGeeks — Exploratory data analysis in python",
-      "url": "https://www.geeksforgeeks.org/data-analysis/exploratory-data-analysis-in-python/"
+      "ten": "GeeksforGeeks — Feature selection techniques in machine learning",
+      "url": "https://www.geeksforgeeks.org/machine-learning/feature-selection-techniques-in-machine-learning/"
      },
      "chu_giai": [
       [
-       "alcohol",
-       "Nồng độ cồn"
+       "Filter Method",
+       "Phương pháp lọc"
       ],
       [
-       "quality",
-       "Điểm chất lượng"
+       "Rank features by statistical score",
+       "Xếp hạng feature theo một chỉ số thống kê"
       ],
       [
-       "o (chấm tròn)",
-       "Giá trị bất thường"
+       "Select top-ranked features",
+       "Chọn các feature đứng đầu"
+      ],
+      [
+       "Feed into model",
+       "Đưa vào model"
+      ],
+      [
+       "Selection, Ranking",
+       "Chọn, xếp hạng"
       ]
      ]
-    },
-    {
-     "t": "video",
-     "yt": "oBREri10ZHk",
-     "ten": "Khan Academy — Interpreting box plots",
-     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc",
-     "bat_dau": null,
-     "ket_thuc": null
-    },
-    {
-     "t": "loi_hay_gap",
-     "muc": [
-      "Nghĩ hộp dài là có nhiều học sinh hơn — hộp dài chỉ là dữ liệu trải rộng hơn.",
-      "Nhầm vạch giữa hộp là số trung bình — đó là trung vị."
-     ]
-    },
-    {
-     "t": "tom_tat",
-     "html": "Biểu đồ hộp: hộp Q1 – Q3, vạch trung vị, râu, chấm bất thường. Vẽ nhiều hộp cạnh nhau để so các nhóm."
-    }
-   ],
-   "checkpoint": [
-    {
-     "k": "mc",
-     "id": "bai08-q9",
-     "q": "Trong biểu đồ hộp, vạch kẻ ở giữa hộp là gì?",
-     "giai": "Vạch giữa hộp là Q2 — trung vị.",
-     "goi_y": "Xem hình cấu tạo biểu đồ hộp.",
-     "a": [
-      "Trung vị",
-      "Số trung bình",
-      "Mốt",
-      "Giá trị lớn nhất"
-     ],
-     "h": "1675bce4d7a057"
-    },
-    {
-     "k": "mc",
-     "id": "bai08-q10",
-     "q": "Hộp của nhóm X dài gấp đôi hộp của nhóm Y. Điều đó nghĩa là gì?",
-     "giai": "Chiều dài hộp là Δ<sub>Q</sub> — đo độ trải của 50% dữ liệu ở giữa, không nói về số người.",
-     "goi_y": "Hộp kéo từ Q1 tới Q3 — độ dài đó đo điều gì?",
-     "a": [
-      "50% ở giữa của X trải rộng hơn",
-      "Nhóm X có đông người hơn",
-      "Nhóm X có trung vị cao hơn",
-      "Nhóm X có nhiều bất thường hơn"
-     ],
-     "h": "67933e0c52752"
-    },
-    {
-     "k": "sx",
-     "id": "bai08-q11",
-     "q": "Sắp xếp các mốc trên một biểu đồ hộp từ trái sang phải.",
-     "giai": "Râu trái → Q1 → trung vị → Q3 → râu phải.",
-     "goi_y": "Hộp nằm giữa hai râu; trung vị nằm trong hộp.",
-     "a": [
-      "Đầu râu trái",
-      "Q1 — cạnh trái của hộp",
-      "Trung vị",
-      "Q3 — cạnh phải của hộp",
-      "Đầu râu phải"
-     ],
-     "h": "17e9e5d3e2ea23"
-    }
-   ]
-  },
-  {
-   "ten": "Chọn biểu đồ đúng và nhận ra biểu đồ gây hiểu nhầm",
-   "ten_ngan": "Chọn biểu đồ",
-   "phut": 5,
-   "muc_tieu": "chọn đúng loại biểu đồ cho từng câu hỏi và nhận ra trục đứng bị cắt.",
-   "khoi_dong": "Hai biểu đồ vẽ từ cùng ba con số. Vì sao một hình trông ba lớp gần bằng nhau, hình kia trông 10A1 vượt hẳn?",
-   "khoi": [
-    {
-     "t": "bang",
-     "cot": [
-      "Câu hỏi",
-      "Loại dữ liệu",
-      "Biểu đồ"
-     ],
-     "dong": [
-      [
-       "Một cột số phân bố thế nào?",
-       "Số",
-       "Biểu đồ tần số"
-      ],
-      [
-       "Mỗi nhóm có bao nhiêu phần tử?",
-       "Chữ / số nguyên ít giá trị",
-       "Biểu đồ cột đếm"
-      ],
-      [
-       "Các nhóm khác nhau về một cột số?",
-       "Số theo nhóm",
-       "Biểu đồ hộp"
-      ],
-      [
-       "Mỗi nhóm chiếm bao nhiêu phần trăm?",
-       "Ít nhóm, cộng 100%",
-       "Biểu đồ tròn"
-      ],
-      [
-       "Hai cột số liên quan thế nào?",
-       "Số và số",
-       "Biểu đồ phân tán (Bài 9)"
-      ]
-     ]
-    },
-    {
-     "t": "anh",
-     "cap": "Điểm trung bình ba lớp: biểu đồ A trục đứng bắt đầu từ 0, biểu đồ B bắt đầu từ 5,5",
-     "alt": "Điểm trung bình ba lớp: biểu đồ A trục đứng bắt đầu từ 0, biểu đồ B bắt đầu từ 5,5",
-     "src": "img/hai-bieu-do-cung-so-lieu-khac-truc.png"
-    },
-    {
-     "t": "demo_truc",
-     "tieu_de": "cắt trục đứng",
-     "huong_dan": "Kéo thanh trượt để trục đứng bắt đầu từ số lớn hơn 0. Nhìn chiều cao các cột và tỉ số bên dưới.",
-     "nhan": [
-      "10A1",
-      "10A8",
-      "10A6"
-     ],
-     "gia_tri": [
-      5.71,
-      5.64,
-      5.57
-     ],
-     "so_le": 2,
-     "tran": 6.0
     },
     {
      "t": "hop",
-     "kieu": "chu-y",
-     "tieu_de": "Biểu đồ cột phải bắt đầu từ 0",
-     "html": "Chiều cao cột được mắt so như độ lớn. Cắt trục đứng làm chênh lệch 0,14 điểm giữa 10A1 và 10A6 trông như gấp nhiều lần. Luôn đọc số trên trục trước khi kết luận."
+     "kieu": "ml",
+     "tieu_de": "Nhắc lại Bài 6",
+     "html": "Nếu model đo khoảng cách (như KNN, Bài 13), nhớ đưa các feature đã chọn về cùng thang đo trước khi huấn luyện."
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Kết luận từ chiều cao cột mà không đọc số trên trục đứng.",
-      "Dùng biểu đồ tròn để so hai cột số."
+      "Giữ hai cột gần như giống nhau (TongGio và StudyHours) rồi nghĩ model có thêm thông tin.",
+      "Nghĩ tương quan thấp là cột vô dụng tuyệt đối — nó chỉ yếu khi đứng một mình."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Chọn biểu đồ theo câu hỏi và loại dữ liệu. Biểu đồ cột phải bắt đầu từ 0; luôn đọc trục trước khi kết luận."
+     "html": "Chọn feature liên quan tới nhãn, bỏ cột nhiễu và cột lặp thông tin. Tương quan là một công cụ xếp hạng."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Data Visualization and its Importance",
-       "url": "https://www.geeksforgeeks.org/data-visualization/data-visualization-and-its-importance/",
+       "ten": "Feature Selection Techniques in Machine Learning",
+       "url": "https://www.geeksforgeeks.org/machine-learning/feature-selection-techniques-in-machine-learning/",
        "ghi_chu": "GeeksforGeeks, tiếng Anh"
       }
      ]
@@ -790,31 +483,471 @@ window.BAI = {
    "checkpoint": [
     {
      "k": "mc",
-     "id": "bai08-q12",
-     "q": "Muốn so điểm của học sinh nam và nữ, vẽ biểu đồ nào hợp nhất?",
-     "giai": "So một cột số (điểm) giữa các nhóm (giới tính): biểu đồ hộp.",
-     "goi_y": "Có mấy nhóm cần so? Cột so sánh là số hay chữ?",
+     "id": "bai08-q7",
+     "q": "Theo hình, cột nào liên quan tới điểm Score yếu nhất?",
+     "giai": "SleepHours có tương quan 0,26 — nhỏ nhất trong bốn cột.",
+     "goi_y": "Thanh nào ngắn nhất trong hình?",
      "a": [
-      "Hai biểu đồ hộp cạnh nhau",
-      "Một biểu đồ tròn",
-      "Một biểu đồ cột đếm",
-      "Biểu đồ tần số một cột"
+      "SleepHours",
+      "StudyHours",
+      "TongGio",
+      "TiLeHocNgu"
      ],
-     "h": "a1e9c43c5ca7f"
+     "h": "84862e56b16a3"
     },
     {
      "k": "mc",
-     "id": "bai08-q13",
-     "q": "Trong phần Tự thử, khi kéo trục đứng lên gần 5,57 thì điều gì xảy ra?",
-     "giai": "Số liệu không đổi, chỉ trục đổi — chênh lệch nhỏ trông rất lớn.",
-     "goi_y": "Kéo thanh trượt sang phải rồi đọc tỉ số bên dưới.",
+     "id": "bai08-q8",
+     "q": "Hệ số tương quan giữa hai cột bằng −0,9. Điều đó nghĩa là gì?",
+     "giai": "Gần −1: liên quan mạnh nhưng ngược chiều.",
+     "goi_y": "Dấu âm nói về chiều, độ lớn gần 1 nói về mức mạnh.",
      "a": [
-      "Cột 10A1 trông cao gấp nhiều lần 10A6",
-      "Ba cột trông cao bằng nhau hơn",
-      "Điểm trung bình của 10A1 tăng lên",
-      "Cột 10A6 biến mất khỏi biểu đồ"
+      "Một cột tăng thì cột kia thường giảm",
+      "Hai cột gần như không liên quan",
+      "Hai cột cùng tăng cùng giảm",
+      "Hai cột có đơn vị khác nhau"
      ],
-     "h": "c69123bb3ee90"
+     "h": "123b9188ec95d4"
+    },
+    {
+     "k": "ds",
+     "id": "bai08-q9",
+     "q": "Hai feature gần như lặp lại thông tin của nhau thì nên giữ cả hai để model mạnh hơn.",
+     "giai": "Cột lặp thông tin không thêm gì mới, chỉ làm model rối hơn.",
+     "goi_y": "Cột thứ hai cho model biết thêm điều gì mới không?",
+     "h": "9b9f2d9bfb6c9"
+    }
+   ]
+  },
+  {
+   "ten": "Chia dữ liệu: tập huấn luyện và tập kiểm tra",
+   "ten_ngan": "Chia dữ liệu",
+   "phut": 5,
+   "muc_tieu": "giải thích được vì sao phải giữ riêng một tập kiểm tra và vai trò của stratify.",
+   "khoi_dong": "Nếu thầy cô cho đề kiểm tra y hệt đề đã chữa trên lớp, điểm cao có chứng minh con đã hiểu bài không?",
+   "khoi": [
+    {
+     "t": "dinh_nghia",
+     "ten": "Tập huấn luyện và tập kiểm tra",
+     "html": "Chia bảng thành hai phần: <b>tập huấn luyện</b> (train) cho model học, <b>tập kiểm tra</b> (test) giấu đi, chỉ dùng để chấm model ở cuối — như đề thi model chưa từng thấy.",
+     "ky_hieu": "<code>train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)</code>"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "chia bảng 90 bạn",
+     "de": "test_size = 0,3 nghĩa là 30% cho kiểm tra.",
+     "cot": [
+      "Phần",
+      "Số bạn",
+      "Trong đó Chưa đạt"
+     ],
+     "dong": [
+      [
+       "Tập huấn luyện (70%)",
+       "63",
+       "8"
+      ],
+      [
+       "Tập kiểm tra (30%)",
+       "27",
+       "3"
+      ],
+      [
+       "Cả bảng",
+       "90",
+       "11"
+      ]
+     ],
+     "ket_luan": "0,3 × 90 = 27 bạn kiểm tra; 63 bạn còn lại để học.",
+     "nhan_manh": []
+    },
+    {
+     "t": "anh",
+     "cap": "Bộ dữ liệu lớn thường chia ba phần; bài này chia hai phần cho gọn",
+     "alt": "Bộ dữ liệu lớn thường chia ba phần; bài này chia hai phần cho gọn",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260903104045073711/frame_3386.webp",
+     "du_phong": "img/minh-hoa-chia-du-lieu-thanh-train-validation-test.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Splitting data for machine learning models",
+      "url": "https://www.geeksforgeeks.org/machine-learning/splitting-data-for-machine-learning-models/"
+     },
+     "chu_giai": [
+      [
+       "Original Dataset",
+       "Bộ dữ liệu ban đầu"
+      ],
+      [
+       "Training Set (70–80%)",
+       "Tập huấn luyện"
+      ],
+      [
+       "Validation / Dev Set",
+       "Tập kiểm định — dùng để chỉnh model (Bài 24)"
+      ],
+      [
+       "Test Set",
+       "Tập kiểm tra — chấm cuối cùng"
+      ]
+     ]
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "Stratify — chia giữ đúng tỉ lệ nhãn",
+     "html": "Khi nhãn lệch (ít bạn Chưa đạt), chia ngẫu nhiên có thể đưa quá nhiều hoặc quá ít bạn Chưa đạt vào tập kiểm tra. <code>stratify=y</code> giữ tỉ lệ Đạt / Chưa đạt ở hai tập giống như cả bảng.",
+     "ky_hieu": null
+    },
+    {
+     "t": "demo_tung_buoc",
+     "tieu_de": "chia 10 lần, có và không có stratify",
+     "huong_dan": "Mỗi lần chia với một random_state khác. Bấm “Bước tiếp” để xem số bạn Chưa đạt rơi vào tập kiểm tra.",
+     "nhan_chon": "Cách chia",
+     "cot": [
+      "Lần chia",
+      "Số bạn Chưa đạt trong tập kiểm tra"
+     ],
+     "mac_dinh": 0,
+     "lua_chon": [
+      {
+       "nhan": "Không stratify",
+       "dong": [
+        [
+         "—",
+         "(cả bảng có 11 bạn Chưa đạt)"
+        ],
+        [
+         "0",
+         "4"
+        ],
+        [
+         "1",
+         "8"
+        ],
+        [
+         "2",
+         "2"
+        ],
+        [
+         "3",
+         "1"
+        ],
+        [
+         "4",
+         "4"
+        ],
+        [
+         "5",
+         "3"
+        ],
+        [
+         "6",
+         "5"
+        ],
+        [
+         "7",
+         "4"
+        ],
+        [
+         "8",
+         "4"
+        ],
+        [
+         "9",
+         "5"
+        ]
+       ]
+      },
+      {
+       "nhan": "Có stratify",
+       "dong": [
+        [
+         "—",
+         "(cả bảng có 11 bạn Chưa đạt)"
+        ],
+        [
+         "0",
+         "3"
+        ],
+        [
+         "1",
+         "3"
+        ],
+        [
+         "2",
+         "3"
+        ],
+        [
+         "3",
+         "3"
+        ],
+        [
+         "4",
+         "3"
+        ],
+        [
+         "5",
+         "3"
+        ],
+        [
+         "6",
+         "3"
+        ],
+        [
+         "7",
+         "3"
+        ],
+        [
+         "8",
+         "3"
+        ],
+        [
+         "9",
+         "3"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Không stratify: số bạn Chưa đạt trong tập kiểm tra nhảy từ 1 đến 8",
+     "alt": "Không stratify: số bạn Chưa đạt trong tập kiểm tra nhảy từ 1 đến 8",
+     "src": "img/so-ban-chua-dat-trong-tap-test.png"
+    },
+    {
+     "t": "video",
+     "yt": "fwY9Qv96DJY",
+     "ten": "codebasics — Training and Testing Data",
+     "ghi_chu": "tiếng Anh, có phụ đề; không bắt buộc — cách dùng train_test_split",
+     "bat_dau": null,
+     "ket_thuc": null
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Chấm model trên chính tập nó đã học — điểm cao nhưng không chứng minh gì.",
+      "Nhìn vào tập kiểm tra để chỉnh model — tập kiểm tra không còn “giấu” nữa.",
+      "Quên stratify khi nhãn lệch."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "Train để học, test để chấm. Nhãn lệch thì chia với stratify=y."
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Splitting Data for Machine Learning Models",
+       "url": "https://www.geeksforgeeks.org/machine-learning/splitting-data-for-machine-learning-models/",
+       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+      }
+     ]
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai08-q10",
+     "q": "Bảng có 200 dòng, chia với test_size=0.25. Tập kiểm tra có bao nhiêu dòng?",
+     "giai": "0,25 × 200 = 50; tập huấn luyện 150.",
+     "goi_y": "test_size là phần dành cho tập nào?",
+     "a": [
+      "50",
+      "25",
+      "150",
+      "75"
+     ],
+     "h": "10f767d2825b9d"
+    },
+    {
+     "k": "mc",
+     "id": "bai08-q11",
+     "q": "Vì sao không chấm model trên chính tập huấn luyện?",
+     "giai": "Giống làm lại đề đã chữa: điểm cao không chứng minh hiểu bài.",
+     "goi_y": "Nhớ ví dụ đề kiểm tra y hệt đề đã chữa.",
+     "a": [
+      "Model đã thấy đáp án nên điểm không đáng tin",
+      "Vì tập huấn luyện luôn chứa rất nhiều lỗi",
+      "Vì Pandas không cho phép làm như thế",
+      "Vì tập huấn luyện có quá ít dòng dữ liệu"
+     ],
+     "h": "92efc77025f7a"
+    },
+    {
+     "k": "sx",
+     "id": "bai08-q12",
+     "q": "Sắp xếp các bước chuẩn bị trước khi huấn luyện theo đúng thứ tự.",
+     "giai": "Làm sạch → feature → chia → huấn luyện.",
+     "goi_y": "Model học trên tập nào? Tập đó có từ bước nào?",
+     "a": [
+      "Làm sạch dữ liệu",
+      "Tạo và chọn feature",
+      "Chia tập huấn luyện và kiểm tra",
+      "Huấn luyện model trên tập huấn luyện"
+     ],
+     "h": "1a3b962a202b8f"
+    }
+   ]
+  },
+  {
+   "ten": "Dữ liệu lệch nhãn và bẫy độ chính xác",
+   "ten_ngan": "Lệch nhãn",
+   "phut": 5,
+   "muc_tieu": "nhận ra bẫy độ chính xác khi dữ liệu lệch nhãn và biết hai cách cân bằng.",
+   "khoi_dong": "Một model đoán mọi bạn đều Đạt, không học gì cả. Nó đúng bao nhiêu phần trăm trên bảng này?",
+   "khoi": [
+    {
+     "t": "dinh_nghia",
+     "ten": "Dữ liệu lệch nhãn (imbalanced data)",
+     "html": "Một nhãn có số dòng nhiều hơn hẳn nhãn kia. Bảng này có 79 Đạt và 11 Chưa đạt — gấp khoảng 7 lần.",
+     "ky_hieu": "Độ chính xác (accuracy) = <span class=\"frac\"><span>số lần đoán đúng</span><span>tổng số lần đoán</span></span>"
+    },
+    {
+     "t": "anh",
+     "cap": "Số bạn Đạt và Chưa đạt trong bảng 90 bạn",
+     "alt": "Số bạn Đạt và Chưa đạt trong bảng 90 bạn",
+     "src": "img/dat-nhieu-gap-bay-lan-chua-dat.png"
+    },
+    {
+     "t": "vi_du",
+     "tieu_de": "model lười trên tập kiểm tra 27 bạn",
+     "de": "Model lười: đoán mọi bạn Đạt.",
+     "cot": [
+      "",
+      "Thật: Đạt",
+      "Thật: Chưa đạt"
+     ],
+     "dong": [
+      [
+       "Model đoán Đạt",
+       "24",
+       "3"
+      ],
+      [
+       "Model đoán Chưa đạt",
+       "0",
+       "0"
+      ]
+     ],
+     "ket_luan": "Đúng 24/27 = 88,9% — nhưng bỏ sót <b>cả 3</b> bạn Chưa đạt, đúng những bạn cần giúp nhất.",
+     "nhan_manh": []
+    },
+    {
+     "t": "anh",
+     "cap": "Bảng nhầm lẫn của model lười trên tập kiểm tra",
+     "alt": "Bảng nhầm lẫn của model lười trên tập kiểm tra",
+     "src": "img/model-luoi-bo-sot-ban-chua-dat.png"
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Cùng độ chính xác, khác giá trị",
+     "html": "Một model đơn giản “đoán Chưa đạt nếu học dưới 0,8 giờ” cũng đúng 88,9% trên tập kiểm tra, nhưng bắt được 2/3 bạn Chưa đạt. Cùng một con số độ chính xác — một model hữu ích, một model vô dụng."
+    },
+    {
+     "t": "dinh_nghia",
+     "ten": "Hai cách cân bằng dữ liệu",
+     "html": "<b>Undersampling</b>: bớt dòng của nhãn nhiều. <b>Oversampling</b>: nhân thêm dòng của nhãn ít. Với bảng này, undersampling còn 11 Đạt + 11 Chưa đạt = 22 dòng — model lười chỉ còn đúng 50%.",
+     "ky_hieu": null
+    },
+    {
+     "t": "anh",
+     "cap": "Một bộ dữ liệu lệch: khoảng 900 dòng nhãn 1, 100 dòng nhãn 0",
+     "alt": "Một bộ dữ liệu lệch: khoảng 900 dòng nhãn 1, 100 dòng nhãn 0",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251218115519613114/HID2.png",
+     "du_phong": "img/minh-hoa-du-lieu-lech-nhan-900-so-voi-100.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Handling imbalanced data for classification",
+      "url": "https://www.geeksforgeeks.org/machine-learning/handling-imbalanced-data-for-classification/"
+     },
+     "chu_giai": [
+      [
+       "Imbalanced Class Distribution",
+       "Phân bố nhãn bị lệch"
+      ],
+      [
+       "Class Label",
+       "Nhãn (0 hoặc 1)"
+      ],
+      [
+       "Count",
+       "Số dòng"
+      ]
+     ]
+    },
+    {
+     "t": "anh",
+     "cap": "Sau oversampling: 900 – 900; sau undersampling: 100 – 100",
+     "alt": "Sau oversampling: 900 – 900; sau undersampling: 100 – 100",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20251218114034080341/HID1.png",
+     "du_phong": "img/minh-hoa-oversampling-va-undersampling.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Handling imbalanced data for classification",
+      "url": "https://www.geeksforgeeks.org/machine-learning/handling-imbalanced-data-for-classification/"
+     },
+     "chu_giai": [
+      [
+       "Original class distribution",
+       "Phân bố nhãn ban đầu"
+      ],
+      [
+       "Oversampled",
+       "Sau khi nhân thêm nhãn ít"
+      ],
+      [
+       "Undersampled",
+       "Sau khi bớt nhãn nhiều"
+      ],
+      [
+       "Counter({1: 900, 0: 100})",
+       "900 dòng nhãn 1, 100 dòng nhãn 0"
+      ]
+     ]
+    },
+    {
+     "t": "loi_hay_gap",
+     "muc": [
+      "Thấy độ chính xác cao là tin ngay, không xem model đoán sai ở nhãn nào.",
+      "Undersampling làm mất nhiều dữ liệu — với bảng nhỏ phải cân nhắc."
+     ]
+    },
+    {
+     "t": "tom_tat",
+     "html": "Nhãn lệch thì độ chính xác cao có thể vô nghĩa. Luôn xem model bắt được bao nhiêu dòng của nhãn ít."
+    },
+    {
+     "t": "doc_them",
+     "link": [
+      {
+       "ten": "Handling Imbalanced Data for Classification",
+       "url": "https://www.geeksforgeeks.org/machine-learning/handling-imbalanced-data-for-classification/",
+       "ghi_chu": "GeeksforGeeks, tiếng Anh"
+      }
+     ]
+    }
+   ],
+   "checkpoint": [
+    {
+     "k": "mc",
+     "id": "bai08-q13",
+     "q": "Một lớp có 38 bạn không bị cận và 2 bạn bị cận. Model đoán “không cận” cho mọi bạn đúng bao nhiêu phần trăm?",
+     "giai": "38 : 40 = 0,95 — dù model không phát hiện được bạn nào bị cận.",
+     "goi_y": "Đếm số lần đoán đúng rồi chia cho 40.",
+     "a": [
+      "95%",
+      "5%",
+      "50%",
+      "100%"
+     ],
+     "h": "e38a428fdc88e"
+    },
+    {
+     "k": "ds",
+     "id": "bai08-q14",
+     "q": "Model có độ chính xác 90% chắc chắn là một model tốt.",
+     "giai": "Nếu 90% dữ liệu cùng một nhãn, model lười cũng đạt 90%.",
+     "goi_y": "Nhớ model lười trên bảng này.",
+     "h": "168eab7a405508"
     }
    ]
   }
@@ -832,342 +965,373 @@ window.BAI = {
   "ngan_hang": [
    {
     "k": "mc",
-    "id": "bai08-q14",
-    "q": "Nhìn hình. Vì sao đường trung bình nằm bên phải đường trung vị?",
-    "giai": "Phân bố lệch phải: đuôi dài kéo số trung bình về bên phải.",
-    "img": {
-     "src": "img/bieu-do-tan-suat-phut-mang-xa-hoi.png"
-    },
-    "a": [
-     "Vài bạn dùng mạng rất nhiều kéo lên",
-     "Đa số dùng mạng trên 300 phút",
-     "Trung bình luôn lớn hơn trung vị",
-     "Biểu đồ đặt sai trục ngang"
-    ],
-    "h": "2382ebc7cdb68"
-   },
-   {
-    "k": "mc",
     "id": "bai08-q15",
-    "q": "Nhìn hình. Nhóm nào có trung vị giờ tự học cao hơn?",
-    "giai": "Vạch đỏ của nhóm Đạt ở 5,4, nhóm Chưa đạt ở 1,9.",
-    "img": {
-     "src": "img/gio-tu-hoc-theo-ket-qua.png"
-    },
+    "q": "Dự đoán một bệnh nhân có bệnh tiểu đường hay không. Cột nào là nhãn?",
+    "giai": "Nhãn là câu trả lời cần đoán; các chỉ số khác là feature, mã hồ sơ thì bỏ.",
     "a": [
-     "Nhóm Đạt",
-     "Nhóm Chưa đạt",
-     "Hai nhóm bằng nhau",
-     "Không đọc được"
+     "Có hay không bệnh tiểu đường",
+     "Lượng đường trong máu",
+     "Tuổi của bệnh nhân",
+     "Mã hồ sơ bệnh nhân"
     ],
-    "h": "a1448b15252d5"
+    "h": "9dcd355c97182"
    },
    {
     "k": "mc",
     "id": "bai08-q16",
-    "q": "Nhìn hình. Mốt của số lần nộp trễ là bao nhiêu?",
-    "giai": "Cột cao nhất ở 0.",
-    "img": {
-     "src": "img/so-hoc-sinh-theo-so-lan-nop-tre.png"
-    },
+    "q": "Bảng có 90 dòng, chia với test_size=0.3. Tập kiểm tra có bao nhiêu dòng?",
+    "giai": "0,3 × 90 = 27.",
     "a": [
-     "0 lần",
-     "1 lần",
-     "14 lần",
-     "2 lần"
+     "27",
+     "63",
+     "30",
+     "9"
     ],
-    "h": "17d7295d0c75bb"
+    "h": "15b2632fb6779c"
    },
    {
     "k": "mc",
     "id": "bai08-q17",
-    "q": "Nhìn hình. Biểu đồ B gây hiểu nhầm ở chỗ nào?",
-    "giai": "Số giống hệt biểu đồ A; chỉ trục đứng bị cắt.",
+    "q": "Nhìn hình. Không stratify, số bạn Chưa đạt trong tập kiểm tra thay đổi thế nào?",
+    "giai": "Từ 1 đến 8 tuỳ lần chia.",
     "img": {
-     "src": "img/hai-bieu-do-cung-so-lieu-khac-truc.png"
+     "src": "img/so-ban-chua-dat-trong-tap-test.png"
     },
     "a": [
-     "Trục đứng không bắt đầu từ 0",
-     "Số liệu của 10A6 bị ghi sai",
-     "Thiếu một lớp trong ba lớp",
-     "Cột vẽ quá rộng so với trục"
+     "Nhảy lung tung giữa các lần chia",
+     "Lần nào cũng đúng bằng 3 bạn",
+     "Lần nào cũng bằng 0 bạn",
+     "Lần nào cũng bằng 11 bạn"
     ],
-    "h": "5192b40252fb5"
+    "h": "16803b2a17e0cc"
    },
    {
     "k": "mc",
     "id": "bai08-q18",
-    "q": "Nhìn hình. Điểm học kỳ có hình dạng phân bố nào?",
-    "giai": "Trung bình 5,26 gần bằng trung vị 5,2.",
+    "q": "Nhìn hình. Model lười bỏ sót bao nhiêu bạn Chưa đạt trong tập kiểm tra?",
+    "giai": "Model lười không bao giờ đoán Chưa đạt.",
     "img": {
-     "src": "img/bieu-do-tan-suat-diem.png"
+     "src": "img/model-luoi-bo-sot-ban-chua-dat.png"
     },
     "a": [
-     "Gần cân đối",
-     "Lệch phải rất mạnh",
-     "Lệch trái rất mạnh",
-     "Không có hình dạng nào"
+     "3 bạn — tất cả",
+     "0 bạn",
+     "24 bạn",
+     "1 bạn"
     ],
-    "h": "7bcade55f8d4d"
+    "h": "799b43a0882b"
    },
    {
     "k": "mc",
     "id": "bai08-q19",
-    "q": "Cột Thu nhập hộ gia đình có trung bình 18 triệu, trung vị 12 triệu. Hình dạng phân bố là gì?",
-    "giai": "Trung bình lớn hơn trung vị: vài hộ thu nhập rất cao.",
+    "q": "Bạn Bình học 4 giờ, ngủ 8 giờ. Feature TongGio của Bình là bao nhiêu?",
+    "giai": "4 + 8 = 12.",
     "a": [
-     "Lệch phải",
-     "Lệch trái",
-     "Cân đối",
-     "Hình chữ U"
+     "12",
+     "0,5",
+     "2",
+     "32"
     ],
-    "h": "25868cd9e0a15"
+    "h": "182b85fdcc428b"
    },
    {
     "k": "mc",
     "id": "bai08-q20",
-    "q": "describe() cho 25% = 3,8 và 75% = 6,6. Khoảng tứ phân vị là bao nhiêu?",
-    "giai": "Δ<sub>Q</sub> = Q3 − Q1 = 6,6 − 3,8 = 2,8.",
+    "q": "Một bảng có 95 email thường và 5 email rác. Model đoán “email thường” cho mọi email đúng bao nhiêu phần trăm?",
+    "giai": "95 : 100 — nhưng không chặn được email rác nào.",
     "a": [
-     "2,8",
-     "10,4",
-     "3,8",
-     "6,6"
+     "95%",
+     "5%",
+     "50%",
+     "100%"
     ],
-    "h": "c94da49cf80fc"
+    "h": "1fe7c50e3199de"
    },
    {
     "k": "mc",
     "id": "bai08-q21",
-    "q": "Muốn xem phân bố tuổi của 500 khách hàng, vẽ biểu đồ nào?",
-    "giai": "Tuổi là cột số nhiều giá trị: chia khoảng và vẽ biểu đồ tần số.",
+    "q": "Vì sao không nên đánh số 10A1 = 1, 10A2 = 2, 10A3 = 3 cho cột Lớp?",
+    "giai": "Lớp không có thứ tự; nên tạo mỗi lớp một cột 0/1.",
     "a": [
-     "Biểu đồ tần số",
-     "Biểu đồ tròn",
-     "Biểu đồ cột đếm từng tuổi lẻ",
-     "Biểu đồ hộp theo tên"
+     "Model sẽ hiểu các lớp có thứ tự lớn nhỏ",
+     "Vì Pandas không đổi được chữ thành số",
+     "Vì cột Lớp luôn phải bỏ đi",
+     "Vì số 3 quá lớn so với các cột khác"
     ],
-    "h": "74cf059e2d082"
+    "h": "135e64fba175a2"
    },
    {
     "k": "mc",
     "id": "bai08-q22",
-    "q": "Biểu đồ tròn có 12 lát, nhiều lát dưới 3%. Nhận xét nào đúng?",
-    "giai": "Biểu đồ tròn chỉ hợp với ít nhóm.",
+    "q": "Bảng có 1000 dòng: 900 nhãn 1, 100 nhãn 0. Undersampling thì còn bao nhiêu dòng?",
+    "giai": "Bớt nhãn 1 còn 100: 100 + 100 = 200.",
     "a": [
-     "Quá nhiều nhóm — nên dùng biểu đồ cột",
-     "Biểu đồ rất rõ ràng và dễ đọc",
-     "Nên thêm lát để dễ so sánh",
-     "Chỉ cần đổi màu các lát là đủ"
+     "200 dòng",
+     "1000 dòng",
+     "1800 dòng",
+     "100 dòng"
     ],
-    "h": "1ccb6406295c21"
+    "h": "fd378e1528c76"
    },
    {
-    "k": "ma",
+    "k": "mc",
     "id": "bai08-q23",
-    "q": "Những lệnh nào dùng để nhìn tổng quan một bảng? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "info, describe chỉ xem; dropna, drop_duplicates thay đổi bảng.",
+    "q": "Nhìn hình. Cột nào liên quan tới điểm mạnh nhất?",
+    "giai": "StudyHours có tương quan 0,82 — cao nhất.",
+    "img": {
+     "src": "img/tuong-quan-tung-cot-voi-diem.png"
+    },
     "a": [
-     "df.info()",
-     "df.describe()",
-     "df.dropna()",
-     "df.drop_duplicates()"
+     "StudyHours",
+     "SleepHours",
+     "TiLeHocNgu",
+     "TongGio"
     ],
-    "h": "55a51b2b95eb1"
+    "h": "18d15d827bee68"
    },
    {
     "k": "ma",
     "id": "bai08-q24",
-    "q": "Những phát biểu nào đúng về biểu đồ hộp? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Vạch giữa là trung vị; độ dài hộp đo độ trải, không đo số người.",
+    "q": "Những việc nào thuộc về chuẩn bị feature? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Xoá trùng là làm sạch (Bài 7); vẽ biểu đồ là EDA (Bài 9).",
     "a": [
-     "Hộp chứa 50% dữ liệu ở giữa",
-     "Chấm ngoài râu là giá trị bất thường",
-     "Vạch giữa hộp là số trung bình",
-     "Hộp dài hơn là có nhiều người hơn"
+     "Tạo cột mới từ các cột có sẵn",
+     "Đổi cột chữ thành số",
+     "Xoá các dòng bị trùng lặp",
+     "Vẽ biểu đồ cho báo cáo"
     ],
-    "h": "bb1aa1571aa3e"
+    "h": "101dab0b23a4b5"
    },
    {
     "k": "ma",
     "id": "bai08-q25",
-    "q": "Với phân bố lệch phải, những phát biểu nào đúng? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Lệch phải: đuôi phải dài, trung bình bị kéo lên.",
+    "q": "Những cột nào KHÔNG nên làm feature khi dự đoán Đạt / Chưa đạt? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Mã số vô nghĩa; điểm học kỳ là rò rỉ.",
     "a": [
-     "Số trung bình lớn hơn trung vị",
-     "Đuôi dài nằm bên phải",
-     "Đỉnh luôn nằm bên phải",
-     "Số trung bình nhỏ hơn trung vị"
+     "Mã học sinh",
+     "Điểm học kỳ",
+     "Giờ tự học",
+     "Giờ ngủ",
+     "Số lần nộp trễ"
     ],
-    "h": "1798d07bb0c172"
+    "h": "14e0ece5fc4944"
    },
    {
     "k": "ma",
     "id": "bai08-q26",
-    "q": "Những lỗi nào làm biểu đồ gây hiểu nhầm? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Ghi số và dùng màu hợp lý giúp đọc dễ hơn.",
+    "q": "Những phát biểu nào đúng về stratify=y? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Stratify chỉ thay đổi cách chia, không đổi kích thước hay xoá dòng.",
     "a": [
-     "Biểu đồ cột có trục đứng bị cắt",
-     "Không ghi tên trục và đơn vị",
-     "Ghi số trên đầu mỗi cột",
-     "Dùng màu khác nhau cho các nhóm"
+     "Giữ tỉ lệ nhãn ở hai tập giống cả bảng",
+     "Hữu ích khi nhãn bị lệch",
+     "Làm tập kiểm tra lớn hơn tập huấn luyện",
+     "Xoá các dòng có nhãn ít"
     ],
-    "h": "17d7b1dd12f381"
+    "h": "6d947a91d7d75"
    },
    {
     "k": "ma",
     "id": "bai08-q27",
-    "q": "Những câu hỏi nào nên trả lời bằng biểu đồ hộp? <b>(Chọn 2 đáp án đúng.)</b>",
-    "giai": "Biểu đồ hộp so một cột số giữa các nhóm.",
+    "q": "Những cách nào dùng để cân bằng dữ liệu lệch nhãn? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Hai cách: undersampling và oversampling.",
     "a": [
-     "Điểm của nam và nữ khác nhau thế nào?",
-     "Giờ ngủ của ba khối lớp khác nhau ra sao?",
-     "Mỗi lớp có bao nhiêu học sinh?",
-     "Mỗi môn chiếm bao nhiêu phần trăm?"
+     "Bớt dòng của nhãn nhiều (undersampling)",
+     "Nhân dòng của nhãn ít (oversampling)",
+     "Xoá hết dòng của nhãn ít",
+     "Đổi tên cột nhãn"
     ],
-    "h": "32ddc3b538449"
+    "h": "701ec163339ed"
    },
    {
-    "k": "sx",
+    "k": "ma",
     "id": "bai08-q28",
-    "q": "Sắp xếp các bước EDA một bảng mới.",
-    "giai": "Nhìn tổng quan → kiểm tra → một cột → so nhóm.",
+    "q": "Model đoán mọi bạn Đạt, đúng 88,9% trên tập kiểm tra. Những nhận xét nào đúng? <b>(Chọn 2 đáp án đúng.)</b>",
+    "giai": "Độ chính xác cao chỉ vì Đạt chiếm đa số.",
     "a": [
-     "Xem vài dòng đầu và kích thước bảng",
-     "Kiểm tra kiểu cột và ô trống",
-     "Vẽ biểu đồ từng cột",
-     "So các nhóm bằng biểu đồ hộp"
+     "Model bỏ sót mọi bạn Chưa đạt",
+     "Độ chính xác cao do nhãn lệch",
+     "Model đã học rất tốt",
+     "Model sẽ đúng 100% với bảng khác"
     ],
-    "h": "1929e966b64297"
+    "h": "f6bc719bf60a0"
    },
    {
     "k": "sx",
     "id": "bai08-q29",
-    "q": "Sắp xếp các bước vẽ biểu đồ tần số bằng tay.",
-    "giai": "Min, max → chia khoảng → đếm → vẽ.",
+    "q": "Sắp xếp các bước tạo một feature mới trong Pandas.",
+    "giai": "Ý nghĩa → công thức → gán → kiểm tra.",
     "a": [
-     "Tìm giá trị nhỏ nhất và lớn nhất",
-     "Chia thành các khoảng bằng nhau",
-     "Đếm số giá trị trong mỗi khoảng",
-     "Vẽ mỗi khoảng một cột"
+     "Nghĩ ra ý nghĩa của cột mới",
+     "Viết công thức từ các cột có sẵn",
+     "Gán vào df[\"TenCotMoi\"]",
+     "Kiểm tra vài dòng bằng head()"
     ],
-    "h": "e4f859aba8b87"
+    "h": "a45de4d5a27d3"
    },
    {
-    "k": "dd",
+    "k": "sx",
     "id": "bai08-q30",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Số: tần số. Chữ: cột đếm.",
-    "mau": "Cột số dùng biểu đồ {0}; cột chữ dùng biểu đồ {1}.",
-    "o": [
-     [
-      "tần số",
-      "tròn",
-      "cột đếm",
-      "đường"
-     ],
-     [
-      "cột đếm",
-      "tần số",
-      "hộp",
-      "phân tán"
-     ]
+    "q": "Sắp xếp các bước chọn feature bằng phương pháp lọc.",
+    "giai": "Tính → xếp hạng → chọn → đưa vào model.",
+    "a": [
+     "Tính mức liên quan của từng cột với nhãn",
+     "Xếp hạng các cột",
+     "Giữ các cột đứng đầu, bỏ cột lặp thông tin",
+     "Đưa các cột đã chọn vào model"
     ],
-    "h": "16392c2aeaf444"
+    "h": "1689b30f6bd48e"
    },
    {
-    "k": "dd",
+    "k": "sx",
     "id": "bai08-q31",
-    "q": "Chọn từ đúng cho mỗi chỗ trống.",
-    "giai": "Lệch phải: trung bình > trung vị; dùng trung vị.",
-    "mau": "Phân bố lệch phải thì số trung bình {0} trung vị; nên mô tả bằng {1}.",
-    "o": [
-     [
-      "lớn hơn",
-      "nhỏ hơn",
-      "bằng",
-      "gấp đôi"
-     ],
-     [
-      "trung vị",
-      "số trung bình",
-      "giá trị lớn nhất",
-      "mốt"
-     ]
+    "q": "Sắp xếp quy trình từ dữ liệu thô tới đánh giá model.",
+    "giai": "Sạch → feature → chia → học → chấm.",
+    "a": [
+     "Làm sạch dữ liệu",
+     "Chuẩn bị feature",
+     "Chia train và test",
+     "Huấn luyện trên train",
+     "Chấm trên test"
     ],
-    "h": "8c8f3d1c591cf"
+    "h": "178701f614f420"
    },
    {
     "k": "dd",
     "id": "bai08-q32",
-    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Hộp kéo từ Q1 tới Q3.",
-    "mau": "Trong biểu đồ hộp, cạnh trái của hộp là {0}, cạnh phải là {1}.",
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "Feature là đầu vào; nhãn là câu trả lời.",
+    "mau": "Cột đầu vào gọi là {0}, cột cần dự đoán gọi là {1}.",
     "o": [
      [
-      "Q1",
-      "Q3",
-      "trung vị",
-      "giá trị nhỏ nhất"
+      "feature",
+      "nhãn",
+      "tập kiểm tra",
+      "tương quan"
      ],
      [
-      "Q3",
-      "Q1",
-      "trung vị",
-      "giá trị lớn nhất"
+      "nhãn",
+      "feature",
+      "tập huấn luyện",
+      "stratify"
      ]
     ],
-    "h": "eeb61324899aa"
+    "h": "45a2c63c1e685"
    },
    {
     "k": "dd",
     "id": "bai08-q33",
-    "q": "Chọn lệnh đúng cho mỗi chỗ trống.",
-    "giai": "value_counts đếm; plt.hist vẽ biểu đồ tần số.",
-    "mau": "Lệnh {0} đếm từng giá trị của cột chữ; lệnh {1} vẽ biểu đồ tần số.",
+    "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
+    "giai": "test_size là tỉ lệ (0.2); stratify nhận cột nhãn y.",
+    "mau": "train_test_split(X, y, test_size={0}, stratify={1}) dành 20% cho kiểm tra và giữ tỉ lệ nhãn.",
     "o": [
      [
-      "value_counts()",
-      "describe()",
-      "head()",
-      "info()"
+      "0.2",
+      "20",
+      "0.8",
+      "2"
      ],
      [
-      "plt.hist()",
-      "plt.pie()",
-      "plt.boxplot()",
-      "plt.scatter()"
+      "y",
+      "X",
+      "True",
+      "0.2"
      ]
     ],
-    "h": "126d2e43e2292f"
+    "h": "1d5c3d5f31a880"
    },
    {
-    "k": "ds",
+    "k": "dd",
     "id": "bai08-q34",
-    "q": "Hai biểu đồ vẽ từ cùng số liệu luôn cho cùng một ấn tượng.",
-    "giai": "Cắt trục đứng có thể làm chênh lệch nhỏ trông rất lớn.",
-    "h": "10723a8e8a87e"
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "Rò rỉ dữ liệu làm model trông giỏi hơn thật.",
+    "mau": "Dùng thông tin mà lúc dự đoán {0} gọi là {1}.",
+    "o": [
+     [
+      "chưa thể có",
+      "đã có sẵn",
+      "bị trùng",
+      "bị trống"
+     ],
+     [
+      "rò rỉ dữ liệu",
+      "chọn feature",
+      "stratify",
+      "undersampling"
+     ]
+    ],
+    "h": "165c9383cc8fc9"
    },
    {
-    "k": "ds",
+    "k": "dd",
     "id": "bai08-q35",
-    "q": "Trong describe(), dòng 50% chính là trung vị.",
-    "giai": "50% là giá trị đứng giữa.",
-    "h": "1a7566c687fcfa"
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "Train để học, test để chấm.",
+    "mau": "Tập {0} dùng để model học; tập {1} giấu đi để chấm ở cuối.",
+    "o": [
+     [
+      "huấn luyện",
+      "kiểm tra",
+      "nhãn",
+      "feature"
+     ],
+     [
+      "kiểm tra",
+      "huấn luyện",
+      "nhãn",
+      "feature"
+     ]
+    ],
+    "h": "17fbc440cd3c29"
    },
    {
-    "k": "ds",
+    "k": "dd",
     "id": "bai08-q36",
-    "q": "Biểu đồ tròn phù hợp để so điểm trung bình của 8 lớp.",
-    "giai": "So các giá trị giữa nhiều nhóm nên dùng biểu đồ cột; biểu đồ tròn dành cho tỉ lệ ít nhóm.",
-    "h": "11dee701e2b2ec"
+    "q": "Chọn từ đúng cho mỗi chỗ trống.",
+    "giai": "1: cùng tăng; −1: ngược chiều; 0: không liên quan.",
+    "mau": "Hệ số tương quan gần {0} nghĩa là hai cột cùng tăng; gần {1} nghĩa là gần như không liên quan.",
+    "o": [
+     [
+      "1",
+      "0",
+      "−1",
+      "10"
+     ],
+     [
+      "0",
+      "1",
+      "−1",
+      "0,5"
+     ]
+    ],
+    "h": "13219cb26cc27d"
    },
    {
     "k": "ds",
     "id": "bai08-q37",
-    "q": "Biểu đồ hộp cho thấy được cả giá trị bất thường.",
-    "giai": "Các chấm ngoài râu.",
-    "h": "7c94d46de4554"
+    "q": "Tập kiểm tra được dùng để model học thêm cho tốt hơn.",
+    "giai": "Tập kiểm tra chỉ để chấm; model không được học trên đó.",
+    "h": "95c2adc585b21"
+   },
+   {
+    "k": "ds",
+    "id": "bai08-q38",
+    "q": "Cùng một độ chính xác, hai model có thể có giá trị rất khác nhau.",
+    "giai": "Model ngưỡng giờ học và model lười cùng 88,9% nhưng một model bắt được bạn Chưa đạt.",
+    "h": "14a0e30aa41673"
+   },
+   {
+    "k": "ds",
+    "id": "bai08-q39",
+    "q": "Mã hoá cột Giới tính thành 0 và 1 là một cách biến đổi feature.",
+    "giai": "Đổi chữ thành số là feature transformation.",
+    "h": "150eb6adc027b8"
+   },
+   {
+    "k": "ds",
+    "id": "bai08-q40",
+    "q": "Undersampling làm tăng số dòng của bảng.",
+    "giai": "Undersampling bớt dòng của nhãn nhiều nên bảng nhỏ đi.",
+    "h": "9038224581081"
    }
   ]
  },
