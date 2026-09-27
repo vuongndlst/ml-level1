@@ -23,6 +23,9 @@
  *  can_tieu_chi    kéo mức ưu tiên từng tiêu chí -> xếp hạng model (số đo thật + đánh giá định tính)
  *  kmeans_buoc     chọn k và điểm xuất phát, bấm từng bước gán nhóm / dời tâm (tính sẵn)
  *  me_cung         Q-learning trên mê cung: kéo số tập đã học -> mũi tên hướng tốt nhất + đường đi
+ *  chuoi_du_bao    kéo cửa sổ ngày trên chuỗi thời gian, bật/tắt đường dự báo, MAE của đoạn đang xem
+ *  app_thu         giả lập app Gradio: thanh trượt + nút Dự đoán, kết quả tra lưới model tính sẵn, chặn ngoài vùng
+ *  no_ron          một nơ-ron: kéo w1, w2, b -> đường ranh giới, số đoán đúng, xác suất cho một bạn
  *  keo_diem        kéo các chấm trên trục số -> số trung bình, trung vị, độ lệch chuẩn (chia n, như SGK) đổi ngay
  */
 (function () {
@@ -985,10 +988,116 @@
     return o;
   }
 
+  // ---------------------------------------------------------------- chuoi_du_bao (cửa sổ ngày + bật/tắt đường dự báo + MAE)
+  function chuoiDuBao(k) {
+    var o = khung(k, "chuoi-du-bao"), n = k.ngay.length, W = k.do_rong || 60, bat = k.duong.map(function () { return true; });
+    var r = el("input", { type: "range", min: 0, max: n - W, step: 1, value: 0, "aria-label": "đoạn ngày" });
+    var hangCb = el("div", { class: "tt-hang" }), nhan = el("div", { class: "thong-bao" });
+    var MAUD = [MAU.vang, MAU.teal, "#7C3AED", "#DC2626"];
+    k.duong.forEach(function (d, i) {
+      var cb = el("input", { type: "checkbox" }); cb.checked = true;
+      cb.addEventListener("change", function () { bat[i] = cb.checked; ve(); });
+      hangCb.appendChild(el("label", { class: "tt-cong-tac-dong" }, [cb, el("span", { html: '<b style="color:' + MAUD[i] + '">━</b> ' + d.ten })]));
+    });
+    var cv = canvas(640, 280), hang = el("div", { class: "tt-the-hang" }, k.duong.map(function (d, i) { return the("MAE — " + d.ten, "m" + i); }));
+    o.appendChild(nhan); o.appendChild(r); o.appendChild(hangCb); o.appendChild(cv.c); o.appendChild(hang);
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    function ve() {
+      var a = +r.value, b = a + W, that = k.that.slice(a, b), hi = 0;
+      [that].concat(k.duong.map(function (d) { return d.gia_tri.slice(a, b); })).forEach(function (s) { hi = Math.max(hi, Math.max.apply(null, s)); });
+      hi = Math.ceil(hi / 50) * 50;
+      nhan.innerHTML = "Từ <b>" + k.ngay[a] + "</b> đến <b>" + k.ngay[b - 1] + "</b>";
+      var t = truc(cv, 0, W - 1, 0, hi, "Ngày", k.nhan_y, vachDep(0, hi, 5)), g = cv.g;
+      g.fillStyle = MAU.phu; g.textAlign = "center";
+      for (var j = 0; j < W; j += 10) g.fillText(k.ngay[a + j], t.x(j), t.T + t.H + 16);
+      function ke(s, mau, day) { g.strokeStyle = mau; g.lineWidth = day; g.beginPath(); s.forEach(function (v, j) { j ? g.lineTo(t.x(j), t.y(v)) : g.moveTo(t.x(j), t.y(v)); }); g.stroke(); }
+      k.duong.forEach(function (d, i) { if (bat[i]) ke(d.gia_tri.slice(a, b), MAUD[i], 1.8); });
+      ke(that, MAU.dam, 2.6);
+      k.duong.forEach(function (d, i) {
+        var s = d.gia_tri.slice(a, b), m = s.reduce(function (acc, v, j) { return acc + Math.abs(v - that[j]); }, 0) / W;
+        hang.querySelector('[data-id="m' + i + '"]').textContent = so(m, 1);
+      });
+    }
+    r.addEventListener("input", ve); ve();
+    return o;
+  }
+
+  // ---------------------------------------------------------------- app_thu (giả lập giao diện Gradio, kết quả tra lưới tính sẵn)
+  function appThu(k) {
+    var o = khung(k, "app-thu"), app = el("div", { class: "tt-app" }), vao = [];
+    app.appendChild(el("div", { class: "tt-app-ten", text: k.ten_app }));
+    k.dau_vao.forEach(function (d) {
+      var r = el("input", { type: "range", min: d.min, max: d.max, step: d.buoc, value: d.mac_dinh, "aria-label": d.ten }), l = el("b");
+      vao.push({ d: d, r: r, l: l });
+      app.appendChild(el("label", { class: "tt-nhan-phu" }, [d.ten + ": ", l])); app.appendChild(r);
+    });
+    var chan = el("input", { type: "checkbox" });
+    var nut = el("button", { type: "button", class: "nut", text: "Dự đoán" }), ra = el("div", { class: "tt-app-ra" });
+    app.appendChild(el("label", { class: "tt-cong-tac-dong" }, [chan, el("span", { text: "Bật chặn đầu vào ngoài vùng dữ liệu" })]));
+    app.appendChild(nut); app.appendChild(ra);
+    o.appendChild(app);
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    function nhan() { vao.forEach(function (v) { v.l.textContent = so(+v.r.value, v.d.buoc < 1 ? 1 : 0) + " " + v.d.don_vi; }); }
+    function doan() {
+      var gt = vao.map(function (v) { return +v.r.value; });
+      var ngoai = vao.filter(function (v, i) { return gt[i] < v.d.vung[0] || gt[i] > v.d.vung[1]; });
+      if (chan.checked && ngoai.length) { ra.innerHTML = "<b>Ngoài phạm vi dữ liệu</b> — app không dự đoán. (" + ngoai.map(function (v) { return v.d.ten; }).join(", ") + ")"; ra.className = "tt-app-ra canh-bao"; return; }
+      var i = Math.round((gt[0] - k.luoi.x0) / k.luoi.bx), j = Math.round((gt[1] - k.luoi.y0) / k.luoi.by);
+      var p = k.luoi.p[i][j];
+      ra.className = "tt-app-ra";
+      ra.innerHTML = "Xác suất Đạt: <b>" + so(p, 1) + "%</b>" + (ngoai.length ? '<br><span class="tt-ghi">⚠ Đầu vào ngoài vùng dữ liệu đã học — model vẫn trả lời rất chắc, nhưng không đáng tin.</span>' : "");
+    }
+    vao.forEach(function (v) { v.r.addEventListener("input", nhan); });
+    nut.addEventListener("click", doan); nhan(); doan();
+    return o;
+  }
+
+  // ---------------------------------------------------------------- no_ron (kéo w1, w2, b -> đường ranh giới + độ chính xác)
+  function noRon(k) {
+    var o = khung(k, "no-ron"), tham = [k.w0[0], k.w0[1], k.w0[2]], ten = ["w₁ (giờ tự học)", "w₂ (phút mạng)", "b (hệ số chặn)"];
+    var rs = [], ls = [];
+    ten.forEach(function (tn, i) {
+      var r = el("input", { type: "range", min: -15, max: 15, step: 0.1, value: tham[i], "aria-label": tn }), l = el("b");
+      r.addEventListener("input", function () { tham[i] = +r.value; ve(); }); rs.push(r); ls.push(l);
+      o.appendChild(el("label", { class: "tt-nhan-phu" }, [tn + " = ", l])); o.appendChild(r);
+    });
+    var nut = el("button", { type: "button", class: "nut phu", text: "Dùng trọng số máy tìm được" });
+    nut.addEventListener("click", function () { tham = k.w_may.slice(); rs.forEach(function (r, i) { r.value = tham[i]; }); ve(); });
+    var cv = canvas(640, 330), hang = el("div", { class: "tt-the-hang" }, [the("Đoán đúng (tập huấn luyện)", "acc"), the(k.vd.ten, "vd")]);
+    o.appendChild(el("div", { class: "tt-hang" }, [nut])); o.appendChild(cv.c); o.appendChild(hang);
+    if (k.ghi) o.appendChild(el("p", { class: "tt-ghi", html: k.ghi }));
+    function ve() {
+      ls.forEach(function (l, i) { l.textContent = so(tham[i], 1); });
+      var t = truc(cv, -0.03, 1.03, -0.03, 1.03, k.nhan_x, k.nhan_y, [0, 0.25, 0.5, 0.75, 1]), g = cv.g;
+      g.fillStyle = MAU.phu; g.textAlign = "center";
+      [0, 0.25, 0.5, 0.75, 1].forEach(function (x) { g.fillText(so(x, 2), t.x(x), t.T + t.H + 16); });
+      var dung = 0;
+      for (var i = 0; i < k.x.length; i++) {
+        var z = tham[0] * k.x[i] + tham[1] * k.y[i] + tham[2], doan = z > 0 ? 1 : 0;
+        if (doan === k.nhan[i]) dung++;
+        g.beginPath(); g.arc(t.x(k.x[i]), t.y(k.y[i]), doan === k.nhan[i] ? 3.4 : 5, 0, 7);
+        g.fillStyle = k.nhan[i] ? MAU.chinh : MAU.vang; g.globalAlpha = 0.75; g.fill(); g.globalAlpha = 1;
+        if (doan !== k.nhan[i]) { g.strokeStyle = "#DC2626"; g.lineWidth = 1.8; g.stroke(); }
+      }
+      // đường w1·x + w2·y + b = 0 trong khung [0, 1] × [0, 1]
+      g.save(); g.beginPath(); g.rect(t.L, t.T, t.W, t.H); g.clip();
+      g.strokeStyle = MAU.dam; g.lineWidth = 3;
+      g.beginPath();
+      if (Math.abs(tham[1]) > 1e-6) { g.moveTo(t.x(-0.1), t.y(-(tham[0] * -0.1 + tham[2]) / tham[1])); g.lineTo(t.x(1.1), t.y(-(tham[0] * 1.1 + tham[2]) / tham[1])); }
+      else if (Math.abs(tham[0]) > 1e-6) { var xc = -tham[2] / tham[0]; g.moveTo(t.x(xc), t.y(-0.1)); g.lineTo(t.x(xc), t.y(1.1)); }
+      g.stroke(); g.restore();
+      var zv = tham[0] * k.vd.x1 + tham[1] * k.vd.x2 + tham[2];
+      hang.querySelector('[data-id="acc"]').textContent = so(100 * dung / k.x.length, 1) + "%";
+      hang.querySelector('[data-id="vd"]').textContent = so(100 / (1 + Math.exp(-zv)), 0) + "% Đạt";
+    }
+    ve();
+    return o;
+  }
+
   window.ML1_TT = {
     init: function (hamEl) { el = hamEl; },
     tra_bang: traBang, du_doan_tu: duDoanTu, phan_tan_3d: phanTan3d, loc_bang: locBang,
     histogram: histogram, chay_tung_dong: chayTungDong, keo_diem: keoDiem,
-    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d, knn: knn, mat_phang: matPhang, nguong_nham_lan: nguongNhamLan, chia_nhanh: chiaNhanh, nhan_bayes: nhanBayes, kiem_dinh_cheo: kiemDinhCheo, can_tieu_chi: canTieuChi, kmeans_buoc: kmeansBuoc, me_cung: meCung
+    duong_thang: duongThang, mat_3d: mat3d, cong_tac: congTac, chia_du_lieu: chiaDuLieu, bieu_do_hop: bieuDoHop, phan_tan_2d: phanTan2d, knn: knn, mat_phang: matPhang, nguong_nham_lan: nguongNhamLan, chia_nhanh: chiaNhanh, nhan_bayes: nhanBayes, kiem_dinh_cheo: kiemDinhCheo, can_tieu_chi: canTieuChi, kmeans_buoc: kmeansBuoc, me_cung: meCung, chuoi_du_bao: chuoiDuBao, app_thu: appThu, no_ron: noRon
   };
 })();

@@ -328,3 +328,7 @@ code, pre, .tt-dong, .tt-ma, .tt-man-hinh { font-variant-ligatures: none; font-f
 .tt .tt-the b:empty { display: none; }
 .tt .tt-the b.tt-muc { font-size: 15px; display: block; }
 .tt .tt-hai-cot .tt-the-hang { align-content: start; }
+.tt .tt-app { border: 1px solid var(--vien); border-radius: 12px; padding: 14px 16px; background: #fff; max-width: 560px; }
+.tt .tt-app-ten { font-weight: 700; font-size: 17px; margin-bottom: 8px; }
+.tt .tt-app-ra { margin-top: 10px; padding: 10px 12px; border-radius: 8px; background: var(--xanh-nhat); font-size: 16px; }
+.tt .tt-app-ra.canh-bao { background: #FEF3C7; color: #92400E; }

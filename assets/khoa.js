@@ -154,6 +154,13 @@ window.KHOA = [
   "phan": "Module 13 · Unsupervised and Reinforcement Learning"
  },
  {
+  "ma": "bai29",
+  "bai": 29,
+  "nhan": "Bài 29",
+  "tieu_de": "Mạng nơ-ron: từ scikit-learn đến PyTorch và TensorFlow",
+  "phan": "Module 14 · Deep Learning and Deployment"
+ },
+ {
   "ma": "bai30",
   "bai": 30,
   "nhan": "Bài 30",
