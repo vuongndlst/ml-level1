@@ -156,7 +156,7 @@
     f.appendChild(el("p", { html: "Gõ <b>họ tên đầy đủ, có dấu</b> và <b>lớp</b> đúng như trong sổ điểm. " +
       "Tên này in lên chứng chỉ — gõ sai thì mã xác nhận không khớp." }));
     var iTen = el("input", { class: "o", id: "ten", autocomplete: "name", placeholder: "Ví dụ: Nguyễn Minh Anh" });
-    var iLop = el("input", { class: "o", id: "lop", placeholder: "Ví dụ: 10A1", list: "ds-lop" });
+    var iLop = el("input", { class: "o", id: "lop", placeholder: "Ví dụ: " + ((B.ds_lop || [])[0] || "10A1"), list: "ds-lop" });
     var dl = el("datalist", { id: "ds-lop" });
     (B.ds_lop || []).forEach(function (l) { dl.appendChild(el("option", { value: l })); });
     iTen.value = TT.ten || ""; iLop.value = TT.lop || "";
@@ -164,7 +164,7 @@
     var nut = el("button", { class: "nut", text: TT.qua ? "Học tiếp" : "Bắt đầu học", onclick: function () {
       var ten = iTen.value.replace(/\s+/g, " ").trim(), lop = iLop.value.replace(/\s+/g, "").toUpperCase();
       if (ten.split(" ").length < 2) { tb.textContent = "Con gõ đủ họ và tên nhé."; return; }
-      if (!/^\d{1,2}[A-Z]\d{0,2}$/.test(lop)) { tb.textContent = "Lớp viết dạng 10A1."; return; }
+      if (!/^\d{1,2}[A-Z]\d{0,2}$/.test(lop)) { tb.textContent = "Lớp viết dạng " + ((B.ds_lop || [])[0] || "10A1") + "."; return; }
       if (TT.dat && TT.ten && khongDau(TT.ten) !== khongDau(ten) &&
           !confirm("Đổi tên sẽ làm chứng chỉ cũ không còn khớp mã. Vẫn đổi?")) return;
       TT.ten = ten; TT.lop = lop; ghi();
@@ -758,26 +758,29 @@
     var ma = maXacNhan(B.bai, TT.ten, TT.lop);
     var F = "Be Vietnam Pro, 'Segoe UI', sans-serif";
     function ve(logo) {
-      g.fillStyle = "#FFFFFF"; g.fillRect(0, 0, W, H);
-      g.fillStyle = "#0F172A"; g.fillRect(0, 0, W, 150);
-      g.strokeStyle = "#D97706"; g.lineWidth = 6; g.strokeRect(40, 190, W - 80, H - 230);
-      g.strokeStyle = "#DBEAFE"; g.lineWidth = 2; g.strokeRect(56, 206, W - 112, H - 262);
+      var cs = getComputedStyle(document.documentElement), cv = function (k, d) { return (cs.getPropertyValue(k) || "").trim() || d; };
+    var M_DAM = cv("--xanh", "#0F172A"), M_PHU = cv("--chu-phu", "#475569"), M_VANG = cv("--vang", "#D97706"),
+      M_NHAT = cv("--xanh-nhat", "#DBEAFE"), M_TEAL = cv("--teal", "#0D9488");
+    g.fillStyle = "#FFFFFF"; g.fillRect(0, 0, W, H);
+      g.fillStyle = M_DAM; g.fillRect(0, 0, W, 150);
+      g.strokeStyle = M_VANG; g.lineWidth = 6; g.strokeRect(40, 190, W - 80, H - 230);
+      g.strokeStyle = M_NHAT; g.lineWidth = 2; g.strokeRect(56, 206, W - 112, H - 262);
       if (logo) { var lh = 104, lw = logo.width * lh / logo.height; g.drawImage(logo, 50, 23, lw, lh); }
       g.fillStyle = "#FFFFFF"; g.textAlign = "left";
       g.font = "700 30px " + F; g.fillText(B.truong.toUpperCase(), 230, 70);
       g.font = "500 24px " + F; g.fillText(B.khoa + " · " + B.khoi, 230, 110);
       g.textAlign = "center";
-      g.fillStyle = "#0D9488"; g.font = "700 30px " + F; g.fillText("CHỨNG NHẬN HOÀN THÀNH", W / 2, 290);
-      g.fillStyle = "#0F172A"; g.font = "700 50px " + F; g.fillText(B.nhan + " — " + B.tieu_de, W / 2, 370);
-      g.fillStyle = "#475569"; g.font = "500 28px " + F; g.fillText("Chứng nhận học sinh", W / 2, 470);
-      g.fillStyle = "#0F172A"; g.font = "700 76px " + F; g.fillText(TT.ten.toUpperCase(), W / 2, 565);
-      g.fillStyle = "#475569"; g.font = "600 32px " + F; g.fillText("Lớp " + TT.lop, W / 2, 625);
-      g.fillStyle = "#0F172A"; g.font = "500 30px " + F;
+      g.fillStyle = M_TEAL; g.font = "700 30px " + F; g.fillText("CHỨNG NHẬN HOÀN THÀNH", W / 2, 290);
+      g.fillStyle = M_DAM; g.font = "700 50px " + F; g.fillText(B.nhan + " — " + B.tieu_de, W / 2, 370);
+      g.fillStyle = M_PHU; g.font = "500 28px " + F; g.fillText("Chứng nhận học sinh", W / 2, 470);
+      g.fillStyle = M_DAM; g.font = "700 76px " + F; g.fillText(TT.ten.toUpperCase(), W / 2, 565);
+      g.fillStyle = M_PHU; g.font = "600 32px " + F; g.fillText("Lớp " + TT.lop, W / 2, 625);
+      g.fillStyle = M_DAM; g.font = "500 30px " + F;
       g.fillText("đã học hết " + B.chang.length + " chặng và trả lời đúng " + diem + "/" + B.cuoi.so_cau + " câu checkpoint cuối bài", W / 2, 710);
-      g.fillStyle = "#DBEAFE"; g.fillRect(W / 2 - 250, 780, 500, 120);
-      g.fillStyle = "#475569"; g.font = "600 24px " + F; g.fillText("MÃ XÁC NHẬN", W / 2, 820);
-      g.fillStyle = "#0F172A"; g.font = "700 52px Consolas, monospace"; g.fillText(ma, W / 2, 880);
-      g.fillStyle = "#475569"; g.font = "500 26px " + F; g.fillText("Ngày " + ngay, W / 2, 985);
+      g.fillStyle = M_NHAT; g.fillRect(W / 2 - 250, 780, 500, 120);
+      g.fillStyle = M_PHU; g.font = "600 24px " + F; g.fillText("MÃ XÁC NHẬN", W / 2, 820);
+      g.fillStyle = M_DAM; g.font = "700 52px Consolas, monospace"; g.fillText(ma, W / 2, 880);
+      g.fillStyle = M_PHU; g.font = "500 26px " + F; g.fillText("Ngày " + ngay, W / 2, 985);
       var ten = "ChungChi_" + B.ma + "_" + khongDau(TT.ten).split(" ").map(function (w) {
         return w.charAt(0).toUpperCase() + w.slice(1); }).join("") + "_" + TT.lop + ".png";
       var url;

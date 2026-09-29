@@ -329,7 +329,7 @@ window.BAI = {
      "id": "bai01-q6",
      "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
      "giai": "Có đúng, có sai.",
-     "goi_y": "Đọc tiêu đề hình và đoạn chữ ngay dưới.",
+     "goi_y": "Đọc đoạn chữ ngay dưới hình máy đoán chữ số.",
      "mau": "Máy đoán đúng {0} số ảnh chưa thấy, và vẫn sai {1} ảnh.",
      "o": [
       [

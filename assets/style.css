@@ -332,3 +332,17 @@ code, pre, .tt-dong, .tt-ma, .tt-man-hinh { font-variant-ligatures: none; font-f
 .tt .tt-app-ten { font-weight: 700; font-size: 17px; margin-bottom: 8px; }
 .tt .tt-app-ra { margin-top: 10px; padding: 10px 12px; border-radius: 8px; background: var(--xanh-nhat); font-size: 16px; }
 .tt .tt-app-ra.canh-bao { background: #FEF3C7; color: #92400E; }
+
+/* Khối code tĩnh trong nội dung bài (C++, Python) — tô màu cú pháp do lib_cpp.html_code sinh sẵn. */
+pre.ma { font-family: "JetBrains Mono", Consolas, monospace; font-size: 14.5px; line-height: 1.55; background: var(--xanh);
+  color: #E2E8F0; padding: 12px 16px; border-radius: 10px; overflow-x: auto; margin: 10px 0; white-space: pre;
+  font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }
+pre.ma .ln { color: #5B6B7F; user-select: none; display: inline; }
+pre.ma .k { color: #C4B5FD; } pre.ma .s { color: #FDBA74; } pre.ma .n { color: #86EFAC; }
+pre.ma .c { color: #7C8DA6; } pre.ma .p { color: #F9A8D4; } pre.ma .sang { background: #1E3A5F; display: inline-block; width: 100%; }
+pre.man-hinh { font-family: "JetBrains Mono", Consolas, monospace; font-size: 14px; background: #05080F; color: #E5E7EB;
+  padding: 10px 14px; border-radius: 8px; margin: 8px 0; white-space: pre-wrap; border-left: 4px solid var(--teal); }
+pre.man-hinh::before { content: "Màn hình"; display: block; font-size: 11px; color: #94A3B8; margin-bottom: 4px;
+  font-family: "Be Vietnam Pro", sans-serif; }
+pre.loi { border-left-color: var(--do); color: #FCA5A5; }
+pre.loi::before { content: "Máy báo lỗi"; }
