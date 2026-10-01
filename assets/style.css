@@ -196,6 +196,11 @@ ul.ds li { margin: 3px 0; }
 .nut:hover { background: var(--xanh); }
 .nut:disabled { background: #94A3B8; cursor: not-allowed; }
 .nut.phu { background: #fff; color: var(--xanh); border: 1.5px solid var(--xanh-chinh); }
+.loi-moi-3d { margin: 24px 0 10px; padding: 18px 20px; border: 1px solid #5B77BA; border-radius: 14px;
+  background: linear-gradient(135deg, #EAF2FF, #F4EFFF); }
+.loi-moi-3d h3 { margin: 0 0 8px; color: #1E3973; }
+.loi-moi-3d p { margin: 0 0 14px; }
+a.nut.choi3d { display: inline-block; text-decoration: none; }
 .hang-nut { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
 .thong-bao { font-weight: 600; }
 .thong-bao.tot { color: var(--xanh); }

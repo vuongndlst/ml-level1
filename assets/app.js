@@ -19,6 +19,7 @@
   // chặng (?chang=i) hoặc checkpoint cuối (?cuoi=1), báo tiến độ cho trang cha bằng postMessage.
   var Q = new URLSearchParams(location.search);
   var NHUNG = Q.get("nhung") === "1" && window.parent !== window;
+  var DUNG_SAU_CHANG = NHUNG && Q.get("dung_sau_chang") === "1";
   function guiCha(m) {
     if (!NHUNG) return;
     m.ma = B.ma;
@@ -163,6 +164,13 @@
       B.cuoi.so_cau + " câu · đạt " + B.cuoi.dat + "/" + B.cuoi.so_cau + " nhận chứng chỉ"]));
     t.appendChild(el("h3", { text: "Lộ trình" }));
     t.appendChild(bd);
+    if ((B.bai === 5 || B.bai === 6) && !NHUNG) {
+      var choi = el("div", { class: "loi-moi-3d" });
+      choi.appendChild(el("h3", { text: "Khám phá bài học trong thành phố 3D" }));
+      choi.appendChild(el("p", { text: "Đi tới từng trạm, học và làm checkpoint. Qua mỗi trạm, dừng lại để trao đổi và ghi bài theo hướng dẫn của giáo viên. Tiến độ và chứng chỉ dùng chung với trang này." }));
+      choi.appendChild(el("a", { class: "nut choi3d", href: "quest.html", text: "Vào thành phố 3D →" }));
+      t.appendChild(choi);
+    }
     t.appendChild(el("p", { html: "Cuối mỗi chặng có vài câu hỏi nhanh — trả lời đúng hết mới mở chặng sau. " +
       "Sai thì đọc gợi ý rồi sửa, <b>không bị trừ điểm</b>. Tiến độ được lưu tự động trên trình duyệt này." }));
     main.appendChild(t);
@@ -681,10 +689,10 @@
       "Trả lời đúng tất cả để mở chặng sau. Sai lần đầu: đọc gợi ý. Sai từ lần hai: xem lời giải chi tiết." }));
     var cau = c.checkpoint.map(function (q, j) { var v = veCau(q, j + 1, true); ck.appendChild(v.node); return v; });
     var tb = el("span", { class: "thong-bao" });
-    var tiep = el("button", { class: "nut", text: NHUNG ? "Về đảo — sang trạm tiếp →" :
+    var tiep = el("button", { class: "nut", text: NHUNG ? (DUNG_SAU_CHANG ? "Về thành phố — dừng trao đổi" : "Về thành phố — sang trạm tiếp →") :
       i + 1 < B.chang.length ? "Sang chặng " + (i + 2) + " →" : "Vào checkpoint cuối →",
       onclick: function () {
-        if (NHUNG) guiCha({ loai: "dong", tiep: true });
+        if (NHUNG) guiCha({ loai: "dong", tiep: !DUNG_SAU_CHANG, vua_xong: i + 1 });
         else if (i + 1 < B.chang.length) moChang(i + 1); else moCuoi();
       } });
     tiep.disabled = i >= TT.qua;

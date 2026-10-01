@@ -416,6 +416,14 @@ window.BAI = {
      ]
     },
     {
+     "t": "video",
+     "yt": "W01tIRP_Rqs",
+     "ten": "IBM Technology — Supervised vs. Unsupervised Learning",
+     "ghi_chu": "Video xem thêm bằng tiếng Anh, minh họa hai loại đầu trong bảng; học tăng cường được giải thích ngay trong bài. Không bắt buộc xem trên lớp.",
+     "bat_dau": null,
+     "ket_thuc": null
+    },
+    {
      "t": "loi_hay_gap",
      "muc": [
       "Nghĩ học không giám sát là máy tự biết tên nhóm — con người đặt tên.",

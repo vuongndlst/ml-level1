@@ -49,9 +49,9 @@
         tt = t.dat ? "✓ Đã có chứng chỉ" : (t.qua ? "Đang học — đã qua " + t.qua + " chặng" : "Chưa bắt đầu");
       } catch (e) { tt = ""; }
       var a = document.createElement("a");
-      a.href = b.ma + "/";
+      a.href = b.bai === 5 || b.bai === 6 ? b.ma + "/quest.html" : b.ma + "/";
       a.innerHTML = '<div class="so">' + b.nhan + " · " + b.phan + '</div><div class="ten">' + b.tieu_de +
-        '</div><div class="tt">' + tt + "</div>";
+        '</div><div class="tt">' + (b.bai === 5 || b.bai === 6 ? "🎮 Thành phố 3D · " : "") + tt + "</div>";
       ds.appendChild(a);
     });
   })();

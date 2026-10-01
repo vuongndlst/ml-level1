@@ -237,6 +237,14 @@ window.BAI = {
      ]
     },
     {
+     "t": "video",
+     "yt": "bOUfOOCFCrE",
+     "ten": "Google for Developers — AI demystified: AI, Machine Learning and Deep Learning",
+     "ghi_chu": "Video xem thêm bằng tiếng Anh; bật phụ đề và chú ý ba vòng AI → ML → học sâu. Không bắt buộc xem trên lớp.",
+     "bat_dau": null,
+     "ket_thuc": null
+    },
+    {
      "t": "loi_hay_gap",
      "muc": [
       "Gọi mọi thứ tự động là AI — máy tính bỏ túi, đèn hẹn giờ chỉ làm đúng các bước viết sẵn.",
