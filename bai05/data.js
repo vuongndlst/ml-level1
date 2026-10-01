@@ -6,9 +6,9 @@ window.BAI = {
  "phan": "Module 05 · Math for Machine Learning",
  "cau_hoi": "Một con số có đủ để mô tả cả một lớp không?",
  "gioi_thieu": [
-  "Đầu giờ con đã nhìn hai lớp <b>10A1</b> và <b>10A8</b>: điểm trung bình gần bằng nhau (5,71 và 5,64). Vậy hai lớp có học lực giống nhau không?",
-  "Năm chặng dưới đây giúp con trả lời bằng số liệu. Mọi ví dụ lấy từ <b>bảng dữ liệu 240 học sinh khối 10</b> — bảng mô phỏng, dựng giống một khối lớp thật để luyện tập, cũng là bảng con mở trên Colab.",
-  "Nhiều khái niệm con đã gặp ở chương Thống kê, Toán 10. Ở đây con dùng lại chúng để đọc dữ liệu như một người làm Machine Learning."
+  "Điểm trung bình của lớp <b>10A1</b> và <b>10A8</b> gần bằng nhau (5,71 và 5,64). Kết quả học tập của hai lớp có giống nhau không?",
+  "Ta sẽ dùng số liệu để trả lời câu hỏi này. Ví dụ trong bài lấy từ <b>bảng dữ liệu 240 học sinh khối 10</b> (dữ liệu mô phỏng). Đây cũng là bảng dùng trong Colab.",
+  "Sau mỗi chặng, cả lớp dừng lại để thảo luận và ghi bài. Các khái niệm Toán 10 sẽ giúp ta đọc bảng dữ liệu và hiểu dự đoán của mô hình."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai05",
@@ -36,11 +36,11 @@ window.BAI = {
  "tien_to_luu": "ml1_",
  "chang": [
   {
-   "ten": "Số đặc trưng đo xu thế trung tâm",
-   "ten_ngan": "Con số ở giữa",
+   "ten": "Số trung bình, trung vị và mốt",
+   "ten_ngan": "Ba cách tóm tắt dữ liệu",
    "phut": 6,
-   "muc_tieu": "tính được số trung bình, trung vị, mốt của một dãy số liệu và biết lệnh Pandas tương ứng.",
-   "khoi_dong": "Muốn tóm tắt cả một cột số bằng <b>một con số</b> — ví dụ “một bạn khối 10 dùng mạng xã hội bao lâu mỗi ngày?” — con chọn con số nào?",
+   "muc_tieu": "tính và giải thích được số trung bình, trung vị, mốt của một dãy số liệu.",
+   "khoi_dong": "Nếu chỉ được dùng một con số để tóm tắt thời gian dùng mạng xã hội của một nhóm học sinh, em sẽ chọn số nào?",
    "khoi": [
     {
      "t": "p",
@@ -55,7 +55,7 @@ window.BAI = {
     {
      "t": "dinh_nghia",
      "ten": "Trung vị (median)",
-     "html": "Sắp xếp dãy theo thứ tự <b>không giảm</b>, trung vị là giá trị đứng chính giữa. Nếu số giá trị n là số chẵn, trung vị là <b>trung bình cộng của hai giá trị đứng giữa</b>.",
+     "html": "Sắp xếp dãy từ nhỏ đến lớn, trung vị là giá trị đứng chính giữa. Nếu số giá trị n là số chẵn, trung vị là <b>trung bình cộng của hai giá trị đứng giữa</b>.",
      "ky_hieu": "n lẻ: giá trị thứ <span class=\"frac\"><span>n + 1</span><span>2</span></span> · n chẵn: trung bình của giá trị thứ <span class=\"frac\"><span>n</span><span>2</span></span> và thứ <span class=\"frac\"><span>n</span><span>2</span></span> + 1"
     },
     {
@@ -100,7 +100,7 @@ window.BAI = {
        "Không — mỗi giá trị xuất hiện một lần"
       ]
      ],
-     "ket_luan": "Hai con số “ở giữa” lệch nhau hơn 20 phút. Chặng 2 giải thích vì sao.",
+     "ket_luan": "Số trung bình và trung vị lệch nhau hơn 20 phút. Vì sao? Chặng tiếp theo sẽ giúp ta giải thích.",
      "nhan_manh": [
       2,
       3
@@ -134,7 +134,7 @@ window.BAI = {
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Tìm trung vị mà <b>quên sắp xếp</b> dãy trước.",
+      "Tìm trung vị khi <b>chưa sắp xếp</b> dãy.",
       "Với n chẵn, lấy một trong hai giá trị giữa thay vì <b>trung bình của cả hai</b>.",
       "Nghĩ rằng trung vị luôn là một giá trị có trong dãy — với n chẵn thì chưa chắc."
      ]
@@ -143,13 +143,19 @@ window.BAI = {
      "t": "video",
      "yt": "h8EYEJ32oQ8",
      "ten": "Khan Academy — Statistics intro: Mean, median, and mode",
-     "ghi_chu": "tiếng Anh, có phụ đề (CC); không bắt buộc — xem nếu con muốn thêm ví dụ",
+     "ghi_chu": "Video tham khảo bằng tiếng Anh, có phụ đề; không bắt buộc xem trên lớp",
      "bat_dau": null,
      "ket_thuc": null
     },
     {
      "t": "tom_tat",
      "html": "Số trung bình cộng mọi giá trị; trung vị là giá trị đứng giữa dãy đã sắp xếp; mốt là giá trị gặp nhiều nhất."
+    },
+    {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Ghi bài sau chặng 1",
+     "html": "Số trung bình = tổng các giá trị ÷ số giá trị. Trung vị là số ở giữa dãy đã sắp xếp; nếu có hai số giữa, lấy trung bình của hai số đó. Mốt là giá trị xuất hiện nhiều nhất. Các số này giúp tóm tắt dữ liệu, nhưng chưa cho biết dữ liệu tản ra thế nào."
     },
     {
      "t": "doc_them",
@@ -222,11 +228,11 @@ window.BAI = {
    ]
   },
   {
-   "ten": "Giá trị bất thường và lựa chọn con số đại diện",
-   "ten_ngan": "Giá trị bất thường",
+   "ten": "Giá trị bất thường và con số đại diện",
+   "ten_ngan": "Khi một giá trị quá khác biệt",
    "phut": 4,
    "muc_tieu": "giải thích được vì sao số trung bình bị giá trị bất thường kéo lệch còn trung vị thì không, và chọn đúng con số đại diện.",
-   "khoi_dong": "Trong 7 bạn ở chặng 1, bạn cuối dùng mạng 445 phút mỗi ngày — hơn 7 tiếng. Nếu con số đó còn lớn hơn nữa, số trung bình và trung vị thay đổi thế nào?",
+   "khoi_dong": "Trong 7 bạn vừa xét, một bạn dùng mạng 445 phút mỗi ngày. Nếu số này tăng lên nữa, số trung bình và trung vị sẽ thay đổi ra sao?",
    "khoi": [
     {
      "t": "demo_tb_tv",
@@ -526,7 +532,7 @@ window.BAI = {
      "t": "dinh_nghia",
      "ten": "Giá trị bất thường (ngoại lai, outlier)",
      "html": "Giá trị khác biệt hẳn so với phần lớn các giá trị còn lại của dãy.",
-     "ky_hieu": "Khi dãy có giá trị bất thường, nên dùng <b>trung vị</b> làm con số đại diện."
+     "ky_hieu": "Nếu cần mô tả một giá trị điển hình, <b>trung vị</b> thường phù hợp hơn khi dãy có giá trị bất thường."
     },
     {
      "t": "anh",
@@ -567,7 +573,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Giá trị bất thường không phải lúc nào cũng là lỗi",
-     "html": "Một bạn học 7 giờ và được 9,8 điểm là hiếm nhưng có thể — cần giữ. Một bạn học 25 giờ mỗi ngày là lỗi nhập liệu — cần sửa. Bài 7 con sẽ tự phân biệt hai trường hợp này."
+     "html": "Một bạn học 7 giờ và được 9,8 điểm là hiếm nhưng có thể — cần giữ. Một bạn học 25 giờ mỗi ngày là lỗi nhập liệu — cần sửa. Bài 7 sẽ xét kỹ cách phân biệt hai trường hợp."
     },
     {
      "t": "loi_hay_gap",
@@ -579,6 +585,12 @@ window.BAI = {
     {
      "t": "tom_tat",
      "html": "Giá trị bất thường kéo số trung bình về phía nó; trung vị thì không. Dữ liệu có giá trị bất thường nên dùng trung vị."
+    },
+    {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Ghi bài sau chặng 2",
+     "html": "Giá trị bất thường là giá trị khác xa phần lớn dữ liệu. Vì số trung bình dùng mọi giá trị để tính, một giá trị rất lớn hoặc rất nhỏ có thể kéo nó lệch đi. Trung vị dựa vào vị trí sau khi sắp xếp nên thường phù hợp hơn để mô tả một trường hợp điển hình."
     }
    ],
    "checkpoint": [
@@ -607,15 +619,15 @@ window.BAI = {
    ]
   },
   {
-   "ten": "Số đặc trưng đo mức độ phân tán",
-   "ten_ngan": "Độ lệch chuẩn",
+   "ten": "Độ lệch chuẩn",
+   "ten_ngan": "Dữ liệu tản ra đến đâu?",
    "phut": 6,
    "muc_tieu": "nêu được các bước tính phương sai, độ lệch chuẩn và dùng độ lệch chuẩn để so sánh mức phân tán của hai nhóm.",
    "khoi_dong": "10A1 và 10A8 có số trung bình gần bằng nhau. Làm sao biết điểm lớp nào <b>đồng đều</b> hơn?",
    "khoi": [
     {
      "t": "p",
-     "html": "Số trung bình chỉ cho biết dữ liệu tập trung quanh đâu, chưa cho biết các giá trị <b>tản ra</b> hay <b>chụm lại</b>. Cần một số đặc trưng đo <b>mức độ phân tán</b>."
+     "html": "Số trung bình cho biết điểm nằm quanh mức nào. Để biết các điểm <b>chụm lại</b> hay <b>trải rộng</b>, ta cần xem độ lệch chuẩn."
     },
     {
      "t": "dinh_nghia",
@@ -669,7 +681,7 @@ window.BAI = {
        "<b>437,50</b>"
       ]
      ],
-     "ket_luan": "Phương sai s<sup>2</sup> = 437,5 : 6 ≈ 72,92 · Độ lệch chuẩn s = √72,92 ≈ <b>8,54 cm</b>: chiều cao mỗi người thường cách số trung bình khoảng 8,5 cm.",
+     "ket_luan": "Phương sai s<sup>2</sup> = 437,5 : 6 ≈ 72,92 · Độ lệch chuẩn s = √72,92 ≈ <b>8,54 cm</b>. Đây là mức chênh lệch điển hình quanh số trung bình (8,5 cm).",
      "nhan_manh": [
       6
      ]
@@ -761,6 +773,12 @@ window.BAI = {
     {
      "t": "tom_tat",
      "html": "Độ lệch chuẩn đo các giá trị tản ra quanh số trung bình bao xa: càng nhỏ càng đồng đều."
+    },
+    {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Ghi bài sau chặng 3",
+     "html": "Độ lệch chuẩn cho biết các giá trị nằm gần hay xa số trung bình. Cách tính: tìm số trung bình, lấy từng giá trị trừ số trung bình, bình phương các độ lệch, lấy trung bình các bình phương rồi lấy căn bậc hai. Độ lệch chuẩn càng nhỏ thì dữ liệu càng chụm lại; nó không cho biết nhóm nào giỏi hơn."
     },
     {
      "t": "doc_them",
@@ -996,6 +1014,12 @@ window.BAI = {
      "html": "Xác suất = đếm rồi chia. Biết thêm điều kiện B thì chỉ đếm và chia trong nhóm thoả B."
     },
     {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Ghi bài sau chặng 4",
+     "html": "Xác suất bằng số trường hợp thuận lợi chia cho tổng số trường hợp có thể. Khi biết thêm điều kiện B, chỉ xét nhóm thỏa B: P(A | B) = số trường hợp vừa thỏa A vừa thỏa B ÷ số trường hợp thỏa B. Vì vậy, mẫu số đổi khi ta đổi nhóm đang xét."
+    },
+    {
      "t": "doc_them",
      "link": [
       {
@@ -1036,7 +1060,7 @@ window.BAI = {
      "id": "bai05-q10",
      "q": "Chọn cụm từ đúng cho mỗi chỗ trống.",
      "giai": "Chỉ đếm trong nhóm đã biết: mẫu số là cả nhóm tự học hơn 4 giờ, tử số là những bạn Đạt trong nhóm đó.",
-     "goi_y": "Điều kiện đứng sau dấu | cho biết con đếm trong nhóm nào.",
+     "goi_y": "Điều kiện đứng sau dấu | cho biết ta đang đếm trong nhóm nào.",
      "mau": "P(Đạt | tự học hơn 4 giờ): tử số là {0}, mẫu số là {1}.",
      "o": [
       [
@@ -1069,7 +1093,7 @@ window.BAI = {
    "ten_ngan": "Nối với ML",
    "phut": 3,
    "muc_tieu": "giải thích được vì sao Machine Learning cần thống kê và xác suất, và đọc đúng một dự đoán dạng xác suất.",
-   "khoi_dong": "Một ứng dụng báo: “bạn có 80% khả năng Đạt học kỳ này”. Con hiểu câu đó thế nào?",
+   "khoi_dong": "Một ứng dụng báo: “bạn có 80% khả năng Đạt học kỳ này”. Em hiểu câu đó thế nào?",
    "khoi": [
     {
      "t": "p",
@@ -1158,8 +1182,8 @@ window.BAI = {
     {
      "t": "bang",
      "cot": [
-      "Hôm nay con học",
-      "Sẽ dùng lại ở"
+      "Kiến thức hôm nay",
+      "Dùng lại ở bài"
      ],
      "dong": [
       [
@@ -1183,6 +1207,12 @@ window.BAI = {
     {
      "t": "tom_tat",
      "html": "Model học từ mẫu nên dự đoán luôn kèm độ không chắc chắn — và được nói ra bằng xác suất."
+    },
+    {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "Ghi bài sau chặng 5",
+     "html": "Thống kê giúp mô tả dữ liệu dùng để học và kiểm tra dự đoán. Xác suất giúp diễn đạt mức độ chắc chắn của một dự đoán: 80% khả năng Đạt không có nghĩa là chắc chắn Đạt hoặc được 8 điểm. Đây là phần đọc hiểu, không có công thức mới cần ghi."
     },
     {
      "t": "doc_them",
