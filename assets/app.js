@@ -15,6 +15,15 @@
   var app = document.getElementById("app");
   var LUU = (B.tien_to_luu || "ml1_") + B.ma;
   var SEP = "\u0001";
+  // Chế độ nhúng (?nhung=1): trang chạy trong khung của game quest 3D (quest.html) — ẩn đầu/cuối trang, mở đúng
+  // chặng (?chang=i) hoặc checkpoint cuối (?cuoi=1), báo tiến độ cho trang cha bằng postMessage.
+  var Q = new URLSearchParams(location.search);
+  var NHUNG = Q.get("nhung") === "1" && window.parent !== window;
+  function guiCha(m) {
+    if (!NHUNG) return;
+    m.ma = B.ma;
+    try { window.parent.postMessage(m, location.origin === "null" ? "*" : location.origin); } catch (e) { /* bỏ qua */ }
+  }
 
   // ------------------------------------------------------------ tiện ích
   function cyrb53(str, seed) {
@@ -70,6 +79,7 @@
   var luuDuoc = true;
   function ghi() {
     try { localStorage.setItem(LUU, JSON.stringify(TT)); } catch (e) { luuDuoc = false; }
+    guiCha({ loai: "tien_do", qua: TT.qua, dat: !!TT.dat, ten: TT.ten || "" });
   }
   function so(x, d) { return Number(x).toFixed(d === undefined ? 1 : d).replace(".", ","); }
   function ngayNay() {
@@ -81,6 +91,12 @@
   var thanh, nguoiEl, main, changDang = null;
   function dungKhung() {
     document.title = B.nhan + " — " + B.tieu_de + " · " + B.khoa;
+    if (NHUNG) {
+      document.documentElement.classList.add("nhung");
+      var st = document.createElement("style");
+      st.textContent = ".nhung header.dau, .nhung footer, .nhung nav.cac-chang { display: none; }";
+      document.head.appendChild(st);
+    }
     thanh = el("div");
     nguoiEl = el("button", { class: "nguoi", title: "Đổi họ tên / lớp", onclick: function () { moDau(); } });
     var dau = el("header", { class: "dau" }, [
@@ -168,6 +184,13 @@
       if (TT.dat && TT.ten && khongDau(TT.ten) !== khongDau(ten) &&
           !confirm("Đổi tên sẽ làm chứng chỉ cũ không còn khớp mã. Vẫn đổi?")) return;
       TT.ten = ten; TT.lop = lop; ghi();
+      if (NHUNG) {
+        var cq0 = Q.get("chang");
+        if (cq0 !== null) moChang(Math.min(+cq0 || 0, TT.qua));
+        else if (Q.get("cuoi") && TT.qua >= B.chang.length) moCuoi();
+        else guiCha({ loai: "dong" });
+        return;
+      }
       if (TT.qua >= B.chang.length) moCuoi(); else moChang(TT.qua);
     } });
     f.appendChild(el("label", { class: "o", for: "ten", text: "Họ và tên" })); f.appendChild(iTen);
@@ -640,6 +663,12 @@
     var t = el("section", { class: "the" });
     t.appendChild(el("span", { class: "nhan", text: "Chặng " + (i + 1) + " / " + B.chang.length + " · khoảng " + c.phut + " phút" }));
     t.appendChild(el("h2", { text: c.ten }));
+    if (i === B.chang.length - 1 && TT.dat && TT.diem) {
+      t.appendChild(el("p", { text: "Em đã đạt checkpoint cuối. Có thể tải lại chứng chỉ tại đây." }));
+      var chungChiChang = el("div", { class: "chung-chi" });
+      t.appendChild(chungChiChang);
+      veChungChi(TT.diem, TT.ngay_dat || ngayNay(), chungChiChang, true);
+    }
     t.appendChild(el("div", { class: "muc-tieu", html: "<b>Mục tiêu:</b> " + c.muc_tieu }));
     if (c.khoi_dong) t.appendChild(el("div", { class: "khoi-dong", html: "<b>Câu hỏi mở đầu:</b> " + c.khoi_dong }));
     c.khoi.forEach(function (k) { t.appendChild(veKhoi(k)); });
@@ -652,8 +681,12 @@
       "Trả lời đúng tất cả để mở chặng sau. Sai lần đầu: đọc gợi ý. Sai từ lần hai: xem lời giải chi tiết." }));
     var cau = c.checkpoint.map(function (q, j) { var v = veCau(q, j + 1, true); ck.appendChild(v.node); return v; });
     var tb = el("span", { class: "thong-bao" });
-    var tiep = el("button", { class: "nut", text: i + 1 < B.chang.length ? "Sang chặng " + (i + 2) + " →" : "Vào checkpoint cuối →",
-      onclick: function () { if (i + 1 < B.chang.length) moChang(i + 1); else moCuoi(); } });
+    var tiep = el("button", { class: "nut", text: NHUNG ? "Về đảo — sang trạm tiếp →" :
+      i + 1 < B.chang.length ? "Sang chặng " + (i + 2) + " →" : "Vào checkpoint cuối →",
+      onclick: function () {
+        if (NHUNG) guiCha({ loai: "dong", tiep: true });
+        else if (i + 1 < B.chang.length) moChang(i + 1); else moCuoi();
+      } });
     tiep.disabled = i >= TT.qua;
     var kt = el("button", { class: "nut phu", text: "Kiểm tra", onclick: function () {
       var lan = TT.lan_sai[i] || 0;
@@ -751,16 +784,16 @@
   }
 
   // ------------------------------------------------------------ chứng chỉ
-  function veChungChi(diem, ngay, noi) {
+  function veChungChi(diem, ngay, noi, chiNut) {
     var W = 1600, H = 1100, cv = document.createElement("canvas");
     cv.width = W; cv.height = H;
     var g = cv.getContext("2d");
     var ma = maXacNhan(B.bai, TT.ten, TT.lop);
     var F = "Be Vietnam Pro, 'Segoe UI', sans-serif";
     function ve(logo) {
-      var cs = getComputedStyle(document.documentElement), cv = function (k, d) { return (cs.getPropertyValue(k) || "").trim() || d; };
-    var M_DAM = cv("--xanh", "#0F172A"), M_PHU = cv("--chu-phu", "#475569"), M_VANG = cv("--vang", "#D97706"),
-      M_NHAT = cv("--xanh-nhat", "#DBEAFE"), M_TEAL = cv("--teal", "#0D9488");
+      var cs = getComputedStyle(document.documentElement), mauCss = function (k, d) { return (cs.getPropertyValue(k) || "").trim() || d; };
+    var M_DAM = mauCss("--xanh", "#0F172A"), M_PHU = mauCss("--chu-phu", "#475569"), M_VANG = mauCss("--vang", "#D97706"),
+      M_NHAT = mauCss("--xanh-nhat", "#DBEAFE"), M_TEAL = mauCss("--teal", "#0D9488");
     g.fillStyle = "#FFFFFF"; g.fillRect(0, 0, W, H);
       g.fillStyle = M_DAM; g.fillRect(0, 0, W, 150);
       g.strokeStyle = M_VANG; g.lineWidth = 6; g.strokeRect(40, 190, W - 80, H - 230);
@@ -787,7 +820,7 @@
       try { url = cv.toDataURL("image/png"); } catch (e) { url = null; }
       noi.innerHTML = "";
       if (url) {
-        noi.appendChild(el("img", { src: url, alt: "Chứng chỉ " + B.nhan }));
+        if (!chiNut) noi.appendChild(el("img", { src: url, alt: "Chứng chỉ " + B.nhan }));
         noi.appendChild(el("div", { class: "hang-nut" }, [el("a", { class: "nut", href: url, download: ten, text: "⬇ Tải chứng chỉ (PNG)" }),
           el("span", { text: "Mã xác nhận: " + ma })]));
       } else {
@@ -807,6 +840,8 @@
   // ------------------------------------------------------------ chạy
   dungKhung();
   if (!TT.ten) moDau();
+  else if (NHUNG && Q.get("cuoi")) moCuoi();
+  else if (NHUNG && Q.get("chang") !== null) moChang(Math.min(+Q.get("chang") || 0, TT.qua));
   else if (TT.qua >= B.chang.length) moCuoi();
   else moChang(TT.qua);
 })();
