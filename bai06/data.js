@@ -7,7 +7,7 @@ window.BAI = {
  "cau_hoi": "Máy so hai học sinh bằng cách nào?",
  "gioi_thieu": [
   "Đầu giờ con đã nhìn ba bạn <b>A, B, C</b> trong bảng khối 10 và đoán A giống ai hơn. Máy không “nhìn” được như con — máy chỉ có các con số.",
-  "Năm chặng dưới đây cho con thấy máy <b>so hai học sinh</b> bằng khoảng cách, vì sao phải đo cho <b>công bằng</b>, và máy tìm ra một <b>đường dự đoán tốt</b> bằng cách đi từng bước xuống dốc. Mọi ví dụ lấy từ <b>bảng dữ liệu 240 học sinh khối 10</b> — bảng mô phỏng, dựng giống một khối lớp thật để luyện tập.",
+  "Làm <b>từng chặng</b> theo hướng dẫn trên slide. Xong checkpoint của một chặng, dừng lại để cả lớp trao đổi và ghi bài rồi mới mở chặng tiếp theo. Năm chặng dưới đây cho con thấy máy <b>so hai học sinh</b> bằng khoảng cách, vì sao phải đo cho <b>công bằng</b>, và máy tìm ra một <b>đường dự đoán tốt</b> bằng cách đi từng bước xuống dốc. Mọi ví dụ lấy từ <b>bảng dữ liệu 240 học sinh khối 10</b> — bảng mô phỏng, dựng giống một khối lớp thật để luyện tập.",
   "Nhiều kiến thức con đã gặp ở Toán 10: tọa độ của vectơ, khoảng cách giữa hai điểm, đường thẳng y = ax + b. Ở đây con dùng lại chúng theo cách của Machine Learning."
  ],
  "thoi_gian": "≈ 22 phút",
@@ -271,7 +271,7 @@ window.BAI = {
     {
      "t": "dinh_nghia",
      "ten": "Khoảng cách Euclid",
-     "html": "Với hai vector cùng số chiều: lấy <b>hiệu</b> từng cặp số cùng cột, <b>bình phương</b>, <b>cộng</b> lại rồi lấy <b>căn bậc hai</b>. Khoảng cách càng nhỏ, hai đối tượng càng giống nhau; bằng 0 khi hai vector trùng nhau.",
+     "html": "Với hai vector cùng số chiều: lấy <b>hiệu</b> từng cặp số cùng cột, <b>bình phương</b>, <b>cộng</b> lại rồi lấy <b>căn bậc hai</b>. Khoảng cách càng nhỏ, hai đối tượng càng gần nhau <b>theo các cột và thang đo đã chọn</b>; bằng 0 khi hai vector trùng nhau.",
      "ky_hieu": "d(A, B) = √[(a<sub>1</sub> − b<sub>1</sub>)<sup>2</sup> + (a<sub>2</sub> − b<sub>2</sub>)<sup>2</sup> + … + (a<sub>n</sub> − b<sub>n</sub>)<sup>2</sup>]"
     },
     {
@@ -379,7 +379,7 @@ window.BAI = {
     },
     {
      "t": "tom_tat",
-     "html": "Khoảng cách Euclid: hiệu từng cột → bình phương → cộng → lấy căn. Khoảng cách càng nhỏ, hai đối tượng càng giống nhau."
+     "html": "Khoảng cách Euclid: hiệu từng cột → bình phương → cộng → lấy căn. Khoảng cách càng nhỏ, hai đối tượng càng gần nhau theo các đặc điểm đang xét."
     },
     {
      "t": "doc_them",
@@ -473,7 +473,7 @@ window.BAI = {
     {
      "t": "dinh_nghia",
      "ten": "Đưa về khoảng 0 – 1 (chuẩn hoá min – max)",
-     "html": "Biến đổi mỗi giá trị x của một cột thành x′: giá trị <b>nhỏ nhất</b> của cột thành <b>0</b>, giá trị <b>lớn nhất</b> thành <b>1</b>, các giá trị khác nằm ở giữa theo đúng tỉ lệ. Sau khi đổi, mọi cột có cùng thang đo nên đóng góp công bằng vào khoảng cách.",
+     "html": "Biến đổi mỗi giá trị x của một cột thành x′: giá trị <b>nhỏ nhất</b> của cột thành <b>0</b>, giá trị <b>lớn nhất</b> thành <b>1</b>, các giá trị khác nằm ở giữa theo đúng tỉ lệ. Sau khi đổi, các cột có cùng khoảng giá trị nên cột có số lớn không tự lấn át phép đo. Điều này chưa bảo đảm các cột quan trọng ngang nhau.",
      "ky_hieu": "x′ = <span class=\"frac\"><span>x − min</span><span>max − min</span></span> — min, max là giá trị nhỏ nhất, lớn nhất của chính cột đó."
     },
     {
@@ -633,14 +633,14 @@ window.BAI = {
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Chỉ đổi một cột về 0 – 1 còn cột kia giữ nguyên — phải đổi <b>mọi cột</b> dùng để đo.",
+      "Chỉ đổi một cột về 0 – 1 còn cột kia giữ nguyên — trong ví dụ này, cần đổi <b>cả hai cột</b> dùng để đo.",
       "Dùng min, max của cột này để đổi cột khác.",
       "Nghĩ cột có số lớn là cột quan trọng hơn — số lớn chỉ do đơn vị đo (phút), không do mức quan trọng."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "Cột có số lớn lấn át khoảng cách. Đưa mọi cột về 0 – 1 bằng x′ = (x − min) : (max − min) rồi mới đo."
+     "html": "Cột có khoảng số lớn có thể lấn át khoảng cách. Trong ví dụ này, đưa cả hai cột về 0 – 1 bằng x′ = (x − min) : (max − min) rồi đo lại. Chọn cột và cách đo vẫn là quyết định của người làm model."
     },
     {
      "t": "doc_them",
@@ -1344,7 +1344,7 @@ window.BAI = {
     },
     {
      "t": "tom_tat",
-     "html": "MSE = trung bình cộng các bình phương sai lệch y − ŷ. Đường nào có MSE nhỏ nhất là đường khớp nhất."
+     "html": "MSE = trung bình cộng các bình phương sai lệch y − ŷ. Khi so trên cùng một tập dữ liệu, đường có MSE nhỏ hơn có sai số bình phương trung bình nhỏ hơn."
     },
     {
      "t": "doc_them",
@@ -1720,7 +1720,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Chọn bước nhảy",
-     "html": "<b>Quá nhỏ</b> (0,005): đi đúng hướng nhưng rất chậm. <b>Vừa</b> (0,02): về đáy sau vài bước. <b>Hơi lớn</b> (0,05): nhảy qua lại hai bên đáy rồi mới dần về. <b>Quá lớn</b> (0,1): mỗi bước văng xa hơn — sai số tăng vọt, không bao giờ về đáy."
+     "html": "<b>Quá nhỏ</b> (0,005): đi đúng hướng nhưng rất chậm. <b>Vừa</b> (0,02): về đáy sau vài bước. <b>Hơi lớn</b> (0,05): nhảy qua lại hai bên đáy rồi mới dần về. <b>Quá lớn</b> (0,1): trong lần thử này, mỗi bước văng xa hơn — sai số tăng vọt."
     },
     {
      "t": "anh",
@@ -1749,7 +1749,7 @@ window.BAI = {
     },
     {
      "t": "mat_3d",
-     "tieu_de": "mặt sai số khi đổi cả a và b",
+     "tieu_de": "Mở rộng: mặt sai số khi đổi cả a và b",
      "huong_dan": "Kéo chuột để xoay mặt cong. Mỗi điểm trên mặt là MSE của một cặp (a; b). Kéo thanh trượt bên dưới để máy đi từng bước (bước nhảy 0,02, bắt đầu từ a = 0, b = 0). Để ý: vài bước đầu rơi rất nhanh, sau đó máy bò chậm dọc <b>lòng máng</b> hẹp.",
      "truc_x": [
       -0.2,
@@ -4022,15 +4022,15 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai06-q27",
-    "q": "Vì sao phải đưa các cột về cùng thang đo trước khi dùng KNN?",
+    "q": "Vì sao cần xem thang đo các cột trước khi dùng KNN?",
     "giai": "KNN chọn láng giềng theo khoảng cách; cột có số lớn sẽ lấn át nếu không đổi.",
     "a": [
-     "Để mọi cột đóng góp công bằng vào khoảng cách",
+     "Tránh cột số lớn lấn át",
      "Để máy chạy nhanh hơn gấp nhiều lần",
      "Để bảng dữ liệu có ít dòng hơn",
      "Để kết quả luôn là Đạt"
     ],
-    "h": "7411fb7abbf18"
+    "h": "1b1ec42294c739"
    },
    {
     "k": "ma",
