@@ -8,7 +8,7 @@ window.BAI = {
  "gioi_thieu": [
   "Con dùng AI mỗi ngày: mở khoá bằng khuôn mặt, xem video được gợi ý, hỏi chatbot. Nhưng “AI” thật ra là gì? Nó có “hiểu” và “nghĩ” như con người không?",
   "Bài đầu tiên của khoá: con khám phá bốn nhóm ứng dụng AI, xem một máy thật đoán chữ số viết tay và một máy nhỏ tự đoán từ tiếp theo — rồi tập nói về AI cho đúng.",
-  "Không cần biết lập trình. Mọi con số và hình trên trang là kết quả máy chạy thật trên dữ liệu thật."
+  "Không cần biết lập trình. Hình chữ số lấy từ bộ dữ liệu thật; 37 câu tiếng Việt dùng cho máy đoán từ là ví dụ tự soạn."
  ],
  "thoi_gian": "≈ 22 phút",
  "muoi": "LSTS-ML1-WEB|bai01",
@@ -47,6 +47,12 @@ window.BAI = {
      "cap": "Bốn nhóm ứng dụng AI hay gặp",
      "alt": "Bốn nhóm ứng dụng AI hay gặp",
      "src": "img/ai-quanh-con.png"
+    },
+    {
+     "t": "anh",
+     "cap": "Hình minh họa tạo bằng AI: mở khóa khuôn mặt và gợi ý video trên thiết bị cá nhân",
+     "alt": "Hình minh họa tạo bằng AI: mở khóa khuôn mặt và gợi ý video trên thiết bị cá nhân",
+     "src": "img/ai-dien-thoai-doi-thuong.png"
     },
     {
      "t": "dinh_nghia",
@@ -178,8 +184,8 @@ window.BAI = {
      "t": "bang",
      "cot": [
       "",
-      "Chương trình thông thường",
-      "Hệ thống AI học từ dữ liệu"
+      "Chương trình theo quy tắc cố định",
+      "Hệ thống học máy trong bài"
      ],
      "dong": [
       [
@@ -189,8 +195,8 @@ window.BAI = {
       ],
       [
        "Kết quả",
-       "Luôn giống nhau, chắc chắn",
-       "Là dự đoán — có thể sai"
+       "Cùng đầu vào thì cùng kết quả",
+       "Dự đoán cho dữ liệu mới, có thể sai"
       ],
       [
        "Ví dụ",
@@ -206,6 +212,31 @@ window.BAI = {
      "html": "Những hệ AI đời đầu (thập niên 1970–1980) được làm bằng hàng nghìn quy tắc do chuyên gia viết — gọi là <b>hệ chuyên gia</b>. Nhưng việc như nhận ra khuôn mặt có quá nhiều trường hợp để viết thành quy tắc, nên ngày nay người ta cho máy <b>học từ dữ liệu</b>."
     },
     {
+     "t": "anh",
+     "cap": "Học máy là một phần của AI; học sâu là một phần của học máy. Hình: GeeksforGeeks.",
+     "alt": "Học máy là một phần của AI; học sâu là một phần của học máy. Hình: GeeksforGeeks.",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260604124223206838/ai_ml.webp",
+     "du_phong": "img/ai-ml-dl-gfg.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — AI, Machine Learning và Deep Learning",
+      "url": "https://www.geeksforgeeks.org/artificial-intelligence/difference-between-artificial-intelligence-vs-machine-learning-vs-deep-learning/"
+     },
+     "chu_giai": [
+      [
+       "Artificial Intelligence",
+       "Trí tuệ nhân tạo"
+      ],
+      [
+       "Machine Learning",
+       "Học máy"
+      ],
+      [
+       "Deep Learning",
+       "Học sâu"
+      ]
+     ]
+    },
+    {
      "t": "loi_hay_gap",
      "muc": [
       "Gọi mọi thứ tự động là AI — máy tính bỏ túi, đèn hẹn giờ chỉ làm đúng các bước viết sẵn.",
@@ -214,7 +245,7 @@ window.BAI = {
     },
     {
      "t": "tom_tat",
-     "html": "Máy chỉ làm đúng các bước viết sẵn thì chưa phải AI; hệ thống học từ dữ liệu để dự đoán là AI (Machine Learning)."
+     "html": "Máy tính bỏ túi và đèn hẹn giờ trong ví dụ làm theo quy tắc cố định. Học máy tìm quy luật từ dữ liệu; AI còn có những cách xây dựng khác."
     }
    ],
    "checkpoint": [
@@ -781,7 +812,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Con người chịu trách nhiệm",
-     "html": "AI không tự “muốn” hay “quyết định” điều gì. Con người chọn dữ liệu, dựng hệ thống và quyết định dùng dự đoán thế nào — nên con người chịu trách nhiệm."
+     "html": "Khi giải thích cách hệ thống hoạt động, hãy nói rõ dữ liệu đầu vào, dự đoán và cách người dùng áp dụng kết quả. Người thiết kế và người sử dụng cần kiểm tra kết quả, nhất là khi kết quả ảnh hưởng đến người khác."
     },
     {
      "t": "loi_hay_gap",
@@ -792,7 +823,7 @@ window.BAI = {
     },
     {
      "t": "tom_tat",
-     "html": "Nói “hệ thống / ứng dụng AI dự đoán…”, không nói “AI hiểu, AI nghĩ”; luôn cân nhắc lợi – hại."
+     "html": "Trong phần giải thích kỹ thuật, nói rõ hệ thống xử lý dữ liệu và tạo dự đoán hoặc nội dung; kiểm tra kết quả trước khi dùng."
     }
    ],
    "checkpoint": [

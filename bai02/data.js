@@ -6,7 +6,7 @@ window.BAI = {
  "phan": "Module 03 · Introduction to AI",
  "cau_hoi": "Máy “học” nghĩa là gì — và học từ đâu?",
  "gioi_thieu": [
-  "Bài 1 cho thấy AI dự đoán từ dữ liệu. Bài này trả lời: máy <b>học</b> để dự đoán như thế nào? Khác gì với lập trình bình thường, và vì sao dữ liệu quyết định máy giỏi hay dở?",
+  "Bài 1 cho thấy AI dự đoán từ dữ liệu. Bài này trả lời: máy <b>học</b> để dự đoán như thế nào? Khác gì với lập trình theo quy tắc, và vì sao dữ liệu ảnh hưởng đến kết quả?",
   "Con tiếp tục dùng bộ ảnh chữ số viết tay: cho máy học ít hoặc nhiều ví dụ, giấu một chữ số, gắn nhãn sai — và xem chuyện gì xảy ra. Cuối bài là bản đồ ba loại học máy và quy trình một dự án.",
   "Mọi con số và hình trên trang là kết quả máy chạy thật trên bộ ảnh chữ số viết tay."
  ],
@@ -15,7 +15,7 @@ window.BAI = {
  "muc_tieu": [
   "Phân biệt lập trình bằng quy tắc với học máy.",
   "Giải thích vì sao nhiều ví dụ giúp máy đoán đúng hơn.",
-  "Nhận ra máy chỉ biết những gì có trong dữ liệu; nhãn sai làm máy học sai.",
+  "Giải thích vì sao dữ liệu thiếu lớp hoặc nhãn sai có thể làm model dự đoán kém.",
   "Phân biệt ba loại học máy: có giám sát, không giám sát, tăng cường.",
   "Kể được 5 bước của một dự án học máy."
  ],
@@ -47,6 +47,12 @@ window.BAI = {
      "cap": "Hai cách làm cho máy tính giải một bài toán",
      "alt": "Hai cách làm cho máy tính giải một bài toán",
      "src": "img/quy-tac-va-hoc.png"
+    },
+    {
+     "t": "anh",
+     "cap": "Hình minh họa tạo bằng AI: một hộp thư có tin nhắn đáng nghi và tin nhắn bình thường",
+     "alt": "Hình minh họa tạo bằng AI: một hộp thư có tin nhắn đáng nghi và tin nhắn bình thường",
+     "src": "img/hop-thu-va-thu-rac.png"
     },
     {
      "t": "demo_tung_buoc",
@@ -97,6 +103,12 @@ window.BAI = {
      "ten": "Học máy (Machine Learning)",
      "html": "Cách làm cho máy tính <b>tự tìm quy luật từ dữ liệu</b>, thay vì con người viết sẵn từng quy tắc. Quy luật máy tìm được gọi là <b>model</b>. Với bài nhận chữ số, dữ liệu là các ảnh <b>kèm đáp án</b> (gọi là <i>nhãn</i>).",
      "ky_hieu": null
+    },
+    {
+     "t": "hop",
+     "kieu": "ml",
+     "tieu_de": "Ngoài đời: lọc thư rác",
+     "html": "Hộp thư có tin nhắn đã được đánh dấu <b>thư rác</b> hoặc <b>bình thường</b>. Model học từ những ví dụ có nhãn đó, rồi dự đoán nhãn cho tin nhắn mới. Nếu chỉ dựa vào từ “quà”, model có thể nhầm lời nhắn “nhận quà của lớp” là thư rác."
     },
     {
      "t": "doc_them",
@@ -200,7 +212,7 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Chỉ 10 ảnh: đúng 41,6%. 100 ảnh: 88,7%. 1000 ảnh: 95,9% — tăng rất nhanh lúc đầu, rồi chậm dần."
+     "html": "Trong thí nghiệm này: 10 ảnh đúng 41,6%; 100 ảnh đúng 88,7%; 1000 ảnh đúng 95,9%. Độ chính xác tăng nhanh lúc đầu, rồi chậm dần."
     },
     {
      "t": "loi_hay_gap",
@@ -211,7 +223,7 @@ window.BAI = {
     },
     {
      "t": "tom_tat",
-     "html": "Nhiều ví dụ hơn → đoán đúng hơn, nhưng mức tăng chậm dần."
+     "html": "Trong thí nghiệm này, thêm ảnh học giúp model đoán đúng nhiều ảnh mới hơn. Kết quả ở bộ dữ liệu khác có thể khác."
     }
    ],
    "checkpoint": [
@@ -258,7 +270,7 @@ window.BAI = {
    "ten": "Dữ liệu quyết định",
    "ten_ngan": "Dữ liệu",
    "phut": 5,
-   "muc_tieu": "nhận ra máy chỉ biết những gì có trong dữ liệu; nhãn sai làm máy học sai.",
+   "muc_tieu": "giải thích kết quả khi dữ liệu thiếu một lớp hoặc nhãn bị sai.",
    "khoi_dong": "Nếu chưa bao giờ thấy con kiwi, con gọi nó là quả gì?",
    "khoi": [
     {
@@ -269,7 +281,7 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Không ảnh nào được đoán đúng: máy chưa từng thấy số 5 nên chỉ chọn được trong những số đã học — nhiều nhất là “3” (17 ảnh) và “9” (17 ảnh)."
+     "html": "Không ảnh nào được đoán đúng: trong thí nghiệm này model chỉ có 9 lớp đầu ra, không có số 5, nên chỉ chọn được trong những số đã học — nhiều nhất là “3” (17 ảnh) và “9” (17 ảnh)."
     },
     {
      "t": "anh",
@@ -296,7 +308,7 @@ window.BAI = {
     },
     {
      "t": "tom_tat",
-     "html": "Máy chỉ biết điều có trong dữ liệu; nhãn sai → học sai. Dữ liệu tốt quan trọng hơn hết."
+     "html": "Model trong thí nghiệm không thể chọn lớp đã bị giấu. Nhãn sai có thể làm độ chính xác giảm; cần kiểm tra dữ liệu trước khi học."
     }
    ],
    "checkpoint": [
@@ -336,6 +348,39 @@ window.BAI = {
      "cap": "Ba cách máy học",
      "alt": "Ba cách máy học",
      "src": "img/ba-loai-hoc-may.png"
+    },
+    {
+     "t": "anh",
+     "cap": "Ví dụ học có giám sát: ảnh động vật đi kèm nhãn; máy dự đoán cho ảnh mới. Hình: GeeksforGeeks.",
+     "alt": "Ví dụ học có giám sát: ảnh động vật đi kèm nhãn; máy dự đoán cho ảnh mới. Hình: GeeksforGeeks.",
+     "src": "https://media.geeksforgeeks.org/wp-content/uploads/20231121154747/Supervised-learning.png",
+     "du_phong": "img/hoc-co-giam-sat-gfg.png",
+     "nguon": {
+      "ten": "GeeksforGeeks — Supervised and Unsupervised Learning",
+      "url": "https://www.geeksforgeeks.org/machine-learning/supervised-unsupervised-learning/"
+     },
+     "chu_giai": [
+      [
+       "Supervised Learning",
+       "Học có giám sát"
+      ],
+      [
+       "Labeled Data",
+       "Dữ liệu có nhãn"
+      ],
+      [
+       "Training data set",
+       "Tập dữ liệu học"
+      ],
+      [
+       "Labels",
+       "Nhãn"
+      ],
+      [
+       "Output",
+       "Kết quả"
+      ]
+     ]
     },
     {
      "t": "bang",
@@ -910,7 +955,7 @@ window.BAI = {
     },
     {
      "t": "tom_tat",
-     "html": "Nhiều ví dụ đúng, đủ mọi loại → máy giỏi; thiếu loại nào hay nhãn sai → máy đoán sai."
+     "html": "Trong các thí nghiệm này, dữ liệu đủ lớp và nhãn đúng giúp model dự đoán tốt hơn trên ảnh mới."
     }
    ],
    "checkpoint": [
