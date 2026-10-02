@@ -40,6 +40,19 @@ Mở `http://localhost:8765/bai04/`.
 - Quy ước số của khóa: **dấu `.` cho phần thập phân**, **dấu `,` giữa các phần tử vector**. Ví dụ trên web/slide: `(3.5, 120)`; trong Python, đây là tuple, còn `np.array([3.5, 120])` là mảng dùng để tính toán. Tránh `(3,5; 120)` và tránh đổi `2.6` thành `2,6` khi hiển thị đồ thị. Bộ chạy web cũng dùng dấu `.`.
 - `lib_web.py` tự chuẩn hóa văn bản và băm lại đáp án sau khi dựng một bài. Khi cập nhật nhiều bài hoặc slide, chạy `_Chung/chuan_hoa_ky_hieu.py` để chuẩn hóa toàn bộ sản phẩm đang dùng; công cụ giữ bố cục PowerPoint và bỏ qua bản lưu/tài liệu tham khảo. Sau đó chạy `_Chung/build_quest_ml.py` để gắn lại cổng 3D và phiên bản asset mới. Kiểm tra phương án nhiễu của câu hỏi Python: phép đổi dấu có thể khiến phương án sai trùng đáp án đúng.
 
+### Dựng lại toàn bộ web
+
+Từ thư mục gốc khóa học, chạy theo thứ tự:
+
+```bash
+python _Tools/_Chung/dung_lai_tat_ca.py --chi web
+python _Tools/_Chung/chuan_hoa_ky_hieu.py
+python _Tools/_Chung/build_quest_ml.py
+python _Tools/_Chung/dang_web.py "Cập nhật toàn bộ web"
+```
+
+Kiểm tra dòng `SO BUOC LOI: 0` sau bước đầu. Bài 12, 13 và 18 cần `scikit-learn`/`scipy` trong môi trường Python dùng để dựng bài. Bước `build_quest_ml.py` phải chạy sau cùng để giữ nút vào cổng 3D và phiên bản asset của cả 25 bài.
+
 ## Hành trình 3D và video
 
 - Trang chủ có sáu khu 3D để học sinh tìm bài theo mạch kiến thức. Mỗi khu có cảnh, màu và ký hiệu riêng; đảo chuyển động nhẹ, sáng và phóng lớn khi rê chuột hoặc dùng bàn phím. Chọn khu để xem bài của khu ấy. Toàn bộ 25 bài đang có đều có cổng 3D với tên gắn nội dung, ví dụ **Thành phố Thống kê và Xác suất**, **Trường Vector**, **Rừng Cây quyết định**. Không dùng cùng một kiểu thành phố cho mọi bài. Metadata tập trung ở `assets/the-gioi.js` để tên ở trang chủ, trang đọc và game khớp nhau.
