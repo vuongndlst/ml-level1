@@ -12,6 +12,7 @@ qua checkpoint rồi nhận chứng chỉ PNG nộp lên Canvas.
 | `baiNN/index.html` + `baiNN/data.js` | Một bài học. `data.js` sinh bằng `_Scripts/build_web.py` của bài đó |
 | `baiNN/img/` | Hình tự vẽ + bản dự phòng khi ảnh GfG không tải được |
 | `assets/app.js`, `assets/style.css`, `assets/lesson-world.css` | Bộ chạy và giao diện đọc dùng chung; màu và lời mời 3D theo từng bài |
+| `du-lieu/*.csv` | Tệp CSV dùng trong Colab của từng bài; học sinh tải trực tiếp trên web |
 | `baiNN/quest.html` | Game đi cảnh 3D cho cả 25 bài; mỗi trạm mở một chặng học |
 | `assets/quest3d.js`, `assets/quest3d.css` | Bộ chạy và giao diện game 3D dùng chung |
 | `_Chung/build_quest_ml.py` | Dựng lại `quest.html` và nối các asset chủ đề vào `index.html` sau khi build bài đọc |
@@ -37,6 +38,8 @@ Mở `http://localhost:8765/bai04/`.
 - Đáp án chỉ lưu dạng băm (cyrb53); mã chứng chỉ tính từ bài + họ tên + lớp. Web tĩnh nên người cố tình đọc mã nguồn vẫn dò được — đây là đánh giá quá trình, điểm chính thức ở quiz Canvas.
 - Hình GfG được nhúng thẳng từ máy chủ gốc, ghi nguồn dưới hình, chỉ dùng cho mục đích học tập.
 - Sửa nội dung: sửa `build_web.py` của bài rồi chạy lại — không sửa tay `data.js`.
+- Màn đầu mỗi bài đặt **câu hỏi dẫn nhập ngắn và ô nhập họ tên/lớp lên trước**. Lớp là danh sách chọn theo `B.ds_lop`; thông báo lỗi hiện ngay cạnh trường nhập. Tên dùng cho chứng chỉ. Phần mục tiêu và lộ trình nằm trong mục mở rộng; lời dẫn ngắn cho 25 bài đặt ở `assets/app.js` (`LOI_DAN`). Khi sửa lời dẫn, dùng câu tự nhiên, một ý chính, phù hợp lớp 10.
+- Bài nào có CSV trong `Colab/` thì `lib_web.py` đưa thông tin tệp vào `data.js` (`du_lieu`) nếu tệp cùng tên đã có trong `_Web/du-lieu/`. Web hiện nút **Tải CSV**, tên cột, 3 dòng mẫu và chú giải trước khi học sinh dùng Colab; trong mỗi chặng cũng có mục truy cập dữ liệu. Chú giải các tệp thông dụng nằm ở `GIAI_THICH_CSV` của `lib_web.py`. Khi thêm CSV mới, đặt bản đúng nội dung trong `_Web/du-lieu/`, thêm chú giải rồi dựng lại bài. Kiểm tra tệp web khớp bản trong Colab.
 - Quy ước số của khóa: **dấu `.` cho phần thập phân**, **dấu `,` giữa các phần tử vector**. Ví dụ trên web/slide: `(3.5, 120)`; trong Python, đây là tuple, còn `np.array([3.5, 120])` là mảng dùng để tính toán. Tránh `(3,5; 120)` và tránh đổi `2.6` thành `2,6` khi hiển thị đồ thị. Bộ chạy web cũng dùng dấu `.`.
 - `lib_web.py` tự chuẩn hóa văn bản và băm lại đáp án sau khi dựng một bài. Khi cập nhật nhiều bài hoặc slide, chạy `_Chung/chuan_hoa_ky_hieu.py` để chuẩn hóa toàn bộ sản phẩm đang dùng; công cụ giữ bố cục PowerPoint và bỏ qua bản lưu/tài liệu tham khảo. Sau đó chạy `_Chung/build_quest_ml.py` để gắn lại cổng 3D và phiên bản asset mới. Kiểm tra phương án nhiễu của câu hỏi Python: phép đổi dấu có thể khiến phương án sai trùng đáp án đúng.
 

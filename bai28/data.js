@@ -19,6 +19,7 @@ window.BAI = {
   "Giải thích được khám phá và khai thác.",
   "Nhận ra hậu quả của phần thưởng đặt sai."
  ],
+ "du_lieu": [],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
  "khoi": "Khối 10",

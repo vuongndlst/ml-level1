@@ -19,6 +19,7 @@ window.BAI = {
   "Mô tả cách AI tạo sinh tạo ra chữ bằng cách đoán từ tiếp theo.",
   "Dùng ngôn ngữ kỹ thuật khi nói về AI; nêu được lợi ích và rủi ro."
  ],
+ "du_lieu": [],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
  "khoi": "Khối 10",

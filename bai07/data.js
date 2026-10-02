@@ -19,6 +19,67 @@ window.BAI = {
   "Phân biệt giá trị phi lý (lỗi nhập liệu) với giá trị bất thường có thật.",
   "Sắp xếp đúng thứ tự các bước làm sạch một bảng dữ liệu."
  ],
+ "du_lieu": [
+  {
+   "ten": "Dữ liệu học sinh chưa làm sạch",
+   "tep": "students_ban.csv",
+   "url": "../du-lieu/students_ban.csv",
+   "mo_ta": "Mỗi dòng là một học sinh. Hãy để ý ô trống và cách viết chưa thống nhất.",
+   "so_dong": 95,
+   "cot": [
+    "StudentID",
+    "HoTen",
+    "Lop",
+    "GioiTinh",
+    "StudyHours",
+    "SleepHours",
+    "Score",
+    "Result"
+   ],
+   "giai_thich": [
+    "Mã học sinh",
+    "Họ tên",
+    "Lớp",
+    "Giới tính",
+    "Số giờ học",
+    "Số giờ ngủ",
+    "Điểm số",
+    "Kết quả đạt/không đạt"
+   ],
+   "mau": [
+    [
+     "HS001",
+     "Hoang Quan",
+     "10A1",
+     "Nu",
+     "5.8",
+     "8.8",
+     "9.7",
+     "Pass"
+    ],
+    [
+     "HS002",
+     "Bui Ha",
+     "10A3",
+     "Nu",
+     "5.1",
+     "7.9",
+     "8.8",
+     "Pass"
+    ],
+    [
+     "HS003",
+     "Tran Giang",
+     "10a1",
+     "Nu",
+     "4.2",
+     "6.2",
+     "7.0",
+     "Pass"
+    ]
+   ]
+  }
+ ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
  "khoi": "Khối 10",

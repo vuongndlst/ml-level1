@@ -144,59 +144,104 @@
     return luuDuoc ? null : el("div", { class: "hop chu-y", html: "<b>Trình duyệt đang chặn lưu tiến độ</b> (chế độ ẩn danh?). Con vẫn học được, nhưng đóng trang là mất tiến độ." });
   }
 
+  // Một câu dẫn vào việc học, trước khi học sinh cần đọc mục tiêu và lộ trình chi tiết.
+  var LOI_DAN = {
+    bai01: "Nhìn quanh con: ứng dụng nào thực sự dùng AI? Hãy thử phân biệt bằng ví dụ quen thuộc.",
+    bai02: "Máy học từ ví dụ như thế nào? Con sẽ thử đóng vai người dạy máy.",
+    bai03: "Con sẽ chạy vài dòng Python trên Colab và đọc kết quả, từng bước một.",
+    bai04: "Một bảng dữ liệu có thể được đọc, tính toán và vẽ thành biểu đồ bằng Python.",
+    bai05: "Hai lớp có điểm trung bình gần nhau. Còn điều gì cần xem trước khi kết luận?",
+    bai06: "Nếu mỗi học sinh là một điểm trên biểu đồ, ta đo hai bạn giống nhau ra sao?",
+    bai07: "Dữ liệu có ô trống hoặc viết không thống nhất. Con sẽ tìm và sửa chúng.",
+    bai08: "Trước khi huấn luyện, ta cần chọn đặc điểm và tách dữ liệu đúng cách.",
+    bai09: "Một biểu đồ tốt giúp con thấy điều khó nhận ra trong bảng số liệu.",
+    bai10: "Hai đại lượng cùng thay đổi có chắc cái này gây ra cái kia không?",
+    bai12: "Con sẽ xem máy học từ dữ liệu có đáp án và thử nhận ra khi mô hình học thuộc.",
+    bai13: "KNN dự đoán bằng cách nhìn các ví dụ gần nhất. Con sẽ thử làm như máy.",
+    bai15: "Có thể ước lượng giá điện thoại cũ từ vài thông tin của máy không?",
+    bai16: "Mô hình có thể trả về xác suất đạt, rồi dùng ngưỡng để đưa ra quyết định.",
+    bai18: "Cây quyết định đặt câu hỏi từng bước. Con sẽ theo nhánh để hiểu một dự đoán.",
+    bai20: "Nhiều mô hình cùng dự đoán có thể cho kết quả khác một mô hình đơn lẻ.",
+    bai21: "Con sẽ thử dùng tần suất và xác suất để phân loại một trường hợp mới.",
+    bai22: "Hãy tìm một ranh giới chia hai nhóm và xem vì sao khoảng cách tới ranh giới quan trọng.",
+    bai24: "Một lần chia dữ liệu có thể may hoặc rủi. Con sẽ xem cách kiểm tra nhiều lần.",
+    bai25: "Không có một mô hình tốt nhất cho mọi bài toán. Con sẽ chọn theo dữ liệu và mục tiêu.",
+    bai26: "Khi chưa có nhãn, máy vẫn có thể gom các điểm giống nhau thành nhóm.",
+    bai28: "Một tác nhân học đường đi bằng cách thử, nhận phản hồi và điều chỉnh.",
+    bai29: "Con sẽ nhìn cách nhiều nơ-ron nối với nhau để tạo ra dự đoán.",
+    bai30: "Dữ liệu theo ngày có thứ tự thời gian. Con sẽ dùng quá khứ để dự đoán ngày sau.",
+    bai31: "Một mô hình chỉ hữu ích khi người khác có thể nhập dữ liệu và xem dự đoán."
+  };
+
+  function theDuLieu(nho) {
+    if (!B.du_lieu || !B.du_lieu.length) return null;
+    var khung = el("section", { class: "the du-lieu-card" });
+    khung.appendChild(el("span", { class: "nhan", text: "Dữ liệu của bài" }));
+    khung.appendChild(el(nho ? "h3" : "h2", { text: "Xem CSV trước khi dùng trong Colab" }));
+    khung.appendChild(el("p", { text: "CSV là bảng dữ liệu: dòng đầu ghi tên cột; các dòng sau là từng trường hợp." }));
+    B.du_lieu.forEach(function (d) {
+      var khoi = el("div", { class: "du-lieu-tep" });
+      khoi.appendChild(el("div", { class: "du-lieu-dau" }, [
+        el("div", {}, [el("b", { text: d.ten }), el("small", { text: d.so_dong + " dòng dữ liệu · " + d.cot.length + " cột · " + d.tep })]),
+        el("a", { class: "nut du-lieu-tai", href: d.url, download: d.tep, text: "↓ Tải CSV" })]));
+      var chiTiet = el("details", { class: "du-lieu-chi-tiet" });
+      chiTiet.appendChild(el("summary", { text: "Xem tên cột và 3 dòng mẫu" }));
+      chiTiet.appendChild(el("p", { text: d.mo_ta }));
+      var bang = el("table", { class: "bang du-lieu-bang" });
+      var head = el("thead");
+      head.appendChild(el("tr", {}, d.cot.map(function (c) { return el("th", { text: c, scope: "col" }); })));
+      bang.appendChild(head);
+      var body = el("tbody");
+      (d.mau || []).forEach(function (dong) { body.appendChild(el("tr", {}, d.cot.map(function (_, j) {
+        return el("td", { text: dong[j] === "" ? "(trống)" : (dong[j] || "") });
+      }))); });
+      bang.appendChild(body);
+      chiTiet.appendChild(el("div", { class: "du-lieu-cuon" }, [bang]));
+      var giai = d.cot.map(function (c, j) { return d.giai_thich[j] ? c + ": " + d.giai_thich[j] : ""; }).filter(Boolean);
+      if (giai.length) chiTiet.appendChild(el("p", { class: "du-lieu-chu-giai", text: giai.join(" · ") }));
+      khoi.appendChild(chiTiet);
+      khung.appendChild(khoi);
+    });
+    return khung;
+  }
+
   // ------------------------------------------------------------ màn bắt đầu
   function moDau() {
     changDang = null;
     capNhatDau();
     main.innerHTML = "";
-    var t = el("section", { class: "the" });
+    var t = el("section", { class: "the mo-dau-hero" });
     t.appendChild(el("span", { class: "nhan", text: B.nhan + " · " + B.thoi_gian }));
     t.appendChild(el("h1", { text: B.tieu_de }));
     t.appendChild(el("div", { class: "cau-lon", text: B.cau_hoi }));
-    if (TG.ten && !NHUNG) {
-      var choi = el("div", { class: "loi-moi-3d" });
-      choi.style.setProperty("--world-accent", TG.mau);
-      choi.appendChild(el("span", { class: "world-symbol", text: TG.bieu_tuong || "ML", "aria-hidden": "true" }));
-      choi.appendChild(el("span", { class: "nhan", text: "THẾ GIỚI 3D CỦA " + B.nhan.toUpperCase() }));
-      choi.appendChild(el("h3", { text: TG.ten }));
-      choi.appendChild(el("p", { text: TG.mo_ta + " Đi từng trạm, làm câu hỏi nhanh rồi dừng để trao đổi và ghi bài. Tiến độ và chứng chỉ dùng chung với trang đọc." }));
-      choi.appendChild(el("a", { class: "nut choi3d", href: "quest.html", text: "Vào thế giới 3D →" }));
-      t.appendChild(choi);
-    }
-    (B.gioi_thieu || []).forEach(function (p) { t.appendChild(el("p", { html: p })); });
-    if (B.muc_tieu && B.muc_tieu.length) {
-      t.appendChild(el("h3", { text: "Học xong bài này, con có thể" }));
-      t.appendChild(el("ul", { class: "ds" }, B.muc_tieu.map(function (m) { return el("li", { html: m }); })));
-    }
-    var bd = el("div", { class: "ban-do" });
-    B.chang.forEach(function (c, i) {
-      bd.appendChild(el("div", { class: i < TT.qua ? "xong" : "" }, [el("b", { text: (i < TT.qua ? "✓ " : "") + "Chặng " + (i + 1) + " · " + c.phut + " phút" }), c.ten]));
-    });
-    bd.appendChild(el("div", {}, [el("b", { text: "Checkpoint cuối" }),
-      B.cuoi.so_cau + " câu · đạt " + B.cuoi.dat + "/" + B.cuoi.so_cau + " nhận chứng chỉ"]));
-    t.appendChild(el("h3", { text: "Lộ trình" }));
-    t.appendChild(bd);
-    t.appendChild(el("p", { html: "Cuối mỗi chặng có vài câu hỏi nhanh — trả lời đúng hết mới mở chặng sau. " +
-      "Sai thì đọc gợi ý rồi sửa, <b>không bị trừ điểm</b>. Tiến độ được lưu tự động trên trình duyệt này." }));
+    t.appendChild(el("p", { class: "loi-dan-ngan", text: LOI_DAN[B.ma] || "Con sẽ khám phá câu hỏi này qua từng chặng ngắn." }));
     main.appendChild(t);
 
-    var f = el("section", { class: "the" });
-    f.appendChild(el("h2", { text: "Con là ai?" }));
-    f.appendChild(el("p", { html: "Gõ <b>họ tên đầy đủ, có dấu</b> và <b>lớp</b> đúng như trong sổ điểm. " +
-      "Tên này in lên chứng chỉ — gõ sai thì mã xác nhận không khớp." }));
-    var iTen = el("input", { class: "o", id: "ten", autocomplete: "name", placeholder: "Ví dụ: Nguyễn Minh Anh" });
-    var iLop = el("input", { class: "o", id: "lop", placeholder: "Ví dụ: " + ((B.ds_lop || [])[0] || "10A1"), list: "ds-lop" });
-    var dl = el("datalist", { id: "ds-lop" });
-    (B.ds_lop || []).forEach(function (l) { dl.appendChild(el("option", { value: l })); });
-    iTen.value = TT.ten || ""; iLop.value = TT.lop || "";
-    var tb = el("span", { class: "thong-bao xau" });
-    var nut = el("button", { class: "nut", text: TT.qua ? "Học tiếp" : "Bắt đầu học", onclick: function () {
-      var ten = iTen.value.replace(/\s+/g, " ").trim(), lop = iLop.value.replace(/\s+/g, "").toUpperCase();
-      if (ten.split(" ").length < 2) { tb.textContent = "Con gõ đủ họ và tên nhé."; return; }
-      if (!/^\d{1,2}[A-Z]\d{0,2}$/.test(lop)) { tb.textContent = "Lớp viết dạng " + ((B.ds_lop || [])[0] || "10A1") + "."; return; }
+    var f = el("form", { class: "the mo-dau-form" });
+    f.appendChild(el("span", { class: "nhan", text: "Bước 1 · Thông tin học sinh" }));
+    f.appendChild(el("h2", { text: TT.ten ? "Kiểm tra thông tin rồi học tiếp" : "Nhập thông tin để bắt đầu" }));
+    f.appendChild(el("p", { class: "goi-y-form", text: "Dùng họ tên có dấu và lớp của con. Thông tin này sẽ in trên chứng chỉ." }));
+    var iTen = el("input", { class: "o", id: "ten", name: "ten", autocomplete: "name", placeholder: "Ví dụ: Nguyễn Minh Anh", required: "", "aria-describedby": "loi-ten" });
+    var iLop = el("select", { class: "o", id: "lop", name: "lop", required: "", "aria-describedby": "loi-lop" });
+    iLop.appendChild(el("option", { value: "", text: "Chọn lớp của con" }));
+    var dsLop = B.ds_lop || [];
+    dsLop.forEach(function (l) { iLop.appendChild(el("option", { value: l, text: l })); });
+    iTen.value = TT.ten || ""; iLop.value = dsLop.indexOf(TT.lop) >= 0 ? TT.lop : "";
+    var loiTen = el("small", { class: "loi-truong", id: "loi-ten", "aria-live": "polite" });
+    var loiLop = el("small", { class: "loi-truong", id: "loi-lop", "aria-live": "polite" });
+    iTen.addEventListener("input", function () { loiTen.textContent = ""; iTen.removeAttribute("aria-invalid"); });
+    iLop.addEventListener("change", function () { loiLop.textContent = ""; iLop.removeAttribute("aria-invalid"); });
+    var nut = el("button", { class: "nut", type: "submit", text: TT.qua >= B.chang.length ? "Vào checkpoint cuối →" :
+      TT.qua ? "Học tiếp chặng " + (TT.qua + 1) + " →" : "Vào chặng 1 →" });
+    var choi = TG.ten && !NHUNG ? el("button", { class: "nut phu", type: "button", text: "Khám phá 3D →" }) : null;
+    function batDau(choi3D) {
+      var ten = iTen.value.replace(/\s+/g, " ").trim(), lop = iLop.value;
+      if (ten.split(" ").length < 2) { loiTen.textContent = "Nhập cả họ và tên của con."; iTen.setAttribute("aria-invalid", "true"); iTen.focus(); return; }
+      if (dsLop.indexOf(lop) < 0) { loiLop.textContent = "Chọn một lớp trong danh sách."; iLop.setAttribute("aria-invalid", "true"); iLop.focus(); return; }
       if (TT.dat && TT.ten && khongDau(TT.ten) !== khongDau(ten) &&
           !confirm("Đổi tên sẽ làm chứng chỉ cũ không còn khớp mã. Vẫn đổi?")) return;
       TT.ten = ten; TT.lop = lop; ghi();
+      if (choi3D) { location.href = "quest.html"; return; }
       if (NHUNG) {
         var cq0 = Q.get("chang");
         if (cq0 !== null) moChang(Math.min(+cq0 || 0, TT.qua));
@@ -205,11 +250,31 @@
         return;
       }
       if (TT.qua >= B.chang.length) moCuoi(); else moChang(TT.qua);
-    } });
-    f.appendChild(el("label", { class: "o", for: "ten", text: "Họ và tên" })); f.appendChild(iTen);
-    f.appendChild(el("label", { class: "o", for: "lop", text: "Lớp" })); f.appendChild(iLop); f.appendChild(dl);
-    f.appendChild(el("div", { class: "hang-nut" }, [nut, tb]));
+    }
+    f.addEventListener("submit", function (ev) { ev.preventDefault(); batDau(false); });
+    if (choi) choi.addEventListener("click", function () { batDau(true); });
+    f.appendChild(el("label", { class: "o", for: "ten", text: "Họ và tên" })); f.appendChild(iTen); f.appendChild(loiTen);
+    f.appendChild(el("label", { class: "o", for: "lop", text: "Lớp" })); f.appendChild(iLop); f.appendChild(loiLop);
+    f.appendChild(el("div", { class: "hang-nut" }, [nut, choi]));
+    if (TG.ten && !NHUNG) f.appendChild(el("p", { class: "goi-y-form", text: "Hai cách học dùng chung tiến độ. Hành trình 3D có tên: " + TG.ten + "." }));
     main.appendChild(f);
+    if (!NHUNG) {
+      var csv = theDuLieu(false); if (csv) main.appendChild(csv);
+      var them = el("details", { class: "the mo-dau-them" });
+      them.appendChild(el("summary", { text: "Xem mục tiêu và lộ trình bài học" }));
+      (B.gioi_thieu || []).forEach(function (p) { them.appendChild(el("p", { html: p })); });
+      if (B.muc_tieu && B.muc_tieu.length) {
+        them.appendChild(el("h3", { text: "Sau bài học, con có thể" }));
+        them.appendChild(el("ul", { class: "ds" }, B.muc_tieu.map(function (m) { return el("li", { html: m }); })));
+      }
+      var bd = el("div", { class: "ban-do" });
+      B.chang.forEach(function (c, i) {
+        bd.appendChild(el("div", { class: i < TT.qua ? "xong" : "" }, [el("b", { text: (i < TT.qua ? "✓ " : "") + "Chặng " + (i + 1) + " · " + c.phut + " phút" }), c.ten]));
+      });
+      bd.appendChild(el("div", {}, [el("b", { text: "Checkpoint cuối" }), B.cuoi.so_cau + " câu · đạt " + B.cuoi.dat + "/" + B.cuoi.so_cau + " nhận chứng chỉ"]));
+      them.appendChild(bd);
+      main.appendChild(them);
+    }
     var cb = canhBaoLuu(); if (cb) main.appendChild(cb);
   }
 
@@ -672,6 +737,12 @@
     capNhatDau();
     main.innerHTML = "";
     main.appendChild(thanhChang(i));
+    if (B.du_lieu && B.du_lieu.length) {
+      var tai = el("details", { class: "du-lieu-truy-cap" });
+      tai.appendChild(el("summary", { text: "Dữ liệu của bài · Tải CSV và xem bảng mẫu" }));
+      tai.appendChild(theDuLieu(true));
+      main.appendChild(tai);
+    }
     var c = B.chang[i];
     var t = el("section", { class: "the" });
     t.appendChild(el("span", { class: "nhan", text: "Chặng " + (i + 1) + " / " + B.chang.length + " · khoảng " + c.phut + " phút" }));

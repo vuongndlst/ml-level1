@@ -19,6 +19,57 @@ window.BAI = {
   "Đánh giá model hồi quy bằng MAE và R², so với model lười.",
   "Huấn luyện hồi quy nhiều cột bằng scikit-learn và nhận ra cột vô dụng."
  ],
+ "du_lieu": [
+  {
+   "ten": "Giá điện thoại cũ",
+   "tep": "dienthoai_cu.csv",
+   "url": "../du-lieu/dienthoai_cu.csv",
+   "mo_ta": "Mỗi dòng là một điện thoại; Gia là giá cần dự đoán theo đơn vị của bài học.",
+   "so_dong": 120,
+   "cot": [
+    "MaTin",
+    "TuoiMay",
+    "DungLuong",
+    "PinConLai",
+    "SoLanRoi",
+    "Gia"
+   ],
+   "giai_thich": [
+    "Mã tin đăng",
+    "Tuổi máy",
+    "Dung lượng",
+    "Mức pin còn lại",
+    "Số lần rơi",
+    "Giá"
+   ],
+   "mau": [
+    [
+     "T001",
+     "30",
+     "128",
+     "81",
+     "0",
+     "5.2"
+    ],
+    [
+     "T002",
+     "22",
+     "128",
+     "80",
+     "2",
+     "7.2"
+    ],
+    [
+     "T003",
+     "36",
+     "128",
+     "77",
+     "0",
+     "2.0"
+    ]
+   ]
+  }
+ ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
  "khoi": "Khối 10",

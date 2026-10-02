@@ -19,6 +19,7 @@ window.BAI = {
   "Phân biệt ba loại học máy: có giám sát, không giám sát, tăng cường.",
   "Kể được 5 bước của một dự án học máy."
  ],
+ "du_lieu": [],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
  "khoi": "Khối 10",

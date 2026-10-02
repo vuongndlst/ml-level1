@@ -19,6 +19,57 @@ window.BAI = {
   "So sánh hồi quy tuyến tính với LSTM (hộp đen) một cách trung thực.",
   "Giải thích vì sao đoán càng xa càng khó và vì sao thêm dữ liệu thời tiết giúp ích."
  ],
+ "du_lieu": [
+  {
+   "ten": "Bụi mịn theo ngày",
+   "tep": "bui_min_ngay.csv",
+   "url": "../du-lieu/bui_min_ngay.csv",
+   "mo_ta": "Mỗi dòng là một ngày; ô trống là dữ liệu còn thiếu.",
+   "so_dong": 1826,
+   "cot": [
+    "ngay",
+    "pm25",
+    "diem_suong",
+    "nhiet_do",
+    "ap_suat",
+    "gio_max"
+   ],
+   "giai_thich": [
+    "Ngày",
+    "Nồng độ PM2.5",
+    "Điểm sương",
+    "Nhiệt độ",
+    "Áp suất",
+    "Tốc độ gió lớn nhất"
+   ],
+   "mau": [
+    [
+     "2010-01-01",
+     "",
+     "-18.8",
+     "-6.8",
+     "1017.1",
+     "43.8"
+    ],
+    [
+     "2010-01-02",
+     "146.0",
+     "-8.5",
+     "-5.1",
+     "1024.8",
+     "55.4"
+    ],
+    [
+     "2010-01-03",
+     "78.8",
+     "-10.1",
+     "-8.5",
+     "1022.8",
+     "127.8"
+    ]
+   ]
+  }
+ ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
  "khoi": "Khối 10",

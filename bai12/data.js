@@ -19,6 +19,77 @@ window.BAI = {
   "Hiểu model là một quy tắc có tham số, huấn luyện là tìm tham số tốt nhất.",
   "Nhận ra model học vẹt: đúng trên dữ liệu đã học, sai trên dữ liệu mới."
  ],
+ "du_lieu": [
+  {
+   "ten": "Dữ liệu học tập minh họa",
+   "tep": "khoi10_hocky2.csv",
+   "url": "../du-lieu/khoi10_hocky2.csv",
+   "mo_ta": "Mỗi dòng là một học sinh; mỗi cột là một thông tin về học sinh đó.",
+   "so_dong": 240,
+   "cot": [
+    "StudentID",
+    "HoTen",
+    "Lop",
+    "GioiTinh",
+    "StudyHours",
+    "SleepHours",
+    "PhutMangXH",
+    "SoLanNopTre",
+    "Score",
+    "Result"
+   ],
+   "giai_thich": [
+    "Mã học sinh",
+    "Họ tên",
+    "Lớp",
+    "Giới tính",
+    "Số giờ học",
+    "Số giờ ngủ",
+    "Phút dùng mạng xã hội",
+    "Số lần nộp trễ",
+    "Điểm số",
+    "Kết quả đạt/không đạt"
+   ],
+   "mau": [
+    [
+     "HS001",
+     "Tran Vy",
+     "10A2",
+     "Nam",
+     "0.6",
+     "5.1",
+     "126",
+     "0",
+     "3.4",
+     "Fail"
+    ],
+    [
+     "HS002",
+     "Pham Vy",
+     "10A3",
+     "Nu",
+     "5.1",
+     "5.2",
+     "135",
+     "0",
+     "6.2",
+     "Pass"
+    ],
+    [
+     "HS003",
+     "Dang Oanh",
+     "10A4",
+     "Nam",
+     "3.9",
+     "5.5",
+     "111",
+     "2",
+     "5.3",
+     "Pass"
+    ]
+   ]
+  }
+ ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
  "khoi": "Khối 10",

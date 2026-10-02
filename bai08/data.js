@@ -19,6 +19,67 @@ window.BAI = {
   "Giải thích được vì sao phải chia dữ liệu thành tập huấn luyện và tập kiểm tra, và vai trò của stratify.",
   "Nhận ra bẫy độ chính xác khi dữ liệu lệch nhãn."
  ],
+ "du_lieu": [
+  {
+   "ten": "Dữ liệu học sinh sau làm sạch",
+   "tep": "students_da_don.csv",
+   "url": "../du-lieu/students_da_don.csv",
+   "mo_ta": "Mỗi dòng là một học sinh; các cột là thông tin để chuẩn bị cho mô hình.",
+   "so_dong": 90,
+   "cot": [
+    "StudentID",
+    "HoTen",
+    "Lop",
+    "GioiTinh",
+    "StudyHours",
+    "SleepHours",
+    "Score",
+    "Result"
+   ],
+   "giai_thich": [
+    "Mã học sinh",
+    "Họ tên",
+    "Lớp",
+    "Giới tính",
+    "Số giờ học",
+    "Số giờ ngủ",
+    "Điểm số",
+    "Kết quả đạt/không đạt"
+   ],
+   "mau": [
+    [
+     "HS001",
+     "Hoang Quan",
+     "10A1",
+     "NU",
+     "5.8",
+     "8.8",
+     "9.7",
+     "Pass"
+    ],
+    [
+     "HS002",
+     "Bui Ha",
+     "10A3",
+     "NU",
+     "5.1",
+     "7.9",
+     "8.8",
+     "Pass"
+    ],
+    [
+     "HS003",
+     "Tran Giang",
+     "10A1",
+     "NU",
+     "4.2",
+     "6.2",
+     "7.0",
+     "Pass"
+    ]
+   ]
+  }
+ ],
  "khoa": "Machine Learning Level 1",
  "truong": "Trường THCS và THPT Đinh Thiện Lý",
  "khoi": "Khối 10",
