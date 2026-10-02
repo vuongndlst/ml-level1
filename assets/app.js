@@ -11,6 +11,8 @@
 (function () {
   "use strict";
   var B = window.BAI;
+  var TG = (window.THE_GIOI || {})[B.ma] || {};
+  if (TG.mau) document.documentElement.style.setProperty("--world-accent", TG.mau);
   var KHOA_CC = B.khoa_cc || "LSTS-ML1-CC";
   var app = document.getElementById("app");
   var LUU = (B.tien_to_luu || "ml1_") + B.ma;
@@ -151,6 +153,16 @@
     t.appendChild(el("span", { class: "nhan", text: B.nhan + " · " + B.thoi_gian }));
     t.appendChild(el("h1", { text: B.tieu_de }));
     t.appendChild(el("div", { class: "cau-lon", text: B.cau_hoi }));
+    if (TG.ten && !NHUNG) {
+      var choi = el("div", { class: "loi-moi-3d" });
+      choi.style.setProperty("--world-accent", TG.mau);
+      choi.appendChild(el("span", { class: "world-symbol", text: TG.bieu_tuong || "ML", "aria-hidden": "true" }));
+      choi.appendChild(el("span", { class: "nhan", text: "THẾ GIỚI 3D CỦA " + B.nhan.toUpperCase() }));
+      choi.appendChild(el("h3", { text: TG.ten }));
+      choi.appendChild(el("p", { text: TG.mo_ta + " Đi từng trạm, làm câu hỏi nhanh rồi dừng để trao đổi và ghi bài. Tiến độ và chứng chỉ dùng chung với trang đọc." }));
+      choi.appendChild(el("a", { class: "nut choi3d", href: "quest.html", text: "Vào thế giới 3D →" }));
+      t.appendChild(choi);
+    }
     (B.gioi_thieu || []).forEach(function (p) { t.appendChild(el("p", { html: p })); });
     if (B.muc_tieu && B.muc_tieu.length) {
       t.appendChild(el("h3", { text: "Học xong bài này, con có thể" }));
@@ -164,13 +176,6 @@
       B.cuoi.so_cau + " câu · đạt " + B.cuoi.dat + "/" + B.cuoi.so_cau + " nhận chứng chỉ"]));
     t.appendChild(el("h3", { text: "Lộ trình" }));
     t.appendChild(bd);
-    if ((B.bai === 5 || B.bai === 6) && !NHUNG) {
-      var choi = el("div", { class: "loi-moi-3d" });
-      choi.appendChild(el("h3", { text: "Khám phá bài học trong thành phố 3D" }));
-      choi.appendChild(el("p", { text: "Đi tới từng trạm, học và làm checkpoint. Qua mỗi trạm, dừng lại để trao đổi và ghi bài theo hướng dẫn của giáo viên. Tiến độ và chứng chỉ dùng chung với trang này." }));
-      choi.appendChild(el("a", { class: "nut choi3d", href: "quest.html", text: "Vào thành phố 3D →" }));
-      t.appendChild(choi);
-    }
     t.appendChild(el("p", { html: "Cuối mỗi chặng có vài câu hỏi nhanh — trả lời đúng hết mới mở chặng sau. " +
       "Sai thì đọc gợi ý rồi sửa, <b>không bị trừ điểm</b>. Tiến độ được lưu tự động trên trình duyệt này." }));
     main.appendChild(t);
@@ -689,7 +694,7 @@
       "Trả lời đúng tất cả để mở chặng sau. Sai lần đầu: đọc gợi ý. Sai từ lần hai: xem lời giải chi tiết." }));
     var cau = c.checkpoint.map(function (q, j) { var v = veCau(q, j + 1, true); ck.appendChild(v.node); return v; });
     var tb = el("span", { class: "thong-bao" });
-    var tiep = el("button", { class: "nut", text: NHUNG ? (DUNG_SAU_CHANG ? "Về thành phố — dừng trao đổi" : "Về thành phố — sang trạm tiếp →") :
+    var tiep = el("button", { class: "nut", text: NHUNG ? (DUNG_SAU_CHANG ? "Về thế giới 3D — dừng trao đổi" : "Về thế giới 3D — sang trạm tiếp →") :
       i + 1 < B.chang.length ? "Sang chặng " + (i + 2) + " →" : "Vào checkpoint cuối →",
       onclick: function () {
         if (NHUNG) guiCha({ loai: "dong", tiep: !DUNG_SAU_CHANG, vua_xong: i + 1 });

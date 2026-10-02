@@ -1,6 +1,6 @@
-/* Game quest 3D — thành phố công nghệ quanh bài học. Đọc window.BAI (data.js) + window.QUEST.
+/* Game quest 3D — thế giới theo chủ đề bài học. Đọc window.BAI (data.js) + window.QUEST.
  *
- * Mỗi chặng là một trạm trong thành phố; tới trạm thì mở đúng chặng của trang bài học trong khung nhúng
+ * Mỗi chặng là một trạm trong thế giới; tới trạm thì mở đúng chặng của trang bài học trong khung nhúng
  * (index.html?nhung=1&chang=i). Qua checkpoint chặng -> trạm sáng xanh, trạm sau mở khoá. Qua hết -> CỔNG
  * checkpoint cuối mở (index.html?nhung=1&cuoi=1) -> chứng chỉ như trang thường.
  * Tiến độ, đáp án, chứng chỉ: KHÔNG làm lại ở đây — do app.js xử lý, lưu cùng khoá localStorage.
@@ -12,9 +12,10 @@
 import * as THREE from "three";
 
 const B = window.BAI;
-const CFG = Object.assign({ ten_dao: "Thành phố " + B.tieu_de, trang_doc: "index.html",
+const CFG = Object.assign({ ten: "Thế giới " + B.tieu_de, trang_doc: "index.html",
   mau: "#38BDF8", mau_phu: "#A78BFA", bieu_tuong: "AI", ky_hieu: ["AI", "ML", "∑", "∇"],
   dung_sau_chang: true }, window.QUEST || {});
+CFG.ten_dao = CFG.ten_dao || CFG.ten;
 const TIEN_TO = B.tien_to_luu || "ml1_";
 const LUU = TIEN_TO + B.ma;
 const LUU_Q = TIEN_TO + "quest";
@@ -126,14 +127,18 @@ for (let i = 0; i < 9; i++) {
 }
 scene.add(may);
 
-// ------------------------------------------------------------------ quảng trường công nghệ và đường đi giữa các trạm
-const sanNgoai = new THREE.Mesh(new THREE.PlaneGeometry(420, 420), vl("#10192D", { metalness: 0.2, roughness: 0.9 }));
+// ------------------------------------------------------------------ nền cảnh và đường đi giữa các trạm
+const CANH = CFG.kieu || "network";
+const DO_THI = new Set(["factory", "code", "tools", "statistics", "charts", "linear", "time", "deploy"]);
+const RUNG = new Set(["clean", "tree", "forest", "neighbors", "cluster", "reward"]);
+const mauNen = DO_THI.has(CANH) ? "#111D36" : RUNG.has(CANH) ? "#12312F" : "#15243E";
+const sanNgoai = new THREE.Mesh(new THREE.PlaneGeometry(420, 420), vl(mauNen, { metalness: 0.12, roughness: 0.9 }));
 sanNgoai.rotation.x = -Math.PI / 2; sanNgoai.position.y = -1.25; sanNgoai.receiveShadow = true; scene.add(sanNgoai);
 const luoiPho = new THREE.GridHelper(360, 72, "#37629B", "#203451");
 luoiPho.position.y = -1.23; scene.add(luoiPho);
 function thanhPho() {
   const g = new THREE.Group();
-  const san = new THREE.Mesh(new THREE.CylinderGeometry(R_DAO, R_DAO, 1.2, 72), vl("#182B4C", { metalness: 0.35, roughness: 0.72 }));
+  const san = new THREE.Mesh(new THREE.CylinderGeometry(R_DAO, R_DAO, 1.2, 72), vl(RUNG.has(CANH) ? "#294C45" : DO_THI.has(CANH) ? "#182B4C" : "#293451", { metalness: 0.25, roughness: 0.72 }));
   san.position.y = -0.6; san.receiveShadow = true; g.add(san);
   const vien = new THREE.Mesh(new THREE.TorusGeometry(R_DAO - 0.3, 0.14, 8, 72),
     new THREE.MeshBasicMaterial({ color: CFG.mau }));
@@ -160,9 +165,9 @@ function thanhPho() {
 }
 scene.add(thanhPho());
 
-// Các tòa nhà đặt ngoài vòng đi bộ, tạo đường chân trời khác màu theo từng bài.
+// Cảnh nền: đô thị có nhà, các chủ đề còn lại có công trình theo hình thái riêng.
 const toaNha = new THREE.Group();
-for (let i = 0; i < 76; i++) {
+for (let i = 0; i < (DO_THI.has(CANH) ? 68 : 0); i++) {
   const a = (i / 76) * Math.PI * 2 + (rnd() - 0.5) * 0.05;
   const r = 34 + rnd() * 68, w = 3 + rnd() * 6, h = 10 + rnd() * 33;
   const x = Math.cos(a) * r, z = Math.sin(a) * r;
@@ -177,6 +182,49 @@ for (let i = 0; i < 76; i++) {
   }
 }
 scene.add(toaNha);
+
+const CANH_CHUYEN = [];
+function canhChuDe() {
+  const g = new THREE.Group(); scene.add(g);
+  const light = new THREE.MeshBasicMaterial({ color: CFG.mau });
+  const pale = new THREE.MeshBasicMaterial({ color: CFG.mau_phu });
+  const sphere = new THREE.SphereGeometry(0.7, 12, 8);
+  for (let i = 0; i < (DO_THI.has(CANH) ? 10 : 26); i++) {
+    const a = i * Math.PI * 2 / (DO_THI.has(CANH) ? 10 : 26), r = 36 + (i % 3) * 7;
+    const x = Math.cos(a) * r, z = Math.sin(a) * r;
+    if (RUNG.has(CANH)) {
+      // Cây thấp đa giác, cụm điểm hoặc vòng thưởng tùy bài.
+      const trunk = new THREE.Mesh(new THREE.CylinderGeometry(.18,.3,2.6,6),vl("#496B5C"));trunk.position.set(x,.2,z);g.add(trunk);
+      const crown = new THREE.Mesh(new THREE.ConeGeometry(CANH === "forest" ? 1.9 : 1.3, CANH === "forest" ? 4.4 : 3.1, 6),
+        vl(i%2 ? CFG.mau : "#4D9A7F",{emissive:CFG.mau,emissiveIntensity:.08}));crown.position.set(x,3.0,z);g.add(crown);
+      if (CANH === "cluster" || CANH === "neighbors") {
+        for (let j=0;j<3;j++){const dot=new THREE.Mesh(new THREE.IcosahedronGeometry(.35,0),j%2?light:pale);dot.position.set(x+(j-1)*1.2,1.1+j*.4,z+(j%2)*1.2);g.add(dot);}
+      }
+    } else if (!DO_THI.has(CANH)) {
+      const h = 2.5+(i%4)*1.2;
+      const pillar = new THREE.Mesh(new THREE.CylinderGeometry(.25,.4,h,6),vl("#3D5478"));pillar.position.set(x,h/2-1,z);g.add(pillar);
+      const ball = new THREE.Mesh(sphere,i%2?light:pale);ball.position.set(x,h-.2,z);g.add(ball);
+      if (CANH === "boundary" || CANH === "vector" || CANH === "correlation") {
+        const arrow = new THREE.Mesh(new THREE.ConeGeometry(.4,1.1,6),light);arrow.position.set(x,h+1,z);arrow.rotation.z=Math.PI/4;g.add(arrow);
+      }
+    }
+  }
+  // Công trình giữa nền cho mỗi nhóm nội dung: nhìn rõ ngay từ màn bắt đầu.
+  const a = CFG.bai || B.bai;
+  if (["statistics","charts","linear","time","evaluate"].includes(CANH)) {
+    for(let k=0;k<7;k++){const h=3+((k*3+a)%7)*1.3;const bar=new THREE.Mesh(new THREE.BoxGeometry(1.2,h,1.2),vl(k%2?CFG.mau:CFG.mau_phu,{emissive:CFG.mau,emissiveIntensity:.15}));bar.position.set(-9+k*3,h/2,-34);g.add(bar);}
+  } else if (["network","neural","labels","bayes","cluster"].includes(CANH)) {
+    for(let row=0;row<3;row++)for(let col=0;col<3;col++){const node=new THREE.Mesh(new THREE.IcosahedronGeometry(.65,1),row===2?pale:light);node.position.set(-5+col*5,2+row*2,-34);g.add(node);CANH_CHUYEN.push({mesh:node,base:node.position.y,phase:row*3+col});}
+  } else if (["vector","boundary","logistic","correlation"].includes(CANH)) {
+    const ring=new THREE.Mesh(new THREE.TorusGeometry(5,.22,8,36),light);ring.position.set(0,9,-34);ring.rotation.x=.35;g.add(ring);CANH_CHUYEN.push({mesh:ring,spin:true});
+    for(let k=0;k<5;k++){const dot=new THREE.Mesh(sphere,k%2?light:pale);dot.position.set(-6+k*3,3+k%2*2,-34);g.add(dot);}
+  } else if (["tree","forest","clean","reward"].includes(CANH)) {
+    for(let k=0;k<5;k++){const x=-9+k*4.5,h=4+(k%3)*1.5;const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.3,.5,h,6),vl("#416458"));trunk.position.set(x,h/2,-34);g.add(trunk);const crown=new THREE.Mesh(new THREE.ConeGeometry(1.7,h*.85,7),vl(CFG.mau,{emissive:CFG.mau,emissiveIntensity:.08}));crown.position.set(x,h+1,-34);g.add(crown);}
+  } else {
+    for(let k=0;k<4;k++){const h=5+(k%2)*2;const tower=new THREE.Mesh(new THREE.BoxGeometry(3,h,3),vl("#31516A"));tower.position.set(-7+k*4.5,h/2,-34);g.add(tower);const cap=new THREE.Mesh(new THREE.BoxGeometry(3.3,.22,3.3),k%2?light:pale);cap.position.set(-7+k*4.5,h+.2,-34);g.add(cap);}
+  }
+}
+canhChuDe();
 
 // ------------------------------------------------------------------ vật cản (va chạm hình tròn)
 const VAT_CAN = [];
@@ -208,7 +256,7 @@ function nhanTram(i, tt) {
 }
 function manHinhTram(i) {
   return veChu(512, 320, (g, w, hh) => {
-    const laThongKe = B.bai === 5;
+    const laThongKe = ["statistics","charts","linear","time","evaluate"].includes(CANH);
     g.fillStyle = "#071426"; g.fillRect(0, 0, w, hh);
     g.fillStyle = "#162F50"; g.fillRect(0, 0, w, 54);
     g.fillStyle = CFG.mau; g.fillRect(0, 51, w, 3);
@@ -228,7 +276,7 @@ function manHinhTram(i) {
       g.beginPath(); pts.forEach((p, j) => j ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1])); g.stroke();
       pts.forEach(p => { g.beginPath(); g.arc(p[0], p[1], 7, 0, Math.PI * 2); g.fill(); });
       g.strokeStyle = CFG.mau_phu; g.lineWidth = 3; g.beginPath(); g.moveTo(55, 256); g.lineTo(275, 116); g.stroke();
-      g.fillStyle = "#D5E8FF"; g.font = "600 27px " + FONT; g.fillText("VECTOR  ·  KHOẢNG CÁCH  ·  SAI SỐ", 30, 298);
+      g.fillStyle = "#D5E8FF"; g.font = "600 27px " + FONT; g.fillText((CFG.ky_hieu || []).slice(0,3).join("  ·  ").toUpperCase(), 30, 298, w - 60);
     }
   });
 }
@@ -365,9 +413,11 @@ const TUONG = (() => {
     vi.push([x, z, 0.8 + rnd() * 0.7, rnd()]);
   }
   const cay = vi.filter(v => v[3] < 0.82), da = vi.filter(v => v[3] >= 0.82);
-  const than = new THREE.InstancedMesh(new THREE.BoxGeometry(1.1, 2.8, 1.1), vl("#294668", { metalness: 0.7 }), cay.length);
-  const la1 = new THREE.InstancedMesh(new THREE.BoxGeometry(1.15, 0.1, 1.15), vl(CFG.mau, { emissive: CFG.mau, emissiveIntensity: 0.7 }), cay.length);
-  const la2 = new THREE.InstancedMesh(new THREE.BoxGeometry(1.15, 0.1, 1.15), vl(CFG.mau_phu, { emissive: CFG.mau_phu, emissiveIntensity: 0.7 }), cay.length);
+  const thanGeo = DO_THI.has(CANH) ? new THREE.BoxGeometry(1.1,2.8,1.1) : new THREE.CylinderGeometry(RUNG.has(CANH)?.18:.12,RUNG.has(CANH)?.28:.2,2.8,6);
+  const dauGeo = DO_THI.has(CANH) ? new THREE.BoxGeometry(1.15,.1,1.15) : RUNG.has(CANH) ? new THREE.ConeGeometry(1.15,1.7,6) : new THREE.OctahedronGeometry(.65,0);
+  const than = new THREE.InstancedMesh(thanGeo, vl(RUNG.has(CANH)?"#526E5C":"#294668", { metalness: DO_THI.has(CANH)?.7:.3 }), cay.length);
+  const la1 = new THREE.InstancedMesh(dauGeo, vl(CFG.mau, { emissive: CFG.mau, emissiveIntensity: 0.45 }), cay.length);
+  const la2 = new THREE.InstancedMesh(dauGeo, vl(CFG.mau_phu, { emissive: CFG.mau_phu, emissiveIntensity: 0.45 }), cay.length);
   const m = new THREE.Matrix4(), q = new THREE.Quaternion(), s = new THREE.Vector3(), p = new THREE.Vector3();
   cay.forEach(([x, z, k], i) => {
     q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rnd() * 6.28);
@@ -393,7 +443,7 @@ const KY_HIEU = [];
   ds.forEach((t, k) => {
     const sp = new THREE.Sprite(new THREE.SpriteMaterial({ transparent: true, opacity: 0.75, depthWrite: false,
       map: veChu(256, 128, (c, w, hh) => { c.fillStyle = "#FFFFFF"; c.font = "700 64px Consolas, monospace"; c.textAlign = "center"; c.textBaseline = "middle";
-        c.shadowColor = "rgba(0,89,156,.8)"; c.shadowBlur = 16; c.fillText(t, w / 2, hh / 2); }) }));
+        c.shadowColor = "rgba(0,89,156,.8)"; c.shadowBlur = 16; c.fillText(t, w / 2, hh / 2, w - 16); }) }));
     const a = (k / ds.length) * Math.PI * 2 + rnd(), r = R_DAO + 5 + rnd() * 10;
     sp.position.set(Math.cos(a) * r, rnd() * 10, Math.sin(a) * r);
     sp.scale.set(2.4, 1.2, 1);
@@ -625,7 +675,7 @@ function phaoHoa(o, mau) {
 // ------------------------------------------------------------------ khung bài học (iframe)
 const khung = h("div", { class: "q-khung", role: "dialog", "aria-modal": "true" });
 const khungTieuDe = h("b");
-const khungDong = h("button", { class: "q-nut", html: ICON.dong + '<span class="q-chu-nut">Về thành phố</span>', "aria-label": "Đóng, về thành phố", onclick: () => dongKhung() });
+const khungDong = h("button", { class: "q-nut", html: ICON.dong + '<span class="q-chu-nut">Về thế giới 3D</span>', "aria-label": "Đóng, về thế giới 3D", onclick: () => dongKhung() });
 const iframe = h("iframe", { title: "Bài học" });
 khung.appendChild(h("div", { class: "q-khung-trong" }, [h("div", { class: "q-khung-dau" }, [khungTieuDe, khungDong]), iframe]));
 document.body.appendChild(khung);
@@ -888,6 +938,7 @@ function khung_hinh() {
     tr.rb.rotation.y = tr === gan ? Math.atan2(BIT.g.position.x - tr.g.position.x, BIT.g.position.z - tr.g.position.z) - tr.g.rotation.y : -0.5;
   });
   TUONG.rotation.y = t * 0.5;
+  if (!IT_CHUYEN_DONG) CANH_CHUYEN.forEach(c => { if (c.spin) c.mesh.rotation.y = t * 0.55; else c.mesh.position.y = c.base + Math.sin(t * 1.5 + c.phase) * 0.22; });
   CONG.cong_mat.uniforms.t.value = t;
   const mo = CONG.cong_mat.uniforms.mo;
   mo.value += ((CONG.mo_muc_tieu || 0) - mo.value) * Math.min(1, dt * 1.5);
@@ -916,7 +967,7 @@ document.addEventListener("visibilitychange", () => {
 
 // ------------------------------------------------------------------ màn đầu
 let dangChoi = false;
-const manDau = h("div", { class: "q-man" });
+const manDau = h("div", { class: "q-man q-intro" });
 const nutVao = h("button", { class: "q-vao", text: "Đang tải…", disabled: "" });
 manDau.appendChild(h("div", { class: "q-the" }, [
   h("div", { class: "q-nho", text: B.khoa + " · " + B.nhan }),
@@ -941,7 +992,7 @@ nutVao.addEventListener("click", () => {
 datAm(QS.am);
 capNhatTrangThai(false);
 datCamera(1);
-const sanSang = () => { nutVao.disabled = false; nutVao.textContent = qua() > 0 ? "Chơi tiếp ▶" : "Vào thành phố ▶"; };
+const sanSang = () => { nutVao.disabled = false; nutVao.textContent = qua() > 0 ? "Đi tiếp ▶" : "Bắt đầu khám phá ▶"; };
 (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => {
   TRAM.forEach(t => { t.tt = ""; }); CONG.tt = ""; capNhatTrangThai(false); sanSang();
 }, sanSang);
