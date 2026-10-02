@@ -177,37 +177,37 @@ window.BAI = {
         [
          "1",
          "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): xuống → (2, 1)",
-         "thưởng −1 · Q[(1, 1), xuống]: 0,0 → −0,5 · tổng −1"
+         "thưởng −1 · Q[(1, 1), xuống]: 0.0 → −0.5 · tổng −1"
         ],
         [
          "2",
          "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): phải → (2, 1) (đâm tường, đứng yên)",
-         "thưởng −1 · Q[(2, 1), phải]: 0,0 → −0,5 · tổng −2"
+         "thưởng −1 · Q[(2, 1), phải]: 0.0 → −0.5 · tổng −2"
         ],
         [
          "3",
          "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): xuống → (3, 1)",
-         "thưởng −1 · Q[(2, 1), xuống]: 0,0 → −0,5 · tổng −3"
+         "thưởng −1 · Q[(2, 1), xuống]: 0.0 → −0.5 · tổng −3"
         ],
         [
          "4",
          "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): trái → (3, 1) (đâm tường, đứng yên)",
-         "thưởng −1 · Q[(3, 1), trái]: 0,0 → −0,5 · tổng −4"
+         "thưởng −1 · Q[(3, 1), trái]: 0.0 → −0.5 · tổng −4"
         ],
         [
          "5",
          "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): phải → (3, 2)",
-         "thưởng −1 · Q[(3, 1), phải]: 0,0 → −0,5 · tổng −5"
+         "thưởng −1 · Q[(3, 1), phải]: 0.0 → −0.5 · tổng −5"
         ],
         [
          "6",
          "Thử ngẫu nhiên: lên → (3, 2) (đâm tường, đứng yên)",
-         "thưởng −1 · Q[(3, 2), lên]: 0,0 → −0,5 · tổng −6"
+         "thưởng −1 · Q[(3, 2), lên]: 0.0 → −0.5 · tổng −6"
         ],
         [
          "7",
          "Chọn điểm cao nhất (hoà thì bốc ngẫu nhiên): phải → (3, 3)",
-         "thưởng −1 · Q[(3, 2), phải]: 0,0 → −0,5 · tổng −7"
+         "thưởng −1 · Q[(3, 2), phải]: 0.0 → −0.5 · tổng −7"
         ],
         [
          "…",
@@ -226,7 +226,7 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "5 tập đầu, người máy cần trung bình 52,4 bước; 50 tập cuối chỉ còn 8,8 bước — gần bằng đường ngắn nhất 8 bước."
+     "html": "5 tập đầu, người máy cần trung bình 52.4 bước; 50 tập cuối chỉ còn 8.8 bước — gần bằng đường ngắn nhất 8 bước."
     },
     {
      "t": "loi_hay_gap",
@@ -286,12 +286,12 @@ window.BAI = {
     },
     {
      "t": "cong_thuc",
-     "html": "Q mới = Q cũ + 0,5 × (thưởng + 0,9 × Q tốt nhất ở ô mới − Q cũ)"
+     "html": "Q mới = Q cũ + 0.5 × (thưởng + 0.9 × Q tốt nhất ở ô mới − Q cũ)"
     },
     {
      "t": "vi_du",
      "tieu_de": "cập nhật một lần",
-     "de": "Q cũ = −0,5; đi một bước được thưởng −1; ở ô mới, hướng tốt nhất có Q = 2,0.",
+     "de": "Q cũ = −0.5; đi một bước được thưởng −1; ở ô mới, hướng tốt nhất có Q = 2.0.",
      "cot": [
       "Bước",
       "Tính",
@@ -300,21 +300,21 @@ window.BAI = {
      "dong": [
       [
        "1",
-       "Mục tiêu = −1 + 0,9 × 2,0",
-       "0,8"
+       "Mục tiêu = −1 + 0.9 × 2.0",
+       "0.8"
       ],
       [
        "2",
-       "Chênh lệch = 0,8 − (−0,5)",
-       "1,3"
+       "Chênh lệch = 0.8 − (−0.5)",
+       "1.3"
       ],
       [
        "3",
-       "Q mới = −0,5 + 0,5 × 1,3",
-       "0,15"
+       "Q mới = −0.5 + 0.5 × 1.3",
+       "0.15"
       ]
      ],
-     "ket_luan": "Ô mới có triển vọng (Q = 2,0) kéo điểm của bước đi này lên, dù bước đi bị trừ 1.",
+     "ket_luan": "Ô mới có triển vọng (Q = 2.0) kéo điểm của bước đi này lên, dù bước đi bị trừ 1.",
      "nhan_manh": []
     },
     {
@@ -1558,7 +1558,7 @@ window.BAI = {
        "ket_qua": "tới đích"
       }
      ],
-     "ghi": "Q-learning chạy thật (alpha = 0,5, gamma = 0,9, thử ngẫu nhiên 10%, seed 0). Ô xám đậm là tường."
+     "ghi": "Q-learning chạy thật (alpha = 0.5, gamma = 0.9, thử ngẫu nhiên 10%, seed 0). Ô xám đậm là tường."
     },
     {
      "t": "hop",
@@ -1569,7 +1569,7 @@ window.BAI = {
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ 0,5 và 0,9 là xác suất — đây là tốc độ học và mức coi trọng tương lai.",
+      "Nghĩ 0.5 và 0.9 là xác suất — đây là tốc độ học và mức coi trọng tương lai.",
       "Tin mọi mũi tên trên hình, kể cả ở ô hiếm khi đi qua."
      ]
     },
@@ -1583,7 +1583,7 @@ window.BAI = {
      "k": "mc",
      "id": "bai28-q5",
      "q": "Theo hình bảng Q ở ô Xuất phát, người máy sẽ đi hướng nào?",
-     "giai": "Hướng có cột cao nhất (-0,43).",
+     "giai": "Hướng có cột cao nhất (-0.43).",
      "goi_y": "Tìm cột cao nhất.",
      "a": [
       "Phải",
@@ -1705,7 +1705,7 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Mê cung nhỏ nên mọi mức đều tìm ra đường. Nhưng thử ngẫu nhiên 50% số bước thì điểm trung bình mỗi tập khi học chỉ còn -12,2, so với -1,0 khi thử 10%."
+     "html": "Mê cung nhỏ nên mọi mức đều tìm ra đường. Nhưng thử ngẫu nhiên 50% số bước thì điểm trung bình mỗi tập khi học chỉ còn -12.2, so với -1.0 khi thử 10%."
     },
     {
      "t": "hop",
@@ -1969,14 +1969,14 @@ window.BAI = {
     "k": "mc",
     "id": "bai28-q19",
     "q": "Q cũ = 0; bước đi được −1; Q tốt nhất ở ô mới = 0. Q mới bằng bao nhiêu?",
-    "giai": "0 + 0,5 × (−1 + 0 − 0).",
+    "giai": "0 + 0.5 × (−1 + 0 − 0).",
     "a": [
-     "−0,5",
+     "−0.5",
      "−1",
      "0",
-     "+0,5"
+     "+0.5"
     ],
-    "h": "179040c13d9dd3"
+    "h": "9a9a8aaeed808"
    },
    {
     "k": "ma",
@@ -2038,10 +2038,10 @@ window.BAI = {
     "a": [
      "Chọn hướng (khai thác hoặc khám phá)",
      "Nhận ô mới và điểm thưởng",
-     "Tính mục tiêu = thưởng + 0,9 × Q tốt nhất ô mới",
+     "Tính mục tiêu = thưởng + 0.9 × Q tốt nhất ô mới",
      "Cập nhật Q của (ô, hướng) cũ"
     ],
-    "h": "2717b804bd6bf"
+    "h": "793e1149e99d6"
    },
    {
     "k": "sx",

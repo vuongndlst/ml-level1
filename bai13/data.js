@@ -185,11 +185,11 @@ window.BAI = {
    "ten_ngan": "Tính tay",
    "phut": 5,
    "muc_tieu": "tự dự đoán được nhãn của một điểm mới bằng KNN và thấy kết quả có thể đổi theo K.",
-   "khoi_dong": "Bạn mới tự học 3,4 giờ, dùng mạng 150 phút mỗi ngày. Bạn ấy Đạt hay Chưa đạt?",
+   "khoi_dong": "Bạn mới tự học 3.4 giờ, dùng mạng 150 phút mỗi ngày. Bạn ấy Đạt hay Chưa đạt?",
    "khoi": [
     {
      "t": "p",
-     "html": "Máy đã đưa hai cột về 0 – 1 (dùng min, max của tập huấn luyện: giờ 0,5 – 7,0, phút 15 – 450), rồi đo khoảng cách từ bạn mới tới 168 bạn trong tập huấn luyện. Dưới đây là 9 bạn gần nhất."
+     "html": "Máy đã đưa hai cột về 0 – 1 (dùng min, max của tập huấn luyện: giờ 0.5 – 7.0, phút 15 – 450), rồi đo khoảng cách từ bạn mới tới 168 bạn trong tập huấn luyện. Dưới đây là 9 bạn gần nhất."
     },
     {
      "t": "demo_tung_buoc",
@@ -213,7 +213,7 @@ window.BAI = {
         [
          "—",
          "Bạn mới",
-         "3,4",
+         "3.4",
          "150",
          "—",
          "?",
@@ -222,81 +222,81 @@ window.BAI = {
         [
          "1",
          "HS186",
-         "3,5",
+         "3.5",
          "147",
-         "0,017",
+         "0.017",
          "Đạt",
          "1 Đạt – 0 Chưa đạt"
         ],
         [
          "2",
          "HS057",
-         "3,2",
+         "3.2",
          "144",
-         "0,034",
+         "0.034",
          "Chưa đạt",
          "1 Đạt – 1 Chưa đạt"
         ],
         [
          "3",
          "HS084",
-         "3,3",
+         "3.3",
          "135",
-         "0,038",
+         "0.038",
          "Chưa đạt",
          "1 Đạt – 2 Chưa đạt"
         ],
         [
          "4",
          "HS214",
-         "3,3",
+         "3.3",
          "133",
-         "0,042",
+         "0.042",
          "Đạt",
          "2 Đạt – 2 Chưa đạt"
         ],
         [
          "5",
          "HS199",
-         "3,6",
+         "3.6",
          "164",
-         "0,045",
+         "0.045",
          "Đạt",
          "3 Đạt – 2 Chưa đạt"
         ],
         [
          "6",
          "HS011",
-         "3,1",
+         "3.1",
          "136",
-         "0,056",
+         "0.056",
          "Chưa đạt",
          "3 Đạt – 3 Chưa đạt"
         ],
         [
          "7",
          "HS046",
-         "3,7",
+         "3.7",
          "128",
-         "0,068",
+         "0.068",
          "Đạt",
          "4 Đạt – 3 Chưa đạt"
         ],
         [
          "8",
          "HS239",
-         "3,2",
+         "3.2",
          "123",
-         "0,069",
+         "0.069",
          "Đạt",
          "5 Đạt – 3 Chưa đạt"
         ],
         [
          "9",
          "HS045",
-         "3,3",
+         "3.3",
          "185",
-         "0,082",
+         "0.082",
          "Đạt",
          "6 Đạt – 3 Chưa đạt"
         ]
@@ -401,14 +401,14 @@ window.BAI = {
     },
     {
      "t": "anh",
-     "cap": "Cùng KNN, cùng K = 5: chưa đưa về cùng thang đo 72,2% — đã đưa 94,4%",
-     "alt": "Cùng KNN, cùng K = 5: chưa đưa về cùng thang đo 72,2% — đã đưa 94,4%",
+     "cap": "Cùng KNN, cùng K = 5: chưa đưa về cùng thang đo 72.2% — đã đưa 94.4%",
+     "alt": "Cùng KNN, cùng K = 5: chưa đưa về cùng thang đo 72.2% — đã đưa 94.4%",
      "src": "img/duong-bien-knn-chua-scale-va-da-scale.png"
     },
     {
      "t": "knn",
      "tieu_de": "kéo bạn mới, xem ai bỏ phiếu",
-     "huong_dan": "Ngôi sao đỏ là một bạn mới. Kéo ngôi sao (hoặc bấm vào hình rồi dùng phím mũi tên), đổi K. Các chấm viền đậm là K láng giềng gần nhất. <b>Thử:</b> đặt ngôi sao ở (2,5 giờ; 150 phút), rồi <b>tắt</b> ô “Đưa hai cột về 0 – 1” — láng giềng đổi thế nào?",
+     "huong_dan": "Ngôi sao đỏ là một bạn mới. Kéo ngôi sao (hoặc bấm vào hình rồi dùng phím mũi tên), đổi K. Các chấm viền đậm là K láng giềng gần nhất. <b>Thử:</b> đặt ngôi sao ở (2.5 giờ, 150 phút), rồi <b>tắt</b> ô “Đưa hai cột về 0 – 1” — láng giềng đổi thế nào?",
      "x": [
       6.6,
       0.6,
@@ -952,18 +952,18 @@ window.BAI = {
      "dong": [
       [
        "Chưa đưa về cùng thang đo",
-       "72,2%"
+       "72.2%"
       ],
       [
        "Đưa về 0 – 1 (MinMaxScaler)",
-       "<b>94,4%</b>"
+       "<b>94.4%</b>"
       ],
       [
        "Mốc model lười",
-       "54,2%"
+       "54.2%"
       ]
      ],
-     "ket_luan": "Chênh 22,2 điểm chỉ vì thang đo — không đổi thuật toán, không đổi dữ liệu.",
+     "ket_luan": "Chênh 22.2 điểm chỉ vì thang đo — không đổi thuật toán, không đổi dữ liệu.",
      "nhan_manh": [
       1
      ]
@@ -994,12 +994,12 @@ window.BAI = {
      "giai": "Hết bị cột phút lấn át, KNN chọn đúng láng giềng hơn.",
      "goi_y": "Xem bảng ví dụ ở trên.",
      "a": [
-      "Tăng từ 72,2% lên 94,4%",
-      "Giảm từ 94,4% xuống 72,2%",
-      "Giữ nguyên 72,2%",
-      "Tăng lên 100,0%"
+      "Tăng từ 72.2% lên 94.4%",
+      "Giảm từ 94.4% xuống 72.2%",
+      "Giữ nguyên 72.2%",
+      "Tăng lên 100.0%"
      ],
-     "h": "1c9c7ae76f043c"
+     "h": "27014841f5484"
     },
     {
      "k": "dd",
@@ -1041,37 +1041,37 @@ window.BAI = {
      "moc": [
       {
        "x": 1,
-       "n": "100,0%",
+       "n": "100.0%",
        "p": 86.1
       },
       {
        "x": 3,
-       "n": "94,0%",
+       "n": "94.0%",
        "p": 91.7
       },
       {
        "x": 5,
-       "n": "91,7%",
+       "n": "91.7%",
        "p": 94.4
       },
       {
        "x": 9,
-       "n": "92,3%",
+       "n": "92.3%",
        "p": 95.8
       },
       {
        "x": 15,
-       "n": "91,1%",
+       "n": "91.1%",
        "p": 93.1
       },
       {
        "x": 25,
-       "n": "88,7%",
+       "n": "88.7%",
        "p": 91.7
       },
       {
        "x": 41,
-       "n": "89,9%",
+       "n": "89.9%",
        "p": 93.1
       }
      ],
@@ -1099,20 +1099,20 @@ window.BAI = {
      "dong": [
       [
        "1",
-       "100,0%",
-       "86,1%",
+       "100.0%",
+       "86.1%",
        "Học vẹt — mỗi điểm tự bầu cho chính nó"
       ],
       [
        "9",
-       "92,3%",
-       "<b>95,8%</b>",
+       "92.3%",
+       "<b>95.8%</b>",
        "Tốt nhất trên test"
       ],
       [
        "41",
-       "89,9%",
-       "93,1%",
+       "89.9%",
+       "93.1%",
        "Ranh giới mượt quá, bắt đầu chưa khớp"
       ]
      ],
@@ -1263,15 +1263,15 @@ window.BAI = {
      "dong": [
       [
        "Model lười (Bài 8, 12)",
-       "54,2%"
+       "54.2%"
       ],
       [
        "Model ngưỡng giờ học (Bài 12)",
-       "91,7%"
+       "91.7%"
       ],
       [
        "KNN K = 9, đã đưa về cùng thang đo",
-       "<b>95,8%</b>"
+       "<b>95.8%</b>"
       ]
      ],
      "ket_luan": "KNN nhìn được hai cột cùng lúc nên vượt model ngưỡng một cột.",
@@ -1617,23 +1617,23 @@ window.BAI = {
     "k": "dd",
     "id": "bai13-q27",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Chênh 22,2 điểm.",
+    "giai": "Chênh 22.2 điểm.",
     "mau": "KNN K = 5 chưa đưa về cùng thang đo đúng {0}; đã đưa đúng {1}.",
     "o": [
      [
-      "72,2%",
-      "94,4%",
-      "54,2%",
-      "95,8%"
+      "72.2%",
+      "94.4%",
+      "54.2%",
+      "95.8%"
      ],
      [
-      "94,4%",
-      "72,2%",
-      "54,2%",
-      "100,0%"
+      "94.4%",
+      "72.2%",
+      "54.2%",
+      "100.0%"
      ]
     ],
-    "h": "175cacb8eb3fd1"
+    "h": "146505980fa83c"
    },
    {
     "k": "dd",

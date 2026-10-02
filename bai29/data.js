@@ -57,7 +57,7 @@ window.BAI = {
     {
      "t": "vi_du",
      "tieu_de": "tính tay cho một bạn",
-     "de": "Bạn học 4 giờ, dùng mạng 120 phút. Đưa về 0 – 1: x<sub>1</sub> = 0,54, x<sub>2</sub> = 0,24.",
+     "de": "Bạn học 4 giờ, dùng mạng 120 phút. Đưa về 0 – 1: x<sub>1</sub> = 0.54, x<sub>2</sub> = 0.24.",
      "cot": [
       "Bước",
       "Tính",
@@ -66,13 +66,13 @@ window.BAI = {
      "dong": [
       [
        "1",
-       "w<sub>1</sub>·x<sub>1</sub> + w<sub>2</sub>·x<sub>2</sub> + b = 5,08 × 0,54 + (-1,89) × 0,24 + (-1,64)",
-       "z ≈ <b>0,63</b>"
+       "w<sub>1</sub>·x<sub>1</sub> + w<sub>2</sub>·x<sub>2</sub> + b = 5.08 × 0.54 + (-1.89) × 0.24 + (-1.64)",
+       "z ≈ <b>0.63</b>"
       ],
       [
        "2",
        "sigmoid(z) — đưa z về khoảng 0 – 1",
-       "<b>65,3%</b>"
+       "<b>65.3%</b>"
       ]
      ],
      "ket_luan": "Một nơ-ron với hàm sigmoid chính là hồi quy logistic của Bài 16. Mạng nơ-ron ghép rất nhiều nơ-ron như vậy lại.",
@@ -639,16 +639,16 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai29-q1",
-     "q": "Một nơ-ron có w<sub>1</sub> = 2, w<sub>2</sub> = −1, b = 0,5. Đầu vào x<sub>1</sub> = 1, x<sub>2</sub> = 3. Tổng z bằng bao nhiêu?",
-     "giai": "2 × 1 + (−1) × 3 + 0,5 = 2 − 3 + 0,5 = −0,5.",
+     "q": "Một nơ-ron có w<sub>1</sub> = 2, w<sub>2</sub> = −1, b = 0.5. Đầu vào x<sub>1</sub> = 1, x<sub>2</sub> = 3. Tổng z bằng bao nhiêu?",
+     "giai": "2 × 1 + (−1) × 3 + 0.5 = 2 − 3 + 0.5 = −0.5.",
      "goi_y": "Nhân từng cặp w với x, cộng lại, rồi cộng thêm b.",
      "a": [
-      "−0,5",
-      "5,5",
-      "1,5",
-      "−2,5"
+      "−0.5",
+      "5.5",
+      "1.5",
+      "−2.5"
      ],
-     "h": "15e85a23c4aa3e"
+     "h": "122ed4f5b8dfad"
     },
     {
      "k": "ds",
@@ -712,15 +712,15 @@ window.BAI = {
     },
     {
      "t": "anh",
-     "cap": "Logistic 90,8% · 4 nơ-ron ẩn 90,8% · 32 nơ-ron ẩn 95,0% (số liệu minh hoạ)",
-     "alt": "Logistic 90,8% · 4 nơ-ron ẩn 90,8% · 32 nơ-ron ẩn 95,0% (số liệu minh hoạ)",
+     "cap": "Logistic 90.8% · 4 nơ-ron ẩn 90.8% · 32 nơ-ron ẩn 95.0% (số liệu minh hoạ)",
+     "alt": "Logistic 90.8% · 4 nơ-ron ẩn 90.8% · 32 nơ-ron ẩn 95.0% (số liệu minh hoạ)",
      "src": "img/ranh-gioi-theo-so-no-ron.png"
     },
     {
      "t": "hop",
      "kieu": "ml",
      "tieu_de": "Vì sao lớp ẩn giúp ích?",
-     "html": "Mỗi nơ-ron ẩn (ReLU) tạo một “đường gấp” nhỏ. Ghép đủ nhiều đường gấp, mạng vẽ được <b>ranh giới cong</b> — điều hồi quy logistic không làm được. Hình trên: 4 nơ-ron chưa đủ (90,8%, bằng logistic), 32 nơ-ron thì được 95,0%. Nhưng nhiều nơ-ron quá mà ít dữ liệu thì dễ <b>học vẹt</b> (Bài 12)."
+     "html": "Mỗi nơ-ron ẩn (ReLU) tạo một “đường gấp” nhỏ. Ghép đủ nhiều đường gấp, mạng vẽ được <b>ranh giới cong</b> — điều hồi quy logistic không làm được. Hình trên: 4 nơ-ron chưa đủ (90.8%, bằng logistic), 32 nơ-ron thì được 95.0%. Nhưng nhiều nơ-ron quá mà ít dữ liệu thì dễ <b>học vẹt</b> (Bài 12)."
     },
     {
      "t": "loi_hay_gap",
@@ -871,21 +871,21 @@ window.BAI = {
      "truc_x": "Epoch",
      "truc_y": "Loss",
      "ghi": [
-      "Epoch 1: loss train 0,713, loss test 0,712.",
-      "Epoch 6: loss train 0,698, loss test 0,698.",
-      "Epoch 11: loss train 0,685, loss test 0,686.",
-      "Epoch 21: loss train 0,648, loss test 0,649.",
-      "Epoch 41: loss train 0,519, loss test 0,526.",
-      "Epoch 81: loss train 0,292, loss test 0,302.",
-      "Epoch 151: loss train 0,205, loss test 0,195.",
-      "Epoch 300: loss train 0,195, loss test 0,173."
+      "Epoch 1: loss train 0.713, loss test 0.712.",
+      "Epoch 6: loss train 0.698, loss test 0.698.",
+      "Epoch 11: loss train 0.685, loss test 0.686.",
+      "Epoch 21: loss train 0.648, loss test 0.649.",
+      "Epoch 41: loss train 0.519, loss test 0.526.",
+      "Epoch 81: loss train 0.292, loss test 0.302.",
+      "Epoch 151: loss train 0.205, loss test 0.195.",
+      "Epoch 300: loss train 0.195, loss test 0.173."
      ]
     },
     {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Loss và độ chính xác khác nhau",
-     "html": "Loss đo mạng <b>tự tin sai</b> tới đâu, dùng để huấn luyện. Độ chính xác đếm số lần đoán đúng, dùng để báo cáo. Sau 300 epoch, mạng này đoán đúng 93,1% trên 72 bạn kiểm tra."
+     "html": "Loss đo mạng <b>tự tin sai</b> tới đâu, dùng để huấn luyện. Độ chính xác đếm số lần đoán đúng, dùng để báo cáo. Sau 300 epoch, mạng này đoán đúng 93.1% trên 72 bạn kiểm tra."
     },
     {
      "t": "loi_hay_gap",
@@ -998,23 +998,23 @@ window.BAI = {
      "dong": [
       [
        "Luôn đoán nhãn nhiều nhất (mốc)",
-       "54,2%"
+       "54.2%"
       ],
       [
        "Logistic — Bài 16",
-       "91,7%"
+       "91.7%"
       ],
       [
        "Mạng nơ-ron — scikit-learn",
-       "93,1%"
+       "93.1%"
       ],
       [
        "Mạng nơ-ron — PyTorch",
-       "93,1%"
+       "93.1%"
       ],
       [
        "Mạng nơ-ron — TensorFlow",
-       "93,1%"
+       "93.1%"
       ]
      ],
      "ket_luan": "Ba thư viện cho kết quả gần như nhau — khác nhau ở cách viết, không ở ý tưởng. Và trên bảng 2 cột này, mạng nơ-ron không hơn logistic bao nhiêu.",
@@ -1081,7 +1081,7 @@ window.BAI = {
      "k": "ds",
      "id": "bai29-q8",
      "q": "Cùng một mạng 2 – 8 – 1, viết bằng PyTorch luôn đúng hơn hẳn viết bằng scikit-learn.",
-     "giai": "Kết quả chạy thật gần như bằng nhau: 93,1% và 93,1%.",
+     "giai": "Kết quả chạy thật gần như bằng nhau: 93.1% và 93.1%.",
      "goi_y": "Đọc lại bảng kết quả chạy thật.",
      "h": "9da4a9912106b"
     }
@@ -1096,15 +1096,15 @@ window.BAI = {
    "khoi": [
     {
      "t": "anh",
-     "cap": "Mạng nơ-ron 64 nơ-ron ẩn trên ảnh chữ số 8 × 8: đúng 97,3% trên 450 ảnh kiểm tra",
-     "alt": "Mạng nơ-ron 64 nơ-ron ẩn trên ảnh chữ số 8 × 8: đúng 97,3% trên 450 ảnh kiểm tra",
+     "cap": "Mạng nơ-ron 64 nơ-ron ẩn trên ảnh chữ số 8 × 8: đúng 97.3% trên 450 ảnh kiểm tra",
+     "alt": "Mạng nơ-ron 64 nơ-ron ẩn trên ảnh chữ số 8 × 8: đúng 97.3% trên 450 ảnh kiểm tra",
      "src": "img/chu-so-viet-tay.png"
     },
     {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Ảnh 8 × 8 còn quá nhỏ",
-     "html": "Mỗi ảnh ở đây chỉ có 64 điểm ảnh — logistic cũng đúng tới 96,9%, gần bằng mạng nơ-ron (97,3%). Ảnh chụp thật có hàng trăm nghìn điểm ảnh; khi đó các model cổ điển tụt hẳn, còn mạng nơ-ron (loại <b>tích chập</b>, học ở Level 2) mới làm tốt. Lợi thế của Deep Learning lộ rõ khi dữ liệu lớn và phức tạp."
+     "html": "Mỗi ảnh ở đây chỉ có 64 điểm ảnh — logistic cũng đúng tới 96.9%, gần bằng mạng nơ-ron (97.3%). Ảnh chụp thật có hàng trăm nghìn điểm ảnh; khi đó các model cổ điển tụt hẳn, còn mạng nơ-ron (loại <b>tích chập</b>, học ở Level 2) mới làm tốt. Lợi thế của Deep Learning lộ rõ khi dữ liệu lớn và phức tạp."
     },
     {
      "t": "bang",
@@ -1326,7 +1326,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai29-q19",
     "q": "Trên bảng khối 10 hai cột, mạng nơ-ron so với logistic thế nào?",
-    "giai": "93,1% so với 91,7%.",
+    "giai": "93.1% so với 91.7%.",
     "a": [
      "Gần như bằng nhau",
      "Hơn hẳn 30 điểm",

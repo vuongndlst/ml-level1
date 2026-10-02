@@ -103,7 +103,7 @@ window.BAI = {
       [
        "<code>df.describe()</code>",
        "count, mean, std, min, 25%, 50%, 75%, max",
-       "Phút mạng: trung bình 152,8, trung vị 135"
+       "Phút mạng: trung bình 152.8, trung vị 135"
       ],
       [
        "<code>df[\"cột\"].value_counts()</code>",
@@ -221,7 +221,7 @@ window.BAI = {
    "ten_ngan": "Biểu đồ tần số",
    "phut": 5,
    "muc_tieu": "đọc được hình dạng phân bố của một cột số trên biểu đồ tần số.",
-   "khoi_dong": "Số trung bình phút mạng là 152,8 nhưng trung vị chỉ 135. Hình dạng dữ liệu như thế nào thì hai số này lệch nhau?",
+   "khoi_dong": "Số trung bình phút mạng là 152.8 nhưng trung vị chỉ 135. Hình dạng dữ liệu như thế nào thì hai số này lệch nhau?",
    "khoi": [
     {
      "t": "dinh_nghia",
@@ -284,21 +284,21 @@ window.BAI = {
      "dong": [
       [
        "Phút mạng xã hội",
-       "152,8",
+       "152.8",
        "135",
        "Lệch phải",
        "<b>Trung vị</b>"
       ],
       [
        "Điểm học kỳ",
-       "5,26",
-       "5,2",
+       "5.26",
+       "5.2",
        "Gần cân đối",
        "Số trung bình"
       ],
       [
        "Số lần nộp trễ",
-       "1,48",
+       "1.48",
        "1",
        "Lệch phải rất mạnh",
        "<b>Trung vị</b>"
@@ -1373,7 +1373,7 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai09-q4",
-     "q": "Một cột có số trung bình 1,43 nhưng trung vị là 1. Hình dạng phân bố nhiều khả năng là gì?",
+     "q": "Một cột có số trung bình 1.43 nhưng trung vị là 1. Hình dạng phân bố nhiều khả năng là gì?",
      "giai": "Số trung bình lớn hơn trung vị: vài giá trị lớn kéo sang phải.",
      "goi_y": "Số trung bình bị kéo về phía đuôi dài.",
      "a": [
@@ -1547,7 +1547,7 @@ window.BAI = {
     {
      "t": "dinh_nghia",
      "ten": "Biểu đồ hộp (box plot)",
-     "html": "Hộp kéo dài từ Q<sub>1</sub> tới Q<sub>3</sub>, vạch giữa hộp là trung vị. Râu kéo tới giá trị nhỏ nhất và lớn nhất <b>không bất thường</b>; chấm tròn ngoài râu là giá trị bất thường (quy tắc 1,5·Δ<sub>Q</sub> — Bài 7).",
+     "html": "Hộp kéo dài từ Q<sub>1</sub> tới Q<sub>3</sub>, vạch giữa hộp là trung vị. Râu kéo tới giá trị nhỏ nhất và lớn nhất <b>không bất thường</b>; chấm tròn ngoài râu là giá trị bất thường (quy tắc 1.5·Δ<sub>Q</sub> — Bài 7).",
      "ky_hieu": "Hộp chứa 50% dữ liệu ở giữa · <code>df.boxplot(column=\"cột\", by=\"nhóm\")</code>"
     },
     {
@@ -1597,17 +1597,17 @@ window.BAI = {
      "dong": [
       [
        "Trung vị",
-       "1,9 giờ",
-       "5,4 giờ"
+       "1.9 giờ",
+       "5.4 giờ"
       ],
       [
        "Hộp (Q<sub>1</sub> – Q<sub>3</sub>)",
-       "1,3 – 2,5",
-       "4,1 – 6,3"
+       "1.3 – 2.5",
+       "4.1 – 6.3"
       ],
       [
        "Giá trị bất thường",
-       "Vài bạn học trên 4,5 giờ vẫn Chưa đạt",
+       "Vài bạn học trên 4.5 giờ vẫn Chưa đạt",
        "Không có"
       ]
      ],
@@ -2308,7 +2308,7 @@ window.BAI = {
       "Giới tính": "GioiTinh",
       "Lớp": "Lop"
      },
-     "ghi": "Tứ phân vị tính bằng pandas (quantile) — có thể lệch rất ít so với cách tính tay trong SGK Toán 10 vì hai cách lấy điểm giữa khác nhau. Chấm đỏ: giá trị bất thường theo quy tắc 1,5·Δ<sub>Q</sub>."
+     "ghi": "Tứ phân vị tính bằng pandas (quantile) — có thể lệch rất ít so với cách tính tay trong SGK Toán 10 vì hai cách lấy điểm giữa khác nhau. Chấm đỏ: giá trị bất thường theo quy tắc 1.5·Δ<sub>Q</sub>."
     },
     {
      "t": "video",
@@ -2420,8 +2420,8 @@ window.BAI = {
     },
     {
      "t": "anh",
-     "cap": "Điểm trung bình ba lớp: biểu đồ A trục đứng bắt đầu từ 0, biểu đồ B bắt đầu từ 5,5",
-     "alt": "Điểm trung bình ba lớp: biểu đồ A trục đứng bắt đầu từ 0, biểu đồ B bắt đầu từ 5,5",
+     "cap": "Điểm trung bình ba lớp: biểu đồ A trục đứng bắt đầu từ 0, biểu đồ B bắt đầu từ 5.5",
+     "alt": "Điểm trung bình ba lớp: biểu đồ A trục đứng bắt đầu từ 0, biểu đồ B bắt đầu từ 5.5",
      "src": "img/hai-bieu-do-cung-so-lieu-khac-truc.png"
     },
     {
@@ -2445,7 +2445,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Biểu đồ cột phải bắt đầu từ 0",
-     "html": "Chiều cao cột được mắt so như độ lớn. Cắt trục đứng làm chênh lệch 0,14 điểm giữa 10A1 và 10A6 trông như gấp nhiều lần. Luôn đọc số trên trục trước khi kết luận."
+     "html": "Chiều cao cột được mắt so như độ lớn. Cắt trục đứng làm chênh lệch 0.14 điểm giữa 10A1 và 10A6 trông như gấp nhiều lần. Luôn đọc số trên trục trước khi kết luận."
     },
     {
      "t": "loi_hay_gap",
@@ -2492,7 +2492,7 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai09-q13",
-     "q": "Trong phần Tự thử, khi kéo trục đứng lên gần 5,57 thì điều gì xảy ra?",
+     "q": "Trong phần Tự thử, khi kéo trục đứng lên gần 5.57 thì điều gì xảy ra?",
      "giai": "Số liệu không đổi, chỉ trục đổi — chênh lệch nhỏ trông rất lớn.",
      "goi_y": "Kéo thanh trượt sang phải rồi đọc tỉ số bên dưới.",
      "a": [
@@ -2537,7 +2537,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai09-q15",
     "q": "Nhìn hình. Nhóm nào có trung vị giờ tự học cao hơn?",
-    "giai": "Vạch đỏ của nhóm Đạt ở 5,4, nhóm Chưa đạt ở 1,9.",
+    "giai": "Vạch đỏ của nhóm Đạt ở 5.4, nhóm Chưa đạt ở 1.9.",
     "img": {
      "src": "img/gio-tu-hoc-theo-ket-qua.png"
     },
@@ -2585,7 +2585,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai09-q18",
     "q": "Nhìn hình. Điểm học kỳ có hình dạng phân bố nào?",
-    "giai": "Trung bình 5,26 gần bằng trung vị 5,2.",
+    "giai": "Trung bình 5.26 gần bằng trung vị 5.2.",
     "img": {
      "src": "img/bieu-do-tan-suat-diem.png"
     },
@@ -2613,15 +2613,15 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai09-q20",
-    "q": "describe() cho 25% = 3,8 và 75% = 6,6. Khoảng tứ phân vị là bao nhiêu?",
-    "giai": "Δ<sub>Q</sub> = Q3 − Q1 = 6,6 − 3,8 = 2,8.",
+    "q": "describe() cho 25% = 3.8 và 75% = 6.6. Khoảng tứ phân vị là bao nhiêu?",
+    "giai": "Δ<sub>Q</sub> = Q3 − Q1 = 6.6 − 3.8 = 2.8.",
     "a": [
-     "2,8",
-     "10,4",
-     "3,8",
-     "6,6"
+     "2.8",
+     "10.4",
+     "3.8",
+     "6.6"
     ],
-    "h": "56fea204d22f9"
+    "h": "1bc116281937d"
    },
    {
     "k": "mc",

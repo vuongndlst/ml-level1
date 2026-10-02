@@ -92,7 +92,7 @@ window.BAI = {
         [
          "4",
          "Thử trên 540 ảnh mới",
-         "Đúng 95,9% — không ai phải viết quy tắc"
+         "Đúng 95.9% — không ai phải viết quy tắc"
         ]
        ]
       }
@@ -196,12 +196,12 @@ window.BAI = {
      "truc_y": "Đoán đúng (%)",
      "ghi": [
       "Mốc đầu tiên.",
-      "Từ 10 ảnh lên 20 ảnh: tăng 15,8 điểm.",
-      "Từ 20 ảnh lên 50 ảnh: tăng 22,7 điểm.",
-      "Từ 50 ảnh lên 100 ảnh: tăng 8,6 điểm.",
-      "Từ 100 ảnh lên 200 ảnh: tăng 3,9 điểm.",
-      "Từ 200 ảnh lên 500 ảnh: tăng 2,3 điểm.",
-      "Từ 500 ảnh lên 1000 ảnh: tăng 1,0 điểm."
+      "Từ 10 ảnh lên 20 ảnh: tăng 15.8 điểm.",
+      "Từ 20 ảnh lên 50 ảnh: tăng 22.7 điểm.",
+      "Từ 50 ảnh lên 100 ảnh: tăng 8.6 điểm.",
+      "Từ 100 ảnh lên 200 ảnh: tăng 3.9 điểm.",
+      "Từ 200 ảnh lên 500 ảnh: tăng 2.3 điểm.",
+      "Từ 500 ảnh lên 1000 ảnh: tăng 1.0 điểm."
      ]
     },
     {
@@ -212,7 +212,7 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Trong thí nghiệm này: 10 ảnh đúng 41,6%; 100 ảnh đúng 88,7%; 1000 ảnh đúng 95,9%. Độ chính xác tăng nhanh lúc đầu, rồi chậm dần."
+     "html": "Trong thí nghiệm này: 10 ảnh đúng 41.6%; 100 ảnh đúng 88.7%; 1000 ảnh đúng 95.9%. Độ chính xác tăng nhanh lúc đầu, rồi chậm dần."
     },
     {
      "t": "loi_hay_gap",
@@ -234,12 +234,12 @@ window.BAI = {
      "giai": "Kéo tới 100.",
      "goi_y": "Kéo thanh tới 100 ảnh, đọc số to màu xanh.",
      "a": [
-      "88,7%",
-      "41,6%",
-      "95,9%",
-      "80,1%"
+      "88.7%",
+      "41.6%",
+      "95.9%",
+      "80.1%"
      ],
-     "h": "16f7c3dca9067e"
+     "h": "139fe39f32d278"
     },
     {
      "k": "dd",
@@ -250,19 +250,19 @@ window.BAI = {
      "mau": "Học 10 ảnh: đúng {0}; học 1000 ảnh: đúng {1}.",
      "o": [
       [
-       "41,6%",
-       "95,9%",
+       "41.6%",
+       "95.9%",
        "100%",
        "0%"
       ],
       [
-       "95,9%",
-       "41,6%",
+       "95.9%",
+       "41.6%",
        "100%",
-       "50,0%"
+       "50.0%"
       ]
      ],
-     "h": "17f7b040fa6864"
+     "h": "dc43d229a4116"
     }
    ]
   },
@@ -291,7 +291,7 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Gắn sai 20% nhãn: còn 87,7%. Gắn sai 60%: còn 75,4% (trung bình 5 lần gắn sai ngẫu nhiên). Đáp án mẫu sai thì máy học theo cái sai."
+     "html": "Gắn sai 20% nhãn: còn 87.7%. Gắn sai 60%: còn 75.4% (trung bình 5 lần gắn sai ngẫu nhiên). Đáp án mẫu sai thì máy học theo cái sai."
     },
     {
      "t": "hop",
@@ -330,7 +330,7 @@ window.BAI = {
      "k": "ds",
      "id": "bai02-q6",
      "q": "Khi 60% nhãn học bị sai, máy vẫn đoán đúng như khi nhãn đúng.",
-     "giai": "75,4% so với 96,3%.",
+     "giai": "75.4% so với 96.3%.",
      "goi_y": "So cột đầu và cột cuối.",
      "h": "2353bcc228893"
     }
@@ -985,7 +985,7 @@ window.BAI = {
      "k": "ds",
      "id": "bai02-q12",
      "q": "Giấu một chữ số làm máy đoán sai hàng loạt cả các chữ số khác.",
-     "giai": "Các số còn lại vẫn đúng khoảng 95,7% – 97,5%.",
+     "giai": "Các số còn lại vẫn đúng khoảng 95.7% – 97.5%.",
      "goi_y": "Xem số to màu xanh khi kéo thanh.",
      "h": "1f51a00cc70cf9"
     }
@@ -1262,19 +1262,19 @@ window.BAI = {
     "mau": "Nhãn đúng: đoán đúng {0}; sai 60%% nhãn: còn {1}.",
     "o": [
      [
-      "96,3%",
-      "75,4%",
+      "96.3%",
+      "75.4%",
       "100%",
       "0%"
      ],
      [
-      "75,4%",
-      "96,3%",
+      "75.4%",
+      "96.3%",
       "100%",
       "0%"
      ]
     ],
-    "h": "e136f3fc1b13a"
+    "h": "1aabb50f3a215"
    },
    {
     "k": "dd",
@@ -1309,7 +1309,7 @@ window.BAI = {
     "k": "ds",
     "id": "bai02-q33",
     "q": "Tăng từ 10 lên 100 ảnh học làm độ chính xác tăng rõ rệt.",
-    "giai": "41,6% → 88,7%.",
+    "giai": "41.6% → 88.7%.",
     "h": "62a4d503f1d36"
    },
    {

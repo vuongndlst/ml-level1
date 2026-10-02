@@ -112,14 +112,14 @@ window.BAI = {
      "truc_x": "Số bạn",
      "truc_y": "Sai lệch (kẹo)",
      "ghi": [
-      "Một bạn đoán một mình: lệch trung bình 76,5 kẹo.",
-      "2 bạn: lệch 54,2 kẹo.",
-      "3 bạn: lệch 42,5 kẹo.",
-      "5 bạn: lệch 32,3 kẹo.",
-      "8 bạn: lệch 27,9 kẹo.",
-      "12 bạn: lệch 22,7 kẹo.",
-      "20 bạn: lệch 17,1 kẹo.",
-      "30 bạn: lệch 16,5 kẹo."
+      "Một bạn đoán một mình: lệch trung bình 76.5 kẹo.",
+      "2 bạn: lệch 54.2 kẹo.",
+      "3 bạn: lệch 42.5 kẹo.",
+      "5 bạn: lệch 32.3 kẹo.",
+      "8 bạn: lệch 27.9 kẹo.",
+      "12 bạn: lệch 22.7 kẹo.",
+      "20 bạn: lệch 17.1 kẹo.",
+      "30 bạn: lệch 16.5 kẹo."
      ]
     },
     {
@@ -292,7 +292,7 @@ window.BAI = {
     {
      "t": "demo_tung_buoc",
      "tieu_de": "11 cây bỏ phiếu cho một bạn mới",
-     "huong_dan": "Bạn mới: học 3,3 giờ, mạng 180 phút, ngủ 7 giờ, nộp trễ 1 lần. Bấm “Bước tiếp” để xem từng cây bỏ phiếu.",
+     "huong_dan": "Bạn mới: học 3.3 giờ, mạng 180 phút, ngủ 7 giờ, nộp trễ 1 lần. Bấm “Bước tiếp” để xem từng cây bỏ phiếu.",
      "nhan_chon": "Bạn mới",
      "cot": [
       "#",
@@ -448,15 +448,15 @@ window.BAI = {
      "dong": [
       [
        "Cây lẻ dở nhất · giỏi nhất",
-       "66,7% · 95,8%"
+       "66.7% · 95.8%"
       ],
       [
        "Trung bình một cây",
-       "86,8%"
+       "86.8%"
       ],
       [
        "Cả rừng",
-       "<b>93,1%</b>"
+       "<b>93.1%</b>"
       ]
      ],
      "ket_luan": "Rừng hơn 90 / 100 cây của chính nó, không hơn cây giỏi nhất — nhưng ta không biết trước cây nào sẽ giỏi nhất.",
@@ -472,37 +472,37 @@ window.BAI = {
      "moc": [
       {
        "x": 1,
-       "n": "77,8 – 97,2",
+       "n": "77.8 – 97.2",
        "p": 86.8
       },
       {
        "x": 3,
-       "n": "80,6 – 94,4",
+       "n": "80.6 – 94.4",
        "p": 89.0
       },
       {
        "x": 5,
-       "n": "86,1 – 95,8",
+       "n": "86.1 – 95.8",
        "p": 91.2
       },
       {
        "x": 11,
-       "n": "88,9 – 97,2",
+       "n": "88.9 – 97.2",
        "p": 92.6
       },
       {
        "x": 25,
-       "n": "88,9 – 95,8",
+       "n": "88.9 – 95.8",
        "p": 93.1
       },
       {
        "x": 51,
-       "n": "91,7 – 97,2",
+       "n": "91.7 – 97.2",
        "p": 93.8
       },
       {
        "x": 101,
-       "n": "91,7 – 95,8",
+       "n": "91.7 – 95.8",
        "p": 93.8
       }
      ],
@@ -534,15 +534,15 @@ window.BAI = {
      "k": "mc",
      "id": "bai20-q5",
      "q": "Rừng 100 cây đúng bao nhiêu trên tập kiểm tra?",
-     "giai": "Trung bình một cây chỉ 86,8%.",
+     "giai": "Trung bình một cây chỉ 86.8%.",
      "goi_y": "Đường đậm trên biểu đồ.",
      "a": [
-      "93,1%",
-      "86,8%",
-      "95,8%",
-      "66,7%"
+      "93.1%",
+      "86.8%",
+      "95.8%",
+      "66.7%"
      ],
-     "h": "158f687bf1ec20"
+     "h": "1401aadab0a2c3"
     },
     {
      "k": "dd",
@@ -553,19 +553,19 @@ window.BAI = {
      "mau": "Rừng 1 cây dao động khoảng {0} điểm; rừng 101 cây dao động khoảng {1} điểm.",
      "o": [
       [
-       "19,4",
-       "4,1",
-       "0,0",
-       "50,0"
+       "19.4",
+       "4.1",
+       "0.0",
+       "50.0"
       ],
       [
-       "4,1",
-       "19,4",
-       "0,0",
-       "50,0"
+       "4.1",
+       "19.4",
+       "0.0",
+       "50.0"
       ]
      ],
-     "h": "9f404a01c98a1"
+     "h": "dd8936ed8b8d"
     }
    ]
   },
@@ -594,21 +594,21 @@ window.BAI = {
      "dong": [
       [
        "Cây không giới hạn",
-       "87,5%",
-       "87,5%"
+       "87.5%",
+       "87.5%"
       ],
       [
        "Cây sâu 2",
-       "91,7%",
-       "91,7%"
+       "91.7%",
+       "91.7%"
       ],
       [
        "Rừng 100 cây",
-       "90,3%",
-       "<b>93,1%</b>"
+       "90.3%",
+       "<b>93.1%</b>"
       ]
      ],
-     "ket_luan": "Với 2 cột, rừng (90,3%) thua cây sâu 2 (91,7%). Có thêm cột, các cây khác nhau hơn và rừng mới phát huy.",
+     "ket_luan": "Với 2 cột, rừng (90.3%) thua cây sâu 2 (91.7%). Có thêm cột, các cây khác nhau hơn và rừng mới phát huy.",
      "nhan_manh": [
       2
      ]
@@ -636,7 +636,7 @@ window.BAI = {
      "k": "mc",
      "id": "bai20-q7",
      "q": "Với 2 cột, model nào đúng nhất trong bảng?",
-     "giai": "91,7% so với rừng 90,3%.",
+     "giai": "91.7% so với rừng 90.3%.",
      "goi_y": "So cột “2 cột”.",
      "a": [
       "Cây sâu 2",
@@ -742,7 +742,7 @@ window.BAI = {
      "k": "mc",
      "id": "bai20-q9",
      "q": "Cột nào quan trọng nhất trong rừng của lớp?",
-     "giai": "Mức quan trọng 0,68.",
+     "giai": "Mức quan trọng 0.68.",
      "goi_y": "Thanh dài nhất bên trái.",
      "a": [
       "Giờ tự học",
@@ -814,12 +814,12 @@ window.BAI = {
      "src": "img/tram-cay-le-va-ca-rung.png"
     },
     "a": [
-     "66,7%",
-     "95,8%",
-     "93,1%",
-     "86,8%"
+     "66.7%",
+     "95.8%",
+     "93.1%",
+     "86.8%"
     ],
-    "h": "c835211b49ebf"
+    "h": "89d5a47cbe0a4"
    },
    {
     "k": "mc",
@@ -841,7 +841,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai20-q14",
     "q": "Nhìn hình. Với 4 cột, model nào cao nhất?",
-    "giai": "93,1%.",
+    "giai": "93.1%.",
     "img": {
      "src": "img/hai-cot-va-bon-cot.png"
     },
@@ -1035,19 +1035,19 @@ window.BAI = {
     "mau": "Rừng đúng {0}; trung bình một cây đúng {1}.",
     "o": [
      [
-      "93,1%",
-      "86,8%",
-      "66,7%",
+      "93.1%",
+      "86.8%",
+      "66.7%",
       "100%"
      ],
      [
-      "86,8%",
-      "93,1%",
-      "95,8%",
-      "50,0%"
+      "86.8%",
+      "93.1%",
+      "95.8%",
+      "50.0%"
      ]
     ],
-    "h": "15c7c29088c9c8"
+    "h": "1a28cc6b56d78a"
    },
    {
     "k": "dd",
@@ -1079,19 +1079,19 @@ window.BAI = {
     "mau": "Với 2 cột, rừng đúng {0}, thua cây sâu 2 ({1}).",
     "o": [
      [
-      "90,3%",
-      "91,7%",
-      "93,1%",
+      "90.3%",
+      "91.7%",
+      "93.1%",
       "100%"
      ],
      [
-      "91,7%",
-      "90,3%",
-      "87,5%",
-      "50,0%"
+      "91.7%",
+      "90.3%",
+      "87.5%",
+      "50.0%"
      ]
     ],
-    "h": "119de8424a980c"
+    "h": "23aca041b5f0e"
    },
    {
     "k": "ds",

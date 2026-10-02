@@ -37,6 +37,8 @@ Mở `http://localhost:8765/bai04/`.
 - Đáp án chỉ lưu dạng băm (cyrb53); mã chứng chỉ tính từ bài + họ tên + lớp. Web tĩnh nên người cố tình đọc mã nguồn vẫn dò được — đây là đánh giá quá trình, điểm chính thức ở quiz Canvas.
 - Hình GfG được nhúng thẳng từ máy chủ gốc, ghi nguồn dưới hình, chỉ dùng cho mục đích học tập.
 - Sửa nội dung: sửa `build_web.py` của bài rồi chạy lại — không sửa tay `data.js`.
+- Quy ước số của khóa: **dấu `.` cho phần thập phân**, **dấu `,` giữa các phần tử vector**. Ví dụ trên web/slide: `(3.5, 120)`; trong Python, đây là tuple, còn `np.array([3.5, 120])` là mảng dùng để tính toán. Tránh `(3,5; 120)` và tránh đổi `2.6` thành `2,6` khi hiển thị đồ thị. Bộ chạy web cũng dùng dấu `.`.
+- `lib_web.py` tự chuẩn hóa văn bản và băm lại đáp án sau khi dựng một bài. Khi cập nhật nhiều bài hoặc slide, chạy `_Chung/chuan_hoa_ky_hieu.py` để chuẩn hóa toàn bộ sản phẩm đang dùng; công cụ giữ bố cục PowerPoint và bỏ qua bản lưu/tài liệu tham khảo. Sau đó chạy `_Chung/build_quest_ml.py` để gắn lại cổng 3D và phiên bản asset mới. Kiểm tra phương án nhiễu của câu hỏi Python: phép đổi dấu có thể khiến phương án sai trùng đáp án đúng.
 
 ## Hành trình 3D và video
 

@@ -205,10 +205,10 @@ window.BAI = {
     {
      "t": "demo_phan_tan",
      "tieu_de": "đám chấm thay đổi theo r",
-     "huong_dan": "Kéo thanh trượt từ trái sang phải. Quan sát hướng của đám chấm và độ chụm khi r đi từ −0,9 tới 0,9.",
+     "huong_dan": "Kéo thanh trượt từ trái sang phải. Quan sát hướng của đám chấm và độ chụm khi r đi từ −0.9 tới 0.9.",
      "bo": [
       {
-       "r": "−0,90",
+       "r": "−0.90",
        "doc": "Âm, mạnh",
        "x": [
         0.792,
@@ -336,7 +336,7 @@ window.BAI = {
        ]
       },
       {
-       "r": "−0,60",
+       "r": "−0.60",
        "doc": "Âm, vừa",
        "x": [
         0.244,
@@ -464,7 +464,7 @@ window.BAI = {
        ]
       },
       {
-       "r": "−0,30",
+       "r": "−0.30",
        "doc": "Âm, yếu",
        "x": [
         0.476,
@@ -592,7 +592,7 @@ window.BAI = {
        ]
       },
       {
-       "r": "0,00",
+       "r": "0.00",
        "doc": "Gần như không liên quan",
        "x": [
         0.587,
@@ -720,7 +720,7 @@ window.BAI = {
        ]
       },
       {
-       "r": "0,30",
+       "r": "0.30",
        "doc": "Dương, yếu",
        "x": [
         0.68,
@@ -848,7 +848,7 @@ window.BAI = {
        ]
       },
       {
-       "r": "0,60",
+       "r": "0.60",
        "doc": "Dương, vừa",
        "x": [
         0.438,
@@ -976,7 +976,7 @@ window.BAI = {
        ]
       },
       {
-       "r": "0,90",
+       "r": "0.90",
        "doc": "Dương, mạnh",
        "x": [
         0.535,
@@ -1114,15 +1114,15 @@ window.BAI = {
      ],
      "dong": [
       [
-       "từ 0,7 trở lên",
+       "từ 0.7 trở lên",
        "Liên quan mạnh"
       ],
       [
-       "từ 0,3 đến dưới 0,7",
+       "từ 0.3 đến dưới 0.7",
        "Liên quan vừa"
       ],
       [
-       "dưới 0,3",
+       "dưới 0.3",
        "Liên quan yếu hoặc gần như không"
       ]
      ]
@@ -1140,25 +1140,25 @@ window.BAI = {
      "dong": [
       [
        "Giờ tự học",
-       "0,92",
+       "0.92",
        "Dương",
        "Mạnh"
       ],
       [
        "Phút mạng xã hội",
-       "−0,54",
+       "−0.54",
        "Âm",
        "Vừa"
       ],
       [
        "Giờ ngủ",
-       "0,15",
+       "0.15",
        "Dương",
        "Yếu"
       ],
       [
        "Số lần nộp trễ",
-       "0,06",
+       "0.06",
        "—",
        "Gần như không"
       ]
@@ -2678,7 +2678,7 @@ window.BAI = {
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ r = −0,54 yếu hơn r = 0,15 vì là số âm — độ mạnh xét độ lớn, bỏ dấu.",
+      "Nghĩ r = −0.54 yếu hơn r = 0.15 vì là số âm — độ mạnh xét độ lớn, bỏ dấu.",
       "Nghĩ r = 0 là hai cột chắc chắn không liên quan gì — r chỉ đo quan hệ đường thẳng."
      ]
     },
@@ -2711,24 +2711,24 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai10-q3",
-     "q": "Cột nào liên quan MẠNH hơn tới điểm: r = −0,8 hay r = 0,5?",
-     "giai": "So độ lớn: 0,8 > 0,5. Dấu âm chỉ cho biết chiều ngược nhau.",
+     "q": "Cột nào liên quan MẠNH hơn tới điểm: r = −0.8 hay r = 0.5?",
+     "giai": "So độ lớn: 0.8 > 0.5. Dấu âm chỉ cho biết chiều ngược nhau.",
      "goi_y": "Độ mạnh xét độ lớn hay xét dấu?",
      "a": [
-      "r = −0,8",
-      "r = 0,5",
+      "r = −0.8",
+      "r = 0.5",
       "Mạnh như nhau",
       "Không so được"
      ],
-     "h": "1f401088a0c9b7"
+     "h": "2bd65bf990a2a"
     },
     {
      "k": "dd",
      "id": "bai10-q4",
      "q": "Chọn từ đúng cho mỗi chỗ trống.",
-     "giai": "Độ lớn 0,9 là mạnh; dấu âm là ngược chiều.",
+     "giai": "Độ lớn 0.9 là mạnh; dấu âm là ngược chiều.",
      "goi_y": "Tách hai phần: độ lớn và dấu.",
-     "mau": "r = −0,9 nghĩa là liên quan {0} và {1}.",
+     "mau": "r = −0.9 nghĩa là liên quan {0} và {1}.",
      "o": [
       [
        "mạnh",
@@ -2748,7 +2748,7 @@ window.BAI = {
     {
      "k": "ds",
      "id": "bai10-q5",
-     "q": "Hệ số tương quan có thể bằng 1,5.",
+     "q": "Hệ số tương quan có thể bằng 1.5.",
      "giai": "r luôn nằm từ −1 đến 1.",
      "goi_y": "Nhớ khoảng giá trị của r.",
      "h": "3358ee694e4c4"
@@ -2785,15 +2785,15 @@ window.BAI = {
      "dong": [
       [
        "Cột nào liên quan mạnh nhất với Điểm?",
-       "Giờ học (0,92)"
+       "Giờ học (0.92)"
       ],
       [
        "Hai cột đầu vào nào liên quan với nhau?",
-       "Phút mạng và giờ học (−0,41)"
+       "Phút mạng và giờ học (−0.41)"
       ],
       [
        "Cột nào gần như không liên quan với Điểm?",
-       "Nộp trễ (0,06)"
+       "Nộp trễ (0.06)"
       ]
      ],
      "ket_luan": null,
@@ -2857,7 +2857,7 @@ window.BAI = {
       "1",
       "0",
       "−1",
-      "0,5"
+      "0.5"
      ],
      "h": "1e640debb1f944"
     },
@@ -2901,15 +2901,15 @@ window.BAI = {
      "dong": [
       [
        "Phút mạng và điểm",
-       "r = −0,54 (âm, vừa)"
+       "r = −0.54 (âm, vừa)"
       ],
       [
        "Phút mạng và giờ học",
-       "r = −0,41 — bạn dùng mạng nhiều cũng tự học ít hơn"
+       "r = −0.41 — bạn dùng mạng nhiều cũng tự học ít hơn"
       ],
       [
        "Giờ học và điểm",
-       "r = 0,92 (dương, mạnh)"
+       "r = 0.92 (dương, mạnh)"
       ]
      ],
      "ket_luan": "Điểm thấp ở nhóm dùng mạng nhiều có thể một phần do học ít hơn. Bảng số không đủ để nói “mạng xã hội làm điểm thấp”.",
@@ -2918,7 +2918,7 @@ window.BAI = {
     {
      "t": "dinh_nghia",
      "ten": "Phải vẽ trước khi tin con số",
-     "html": "Bốn bộ số liệu của Anscombe có cùng số trung bình, cùng độ lệch chuẩn, cùng r ≈ 0,82 — nhưng vẽ ra thì khác hẳn: một đường thẳng, một đường cong, một đường có điểm lạ, một cột dọc với một điểm xa.",
+     "html": "Bốn bộ số liệu của Anscombe có cùng số trung bình, cùng độ lệch chuẩn, cùng r ≈ 0.82 — nhưng vẽ ra thì khác hẳn: một đường thẳng, một đường cong, một đường có điểm lạ, một cột dọc với một điểm xa.",
      "ky_hieu": null
     },
     {
@@ -2972,7 +2972,7 @@ window.BAI = {
      "k": "ds",
      "id": "bai10-q9",
      "q": "Bốn bộ số liệu có cùng r thì có biểu đồ phân tán giống nhau.",
-     "giai": "Bộ tứ Anscombe: cùng r ≈ 0,82 mà hình dạng khác hẳn.",
+     "giai": "Bộ tứ Anscombe: cùng r ≈ 0.82 mà hình dạng khác hẳn.",
      "goi_y": "Nhớ bốn biểu đồ của Anscombe.",
      "h": "99cb1ac362aed"
     },
@@ -3021,12 +3021,12 @@ window.BAI = {
       [
        "Con số",
        "Bằng chứng là số nào?",
-       "Nhóm trên 200 phút: điểm trung bình 3,88"
+       "Nhóm trên 200 phút: điểm trung bình 3.88"
       ],
       [
        "So sánh",
        "So với ai?",
-       "Nhóm đến 100 phút: 6,81 — cao hơn 2,93 điểm"
+       "Nhóm đến 100 phút: 6.81 — cao hơn 2.93 điểm"
       ],
       [
        "Biểu đồ",
@@ -3036,7 +3036,7 @@ window.BAI = {
       [
        "Cảnh báo",
        "Điều gì con số chưa nói được?",
-       "Nhóm dùng mạng nhiều cũng tự học ít hơn (2,63 so với 5,20 giờ); dữ liệu mô phỏng"
+       "Nhóm dùng mạng nhiều cũng tự học ít hơn (2.63 so với 5.20 giờ); dữ liệu mô phỏng"
       ]
      ]
     },
@@ -3050,7 +3050,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "thu",
      "tieu_de": "Một câu chuyện mẫu",
-     "html": "“Trong 240 học sinh khối 10 (dữ liệu mô phỏng), nhóm dùng mạng xã hội trên 200 phút mỗi ngày có điểm trung bình 3,88, thấp hơn nhóm dùng đến 100 phút (6,81). Tuy vậy, nhóm này cũng tự học ít hơn, nên chưa thể nói mạng xã hội là nguyên nhân.”"
+     "html": "“Trong 240 học sinh khối 10 (dữ liệu mô phỏng), nhóm dùng mạng xã hội trên 200 phút mỗi ngày có điểm trung bình 3.88, thấp hơn nhóm dùng đến 100 phút (6.81). Tuy vậy, nhóm này cũng tự học ít hơn, nên chưa thể nói mạng xã hội là nguyên nhân.”"
     },
     {
      "t": "anh",
@@ -3147,7 +3147,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai10-q13",
     "q": "Nhìn hình. Đám chấm giờ học – điểm cho thấy điều gì?",
-    "giai": "Đám chấm đi lên rõ, r = 0,92.",
+    "giai": "Đám chấm đi lên rõ, r = 0.92.",
     "img": {
      "src": "img/phan-tan-gio-hoc-va-diem.png"
     },
@@ -3163,7 +3163,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai10-q14",
     "q": "Nhìn hình. Cặp cột đầu vào nào liên quan với nhau rõ nhất?",
-    "giai": "r = −0,41 — lớn nhất (theo độ lớn) giữa các cột đầu vào.",
+    "giai": "r = −0.41 — lớn nhất (theo độ lớn) giữa các cột đầu vào.",
     "img": {
      "src": "img/ban-do-nhiet-tuong-quan-khoi-10.png"
     },
@@ -3200,17 +3200,17 @@ window.BAI = {
      "src": "img/diem-theo-nhom-phut-mang.png"
     },
     "a": [
-     "3,88",
-     "6,81",
-     "5,09",
-     "5,26"
+     "3.88",
+     "6.81",
+     "5.09",
+     "5.26"
     ],
-    "h": "b79ed8cbfc1b8"
+    "h": "17d6c599a06fe7"
    },
    {
     "k": "mc",
     "id": "bai10-q17",
-    "q": "r giữa số giờ luyện đàn và số lỗi khi biểu diễn là −0,85. Cách đọc nào đúng?",
+    "q": "r giữa số giờ luyện đàn và số lỗi khi biểu diễn là −0.85. Cách đọc nào đúng?",
     "giai": "Âm, mạnh: một tăng một giảm. “Chắc chắn gây ra” là nói quá.",
     "a": [
      "Luyện nhiều thì thường ít lỗi hơn",
@@ -3223,7 +3223,7 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai10-q18",
-    "q": "Bộ số liệu có r = 0,02. Kết luận nào cẩn thận nhất?",
+    "q": "Bộ số liệu có r = 0.02. Kết luận nào cẩn thận nhất?",
     "giai": "r chỉ đo quan hệ đường thẳng; vẫn có thể có quan hệ cong.",
     "a": [
      "Gần như không có quan hệ đường thẳng",
@@ -3236,7 +3236,7 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai10-q19",
-    "q": "Số giáo viên và số học sinh vi phạm nội quy ở các trường có r = 0,8. Giải thích nào hợp lý?",
+    "q": "Số giáo viên và số học sinh vi phạm nội quy ở các trường có r = 0.8. Giải thích nào hợp lý?",
     "giai": "Quy mô trường là cột thứ ba.",
     "a": [
      "Trường lớn có nhiều cả hai",
@@ -3268,7 +3268,7 @@ window.BAI = {
      "Luôn nằm từ −1 đến 1",
      "Dấu cho biết chiều của quan hệ",
      "r âm nghĩa là quan hệ yếu",
-     "r = 0,9 chứng minh nguyên nhân"
+     "r = 0.9 chứng minh nguyên nhân"
     ],
     "h": "75a5d345a076b"
    },
@@ -3409,7 +3409,7 @@ window.BAI = {
     "id": "bai10-q30",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
     "giai": "Quy ước thường dùng.",
-    "mau": "|r| từ 0,7 trở lên thường đọc là liên quan {0}; |r| dưới 0,3 là liên quan {1}.",
+    "mau": "|r| từ 0.7 trở lên thường đọc là liên quan {0}; |r| dưới 0.3 là liên quan {1}.",
     "o": [
      [
       "mạnh",
@@ -3429,8 +3429,8 @@ window.BAI = {
    {
     "k": "ds",
     "id": "bai10-q31",
-    "q": "r = −0,7 cho thấy liên quan mạnh hơn r = 0,4.",
-    "giai": "So độ lớn: 0,7 > 0,4.",
+    "q": "r = −0.7 cho thấy liên quan mạnh hơn r = 0.4.",
+    "giai": "So độ lớn: 0.7 > 0.4.",
     "h": "199d8985ba2f78"
    },
    {

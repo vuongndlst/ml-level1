@@ -322,7 +322,7 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Máy đoán đúng 96,3% — nhưng vẫn sai 20 ảnh. Nhìn ảnh sai bên dưới: có ảnh máy đoán sai với độ tin cậy 99,5%."
+     "html": "Máy đoán đúng 96.3% — nhưng vẫn sai 20 ảnh. Nhìn ảnh sai bên dưới: có ảnh máy đoán sai với độ tin cậy 99.5%."
     },
     {
      "t": "anh",
@@ -372,10 +372,10 @@ window.BAI = {
      "mau": "Máy đoán đúng {0} số ảnh chưa thấy, và vẫn sai {1} ảnh.",
      "o": [
       [
-       "96,3%",
+       "96.3%",
        "100%",
-       "50,0%",
-       "75,0%"
+       "50.0%",
+       "75.0%"
       ],
       [
        "20",
@@ -384,7 +384,7 @@ window.BAI = {
        "540"
       ]
      ],
-     "h": "a321ff29196aa"
+     "h": "f512b86b8cbeb"
     }
    ]
   },
@@ -403,7 +403,7 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Sau từ “trời”, trong 37 câu máy đã học có 9 lần “nắng”, 8 lần “mưa”, 2 lần “lạnh”. Vì thế máy đoán “nắng” với xác suất 47,4%."
+     "html": "Sau từ “trời”, trong 37 câu máy đã học có 9 lần “nắng”, 8 lần “mưa”, 2 lần “lạnh”. Vì thế máy đoán “nắng” với xác suất 47.4%."
     },
     {
      "t": "du_doan_tu",
@@ -917,17 +917,17 @@ window.BAI = {
      "truc_x": "Số câu thêm vào",
      "truc_y": "Xác suất “mưa” (%)",
      "ghi": [
-      "Máy đoán: <b>nắng</b> · “nắng” 47,4% · “mưa” 42,1%",
-      "Máy đoán: <b>nắng</b> · “nắng” 45,0% · “mưa” 45,0% — hai từ bằng nhau, máy chọn từ gặp trước",
-      "Máy đoán: <b>mưa</b> · “nắng” 42,9% · “mưa” 47,6%",
-      "Máy đoán: <b>mưa</b> · “nắng” 40,9% · “mưa” 50,0%",
-      "Máy đoán: <b>mưa</b> · “nắng” 39,1% · “mưa” 52,2%",
-      "Máy đoán: <b>mưa</b> · “nắng” 37,5% · “mưa” 54,2%",
-      "Máy đoán: <b>mưa</b> · “nắng” 36,0% · “mưa” 56,0%",
-      "Máy đoán: <b>mưa</b> · “nắng” 34,6% · “mưa” 57,7%",
-      "Máy đoán: <b>mưa</b> · “nắng” 33,3% · “mưa” 59,3%",
-      "Máy đoán: <b>mưa</b> · “nắng” 32,1% · “mưa” 60,7%",
-      "Máy đoán: <b>mưa</b> · “nắng” 31,0% · “mưa” 62,1%"
+      "Máy đoán: <b>nắng</b> · “nắng” 47.4% · “mưa” 42.1%",
+      "Máy đoán: <b>nắng</b> · “nắng” 45.0% · “mưa” 45.0% — hai từ bằng nhau, máy chọn từ gặp trước",
+      "Máy đoán: <b>mưa</b> · “nắng” 42.9% · “mưa” 47.6%",
+      "Máy đoán: <b>mưa</b> · “nắng” 40.9% · “mưa” 50.0%",
+      "Máy đoán: <b>mưa</b> · “nắng” 39.1% · “mưa” 52.2%",
+      "Máy đoán: <b>mưa</b> · “nắng” 37.5% · “mưa” 54.2%",
+      "Máy đoán: <b>mưa</b> · “nắng” 36.0% · “mưa” 56.0%",
+      "Máy đoán: <b>mưa</b> · “nắng” 34.6% · “mưa” 57.7%",
+      "Máy đoán: <b>mưa</b> · “nắng” 33.3% · “mưa” 59.3%",
+      "Máy đoán: <b>mưa</b> · “nắng” 32.1% · “mưa” 60.7%",
+      "Máy đoán: <b>mưa</b> · “nắng” 31.0% · “mưa” 62.1%"
      ]
     },
     {
@@ -1036,7 +1036,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai01-q16",
     "q": "Nhìn hình. Sau “trời”, từ nào có xác suất cao nhất?",
-    "giai": "47,4%.",
+    "giai": "47.4%.",
     "img": {
      "src": "img/du-doan-tu-tiep-theo.png"
     },

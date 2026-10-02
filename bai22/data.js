@@ -66,18 +66,18 @@ window.BAI = {
      "dong": [
       [
        "A",
-       "Học > 3,05 giờ → Đạt",
-       "88,7%"
+       "Học > 3.05 giờ → Đạt",
+       "88.7%"
       ],
       [
        "B",
-       "Học > 3,45 giờ → Đạt",
-       "91,1%"
+       "Học > 3.45 giờ → Đạt",
+       "91.1%"
       ],
       [
        "C",
        "Đường xiên theo cả giờ học và phút mạng",
-       "90,5%"
+       "90.5%"
       ]
      ],
      "ket_luan": "Ba đường đúng gần bằng nhau — độ chính xác không đủ để chọn.",
@@ -140,7 +140,7 @@ window.BAI = {
      "k": "mc",
      "id": "bai22-q1",
      "q": "Trên tập huấn luyện, đường nào trong ba đường đúng nhiều nhất?",
-     "giai": "Đường B: 91,1%.",
+     "giai": "Đường B: 91.1%.",
      "goi_y": "So cột “Đúng” của bảng.",
      "a": [
       "Đường B",
@@ -373,8 +373,8 @@ window.BAI = {
     },
     {
      "t": "anh",
-     "cap": "Ba đường đều tách được — khoảng cách tới điểm gần nhất: 1,16 · 0,55 · 0,37",
-     "alt": "Ba đường đều tách được — khoảng cách tới điểm gần nhất: 1,16 · 0,55 · 0,37",
+     "cap": "Ba đường đều tách được — khoảng cách tới điểm gần nhất: 1.16 · 0.55 · 0.37",
+     "alt": "Ba đường đều tách được — khoảng cách tới điểm gần nhất: 1.16 · 0.55 · 0.37",
      "src": "img/ba-duong-tach-tao-va-cam-minh-hoa.png"
     },
     {
@@ -419,7 +419,7 @@ window.BAI = {
      "k": "mc",
      "id": "bai22-q3",
      "q": "Trong hình ba đường tách táo và cam, đường nào có lề rộng nhất?",
-     "giai": "Khoảng cách tới điểm gần nhất lớn nhất: 1,16.",
+     "giai": "Khoảng cách tới điểm gần nhất lớn nhất: 1.16.",
      "goi_y": "Đường nào đi xa cả táo lẫn cam nhất?",
      "a": [
       "Đường 1",
@@ -478,7 +478,7 @@ window.BAI = {
      "dong": [
       [
        "Độ rộng lề (thang 0 – 1)",
-       "0,412"
+       "0.412"
       ],
       [
        "Số vector hỗ trợ",
@@ -486,7 +486,7 @@ window.BAI = {
       ],
       [
        "Độ chính xác trên tập kiểm tra",
-       "91,7%"
+       "91.7%"
       ]
      ],
      "ket_luan": "Dữ liệu thật không tách được hoàn toàn: SVM cho phép vài điểm nằm trong lề hoặc sai phía (“lề mềm”), đổi lại lề rộng hơn.",
@@ -1239,7 +1239,7 @@ window.BAI = {
       "trong",
       "ngoai"
      ],
-     "cong_thuc": "z = 0,52",
+     "cong_thuc": "z = 0.52",
      "nhan_x": "x",
      "nhan_y": "y",
      "nhan_z": "z = x² + y²",
@@ -1358,37 +1358,37 @@ window.BAI = {
      "dong": [
       [
        "Model lười",
-       "54,2%"
+       "54.2%"
       ],
       [
        "KNN (K = 9)",
-       "<b>95,8%</b>"
+       "<b>95.8%</b>"
       ],
       [
        "Logistic",
-       "91,7%"
+       "91.7%"
       ],
       [
        "Cây sâu 2",
-       "91,7%"
+       "91.7%"
       ],
       [
        "Naïve Bayes",
-       "91,7%"
+       "91.7%"
       ],
       [
        "SVM tuyến tính",
-       "91,7%"
+       "91.7%"
       ]
      ],
-     "ket_luan": "Trừ model lười, các model chỉ chênh 4,1 điểm — khoảng 3 bạn trên 72. Trên bảng này chọn model nào cũng gần như nhau; Bài 24 sẽ đo cho công bằng hơn.",
+     "ket_luan": "Trừ model lười, các model chỉ chênh 4.1 điểm — khoảng 3 bạn trên 72. Trên bảng này chọn model nào cũng gần như nhau; Bài 24 sẽ đo cho công bằng hơn.",
      "nhan_manh": []
     },
     {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "SVM đo khoảng cách",
-     "html": "Như KNN, lề đo bằng khoảng cách nên các cột cần cùng thang đo. Trên bảng này không đưa về 0 – 1 cho 93,1%, đưa về cho 91,7% — chênh 1 bạn, không đủ để kết luận."
+     "html": "Như KNN, lề đo bằng khoảng cách nên các cột cần cùng thang đo. Trên bảng này không đưa về 0 – 1 cho 93.1%, đưa về cho 91.7% — chênh 1 bạn, không đủ để kết luận."
     },
     {
      "t": "loi_hay_gap",
@@ -1481,7 +1481,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai22-q13",
     "q": "Nhìn hình. Model nào có cột thấp hẳn so với các model khác?",
-    "giai": "Luôn đoán Đạt: 54,2%.",
+    "giai": "Luôn đoán Đạt: 54.2%.",
     "img": {
      "src": "img/sau-model-tren-cung-bai-toan.png"
     },
@@ -1518,7 +1518,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai22-q15",
     "q": "Nhìn hình. Đường nào đi sát táo nhất?",
-    "giai": "Khoảng cách tới điểm gần nhất chỉ 0,37.",
+    "giai": "Khoảng cách tới điểm gần nhất chỉ 0.37.",
     "img": {
      "src": "img/ba-duong-tach-tao-va-cam-minh-hoa.png"
     },
@@ -1697,13 +1697,13 @@ window.BAI = {
       "72"
      ],
      [
-      "91,7%",
-      "54,2%",
+      "91.7%",
+      "54.2%",
       "100%",
-      "95,8%"
+      "95.8%"
      ]
     ],
-    "h": "113924f856fae4"
+    "h": "124bf65ed8315c"
    },
    {
     "k": "dd",

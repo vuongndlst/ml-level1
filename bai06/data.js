@@ -44,13 +44,13 @@ window.BAI = {
    "khoi": [
     {
      "t": "p",
-     "html": "Ở Toán 10, một vectơ trong mặt phẳng tọa độ được xác định bởi <b>hai số</b> (x; y). Machine Learning dùng đúng ý đó để lưu dữ liệu, và cho phép dùng bao nhiêu số cũng được."
+     "html": "Ở Toán 10, một vectơ trong mặt phẳng tọa độ được xác định bởi <b>hai số</b> (x, y). Machine Learning dùng đúng ý đó để lưu dữ liệu, và cho phép dùng bao nhiêu số cũng được."
     },
     {
      "t": "dinh_nghia",
      "ten": "Vector (trong Machine Learning)",
      "html": "Một <b>dãy số có thứ tự</b>; mỗi số ứng với một đặc điểm (một cột) của đối tượng. Số lượng số trong dãy gọi là <b>số chiều</b> của vector.",
-     "ky_hieu": "Bạn A với hai cột (giờ tự học; phút mạng xã hội): A = (2,6; 86) — vector 2 chiều."
+     "ky_hieu": "Bạn A với hai cột (giờ tự học; phút mạng xã hội): A = (2.6, 86) — vector 2 chiều."
     },
     {
      "t": "dinh_nghia",
@@ -98,23 +98,23 @@ window.BAI = {
       [
        "A",
        "HS130",
-       "2,6",
+       "2.6",
        "86",
-       "<b>(2,6; 86)</b>"
+       "<b>(2.6, 86)</b>"
       ],
       [
        "B",
        "HS147",
-       "6,7",
+       "6.7",
        "70",
-       "<b>(6,7; 70)</b>"
+       "<b>(6.7, 70)</b>"
       ],
       [
        "C",
        "HS043",
-       "2,2",
+       "2.2",
        "182",
-       "<b>(2,2; 182)</b>"
+       "<b>(2.2, 182)</b>"
       ]
      ],
      "ket_luan": "Ba vector xếp chồng thành một ma trận 3 × 2. Cả khối 240 bạn là ma trận 240 × 2 — chính là bảng con mở bằng Pandas.",
@@ -146,7 +146,7 @@ window.BAI = {
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Đổi thứ tự các số: (2,6; 86) và (86; 2,6) là hai vector khác nhau — thứ tự số phải khớp thứ tự cột.",
+      "Đổi thứ tự các số: (2.6, 86) và (86, 2.6) là hai vector khác nhau — thứ tự số phải khớp thứ tự cột.",
       "Ghi cỡ ma trận ngược: bảng 240 dòng, 2 cột là 240 × 2, không phải 2 × 240.",
       "Nghĩ vector bắt buộc phải là mũi tên. Trong Machine Learning, vector đơn giản là một dãy số có thứ tự."
      ]
@@ -188,16 +188,16 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai06-q1",
-     "q": "Bạn D tự học 3,5 giờ và dùng mạng xã hội 120 phút mỗi ngày. Theo thứ tự cột (giờ tự học; phút mạng xã hội), vector của bạn D là gì?",
+     "q": "Bạn D tự học 3.5 giờ và dùng mạng xã hội 120 phút mỗi ngày. Theo thứ tự cột (giờ tự học; phút mạng xã hội), vector của bạn D là gì?",
      "giai": "Hai cột nên vector có 2 số, theo đúng thứ tự cột: giờ tự học trước, phút mạng sau. Tên bạn D không phải là số đo.",
      "goi_y": "Mỗi số ứng với một cột, và thứ tự các số phải theo đúng thứ tự cột.",
      "a": [
-      "(3,5; 120)",
-      "(120; 3,5)",
-      "(123,5)",
-      "(3,5; 120; D)"
+      "(3.5, 120)",
+      "(120, 3.5)",
+      "(123.5,)",
+      "(3.5, 120, 0)"
      ],
-     "h": "1c65f1f025dca4"
+     "h": "118664e11e38d4"
     },
     {
      "k": "dd",
@@ -225,9 +225,9 @@ window.BAI = {
     {
      "k": "ds",
      "id": "bai06-q3",
-     "q": "Vector (2,6; 86) và vector (86; 2,6) biểu diễn cùng một học sinh.",
-     "giai": "Thứ tự số phải khớp thứ tự cột: (86; 2,6) nghĩa là học 86 giờ và dùng mạng 2,6 phút — một học sinh khác hẳn.",
-     "goi_y": "Nếu đọc (86; 2,6) theo thứ tự cột (giờ tự học; phút mạng) thì được gì?",
+     "q": "Vector (2.6, 86) và vector (86, 2.6) biểu diễn cùng một học sinh.",
+     "giai": "Thứ tự số phải khớp thứ tự cột: (86, 2.6) nghĩa là học 86 giờ và dùng mạng 2.6 phút — một học sinh khác hẳn.",
+     "goi_y": "Nếu đọc (86, 2.6) theo thứ tự cột (giờ tự học; phút mạng) thì được gì?",
      "h": "11157f65fe677f"
     }
    ]
@@ -241,7 +241,7 @@ window.BAI = {
    "khoi": [
     {
      "t": "p",
-     "html": "Toán 10: khoảng cách giữa hai điểm A(x<sub>1</sub>; y<sub>1</sub>) và B(x<sub>2</sub>; y<sub>2</sub>) là AB = √[(x<sub>2</sub> − x<sub>1</sub>)<sup>2</sup> + (y<sub>2</sub> − y<sub>1</sub>)<sup>2</sup>]. Công thức có từ <b>định lý Pythagoras</b>: hai hiệu là hai cạnh góc vuông, khoảng cách là cạnh huyền."
+     "html": "Toán 10: khoảng cách giữa hai điểm A(x<sub>1</sub>, y<sub>1</sub>) và B(x<sub>2</sub>, y<sub>2</sub>) là AB = √[(x<sub>2</sub> − x<sub>1</sub>)<sup>2</sup> + (y<sub>2</sub> − y<sub>1</sub>)<sup>2</sup>]. Công thức có từ <b>định lý Pythagoras</b>: hai hiệu là hai cạnh góc vuông, khoảng cách là cạnh huyền."
     },
     {
      "t": "anh",
@@ -277,7 +277,7 @@ window.BAI = {
     {
      "t": "vi_du",
      "tieu_de": "khoảng cách từ A đến B và từ A đến C",
-     "de": "A = (2,6; 86), B = (6,7; 70), C = (2,2; 182).",
+     "de": "A = (2.6, 86), B = (6.7, 70), C = (2.2, 182).",
      "cot": [
       "Bước",
       "A → B",
@@ -286,8 +286,8 @@ window.BAI = {
      "dong": [
       [
        "Hiệu giờ tự học",
-       "2,6 − 6,7 = −4,1",
-       "2,6 − 2,2 = 0,4"
+       "2.6 − 6.7 = −4.1",
+       "2.6 − 2.2 = 0.4"
       ],
       [
        "Hiệu phút mạng",
@@ -296,21 +296,21 @@ window.BAI = {
       ],
       [
        "Bình phương hai hiệu",
-       "16,81 và 256",
-       "0,16 và 9216"
+       "16.81 và 256",
+       "0.16 và 9216"
       ],
       [
        "Cộng lại",
-       "272,81",
-       "9216,16"
+       "272.81",
+       "9216.16"
       ],
       [
        "Lấy căn bậc hai",
-       "<b>≈ 16,5</b>",
-       "<b>≈ 96,0</b>"
+       "<b>≈ 16.5</b>",
+       "<b>≈ 96.0</b>"
       ]
      ],
-     "ket_luan": "Theo phép đo này, A gần B hơn nhiều (16,5 so với 96,0) — ngược với điều mắt con thấy trên hình đầu giờ. Chặng 3 giải thích vì sao.",
+     "ket_luan": "Theo phép đo này, A gần B hơn nhiều (16.5 so với 96.0) — ngược với điều mắt con thấy trên hình đầu giờ. Chặng 3 giải thích vì sao.",
      "nhan_manh": [
       4
      ]
@@ -364,9 +364,9 @@ window.BAI = {
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Quên bình phương: cộng thẳng hai hiệu (−4,1) + 16 thì số âm và số dương bù trừ nhau, ra kết quả sai.",
+      "Quên bình phương: cộng thẳng hai hiệu (−4.1) + 16 thì số âm và số dương bù trừ nhau, ra kết quả sai.",
       "Quên lấy căn bậc hai ở bước cuối.",
-      "Gõ số thập phân trong Python bằng dấu phẩy: phải viết <code>2.6</code>, không viết <code>2,6</code>."
+      "Trong Python, viết <code>2.6</code> cho số thập phân; dấu phẩy dùng để tách các phần tử, ví dụ <code>(2.6, 86)</code>."
      ]
     },
     {
@@ -401,7 +401,7 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai06-q4",
-     "q": "Hai điểm P(1; 2) và Q(4; 6). Khoảng cách PQ bằng bao nhiêu?",
+     "q": "Hai điểm P(1, 2) và Q(4, 6). Khoảng cách PQ bằng bao nhiêu?",
      "giai": "Hiệu hoành độ 3, hiệu tung độ 4 → √(3² + 4²) = √25 = 5. Số 7 là cộng thẳng hai hiệu, số 25 là quên lấy căn.",
      "goi_y": "Tính hai hiệu, bình phương, cộng — rồi đừng quên bước cuối.",
      "a": [
@@ -445,7 +445,7 @@ window.BAI = {
    "khoi": [
     {
      "t": "p",
-     "html": "Nhìn lại ví dụ chặng 2: hiệu phút mạng (16 và 96) lớn hơn hiệu giờ học (4,1 và 0,4) rất nhiều. Sau khi bình phương, cột phút quyết định gần như toàn bộ khoảng cách — cột giờ tự học gần như không được tính. Lý do nằm ở <b>khoảng biến thiên</b> của hai cột:"
+     "html": "Nhìn lại ví dụ chặng 2: hiệu phút mạng (16 và 96) lớn hơn hiệu giờ học (4.1 và 0.4) rất nhiều. Sau khi bình phương, cột phút quyết định gần như toàn bộ khoảng cách — cột giờ tự học gần như không được tính. Lý do nằm ở <b>khoảng biến thiên</b> của hai cột:"
     },
     {
      "t": "bang",
@@ -458,9 +458,9 @@ window.BAI = {
      "dong": [
       [
        "Giờ tự học",
-       "0,5",
-       "7,0",
-       "6,5"
+       "0.5",
+       "7.0",
+       "6.5"
       ],
       [
        "Phút mạng xã hội",
@@ -479,7 +479,7 @@ window.BAI = {
     {
      "t": "vi_du",
      "tieu_de": "đưa A, B, C về 0 – 1",
-     "de": "Giờ tự học: min 0,5, max 7,0. Phút mạng: min 15, max 450.",
+     "de": "Giờ tự học: min 0.5, max 7.0. Phút mạng: min 15, max 450.",
      "cot": [
       "Bạn",
       "Giờ tự học → 0 – 1",
@@ -488,21 +488,21 @@ window.BAI = {
      "dong": [
       [
        "A",
-       "(2,6 − 0,5) : 6,5 ≈ <b>0,323</b>",
-       "(86 − 15) : 435 ≈ <b>0,163</b>"
+       "(2.6 − 0.5) : 6.5 ≈ <b>0.323</b>",
+       "(86 − 15) : 435 ≈ <b>0.163</b>"
       ],
       [
        "B",
-       "(6,7 − 0,5) : 6,5 ≈ <b>0,954</b>",
-       "(70 − 15) : 435 ≈ <b>0,126</b>"
+       "(6.7 − 0.5) : 6.5 ≈ <b>0.954</b>",
+       "(70 − 15) : 435 ≈ <b>0.126</b>"
       ],
       [
        "C",
-       "(2,2 − 0,5) : 6,5 ≈ <b>0,262</b>",
-       "(182 − 15) : 435 ≈ <b>0,384</b>"
+       "(2.2 − 0.5) : 6.5 ≈ <b>0.262</b>",
+       "(182 − 15) : 435 ≈ <b>0.384</b>"
       ]
      ],
-     "ket_luan": "Đo lại bằng số mới: A → B ≈ 0,632, A → C ≈ 0,229. <b>Kết luận đảo ngược</b>: A gần C hơn — khớp với điều mắt con thấy, và A, C cùng học ít, cùng Chưa đạt.",
+     "ket_luan": "Đo lại bằng số mới: A → B ≈ 0.632, A → C ≈ 0.229. <b>Kết luận đảo ngược</b>: A gần C hơn — khớp với điều mắt con thấy, và A, C cùng học ít, cùng Chưa đạt.",
      "nhan_manh": []
     },
     {
@@ -663,21 +663,21 @@ window.BAI = {
      "k": "mc",
      "id": "bai06-q7",
      "q": "Cột nhiệt độ có giá trị nhỏ nhất 20 °C, lớn nhất 40 °C. Đưa về 0 – 1 thì 35 °C thành bao nhiêu?",
-     "giai": "(35 − 20) : (40 − 20) = 15 : 20 = 0,75. Số 0,875 là 35 : 40 (quên trừ min); 15 là quên chia.",
+     "giai": "(35 − 20) : (40 − 20) = 15 : 20 = 0.75. Số 0.875 là 35 : 40 (quên trừ min); 15 là quên chia.",
      "goi_y": "Lấy giá trị trừ min trước, rồi chia cho (max − min).",
      "a": [
-      "0,75",
-      "0,875",
-      "0,35",
+      "0.75",
+      "0.875",
+      "0.35",
       "15"
      ],
-     "h": "11e521ff3ca30d"
+     "h": "3ec00d668a178"
     },
     {
      "k": "mc",
      "id": "bai06-q8",
      "q": "Vì sao khi đo thô, cột phút mạng quyết định gần như toàn bộ khoảng cách giữa hai bạn?",
-     "giai": "Khoảng biến thiên của cột phút là 435, của cột giờ chỉ 6,5. Bình phương lên, chênh lệch càng lớn.",
+     "giai": "Khoảng biến thiên của cột phút là 435, của cột giờ chỉ 6.5. Bình phương lên, chênh lệch càng lớn.",
      "goi_y": "So khoảng biến thiên của hai cột trong bảng đầu chặng.",
      "a": [
       "Số ở cột phút lớn hơn cột giờ rất nhiều",
@@ -698,7 +698,7 @@ window.BAI = {
       [
        "0",
        "1",
-       "0,5",
+       "0.5",
        "−1"
       ],
       [
@@ -776,41 +776,41 @@ window.BAI = {
      "dong": [
       [
        "1",
-       "3,5",
+       "3.5",
        "3",
-       "0,5",
-       "0,25"
+       "0.5",
+       "0.25"
       ],
       [
        "2",
-       "3,5",
+       "3.5",
        "4",
-       "−0,5",
-       "0,25"
+       "−0.5",
+       "0.25"
       ],
       [
        "3",
-       "5,5",
+       "5.5",
        "5",
-       "0,5",
-       "0,25"
+       "0.5",
+       "0.25"
       ],
       [
        "4",
-       "6,0",
+       "6.0",
        "6",
-       "0,0",
-       "0,00"
+       "0.0",
+       "0.00"
       ],
       [
        "Tổng",
        "",
        "",
        "",
-       "<b>0,75</b>"
+       "<b>0.75</b>"
       ]
      ],
-     "ket_luan": "MSE = 0,75 : 4 ≈ <b>0,19</b>. Làm tương tự với đường ŷ = 1,5x + 1 được MSE ≈ 0,56 — lớn hơn, nên đường ŷ = x + 2 khớp với 4 bạn này hơn.",
+     "ket_luan": "MSE = 0.75 : 4 ≈ <b>0.19</b>. Làm tương tự với đường ŷ = 1.5x + 1 được MSE ≈ 0.56 — lớn hơn, nên đường ŷ = x + 2 khớp với 4 bạn này hơn.",
      "nhan_manh": [
       4
      ]
@@ -824,7 +824,7 @@ window.BAI = {
     {
      "t": "duong_thang",
      "tieu_de": "tự tìm đường khớp nhất",
-     "huong_dan": "Kéo hai thanh trượt để đổi a và b. Đoạn màu cam là sai lệch y − ŷ của một số bạn. <b>Thử thách:</b> đưa MSE xuống dưới 0,6 — rồi bấm “Hiện đường tốt nhất” để so với đường máy tìm được.",
+     "huong_dan": "Kéo hai thanh trượt để đổi a và b. Đoạn màu cam là sai lệch y − ŷ của một số bạn. <b>Thử thách:</b> đưa MSE xuống dưới 0.6 — rồi bấm “Hiện đường tốt nhất” để so với đường máy tìm được.",
      "x": [
       0.6,
       5.1,
@@ -1317,7 +1317,7 @@ window.BAI = {
      "b0": 3,
      "buoc": 0.01,
      "a_tot": 0.84893005335757,
-     "b_tot": 2.1304187993663124,
+     "b_tot": 2.1304187993663133,
      "x_min": 0,
      "x_max": 8,
      "y_min": 0,
@@ -1332,7 +1332,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Vì sao phải bình phương?",
-     "html": "Sai lệch có thể âm (đoán cao hơn thật) hoặc dương (đoán thấp hơn thật); cộng thẳng thì chúng bù trừ nhau — ví dụ 0,5 + (−0,5) = 0 dù cả hai điểm đều lệch. Bình phương làm mọi số không âm, và phạt nặng hơn những điểm lệch nhiều."
+     "html": "Sai lệch có thể âm (đoán cao hơn thật) hoặc dương (đoán thấp hơn thật); cộng thẳng thì chúng bù trừ nhau — ví dụ 0.5 + (−0.5) = 0 dù cả hai điểm đều lệch. Bình phương làm mọi số không âm, và phạt nặng hơn những điểm lệch nhiều."
     },
     {
      "t": "loi_hay_gap",
@@ -1380,7 +1380,7 @@ window.BAI = {
     {
      "k": "ds",
      "id": "bai06-q11",
-     "q": "Đường có MSE bằng 0,46 khớp với dữ liệu hơn đường có MSE bằng 5,67.",
+     "q": "Đường có MSE bằng 0.46 khớp với dữ liệu hơn đường có MSE bằng 5.67.",
      "giai": "MSE đo mức lệch trung bình: càng nhỏ càng khớp.",
      "goi_y": "MSE đo mức khớp hay mức lệch?",
      "h": "1b677c810e0ee0"
@@ -1389,8 +1389,8 @@ window.BAI = {
      "k": "mc",
      "id": "bai06-q12",
      "q": "Vì sao khi tính MSE phải bình phương các sai lệch?",
-     "giai": "Cộng thẳng 0,5 và −0,5 được 0 dù cả hai điểm đều lệch. Bình phương làm mọi số không âm.",
-     "goi_y": "Thử cộng thẳng hai sai lệch 0,5 và −0,5 xem được bao nhiêu.",
+     "giai": "Cộng thẳng 0.5 và −0.5 được 0 dù cả hai điểm đều lệch. Bình phương làm mọi số không âm.",
+     "goi_y": "Thử cộng thẳng hai sai lệch 0.5 và −0.5 xem được bao nhiêu.",
      "a": [
       "Để sai lệch âm và dương không bù trừ nhau",
       "Để kết quả luôn là một số nguyên",
@@ -1410,7 +1410,7 @@ window.BAI = {
    "khoi": [
     {
      "t": "p",
-     "html": "Giữ b cố định (b ≈ 2,13), chỉ thay đổi a. Mỗi giá trị a cho một MSE. Vẽ MSE theo a được một đường cong hình <b>thung lũng</b>: đáy thung lũng là a tốt nhất."
+     "html": "Giữ b cố định (b ≈ 2.13), chỉ thay đổi a. Mỗi giá trị a cho một MSE. Vẽ MSE theo a được một đường cong hình <b>thung lũng</b>: đáy thung lũng là a tốt nhất."
     },
     {
      "t": "anh",
@@ -1430,39 +1430,39 @@ window.BAI = {
     },
     {
      "t": "vi_du",
-     "tieu_de": "ba bước đầu với bước nhảy η = 0,02",
-     "de": "Bắt đầu từ a = 0, giữ b ≈ 2,13.",
+     "tieu_de": "ba bước đầu với bước nhảy η = 0.02",
+     "de": "Bắt đầu từ a = 0, giữ b ≈ 2.13.",
      "cot": [
       "Bước",
       "a hiện tại",
       "Sai số MSE",
       "Độ dốc tại a",
-      "a mới = a − 0,02 × độ dốc"
+      "a mới = a − 0.02 × độ dốc"
      ],
      "dong": [
       [
        "0",
-       "0,000",
-       "12,92",
-       "−29,34",
-       "0,000 − 0,02 × (−29,34) ≈ <b>0,587</b>"
+       "0.000",
+       "12.92",
+       "−29.34",
+       "0.000 − 0.02 × (−29.34) ≈ <b>0.587</b>"
       ],
       [
        "1",
-       "0,587",
-       "1,65",
-       "−9,06",
-       "0,587 − 0,02 × (−9,06) ≈ <b>0,768</b>"
+       "0.587",
+       "1.65",
+       "−9.06",
+       "0.587 − 0.02 × (−9.06) ≈ <b>0.768</b>"
       ],
       [
        "2",
-       "0,768",
-       "0,58",
-       "−2,80",
-       "0,768 − 0,02 × (−2,80) ≈ <b>0,824</b>"
+       "0.768",
+       "0.58",
+       "−2.80",
+       "0.768 − 0.02 × (−2.80) ≈ <b>0.824</b>"
       ]
      ],
-     "ket_luan": "Độ dốc âm nên a tăng dần; càng gần đáy dốc càng thoải nên a đổi càng ít. Sau 8 bước a ≈ 0,849, MSE ≈ 0,46 — đúng đáy thung lũng.",
+     "ket_luan": "Độ dốc âm nên a tăng dần; càng gần đáy dốc càng thoải nên a đổi càng ít. Sau 8 bước a ≈ 0.849, MSE ≈ 0.46 — đúng đáy thung lũng.",
      "nhan_manh": []
     },
     {
@@ -1479,230 +1479,230 @@ window.BAI = {
      "mac_dinh": 1,
      "lua_chon": [
       {
-       "nhan": "0,005",
+       "nhan": "0.005",
        "dong": [
         [
          "0",
-         "0,000",
-         "12,92",
-         "−29,34"
+         "0.000",
+         "12.92",
+         "−29.34"
         ],
         [
          "1",
-         "0,147",
-         "8,98",
-         "−24,27"
+         "0.147",
+         "8.98",
+         "−24.27"
         ],
         [
          "2",
-         "0,268",
-         "6,29",
-         "−20,08"
+         "0.268",
+         "6.29",
+         "−20.08"
         ],
         [
          "3",
-         "0,368",
-         "4,45",
-         "−16,61"
+         "0.368",
+         "4.45",
+         "−16.61"
         ],
         [
          "4",
-         "0,451",
-         "3,19",
-         "−13,74"
+         "0.451",
+         "3.19",
+         "−13.74"
         ],
         [
          "5",
-         "0,520",
-         "2,33",
-         "−11,36"
+         "0.520",
+         "2.33",
+         "−11.36"
         ],
         [
          "6",
-         "0,577",
-         "1,74",
-         "−9,40"
+         "0.577",
+         "1.74",
+         "−9.40"
         ],
         [
          "7",
-         "0,624",
-         "1,34",
-         "−7,78"
+         "0.624",
+         "1.34",
+         "−7.78"
         ],
         [
          "8",
-         "0,663",
-         "1,06",
-         "−6,43"
+         "0.663",
+         "1.06",
+         "−6.43"
         ]
        ]
       },
       {
-       "nhan": "0,02",
+       "nhan": "0.02",
        "dong": [
         [
          "0",
-         "0,000",
-         "12,92",
-         "−29,34"
+         "0.000",
+         "12.92",
+         "−29.34"
         ],
         [
          "1",
-         "0,587",
-         "1,65",
-         "−9,06"
+         "0.587",
+         "1.65",
+         "−9.06"
         ],
         [
          "2",
-         "0,768",
-         "0,58",
-         "−2,80"
+         "0.768",
+         "0.58",
+         "−2.80"
         ],
         [
          "3",
-         "0,824",
-         "0,47",
-         "−0,86"
+         "0.824",
+         "0.47",
+         "−0.86"
         ],
         [
          "4",
-         "0,841",
-         "0,46",
-         "−0,27"
+         "0.841",
+         "0.46",
+         "−0.27"
         ],
         [
          "5",
-         "0,847",
-         "0,46",
-         "−0,08"
+         "0.847",
+         "0.46",
+         "−0.08"
         ],
         [
          "6",
-         "0,848",
-         "0,46",
-         "−0,03"
+         "0.848",
+         "0.46",
+         "−0.03"
         ],
         [
          "7",
-         "0,849",
-         "0,46",
-         "−0,01"
+         "0.849",
+         "0.46",
+         "−0.01"
         ],
         [
          "8",
-         "0,849",
-         "0,46",
-         "−0,00"
+         "0.849",
+         "0.46",
+         "−0.00"
         ]
        ]
       },
       {
-       "nhan": "0,05",
+       "nhan": "0.05",
        "dong": [
         [
          "0",
-         "0,000",
-         "12,92",
-         "−29,34"
+         "0.000",
+         "12.92",
+         "−29.34"
         ],
         [
          "1",
-         "1,467",
-         "7,07",
-         "21,36"
+         "1.467",
+         "7.07",
+         "21.36"
         ],
         [
          "2",
-         "0,399",
-         "3,96",
-         "−15,56"
+         "0.399",
+         "3.96",
+         "−15.56"
         ],
         [
          "3",
-         "1,177",
-         "2,32",
-         "11,33"
+         "1.177",
+         "2.32",
+         "11.33"
         ],
         [
          "4",
-         "0,610",
-         "1,45",
-         "−8,25"
+         "0.610",
+         "1.45",
+         "−8.25"
         ],
         [
          "5",
-         "1,023",
-         "0,98",
-         "6,00"
+         "1.023",
+         "0.98",
+         "6.00"
         ],
         [
          "6",
-         "0,722",
-         "0,74",
-         "−4,37"
+         "0.722",
+         "0.74",
+         "−4.37"
         ],
         [
          "7",
-         "0,941",
-         "0,61",
-         "3,18"
+         "0.941",
+         "0.61",
+         "3.18"
         ],
         [
          "8",
-         "0,782",
-         "0,54",
-         "−2,32"
+         "0.782",
+         "0.54",
+         "−2.32"
         ]
        ]
       },
       {
-       "nhan": "0,1",
+       "nhan": "0.1",
        "dong": [
         [
          "0",
-         "0,000",
-         "12,92",
-         "−29,34"
+         "0.000",
+         "12.92",
+         "−29.34"
         ],
         [
          "1",
-         "2,934",
-         "75,60",
-         "72,07"
+         "2.934",
+         "75.60",
+         "72.07"
         ],
         [
          "2",
-         "−4,273",
-         "453,78",
-         "−177,02"
+         "−4.273",
+         "453.78",
+         "−177.02"
         ],
         [
          "3",
-         "13,429",
+         "13.429",
          "2 735",
-         "434,80"
+         "434.80"
         ],
         [
          "4",
-         "−30,051",
+         "−30.051",
          "16 501",
          "−1 068"
         ],
         [
          "5",
-         "76,746",
+         "76.746",
          "99 548",
          "2 623"
         ],
         [
          "6",
-         "−185,574",
+         "−185.574",
          "600 581",
          "−6 443"
         ],
         [
          "7",
-         "458,748",
+         "458.748",
          "3 623 375",
          "15 826"
         ],
@@ -1720,7 +1720,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Chọn bước nhảy",
-     "html": "<b>Quá nhỏ</b> (0,005): đi đúng hướng nhưng rất chậm. <b>Vừa</b> (0,02): về đáy sau vài bước. <b>Hơi lớn</b> (0,05): nhảy qua lại hai bên đáy rồi mới dần về. <b>Quá lớn</b> (0,1): trong lần thử này, mỗi bước văng xa hơn — sai số tăng vọt."
+     "html": "<b>Quá nhỏ</b> (0.005): đi đúng hướng nhưng rất chậm. <b>Vừa</b> (0.02): về đáy sau vài bước. <b>Hơi lớn</b> (0.05): nhảy qua lại hai bên đáy rồi mới dần về. <b>Quá lớn</b> (0.1): trong lần thử này, mỗi bước văng xa hơn — sai số tăng vọt."
     },
     {
      "t": "anh",
@@ -1750,7 +1750,7 @@ window.BAI = {
     {
      "t": "mat_3d",
      "tieu_de": "Mở rộng: mặt sai số khi đổi cả a và b",
-     "huong_dan": "Kéo chuột để xoay mặt cong. Mỗi điểm trên mặt là MSE của một cặp (a; b). Kéo thanh trượt bên dưới để máy đi từng bước (bước nhảy 0,02, bắt đầu từ a = 0, b = 0). Để ý: vài bước đầu rơi rất nhanh, sau đó máy bò chậm dọc <b>lòng máng</b> hẹp.",
+     "huong_dan": "Kéo chuột để xoay mặt cong. Mỗi điểm trên mặt là MSE của một cặp (a, b). Kéo thanh trượt bên dưới để máy đi từng bước (bước nhảy 0.02, bắt đầu từ a = 0, b = 0). Để ý: vài bước đầu rơi rất nhanh, sau đó máy bò chậm dọc <b>lòng máng</b> hẹp.",
      "truc_x": [
       -0.2,
       -0.15000000000000002,
@@ -3739,7 +3739,7 @@ window.BAI = {
      "nhan_x": "a (hệ số góc)",
      "nhan_y": "b (hệ số chặn)",
      "nhan_z": "MSE",
-     "ghi": "Sau 400 bước: a ≈ 0,864, b ≈ 2,062, MSE ≈ 0,464 — gần đáy (a ≈ 0,849, b ≈ 2,130, MSE ≈ 0,463). Hình 3D cần mạng để tải thư viện Plotly."
+     "ghi": "Sau 400 bước: a ≈ 0.864, b ≈ 2.062, MSE ≈ 0.464 — gần đáy (a ≈ 0.849, b ≈ 2.130, MSE ≈ 0.463). Hình 3D cần mạng để tải thư viện Plotly."
     },
     {
      "t": "loi_hay_gap",
@@ -3834,9 +3834,9 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai06-q15",
-     "q": "Trong phần Tự thử, với bước nhảy 0,1 thì sai số thay đổi thế nào sau mỗi bước?",
+     "q": "Trong phần Tự thử, với bước nhảy 0.1 thì sai số thay đổi thế nào sau mỗi bước?",
      "giai": "Bước nhảy quá lớn: mỗi bước vượt qua đáy và rơi xa hơn lần trước, sai số lên tới hàng triệu.",
-     "goi_y": "Chọn nút 0,1 trong phần Tự thử rồi bấm “Bước tiếp” vài lần.",
+     "goi_y": "Chọn nút 0.1 trong phần Tự thử rồi bấm “Bước tiếp” vài lần.",
      "a": [
       "Tăng vọt, a văng ngày càng xa đáy",
       "Giảm đều và về đáy nhanh nhất",
@@ -3875,7 +3875,7 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai06-q17",
-    "q": "Khoảng cách giữa hai điểm M(0; 0) và N(6; 8) bằng bao nhiêu?",
+    "q": "Khoảng cách giữa hai điểm M(0, 0) và N(6, 8) bằng bao nhiêu?",
     "giai": "√(6² + 8²) = √100 = 10.",
     "a": [
      "10",
@@ -3888,7 +3888,7 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai06-q18",
-    "q": "Hai bạn có vector (2; 100) và (5; 104). Khoảng cách Euclid giữa hai bạn bằng bao nhiêu?",
+    "q": "Hai bạn có vector (2, 100) và (5, 104). Khoảng cách Euclid giữa hai bạn bằng bao nhiêu?",
     "giai": "Hiệu 3 và 4 → √(9 + 16) = √25 = 5.",
     "a": [
      "5",
@@ -3902,33 +3902,33 @@ window.BAI = {
     "k": "mc",
     "id": "bai06-q19",
     "q": "Cột cân nặng có min 40 kg, max 80 kg. Đưa về 0 – 1 thì 50 kg thành bao nhiêu?",
-    "giai": "(50 − 40) : (80 − 40) = 10 : 40 = 0,25.",
+    "giai": "(50 − 40) : (80 − 40) = 10 : 40 = 0.25.",
     "a": [
-     "0,25",
-     "0,5",
-     "0,625",
+     "0.25",
+     "0.5",
+     "0.625",
      "10"
     ],
-    "h": "dbe1cd71ee423"
+    "h": "1af555e6c2526f"
    },
    {
     "k": "mc",
     "id": "bai06-q20",
-    "q": "A = (0,3; 0,2) và B = (0,7; 0,5) đã đưa về 0 – 1. Khoảng cách A → B bằng bao nhiêu?",
-    "giai": "Hiệu 0,4 và 0,3 → √(0,16 + 0,09) = √0,25 = 0,5.",
+    "q": "A = (0.3, 0.2) và B = (0.7, 0.5) đã đưa về 0 – 1. Khoảng cách A → B bằng bao nhiêu?",
+    "giai": "Hiệu 0.4 và 0.3 → √(0.16 + 0.09) = √0.25 = 0.5.",
     "a": [
-     "0,5",
-     "0,7",
-     "0,25",
-     "1,2"
+     "0.5",
+     "0.7",
+     "0.25",
+     "1.2"
     ],
-    "h": "1a27bf62ee7d4e"
+    "h": "34cc99b42479"
    },
    {
     "k": "mc",
     "id": "bai06-q21",
     "q": "Nhìn hình. Sau khi đưa hai cột về 0 – 1, bạn gần A hơn thay đổi thế nào?",
-    "giai": "Đo thô: A gần B (16,5 < 96,0). Sau khi đổi: A gần C (0,229 < 0,632).",
+    "giai": "Đo thô: A gần B (16.5 < 96.0). Sau khi đổi: A gần C (0.229 < 0.632).",
     "img": {
      "src": "img/truoc-va-sau-khi-cung-thang-do.png"
     },
@@ -3943,8 +3943,8 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai06-q22",
-    "q": "Nhìn hình. Vì sao đường a = 1,40 chưa tốt?",
-    "giai": "Đường a = 1,40 dốc hơn đám điểm; sai số 5,71 lớn hơn nhiều so với 0,46 của đường a = 0,85.",
+    "q": "Nhìn hình. Vì sao đường a = 1.40 chưa tốt?",
+    "giai": "Đường a = 1.40 dốc hơn đám điểm; sai số 5.71 lớn hơn nhiều so với 0.46 của đường a = 0.85.",
     "img": {
      "src": "img/ba-duong-thu-cho-diem-va-gio-hoc.png"
     },
@@ -3960,7 +3960,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai06-q23",
     "q": "Nhìn hình. Đáy của thung lũng ứng với điều gì?",
-    "giai": "Đáy là chỗ MSE thấp nhất, a ≈ 0,85.",
+    "giai": "Đáy là chỗ MSE thấp nhất, a ≈ 0.85.",
     "img": {
      "src": "img/duong-sai-so-hinh-thung-lung.png"
     },
@@ -3975,28 +3975,28 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai06-q24",
-    "q": "Đường ŷ = x + 1 với hai bạn (x; y) = (1; 3) và (3; 4). MSE bằng bao nhiêu?",
-    "giai": "Dự đoán 2 và 4; sai lệch 1 và 0; bình phương 1 và 0; MSE = (1 + 0) : 2 = 0,5.",
+    "q": "Đường ŷ = x + 1 với hai bạn (x, y) = (1, 3) và (3, 4). MSE bằng bao nhiêu?",
+    "giai": "Dự đoán 2 và 4; sai lệch 1 và 0; bình phương 1 và 0; MSE = (1 + 0) : 2 = 0.5.",
     "a": [
-     "0,5",
+     "0.5",
      "1",
-     "0,25",
+     "0.25",
      "2"
     ],
-    "h": "322517aa529e1"
+    "h": "15d777d5035e6a"
    },
    {
     "k": "mc",
     "id": "bai06-q25",
-    "q": "Với η = 0,005, sau 8 bước a mới tới 0,663 trong khi đáy ở a ≈ 0,85. Nên chỉnh thế nào?",
-    "giai": "η nhỏ thì đúng hướng nhưng chậm; tăng vừa phải (0,02) là 8 bước về đáy. η = 1 thì văng khỏi đáy; đổi dấu cộng thì đi lên dốc.",
+    "q": "Với η = 0.005, sau 8 bước a mới tới 0.663 trong khi đáy ở a ≈ 0.85. Nên chỉnh thế nào?",
+    "giai": "η nhỏ thì đúng hướng nhưng chậm; tăng vừa phải (0.02) là 8 bước về đáy. η = 1 thì văng khỏi đáy; đổi dấu cộng thì đi lên dốc.",
     "a": [
-     "Tăng η lên một chút, ví dụ 0,02",
+     "Tăng η lên một chút, ví dụ 0.02",
      "Tăng η lên thật lớn, ví dụ 1",
      "Đổi dấu trừ thành dấu cộng",
      "Dừng lại và lấy luôn a hiện tại"
     ],
-    "h": "f8d2de5650295"
+    "h": "13b94fd4589292"
    },
    {
     "k": "mc",
@@ -4053,7 +4053,7 @@ window.BAI = {
     "a": [
      "Giá trị nhỏ nhất của cột thành 0",
      "Giá trị lớn nhất của cột thành 1",
-     "Mọi giá trị của cột đều thành 0,5",
+     "Mọi giá trị của cột đều thành 0.5",
      "Chỉ cần đổi cột có số lớn nhất"
     ],
     "h": "4c81683073d00"
@@ -4249,7 +4249,7 @@ window.BAI = {
     "k": "dd",
     "id": "bai06-q41",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "Phút mạng biến thiên 435 phút, giờ học chỉ 6,5 giờ.",
+    "giai": "Phút mạng biến thiên 435 phút, giờ học chỉ 6.5 giờ.",
     "mau": "Khi đo thô, cột {0} lấn át vì có {1} lớn hơn nhiều.",
     "o": [
      [
@@ -4285,7 +4285,7 @@ window.BAI = {
     "k": "ds",
     "id": "bai06-q44",
     "q": "Gradient descent chắc chắn về tới đáy với mọi bước nhảy.",
-    "giai": "Bước nhảy quá lớn (ví dụ 0,1 trong bài) làm a văng ngày càng xa đáy.",
+    "giai": "Bước nhảy quá lớn (ví dụ 0.1 trong bài) làm a văng ngày càng xa đáy.",
     "h": "35d07aaa6692f"
    },
    {

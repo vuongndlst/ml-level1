@@ -416,7 +416,7 @@ window.BAI = {
       [
        "5",
        "Đánh giá",
-       "So dự đoán với đáp án thật, so với mốc model lười 54,2%"
+       "So dự đoán với đáp án thật, so với mốc model lười 54.2%"
       ]
      ],
      "ket_luan": null,
@@ -434,7 +434,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "ml",
      "tieu_de": "Mốc so sánh",
-     "html": "Trước khi khen model, luôn so với <b>model lười</b> (đoán mọi bạn cùng một nhãn — Bài 8). Với bảng này model lười đúng 54,2% trên tập kiểm tra: model nào không vượt mốc này là chưa học được gì."
+     "html": "Trước khi khen model, luôn so với <b>model lười</b> (đoán mọi bạn cùng một nhãn — Bài 8). Với bảng này model lười đúng 54.2% trên tập kiểm tra: model nào không vượt mốc này là chưa học được gì."
     },
     {
      "t": "loi_hay_gap",
@@ -467,8 +467,8 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai12-q7",
-     "q": "Với bảng khối 10, model lười đúng 54,2% trên tập kiểm tra. Một model mới đúng 55%. Nhận xét nào đúng?",
-     "giai": "55% gần bằng mốc lười 54,2% — model hầu như không hơn việc đoán một nhãn.",
+     "q": "Với bảng khối 10, model lười đúng 54.2% trên tập kiểm tra. Một model mới đúng 55%. Nhận xét nào đúng?",
+     "giai": "55% gần bằng mốc lười 54.2% — model hầu như không hơn việc đoán một nhãn.",
      "goi_y": "So 55% với mốc model lười.",
      "a": [
       "Gần như chưa học được gì",
@@ -485,7 +485,7 @@ window.BAI = {
    "ten_ngan": "Huấn luyện",
    "phut": 5,
    "muc_tieu": "hiểu model là một quy tắc có tham số và huấn luyện là tìm tham số tốt nhất.",
-   "khoi_dong": "Quy tắc “học từ 3,5 giờ trở lên thì Đạt” có một con số. Nếu đổi con số đó, quy tắc đúng hơn hay sai hơn?",
+   "khoi_dong": "Quy tắc “học từ 3.5 giờ trở lên thì Đạt” có một con số. Nếu đổi con số đó, quy tắc đúng hơn hay sai hơn?",
    "khoi": [
     {
      "t": "dinh_nghia",
@@ -495,8 +495,8 @@ window.BAI = {
     },
     {
      "t": "anh",
-     "cap": "Model ngưỡng t = 3,5 giờ trên cả 240 bạn: vòng vàng là các bạn model đoán sai",
-     "alt": "Model ngưỡng t = 3,5 giờ trên cả 240 bạn: vòng vàng là các bạn model đoán sai",
+     "cap": "Model ngưỡng t = 3.5 giờ trên cả 240 bạn: vòng vàng là các bạn model đoán sai",
+     "alt": "Model ngưỡng t = 3.5 giờ trên cả 240 bạn: vòng vàng là các bạn model đoán sai",
      "src": "img/nguong-tren-truc-gio-hoc.png"
     },
     {
@@ -507,62 +507,62 @@ window.BAI = {
      "moc": [
       {
        "x": 0.5,
-       "n": "53,6%",
+       "n": "53.6%",
        "p": 54.2
       },
       {
        "x": 1.0,
-       "n": "60,7%",
+       "n": "60.7%",
        "p": 61.1
       },
       {
        "x": 1.5,
-       "n": "67,9%",
+       "n": "67.9%",
        "p": 70.8
       },
       {
        "x": 2.0,
-       "n": "76,8%",
+       "n": "76.8%",
        "p": 79.2
       },
       {
        "x": 2.5,
-       "n": "84,5%",
+       "n": "84.5%",
        "p": 88.9
       },
       {
        "x": 3.0,
-       "n": "88,7%",
+       "n": "88.7%",
        "p": 90.3
       },
       {
        "x": 3.5,
-       "n": "91,1%",
+       "n": "91.1%",
        "p": 91.7
       },
       {
        "x": 4.0,
-       "n": "86,3%",
+       "n": "86.3%",
        "p": 88.9
       },
       {
        "x": 4.5,
-       "n": "80,4%",
+       "n": "80.4%",
        "p": 79.2
       },
       {
        "x": 5.0,
-       "n": "80,4%",
+       "n": "80.4%",
        "p": 70.8
       },
       {
        "x": 5.5,
-       "n": "72,0%",
+       "n": "72.0%",
        "p": 69.4
       },
       {
        "x": 6.0,
-       "n": "65,5%",
+       "n": "65.5%",
        "p": 63.9
       }
      ],
@@ -589,13 +589,13 @@ window.BAI = {
      "dong": [
       [
        "Model lười",
-       "53,6%",
-       "54,2%"
+       "53.6%",
+       "54.2%"
       ],
       [
-       "Model ngưỡng t = 3,5",
-       "91,1%",
-       "<b>91,7%</b>"
+       "Model ngưỡng t = 3.5",
+       "91.1%",
+       "<b>91.7%</b>"
       ]
      ],
      "ket_luan": "Ngưỡng được chọn chỉ bằng tập huấn luyện; tập kiểm tra xác nhận model học được quy luật thật — vượt xa mốc lười.",
@@ -684,20 +684,20 @@ window.BAI = {
      "dong": [
       [
        "Lười — đoán hết Đạt",
-       "53,6%",
-       "54,2%",
+       "53.6%",
+       "54.2%",
        "Mốc so sánh"
       ],
       [
-       "Ngưỡng 3,5 giờ",
-       "91,1%",
-       "91,7%",
+       "Ngưỡng 3.5 giờ",
+       "91.1%",
+       "91.7%",
        "<b>Vừa khớp</b>"
       ],
       [
        "Học vẹt — nhớ từng dòng",
-       "100,0%",
-       "54,2%",
+       "100.0%",
+       "54.2%",
        "Học vẹt"
       ]
      ],
@@ -766,17 +766,17 @@ window.BAI = {
      "truc_x": "Độ sâu tối đa (max_depth)",
      "truc_y": "Đoán đúng (%)",
      "ghi": [
-      "Độ sâu 1: train 91,1%, test 91,7%.",
-      "Độ sâu 2: train 92,3%, test 91,7%.",
-      "Độ sâu 3: train 92,9%, test 91,7%.",
-      "Độ sâu 4: train 94,6%, test 91,7%.",
-      "Độ sâu 5: train 96,4%, test 87,5%.",
-      "Độ sâu 6: train 97,6%, test 88,9%.",
-      "Độ sâu 7: train 98,2%, test 88,9%.",
-      "Độ sâu 8: train 100,0%, test 87,5%. Train chạm 100%% nhưng test tụt — học vẹt.",
-      "Độ sâu 9: train 100,0%, test 87,5%. Train chạm 100%% nhưng test tụt — học vẹt.",
-      "Độ sâu 10: train 100,0%, test 87,5%. Train chạm 100%% nhưng test tụt — học vẹt.",
-      "Không giới hạn: train 100,0%, test 87,5%. Cây vẫn đoán bạn mới bằng các câu hỏi đã học nên không tệ như model nhớ từng dòng ở bảng trên (54,2%) — nhưng vẫn kém cây nông độ sâu 1 – 4."
+      "Độ sâu 1: train 91.1%, test 91.7%.",
+      "Độ sâu 2: train 92.3%, test 91.7%.",
+      "Độ sâu 3: train 92.9%, test 91.7%.",
+      "Độ sâu 4: train 94.6%, test 91.7%.",
+      "Độ sâu 5: train 96.4%, test 87.5%.",
+      "Độ sâu 6: train 97.6%, test 88.9%.",
+      "Độ sâu 7: train 98.2%, test 88.9%.",
+      "Độ sâu 8: train 100.0%, test 87.5%. Train chạm 100%% nhưng test tụt — học vẹt.",
+      "Độ sâu 9: train 100.0%, test 87.5%. Train chạm 100%% nhưng test tụt — học vẹt.",
+      "Độ sâu 10: train 100.0%, test 87.5%. Train chạm 100%% nhưng test tụt — học vẹt.",
+      "Không giới hạn: train 100.0%, test 87.5%. Cây vẫn đoán bạn mới bằng các câu hỏi đã học nên không tệ như model nhớ từng dòng ở bảng trên (54.2%) — nhưng vẫn kém cây nông độ sâu 1 – 4."
      ]
     },
     {
@@ -881,17 +881,17 @@ window.BAI = {
     "k": "mc",
     "id": "bai12-q13",
     "q": "Nhìn hình. Ngưỡng nào đúng nhất trên tập huấn luyện?",
-    "giai": "Đỉnh đường tập huấn luyện ở 3,5 giờ.",
+    "giai": "Đỉnh đường tập huấn luyện ở 3.5 giờ.",
     "img": {
      "src": "img/do-chinh-xac-theo-tung-nguong.png"
     },
     "a": [
-     "3,5 giờ",
-     "1,0 giờ",
-     "5,0 giờ",
-     "2,0 giờ"
+     "3.5 giờ",
+     "1.0 giờ",
+     "5.0 giờ",
+     "2.0 giờ"
     ],
-    "h": "147c758267e20f"
+    "h": "17e5942b9f59ba"
    },
    {
     "k": "mc",
@@ -902,12 +902,12 @@ window.BAI = {
      "src": "img/ba-model-tren-train-va-test.png"
     },
     "a": [
-     "54,2%",
-     "100,0%",
-     "91,7%",
-     "91,1%"
+     "54.2%",
+     "100.0%",
+     "91.7%",
+     "91.1%"
     ],
-    "h": "ebd1947c5dfa5"
+    "h": "47ab162884c09"
    },
    {
     "k": "mc",
@@ -1117,22 +1117,22 @@ window.BAI = {
     "id": "bai12-q29",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
     "giai": "Số trong bảng ba model.",
-    "mau": "Model ngưỡng 3,5 giờ đúng {0} trên tập kiểm tra; model lười đúng {1}.",
+    "mau": "Model ngưỡng 3.5 giờ đúng {0} trên tập kiểm tra; model lười đúng {1}.",
     "o": [
      [
-      "91,7%",
-      "100,0%",
-      "54,2%",
-      "91,1%"
+      "91.7%",
+      "100.0%",
+      "54.2%",
+      "91.1%"
      ],
      [
-      "54,2%",
-      "91,7%",
-      "100,0%",
-      "50,0%"
+      "54.2%",
+      "91.7%",
+      "100.0%",
+      "50.0%"
      ]
     ],
-    "h": "2334c5d4b63a9"
+    "h": "14850f4a8c300b"
    },
    {
     "k": "dd",

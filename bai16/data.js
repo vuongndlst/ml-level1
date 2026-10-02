@@ -15,7 +15,7 @@ window.BAI = {
  "muc_tieu": [
   "Giải thích được vì sao hồi quy tuyến tính không hợp với nhãn 0/1.",
   "Mô tả được hàm sigmoid biến mọi số thành xác suất từ 0 tới 1.",
-  "Đọc được xác suất model trả về và quy tắc ngưỡng 0,5.",
+  "Đọc được xác suất model trả về và quy tắc ngưỡng 0.5.",
   "Đọc được ma trận nhầm lẫn: bỏ sót và báo nhầm.",
   "Chọn ngưỡng theo kiểu sai mình chấp nhận được."
  ],
@@ -44,8 +44,8 @@ window.BAI = {
    "khoi": [
     {
      "t": "anh",
-     "cap": "Đường thẳng đoán ra 1,21 và -0,13 — không phải xác suất nào",
-     "alt": "Đường thẳng đoán ra 1,21 và -0,13 — không phải xác suất nào",
+     "cap": "Đường thẳng đoán ra 1.21 và -0.13 — không phải xác suất nào",
+     "alt": "Đường thẳng đoán ra 1.21 và -0.13 — không phải xác suất nào",
      "src": "img/duong-thang-tren-du-lieu-0-va-1.png"
     },
     {
@@ -174,7 +174,7 @@ window.BAI = {
     {
      "t": "dinh_nghia",
      "ten": "Hàm sigmoid",
-     "html": "Nhận vào một số z bất kỳ, trả về một số nằm giữa 0 và 1. z rất lớn → gần 1; z rất âm → gần 0; z = 0 → đúng 0,5.",
+     "html": "Nhận vào một số z bất kỳ, trả về một số nằm giữa 0 và 1. z rất lớn → gần 1; z rất âm → gần 0; z = 0 → đúng 0.5.",
      "ky_hieu": "sigmoid(z) = 1 / (1 + e<sup>−z</sup>), với z = a·x + b như Bài 15."
     },
     {
@@ -203,7 +203,7 @@ window.BAI = {
     {
      "t": "demo_truot",
      "tieu_de": "xác suất Đạt theo giờ tự học",
-     "huong_dan": "Kéo thanh trượt để đổi số giờ tự học mỗi ngày. Model logistic một cột trả về xác suất Đạt; ngưỡng 0,5 biến xác suất thành nhãn.",
+     "huong_dan": "Kéo thanh trượt để đổi số giờ tự học mỗi ngày. Model logistic một cột trả về xác suất Đạt; ngưỡng 0.5 biến xác suất thành nhãn.",
      "dieu_kien": "Bạn tự học <b>{x}</b> giờ mỗi ngày",
      "moc": [
       {
@@ -277,7 +277,7 @@ window.BAI = {
        "p": 99.9
       }
      ],
-     "nhan_n": "Model đoán (ngưỡng 0,5)",
+     "nhan_n": "Model đoán (ngưỡng 0.5)",
      "nhan_p": "Xác suất Đạt",
      "so_le_x": 1,
      "bat_dau": 5
@@ -286,7 +286,7 @@ window.BAI = {
      "t": "loi_hay_gap",
      "muc": [
       "Nghĩ sigmoid làm thay đổi thứ tự: giờ học nhiều hơn vẫn luôn có xác suất cao hơn.",
-      "Quên rằng sigmoid(0) = 0,5."
+      "Quên rằng sigmoid(0) = 0.5."
      ]
     },
     {
@@ -307,29 +307,29 @@ window.BAI = {
      "k": "mc",
      "id": "bai16-q3",
      "q": "sigmoid(0) bằng bao nhiêu?",
-     "giai": "Đúng giữa: 1 / (1 + 1) = 0,5.",
+     "giai": "Đúng giữa: 1 / (1 + 1) = 0.5.",
      "goi_y": "e mũ 0 bằng 1.",
      "a": [
-      "0,5",
+      "0.5",
       "0",
       "1",
       "−1"
      ],
-     "h": "1c0224d986dced"
+     "h": "12f5222cb1c8cb"
     },
     {
      "k": "mc",
      "id": "bai16-q4",
      "q": "Theo phần Tự thử, học bao nhiêu giờ thì model bắt đầu đoán Đạt?",
-     "giai": "Xác suất vượt 0,5 khi học khoảng 3,37 giờ.",
+     "giai": "Xác suất vượt 0.5 khi học khoảng 3.37 giờ.",
      "goi_y": "Kéo tới lúc ô bên trái đổi từ Chưa đạt sang Đạt.",
      "a": [
-      "Khoảng 3,5 giờ",
-      "Khoảng 1,5 giờ",
-      "Khoảng 5,5 giờ",
+      "Khoảng 3.5 giờ",
+      "Khoảng 1.5 giờ",
+      "Khoảng 5.5 giờ",
       "Khoảng 7 giờ"
      ],
-     "h": "31e293fae23fb"
+     "h": "381d09be0611d"
     }
    ]
   },
@@ -337,13 +337,13 @@ window.BAI = {
    "ten": "Đọc xác suất",
    "ten_ngan": "Xác suất",
    "phut": 4,
-   "muc_tieu": "đọc được xác suất model trả về và quy tắc ngưỡng 0,5.",
-   "khoi_dong": "Model nói “0,34”. Con hiểu câu đó thế nào?",
+   "muc_tieu": "đọc được xác suất model trả về và quy tắc ngưỡng 0.5.",
+   "khoi_dong": "Model nói “0.34”. Con hiểu câu đó thế nào?",
    "khoi": [
     {
      "t": "anh",
-     "cap": "Xác suất Đạt theo giờ tự học — 50% tại 3,37 giờ",
-     "alt": "Xác suất Đạt theo giờ tự học — 50% tại 3,37 giờ",
+     "cap": "Xác suất Đạt theo giờ tự học — 50% tại 3.37 giờ",
+     "alt": "Xác suất Đạt theo giờ tự học — 50% tại 3.37 giờ",
      "src": "img/xac-suat-theo-gio-hoc.png"
     },
     {
@@ -358,17 +358,17 @@ window.BAI = {
      "dong": [
       [
        "2 giờ",
-       "0,08",
+       "0.08",
        "Khoảng 8 trên 100 bạn như vậy Đạt"
       ],
       [
        "3 giờ",
-       "0,34",
+       "0.34",
        "Khoảng 34 trên 100 bạn như vậy Đạt"
       ],
       [
        "4 giờ",
-       "0,76",
+       "0.76",
        "Khoảng 76 trên 100 bạn như vậy Đạt"
       ]
      ],
@@ -391,7 +391,7 @@ window.BAI = {
        "<code>model.predict_proba(X_test_s)</code>"
       ],
       [
-       "Nhãn (ngưỡng 0,5)",
+       "Nhãn (ngưỡng 0.5)",
        "<code>model.predict(X_test_s)</code>"
       ]
      ]
@@ -407,43 +407,43 @@ window.BAI = {
      "dong": [
       [
        "Model lười",
-       "54,2%"
+       "54.2%"
       ],
       [
        "Logistic 1 cột (giờ học)",
-       "93,1%"
+       "93.1%"
       ],
       [
        "Logistic 2 cột (giờ học, phút mạng)",
-       "<b>91,7%</b>"
+       "<b>91.7%</b>"
       ]
      ],
-     "ket_luan": "Hệ số giờ học dương (5,08), phút mạng âm (-1,89): học nhiều → xác suất Đạt tăng, lướt mạng nhiều → giảm.",
+     "ket_luan": "Hệ số giờ học dương (5.08), phút mạng âm (-1.89): học nhiều → xác suất Đạt tăng, lướt mạng nhiều → giảm.",
      "nhan_manh": []
     },
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Đọc 0,34 thành “bạn ấy được 3,4 điểm”.",
-      "Nghĩ xác suất 0,76 là chắc chắn Đạt."
+      "Đọc 0.34 thành “bạn ấy được 3.4 điểm”.",
+      "Nghĩ xác suất 0.76 là chắc chắn Đạt."
      ]
     },
     {
      "t": "tom_tat",
-     "html": "predict_proba cho xác suất; predict dùng ngưỡng 0,5 để ra nhãn."
+     "html": "predict_proba cho xác suất; predict dùng ngưỡng 0.5 để ra nhãn."
     }
    ],
    "checkpoint": [
     {
      "k": "mc",
      "id": "bai16-q5",
-     "q": "Model trả về xác suất Đạt 0,34 cho một bạn. Cách hiểu nào đúng?",
+     "q": "Model trả về xác suất Đạt 0.34 cho một bạn. Cách hiểu nào đúng?",
      "giai": "Xác suất là khả năng, không phải điểm.",
-     "goi_y": "Xác suất 0,34 = 34%. Của cái gì?",
+     "goi_y": "Xác suất 0.34 = 34%. Của cái gì?",
      "a": [
       "Khoảng 34 trên 100 bạn như vậy Đạt",
       "Bạn ấy chắc chắn Chưa đạt",
-      "Bạn ấy được 3,4 điểm",
+      "Bạn ấy được 3.4 điểm",
       "Bạn ấy đúng 34% số câu"
      ],
      "h": "1bfa8b825cf14d"
@@ -454,7 +454,7 @@ window.BAI = {
      "q": "Chọn lệnh đúng cho mỗi chỗ trống.",
      "giai": "proba = probability = xác suất.",
      "goi_y": "Chữ proba là viết tắt của từ nào?",
-     "mau": "Lệnh {0} trả về xác suất; lệnh {1} trả về nhãn theo ngưỡng 0,5.",
+     "mau": "Lệnh {0} trả về xác suất; lệnh {1} trả về nhãn theo ngưỡng 0.5.",
      "o": [
       [
        "predict_proba",
@@ -478,7 +478,7 @@ window.BAI = {
    "ten_ngan": "Nhầm lẫn",
    "phut": 4,
    "muc_tieu": "đọc được ma trận nhầm lẫn và phân biệt bỏ sót với báo nhầm.",
-   "khoi_dong": "Model đúng 91,7%. 6 bạn còn lại bị sai theo cùng một kiểu không?",
+   "khoi_dong": "Model đúng 91.7%. 6 bạn còn lại bị sai theo cùng một kiểu không?",
    "khoi": [
     {
      "t": "anh",
@@ -585,7 +585,7 @@ window.BAI = {
    "ten_ngan": "Ngưỡng",
    "phut": 5,
    "muc_tieu": "chọn ngưỡng theo kiểu sai mình chấp nhận được.",
-   "khoi_dong": "Ngưỡng 0,5 do máy đặt sẵn. Thầy chủ nhiệm muốn không bỏ sót bạn nào — nên đổi ngưỡng thế nào?",
+   "khoi_dong": "Ngưỡng 0.5 do máy đặt sẵn. Thầy chủ nhiệm muốn không bỏ sót bạn nào — nên đổi ngưỡng thế nào?",
    "khoi": [
     {
      "t": "p",
@@ -874,25 +874,25 @@ window.BAI = {
      ],
      "dong": [
       [
-       "0,30",
+       "0.30",
        "7",
        "0",
-       "90,3%"
+       "90.3%"
       ],
       [
-       "0,50",
+       "0.50",
        "3",
        "3",
-       "91,7%"
+       "91.7%"
       ],
       [
-       "0,60",
+       "0.60",
        "0",
        "9",
-       "87,5%"
+       "87.5%"
       ]
      ],
-     "ket_luan": "Ngưỡng 0,6: không bỏ sót ai, đổi lại 9 bạn bị báo nhầm và độ chính xác giảm.",
+     "ket_luan": "Ngưỡng 0.6: không bỏ sót ai, đổi lại 9 bạn bị báo nhầm và độ chính xác giảm.",
      "nhan_manh": [
       2
      ]
@@ -907,7 +907,7 @@ window.BAI = {
      "t": "loi_hay_gap",
      "muc": [
       "Luôn chọn ngưỡng có độ chính xác cao nhất mà không hỏi hai kiểu sai.",
-      "Nghĩ ngưỡng phải luôn là 0,5."
+      "Nghĩ ngưỡng phải luôn là 0.5."
      ]
     },
     {
@@ -923,17 +923,17 @@ window.BAI = {
      "giai": "Từ ngưỡng này, ô bỏ sót bằng 0.",
      "goi_y": "Kéo dần sang phải tới khi số bỏ sót về 0.",
      "a": [
-      "0,60",
-      "0,50",
-      "0,30",
-      "0,90"
+      "0.60",
+      "0.50",
+      "0.30",
+      "0.90"
      ],
-     "h": "12b08e2d7a40c5"
+     "h": "a596c94e9a838"
     },
     {
      "k": "ma",
      "id": "bai16-q10",
-     "q": "Nâng ngưỡng từ 0,5 lên 0,7. Hai điều nào xảy ra? <b>(Chọn 2 đáp án đúng.)</b>",
+     "q": "Nâng ngưỡng từ 0.5 lên 0.7. Hai điều nào xảy ra? <b>(Chọn 2 đáp án đúng.)</b>",
      "giai": "Hai kiểu sai đổi chỗ cho nhau.",
      "goi_y": "Ngưỡng cao hơn thì model dễ đoán Chưa đạt hơn hay khó hơn?",
      "a": [
@@ -999,12 +999,12 @@ window.BAI = {
      "src": "img/xac-suat-theo-gio-hoc.png"
     },
     "a": [
-     "0,76",
-     "0,34",
-     "0,95",
-     "0,08"
+     "0.76",
+     "0.34",
+     "0.95",
+     "0.08"
     ],
-    "h": "211463ecd0ec4"
+    "h": "e3a3cf6363774"
    },
    {
     "k": "mc",
@@ -1025,8 +1025,8 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai16-q15",
-    "q": "Nhìn hình. Ở ngưỡng 0,7 có bao nhiêu bạn bị báo nhầm?",
-    "giai": "Cột vàng tại ngưỡng 0,7.",
+    "q": "Nhìn hình. Ở ngưỡng 0.7 có bao nhiêu bạn bị báo nhầm?",
+    "giai": "Cột vàng tại ngưỡng 0.7.",
     "img": {
      "src": "img/bo-sot-va-bao-dong-nham-theo-nguong.png"
     },
@@ -1041,7 +1041,7 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai16-q16",
-    "q": "Model dự báo mưa trả về 0,8. Cách nói nào đúng?",
+    "q": "Model dự báo mưa trả về 0.8. Cách nói nào đúng?",
     "giai": "Xác suất là khả năng.",
     "a": [
      "Khả năng mưa khoảng 80%",
@@ -1057,12 +1057,12 @@ window.BAI = {
     "q": "Trường muốn gọi phụ đạo mọi bạn có nguy cơ, chấp nhận gọi nhầm vài bạn. Nên chỉnh ngưỡng xác suất Đạt thế nào?",
     "giai": "Ngưỡng cao → ít bỏ sót.",
     "a": [
-     "Nâng ngưỡng lên cao hơn 0,5",
-     "Hạ ngưỡng xuống dưới 0,5",
-     "Giữ đúng ngưỡng 0,5",
+     "Nâng ngưỡng lên cao hơn 0.5",
+     "Hạ ngưỡng xuống dưới 0.5",
+     "Giữ đúng ngưỡng 0.5",
      "Bỏ ngưỡng, dùng đường thẳng"
     ],
-    "h": "253b37cfacb32"
+    "h": "1c6b73fb0fc6a6"
    },
    {
     "k": "mc",
@@ -1097,11 +1097,11 @@ window.BAI = {
     "giai": "Đường cong chữ S, từ 0 tới 1.",
     "a": [
      "Kết quả luôn nằm giữa 0 và 1",
-     "sigmoid(0) = 0,5",
+     "sigmoid(0) = 0.5",
      "Kết quả có thể lớn hơn 1",
      "sigmoid là đường thẳng"
     ],
-    "h": "49765c53903c9"
+    "h": "167a48ee7c87e4"
    },
    {
     "k": "ma",
@@ -1132,7 +1132,7 @@ window.BAI = {
    {
     "k": "ma",
     "id": "bai16-q23",
-    "q": "Hạ ngưỡng từ 0,5 xuống 0,3. Hai điều nào xảy ra? <b>(Chọn 2 đáp án đúng.)</b>",
+    "q": "Hạ ngưỡng từ 0.5 xuống 0.3. Hai điều nào xảy ra? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Ngưỡng thấp → dễ đoán Đạt.",
     "a": [
      "Bỏ sót nhiều lên",
@@ -1196,7 +1196,7 @@ window.BAI = {
     "id": "bai16-q27",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
     "giai": "Hai ô ngoài đường chéo.",
-    "mau": "Ở ngưỡng 0,5 model bỏ sót {0} bạn và báo nhầm {1} bạn.",
+    "mau": "Ở ngưỡng 0.5 model bỏ sót {0} bạn và báo nhầm {1} bạn.",
     "o": [
      [
       "3",
@@ -1243,19 +1243,19 @@ window.BAI = {
     "mau": "Học {0} giờ thì xác suất Đạt khoảng 50%; model hai cột đúng {1} trên tập kiểm tra.",
     "o": [
      [
-      "3,37",
-      "2,00",
-      "5,00",
-      "6,00"
+      "3.37",
+      "2.00",
+      "5.00",
+      "6.00"
      ],
      [
-      "91,7%",
-      "54,2%",
+      "91.7%",
+      "54.2%",
       "100%",
-      "50,0%"
+      "50.0%"
      ]
     ],
-    "h": "138c982403ff24"
+    "h": "107dc360a0fb0f"
    },
    {
     "k": "ds",
@@ -1274,7 +1274,7 @@ window.BAI = {
    {
     "k": "ds",
     "id": "bai16-q32",
-    "q": "Xác suất 0,76 nghĩa là bạn đó chắc chắn Đạt.",
+    "q": "Xác suất 0.76 nghĩa là bạn đó chắc chắn Đạt.",
     "giai": "Khoảng 76 trên 100 bạn như vậy Đạt.",
     "h": "12c1328b45a258"
    }

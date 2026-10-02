@@ -84,7 +84,7 @@
     try { localStorage.setItem(LUU, JSON.stringify(TT)); } catch (e) { luuDuoc = false; }
     guiCha({ loai: "tien_do", qua: TT.qua, dat: !!TT.dat, ten: TT.ten || "" });
   }
-  function so(x, d) { return Number(x).toFixed(d === undefined ? 1 : d).replace(".", ","); }
+  function so(x, d) { return Number(x).toFixed(d === undefined ? 1 : d); }
   function ngayNay() {
     var d = new Date();
     return ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear();

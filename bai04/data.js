@@ -40,7 +40,7 @@ window.BAI = {
    "ten_ngan": "NumPy",
    "phut": 4,
    "muc_tieu": "dùng mảng NumPy để tính cho cả dãy số một lần.",
-   "khoi_dong": "Cộng 0,5 điểm cho 240 bạn: Bài 3 con cần vòng for. Có cách nào ngắn hơn?",
+   "khoi_dong": "Cộng 0.5 điểm cho 240 bạn: Bài 3 con cần vòng for. Có cách nào ngắn hơn?",
    "khoi": [
     {
      "t": "anh",
@@ -74,7 +74,7 @@ window.BAI = {
       [
        "<code>diem.mean()</code>",
        "Trung bình",
-       "6,30"
+       "6.30"
       ]
      ]
     },
@@ -122,12 +122,12 @@ window.BAI = {
      "giai": "diem.mean().",
      "goi_y": "Xem dòng cuối của bảng.",
      "a": [
-      "6,30",
-      "6,80",
-      "8,00",
-      "4,50"
+      "6.30",
+      "6.80",
+      "8.00",
+      "4.50"
      ],
-     "h": "4869406eeda50"
+     "h": "984132a88344c"
     }
    ]
   },
@@ -256,7 +256,7 @@ window.BAI = {
       [
        "Trung bình giờ tự học?",
        "<code>df[\"StudyHours\"].mean()</code>",
-       "3,68"
+       "3.68"
       ],
       [
        "Bao nhiêu bạn Pass, Fail?",
@@ -266,7 +266,7 @@ window.BAI = {
       [
        "Nhóm Pass tự học bao nhiêu?",
        "<code>df[df[\"Result\"] == \"Pass\"][\"StudyHours\"].mean()</code>",
-       "5,13"
+       "5.13"
       ],
       [
        "Mỗi lớp tự học bao nhiêu?",
@@ -2337,7 +2337,7 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Biểu đồ phân tán cho thấy <b>xu hướng</b>: tự học nhiều thì điểm thường cao hơn (hệ số tương quan 0,92 — Bài 10 con học kỹ). Chấm xanh (Pass) và cam (Fail) tách thành hai vùng — đó là điều máy sẽ học ở Bài 12. Nhớ: đây là dữ liệu mô phỏng, và liên quan chưa chắc là nguyên nhân."
+     "html": "Biểu đồ phân tán cho thấy <b>xu hướng</b>: tự học nhiều thì điểm thường cao hơn (hệ số tương quan 0.92 — Bài 10 con học kỹ). Chấm xanh (Pass) và cam (Fail) tách thành hai vùng — đó là điều máy sẽ học ở Bài 12. Nhớ: đây là dữ liệu mô phỏng, và liên quan chưa chắc là nguyên nhân."
     },
     {
      "t": "phan_tan_3d",
@@ -4119,7 +4119,7 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Máy học từ giờ tự học và giờ ngủ của 168 bạn để đoán Pass / Fail, rồi đúng 93,1% trên 72 bạn dùng để thử. Con chưa cần hiểu hết — từ Bài 12 con học kỹ từng dòng."
+     "html": "Máy học từ giờ tự học và giờ ngủ của 168 bạn để đoán Pass / Fail, rồi đúng 93.1% trên 72 bạn dùng để thử. Con chưa cần hiểu hết — từ Bài 12 con học kỹ từng dòng."
     },
     {
      "t": "anh",
@@ -4274,12 +4274,12 @@ window.BAI = {
      "src": "img/mang-numpy.png"
     },
     "a": [
-     "6,80",
-     "6,30",
-     "0,50",
-     "7,50"
+     "6.80",
+     "6.30",
+     "0.50",
+     "7.50"
     ],
-    "h": "cfa5fe90cd19"
+    "h": "1d264a46513cf1"
    },
    {
     "k": "mc",
@@ -4477,13 +4477,13 @@ window.BAI = {
       "0"
      ],
      [
-      "93,1%",
+      "93.1%",
       "100%",
-      "50,0%",
+      "50.0%",
       "0%"
      ]
     ],
-    "h": "1cb9d238019917"
+    "h": "8eaa017f3c6c4"
    },
    {
     "k": "dd",

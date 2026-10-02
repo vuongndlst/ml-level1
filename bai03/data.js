@@ -164,7 +164,7 @@ window.BAI = {
    "ten_ngan": "Biến và if",
    "phut": 5,
    "muc_tieu": "dùng biến, kiểu dữ liệu và câu lệnh if.",
-   "khoi_dong": "Một bạn được 7,5 điểm. Con lưu con số đó vào máy tính thế nào?",
+   "khoi_dong": "Một bạn được 7.5 điểm. Con lưu con số đó vào máy tính thế nào?",
    "khoi": [
     {
      "t": "anh",
@@ -218,7 +218,7 @@ window.BAI = {
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Viết số thập phân bằng dấu phẩy: <code>3,5</code> — Python hiểu là hai số.",
+      "Trong Python, số thập phân dùng dấu chấm: <code>3.5</code>. Dấu phẩy tách các phần tử trong tuple hoặc list.",
       "Quên dấu hai chấm sau <code>if</code> hoặc quên thụt lề."
      ]
     },
@@ -947,12 +947,12 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai03-q15",
-    "q": "Viết số 7,5 trong Python thế nào?",
+    "q": "Viết số 7.5 trong Python thế nào?",
     "giai": "Dấu chấm.",
     "a": [
      "7.5",
-     "7,5",
-     "\"7,5\"",
+     "7 / 5",
+     "\"7.5\"",
      "7 5"
     ],
     "h": "b4f646adb6c6"

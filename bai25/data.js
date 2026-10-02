@@ -312,42 +312,42 @@ window.BAI = {
      "dong": [
       [
        "KNN (K = 3)",
-       "90,8%",
+       "90.8%",
        "11",
        "11"
       ],
       [
        "Logistic",
-       "90,4%",
+       "90.4%",
        "12",
        "11"
       ],
       [
        "Cây sâu 2",
-       "89,6%",
+       "89.6%",
        "9",
        "16"
       ],
       [
        "Naïve Bayes",
-       "90,8%",
+       "90.8%",
        "10",
        "12"
       ],
       [
        "SVM",
-       "90,8%",
+       "90.8%",
        "13",
        "9"
       ],
       [
        "Rừng 100 cây",
-       "90,8%",
+       "90.8%",
        "11",
        "11"
       ]
      ],
-     "ket_luan": "Độ chính xác chỉ chênh 1,2 điểm; bỏ sót từ 9 tới 13 bạn. Trên bảng này, các model gần như ngang nhau.",
+     "ket_luan": "Độ chính xác chỉ chênh 1.2 điểm; bỏ sót từ 9 tới 13 bạn. Trên bảng này, các model gần như ngang nhau.",
      "nhan_manh": []
     },
     {
@@ -396,19 +396,19 @@ window.BAI = {
      "mau": "Độ chính xác các model từ {0} tới {1}.",
      "o": [
       [
-       "89,6%",
-       "90,8%",
-       "50,0%",
+       "89.6%",
+       "90.8%",
+       "50.0%",
        "100%"
       ],
       [
-       "90,8%",
-       "89,6%",
+       "90.8%",
+       "89.6%",
        "100%",
-       "75,0%"
+       "75.0%"
       ]
      ],
-     "h": "18cb43eaa496ee"
+     "h": "f795ed769647c"
     }
    ]
   },
@@ -748,8 +748,8 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai25-q15",
-    "q": "Hai model: A đúng 91% và giải thích được; B đúng 91,5% nhưng không giải thích được. Phòng tuyển sinh cần nói lý do. Chọn?",
-    "giai": "Giải thích quan trọng hơn 0,5 điểm.",
+    "q": "Hai model: A đúng 91% và giải thích được; B đúng 91.5% nhưng không giải thích được. Phòng tuyển sinh cần nói lý do. Chọn?",
+    "giai": "Giải thích quan trọng hơn 0.5 điểm.",
     "a": [
      "Model A",
      "Model B",

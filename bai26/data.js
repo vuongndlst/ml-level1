@@ -157,42 +157,42 @@ window.BAI = {
         [
          "0",
          "Chọn ngẫu nhiên 2 bạn làm tâm",
-         "Tâm A (0,09 ; 0,13), tâm B (0,71 ; 0,24)"
+         "Tâm A (0.09, 0.13), tâm B (0.71, 0.24)"
         ],
         [
          "0",
          "Gán mỗi bạn vào tâm gần nhất",
-         "A: 96 bạn, B: 144 bạn — tổng khoảng cách² 21,11"
+         "A: 96 bạn, B: 144 bạn — tổng khoảng cách² 21.11"
         ],
         [
          "1",
          "Dời tâm về giữa nhóm",
-         "Tâm A (0,18 ; 0,39), tâm B (0,69 ; 0,27)"
+         "Tâm A (0.18, 0.39), tâm B (0.69, 0.27)"
         ],
         [
          "1",
          "Gán lại mỗi bạn vào tâm gần nhất",
-         "A: 110 bạn, B: 130 bạn — tổng khoảng cách² 13,11"
+         "A: 110 bạn, B: 130 bạn — tổng khoảng cách² 13.11"
         ],
         [
          "2",
          "Dời tâm về giữa nhóm",
-         "Tâm A (0,21 ; 0,39), tâm B (0,72 ; 0,25)"
+         "Tâm A (0.21, 0.39), tâm B (0.72, 0.25)"
         ],
         [
          "2",
          "Gán lại mỗi bạn vào tâm gần nhất",
-         "A: 119 bạn, B: 121 bạn — tổng khoảng cách² 12,68"
+         "A: 119 bạn, B: 121 bạn — tổng khoảng cách² 12.68"
         ],
         [
          "3",
          "Dời tâm về giữa nhóm",
-         "Tâm A (0,23 ; 0,40), tâm B (0,74 ; 0,24)"
+         "Tâm A (0.23, 0.40), tâm B (0.74, 0.24)"
         ],
         [
          "3",
          "Gán lại mỗi bạn vào tâm gần nhất",
-         "A: 127 bạn, B: 113 bạn — tổng khoảng cách² 12,46"
+         "A: 127 bạn, B: 113 bạn — tổng khoảng cách² 12.46"
         ],
         [
          "…",
@@ -33691,8 +33691,8 @@ window.BAI = {
     },
     {
      "t": "anh",
-     "cap": "Sau mỗi vòng, tổng khoảng cách² giảm: 21,11 → 13,11 → 12,68 → 12,46",
-     "alt": "Sau mỗi vòng, tổng khoảng cách² giảm: 21,11 → 13,11 → 12,68 → 12,46",
+     "cap": "Sau mỗi vòng, tổng khoảng cách² giảm: 21.11 → 13.11 → 12.68 → 12.46",
+     "alt": "Sau mỗi vòng, tổng khoảng cách² giảm: 21.11 → 13.11 → 12.68 → 12.46",
      "src": "img/k-means-tung-vong.png"
     },
     {
@@ -33732,15 +33732,15 @@ window.BAI = {
      "k": "mc",
      "id": "bai26-q4",
      "q": "Theo phần Tự thử, sau vòng 1 tổng khoảng cách² còn bao nhiêu?",
-     "giai": "Giảm từ 21,11 xuống 13,11.",
+     "giai": "Giảm từ 21.11 xuống 13.11.",
      "goi_y": "Bấm “Bước tiếp” tới dòng gán lại ở vòng 1.",
      "a": [
-      "13,11",
-      "21,11",
-      "12,46",
-      "29,67"
+      "13.11",
+      "21.11",
+      "12.46",
+      "29.67"
      ],
-     "h": "1bd29b7de27abe"
+     "h": "194173bb6a3872"
     }
    ]
   },
@@ -33759,37 +33759,37 @@ window.BAI = {
      "moc": [
       {
        "x": 1,
-       "n": "tổng khoảng cách² = 29,67",
+       "n": "tổng khoảng cách² = 29.67",
        "p": 0.0
       },
       {
        "x": 2,
-       "n": "tổng khoảng cách² = 12,33; giảm thêm 17,34 so với k = 1",
+       "n": "tổng khoảng cách² = 12.33; giảm thêm 17.34 so với k = 1",
        "p": 58.4
       },
       {
        "x": 3,
-       "n": "tổng khoảng cách² = 8,81; giảm thêm 3,52 so với k = 2",
+       "n": "tổng khoảng cách² = 8.81; giảm thêm 3.52 so với k = 2",
        "p": 70.3
       },
       {
        "x": 4,
-       "n": "tổng khoảng cách² = 6,18; giảm thêm 2,63 so với k = 3",
+       "n": "tổng khoảng cách² = 6.18; giảm thêm 2.63 so với k = 3",
        "p": 79.2
       },
       {
        "x": 5,
-       "n": "tổng khoảng cách² = 4,85; giảm thêm 1,33 so với k = 4",
+       "n": "tổng khoảng cách² = 4.85; giảm thêm 1.33 so với k = 4",
        "p": 83.7
       },
       {
        "x": 6,
-       "n": "tổng khoảng cách² = 4,11; giảm thêm 0,74 so với k = 5",
+       "n": "tổng khoảng cách² = 4.11; giảm thêm 0.74 so với k = 5",
        "p": 86.1
       },
       {
        "x": 7,
-       "n": "tổng khoảng cách² = 3,52; giảm thêm 0,59 so với k = 6",
+       "n": "tổng khoảng cách² = 3.52; giảm thêm 0.59 so với k = 6",
        "p": 88.1
       }
      ],
@@ -33806,7 +33806,7 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Từ k = 1 lên k = 2, tổng khoảng cách² giảm 58,4%. Từ k = 2 lên k = 3 chỉ giảm thêm 3,52. Chỗ “gập” như khuỷu tay là k = 2."
+     "html": "Từ k = 1 lên k = 2, tổng khoảng cách² giảm 58.4%. Từ k = 2 lên k = 3 chỉ giảm thêm 3.52. Chỗ “gập” như khuỷu tay là k = 2."
     },
     {
      "t": "hop",
@@ -33831,15 +33831,15 @@ window.BAI = {
      "k": "mc",
      "id": "bai26-q5",
      "q": "Theo phần Tự thử, k = 2 đã làm tổng khoảng cách² giảm bao nhiêu so với k = 1?",
-     "giai": "29,67 → 12,33.",
+     "giai": "29.67 → 12.33.",
      "goi_y": "Kéo thanh tới k = 2.",
      "a": [
-      "58,4%",
-      "70,3%",
+      "58.4%",
+      "70.3%",
       "100%",
-      "83,7%"
+      "83.7%"
      ],
-     "h": "99cf42b040328"
+     "h": "1b906f30f1dd38"
     },
     {
      "k": "ds",
@@ -33860,8 +33860,8 @@ window.BAI = {
    "khoi": [
     {
      "t": "anh",
-     "cap": "Máy không được xem nhãn, nhưng hai nhóm trùng 87,1% với Đạt / Chưa đạt",
-     "alt": "Máy không được xem nhãn, nhưng hai nhóm trùng 87,1% với Đạt / Chưa đạt",
+     "cap": "Máy không được xem nhãn, nhưng hai nhóm trùng 87.1% với Đạt / Chưa đạt",
+     "alt": "Máy không được xem nhãn, nhưng hai nhóm trùng 87.1% với Đạt / Chưa đạt",
      "src": "img/hai-nhom-va-nhan-that.png"
     },
     {
@@ -33875,11 +33875,11 @@ window.BAI = {
      "dong": [
       [
        "Đưa về 0 – 1 (MinMaxScaler)",
-       "87,1%"
+       "87.1%"
       ],
       [
        "Để nguyên đơn vị",
-       "70,0%"
+       "70.0%"
       ]
      ],
      "ket_luan": "Để nguyên, phút mạng XH lấn át giờ tự học: máy gần như chỉ chia theo phút mạng XH.",
@@ -33895,7 +33895,7 @@ window.BAI = {
      "t": "loi_hay_gap",
      "muc": [
       "Quên đưa về cùng thang đo — lỗi giống KNN ở Bài 13.",
-      "Nghĩ 87,1% là “độ chính xác” — K-Means không đoán nhãn, đây chỉ là mức trùng khớp."
+      "Nghĩ 87.1% là “độ chính xác” — K-Means không đoán nhãn, đây chỉ là mức trùng khớp."
      ]
     },
     {
@@ -33913,19 +33913,19 @@ window.BAI = {
      "mau": "Đưa về 0 – 1: trùng {0}; để nguyên đơn vị: trùng {1}.",
      "o": [
       [
-       "87,1%",
-       "70,0%",
+       "87.1%",
+       "70.0%",
        "100%",
-       "50,0%"
+       "50.0%"
       ],
       [
-       "70,0%",
-       "87,1%",
+       "70.0%",
+       "87.1%",
        "100%",
-       "95,0%"
+       "95.0%"
       ]
      ],
-     "h": "11a81cfce8ac1d"
+     "h": "15d40457796a00"
     },
     {
      "k": "mc",
@@ -33971,21 +33971,21 @@ window.BAI = {
       [
        "Học ít",
        "91",
-       "1,64",
+       "1.64",
        "193",
        "4 / 91"
       ],
       [
        "Ở giữa",
        "75",
-       "3,82",
+       "3.82",
        "159",
        "51 / 75"
       ],
       [
        "Học nhiều",
        "74",
-       "6,05",
+       "6.05",
        "97",
        "74 / 74"
       ]
@@ -34036,7 +34036,7 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai26-q9",
-     "q": "Nhóm có tâm 6,05 giờ tự học, 97 phút mạng XH nên được đặt tên gì?",
+     "q": "Nhóm có tâm 6.05 giờ tự học, 97 phút mạng XH nên được đặt tên gì?",
      "giai": "Giờ học cao nhất, phút mạng XH thấp nhất.",
      "goi_y": "So với hai tâm còn lại trong bảng.",
      "a": [
@@ -34313,19 +34313,19 @@ window.BAI = {
     "mau": "Tổng khoảng cách² với k = 1 là {0}; với k = 2 là {1}.",
     "o": [
      [
-      "29,67",
-      "8,81",
-      "3,52",
-      "0,00"
+      "29.67",
+      "8.81",
+      "3.52",
+      "0.00"
      ],
      [
-      "12,33",
-      "6,18",
-      "4,11",
-      "0,00"
+      "12.33",
+      "6.18",
+      "4.11",
+      "0.00"
      ]
     ],
-    "h": "14b1d77a7d94f2"
+    "h": "1d6204c8b6af"
    },
    {
     "k": "dd",

@@ -6,7 +6,7 @@ window.BAI = {
  "phan": "Module 05 · Math for Machine Learning",
  "cau_hoi": "Một con số có đủ để mô tả cả một lớp không?",
  "gioi_thieu": [
-  "Điểm trung bình của lớp <b>10A1</b> và <b>10A8</b> gần bằng nhau (5,71 và 5,64). Kết quả học tập của hai lớp có giống nhau không?",
+  "Điểm trung bình của lớp <b>10A1</b> và <b>10A8</b> gần bằng nhau (5.71 và 5.64). Kết quả học tập của hai lớp có giống nhau không?",
   "Ta sẽ dùng số liệu để trả lời câu hỏi này. Ví dụ trong bài lấy từ <b>bảng dữ liệu 240 học sinh khối 10</b> (dữ liệu mô phỏng). Đây cũng là bảng dùng trong Colab.",
   "Sau mỗi chặng, cả lớp dừng lại để thảo luận và ghi bài. Các khái niệm Toán 10 sẽ giúp ta đọc bảng dữ liệu và hiểu dự đoán của mô hình."
  ],
@@ -87,7 +87,7 @@ window.BAI = {
       [
        "3",
        "Số trung bình = tổng : số giá trị",
-       "1213 : 7 ≈ <b>173,3 phút</b>"
+       "1213 : 7 ≈ <b>173.3 phút</b>"
       ],
       [
        "4",
@@ -192,13 +192,13 @@ window.BAI = {
      "k": "mc",
      "id": "bai05-q2",
      "q": "Dãy 6 giá trị đã sắp xếp: 2 · 4 · 5 · 7 · 8 · 9. Trung vị bằng bao nhiêu?",
-     "giai": "n = 6 chẵn nên trung vị là trung bình hai giá trị thứ 3 và thứ 4: (5 + 7) : 2 = 6. 5,8 là số trung bình của cả dãy.",
+     "giai": "n = 6 chẵn nên trung vị là trung bình hai giá trị thứ 3 và thứ 4: (5 + 7) : 2 = 6. 5.8 là số trung bình của cả dãy.",
      "goi_y": "Với n chẵn, không có một giá trị nào đứng chính giữa. Nhìn lại định nghĩa.",
      "a": [
       "6",
       "5",
       "7",
-      "5,8"
+      "5.8"
      ],
      "h": "14cff38057e7ea"
     },
@@ -261,8 +261,8 @@ window.BAI = {
      "dong": [
       [
        "Số trung bình",
-       "173,3 phút",
-       "<b>252,6 phút</b>"
+       "173.3 phút",
+       "<b>252.6 phút</b>"
       ],
       [
        "Trung vị",
@@ -565,15 +565,15 @@ window.BAI = {
     },
     {
      "t": "anh",
-     "cap": "Phút mạng xã hội của 240 học sinh: trung bình 152,8, trung vị 135 — vài bạn dùng rất nhiều kéo số trung bình sang phải",
-     "alt": "Phút mạng xã hội của 240 học sinh: trung bình 152,8, trung vị 135 — vài bạn dùng rất nhiều kéo số trung bình sang phải",
+     "cap": "Phút mạng xã hội của 240 học sinh: trung bình 152.8, trung vị 135 — vài bạn dùng rất nhiều kéo số trung bình sang phải",
+     "alt": "Phút mạng xã hội của 240 học sinh: trung bình 152.8, trung vị 135 — vài bạn dùng rất nhiều kéo số trung bình sang phải",
      "src": "img/trung-binh-bi-keo-lech.png"
     },
     {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Giá trị bất thường không phải lúc nào cũng là lỗi",
-     "html": "Một bạn học 7 giờ và được 9,8 điểm là hiếm nhưng có thể — cần giữ. Một bạn học 25 giờ mỗi ngày là lỗi nhập liệu — cần sửa. Bài 7 sẽ xét kỹ cách phân biệt hai trường hợp."
+     "html": "Một bạn học 7 giờ và được 9.8 điểm là hiếm nhưng có thể — cần giữ. Một bạn học 25 giờ mỗi ngày là lỗi nhập liệu — cần sửa. Bài 7 sẽ xét kỹ cách phân biệt hai trường hợp."
     },
     {
      "t": "loi_hay_gap",
@@ -638,7 +638,7 @@ window.BAI = {
     {
      "t": "vi_du",
      "tieu_de": "độ lệch chuẩn chiều cao 6 người",
-     "de": "Chiều cao: 150 · 155 · 160 · 165 · 170 · 175 cm. Số trung bình x̄ = 975 : 6 = <b>162,5 cm</b>.",
+     "de": "Chiều cao: 150 · 155 · 160 · 165 · 170 · 175 cm. Số trung bình x̄ = 975 : 6 = <b>162.5 cm</b>.",
      "cot": [
       "Chiều cao x (cm)",
       "Độ lệch x − x̄",
@@ -647,41 +647,41 @@ window.BAI = {
      "dong": [
       [
        "150",
-       "−12,5",
-       "156,25"
+       "−12.5",
+       "156.25"
       ],
       [
        "155",
-       "−7,5",
-       "56,25"
+       "−7.5",
+       "56.25"
       ],
       [
        "160",
-       "−2,5",
-       "6,25"
+       "−2.5",
+       "6.25"
       ],
       [
        "165",
-       "2,5",
-       "6,25"
+       "2.5",
+       "6.25"
       ],
       [
        "170",
-       "7,5",
-       "56,25"
+       "7.5",
+       "56.25"
       ],
       [
        "175",
-       "12,5",
-       "156,25"
+       "12.5",
+       "156.25"
       ],
       [
        "Tổng",
        "0",
-       "<b>437,50</b>"
+       "<b>437.50</b>"
       ]
      ],
-     "ket_luan": "Phương sai s<sup>2</sup> = 437,5 : 6 ≈ 72,92 · Độ lệch chuẩn s = √72,92 ≈ <b>8,54 cm</b>. Đây là mức chênh lệch điển hình quanh số trung bình (8,5 cm).",
+     "ket_luan": "Phương sai s<sup>2</sup> = 437.5 : 6 ≈ 72.92 · Độ lệch chuẩn s = √72.92 ≈ <b>8.54 cm</b>. Đây là mức chênh lệch điển hình quanh số trung bình (8.5 cm).",
      "nhan_manh": [
       6
      ]
@@ -695,7 +695,7 @@ window.BAI = {
     {
      "t": "keo_diem",
      "tieu_de": "kéo chiều cao, xem độ lệch chuẩn",
-     "huong_dan": "Kéo các chấm (hoặc bấm vào hình rồi dùng phím mũi tên, phím cách để chọn chấm khác). <b>Thử thách:</b> giữ số trung bình 162,5 cm mà làm độ lệch chuẩn <b>nhỏ hơn 3 cm</b>. Rồi làm nó <b>lớn hơn 12 cm</b>.",
+     "huong_dan": "Kéo các chấm (hoặc bấm vào hình rồi dùng phím mũi tên, phím cách để chọn chấm khác). <b>Thử thách:</b> giữ số trung bình 162.5 cm mà làm độ lệch chuẩn <b>nhỏ hơn 3 cm</b>. Rồi làm nó <b>lớn hơn 12 cm</b>.",
      "gia_tri": [
       150,
       155,
@@ -726,14 +726,14 @@ window.BAI = {
      "dong": [
       [
        "10A1",
-       "5,71",
-       "1,92",
+       "5.71",
+       "1.92",
        "Điểm tản ra hơn"
       ],
       [
        "10A8",
-       "5,64",
-       "1,58",
+       "5.64",
+       "1.58",
        "Điểm đồng đều hơn"
       ]
      ],
@@ -752,7 +752,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Pandas chia cho n − 1",
-     "html": "Lệnh <code>.std()</code> của Pandas mặc định chia cho <b>n − 1</b> thay vì n — cách tính dùng khi dữ liệu chỉ là một <b>mẫu</b> của nhóm lớn hơn. Muốn đúng công thức SGK thì viết <code>.std(ddof=0)</code>. Với 30 bạn một lớp, hai cách chênh chưa tới 2% và <b>thứ tự các lớp không đổi</b>: 10A1 là 1,92 (Pandas) hay 1,89 (chia n)."
+     "html": "Lệnh <code>.std()</code> của Pandas mặc định chia cho <b>n − 1</b> thay vì n — cách tính dùng khi dữ liệu chỉ là một <b>mẫu</b> của nhóm lớn hơn. Muốn đúng công thức SGK thì viết <code>.std(ddof=0)</code>. Với 30 bạn một lớp, hai cách chênh chưa tới 2% và <b>thứ tự các lớp không đổi</b>: 10A1 là 1.92 (Pandas) hay 1.89 (chia n)."
     },
     {
      "t": "loi_hay_gap",
@@ -805,7 +805,7 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai05-q6",
-     "q": "Lớp A và lớp B cùng có số trung bình 6,0. Độ lệch chuẩn của lớp A là 0,5, của lớp B là 2,5. Nhận xét nào đúng?",
+     "q": "Lớp A và lớp B cùng có số trung bình 6.0. Độ lệch chuẩn của lớp A là 0.5, của lớp B là 2.5. Nhận xét nào đúng?",
      "giai": "Độ lệch chuẩn nhỏ nghĩa là các điểm nằm sát số trung bình, tức là đồng đều hơn.",
      "goi_y": "Độ lệch chuẩn đo điều gì: mức giỏi hay mức tản ra?",
      "a": [
@@ -880,19 +880,19 @@ window.BAI = {
        "Cả khối — chưa biết gì thêm",
        "240",
        "129",
-       "129 : 240 ≈ 53,8%"
+       "129 : 240 ≈ 53.8%"
       ],
       [
        "Tự học hơn 4 giờ mỗi ngày",
        "104",
        "100",
-       "100 : 104 ≈ <b>96,2%</b>"
+       "100 : 104 ≈ <b>96.2%</b>"
       ],
       [
        "Dùng mạng hơn 300 phút mỗi ngày",
        "10",
        "2",
-       "2 : 10 = 20,0%"
+       "2 : 10 = 20.0%"
       ]
      ],
      "ket_luan": "Biết thêm một điều kiện thì mẫu số đổi thành số học sinh của nhóm đó — và xác suất có thể thay đổi rất nhiều.",
@@ -998,7 +998,7 @@ window.BAI = {
      "t": "loi_hay_gap",
      "muc": [
       "Tính xác suất có điều kiện nhưng vẫn chia cho cả khối 240 học sinh.",
-      "Hiểu xác suất 0,96 là “chắc chắn” — chỉ xác suất 1 mới là chắc chắn."
+      "Hiểu xác suất 0.96 là “chắc chắn” — chỉ xác suất 1 mới là chắc chắn."
      ]
     },
     {
@@ -1045,15 +1045,15 @@ window.BAI = {
      "k": "mc",
      "id": "bai05-q9",
      "q": "Khối 10 có 129 học sinh Đạt trong 240 học sinh. Chọn ngẫu nhiên một bạn, xác suất chọn được bạn Đạt xấp xỉ bao nhiêu?",
-     "giai": "n(A) = 129, n(Ω) = 240 → 129 : 240 ≈ 53,8%.",
+     "giai": "n(A) = 129, n(Ω) = 240 → 129 : 240 ≈ 53.8%.",
      "goi_y": "Số kết quả thuận lợi là bao nhiêu, tổng số kết quả là bao nhiêu?",
      "a": [
-      "53,8%",
-      "46,2%",
-      "96,2%",
-      "50,0%"
+      "53.8%",
+      "46.2%",
+      "96.2%",
+      "50.0%"
      ],
-     "h": "af5a3deb1899a"
+     "h": "19474cb3670551"
     },
     {
      "k": "dd",
@@ -1081,8 +1081,8 @@ window.BAI = {
     {
      "k": "ds",
      "id": "bai05-q11",
-     "q": "Xác suất Đạt của một bạn là 0,96 nghĩa là bạn đó chắc chắn sẽ Đạt.",
-     "giai": "0,96 là rất có khả năng, nhưng chỉ xác suất 1 mới là chắc chắn: cứ 100 bạn như vậy vẫn có khoảng 4 bạn không Đạt.",
+     "q": "Xác suất Đạt của một bạn là 0.96 nghĩa là bạn đó chắc chắn sẽ Đạt.",
+     "giai": "0.96 là rất có khả năng, nhưng chỉ xác suất 1 mới là chắc chắn: cứ 100 bạn như vậy vẫn có khoảng 4 bạn không Đạt.",
      "goi_y": "Xác suất bằng bao nhiêu thì mới là “chắc chắn xảy ra”?",
      "h": "17f8b4d567313"
     }
@@ -1285,10 +1285,10 @@ window.BAI = {
     "k": "mc",
     "id": "bai05-q14",
     "q": "Bảy học sinh dùng mạng xã hội 30, 89, 108, 151, 182, 208, 445 phút mỗi ngày. Trung vị bằng bao nhiêu phút?",
-    "giai": "n = 7 lẻ → giá trị thứ 4 của dãy đã sắp xếp: 151. 173,3 là số trung bình.",
+    "giai": "n = 7 lẻ → giá trị thứ 4 của dãy đã sắp xếp: 151. 173.3 là số trung bình.",
     "a": [
      "151 phút",
-     "173,3 phút",
+     "173.3 phút",
      "182 phút",
      "108 phút"
     ],
@@ -1298,20 +1298,20 @@ window.BAI = {
     "k": "mc",
     "id": "bai05-q15",
     "q": "Bảy học sinh dùng mạng xã hội 30, 89, 108, 151, 182, 208, 445 phút mỗi ngày. Số trung bình xấp xỉ bao nhiêu phút?",
-    "giai": "Tổng 1213 chia 7 ≈ 173,3.",
+    "giai": "Tổng 1213 chia 7 ≈ 173.3.",
     "a": [
-     "173,3 phút",
-     "151,0 phút",
-     "182,0 phút",
-     "226,5 phút"
+     "173.3 phút",
+     "151.0 phút",
+     "182.0 phút",
+     "226.5 phút"
     ],
-    "h": "78f948fa27a1a"
+    "h": "cd76ab2ff0e45"
    },
    {
     "k": "mc",
     "id": "bai05-q16",
     "q": "Trong dãy 30, 89, 108, 151, 182, 208, 445, đổi 445 thành 1000. Số trung bình và trung vị thay đổi thế nào?",
-    "giai": "Số trung bình cộng cả 1000 nên tăng lên 252,6; giá trị thứ 4 vẫn là 151.",
+    "giai": "Số trung bình cộng cả 1000 nên tăng lên 252.6; giá trị thứ 4 vẫn là 151.",
     "a": [
      "Số trung bình tăng, trung vị giữ nguyên",
      "Cả hai cùng tăng lên như nhau",
@@ -1324,7 +1324,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai05-q17",
     "q": "Nhìn hai biểu đồ phân bố điểm. Lớp nào có điểm đồng đều hơn, và vì sao?",
-    "giai": "Độ lệch chuẩn 10A8 là 1,58, nhỏ hơn 1,92 của 10A1.",
+    "giai": "Độ lệch chuẩn 10A8 là 1.58, nhỏ hơn 1.92 của 10A1.",
     "img": {
      "src": "img/hai-lop-gan-cung-trung-binh.png"
     },
@@ -1356,17 +1356,17 @@ window.BAI = {
     "k": "mc",
     "id": "bai05-q19",
     "q": "Nhìn biểu đồ. Biết một bạn dùng mạng hơn 300 phút mỗi ngày, xác suất bạn ấy Đạt là bao nhiêu?",
-    "giai": "Cột của nhóm dùng mạng hơn 300 phút: 20,0%.",
+    "giai": "Cột của nhóm dùng mạng hơn 300 phút: 20.0%.",
     "img": {
      "src": "img/xac-suat-dat-khi-biet-them.png"
     },
     "a": [
-     "20,0%",
-     "53,8%",
-     "96,2%",
-     "80,0%"
+     "20.0%",
+     "53.8%",
+     "96.2%",
+     "80.0%"
     ],
-    "h": "104b331f21552b"
+    "h": "1056ee9d84e38a"
    },
    {
     "k": "mc",
@@ -1393,7 +1393,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai05-q21",
     "q": "Biểu đồ cột cho biết số trận đã chơi (Games Played) của bốn bạn. Số trận trung bình của bốn bạn là bao nhiêu?",
-    "giai": "(5 + 7 + 9 + 6) : 4 = 27 : 4 = 6,75 trận.",
+    "giai": "(5 + 7 + 9 + 6) : 4 = 27 : 4 = 6.75 trận.",
     "img": {
      "src": "https://media.geeksforgeeks.org/wp-content/uploads/20260504115244347887/1.webp",
      "du_phong": "img/minh-hoa-bieu-do-cot-so-tran-da-choi.png",
@@ -1403,30 +1403,30 @@ window.BAI = {
      }
     },
     "a": [
-     "6,75 trận",
-     "6,00 trận",
-     "7,00 trận",
-     "9,00 trận"
+     "6.75 trận",
+     "6.00 trận",
+     "7.00 trận",
+     "9.00 trận"
     ],
-    "h": "1c149be797d367"
+    "h": "9f30736b204d0"
    },
    {
     "k": "mc",
     "id": "bai05-q22",
-    "q": "Chiều cao sáu người có số trung bình 162,5 cm, độ lệch chuẩn 8,5 cm. Câu nào mô tả đúng?",
+    "q": "Chiều cao sáu người có số trung bình 162.5 cm, độ lệch chuẩn 8.5 cm. Câu nào mô tả đúng?",
     "giai": "Độ lệch chuẩn là khoảng cách điển hình từ mỗi giá trị tới số trung bình.",
     "a": [
-     "Chiều cao thường cách số trung bình khoảng 8,5 cm",
-     "Người cao nhất hơn người thấp nhất đúng 8,5 cm",
-     "Có 8,5% số người cao hơn số trung bình",
-     "Chiều cao trung bình của cả nhóm là 8,5 cm"
+     "Chiều cao thường cách số trung bình khoảng 8.5 cm",
+     "Người cao nhất hơn người thấp nhất đúng 8.5 cm",
+     "Có 8.5% số người cao hơn số trung bình",
+     "Chiều cao trung bình của cả nhóm là 8.5 cm"
     ],
-    "h": "1e8de5ed05a7fe"
+    "h": "12c039e07b629f"
    },
    {
     "k": "mc",
     "id": "bai05-q23",
-    "q": "Nhóm dùng mạng hơn 300 phút chỉ có 10 học sinh, xác suất Đạt 20,0%. Nên hiểu con số này thế nào?",
+    "q": "Nhóm dùng mạng hơn 300 phút chỉ có 10 học sinh, xác suất Đạt 20.0%. Nên hiểu con số này thế nào?",
     "giai": "Nhóm nhỏ thì thêm bớt một bạn là con số đổi nhiều; liên quan không có nghĩa là gây ra.",
     "a": [
      "Tính đúng nhưng kém tin cậy vì nhóm quá nhỏ",
@@ -1496,12 +1496,12 @@ window.BAI = {
     "giai": "Xác suất nằm từ 0 đến 1, tính cả 0 và 1.",
     "a": [
      "0",
-     "0,75",
+     "0.75",
      "1",
-     "1,2",
-     "−0,3"
+     "1.2",
+     "−0.3"
     ],
-    "h": "10475bb816d760"
+    "h": "1bce64d968f9f8"
    },
    {
     "k": "ma",
@@ -1676,7 +1676,7 @@ window.BAI = {
    {
     "k": "ds",
     "id": "bai05-q38",
-    "q": "Xác suất 0,96 nghĩa là chắc chắn biến cố sẽ xảy ra.",
+    "q": "Xác suất 0.96 nghĩa là chắc chắn biến cố sẽ xảy ra.",
     "giai": "Chỉ xác suất 1 mới là chắc chắn.",
     "h": "b294af9129033"
    },
@@ -1698,7 +1698,7 @@ window.BAI = {
     "k": "ds",
     "id": "bai05-q41",
     "q": "Biết thêm thông tin về một học sinh có thể làm thay đổi xác suất Đạt của bạn đó.",
-    "giai": "Đó chính là xác suất có điều kiện: 53,8% → 96,2% khi biết bạn ấy tự học hơn 4 giờ.",
+    "giai": "Đó chính là xác suất có điều kiện: 53.8% → 96.2% khi biết bạn ấy tự học hơn 4 giờ.",
     "h": "595836d5005e3"
    },
    {

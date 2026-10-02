@@ -7,7 +7,7 @@ window.BAI = {
  "cau_hoi": "Làm sao để người không biết code cũng dùng được model của con?",
  "gioi_thieu": [
   "Model của con đang nằm trong notebook — chỉ người biết Python mới dùng được. Bài này con biến model thành một <b>ứng dụng web nhỏ</b> có thanh trượt và nút bấm, bằng thư viện <b>Gradio</b> ngay trong Colab.",
-  "Model là hồi quy logistic 2 cột của Bài 16 trên bảng khối 10 (mô phỏng), đúng 91,7% trên tập kiểm tra. Trọng tâm không phải model, mà là: bọc model thành hàm, dựng giao diện, kiểm thử và chia sẻ có trách nhiệm.",
+  "Model là hồi quy logistic 2 cột của Bài 16 trên bảng khối 10 (mô phỏng), đúng 91.7% trên tập kiểm tra. Trọng tâm không phải model, mà là: bọc model thành hàm, dựng giao diện, kiểm thử và chia sẻ có trách nhiệm.",
   "Con dùng lại predict_proba (Bài 16) và ý tưởng “vùng có dữ liệu” (Bài 15)."
  ],
  "thoi_gian": "≈ 22 phút",
@@ -82,7 +82,7 @@ window.BAI = {
      "t": "loi_hay_gap",
      "muc": [
       "Nghĩ app huấn luyện lại model mỗi lần bấm nút — model đã học xong, app chỉ gọi dự đoán.",
-      "Đưa thẳng con số 0,818 cho người dùng mà không giải thích."
+      "Đưa thẳng con số 0.818 cho người dùng mà không giải thích."
      ]
     },
     {
@@ -137,32 +137,32 @@ window.BAI = {
      ],
      "dong": [
       [
-       "0,0",
+       "0.0",
        "300",
        "Khả năng Đạt: 4%"
       ],
       [
-       "2,0",
+       "2.0",
        "200",
        "Khả năng Đạt: 22%"
       ],
       [
-       "3,5",
+       "3.5",
        "150",
        "Khả năng Đạt: 53%"
       ],
       [
-       "5,0",
+       "5.0",
        "100",
        "Khả năng Đạt: 82%"
       ],
       [
-       "7,0",
+       "7.0",
        "60",
        "Khả năng Đạt: 96%"
       ]
      ],
-     "ket_luan": "Cùng một model, nhưng câu trả lời bằng lời dễ hiểu hơn con số 0,818.",
+     "ket_luan": "Cùng một model, nhưng câu trả lời bằng lời dễ hiểu hơn con số 0.818.",
      "nhan_manh": []
     },
     {
@@ -174,7 +174,7 @@ window.BAI = {
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Trả về cả mảng [[0,18 0,82]] — người dùng không hiểu.",
+      "Trả về cả mảng [[0.18 0.82]] — người dùng không hiểu.",
       "Tạo bảng với tên cột khác lúc huấn luyện."
      ]
     },
@@ -187,9 +187,9 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai31-q3",
-     "q": "Theo ví dụ, nhập 3,5 giờ và 150 phút thì app trả lời gì?",
+     "q": "Theo ví dụ, nhập 3.5 giờ và 150 phút thì app trả lời gì?",
      "giai": "Gần ngưỡng 50%.",
-     "goi_y": "Tìm dòng 3,5 giờ trong bảng ví dụ.",
+     "goi_y": "Tìm dòng 3.5 giờ trong bảng ví dụ.",
      "a": [
       "Khả năng Đạt: 53%",
       "Khả năng Đạt: 82%",
@@ -306,7 +306,7 @@ window.BAI = {
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Đặt thanh trượt 0 – 24 giờ trong khi dữ liệu chỉ có 0,5 – 7 giờ.",
+      "Đặt thanh trượt 0 – 24 giờ trong khi dữ liệu chỉ có 0.5 – 7 giờ.",
       "Truyền du_doan() (có ngoặc) vào fn — phải truyền tên hàm du_doan."
      ]
     },
@@ -3494,7 +3494,7 @@ window.BAI = {
        ]
       }
      ],
-     "ghi": "Kết quả lấy từ model logistic thật của bài (tính sẵn trên lưới 0,5 giờ × 10 phút). Vùng dữ liệu đã học: 0,5 – 7,0 giờ, 15 – 450 phút (mô phỏng). Bài học, không dùng để đánh giá bạn thật."
+     "ghi": "Kết quả lấy từ model logistic thật của bài (tính sẵn trên lưới 0.5 giờ × 10 phút). Vùng dữ liệu đã học: 0.5 – 7.0 giờ, 15 – 450 phút (mô phỏng). Bài học, không dùng để đánh giá bạn thật."
     },
     {
      "t": "bang",
@@ -3506,22 +3506,22 @@ window.BAI = {
      "dong": [
       [
        "12 giờ, 150 phút",
-       "99,9%",
+       "99.9%",
        "Ngoài vùng dữ liệu (tối đa 7 giờ)"
       ],
       [
        "20 giờ, 150 phút",
-       "100,0%",
+       "100.0%",
        "Vô lý: một ngày chỉ có 24 giờ"
       ],
       [
        "−3 giờ, 100 phút",
-       "0,9%",
+       "0.9%",
        "Số âm — không thể có"
       ],
       [
        "4 giờ, 1 000 phút",
-       "3,9%",
+       "3.9%",
        "1 000 phút > 16 giờ, ngoài vùng dữ liệu"
       ]
      ]
@@ -3534,7 +3534,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Hai cách chặn",
-     "html": "(1) Đặt giới hạn thanh trượt đúng vùng dữ liệu: 0,5 – 7 giờ, 15 – 450 phút. (2) Trong hàm, nếu đầu vào ngoài vùng thì trả lời “Ngoài phạm vi dữ liệu, không dự đoán được” thay vì một con số."
+     "html": "(1) Đặt giới hạn thanh trượt đúng vùng dữ liệu: 0.5 – 7 giờ, 15 – 450 phút. (2) Trong hàm, nếu đầu vào ngoài vùng thì trả lời “Ngoài phạm vi dữ liệu, không dự đoán được” thay vì một con số."
     },
     {
      "t": "loi_hay_gap",
@@ -3556,12 +3556,12 @@ window.BAI = {
      "giai": "Model vẫn trả một con số, dù đầu vào vô lý.",
      "goi_y": "Tìm dòng −3 giờ.",
      "a": [
-      "0,9%",
+      "0.9%",
       "Báo lỗi, không trả số",
       "0%",
-      "3,9%"
+      "3.9%"
      ],
-     "h": "a329165ab84c6"
+     "h": "15c9520183e2d8"
     },
     {
      "k": "ma",
@@ -3706,7 +3706,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai31-q13",
     "q": "Nhìn hình. Vùng tô xanh nhạt là gì?",
-    "giai": "0,5 – 7 giờ.",
+    "giai": "0.5 – 7 giờ.",
     "img": {
      "src": "img/ngoai-vung-du-lieu.png"
     },
@@ -3908,10 +3908,10 @@ window.BAI = {
     "mau": "Dữ liệu có giờ tự học từ {0} tới {1} giờ.",
     "o": [
      [
-      "0,5",
+      "0.5",
       "0",
-      "2,0",
-      "1,5"
+      "2.0",
+      "1.5"
      ],
      [
       "7",
@@ -3920,7 +3920,7 @@ window.BAI = {
       "10"
      ]
     ],
-    "h": "69acdbff54dcc"
+    "h": "1dd9fe1a79f36c"
    },
    {
     "k": "dd",

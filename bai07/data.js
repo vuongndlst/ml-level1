@@ -6,7 +6,7 @@ window.BAI = {
  "phan": "Module 06 · Data Preparation",
  "cau_hoi": "Vì sao dữ liệu bẩn làm hỏng cả một model tốt?",
  "gioi_thieu": [
-  "Đầu giờ máy báo điểm trung bình của bảng 95 học sinh là <b>9,08</b> — trên thang 10. Máy tính không cộng chia sai. Vậy sai ở đâu?",
+  "Đầu giờ máy báo điểm trung bình của bảng 95 học sinh là <b>9.08</b> — trên thang 10. Máy tính không cộng chia sai. Vậy sai ở đâu?",
   "Năm chặng dưới đây giúp con nhận ra <b>năm loại lỗi</b> hay gặp trong dữ liệu, biết cách xử lý từng loại bằng Pandas, và sắp xếp các bước dọn theo đúng thứ tự. Ví dụ lấy từ bảng <b>students_ban.csv</b> — bảng mô phỏng, được cài sẵn lỗi để luyện tập, cũng là bảng con mở trên Colab.",
   "Con sẽ dùng lại trung vị, mốt (Bài 5) và tứ phân vị (Toán 10)."
  ],
@@ -40,7 +40,7 @@ window.BAI = {
    "ten_ngan": "Dữ liệu bẩn",
    "phut": 4,
    "muc_tieu": "giải thích được vì sao phải làm sạch dữ liệu trước khi tính toán hay huấn luyện model.",
-   "khoi_dong": "Máy báo điểm trung bình của bảng là 9,08 trên thang 10. Con có tin con số đó không?",
+   "khoi_dong": "Máy báo điểm trung bình của bảng là 9.08 trên thang 10. Con có tin con số đó không?",
    "khoi": [
     {
      "t": "dinh_nghia",
@@ -71,44 +71,44 @@ window.BAI = {
        "HS003",
        "10a1",
        "Nu",
-       "4,2",
-       "7,0",
+       "4.2",
+       "7.0",
        "Lớp viết chữ thường"
       ],
       [
        "HS004",
        "10A3",
        "Nam",
-       "3,7",
-       "6,6",
+       "3.7",
+       "6.6",
        "Thiếu họ tên"
       ],
       [
        "HS009",
        "10A1",
        "Nu",
-       "<b>25,0</b>",
-       "5,8",
+       "<b>25.0</b>",
+       "5.8",
        "Học 25 giờ mỗi ngày"
       ],
       [
        "HS010",
        "10A2",
        "<b>M</b>",
-       "1,8",
-       "5,2",
+       "1.8",
+       "5.2",
        "Giới tính viết kiểu khác"
       ],
       [
        "HS012",
        "10A3",
        "Nam",
-       "4,2",
-       "<b>55,0</b>",
+       "4.2",
+       "<b>55.0</b>",
        "Điểm 55 trên thang 10"
       ]
      ],
-     "ket_luan": "Máy vẫn cộng cả 25 giờ và 55 điểm vào phép tính — nên điểm trung bình ra 9,08. Máy không sai; dữ liệu sai.",
+     "ket_luan": "Máy vẫn cộng cả 25 giờ và 55 điểm vào phép tính — nên điểm trung bình ra 9.08. Máy không sai; dữ liệu sai.",
      "nhan_manh": [
       2,
       4
@@ -207,7 +207,7 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai07-q1",
-     "q": "Máy tính điểm trung bình của một bảng điểm thang 10 ra 9,08. Giải thích nào hợp lý nhất?",
+     "q": "Máy tính điểm trung bình của một bảng điểm thang 10 ra 9.08. Giải thích nào hợp lý nhất?",
      "giai": "Máy cộng chia đúng — nhưng cộng cả những điểm không thể có trên thang 10.",
      "goi_y": "Điểm trung bình trên thang 10 mà gần 9 — thử nghĩ tới các con số lạ trong bảng.",
      "a": [
@@ -321,7 +321,7 @@ window.BAI = {
     {
      "t": "vi_du",
      "tieu_de": "điền một ô trống trong cột điểm",
-     "de": "Điểm của 6 bạn: 5 · 6 · 6,5 · 7 · 9,5 · <b>(trống)</b>.",
+     "de": "Điểm của 6 bạn: 5 · 6 · 6.5 · 7 · 9.5 · <b>(trống)</b>.",
      "cot": [
       "Cách điền",
       "Tính",
@@ -330,13 +330,13 @@ window.BAI = {
      "dong": [
       [
        "Số trung bình",
-       "(5 + 6 + 6,5 + 7 + 9,5) : 5",
-       "6,8"
+       "(5 + 6 + 6.5 + 7 + 9.5) : 5",
+       "6.8"
       ],
       [
        "Trung vị",
        "Sắp xếp 5 giá trị, lấy giá trị thứ 3",
-       "<b>6,5</b>"
+       "<b>6.5</b>"
       ],
       [
        "Xoá dòng",
@@ -344,13 +344,13 @@ window.BAI = {
        "Còn 5 bạn — mất cả các cột khác của bạn ấy"
       ]
      ],
-     "ket_luan": "Bạn 9,5 điểm kéo số trung bình lên 6,8; trung vị 6,5 ít bị ảnh hưởng hơn.",
+     "ket_luan": "Bạn 9.5 điểm kéo số trung bình lên 6.8; trung vị 6.5 ít bị ảnh hưởng hơn.",
      "nhan_manh": []
     },
     {
      "t": "demo_tb_tv",
      "tieu_de": "vì sao nên điền bằng trung vị",
-     "huong_dan": "Bảy điểm dưới đây có một điểm gõ nhầm (55). Sửa ô vàng thành 5,5 rồi thành 100. Số nào đổi nhiều nếu dùng để điền ô trống?",
+     "huong_dan": "Bảy điểm dưới đây có một điểm gõ nhầm (55). Sửa ô vàng thành 5.5 rồi thành 100. Số nào đổi nhiều nếu dùng để điền ô trống?",
      "gia_tri": [
       5.8,
       6.2,
@@ -654,7 +654,7 @@ window.BAI = {
    "ten_ngan": "Phi lý, bất thường",
    "phut": 5,
    "muc_tieu": "phân biệt giá trị phi lý (lỗi nhập liệu) với giá trị bất thường có thật, và xử lý đúng từng loại.",
-   "khoi_dong": "Một bạn học 25 giờ mỗi ngày. Một bạn khác học 7 giờ và được 9,8 điểm. Hai trường hợp này có giống nhau không?",
+   "khoi_dong": "Một bạn học 25 giờ mỗi ngày. Một bạn khác học 7 giờ và được 9.8 điểm. Hai trường hợp này có giống nhau không?",
    "khoi": [
     {
      "t": "dinh_nghia",
@@ -672,18 +672,18 @@ window.BAI = {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Vì sao đổi thành ô trống mà không tự sửa?",
-     "html": "Điểm 55 nhiều khả năng là 5,5 gõ thừa số 0 — nhưng đó chỉ là <b>đoán</b>. Đổi thành ô trống rồi điền bằng trung vị là cách thận trọng. Chỉ sửa trực tiếp khi <b>chắc chắn</b> nguyên nhân, ví dụ biết chắc cột ghi nhầm đơn vị."
+     "html": "Điểm 55 nhiều khả năng là 5.5 gõ thừa số 0 — nhưng đó chỉ là <b>đoán</b>. Đổi thành ô trống rồi điền bằng trung vị là cách thận trọng. Chỉ sửa trực tiếp khi <b>chắc chắn</b> nguyên nhân, ví dụ biết chắc cột ghi nhầm đơn vị."
     },
     {
      "t": "dinh_nghia",
      "ten": "Giá trị bất thường (Toán 10)",
      "html": "Giá trị quá nhỏ hoặc quá lớn so với phần lớn dữ liệu. Toán 10 dùng tứ phân vị: với khoảng tứ phân vị Δ<sub>Q</sub> = Q<sub>3</sub> − Q<sub>1</sub>, giá trị x là bất thường nếu",
-     "ky_hieu": "x &gt; Q<sub>3</sub> + 1,5·Δ<sub>Q</sub> &nbsp;hoặc&nbsp; x &lt; Q<sub>1</sub> − 1,5·Δ<sub>Q</sub>"
+     "ky_hieu": "x &gt; Q<sub>3</sub> + 1.5·Δ<sub>Q</sub> &nbsp;hoặc&nbsp; x &lt; Q<sub>1</sub> − 1.5·Δ<sub>Q</sub>"
     },
     {
      "t": "vi_du",
      "tieu_de": "tìm giá trị bất thường trong 11 điểm (số liệu minh hoạ)",
-     "de": "Dãy đã sắp xếp: 4,5 · 5,8 · 6 · 6,2 · 6,6 · 6,7 · 7 · 7,4 · 8,1 · 8,8 · 55.",
+     "de": "Dãy đã sắp xếp: 4.5 · 5.8 · 6 · 6.2 · 6.6 · 6.7 · 7 · 7.4 · 8.1 · 8.8 · 55.",
      "cot": [
       "Bước",
       "Tính",
@@ -693,22 +693,22 @@ window.BAI = {
       [
        "1",
        "Trung vị Q<sub>2</sub> (giá trị thứ 6)",
-       "6,7"
+       "6.7"
       ],
       [
        "2",
        "Q<sub>1</sub> = trung vị 5 giá trị đầu; Q<sub>3</sub> = trung vị 5 giá trị cuối",
-       "Q<sub>1</sub> = 6, Q<sub>3</sub> = 8,1"
+       "Q<sub>1</sub> = 6, Q<sub>3</sub> = 8.1"
       ],
       [
        "3",
        "Δ<sub>Q</sub> = Q<sub>3</sub> − Q<sub>1</sub>",
-       "2,1"
+       "2.1"
       ],
       [
        "4",
-       "Ngưỡng trên Q<sub>3</sub> + 1,5·Δ<sub>Q</sub> · ngưỡng dưới Q<sub>1</sub> − 1,5·Δ<sub>Q</sub>",
-       "11,25 · 2,85"
+       "Ngưỡng trên Q<sub>3</sub> + 1.5·Δ<sub>Q</sub> · ngưỡng dưới Q<sub>1</sub> − 1.5·Δ<sub>Q</sub>",
+       "11.25 · 2.85"
       ],
       [
        "5",
@@ -765,7 +765,7 @@ window.BAI = {
        "Đổi thành ô trống"
       ],
       [
-       "Học 7 giờ, được 9,8 điểm",
+       "Học 7 giờ, được 9.8 điểm",
        "Có — hiếm nhưng thật",
        "<b>Giữ lại</b>"
       ],
@@ -788,8 +788,8 @@ window.BAI = {
      "t": "loi_hay_gap",
      "muc": [
       "Thấy giá trị bất thường là xoá ngay — xoá mất những trường hợp thật và thú vị nhất.",
-      "Tự sửa 55 thành 5,5 khi chưa chắc chắn.",
-      "Chỉ dựa vào quy tắc biểu đồ hộp: một số âm như −1,5 giờ có thể nằm trong ngưỡng mà vẫn phi lý."
+      "Tự sửa 55 thành 5.5 khi chưa chắc chắn.",
+      "Chỉ dựa vào quy tắc biểu đồ hộp: một số âm như −1.5 giờ có thể nằm trong ngưỡng mà vẫn phi lý."
      ]
     },
     {
@@ -802,7 +802,7 @@ window.BAI = {
       {
        "ten": "Toán 10 — chương Thống kê: tứ phân vị, biểu đồ hộp, giá trị bất thường",
        "url": null,
-       "ghi_chu": "SGK — cùng quy tắc 1,5·ΔQ"
+       "ghi_chu": "SGK — cùng quy tắc 1.5·ΔQ"
       },
       {
        "ten": "Khan Academy — Identifying outliers",
@@ -831,22 +831,22 @@ window.BAI = {
      "k": "mc",
      "id": "bai07-q11",
      "q": "Dãy có Q<sub>1</sub> = 5 và Q<sub>3</sub> = 7. Theo quy tắc Toán 10, giá trị nào dưới đây là bất thường?",
-     "giai": "Δ<sub>Q</sub> = 2; ngưỡng trên 7 + 3 = 10, ngưỡng dưới 5 − 3 = 2. Chỉ 10,5 vượt ngưỡng.",
-     "goi_y": "Tính Δ<sub>Q</sub>, rồi hai ngưỡng Q<sub>3</sub> + 1,5·Δ<sub>Q</sub> và Q<sub>1</sub> − 1,5·Δ<sub>Q</sub>.",
+     "giai": "Δ<sub>Q</sub> = 2; ngưỡng trên 7 + 3 = 10, ngưỡng dưới 5 − 3 = 2. Chỉ 10.5 vượt ngưỡng.",
+     "goi_y": "Tính Δ<sub>Q</sub>, rồi hai ngưỡng Q<sub>3</sub> + 1.5·Δ<sub>Q</sub> và Q<sub>1</sub> − 1.5·Δ<sub>Q</sub>.",
      "a": [
-      "10,5",
-      "9,5",
-      "3,0",
-      "7,0"
+      "10.5",
+      "9.5",
+      "3.0",
+      "7.0"
      ],
-     "h": "1e578529491d6b"
+     "h": "8a42f0c74677a"
     },
     {
      "k": "ds",
      "id": "bai07-q12",
      "q": "Mọi giá trị bất thường đều là lỗi nhập liệu và cần xoá.",
      "giai": "Có giá trị bất thường có thật (hiếm nhưng có thể) — phải giữ.",
-     "goi_y": "Nhớ ví dụ học 7 giờ được 9,8 điểm.",
+     "goi_y": "Nhớ ví dụ học 7 giờ được 9.8 điểm.",
      "h": "14a91c9e50da70"
     }
    ]
@@ -907,7 +907,7 @@ window.BAI = {
     {
      "t": "cong_tac",
      "tieu_de": "bật từng bước dọn bảng",
-     "huong_dan": "Bảng students_ban.csv có 95 dòng. Bật / tắt từng bước (máy luôn làm theo thứ tự 1 → 5) và xem bốn con số đổi thế nào. <b>Thử:</b> chỉ bật bước 4 — điểm trung bình có về gần 6,77 không? Vì sao?",
+     "huong_dan": "Bảng students_ban.csv có 95 dòng. Bật / tắt từng bước (máy luôn làm theo thứ tự 1 → 5) và xem bốn con số đổi thế nào. <b>Thử:</b> chỉ bật bước 4 — điểm trung bình có về gần 6.77 không? Vì sao?",
      "cong_tac": [
       {
        "ten": "Xoá dòng trùng",
@@ -1182,7 +1182,7 @@ window.BAI = {
      "nhan_xet": [
       {
        "khi": "11110",
-       "html": "Đúng quy trình: giữ đủ 90 bạn, không còn ô trống, điểm trung bình 6,77."
+       "html": "Đúng quy trình: giữ đủ 90 bạn, không còn ô trống, điểm trung bình 6.77."
       },
       {
        "khi": "11101",
@@ -1425,20 +1425,20 @@ window.BAI = {
     "k": "mc",
     "id": "bai07-q23",
     "q": "Dãy 4 · 5 · 6 · 7 · 100 có thêm một ô trống. Điền bằng số trung bình thì được bao nhiêu?",
-    "giai": "(4 + 5 + 6 + 7 + 100) : 5 = 24,4 — bị 100 kéo lên; trung vị là 6.",
+    "giai": "(4 + 5 + 6 + 7 + 100) : 5 = 24.4 — bị 100 kéo lên; trung vị là 6.",
     "a": [
-     "24,4",
+     "24.4",
      "6",
      "100",
      "0"
     ],
-    "h": "e01d7dd7ed4cb"
+    "h": "be05d0fc70f18"
    },
    {
     "k": "mc",
     "id": "bai07-q24",
     "q": "Q<sub>1</sub> = 6, Q<sub>3</sub> = 8. Ngưỡng trên của giá trị bất thường là bao nhiêu?",
-    "giai": "Δ<sub>Q</sub> = 2; Q<sub>3</sub> + 1,5 × 2 = 8 + 3 = 11.",
+    "giai": "Δ<sub>Q</sub> = 2; Q<sub>3</sub> + 1.5 × 2 = 8 + 3 = 11.",
     "a": [
      "11",
      "9",
@@ -1496,7 +1496,7 @@ window.BAI = {
     "a": [
      "Điểm 55",
      "Điểm −3",
-     "Điểm 9,8",
+     "Điểm 9.8",
      "Điểm 0",
      "Điểm 10"
     ],
@@ -1702,7 +1702,7 @@ window.BAI = {
     "k": "ds",
     "id": "bai07-q42",
     "q": "Quy tắc tứ phân vị có thể bỏ sót một giá trị phi lý.",
-    "giai": "Ví dụ giờ học −1,5 nằm trong ngưỡng của quy tắc nhưng vẫn phi lý (giờ không thể âm).",
+    "giai": "Ví dụ giờ học −1.5 nằm trong ngưỡng của quy tắc nhưng vẫn phi lý (giờ không thể âm).",
     "h": "1f612fd29706b3"
    }
   ]

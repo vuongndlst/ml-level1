@@ -106,13 +106,13 @@ window.BAI = {
     },
     {
      "t": "anh",
-     "cap": "Cùng một model, mười con số từ 83,3% tới 93,1%",
-     "alt": "Cùng một model, mười con số từ 83,3% tới 93,1%",
+     "cap": "Cùng một model, mười con số từ 83.3% tới 93.1%",
+     "alt": "Cùng một model, mười con số từ 83.3% tới 93.1%",
      "src": "img/muoi-lan-chia-khac-nhau.png"
     },
     {
      "t": "p",
-     "html": "Tập kiểm tra chỉ 72 bạn: vài bạn “khó” rơi vào hay không đã đủ làm con số nhảy gần 9,8 điểm. Một lần đo giống như một bài kiểm tra 15 phút — có thể may, có thể xui."
+     "html": "Tập kiểm tra chỉ 72 bạn: vài bạn “khó” rơi vào hay không đã đủ làm con số nhảy gần 9.8 điểm. Một lần đo giống như một bài kiểm tra 15 phút — có thể may, có thể xui."
     },
     {
      "t": "loi_hay_gap",
@@ -157,12 +157,12 @@ window.BAI = {
      "giai": "Lần chia random_state = 4.",
      "goi_y": "Kéo thanh trượt, tìm cột đỏ.",
      "a": [
-      "83,3%",
-      "93,1%",
-      "91,7%",
-      "50,0%"
+      "83.3%",
+      "93.1%",
+      "91.7%",
+      "50.0%"
      ],
-     "h": "9629bf2da5cd6"
+     "h": "1c7747e592fc74"
     },
     {
      "k": "ds",
@@ -756,7 +756,7 @@ window.BAI = {
    "ten_ngan": "So model",
    "phut": 4,
    "muc_tieu": "dùng kiểm định chéo để so các model công bằng hơn.",
-   "khoi_dong": "Bài 22: KNN đúng 95,8%, bốn model khác 91,7%. KNN có thật sự giỏi hơn?",
+   "khoi_dong": "Bài 22: KNN đúng 95.8%, bốn model khác 91.7%. KNN có thật sự giỏi hơn?",
    "khoi": [
     {
      "t": "anh",
@@ -776,36 +776,36 @@ window.BAI = {
      "dong": [
       [
        "KNN (K = 9)",
-       "91,3%",
-       "89,6 – 93,8"
+       "91.3%",
+       "89.6 – 93.8"
       ],
       [
        "Logistic",
-       "90,4%",
-       "85,4 – 97,9"
+       "90.4%",
+       "85.4 – 97.9"
       ],
       [
        "Cây sâu 2",
-       "89,6%",
-       "85,4 – 95,8"
+       "89.6%",
+       "85.4 – 95.8"
       ],
       [
        "Naïve Bayes",
-       "90,8%",
-       "87,5 – 95,8"
+       "90.8%",
+       "87.5 – 95.8"
       ],
       [
        "SVM",
-       "90,8%",
-       "87,5 – 97,9"
+       "90.8%",
+       "87.5 – 97.9"
       ],
       [
        "Rừng 100 cây",
-       "90,9%",
-       "89,6 – 93,8"
+       "90.9%",
+       "89.6 – 93.8"
       ]
      ],
-     "ket_luan": "Các model chỉ chênh 1,7 điểm trung bình, trong khi mỗi model tự dao động vài điểm giữa các phần — không model nào hơn hẳn.",
+     "ket_luan": "Các model chỉ chênh 1.7 điểm trung bình, trong khi mỗi model tự dao động vài điểm giữa các phần — không model nào hơn hẳn.",
      "nhan_manh": []
     },
     {
@@ -828,12 +828,12 @@ window.BAI = {
      "giai": "Nhỏ hơn cả độ dao động của một model.",
      "goi_y": "Trừ trung bình cao nhất cho thấp nhất.",
      "a": [
-      "1,7 điểm",
-      "4,1 điểm",
-      "15,0 điểm",
-      "0,0 điểm"
+      "1.7 điểm",
+      "4.1 điểm",
+      "15.0 điểm",
+      "0.0 điểm"
      ],
-     "h": "8ea83946d6b16"
+     "h": "19a7a20129c6cf"
     },
     {
      "k": "ds",
@@ -881,12 +881,12 @@ window.BAI = {
       [
        "Theo tập kiểm tra (Bài 13)",
        "9",
-       "95,8% — lạc quan"
+       "95.8% — lạc quan"
       ],
       [
        "Kiểm định chéo trên tập huấn luyện",
        "3",
-       "<b>91,7%</b> — trung thực"
+       "<b>91.7%</b> — trung thực"
       ]
      ],
      "ket_luan": "Con số trung thực thấp hơn — nhưng đó mới là điều ta có thể hứa với dữ liệu mới.",
@@ -1043,7 +1043,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai24-q11",
     "q": "Nhìn hình. Lần chia nào cho độ chính xác thấp nhất?",
-    "giai": "Cột đỏ: 83,3%.",
+    "giai": "Cột đỏ: 83.3%.",
     "img": {
      "src": "img/muoi-lan-chia-khac-nhau.png"
     },
@@ -1277,19 +1277,19 @@ window.BAI = {
     "mau": "Mười lần chia cho kết quả từ {0} tới {1}.",
     "o": [
      [
-      "83,3%",
-      "93,1%",
-      "50,0%",
+      "83.3%",
+      "93.1%",
+      "50.0%",
       "100%"
      ],
      [
-      "93,1%",
-      "83,3%",
+      "93.1%",
+      "83.3%",
       "100%",
-      "75,0%"
+      "75.0%"
      ]
     ],
-    "h": "1694f657fcf935"
+    "h": "195723e717a324"
    },
    {
     "k": "dd",
@@ -1305,13 +1305,13 @@ window.BAI = {
       "41"
      ],
      [
-      "91,7%",
-      "95,8%",
+      "91.7%",
+      "95.8%",
       "100%",
-      "83,3%"
+      "83.3%"
      ]
     ],
-    "h": "87426eea88645"
+    "h": "858ab370452f0"
    },
    {
     "k": "dd",

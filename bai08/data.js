@@ -6,7 +6,7 @@ window.BAI = {
  "phan": "Module 06 · Data Preparation",
  "cau_hoi": "Model đúng gần 90% — đã đáng tin chưa?",
  "gioi_thieu": [
-  "Bảng học sinh đã được con dọn sạch ở Bài 7: 90 bạn, trong đó 79 Đạt và chỉ 11 Chưa đạt. Một model “lười” đoán <b>mọi bạn đều Đạt</b> vẫn đúng 87,8%. Vậy model đó có dùng được không?",
+  "Bảng học sinh đã được con dọn sạch ở Bài 7: 90 bạn, trong đó 79 Đạt và chỉ 11 Chưa đạt. Một model “lười” đoán <b>mọi bạn đều Đạt</b> vẫn đúng 87.8%. Vậy model đó có dùng được không?",
   "Năm chặng dưới đây là những việc phải làm <b>sau khi làm sạch</b> và <b>trước khi huấn luyện</b>: chọn cột đầu vào, tạo cột mới, chia dữ liệu để kiểm tra, và cảnh giác với dữ liệu lệch nhãn. Bảng dùng trong bài là bảng mô phỏng.",
   "Con dùng lại việc đưa về cùng thang đo (Bài 6) và làm sạch (Bài 7)."
  ],
@@ -79,13 +79,13 @@ window.BAI = {
       ],
       [
        "StudyHours, SleepHours",
-       "5,8 · 8,8",
+       "5.8 · 8.8",
        "<b>Feature</b>",
        "Thông tin có trước kỳ thi"
       ],
       [
        "Score",
-       "9,7",
+       "9.7",
        "<b>Bỏ</b>",
        "Kết quả được xếp theo điểm — dùng là “nhìn trộm” đáp án"
       ],
@@ -234,24 +234,24 @@ window.BAI = {
      "dong": [
       [
        "HS001",
-       "5,8",
-       "8,8",
-       "14,6",
-       "0,66"
+       "5.8",
+       "8.8",
+       "14.6",
+       "0.66"
       ],
       [
        "HS002",
-       "5,1",
-       "7,9",
-       "13,0",
-       "0,65"
+       "5.1",
+       "7.9",
+       "13.0",
+       "0.65"
       ],
       [
        "HS003",
-       "4,2",
-       "6,2",
-       "10,4",
-       "0,68"
+       "4.2",
+       "6.2",
+       "10.4",
+       "0.68"
       ]
      ],
      "ket_luan": "Hai cột mới được tính từ hai cột cũ — không thêm dữ liệu nào ngoài bảng.",
@@ -320,15 +320,15 @@ window.BAI = {
      "k": "mc",
      "id": "bai08-q4",
      "q": "Bạn An học 3 giờ, ngủ 6 giờ. Feature TiLeHocNgu = giờ học : giờ ngủ của An bằng bao nhiêu?",
-     "giai": "3 : 6 = 0,5. Số 2 là 6 : 3 (chia ngược); 9 là cộng.",
+     "giai": "3 : 6 = 0.5. Số 2 là 6 : 3 (chia ngược); 9 là cộng.",
      "goi_y": "Giờ học đứng trên, giờ ngủ đứng dưới.",
      "a": [
-      "0,5",
+      "0.5",
       "2",
       "9",
       "18"
      ],
-     "h": "1f247f39f5af04"
+     "h": "17b8d98767e081"
     },
     {
      "k": "dd",
@@ -400,22 +400,22 @@ window.BAI = {
      "dong": [
       [
        "StudyHours",
-       "0,82",
+       "0.82",
        "<b>Giữ</b> — liên quan mạnh"
       ],
       [
        "TongGio",
-       "0,81",
-       "Cân nhắc bỏ — gần như lặp lại StudyHours (tương quan với StudyHours là 0,83)"
+       "0.81",
+       "Cân nhắc bỏ — gần như lặp lại StudyHours (tương quan với StudyHours là 0.83)"
       ],
       [
        "TiLeHocNgu",
-       "0,69",
+       "0.69",
        "Có thể thử"
       ],
       [
        "SleepHours",
-       "0,26",
+       "0.26",
        "Liên quan yếu"
       ]
      ],
@@ -495,7 +495,7 @@ window.BAI = {
      "k": "mc",
      "id": "bai08-q7",
      "q": "Theo hình, cột nào liên quan tới điểm Score yếu nhất?",
-     "giai": "SleepHours có tương quan 0,26 — nhỏ nhất trong bốn cột.",
+     "giai": "SleepHours có tương quan 0.26 — nhỏ nhất trong bốn cột.",
      "goi_y": "Thanh nào ngắn nhất trong hình?",
      "a": [
       "SleepHours",
@@ -508,7 +508,7 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai08-q8",
-     "q": "Hệ số tương quan giữa hai cột bằng −0,9. Điều đó nghĩa là gì?",
+     "q": "Hệ số tương quan giữa hai cột bằng −0.9. Điều đó nghĩa là gì?",
      "giai": "Gần −1: liên quan mạnh nhưng ngược chiều.",
      "goi_y": "Dấu âm nói về chiều, độ lớn gần 1 nói về mức mạnh.",
      "a": [
@@ -545,7 +545,7 @@ window.BAI = {
     {
      "t": "vi_du",
      "tieu_de": "chia bảng 90 bạn",
-     "de": "test_size = 0,3 nghĩa là 30% cho kiểm tra.",
+     "de": "test_size = 0.3 nghĩa là 30% cho kiểm tra.",
      "cot": [
       "Phần",
       "Số bạn",
@@ -568,7 +568,7 @@ window.BAI = {
        "11"
       ]
      ],
-     "ket_luan": "0,3 × 90 = 27 bạn kiểm tra; 63 bạn còn lại để học.",
+     "ket_luan": "0.3 × 90 = 27 bạn kiểm tra; 63 bạn còn lại để học.",
      "nhan_manh": []
     },
     {
@@ -2502,7 +2502,7 @@ window.BAI = {
      "k": "mc",
      "id": "bai08-q10",
      "q": "Bảng có 200 dòng, chia với test_size=0.25. Tập kiểm tra có bao nhiêu dòng?",
-     "giai": "0,25 × 200 = 50; tập huấn luyện 150.",
+     "giai": "0.25 × 200 = 50; tập huấn luyện 150.",
      "goi_y": "test_size là phần dành cho tập nào?",
      "a": [
       "50",
@@ -2582,7 +2582,7 @@ window.BAI = {
        "0"
       ]
      ],
-     "ket_luan": "Đúng 24/27 = 88,9% — nhưng bỏ sót <b>cả 3</b> bạn Chưa đạt, đúng những bạn cần giúp nhất.",
+     "ket_luan": "Đúng 24/27 = 88.9% — nhưng bỏ sót <b>cả 3</b> bạn Chưa đạt, đúng những bạn cần giúp nhất.",
      "nhan_manh": []
     },
     {
@@ -2595,7 +2595,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "ml",
      "tieu_de": "Cùng độ chính xác, khác giá trị",
-     "html": "Một model đơn giản “đoán Chưa đạt nếu học dưới 0,8 giờ” cũng đúng 88,9% trên tập kiểm tra, nhưng bắt được 2/3 bạn Chưa đạt. Cùng một con số độ chính xác — một model hữu ích, một model vô dụng."
+     "html": "Một model đơn giản “đoán Chưa đạt nếu học dưới 0.8 giờ” cũng đúng 88.9% trên tập kiểm tra, nhưng bắt được 2/3 bạn Chưa đạt. Cùng một con số độ chính xác — một model hữu ích, một model vô dụng."
     },
     {
      "t": "dinh_nghia",
@@ -2689,7 +2689,7 @@ window.BAI = {
      "k": "mc",
      "id": "bai08-q13",
      "q": "Một lớp có 38 bạn không bị cận và 2 bạn bị cận. Model đoán “không cận” cho mọi bạn đúng bao nhiêu phần trăm?",
-     "giai": "38 : 40 = 0,95 — dù model không phát hiện được bạn nào bị cận.",
+     "giai": "38 : 40 = 0.95 — dù model không phát hiện được bạn nào bị cận.",
      "goi_y": "Đếm số lần đoán đúng rồi chia cho 40.",
      "a": [
       "95%",
@@ -2738,7 +2738,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai08-q16",
     "q": "Bảng có 90 dòng, chia với test_size=0.3. Tập kiểm tra có bao nhiêu dòng?",
-    "giai": "0,3 × 90 = 27.",
+    "giai": "0.3 × 90 = 27.",
     "a": [
      "27",
      "63",
@@ -2786,7 +2786,7 @@ window.BAI = {
     "giai": "4 + 8 = 12.",
     "a": [
      "12",
-     "0,5",
+     "0.5",
      "2",
      "32"
     ],
@@ -2835,7 +2835,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai08-q23",
     "q": "Nhìn hình. Cột nào liên quan tới điểm mạnh nhất?",
-    "giai": "StudyHours có tương quan 0,82 — cao nhất.",
+    "giai": "StudyHours có tương quan 0.82 — cao nhất.",
     "img": {
      "src": "img/tuong-quan-tung-cot-voi-diem.png"
     },
@@ -2903,7 +2903,7 @@ window.BAI = {
    {
     "k": "ma",
     "id": "bai08-q28",
-    "q": "Model đoán mọi bạn Đạt, đúng 88,9% trên tập kiểm tra. Những nhận xét nào đúng? <b>(Chọn 2 đáp án đúng.)</b>",
+    "q": "Model đoán mọi bạn Đạt, đúng 88.9% trên tập kiểm tra. Những nhận xét nào đúng? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Độ chính xác cao chỉ vì Đạt chiếm đa số.",
     "a": [
      "Model bỏ sót mọi bạn Chưa đạt",
@@ -3058,7 +3058,7 @@ window.BAI = {
       "0",
       "1",
       "−1",
-      "0,5"
+      "0.5"
      ]
     ],
     "h": "13219cb26cc27d"
@@ -3074,7 +3074,7 @@ window.BAI = {
     "k": "ds",
     "id": "bai08-q38",
     "q": "Cùng một độ chính xác, hai model có thể có giá trị rất khác nhau.",
-    "giai": "Model ngưỡng giờ học và model lười cùng 88,9% nhưng một model bắt được bạn Chưa đạt.",
+    "giai": "Model ngưỡng giờ học và model lười cùng 88.9% nhưng một model bắt được bạn Chưa đạt.",
     "h": "14a0e30aa41673"
    },
    {

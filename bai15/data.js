@@ -115,7 +115,7 @@ window.BAI = {
        "<b>cột cần dự đoán</b>"
       ]
      ],
-     "ket_luan": "Tương quan giữa tuổi máy và giá: r = -0,91 — xu hướng giảm rất rõ.",
+     "ket_luan": "Tương quan giữa tuổi máy và giá: r = -0.91 — xu hướng giảm rất rõ.",
      "nhan_manh": []
     },
     {
@@ -693,20 +693,20 @@ window.BAI = {
      "dong": [
       [
        "Đường 1",
-       "-0,10",
-       "9,00",
+       "-0.10",
+       "9.00",
        "800"
       ],
       [
        "Đường 2",
-       "-0,42",
-       "16,50",
+       "-0.42",
+       "16.50",
        "705"
       ],
       [
        "Đường 3",
-       "-0,27",
-       "13,08",
+       "-0.27",
+       "13.08",
        "290"
       ]
      ],
@@ -806,12 +806,12 @@ window.BAI = {
    "ten_ngan": "a và b",
    "phut": 4,
    "muc_tieu": "đọc được ý nghĩa của hệ số góc a, hệ số chặn b và biết giới hạn của đường thẳng.",
-   "khoi_dong": "Máy trả về a = -0,27, b = 13,08. Hai con số này nói gì về điện thoại cũ?",
+   "khoi_dong": "Máy trả về a = -0.27, b = 13.08. Hai con số này nói gì về điện thoại cũ?",
    "khoi": [
     {
      "t": "anh",
-     "cap": "Giá = -0,27 × TuoiMay + 13,08",
-     "alt": "Giá = -0,27 × TuoiMay + 13,08",
+     "cap": "Giá = -0.27 × TuoiMay + 13.08",
+     "alt": "Giá = -0.27 × TuoiMay + 13.08",
      "src": "img/duong-tot-nhat-va-hai-so-a-b.png"
     },
     {
@@ -824,16 +824,16 @@ window.BAI = {
      ],
      "dong": [
       [
-       "a = -0,27",
+       "a = -0.27",
        "Mỗi tháng tuổi máy, giá giảm khoảng 269 nghìn đồng"
       ],
       [
-       "b = 13,08",
+       "b = 13.08",
        "Giá đường thẳng đoán cho máy 0 tháng tuổi"
       ],
       [
        "Máy 24 tháng",
-       "-0,27 × 24 + 13,08 ≈ <b>6,63 triệu</b>"
+       "-0.27 × 24 + 13.08 ≈ <b>6.63 triệu</b>"
       ]
      ],
      "ket_luan": null,
@@ -845,7 +845,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Đường thẳng chỉ đáng tin trong vùng dữ liệu đã học",
-     "html": "Dữ liệu có máy từ 1 tới 48 tháng. Máy 80 tháng: đường đoán -8,42 triệu — giá âm, vô lý. Ra ngoài vùng đã học, model không biết gì."
+     "html": "Dữ liệu có máy từ 1 tới 48 tháng. Máy 80 tháng: đường đoán -8.42 triệu — giá âm, vô lý. Ra ngoài vùng đã học, model không biết gì."
     },
     {
      "t": "anh",
@@ -884,16 +884,16 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai15-q5",
-     "q": "Với a = -0,27, máy già thêm 10 tháng thì giá đoán thay đổi thế nào?",
-     "giai": "10 × -0,27 = -2,69.",
+     "q": "Với a = -0.27, máy già thêm 10 tháng thì giá đoán thay đổi thế nào?",
+     "giai": "10 × -0.27 = -2.69.",
      "goi_y": "a là mức thay đổi cho MỖI tháng. 10 tháng thì nhân lên.",
      "a": [
-      "Giảm khoảng 2,69 triệu",
-      "Tăng khoảng 2,69 triệu",
-      "Giảm khoảng 0,27 triệu",
+      "Giảm khoảng 2.69 triệu",
+      "Tăng khoảng 2.69 triệu",
+      "Giảm khoảng 0.27 triệu",
       "Không đổi"
      ],
-     "h": "121b766584288f"
+     "h": "8ba72c8e79ce8"
     },
     {
      "k": "ds",
@@ -942,21 +942,21 @@ window.BAI = {
      "dong": [
       [
        "Lười — đoán giá trung bình",
-       "3,99",
+       "3.99",
        "≈ 0"
       ],
       [
        "1 cột — tuổi máy",
-       "1,34",
-       "0,84"
+       "1.34",
+       "0.84"
       ],
       [
        "3 cột — tuổi, dung lượng, pin",
-       "<b>0,75</b>",
-       "<b>0,95</b>"
+       "<b>0.75</b>",
+       "<b>0.95</b>"
       ]
      ],
-     "ket_luan": "Thêm hai cột có ích, sai trung bình giảm từ 1,34 xuống 0,75 triệu.",
+     "ket_luan": "Thêm hai cột có ích, sai trung bình giảm từ 1.34 xuống 0.75 triệu.",
      "nhan_manh": [
       2
      ]
@@ -983,16 +983,16 @@ window.BAI = {
     {
      "k": "mc",
      "id": "bai15-q7",
-     "q": "Model đoán giá có MAE = 0,75 triệu. Nghĩa là gì?",
+     "q": "Model đoán giá có MAE = 0.75 triệu. Nghĩa là gì?",
      "giai": "MAE là sai trung bình, cùng đơn vị với giá.",
      "goi_y": "Chữ M trong MAE là Mean — trung bình.",
      "a": [
-      "Trung bình mỗi máy đoán lệch 0,75 triệu",
-      "Đoán đúng 0,75% số máy",
-      "Máy nào cũng lệch đúng 0,75 triệu",
-      "Tổng lệch của cả tập là 0,75 triệu"
+      "Trung bình mỗi máy đoán lệch 0.75 triệu",
+      "Đoán đúng 0.75% số máy",
+      "Máy nào cũng lệch đúng 0.75 triệu",
+      "Tổng lệch của cả tập là 0.75 triệu"
      ],
-     "h": "166b5d21c9ba4b"
+     "h": "c0e2f900f7293"
     },
     {
      "k": "dd",
@@ -1363,11 +1363,11 @@ window.BAI = {
      "a1": -0.25513917306312367,
      "a2": 0.025959124997496915,
      "b": 10.510079913020462,
-     "cong_thuc": "Giá ≈ -0,255 × TuoiMay + 0,026 × PinConLai + 10,51",
+     "cong_thuc": "Giá ≈ -0.255 × TuoiMay + 0.026 × PinConLai + 10.51",
      "nhan_x": "TuoiMay (tháng)",
      "nhan_y": "PinConLai (%)",
      "nhan_z": "Giá (triệu đồng)",
-     "ghi": "Dữ liệu mô phỏng. Mặt phẳng do LinearRegression tìm trên 90 máy; R² trên tập kiểm tra 0,832. Ba cột trở lên thì không vẽ được nữa, nhưng máy vẫn làm đúng cách này."
+     "ghi": "Dữ liệu mô phỏng. Mặt phẳng do LinearRegression tìm trên 90 máy; R² trên tập kiểm tra 0.832. Ba cột trở lên thì không vẽ được nữa, nhưng máy vẫn làm đúng cách này."
     },
     {
      "t": "anh",
@@ -1387,16 +1387,16 @@ window.BAI = {
      "dong": [
       [
        "3 cột",
-       "0,9569",
-       "0,9505"
+       "0.9569",
+       "0.9505"
       ],
       [
        "3 cột + SoLanRoi",
-       "<b>0,9590 ↑</b>",
-       "<b>0,9482 ↓</b>"
+       "<b>0.9590 ↑</b>",
+       "<b>0.9482 ↓</b>"
       ]
      ],
-     "ket_luan": "Trên dữ liệu đã học R² luôn tăng khi thêm cột — kể cả cột vô dụng. Chỉ tập kiểm tra mới lộ ra (r của SoLanRoi với giá: -0,05).",
+     "ket_luan": "Trên dữ liệu đã học R² luôn tăng khi thêm cột — kể cả cột vô dụng. Chỉ tập kiểm tra mới lộ ra (r của SoLanRoi với giá: -0.05).",
      "nhan_manh": [
       1
      ]
@@ -1535,7 +1535,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai15-q15",
     "q": "Nhìn hình. Điểm nằm xa đường chéo nét đứt nhất cho biết gì?",
-    "giai": "Lệch 2,53 triệu.",
+    "giai": "Lệch 2.53 triệu.",
     "img": {
      "src": "img/gia-that-va-gia-du-doan.png"
     },
@@ -1576,7 +1576,7 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai15-q18",
-    "q": "Model A có MAE 2 triệu, model B có MAE 0,8 triệu trên cùng tập kiểm tra. Nhận xét nào đúng?",
+    "q": "Model A có MAE 2 triệu, model B có MAE 0.8 triệu trên cùng tập kiểm tra. Nhận xét nào đúng?",
     "giai": "MAE càng nhỏ càng tốt.",
     "a": [
      "Model B đoán sát hơn model A",
@@ -1589,7 +1589,7 @@ window.BAI = {
    {
     "k": "mc",
     "id": "bai15-q19",
-    "q": "Model hồi quy có R² = −0,2 trên tập kiểm tra. Điều đó cho thấy gì?",
+    "q": "Model hồi quy có R² = −0.2 trên tập kiểm tra. Điều đó cho thấy gì?",
     "giai": "R² âm: thua model lười.",
     "a": [
      "Còn tệ hơn luôn đoán trung bình",
@@ -1703,7 +1703,7 @@ window.BAI = {
     "k": "dd",
     "id": "bai15-q27",
     "q": "Chọn đáp án đúng cho mỗi chỗ trống.",
-    "giai": "a = -0,27; -0,27 × 24 + 13,08.",
+    "giai": "a = -0.27; -0.27 × 24 + 13.08.",
     "mau": "Mỗi tháng tuổi máy, giá giảm khoảng {0} nghìn; máy 24 tháng đoán khoảng {1} triệu.",
     "o": [
      [
@@ -1713,13 +1713,13 @@ window.BAI = {
       "1 000"
      ],
      [
-      "6,63",
-      "13,08",
-      "-8,42",
-      "6,50"
+      "6.63",
+      "13.08",
+      "-8.42",
+      "6.50"
      ]
     ],
-    "h": "1889de2d4c3499"
+    "h": "e816eb3b60631"
    },
    {
     "k": "dd",

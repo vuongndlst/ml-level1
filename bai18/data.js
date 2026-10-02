@@ -85,7 +85,7 @@ window.BAI = {
      },
      "chu_giai": [
       [
-       "Income > 50,000?",
+       "Income > 50.000?",
        "Thu nhập trên 50 000?"
       ],
       [
@@ -211,7 +211,7 @@ window.BAI = {
    "ten_ngan": "Câu hỏi tốt",
    "phut": 5,
    "muc_tieu": "giải thích được cây chọn câu hỏi làm các nhóm gọn nhất.",
-   "khoi_dong": "Học trên 1,5 giờ? Học trên 3,45 giờ? Mạng trên 250 phút? Câu nào chia lớp gọn nhất?",
+   "khoi_dong": "Học trên 1.5 giờ? Học trên 3.45 giờ? Mạng trên 250 phút? Câu nào chia lớp gọn nhất?",
    "khoi": [
     {
      "t": "anh",
@@ -222,7 +222,7 @@ window.BAI = {
     {
      "t": "dinh_nghia",
      "ten": "Độ lẫn lộn (chỉ số Gini)",
-     "html": "Đo một nhóm còn trộn hai nhãn tới đâu: <b>0</b> = cả nhóm cùng một nhãn (thuần); <b>0,5</b> = nửa này nửa kia (lẫn nhất, với hai nhãn).",
+     "html": "Đo một nhóm còn trộn hai nhãn tới đâu: <b>0</b> = cả nhóm cùng một nhãn (thuần); <b>0.5</b> = nửa này nửa kia (lẫn nhất, với hai nhãn).",
      "ky_hieu": "Cây thử mọi câu hỏi có thể và chọn câu làm độ lẫn lộn còn lại <b>nhỏ nhất</b>."
     },
     {
@@ -235,19 +235,19 @@ window.BAI = {
      ],
      "dong": [
       [
-       "Học trên 1,5 giờ?",
-       "0,392"
+       "Học trên 1.5 giờ?",
+       "0.392"
       ],
       [
-       "Học trên 3,45 giờ?",
-       "<b>0,161</b>"
+       "Học trên 3.45 giờ?",
+       "<b>0.161</b>"
       ],
       [
        "Dùng mạng trên 250 phút?",
-       "0,462"
+       "0.462"
       ]
      ],
-     "ket_luan": "Trước khi chia: 0,497. Câu “học trên 3,45 giờ” giảm mạnh nhất nên thành câu hỏi đầu tiên.",
+     "ket_luan": "Trước khi chia: 0.497. Câu “học trên 3.45 giờ” giảm mạnh nhất nên thành câu hỏi đầu tiên.",
      "nhan_manh": [
       1
      ]
@@ -1650,15 +1650,15 @@ window.BAI = {
      "k": "mc",
      "id": "bai18-q3",
      "q": "Theo bảng, câu hỏi nào được cây chọn làm câu hỏi đầu tiên?",
-     "giai": "Độ lẫn lộn còn lại nhỏ nhất: 0,161.",
+     "giai": "Độ lẫn lộn còn lại nhỏ nhất: 0.161.",
      "goi_y": "Tìm dòng có độ lẫn lộn còn lại nhỏ nhất.",
      "a": [
-      "Học trên 3,45 giờ?",
-      "Học trên 1,5 giờ?",
+      "Học trên 3.45 giờ?",
+      "Học trên 1.5 giờ?",
       "Dùng mạng trên 250 phút?",
       "Ngủ trên 7 giờ?"
      ],
-     "h": "5934c97868baa"
+     "h": "5ff438f1e602"
     },
     {
      "k": "dd",
@@ -1670,18 +1670,18 @@ window.BAI = {
      "o": [
       [
        "0",
-       "0,5",
+       "0.5",
        "1",
        "100"
       ],
       [
-       "0,5",
+       "0.5",
        "0",
        "1",
        "2"
       ]
      ],
-     "h": "4ed756a988ddf"
+     "h": "d7016ee74d94f"
     }
    ]
   },
@@ -1694,8 +1694,8 @@ window.BAI = {
    "khoi": [
     {
      "t": "anh",
-     "cap": "Cây sâu 1: chỉ một câu hỏi, đúng 91,7% trên tập kiểm tra",
-     "alt": "Cây sâu 1: chỉ một câu hỏi, đúng 91,7% trên tập kiểm tra",
+     "cap": "Cây sâu 1: chỉ một câu hỏi, đúng 91.7% trên tập kiểm tra",
+     "alt": "Cây sâu 1: chỉ một câu hỏi, đúng 91.7% trên tập kiểm tra",
      "src": "img/cay-sau-1-chia-doi-lop.png"
     },
     {
@@ -1724,18 +1724,18 @@ window.BAI = {
      "mac_dinh": 0,
      "lua_chon": [
       {
-       "nhan": "Bạn Hà (2,8 giờ, 90 phút)",
+       "nhan": "Bạn Hà (2.8 giờ, 90 phút)",
        "dong": [
         [
          "1",
-         "Giờ tự học ≤ 3,45?",
-         "2,8 → Có — rẽ trái",
+         "Giờ tự học ≤ 3.45?",
+         "2.8 → Có — rẽ trái",
          "—"
         ],
         [
          "2",
-         "Giờ tự học ≤ 2,35?",
-         "2,8 → Không — rẽ phải",
+         "Giờ tự học ≤ 2.35?",
+         "2.8 → Không — rẽ phải",
          "—"
         ],
         [
@@ -1747,17 +1747,17 @@ window.BAI = {
        ]
       },
       {
-       "nhan": "Bạn Minh (4,5 giờ, 120 phút)",
+       "nhan": "Bạn Minh (4.5 giờ, 120 phút)",
        "dong": [
         [
          "1",
-         "Giờ tự học ≤ 3,45?",
-         "4,5 → Không — rẽ phải",
+         "Giờ tự học ≤ 3.45?",
+         "4.5 → Không — rẽ phải",
          "—"
         ],
         [
          "2",
-         "Phút mạng ≤ 317,5?",
+         "Phút mạng ≤ 317.5?",
          "120 → Có — rẽ trái",
          "—"
         ],
@@ -1770,17 +1770,17 @@ window.BAI = {
        ]
       },
       {
-       "nhan": "Bạn Khoa (5,2 giờ, 380 phút)",
+       "nhan": "Bạn Khoa (5.2 giờ, 380 phút)",
        "dong": [
         [
          "1",
-         "Giờ tự học ≤ 3,45?",
-         "5,2 → Không — rẽ phải",
+         "Giờ tự học ≤ 3.45?",
+         "5.2 → Không — rẽ phải",
          "—"
         ],
         [
          "2",
-         "Phút mạng ≤ 317,5?",
+         "Phút mạng ≤ 317.5?",
          "380 → Không — rẽ phải",
          "—"
         ],
@@ -1798,7 +1798,7 @@ window.BAI = {
      "t": "hop",
      "kieu": "ml",
      "tieu_de": "Luật thứ ba",
-     "html": "NẾU học > 3,45 giờ VÀ mạng > 317,5 phút THÌ Chưa đạt — học nhiều mà lướt mạng quá nhiều vẫn có nguy cơ. KNN hay logistic không nói ra được câu như vậy."
+     "html": "NẾU học > 3.45 giờ VÀ mạng > 317.5 phút THÌ Chưa đạt — học nhiều mà lướt mạng quá nhiều vẫn có nguy cơ. KNN hay logistic không nói ra được câu như vậy."
     },
     {
      "t": "loi_hay_gap",
@@ -1817,7 +1817,7 @@ window.BAI = {
      "k": "mc",
      "id": "bai18-q5",
      "q": "Theo phần Tự thử, cây đoán Bạn Khoa thế nào?",
-     "giai": "Học nhiều nhưng mạng 380 phút > 317,5.",
+     "giai": "Học nhiều nhưng mạng 380 phút > 317.5.",
      "goi_y": "Chọn bạn đó và bấm tới lá.",
      "a": [
       "Chưa đạt",
@@ -1830,7 +1830,7 @@ window.BAI = {
     {
      "k": "ds",
      "id": "bai18-q6",
-     "q": "Cây sâu 2 của lớp đoán mọi bạn học không quá 3,45 giờ là Chưa đạt.",
+     "q": "Cây sâu 2 của lớp đoán mọi bạn học không quá 3.45 giờ là Chưa đạt.",
      "giai": "Cả hai lá bên trái đều Chưa đạt.",
      "goi_y": "Nhìn nhánh trái của nút gốc.",
      "h": "c4c5c00f676b3"
@@ -1927,23 +1927,23 @@ window.BAI = {
       [
        "1",
        "2",
-       "91,1%",
-       "91,7%"
+       "91.1%",
+       "91.7%"
       ],
       [
        "4",
        "10",
-       "94,6%",
-       "91,7%"
+       "94.6%",
+       "91.7%"
       ],
       [
        "8",
        "18",
-       "100,0%",
-       "87,5%"
+       "100.0%",
+       "87.5%"
       ]
      ],
-     "ket_luan": "Không giới hạn: đúng 100,0% trên dữ liệu đã học nhưng chỉ 87,5% trên tập kiểm tra — học vẹt.",
+     "ket_luan": "Không giới hạn: đúng 100.0% trên dữ liệu đã học nhưng chỉ 87.5% trên tập kiểm tra — học vẹt.",
      "nhan_manh": [
       2
      ]
@@ -2072,19 +2072,19 @@ window.BAI = {
      "dong": [
       [
        "Model lười",
-       "54,2%"
+       "54.2%"
       ],
       [
        "Cây sâu 2",
-       "91,7%"
+       "91.7%"
       ],
       [
        "Logistic 2 cột (Bài 16)",
-       "91,7%"
+       "91.7%"
       ],
       [
        "KNN K = 9 (Bài 13)",
-       "95,8%"
+       "95.8%"
       ]
      ],
      "ket_luan": "Cây không đúng nhất — nhưng là model duy nhất nói ra được luật.",
@@ -2164,14 +2164,14 @@ window.BAI = {
     "k": "mc",
     "id": "bai18-q12",
     "q": "Nhìn hình. Câu hỏi nào để lại độ lẫn lộn nhiều nhất?",
-    "giai": "Độ lẫn lộn 0,462.",
+    "giai": "Độ lẫn lộn 0.462.",
     "img": {
      "src": "img/cau-hoi-nao-chia-gon-nhat.png"
     },
     "a": [
      "Dùng mạng trên 250 phút?",
-     "Học trên 3,45 giờ?",
-     "Học trên 1,5 giờ?",
+     "Học trên 3.45 giờ?",
+     "Học trên 1.5 giờ?",
      "Ba câu như nhau"
     ],
     "h": "19cb558daf21f3"
@@ -2180,7 +2180,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai18-q13",
     "q": "Nhìn hình. Ở độ sâu nào đường test bắt đầu tụt?",
-    "giai": "Test 91,7% ở sâu 4, 87,5% ở sâu 5.",
+    "giai": "Test 91.7% ở sâu 4, 87.5% ở sâu 5.",
     "img": {
      "src": "img/do-chinh-xac-theo-do-sau.png"
     },
@@ -2201,12 +2201,12 @@ window.BAI = {
      "src": "img/luat-doc-thanh-cau-tieng-viet.png"
     },
     "a": [
-     "Học > 3,45 giờ và mạng ≤ 317,5 phút",
-     "Học ≤ 3,45 giờ",
-     "Học > 3,45 giờ và mạng > 317,5 phút",
-     "Mạng ≤ 317,5 phút"
+     "Học > 3.45 giờ và mạng ≤ 317.5 phút",
+     "Học ≤ 3.45 giờ",
+     "Học > 3.45 giờ và mạng > 317.5 phút",
+     "Mạng ≤ 317.5 phút"
     ],
-    "h": "33e8702dc7b7b"
+    "h": "a066c80c95fbd"
    },
    {
     "k": "mc",
@@ -2274,12 +2274,12 @@ window.BAI = {
     "q": "Cây sâu 2 của lớp đúng bao nhiêu trên tập kiểm tra?",
     "giai": "Bằng logistic hai cột.",
     "a": [
-     "91,7%",
-     "54,2%",
-     "87,5%",
+     "91.7%",
+     "54.2%",
+     "87.5%",
      "100%"
     ],
-    "h": "14ed5af1313f8c"
+    "h": "3920c684701ce"
    },
    {
     "k": "ma",
@@ -2396,13 +2396,13 @@ window.BAI = {
       "100"
      ],
      [
-      "87,5%",
-      "100,0%",
-      "91,7%",
-      "54,2%"
+      "87.5%",
+      "100.0%",
+      "91.7%",
+      "54.2%"
      ]
     ],
-    "h": "30bc756dfb48"
+    "h": "1d91f961e7c125"
    },
    {
     "k": "dd",
@@ -2434,19 +2434,19 @@ window.BAI = {
     "mau": "Câu hỏi đầu tiên của cây là học ≤ {0} giờ; câu hỏi tầng hai bên phải là mạng ≤ {1} phút.",
     "o": [
      [
-      "3,45",
-      "1,50",
-      "5,00",
-      "2,35"
+      "3.45",
+      "1.50",
+      "5.00",
+      "2.35"
      ],
      [
-      "317,5",
-      "250,0",
-      "150,0",
-      "450,0"
+      "317.5",
+      "250.0",
+      "150.0",
+      "450.0"
      ]
     ],
-    "h": "1a77280453fb7a"
+    "h": "d8110945d3808"
    },
    {
     "k": "ds",

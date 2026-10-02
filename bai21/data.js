@@ -194,17 +194,17 @@ window.BAI = {
       [
        "Học Nhiều · Đạt",
        "69 trong 90 bạn Đạt học > 4 giờ",
-       "0,767"
+       "0.767"
       ],
       [
        "Học Nhiều · Chưa đạt",
        "4 trong 78 bạn Chưa đạt",
-       "0,051"
+       "0.051"
       ],
       [
        "Mạng Ít · Đạt",
        "71 trong 90 bạn Đạt",
-       "0,789"
+       "0.789"
       ]
      ],
      "ket_luan": "Tỉ lệ luôn tính <b>trong nhóm nhãn</b>: chia cho 90 (Đạt) hoặc 78 (Chưa đạt).",
@@ -230,12 +230,12 @@ window.BAI = {
      "giai": "69 : 90.",
      "goi_y": "Tìm cột Giờ tự học, dòng Nhiều, cột Đạt.",
      "a": [
-      "0,767",
-      "0,051",
-      "0,789",
-      "0,536"
+      "0.767",
+      "0.051",
+      "0.789",
+      "0.536"
      ],
-     "h": "98dcdcaa73e00"
+     "h": "116f86b6f0e05b"
     },
     {
      "k": "dd",
@@ -288,26 +288,26 @@ window.BAI = {
         [
          "1",
          "Tỉ lệ Đạt / Chưa đạt ban đầu",
-         "0,536",
-         "0,464"
+         "0.536",
+         "0.464"
         ],
         [
          "2",
          "× tỉ lệ học “Nhiều” trong nhóm",
-         "0,767",
-         "0,051"
+         "0.767",
+         "0.051"
         ],
         [
          "3",
          "× tỉ lệ mạng “Ít” trong nhóm",
-         "0,789",
-         "0,372"
+         "0.789",
+         "0.372"
         ],
         [
          "4",
          "= Tích",
-         "0,3242",
-         "0,0088"
+         "0.3242",
+         "0.0088"
         ],
         [
          "5",
@@ -323,26 +323,26 @@ window.BAI = {
         [
          "1",
          "Tỉ lệ Đạt / Chưa đạt ban đầu",
-         "0,536",
-         "0,464"
+         "0.536",
+         "0.464"
         ],
         [
          "2",
          "× tỉ lệ học “Vừa” trong nhóm",
-         "0,233",
-         "0,372"
+         "0.233",
+         "0.372"
         ],
         [
          "3",
          "× tỉ lệ mạng “Vừa” trong nhóm",
-         "0,189",
-         "0,538"
+         "0.189",
+         "0.538"
         ],
         [
          "4",
          "= Tích",
-         "0,0236",
-         "0,0929"
+         "0.0236",
+         "0.0929"
         ],
         [
          "5",
@@ -358,26 +358,26 @@ window.BAI = {
         [
          "1",
          "Tỉ lệ Đạt / Chưa đạt ban đầu",
-         "0,536",
-         "0,464"
+         "0.536",
+         "0.464"
         ],
         [
          "2",
          "× tỉ lệ học “Vừa” trong nhóm",
-         "0,233",
-         "0,372"
+         "0.233",
+         "0.372"
         ],
         [
          "3",
          "× tỉ lệ mạng “Ít” trong nhóm",
-         "0,789",
-         "0,372"
+         "0.789",
+         "0.372"
         ],
         [
          "4",
          "= Tích",
-         "0,0987",
-         "0,0641"
+         "0.0987",
+         "0.0641"
         ],
         [
          "5",
@@ -459,15 +459,15 @@ window.BAI = {
      "dong": [
       [
        "Tích Đạt",
-       "0,3240"
+       "0.3240"
       ],
       [
        "Tích Chưa đạt",
-       "0,0089"
+       "0.0089"
       ],
       [
        "% Đạt = Đạt ÷ (Đạt + Chưa đạt)",
-       "<b>97,3%</b>"
+       "<b>97.3%</b>"
       ]
      ],
      "ket_luan": "Hai tích rất nhỏ, nhưng chỉ cần so với nhau.",
@@ -478,7 +478,7 @@ window.BAI = {
     {
      "t": "loi_hay_gap",
      "muc": [
-      "Nghĩ tích 0,3240 là “32% Đạt” — phải chia cho tổng hai tích.",
+      "Nghĩ tích 0.3240 là “32% Đạt” — phải chia cho tổng hai tích.",
       "Quên nhân tỉ lệ nhãn ban đầu (bước 1)."
      ]
     },
@@ -492,7 +492,7 @@ window.BAI = {
      "k": "mc",
      "id": "bai21-q5",
      "q": "Theo phần Tự thử, bạn học Vừa và mạng Vừa được đoán thế nào?",
-     "giai": "Tích Đạt 0,0236, tích Chưa đạt 0,0929.",
+     "giai": "Tích Đạt 0.0236, tích Chưa đạt 0.0929.",
      "goi_y": "Chọn bạn đó, bấm tới dòng Kết luận.",
      "a": [
       "Chưa đạt",
@@ -642,19 +642,19 @@ window.BAI = {
      "dong": [
       [
        "Model lười",
-       "54,2%"
+       "54.2%"
       ],
       [
        "Naïve Bayes đếm 3 mức",
-       "88,9%"
+       "88.9%"
       ],
       [
        "GaussianNB (số giờ, số phút thật)",
-       "<b>91,7%</b>"
+       "<b>91.7%</b>"
       ],
       [
        "Logistic (Bài 16) · cây sâu 2 (Bài 18)",
-       "91,7%"
+       "91.7%"
       ]
      ],
      "ket_luan": "Dùng số thật tốt hơn chia mức; ngang logistic và cây.",
@@ -732,12 +732,12 @@ window.BAI = {
      "src": "img/bang-tan-suat-dem-tay.png"
     },
     "a": [
-     "0,577",
-     "0,000",
-     "0,372",
-     "0,538"
+     "0.577",
+     "0.000",
+     "0.372",
+     "0.538"
     ],
-    "h": "125fe38a6caa64"
+    "h": "1838e1ce1d560b"
    },
    {
     "k": "mc",
@@ -748,12 +748,12 @@ window.BAI = {
      "src": "img/nhan-xac-suat-mot-ban-cu-the.png"
     },
     "a": [
-     "0,3240",
-     "0,0089",
-     "0,536",
-     "1,0000"
+     "0.3240",
+     "0.0089",
+     "0.536",
+     "1.0000"
     ],
-    "h": "30cb95984644b"
+    "h": "17f1f1ffde37b0"
    },
    {
     "k": "mc",
@@ -819,17 +819,17 @@ window.BAI = {
     "q": "Trong 50 email lừa đảo, 30 email có chữ “khẩn cấp”. Tỉ lệ “khẩn cấp” trong nhóm lừa đảo là bao nhiêu?",
     "giai": "30 : 50.",
     "a": [
-     "0,6",
-     "0,3",
-     "0,5",
+     "0.6",
+     "0.3",
+     "0.5",
      "30"
     ],
-    "h": "4f0829fe13360"
+    "h": "a6a2c81ea6f4a"
    },
    {
     "k": "mc",
     "id": "bai21-q17",
-    "q": "Naïve Bayes cho tích Có = 0,02, tích Không = 0,06. Dự đoán là gì?",
+    "q": "Naïve Bayes cho tích Có = 0.02, tích Không = 0.06. Dự đoán là gì?",
     "giai": "Tích lớn hơn thắng.",
     "a": [
      "Không",
@@ -979,13 +979,13 @@ window.BAI = {
       "100"
      ],
      [
-      "97,3%",
-      "50,0%",
-      "32,4%",
+      "97.3%",
+      "50.0%",
+      "32.4%",
       "100%"
      ]
     ],
-    "h": "d456f1b8142a7"
+    "h": "1b53f604c3c3c5"
    },
    {
     "k": "dd",
@@ -998,7 +998,7 @@ window.BAI = {
       "0",
       "1",
       "vô cùng",
-      "0,5"
+      "0.5"
      ],
      [
       "làm mịn",
@@ -1017,19 +1017,19 @@ window.BAI = {
     "mau": "GaussianNB đúng {0} trên tập kiểm tra; mốc model lười là {1}.",
     "o": [
      [
-      "91,7%",
-      "54,2%",
+      "91.7%",
+      "54.2%",
       "100%",
-      "50,0%"
+      "50.0%"
      ],
      [
-      "54,2%",
-      "91,7%",
+      "54.2%",
+      "91.7%",
       "100%",
-      "90,0%"
+      "90.0%"
      ]
     ],
-    "h": "16969557b9b752"
+    "h": "d6694a3827102"
    },
    {
     "k": "ds",
@@ -1048,8 +1048,8 @@ window.BAI = {
    {
     "k": "ds",
     "id": "bai21-q32",
-    "q": "Tích 0,3240 nghĩa là bạn đó có 32,4% khả năng Đạt.",
-    "giai": "Phải chia cho tổng hai tích: 97,3%.",
+    "q": "Tích 0.3240 nghĩa là bạn đó có 32.4% khả năng Đạt.",
+    "giai": "Phải chia cho tổng hai tích: 97.3%.",
     "h": "1884f913bd3e1d"
    }
   ]

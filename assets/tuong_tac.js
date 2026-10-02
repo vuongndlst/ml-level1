@@ -37,7 +37,7 @@
     phu: v("--chu-phu", "#475569") };
   var BANG_MAU = [MAU.chinh, MAU.vang, MAU.teal, "#DC2626", "#7C3AED", "#64748B"];
   var FONT = '"Be Vietnam Pro", "Segoe UI", sans-serif';
-  function so(x, d) { return Number(x).toFixed(d === undefined ? 1 : d).replace(".", ","); }
+  function so(x, d) { return Number(x).toFixed(d === undefined ? 1 : d); }
   var el;
 
   function khung(k, loai) {

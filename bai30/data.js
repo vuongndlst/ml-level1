@@ -130,7 +130,7 @@ window.BAI = {
     {
      "t": "vi_du",
      "tieu_de": "hai mốc",
-     "de": "Năm 2014, PM2.5 trung bình 97,8 µg/m³.",
+     "de": "Năm 2014, PM2.5 trung bình 97.8 µg/m³.",
      "cot": [
       "Mốc",
       "Cách đoán",
@@ -139,16 +139,16 @@ window.BAI = {
      "dong": [
       [
        "Đoán trung bình chung",
-       "Ngày nào cũng đoán 98,8 (trung bình 2010 – 2013)",
-       "59,5"
+       "Ngày nào cũng đoán 98.8 (trung bình 2010 – 2013)",
+       "59.5"
       ],
       [
        "“Mai giống hôm nay”",
        "Lấy đúng số của hôm trước",
-       "52,8"
+       "52.8"
       ]
      ],
-     "ket_luan": "Chỉ nhìn hôm qua đã giảm sai số từ 59,5 xuống 52,8 — thứ tự có thông tin.",
+     "ket_luan": "Chỉ nhìn hôm qua đã giảm sai số từ 59.5 xuống 52.8 — thứ tự có thông tin.",
      "nhan_manh": []
     },
     {
@@ -171,12 +171,12 @@ window.BAI = {
      "giai": "Nhỏ hơn đoán trung bình chung.",
      "goi_y": "Đọc cột MAE ở dòng thứ hai.",
      "a": [
-      "52,8",
-      "59,5",
-      "47,3",
-      "35,6"
+      "52.8",
+      "59.5",
+      "47.3",
+      "35.6"
      ],
-     "h": "9f3883798dc80"
+     "h": "296d72a6992e7"
     },
     {
      "k": "dd",
@@ -262,7 +262,7 @@ window.BAI = {
     },
     {
      "t": "p",
-     "html": "Hồi quy tuyến tính trên bảng 7 cột cho MAE 47,3, tốt hơn cả hai mốc. Hệ số của hôm qua là 0,66 — lớn nhất; các ngày xa hơn gần 0."
+     "html": "Hồi quy tuyến tính trên bảng 7 cột cho MAE 47.3, tốt hơn cả hai mốc. Hệ số của hôm qua là 0.66 — lớn nhất; các ngày xa hơn gần 0."
     },
     {
      "t": "hop",
@@ -2194,17 +2194,17 @@ window.BAI = {
      "dong": [
       [
        "Hồi quy 7 ngày",
-       "47,3",
+       "47.3",
        "Đơn giản, đọc được hệ số"
       ],
       [
        "LSTM, 3 lần học",
-       "47,0 – 49,6",
+       "47.0 – 49.6",
        "Ngang hồi quy; mỗi lần học ra số khác"
       ],
       [
        "Rừng 7 ngày",
-       "47,7",
+       "47.7",
        "Ngang hồi quy"
       ]
      ]
@@ -2217,22 +2217,22 @@ window.BAI = {
      "moc": [
       {
        "x": 1,
-       "n": "hồi quy 47,3 · lấy ngày gần nhất đã biết 52,8 · đoán trung bình chung 59,5",
+       "n": "hồi quy 47.3 · lấy ngày gần nhất đã biết 52.8 · đoán trung bình chung 59.5",
        "p": 20.5
       },
       {
        "x": 2,
-       "n": "hồi quy 59,3 · lấy ngày gần nhất đã biết 74,7 · đoán trung bình chung 59,5",
+       "n": "hồi quy 59.3 · lấy ngày gần nhất đã biết 74.7 · đoán trung bình chung 59.5",
        "p": 0.3
       },
       {
        "x": 3,
-       "n": "hồi quy 59,9 · lấy ngày gần nhất đã biết 82,4 · đoán trung bình chung 59,5",
+       "n": "hồi quy 59.9 · lấy ngày gần nhất đã biết 82.4 · đoán trung bình chung 59.5",
        "p": 0.0
       },
       {
        "x": 7,
-       "n": "hồi quy 59,3 · lấy ngày gần nhất đã biết 78,4 · đoán trung bình chung 59,5",
+       "n": "hồi quy 59.3 · lấy ngày gần nhất đã biết 78.4 · đoán trung bình chung 59.5",
        "p": 0.3
       }
      ],
@@ -2264,21 +2264,21 @@ window.BAI = {
      "k": "mc",
      "id": "bai30-q7",
      "q": "Theo phần Tự thử, đoán trước 2 ngày thì hồi quy có MAE bao nhiêu?",
-     "giai": "Gần bằng đoán trung bình chung (59,5).",
+     "giai": "Gần bằng đoán trung bình chung (59.5).",
      "goi_y": "Kéo thanh tới 2 ngày.",
      "a": [
-      "59,3",
-      "47,3",
-      "74,7",
-      "82,4"
+      "59.3",
+      "47.3",
+      "74.7",
+      "82.4"
      ],
-     "h": "ef18dc6296409"
+     "h": "10ba70832920de"
     },
     {
      "k": "ds",
      "id": "bai30-q8",
      "q": "Trên chuỗi bụi mịn này, LSTM thắng hồi quy tuyến tính rất xa.",
-     "giai": "MAE 47,0 – 49,6 so với 47,3.",
+     "giai": "MAE 47.0 – 49.6 so với 47.3.",
      "goi_y": "So hai cột tím và xanh ngọc.",
      "h": "c2a58a1820500"
     }
@@ -2293,13 +2293,13 @@ window.BAI = {
    "khoi": [
     {
      "t": "p",
-     "html": "Bụi mịn phụ thuộc nhiều vào <b>thời tiết</b>: gió mạnh thổi bụi đi, không khí ẩm và lặng gió giữ bụi lại. Thêm hai cột của chính ngày cần đoán — gió mạnh nhất và điểm sương (độ ẩm) — rừng ngẫu nhiên giảm MAE từ 47,7 xuống 35,6."
+     "html": "Bụi mịn phụ thuộc nhiều vào <b>thời tiết</b>: gió mạnh thổi bụi đi, không khí ẩm và lặng gió giữ bụi lại. Thêm hai cột của chính ngày cần đoán — gió mạnh nhất và điểm sương (độ ẩm) — rừng ngẫu nhiên giảm MAE từ 47.7 xuống 35.6."
     },
     {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Lấy thời tiết ngày mai ở đâu?",
-     "html": "Khi dự báo thật, gió và độ ẩm ngày mai lấy từ <b>dự báo thời tiết</b> — cũng có sai số. Con số 35,6 trong bài dùng thời tiết đo thật nên lạc quan hơn thực tế."
+     "html": "Khi dự báo thật, gió và độ ẩm ngày mai lấy từ <b>dự báo thời tiết</b> — cũng có sai số. Con số 35.6 trong bài dùng thời tiết đo thật nên lạc quan hơn thực tế."
     },
     {
      "t": "bang",
@@ -2342,12 +2342,12 @@ window.BAI = {
      "giai": "Giảm khoảng 12 µg/m³.",
      "goi_y": "Đọc cột xanh đậm cuối cùng.",
      "a": [
-      "35,6",
-      "47,7",
-      "47,3",
-      "52,8"
+      "35.6",
+      "47.7",
+      "47.3",
+      "52.8"
      ],
-     "h": "19fc8217ff7674"
+     "h": "5b1957240104a"
     },
     {
      "k": "ma",
@@ -2429,7 +2429,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai30-q14",
     "q": "Nhìn hình. Cách nào có MAE nhỏ nhất?",
-    "giai": "35,6.",
+    "giai": "35.6.",
     "img": {
      "src": "img/so-sanh-sai-so.png"
     },
@@ -2497,7 +2497,7 @@ window.BAI = {
     "k": "mc",
     "id": "bai30-q19",
     "q": "Hệ số lớn nhất của hồi quy 7 ngày thuộc về ngày nào?",
-    "giai": "0,66.",
+    "giai": "0.66.",
     "a": [
      "Hôm qua (t-1)",
      "7 ngày trước (t-7)",
@@ -2576,7 +2576,7 @@ window.BAI = {
     "k": "sx",
     "id": "bai30-q25",
     "q": "Sắp xếp các cách theo MAE năm 2014 từ lớn tới nhỏ.",
-    "giai": "59,5 → 52,8 → 47,3 → 35,6.",
+    "giai": "59.5 → 52.8 → 47.3 → 35.6.",
     "a": [
      "Đoán trung bình chung",
      "“Mai giống hôm nay”",
@@ -2615,19 +2615,19 @@ window.BAI = {
     "mau": "MAE của hồi quy 7 ngày là {0}; của “mai giống hôm nay” là {1}.",
     "o": [
      [
-      "47,3",
-      "59,5",
-      "35,6",
-      "0,0"
+      "47.3",
+      "59.5",
+      "35.6",
+      "0.0"
      ],
      [
-      "52,8",
-      "59,5",
-      "35,6",
-      "100,0"
+      "52.8",
+      "59.5",
+      "35.6",
+      "100.0"
      ]
     ],
-    "h": "c0e293cfe067f"
+    "h": "18b8d4b1fd250f"
    },
    {
     "k": "dd",
