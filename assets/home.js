@@ -3,6 +3,21 @@
   const regionBox = document.getElementById('regions'), lessonBox = document.getElementById('lessons');
   let selected = 0;
   const lessonByNumber = new Map(lessons.map(b => [b.bai, b]));
+  const picker = document.getElementById('lesson-picker');
+  const pickError = document.getElementById('quick-jump-error');
+  lessons.slice().sort((a,b) => a.bai - b.bai).forEach(b => {
+    const option = document.createElement('option');
+    option.value = b.ma;
+    option.textContent = b.nhan + ' — ' + b.tieu_de;
+    picker.append(option);
+  });
+  picker.addEventListener('change', () => { pickError.textContent=''; picker.removeAttribute('aria-invalid'); });
+  document.getElementById('chon-bai').addEventListener('submit', ev => {
+    ev.preventDefault();
+    const bai = lessons.find(b => b.ma === picker.value);
+    if (!bai) { pickError.textContent='Chọn bài trong danh sách trước khi mở.'; picker.setAttribute('aria-invalid','true'); picker.focus(); return; }
+    location.href = bai.ma + '/index.html';
+  });
   function status(b) {
     try { const t = JSON.parse(localStorage.getItem('ml1_' + b.ma) || '{}');
       return t.dat ? '✓ Đã có chứng chỉ' : t.qua ? 'Đã qua ' + t.qua + ' chặng' : 'Chưa bắt đầu';
