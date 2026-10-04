@@ -5,7 +5,7 @@ window.THE_GIOI = {
   bai03:{ten:"Phòng mã Colab",mo_ta:"Viết những dòng Python đầu tiên và chạy thử trên Colab.",kieu:"code",mau:"#8BC7FF",mau_phu:"#FFC47F",bieu_tuong:"Py",ky_hieu:["print()","x = 3","if","list"]},
   bai04:{ten:"Xưởng Công cụ dữ liệu",mo_ta:"Dùng bảng, mảng và biểu đồ để nhìn rõ dữ liệu.",kieu:"tools",mau:"#70DBE4",mau_phu:"#C6A8FF",bieu_tuong:"[ ]",ky_hieu:["NumPy","pandas","plot","df"]},
   bai05:{ten:"Thành phố Thống kê và Xác suất",mo_ta:"Đọc các con số, mô tả dữ liệu và ước lượng khả năng xảy ra.",kieu:"statistics",mau:"#B69CFF",mau_phu:"#54E1C1",bieu_tuong:"Σ",ky_hieu:["μ","σ","P(A)","x̄"]},
-  bai06:{ten:"Trường Vector",mo_ta:"Di chuyển bằng tọa độ và so sánh khoảng cách giữa các điểm.",kieu:"vector",mau:"#38D5F4",mau_phu:"#FFCB6B",bieu_tuong:"→",ky_hieu:["→","d","x′","∇"]},
+  bai06:{ten:"Trường Vector",mo_ta:"Di chuyển bằng tọa độ và so sánh khoảng cách giữa các điểm.",kieu:"vector",mau:"#38D5F4",mau_phu:"#FFCB6B",bieu_tuong:"→",ky_hieu:["→","d","x′","0–1"]},
   bai07:{ten:"Phòng sạch Dữ liệu",mo_ta:"Tìm dữ liệu thiếu, trùng hoặc sai trước khi cho máy học.",kieu:"clean",mau:"#75E2D3",mau_phu:"#F8CE7A",bieu_tuong:"✓",ky_hieu:["NaN","?","✓","filter"]},
   bai08:{ten:"Xưởng Feature",mo_ta:"Chọn thông tin đầu vào và chia dữ liệu để kiểm tra mô hình.",kieu:"feature",mau:"#8CE0A8",mau_phu:"#95B9FF",bieu_tuong:"x₁",ky_hieu:["x₁","x₂","train","test"]},
   bai09:{ten:"Đài Quan sát Biểu đồ",mo_ta:"Đổi dữ liệu thành hình để nhận ra xu hướng và điểm lạ.",kieu:"charts",mau:"#F2BC7B",mau_phu:"#7DD9EE",bieu_tuong:"▥",ky_hieu:["bar","line","hist","outlier"]},
