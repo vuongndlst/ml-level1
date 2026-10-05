@@ -933,7 +933,7 @@ window.BAI = {
     {
      "t": "dinh_nghia",
      "ten": "Xác suất có điều kiện",
-     "html": "Xác suất của A <b>khi biết</b> B đã xảy ra, ký hiệu P(A | B). Với bảng dữ liệu: chỉ đếm trong nhóm thoả B.",
+     "html": "Xác suất của biến cố A <b>với điều kiện</b> biến cố B đã xảy ra, ký hiệu P(A | B), đọc là “xác suất của A khi biết B”. A là điều ta hỏi (ví dụ: bạn được chọn Đạt), B là điều đã biết (ví dụ: bạn được chọn tự học hơn 4 giờ). Với bảng dữ liệu: chỉ đếm trong nhóm thoả B.",
      "ky_hieu": "P(A | B) = <span class=\"frac\"><span>số trường hợp có cả A và B</span><span>số trường hợp có B</span></span> — Toán 12 sẽ học kỹ hơn."
     },
     {
@@ -976,6 +976,12 @@ window.BAI = {
      "cap": "Tỉ lệ Đạt của cả khối và của hai nhóm điều kiện",
      "alt": "Tỉ lệ Đạt của cả khối và của hai nhóm điều kiện",
      "src": "img/xac-suat-dat-khi-biet-them.png"
+    },
+    {
+     "t": "hop",
+     "kieu": "chu-y",
+     "tieu_de": "P(A | B) khác P(B | A)",
+     "html": "Mẫu số luôn là nhóm đứng <b>sau</b> dấu |. P(Đạt | tự học hơn 4 giờ) = 100 : 104 ≈ 96.2% — trong các bạn tự học hơn 4 giờ, bao nhiêu bạn Đạt. Còn P(tự học hơn 4 giờ | Đạt) = 100 : 129 ≈ 77.5% — trong các bạn Đạt, bao nhiêu bạn tự học hơn 4 giờ. Hai câu hỏi khác nhau nên kết quả khác nhau."
     },
     {
      "t": "demo_truot",
@@ -1069,6 +1075,7 @@ window.BAI = {
      "t": "loi_hay_gap",
      "muc": [
       "Tính xác suất có điều kiện nhưng vẫn chia cho cả khối 240 học sinh.",
+      "Đảo ngược hai biến cố: tính P(B | A) trong khi câu hỏi là P(A | B).",
       "Hiểu xác suất 0.96 là “chắc chắn” — chỉ xác suất 1 mới là chắc chắn."
      ]
     },
@@ -1088,15 +1095,20 @@ window.BAI = {
      "t": "hop",
      "kieu": "chu-y",
      "tieu_de": "Ghi bài sau chặng 4",
-     "html": "Xác suất bằng số trường hợp thuận lợi chia cho tổng số trường hợp có thể. Khi biết thêm điều kiện B, chỉ xét nhóm thỏa B: P(A | B) = số trường hợp vừa thỏa A vừa thỏa B ÷ số trường hợp thỏa B. Vì vậy, mẫu số đổi khi ta đổi nhóm đang xét."
+     "html": "Xác suất bằng số trường hợp thuận lợi chia cho tổng số trường hợp có thể. Khi biết biến cố B đã xảy ra, chỉ xét nhóm thỏa B: P(A | B) = số trường hợp vừa thỏa A vừa thỏa B ÷ số trường hợp thỏa B. Vì vậy, mẫu số đổi khi ta đổi nhóm đang xét."
     },
     {
      "t": "doc_them",
      "link": [
       {
-       "ten": "Toán 10 — chương Đại số tổ hợp và Xác suất: định nghĩa cổ điển của xác suất",
+       "ten": "Toán 10 — Tính xác suất theo định nghĩa cổ điển",
        "url": null,
        "ghi_chu": "SGK"
+      },
+      {
+       "ten": "Toán 12 — Xác suất có điều kiện",
+       "url": null,
+       "ghi_chu": "SGK, học sau"
       },
       {
        "ten": "Seeing Theory (Đại học Brown) — Compound Probability, Conditional Probability",
@@ -1150,12 +1162,26 @@ window.BAI = {
      "h": "4aa5ed28fc4f7"
     },
     {
-     "k": "ds",
+     "k": "mc",
      "id": "bai05-q11",
+     "q": "Khối 10 có 129 bạn Đạt, trong đó 100 bạn tự học hơn 4 giờ. Biết một bạn được chọn đã Đạt, xác suất bạn ấy tự học hơn 4 giờ xấp xỉ bao nhiêu?",
+     "giai": "Điều đã biết là “Đạt” nên mẫu số là 129 bạn Đạt: 100 : 129 ≈ 77.5%. Đây là P(tự học hơn 4 giờ | Đạt), khác P(Đạt | tự học hơn 4 giờ) ≈ 96.2%.",
+     "goi_y": "Nhóm nào đã biết chắc? Mẫu số là số bạn của nhóm đó.",
+     "a": [
+      "77.5%",
+      "96.2%",
+      "53.8%",
+      "43.3%"
+     ],
+     "h": "1c0247415287b"
+    },
+    {
+     "k": "ds",
+     "id": "bai05-q12",
      "q": "Xác suất Đạt của một bạn là 0.96 nghĩa là bạn đó chắc chắn sẽ Đạt.",
      "giai": "0.96 là rất có khả năng, nhưng chỉ xác suất 1 mới là chắc chắn: cứ 100 bạn như vậy vẫn có khoảng 4 bạn không Đạt.",
      "goi_y": "Xác suất bằng bao nhiêu thì mới là “chắc chắn xảy ra”?",
-     "h": "17f8b4d567313"
+     "h": "1f8a8702bfb00e"
     }
    ]
   },
@@ -1304,7 +1330,7 @@ window.BAI = {
    "checkpoint": [
     {
      "k": "mc",
-     "id": "bai05-q12",
+     "id": "bai05-q13",
      "q": "Model dự đoán một bạn có 80% khả năng Đạt. Cách hiểu nào đúng nhất?",
      "giai": "Xác suất nói về tần suất trong nhiều trường hợp giống nhau — không phải điểm số, không phải độ chính xác của model.",
      "goi_y": "Đọc lại khung “Đọc đúng một dự đoán”.",
@@ -1314,11 +1340,11 @@ window.BAI = {
       "Bạn ấy sẽ được đúng 8 điểm kỳ thi này",
       "Model dự đoán đúng 80% mọi học sinh"
      ],
-     "h": "3afba7e964ff7"
+     "h": "553d886ed3ff7"
     },
     {
      "k": "ma",
-     "id": "bai05-q13",
+     "id": "bai05-q14",
      "q": "Theo hình “Sáu ứng dụng của xác suất”, những ứng dụng nào dưới đây có trong hình? <b>(Chọn 2 đáp án đúng.)</b>",
      "giai": "Hình liệt kê: phân loại, mô hình Markov ẩn, phát hiện bất thường, học tăng cường, suy luận Bayes, ước lượng độ không chắc chắn.",
      "goi_y": "Đối chiếu từng phương án với sáu dòng trong hình và bảng chú giải.",
@@ -1336,7 +1362,7 @@ window.BAI = {
       "Đưa dữ liệu về cùng thang đo (Feature Scaling)",
       "Làm sạch dữ liệu (Data Cleaning)"
      ],
-     "h": "1a4265086b5130"
+     "h": "1c3460480aae04"
     }
    ]
   }
@@ -1354,7 +1380,7 @@ window.BAI = {
   "ngan_hang": [
    {
     "k": "mc",
-    "id": "bai05-q14",
+    "id": "bai05-q15",
     "q": "Bảy học sinh dùng mạng xã hội 30, 89, 108, 151, 182, 208, 445 phút mỗi ngày. Trung vị bằng bao nhiêu phút?",
     "giai": "n = 7 lẻ → giá trị thứ 4 của dãy đã sắp xếp: 151. 173.3 là số trung bình.",
     "a": [
@@ -1363,11 +1389,11 @@ window.BAI = {
      "182 phút",
      "108 phút"
     ],
-    "h": "b8bef128ccc04"
+    "h": "1763f7d907a628"
    },
    {
     "k": "mc",
-    "id": "bai05-q15",
+    "id": "bai05-q16",
     "q": "Bảy học sinh dùng mạng xã hội 30, 89, 108, 151, 182, 208, 445 phút mỗi ngày. Số trung bình xấp xỉ bao nhiêu phút?",
     "giai": "Tổng 1213 chia 7 ≈ 173.3.",
     "a": [
@@ -1376,11 +1402,11 @@ window.BAI = {
      "182.0 phút",
      "226.5 phút"
     ],
-    "h": "cd76ab2ff0e45"
+    "h": "17df4903caef75"
    },
    {
     "k": "mc",
-    "id": "bai05-q16",
+    "id": "bai05-q17",
     "q": "Trong dãy 30, 89, 108, 151, 182, 208, 445, đổi 445 thành 1000. Số trung bình và trung vị thay đổi thế nào?",
     "giai": "Số trung bình cộng cả 1000 nên tăng lên 252.6; giá trị thứ 4 vẫn là 151.",
     "a": [
@@ -1389,11 +1415,11 @@ window.BAI = {
      "Trung vị tăng, số trung bình giữ nguyên",
      "Cả hai cùng giữ nguyên như cũ"
     ],
-    "h": "12a1b735a9327"
+    "h": "1b7016a5bfcc8c"
    },
    {
     "k": "mc",
-    "id": "bai05-q17",
+    "id": "bai05-q18",
     "q": "Nhìn hai biểu đồ phân bố điểm. Lớp nào có điểm đồng đều hơn, và vì sao?",
     "giai": "Độ lệch chuẩn 10A8 là 1.58, nhỏ hơn 1.92 của 10A1.",
     "img": {
@@ -1405,11 +1431,11 @@ window.BAI = {
      "10A1, vì độ lệch chuẩn lớn hơn",
      "Như nhau, vì số trung bình gần bằng"
     ],
-    "h": "44db51931f43f"
+    "h": "6b58dc62eacf6"
    },
    {
     "k": "mc",
-    "id": "bai05-q18",
+    "id": "bai05-q19",
     "q": "Nhìn biểu đồ phút mạng xã hội. Vì sao đường số trung bình nằm bên phải đường trung vị?",
     "giai": "Vài giá trị rất lớn kéo số trung bình về phía chúng; trung vị không bị kéo.",
     "img": {
@@ -1421,11 +1447,11 @@ window.BAI = {
      "Số trung bình luôn lớn hơn trung vị",
      "Biểu đồ được vẽ lệch sang bên phải"
     ],
-    "h": "8987785cbc403"
+    "h": "171b0980c66855"
    },
    {
     "k": "mc",
-    "id": "bai05-q19",
+    "id": "bai05-q20",
     "q": "Nhìn biểu đồ. Biết một bạn dùng mạng hơn 300 phút mỗi ngày, xác suất bạn ấy Đạt là bao nhiêu?",
     "giai": "Cột của nhóm dùng mạng hơn 300 phút: 20.0%.",
     "img": {
@@ -1437,11 +1463,11 @@ window.BAI = {
      "96.2%",
      "80.0%"
     ],
-    "h": "1056ee9d84e38a"
+    "h": "189c4edbac5a88"
    },
    {
     "k": "mc",
-    "id": "bai05-q20",
+    "id": "bai05-q21",
     "q": "Hai biểu đồ hộp (box plot) của nhóm Plot A và Plot B. Đường kẻ ngang giữa mỗi hộp là trung vị. Nhóm nào có trung vị cao hơn?",
     "giai": "Đường giữa hộp của Plot B nằm cao hơn của Plot A.",
     "img": {
@@ -1458,11 +1484,11 @@ window.BAI = {
      "Hai nhóm bằng nhau",
      "Không đọc được từ hình"
     ],
-    "h": "19f86e0878d8ff"
+    "h": "92ce04b2c74a4"
    },
    {
     "k": "mc",
-    "id": "bai05-q21",
+    "id": "bai05-q22",
     "q": "Biểu đồ cột cho biết số trận đã chơi (Games Played) của bốn bạn. Số trận trung bình của bốn bạn là bao nhiêu?",
     "giai": "(5 + 7 + 9 + 6) : 4 = 27 : 4 = 6.75 trận.",
     "img": {
@@ -1479,11 +1505,11 @@ window.BAI = {
      "7.00 trận",
      "9.00 trận"
     ],
-    "h": "9f30736b204d0"
+    "h": "fb16051b9ef21"
    },
    {
     "k": "mc",
-    "id": "bai05-q22",
+    "id": "bai05-q23",
     "q": "Chiều cao sáu người có số trung bình 162.5 cm, độ lệch chuẩn 8.5 cm. Câu nào mô tả đúng?",
     "giai": "Độ lệch chuẩn là khoảng cách điển hình từ mỗi giá trị tới số trung bình.",
     "a": [
@@ -1492,11 +1518,11 @@ window.BAI = {
      "Có 8.5% số người cao hơn số trung bình",
      "Chiều cao trung bình của cả nhóm là 8.5 cm"
     ],
-    "h": "12c039e07b629f"
+    "h": "3b5fffdf1a2a7"
    },
    {
     "k": "mc",
-    "id": "bai05-q23",
+    "id": "bai05-q24",
     "q": "Nhóm dùng mạng hơn 300 phút chỉ có 10 học sinh, xác suất Đạt 20.0%. Nên hiểu con số này thế nào?",
     "giai": "Nhóm nhỏ thì thêm bớt một bạn là con số đổi nhiều; liên quan không có nghĩa là gây ra.",
     "a": [
@@ -1505,11 +1531,11 @@ window.BAI = {
      "Đúng tuyệt đối với mọi học sinh",
      "Chứng minh mạng xã hội gây ra việc trượt"
     ],
-    "h": "19a082f30b5da5"
+    "h": "545ad57e0286"
    },
    {
     "k": "mc",
-    "id": "bai05-q24",
+    "id": "bai05-q25",
     "q": "Cột Lop ghi tên lớp của 240 học sinh. Số đặc trưng nào dùng được để tóm tắt cột này?",
     "giai": "Tên lớp là chữ, không cộng chia hay sắp xếp theo độ lớn được; chỉ đếm được lớp nào gặp nhiều nhất.",
     "a": [
@@ -1518,11 +1544,11 @@ window.BAI = {
      "Trung vị",
      "Độ lệch chuẩn"
     ],
-    "h": "1f1f0a49f84cf5"
+    "h": "94b6afbe57d77"
    },
    {
     "k": "ma",
-    "id": "bai05-q25",
+    "id": "bai05-q26",
     "q": "Những lệnh Pandas nào cho ra số đặc trưng đo xu thế trung tâm của một cột số? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": ".mean() là số trung bình, .median() là trung vị; .std() đo mức phân tán, .count() đếm, .max() lấy giá trị lớn nhất.",
     "a": [
@@ -1532,11 +1558,11 @@ window.BAI = {
      ".count()",
      ".max()"
     ],
-    "h": "13e515841d1b50"
+    "h": "574f74c2f3e43"
    },
    {
     "k": "ma",
-    "id": "bai05-q26",
+    "id": "bai05-q27",
     "q": "Những phát biểu nào đúng về trung vị? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Trung vị có thể lớn hay nhỏ hơn số trung bình; dãy chẵn thì lấy trung bình hai giá trị giữa.",
     "a": [
@@ -1545,11 +1571,11 @@ window.BAI = {
      "Luôn lớn hơn số trung bình của dãy",
      "Chỉ tính được khi dãy có số lẻ giá trị"
     ],
-    "h": "1f948c111e1384"
+    "h": "97d67f2aaf073"
    },
    {
     "k": "ma",
-    "id": "bai05-q27",
+    "id": "bai05-q28",
     "q": "Những phát biểu nào đúng về độ lệch chuẩn? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Độ lệch chuẩn là căn bậc hai nên không bao giờ âm.",
     "a": [
@@ -1558,11 +1584,11 @@ window.BAI = {
      "Luôn bằng số trung bình chia cho hai",
      "Có thể âm khi dữ liệu giảm dần"
     ],
-    "h": "147c222b3885b8"
+    "h": "be6b0c3d87443"
    },
    {
     "k": "ma",
-    "id": "bai05-q28",
+    "id": "bai05-q29",
     "q": "Những số nào có thể là xác suất của một biến cố? <b>(Chọn 3 đáp án đúng.)</b>",
     "giai": "Xác suất nằm từ 0 đến 1, tính cả 0 và 1.",
     "a": [
@@ -1572,11 +1598,11 @@ window.BAI = {
      "1.2",
      "−0.3"
     ],
-    "h": "1bce64d968f9f8"
+    "h": "195360d2e63c67"
    },
    {
     "k": "ma",
-    "id": "bai05-q29",
+    "id": "bai05-q30",
     "q": "Theo hình “Sáu ứng dụng của xác suất”, những ứng dụng nào có trong hình? <b>(Chọn 2 đáp án đúng.)</b>",
     "giai": "Đưa về cùng thang đo và làm sạch là bước chuẩn bị dữ liệu, không có trong hình.",
     "img": {
@@ -1593,11 +1619,11 @@ window.BAI = {
      "Đưa dữ liệu về cùng thang đo (Feature Scaling)",
      "Làm sạch dữ liệu (Data Cleaning)"
     ],
-    "h": "130ab9ce809394"
+    "h": "1113fc44cfa402"
    },
    {
     "k": "sx",
-    "id": "bai05-q30",
+    "id": "bai05-q31",
     "q": "Sắp xếp các bước tính độ lệch chuẩn theo đúng thứ tự.",
     "giai": "Số trung bình → độ lệch → phương sai → độ lệch chuẩn.",
     "a": [
@@ -1606,11 +1632,11 @@ window.BAI = {
      "Tính trung bình các bình phương độ lệch",
      "Lấy căn bậc hai của phương sai"
     ],
-    "h": "3b8a8a60508f"
+    "h": "5fc314cc3fdf6"
    },
    {
     "k": "sx",
-    "id": "bai05-q31",
+    "id": "bai05-q32",
     "q": "Sắp xếp các bước tìm trung vị của một dãy có số chẵn giá trị.",
     "giai": "Phải sắp xếp trước, rồi lấy trung bình hai giá trị giữa.",
     "a": [
@@ -1619,11 +1645,11 @@ window.BAI = {
      "Cộng hai giá trị đó lại",
      "Chia tổng vừa được cho 2"
     ],
-    "h": "117b936260fbd3"
+    "h": "1de2ab6e48a283"
    },
    {
     "k": "sx",
-    "id": "bai05-q32",
+    "id": "bai05-q33",
     "q": "Sắp xếp các bước tính xác suất Đạt của nhóm học sinh tự học hơn 4 giờ.",
     "giai": "Xác suất có điều kiện: lọc nhóm trước, rồi đếm và chia trong nhóm.",
     "a": [
@@ -1632,11 +1658,11 @@ window.BAI = {
      "Đếm số học sinh Đạt trong nhóm đó",
      "Chia số học sinh Đạt cho số học sinh của nhóm"
     ],
-    "h": "99fbfa15a0685"
+    "h": "14a9faaab18f86"
    },
    {
     "k": "dd",
-    "id": "bai05-q33",
+    "id": "bai05-q34",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
     "giai": "Cộng hết rồi chia cho số giá trị.",
     "mau": "Số trung bình: {0} tất cả các giá trị, rồi {1} cho số giá trị.",
@@ -1654,11 +1680,11 @@ window.BAI = {
       "trừ"
      ]
     ],
-    "h": "1224637990807b"
+    "h": "159f19151430b7"
    },
    {
     "k": "dd",
-    "id": "bai05-q34",
+    "id": "bai05-q35",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
     "giai": "Trung vị chỉ phụ thuộc vị trí nên không bị giá trị bất thường kéo lệch.",
     "mau": "Dãy có giá trị bất thường thì nên mô tả bằng {0}, vì số đặc trưng này {1}.",
@@ -1676,11 +1702,11 @@ window.BAI = {
       "luôn bằng 0"
      ]
     ],
-    "h": "1c7f387ed7de1d"
+    "h": "1548424a984c65"
    },
    {
     "k": "dd",
-    "id": "bai05-q35",
+    "id": "bai05-q36",
     "q": "Chọn từ đúng cho mỗi chỗ trống.",
     "giai": "Phương sai là trung bình các bình phương độ lệch; độ lệch chuẩn nhỏ nghĩa là dữ liệu đồng đều.",
     "mau": "Độ lệch chuẩn là căn bậc hai của {0}; con số này càng {1} thì dữ liệu càng đồng đều.",
@@ -1698,11 +1724,11 @@ window.BAI = {
       "gần 100"
      ]
     ],
-    "h": "47b5759151bca"
+    "h": "e019dbf3d1294"
    },
    {
     "k": "dd",
-    "id": "bai05-q36",
+    "id": "bai05-q37",
     "q": "Chọn số đúng cho mỗi chỗ trống.",
     "giai": "n(A) là số học sinh Đạt, n(Ω) là tổng số học sinh.",
     "mau": "Khối 10 có 129 học sinh Đạt trong 240 học sinh. Xác suất chọn ngẫu nhiên được một bạn Đạt bằng {0} chia cho {1}.",
@@ -1720,11 +1746,11 @@ window.BAI = {
       "104"
      ]
     ],
-    "h": "3d5d970bbc75f"
+    "h": "bb393f45dd293"
    },
    {
     "k": "dd",
-    "id": "bai05-q37",
+    "id": "bai05-q38",
     "q": "Chọn lệnh đúng cho mỗi chỗ trống.",
     "giai": ".std() là standard deviation (độ lệch chuẩn); .count() đếm số ô có dữ liệu.",
     "mau": "Lệnh {0} tính độ lệch chuẩn của một cột, còn lệnh {1} đếm số ô có dữ liệu trong cột.",
@@ -1742,42 +1768,42 @@ window.BAI = {
       ".min()"
      ]
     ],
-    "h": "1a45560dc95e61"
-   },
-   {
-    "k": "ds",
-    "id": "bai05-q38",
-    "q": "Xác suất 0.96 nghĩa là chắc chắn biến cố sẽ xảy ra.",
-    "giai": "Chỉ xác suất 1 mới là chắc chắn.",
-    "h": "b294af9129033"
+    "h": "66c1b1a06ad91"
    },
    {
     "k": "ds",
     "id": "bai05-q39",
-    "q": "Hai lớp có cùng số trung bình thì điểm của hai lớp phân bố giống hệt nhau.",
-    "giai": "Cùng số trung bình vẫn có thể khác mức phân tán — xem 10A1 và 10A8.",
+    "q": "Xác suất 0.96 nghĩa là chắc chắn biến cố sẽ xảy ra.",
+    "giai": "Chỉ xác suất 1 mới là chắc chắn.",
     "h": "13c3bae58de886"
    },
    {
     "k": "ds",
     "id": "bai05-q40",
-    "q": "Giá trị bất thường không phải lúc nào cũng là lỗi nhập liệu.",
-    "giai": "Có giá trị bất thường thật (hiếm nhưng có thể) và có giá trị do nhập sai.",
-    "h": "1a8c10b411ae73"
+    "q": "Hai lớp có cùng số trung bình thì điểm của hai lớp phân bố giống hệt nhau.",
+    "giai": "Cùng số trung bình vẫn có thể khác mức phân tán — xem 10A1 và 10A8.",
+    "h": "1c6e3dde1b7d24"
    },
    {
     "k": "ds",
     "id": "bai05-q41",
-    "q": "Biết thêm thông tin về một học sinh có thể làm thay đổi xác suất Đạt của bạn đó.",
-    "giai": "Đó chính là xác suất có điều kiện: 53.8% → 96.2% khi biết bạn ấy tự học hơn 4 giờ.",
+    "q": "Giá trị bất thường không phải lúc nào cũng là lỗi nhập liệu.",
+    "giai": "Có giá trị bất thường thật (hiếm nhưng có thể) và có giá trị do nhập sai.",
     "h": "595836d5005e3"
    },
    {
     "k": "ds",
     "id": "bai05-q42",
+    "q": "Biết thêm thông tin về bạn được chọn (ví dụ giờ tự học) có thể làm thay đổi xác suất bạn ấy Đạt.",
+    "giai": "Đó chính là xác suất có điều kiện: 53.8% → 96.2% khi biết bạn ấy tự học hơn 4 giờ.",
+    "h": "4d18610eb15cb"
+   },
+   {
+    "k": "ds",
+    "id": "bai05-q43",
     "q": "Trung vị của một dãy số liệu luôn là một giá trị có mặt trong dãy.",
     "giai": "Dãy có số chẵn giá trị thì trung vị là trung bình hai giá trị giữa — có thể không có mặt trong dãy.",
-    "h": "2daadbeee5cbb"
+    "h": "10b898ee3de1e2"
    }
   ]
  },
