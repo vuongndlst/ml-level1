@@ -103,7 +103,7 @@
       document.head.appendChild(st);
     }
     thanh = el("div");
-    nguoiEl = el("button", { class: "nguoi", title: "Đổi họ tên / lớp", onclick: function () { moDau(); } });
+    nguoiEl = el("button", { class: "nguoi", title: "Đổi họ tên / lớp", onclick: function () { parent.postMessage({type:'portal-account'},location.origin); } });
     var dau = el("header", { class: "dau" }, [
       el("div", { class: "dau-trong" }, [
         el("a", { href: "../", title: "Về trang chủ khoá học" }, [el("img", { src: "../assets/logo_lsts_trang.png", alt: "Logo trường" })]),
