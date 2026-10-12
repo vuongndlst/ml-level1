@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import {GLTFLoader} from './vendor/loaders/GLTFLoader.js?v=0a9e6457d383';
-import {clone} from './vendor/utils/SkeletonUtils.js?v=0a9e6457d383';
+import {GLTFLoader} from './vendor/loaders/GLTFLoader.js?v=1bcd88d5b741';
+import {clone} from './vendor/utils/SkeletonUtils.js?v=1bcd88d5b741';
 const loader=new GLTFLoader(),cache=new Map();
 const url=name=>{const u=new URL('./models/'+name+'.glb',import.meta.url);u.searchParams.set('v',window.PORTAL_RUNTIME_VERSION||'1');return u.href;};
 function load(name){if(!cache.has(name))cache.set(name,loader.loadAsync(url(name)).catch(()=>null));return cache.get(name);}
