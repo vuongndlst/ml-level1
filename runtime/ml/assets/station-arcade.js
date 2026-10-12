@@ -1,9 +1,8 @@
 import * as THREE from 'three';
-import {ALL_CATALOG as CATALOG,GAME_TYPES,DL_TYPES} from './arcade-rules.js?v=129b322c5fdd';
-import {createArt} from './arcade-art.js?v=129b322c5fdd';
-import {setupAction} from './arcade-action-games.js?v=129b322c5fdd';
-import {setupBoard} from './arcade-board-games.js?v=129b322c5fdd';
-import {setupDL} from './arcade-dl-games.js?v=129b322c5fdd';
+import {CATALOG,GAME_TYPES} from './arcade-rules.js?v=0a9e6457d383';
+import {createArt} from './arcade-art.js?v=0a9e6457d383';
+import {setupAction} from './arcade-action-games.js?v=0a9e6457d383';
+import {setupBoard} from './arcade-board-games.js?v=0a9e6457d383';
 
 // A single bounded session. Arcade scores never write academic XP or stage completion.
 export function stationGame({theme,seed=1,gameType,seconds,title='',sound=true,onEnter,onCancel,onStart=()=>true,onFinish=()=>{}}){
@@ -32,6 +31,6 @@ export function stationGame({theme,seed=1,gameType,seconds,title='',sound=true,o
   if(active&&!reduced)scenery.frame(dt);for(const p of sparks){p.vy-=dt*9;p.o.position.x+=p.vx*dt;p.o.position.y+=p.vy*dt;p.o.position.z+=p.vz*dt;}frameAverage=frameAverage*.97+elapsed*.03;if(!qualityReduced&&frameAverage>36&&firstStart&&now-firstStart>4000){qualityReduced=true;renderer.shadowMap.enabled=false;renderer.setPixelRatio(1);resize();}renderer.render(scene,camera);
  }
  timer.textContent=`${Math.floor(limit/60)}:${String(limit%60).padStart(2,'0')}`;
- try{renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'low-power'});renderer.setPixelRatio(Math.min(1.5,devicePixelRatio||1));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.shadowMap.enabled=!reduced;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.domElement.tabIndex=0;renderer.domElement.setAttribute('aria-label',config.name+' — '+config.hint);host.prepend(renderer.domElement);const opts={type,seed,art,scene,camera,canvas:renderer.domElement,control,status,active:()=>active&&!ended,win:()=>conclude('win'),lose,tone,held};module=actionModule?setupAction(opts):DL_TYPES.includes(type)?setupDL(opts):setupBoard(opts);module.start();listen(renderer.domElement,'pointerdown',e=>{if(active){renderer.domElement.focus();module.pointer?.(e);}});resize();play.onclick=begin;play.focus();raf=requestAnimationFrame(loop);}catch{panel.querySelector('h2').textContent='Sẵn sàng học nhé';panel.querySelector('.game-goal').textContent='';panel.querySelector('.game-hint').textContent='Mở bài học để bắt đầu.';play.textContent='Vào bài học';play.onclick=enter;play.focus();}
+ try{renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'low-power'});renderer.setPixelRatio(Math.min(1.5,devicePixelRatio||1));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.shadowMap.enabled=!reduced;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.domElement.tabIndex=0;renderer.domElement.setAttribute('aria-label',config.name+' — '+config.hint);host.prepend(renderer.domElement);const opts={type,seed,art,scene,camera,canvas:renderer.domElement,control,status,active:()=>active&&!ended,win:()=>conclude('win'),lose,tone,held};module=actionModule?setupAction(opts):setupBoard(opts);module.start();listen(renderer.domElement,'pointerdown',e=>{if(active){renderer.domElement.focus();module.pointer?.(e);}});resize();play.onclick=begin;play.focus();raf=requestAnimationFrame(loop);}catch{panel.querySelector('h2').textContent='Sẵn sàng học nhé';panel.querySelector('.game-goal').textContent='';panel.querySelector('.game-hint').textContent='Mở bài học để bắt đầu.';play.textContent='Vào bài học';play.onclick=enter;play.focus();}
  return {close:()=>finish(onCancel,'closed')};
 }

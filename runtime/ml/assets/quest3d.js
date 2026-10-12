@@ -10,9 +10,9 @@
  * Âm thanh tự tạo bằng Web Audio (không tải file nhạc). Máy yếu: tự chuyển chế độ nhẹ.
  */
 import * as THREE from "three";
-import {upgradeActor,addLandmark} from "./blender-art.js?v=129b322c5fdd";
-import {stationGame} from './quest-games.js?v=129b322c5fdd';
-import {assignStation,startStation,finishStation} from './arcade-selection.js?v=129b322c5fdd';
+import {upgradeActor,addLandmark} from "./blender-art.js?v=0a9e6457d383";
+import {stationGame} from './quest-games.js?v=0a9e6457d383';
+import {assignStation,startStation,finishStation} from './arcade-selection.js?v=0a9e6457d383';
 
 const B = window.BAI;
 const CFG = Object.assign({ ten: "Thế giới " + B.tieu_de, trang_doc: "index.html",
@@ -842,7 +842,7 @@ async function vaoTram(t){
  if(passed(t.i)||progress.stationGames?.[t.i]){vaoBaiTram(t);return;}
  miniOpen=true;PHIM.clear();CAN.hoat=false;moMenu(false);if(AM.tong)AM.tong.gain.value=0;
  const restore=()=>{miniOpen=false;if(AM.tong)AM.tong.gain.value=QS.am?.8:0;renderer.domElement.focus();};
- const C=window.PortalCloud;let assignment;try{assignment=await assignStation(C,t.i,THEME);}catch{restore();vaoBaiTram(t);return;}if(!assignment||assignment.status!=='assigned'){restore();vaoBaiTram(t);return;}
+ const C=window.PortalCloud;let assignment;try{assignment=await assignStation(C,t.i);}catch{restore();vaoBaiTram(t);return;}if(!assignment||assignment.status!=='assigned'){restore();vaoBaiTram(t);return;}
  const sound=window.LocalLearning?.read('arcade-sound:'+C.profile.id,QS.am);
  stationGame({theme:THEME,seed:assignment.seed,gameType:assignment.type,seconds:assignment.seconds,title:B.chang[t.i].ten,sound,onStart:()=>startStation(C,t.i),onFinish:reason=>finishStation(C,t.i,reason),onEnter:()=>{
    const C=window.PortalCloud;if(C){const state=C.peek();state.stationGames={...state.stationGames,[t.i]:true};C.save(C.packet.lesson.lesson_key,state);}

@@ -1,5 +1,6 @@
 /* Giao diện "lab" cho trang vào và trang khoá (11/10/2026).
- * Chỉ bật khi course.js có ui:'lab' (ml-level1, dl-11). C++, Python, SQL giữ giao diện cũ.
+ * Chỉ bật khi course.js có ui:'lab'. Từ 12/10/2026 cả năm khoá dùng (ML, DL, Python, SQL, C++); chữ riêng từng khoá
+ * lấy từ cfg.fact, cfg.card_note, cfg.cover_icon (thiếu thì dùng chữ của ML).
  * Chỉ dựng HTML: shell.js vẫn gắn sự kiện theo đúng các ID cũ (#identity, #person, #end-session, #edit,
  * #course-cert, #course-search, #course-topic, #course-kind, #course-status, #filter-count, .card, #no-results, #resume).
  */
@@ -57,7 +58,7 @@
           esc(cfg.intro || 'Nhập tên và lớp để bắt đầu. Con có thể chọn bài học; các chặng mở theo tiến độ hoàn thành.')) + '</p>' +
         '<div class="intro-symbols">' + cfg.symbols.map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div>' +
         '<dl class="lab-facts"><div><dt>' + cfg.lessons.length + '</dt><dd>bài học</dd></div><div><dt>' + nhom.length +
-        '</dt><dd>chủ đề</dd></div><div><dt>5</dt><dd>chặng mỗi bài</dd></div></dl></section>' +
+        '</dt><dd>chủ đề</dd></div><div><dt>' + esc((cfg.fact || ['5'])[0]) + '</dt><dd>' + esc((cfg.fact || [0, 'chặng mỗi bài'])[1]) + '</dd></div></dl></section>' +
         '<section class="panel lab-panel"><p class="eyebrow">SẴN SÀNG HỌC</p><h2>Con học với tên nào?</h2>' +
         '<form id="identity">' + (o.list.length ? '<label class="field">Người học trên máy này<select name="saved"><option value="">Người học mới</option>' +
           o.list.map(function (p) {
@@ -82,9 +83,9 @@
           '" data-done="' + st.done + '" data-started="' + st.started + '" href="' + o.lessonUrl(l.key) + '">' +
           '<div class="lab-cover' + (hinh ? '' : ' lab-cover-empty') + '"' + (hinh ? ' style="background-image:url(\'' + hinh + '\')"' : '') + '>' +
           '<span class="lab-num">' + esc(l.badge || l.position) + '</span><span class="lab-kind lab-kind-' + loai + '">' +
-          (loai === 'activity' ? 'Thực hành' : 'Bài học') + '</span>' + (hinh ? '' : '<span class="lab-cover-icon">' + (loai === 'activity' ? '⚗' : '◆') + '</span>') + '</div>' +
+          (loai === 'activity' ? 'Thực hành' : 'Bài học') + '</span>' + (hinh ? '' : '<span class="lab-cover-icon">' + (loai === 'activity' ? '⚗' : esc((cfg.icons && cfg.icons[l.key]) || cfg.cover_icon || '◆')) + '</span>') + '</div>' +
           '<div class="lab-card-body"><span class="eyebrow">' + (l.label ? esc(l.label) : (loai === 'activity' ? 'Thực hành' : 'Bài') + ' ' + l.position + ' · ' + esc(l.topic || '')) + '</span>' +
-          '<h2>' + esc(l.title) + '</h2><p>' + (loai === 'activity' ? 'Notebook nhóm · sản phẩm và minh chứng' : '5 chặng · đảo 3D · checkpoint') + '</p>' +
+          '<h2>' + esc(l.title) + '</h2><p>' + (loai === 'activity' ? 'Notebook nhóm · sản phẩm và minh chứng' : esc(cfg.card_note || '5 chặng · đảo 3D · checkpoint')) + '</p>' +
           '<div class="card-bottom"><span class="lab-state ' + (st.done ? 'is-done' : st.started ? 'is-started' : '') + '">' +
           (st.done ? '✓ Đã hoàn thành' : st.started ? '● Đang học' : 'Bắt đầu') + '</span><b>Vào học ↗</b></div></div></a>';
       };

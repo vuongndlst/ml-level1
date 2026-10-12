@@ -14,21 +14,9 @@ export const CATALOG = {
  sokoban:{name:'Đẩy thùng',group:'thinking',seconds:120,goal:'Đẩy hai thùng vào hai đích.',hint:'Dùng mũi tên để đẩy; Hoàn tác khi cần.'}
 };
 export const GAME_TYPES=Object.keys(CATALOG);
-// Deep Learning course (theme 'neural') gets its own bag; the four other courses keep the 12 games above.
-export const DL_CATALOG = {
- descent:{name:'Xuống dốc gradient',group:'thinking',seconds:90,goal:'Tìm ô loss 0 trước khi hết bước.',hint:'Mũi tên hoặc nút hướng để đi. Chỉ thấy loss các ô quanh đường đã đi — coi chừng thung lũng giả.'},
- kernel:{name:'Trượt kernel',group:'thinking',seconds:90,goal:'Tìm 3 vị trí ảnh khớp đúng mẫu kernel ở trên.',hint:'Mũi tên hoặc chạm ảnh để trượt khung 3 × 3; Space hoặc Chọn khi khớp. Sai 3 lần là hết lượt.'},
- iou:{name:'Bắt hộp bao',group:'control',seconds:90,goal:'Vẽ hộp bao cho 4 vật thể, IoU từ 0,6 trở lên.',hint:'Đưa con trỏ bằng mũi tên hoặc chạm ô; Space hoặc Đặt góc hai lần để vẽ hộp.'},
- relu:{name:'Cổng ReLU',group:'reflex',seconds:90,goal:'Đưa 12 số qua cổng đúng luật ReLU.',hint:'Nhấn Space, chạm màn hình hoặc nút ReLU khi số ÂM nằm trong cổng; số dương để yên.'},
- lights:{name:'Bật nơ-ron',group:'thinking',seconds:90,goal:'Bật sáng cả 16 nơ-ron.',hint:'Chạm một nơ-ron để đảo nó và các nơ-ron nối liền; Gợi ý chỉ ra một nơ-ron nên chạm.'},
- agent:{name:'Agent tìm thưởng',group:'thinking',seconds:90,goal:'Nhặt 3 phần thưởng rồi tới cổng ra, tránh hố.',hint:'Mũi tên hoặc nút hướng để đi; số bước có giới hạn, chọn thứ tự nhặt cho đường ngắn.'}
-};
-export const DL_TYPES=Object.keys(DL_CATALOG);
-export const ALL_CATALOG={...CATALOG,...DL_CATALOG};
-export const typesFor=theme=>theme==='neural'?DL_TYPES:GAME_TYPES;
 export function rng(seed){let s=seed>>>0;return ()=>{s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296;};}
 export function shuffle(items,random){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-export function shuffleBag(seed,history=[],types=GAME_TYPES){const random=rng(seed),a=shuffle(types,random),recent=history.slice(-2);for(let i=0;i<a.length;i++){let choices=a.slice(i).filter(t=>!recent.includes(t));if(!choices.length)choices=a.slice(i).filter(t=>t!==recent.at(-1));if(!choices.length)choices=a.slice(i);const prevGroup=ALL_CATALOG[recent.at(-1)]?.group,other=choices.filter(t=>ALL_CATALOG[t].group!==prevGroup);if(other.length)choices=other;const pick=choices[Math.floor(random()*choices.length)],j=a.indexOf(pick,i);[a[i],a[j]]=[a[j],a[i]];recent.push(pick);recent.splice(0,Math.max(0,recent.length-2));}return a;}
+export function shuffleBag(seed,history=[]){const random=rng(seed),a=shuffle(GAME_TYPES,random),recent=history.slice(-2);for(let i=0;i<a.length;i++){let choices=a.slice(i).filter(t=>!recent.includes(t));if(!choices.length)choices=a.slice(i).filter(t=>t!==recent.at(-1));if(!choices.length)choices=a.slice(i);const prevGroup=CATALOG[recent.at(-1)]?.group,other=choices.filter(t=>CATALOG[t].group!==prevGroup);if(other.length)choices=other;const pick=choices[Math.floor(random()*choices.length)],j=a.indexOf(pick,i);[a[i],a[j]]=[a[j],a[i]];recent.push(pick);recent.splice(0,Math.max(0,recent.length-2));}return a;}
 export const DIRECTIONS=[[0,-1],[1,0],[0,1],[-1,0]];
 export function slideBoard(seed,steps=20){const random=rng(seed),b=[1,2,3,4,5,6,7,8,0];let z=8,last=-1;for(let k=0;k<steps;k++){const options=b.map((_,i)=>i).filter(i=>i!==last&&Math.abs(i%3-z%3)+Math.abs(Math.floor(i/3)-Math.floor(z/3))===1),n=options[Math.floor(random()*options.length)];[b[n],b[z]]=[b[z],b[n]];last=z;z=n;}if(b.every((n,i)=>n===(i+1)%9))return slideBoard(seed+1,steps+1);return b;}
 export function slideMove(b,n){const p=b.indexOf(n),z=b.indexOf(0);if(n===0||Math.abs(p%3-z%3)+Math.abs(Math.floor(p/3)-Math.floor(z/3))!==1)return false;[b[p],b[z]]=[b[z],b[p]];return true;}
