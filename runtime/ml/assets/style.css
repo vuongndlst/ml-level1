@@ -445,3 +445,9 @@ pre.loi::before { content: "Máy báo lỗi"; }
 .tu-lam details { margin-top: 6px; } .tu-lam summary { cursor: pointer; font-weight: 600; color: var(--xanh-chinh); }
 .tu-lam .ck-text { margin: 6px 0; font-family: "JetBrains Mono", Consolas, monospace; font-size: 13.5px; white-space: pre; overflow-x: auto;
   background: #F8FAFC; border: 1px solid var(--vien); border-radius: 8px; padding: 8px 10px; }
+.cau .ngu-canh { margin: 8px 0 4px; padding: 8px 12px; background: #F8FAFC; border-left: 3px solid var(--teal, #0D9488); border-radius: 6px; font-size: 15px; line-height: 1.55; }
+.cau .cau-bang { margin: 6px 0 8px; overflow-x: auto; }
+.cau .cau-bang table { font-size: 14px; width: auto; min-width: 0; }
+.cau .cau-bang th, .cau .cau-bang td { padding: 4px 10px; }
+ul.du-lieu-chu-giai { columns: 2 260px; column-gap: 24px; margin: 8px 0; padding-left: 18px; font-size: 14px; color: var(--chu-phu); }
+ul.du-lieu-chu-giai li { break-inside: avoid; margin: 2px 0; }

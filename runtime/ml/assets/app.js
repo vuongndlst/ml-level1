@@ -206,7 +206,9 @@
       bang.appendChild(body);
       chiTiet.appendChild(el("div", { class: "du-lieu-cuon" }, [bang]));
       var giai = d.cot.map(function (c, j) { return d.giai_thich[j] ? c + ": " + d.giai_thich[j] : ""; }).filter(Boolean);
-      if (giai.length) chiTiet.appendChild(el("p", { class: "du-lieu-chu-giai", text: giai.join(" · ") }));
+      if (giai.length) chiTiet.appendChild(el("ul", { class: "du-lieu-chu-giai" }, giai.map(function (g) {   // mỗi cột một dòng
+        var i = g.indexOf(": "); return el("li", {}, [el("code", { text: g.slice(0, i) }), document.createTextNode(": " + g.slice(i + 2))]);
+      })));
       khoi.appendChild(chiTiet);
       khung.appendChild(khoi);
     });
@@ -719,6 +721,8 @@
     var o = el("div", { class: "cau", "data-id": q.id });
     o.appendChild(el("div", { class: "de" }, [el("span", { class: "so-cau", text: "Câu " + stt + "." }),
       el("span", { html: q.q }), el("span", { class: "loai", text: TEN_LOAI[q.k] })]));
+    if (q.ngu_canh) o.appendChild(el("div", { class: "ngu-canh", html: q.ngu_canh }));   // ngữ cảnh để câu hỏi tự đủ dữ kiện
+    if (q.bang) { var bq = el("div", { class: "cau-bang" }); bq.appendChild(veBang(q.bang.cot, q.bang.dong)); o.appendChild(bq); }
     if (q.img) o.appendChild(anhCoDuPhong(q.img.src, q.img.du_phong, { class: "hinh-cau", alt: "Hình của câu hỏi" }));
     var cu = luuTL ? TT.tl[q.id] : null;
     var ten = "c" + Math.random().toString(36).slice(2);
