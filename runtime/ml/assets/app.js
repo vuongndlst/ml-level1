@@ -846,7 +846,7 @@
     t.appendChild(el("span", { class: "nhan", text: "Chặng " + (i + 1) + " / " + B.chang.length + " · khoảng " + c.phut + " phút" }));
     t.appendChild(el("h2", { text: c.ten }));
     if (i === B.chang.length - 1 && TT.dat && TT.diem) {
-      t.appendChild(el("p", { text: "Em đã đạt checkpoint cuối. Có thể tải lại chứng chỉ tại đây." }));
+      t.appendChild(el("p", { text: "Con đã đạt checkpoint cuối. Có thể tải lại chứng chỉ tại đây." }));
       var chungChiChang = el("div", { class: "chung-chi" });
       t.appendChild(chungChiChang);
       veChungChi(TT.diem, TT.ngay_dat || ngayNay(), chungChiChang, true);
