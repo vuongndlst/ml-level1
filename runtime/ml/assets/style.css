@@ -369,6 +369,16 @@ code, pre, .tt-dong, .tt-ma, .tt-man-hinh { font-variant-ligatures: none; font-f
 .tt .tt-the b:empty { display: none; }
 .tt .tt-the b.tt-muc { font-size: 15px; display: block; }
 .tt .tt-hai-cot .tt-the-hang { align-content: start; }
+.tt .tt-buoc { margin: 6px 0 10px; padding-left: 22px; color: var(--chu); font-size: 15px; }
+.tt .tt-buoc li { margin: 3px 0; }
+.tt .tt-k-so { font-size: 22px; color: var(--xanh-tuoi); font-variant-numeric: tabular-nums; }
+.tt .tt-cham { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: middle; }
+.tt .tt-cham.tt-o { width: 13px; height: 13px; border-radius: 3px; border: 1px solid #94A3B8; }
+.tt .tt-o-val { display: inline-block; width: 9px; height: 9px; border: 1.6px solid var(--chu-phu); background: #fff; vertical-align: middle; }
+.tt .tt-phieu { display: flex; height: 24px; border-radius: 8px; overflow: hidden; border: 1px solid var(--vien); margin: 6px 0; font-size: 13px; font-weight: 600; }
+.tt .tt-phieu span { display: flex; align-items: center; justify-content: center; color: #fff; transition: width .25s; min-width: 0; overflow: hidden; }
+.tt .tt-phieu-b { color: #422006 !important; }
+.tt-knn-k .tt-the-hang { grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)); }
 .tt .tt-app { border: 1px solid var(--vien); border-radius: 12px; padding: 14px 16px; background: #fff; max-width: 560px; }
 .tt .tt-app-ten { font-weight: 700; font-size: 17px; margin-bottom: 8px; }
 .tt .tt-app-ra { margin-top: 10px; padding: 10px 12px; border-radius: 8px; background: var(--xanh-nhat); font-size: 16px; }
